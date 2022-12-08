@@ -9,7 +9,7 @@ function GNavBar() {
   return (
     <>
       {["md"].map((expand) => (
-        <Navbar bg="light" expand={expand} className="mb-3">
+        <Navbar key={"navbar"} bg="light" expand={expand} className="mb-3">
           <Container fluid>
             <Navbar.Brand href="#">Guitos</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
