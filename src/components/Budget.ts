@@ -1,12 +1,14 @@
 import ItemForm from "./ItemForm";
 import Stats from "./Stats";
 
+type Items = typeof ItemForm[];
+
 export class Budget {
-  id: number | undefined;
+  id!: number;
   name!: string;
-  expenses: ItemForm[] = [];
-  incomes: ItemForm[] = [];
-  stats: Stats | undefined;
+  expenses: Items = [];
+  incomes: Items = [];
+  stats!: Stats;
   total = 0;
   get isNew(): boolean {
     return this.id === undefined;
@@ -23,5 +25,3 @@ export class Budget {
     if (initializer.total) this.total = initializer.total;
   }
 }
-
-export default Budget;

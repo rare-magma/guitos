@@ -17,6 +17,42 @@ export const MOCK_BUDGETS = [
         name: "electricity",
         value: 50,
       },
+      {
+        name: "rent",
+        value: 700,
+      },
+      {
+        name: "food",
+        value: 200,
+      },
+      {
+        name: "electricity",
+        value: 50,
+      },
+      {
+        name: "rent",
+        value: 700,
+      },
+      {
+        name: "food",
+        value: 200,
+      },
+      {
+        name: "electricity",
+        value: 50,
+      },
+      {
+        name: "rent",
+        value: 700,
+      },
+      {
+        name: "food",
+        value: 200,
+      },
+      {
+        name: "electricity",
+        value: 50,
+      },
     ],
     incomes: [
       {
@@ -26,6 +62,15 @@ export const MOCK_BUDGETS = [
       {
         name: "sales",
         value: 300,
+      },
+    ],
+    stats: [
+      {
+        available: 400,
+        withGoal: 300,
+        saved: 400,
+        goal: 45,
+        savings: 3000,
       },
     ],
     total: 1230,
