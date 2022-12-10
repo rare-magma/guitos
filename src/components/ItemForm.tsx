@@ -6,14 +6,19 @@ interface ItemForm {
   value: string;
 }
 
-function ItemForm(itemForm: React.ComponentType) {
+function ItemForm(itemForm: ItemForm, key: string) {
   return (
-    <InputGroup className="mb-1" key={itemForm.name + "-group"}>
-      <Form.Control aria-label={"newname"} key={itemForm.name + "-key"} />
+    <InputGroup className="mb-1" key={key + "-group"}>
+      <Form.Control
+        aria-label={"newname"}
+        key={key + "-key"}
+        defaultValue={itemForm.name}
+      />
       <Form.Control
         aria-label={"newvalue"}
-        key={itemForm.value + "-value"}
+        key={key + "-value"}
         className="text-right"
+        defaultValue={itemForm.value}
       />
     </InputGroup>
   );
