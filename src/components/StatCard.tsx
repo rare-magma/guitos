@@ -1,5 +1,5 @@
 import { Stat } from "./Stat";
-import { Card, Form, InputGroup } from "react-bootstrap";
+import { Button, Card, Form, InputGroup } from "react-bootstrap";
 
 function formatDescription(description: string): string {
   return description.substring(0, 60) + "...";
@@ -65,7 +65,12 @@ function StatCard(props: StatCardProps) {
             aria-label={"savings"}
             key={stat.id + "savings"}
             defaultValue={stat.savings}
+            disabled
+            readOnly
           />
+          <Button variant="primary" id="button-addon1">
+            +
+          </Button>
         </InputGroup>
       </Card.Body>
     </Card>

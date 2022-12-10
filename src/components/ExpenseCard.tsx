@@ -1,12 +1,9 @@
 import { Expense } from "./Expense";
 import React from "react";
 import { ItemForm } from "./ItemForm";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
-
-function calcTotal(description: string): string {
-  return description.substring(0, 60) + "...";
-}
+import { calcTotal } from "../utils";
 
 interface ExpenseCardProps {
   expense: Expense;
@@ -35,17 +32,30 @@ function ExpenseCard(props: ExpenseCardProps) {
             />
           )
         )}
+        <div className="mt-3" />
+        <div className="d-grid gap-2">
+          <Button
+            variant="primary"
+            size="sm"
+            //   onClick={addIncome}
+            name=""
+            value=""
+          >
+            +
+          </Button>
+        </div>
       </Card.Body>
       <Card.Footer className="d-grid gap-2">
-        <Button
-          variant="primary"
-          size="sm"
-          // onClick={addExpense}
-          name=""
-          value=""
-        >
-          +
-        </Button>
+        <InputGroup className="mb-1" key={expense.id + "-total-group"}>
+          <InputGroup.Text>total</InputGroup.Text>
+          <Form.Control
+            aria-label={"expense-total"}
+            key={expense.id + "total"}
+            defaultValue={calcTotal(expense.expenses)}
+            disabled
+            readOnly
+          />
+        </InputGroup>
       </Card.Footer>
     </Card>
   );
