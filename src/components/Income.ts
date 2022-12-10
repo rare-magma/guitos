@@ -1,7 +1,9 @@
-export class ItemForm {
+import { ItemForm } from "./ItemForm";
+
+export class Income {
   id!: number;
-  name!: string;
-  value!: number;
+  incomes: Array<ItemForm> = [];
+  total = 0;
   get isNew(): boolean {
     return this.id === undefined;
   }
@@ -10,7 +12,7 @@ export class ItemForm {
   constructor(initializer?: any) {
     if (!initializer) return;
     if (initializer.id) this.id = initializer.id;
-    if (initializer.name) this.name = initializer.name;
-    if (initializer.value) this.value = initializer.value;
+    if (initializer.incomes) this.incomes = initializer.incomes;
+    if (initializer.total) this.total = initializer.total;
   }
 }

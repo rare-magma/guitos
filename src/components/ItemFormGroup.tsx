@@ -1,12 +1,13 @@
-import React from "react";
 import { Form, InputGroup } from "react-bootstrap";
+import { ItemForm } from "./ItemForm";
 
-interface ItemForm {
-  name: string;
-  value: string;
+interface ItemFormProps {
+  itemForm: ItemForm;
+  onEdit: (itemForm: ItemForm) => void;
 }
 
-function ItemForm(itemForm: ItemForm, key: string) {
+function ItemFormGroup(props: ItemFormProps, key: string) {
+  const { itemForm, onEdit } = props;
   return (
     <InputGroup className="mb-1" key={key + "-group"}>
       <Form.Control
@@ -24,4 +25,4 @@ function ItemForm(itemForm: ItemForm, key: string) {
   );
 }
 
-export default { ItemForm };
+export default ItemFormGroup;

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Budget } from "./Budget";
-import BudgetCard from "./BudgetCard";
-import BudgetForm from "./BudgetForm";
 
 interface BudgetListProps {
   budgets: Budget[];
@@ -21,7 +19,7 @@ function BudgetList({ budgets, onSave }: BudgetListProps) {
 
   return (
     <div className="row">
-      {budgets.map((budget) => (
+      {/* {budgets.map((budget) => (
         <div key={budget.id} className="cols-sm">
           {budget === budgetBeingEdited ? (
             <BudgetForm
@@ -33,7 +31,7 @@ function BudgetList({ budgets, onSave }: BudgetListProps) {
             <BudgetCard budget={budget} onEdit={handleEdit} />
           )}
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }

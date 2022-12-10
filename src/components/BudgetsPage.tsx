@@ -1,27 +1,23 @@
-import Stats from "./Stats";
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  InputGroup,
-  Row,
-} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { MOCK_BUDGETS } from "./MockBudgets";
-import Budget from "./Budget";
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import ItemForm from "./ItemForm";
+import { Budget } from "./Budget";
+import { useState } from "react";
+import IncomeCard from "./IncomeCard";
+import ExpenseCard from "./ExpenseCard";
+import StatCard from "./StatCard";
+import { Stat } from "./Stat";
+import { Expense } from "./Expense";
+import { Income } from "./Income";
 
 function BudgetsPage() {
-  const [budgets, setBudgets] = useState(MOCK_BUDGETS);
-  const saveBudget = (budget: Budget) => {
-    const updatedBudgets = budgets.map((budget: Budget) => {
-      return budget.id === budget.id ? budget : budget;
-    });
-    setBudgets(updatedBudgets);
-  };
+  const [budgets, setBudgets] = useState(MOCK_BUDGETS[0]);
+  // const saveBudget = (budget: Budget) => {
+  //   const updatedBudgets = budgets.map((budget: Budget) => {
+  //     return budget.id === budget.id ? budget : budget;
+  //   });
+  //   setBudgets(updatedBudgets);
+  // };
+  console.log("budgets[0]" + JSON.stringify(budgets));
 
   return (
     <>
@@ -29,118 +25,31 @@ function BudgetsPage() {
         <Row>
           <Col md="6">
             <Row style={{ padding: 10 }}>
-              <Card>
-                <Card.Header>Stats</Card.Header>
-                <Card.Body>
-                  <InputGroup
-                    className="mb-1"
-                    key={budget.stats.available + budget.name}
-                  >
-                    <InputGroup.Text>available</InputGroup.Text>
-                    <Form.Control
-                      aria-label={"available"}
-                      key={budget.stats?.available + budget.name}
-                      defaultValue={budget.stats?.available}
-                      disabled
-                      readOnly
-                    />
-                  </InputGroup>
-                  <InputGroup
-                    className="mb-1"
-                    key={budget.stats?.withGoal + budget.name}
-                  >
-                    <InputGroup.Text>with goal</InputGroup.Text>
-                    <Form.Control
-                      aria-label={"withGoal"}
-                      key={budget.stats?.withGoal + budget.name}
-                      defaultValue={budget.stats?.withGoal}
-                      disabled
-                      readOnly
-                    />
-                  </InputGroup>
-                </Card.Body>
-                <Card.Footer className="d-grid gap-2">
-                  <Button variant="primary" size="sm">
-                    +
-                  </Button>
-                </Card.Footer>
-              </Card>
+              <StatCard
+                stat={budgets.stats}
+                onEdit={function (stat: Stat): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
             </Row>
 
             <Row style={{ padding: 10 }}>
-              <Card>
-                <Card.Header>Income</Card.Header>
-                <Card.Body>
-                  {incomes.map((item, i) => (
-                    <ItemForm name={item.name} value={item.value} />
-                  ))}
-                  <InputGroup size="sm" className="mb-3">
-                    {Array.from(budget.incomes).map((item) => (
-                      <InputGroup
-                        className="mb-1"
-                        key={budget.incomes.indexOf(item) + item.name}
-                      >
-                        <Form.Control
-                          aria-label={item.name}
-                          key={budget.incomes.indexOf(item) + item.name}
-                          defaultValue={item.name}
-                        />
-                        <Form.Control
-                          aria-label={item.value.toString()}
-                          key={budget.incomes.indexOf(item) + item.name}
-                          defaultValue={item.value.toString()}
-                          className="text-right"
-                        />
-                      </InputGroup>
-                    ))}
-                  </InputGroup>
-                </Card.Body>
-                <Card.Footer className="d-grid gap-2">
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    onClick={addIncome}
-                    value=""
-                    name=""
-                  >
-                    +
-                  </Button>
-                </Card.Footer>
-              </Card>
+              <IncomeCard
+                income={budgets.incomes}
+                onEdit={function (income: Income): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
             </Row>
           </Col>
 
           <Col md="6">
-            <Card>
-              <Card.Header>Expenses</Card.Header>
-              <Card.Body>
-                <InputGroup className="mb-1">
-                  {Array.from(budget.expenses).map((item) => (
-                    <InputGroup
-                      className="mb-1"
-                      key={budget.expenses.indexOf(item) + item.name}
-                    >
-                      <Form.Control
-                        aria-label={item.name}
-                        key={budget.expenses.indexOf(item) + item.name}
-                        defaultValue={item.name}
-                      />
-                      <Form.Control
-                        aria-label={item.value.toString()}
-                        key={budget.expenses.indexOf(item) + item.name}
-                        defaultValue={item.value.toString()}
-                        className="justify-content-end"
-                      />
-                    </InputGroup>
-                  ))}
-                </InputGroup>
-              </Card.Body>
-              <Card.Footer className="d-grid gap-2">
-                <Button variant="primary" size="sm">
-                  +
-                </Button>
-              </Card.Footer>
-            </Card>
+            <ExpenseCard
+              expense={budgets.expenses}
+              onEdit={function (expense: Expense): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
           </Col>
         </Row>
       </Container>
