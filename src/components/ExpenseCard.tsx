@@ -20,7 +20,6 @@ function ExpenseCard(props: ExpenseCardProps) {
     onEdit(expenseBeingEdited);
   };
 
-  console.log("expense" + JSON.stringify(expense));
   return (
     <Card>
       <Card.Header>Expenses</Card.Header>
