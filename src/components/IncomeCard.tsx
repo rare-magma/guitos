@@ -13,8 +13,10 @@ interface IncomeCardProps {
 function IncomeCard(props: IncomeCardProps) {
   const { income, onEdit } = props;
 
-  const handleEditClick = (incomeBeingEdited: Income) => {
-    onEdit(incomeBeingEdited);
+  const addIncome = (incomeBeingEdited: Income) => {
+    const newIncome = new ItemForm();
+    incomeBeingEdited.incomes.push(newIncome);
+    console.log(income.incomes);
   };
 
   return (
@@ -37,7 +39,9 @@ function IncomeCard(props: IncomeCardProps) {
           <Button
             variant="primary"
             size="sm"
-            //   onClick={addIncome}
+            onClick={() => {
+              addIncome(income);
+            }}
             name=""
             value=""
           >
