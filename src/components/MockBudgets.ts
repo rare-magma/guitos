@@ -26,6 +26,81 @@ export const MOCK_BUDGETS = [
           name: "electricity",
           value: 50,
         }),
+        new ItemForm({
+          id: 4,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 5,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 6,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 7,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 8,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 9,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 10,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 11,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 12,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 13,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 14,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 15,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 16,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 17,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 18,
+          name: "electricity",
+          value: 50,
+        }),
       ],
       total: 1250,
     }),
@@ -72,6 +147,81 @@ export const MOCK_BUDGETS = [
         }),
         new ItemForm({
           id: 3,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 4,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 5,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 6,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 7,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 8,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 9,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 10,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 11,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 12,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 13,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 14,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 15,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 16,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 17,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 18,
           name: "electricity",
           value: 50,
         }),
@@ -124,6 +274,81 @@ export const MOCK_BUDGETS = [
           name: "electricity",
           value: 50,
         }),
+        new ItemForm({
+          id: 4,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 5,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 6,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 7,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 8,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 9,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 10,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 11,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 12,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 13,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 14,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 15,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 16,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 17,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 18,
+          name: "electricity",
+          value: 50,
+        }),
       ],
       total: 1250,
     }),
@@ -173,6 +398,81 @@ export const MOCK_BUDGETS = [
           name: "electricity",
           value: 50,
         }),
+        new ItemForm({
+          id: 4,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 5,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 6,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 7,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 8,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 9,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 10,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 11,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 12,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 13,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 14,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 15,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 16,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 17,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 18,
+          name: "electricity",
+          value: 50,
+        }),
       ],
       total: 1250,
     }),
@@ -219,6 +519,81 @@ export const MOCK_BUDGETS = [
         }),
         new ItemForm({
           id: 3,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 4,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 5,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 6,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 7,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 8,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 9,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 10,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 11,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 12,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 13,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 14,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 15,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 16,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 17,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 18,
           name: "electricity",
           value: 50,
         }),
