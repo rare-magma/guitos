@@ -1,4 +1,3 @@
-import { Col, Container, Row } from "react-bootstrap";
 import { MOCK_BUDGETS } from "./MockBudgets";
 import { Budget } from "./Budget";
 import { useState } from "react";
@@ -8,6 +7,7 @@ import StatCard from "./StatCard";
 import { Stat } from "./Stat";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
+import { Container, Row, Col } from "react-bootstrap";
 
 function BudgetsPage() {
   const [budgets, setBudgets] = useState(MOCK_BUDGETS[0]);
@@ -17,30 +17,28 @@ function BudgetsPage() {
   //   });
   //   setBudgets(updatedBudgets);
   // };
-  console.log("budgets[0]" + JSON.stringify(budgets));
 
   return (
     <>
       <Container>
         <Row>
           <Col md="6">
-            <Row style={{ padding: 10 }}>
+            <div className="card-columns">
               <StatCard
                 stat={budgets.stats}
                 onEdit={function (stat: Stat): void {
                   throw new Error("Function not implemented.");
                 }}
               />
-            </Row>
+              <div className="mt-3" />
 
-            <Row style={{ padding: 10 }}>
               <IncomeCard
                 income={budgets.incomes}
                 onEdit={function (income: Income): void {
                   throw new Error("Function not implemented.");
                 }}
               />
-            </Row>
+            </div>
           </Col>
 
           <Col md="6">
