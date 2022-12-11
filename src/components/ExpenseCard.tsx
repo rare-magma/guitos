@@ -1,5 +1,5 @@
 import { Expense } from "./Expense";
-import React from "react";
+import React, { useState } from "react";
 import { ItemForm } from "./ItemForm";
 import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
@@ -7,14 +7,15 @@ import { calcTotal } from "../utils";
 
 interface ExpenseCardProps {
   expense: Expense;
-  onEdit: (expense: Expense) => void;
 }
 
-function ExpenseCard(props: ExpenseCardProps) {
-  const { expense, onEdit } = props;
+function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
+  const [expense, setExpense] = useState(initialExpense);
 
-  const handleEditClick = (expenseBeingEdited: Expense) => {
-    onEdit(expenseBeingEdited);
+  const addExpense = (expenseBeingEdited: Expense) => {
+    const newExpense = new Expense();
+    newExpense.expenses = expenseBeingEdited.expenses.concat(new ItemForm());
+    setExpense(newExpense);
   };
 
   return (
@@ -37,7 +38,9 @@ function ExpenseCard(props: ExpenseCardProps) {
           <Button
             variant="primary"
             size="sm"
-            //   onClick={addIncome}
+            onClick={() => {
+              addExpense(expense);
+            }}
             name=""
             value=""
           >

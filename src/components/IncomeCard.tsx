@@ -1,5 +1,5 @@
 import { Income } from "./Income";
-import React from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { ItemForm } from "./ItemForm";
 import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
@@ -7,16 +7,15 @@ import { calcTotal } from "../utils";
 
 interface IncomeCardProps {
   income: Income;
-  onEdit: (income: Income) => void;
 }
 
-function IncomeCard(props: IncomeCardProps) {
-  const { income, onEdit } = props;
+function IncomeCard({ income: initialIncome }: IncomeCardProps) {
+  const [income, setIncome] = useState(initialIncome);
 
   const addIncome = (incomeBeingEdited: Income) => {
-    const newIncome = new ItemForm();
-    incomeBeingEdited.incomes.push(newIncome);
-    console.log(income.incomes);
+    const newIncome = new Income();
+    newIncome.incomes = incomeBeingEdited.incomes.concat(new ItemForm());
+    setIncome(newIncome);
   };
 
   return (

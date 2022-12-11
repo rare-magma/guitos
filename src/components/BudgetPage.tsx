@@ -60,22 +60,12 @@ function BudgetPage() {
                   />
                   <div className="mt-3" />
 
-                  <IncomeCard
-                    income={budget.incomes}
-                    onEdit={function (income: Income): void {
-                      throw new Error("Function not implemented.");
-                    }}
-                  />
+                  <IncomeCard income={budget.incomes} />
                 </div>
               </Col>
 
               <Col md="6">
-                <ExpenseCard
-                  expense={budget.expenses}
-                  onEdit={function (expense: Expense): void {
-                    throw new Error("Function not implemented.");
-                  }}
-                />
+                <ExpenseCard expense={budget.expenses} />
               </Col>
             </Row>
           </Container>
