@@ -10,7 +10,7 @@ import { Income } from "./Income";
 import { Container, Row, Col } from "react-bootstrap";
 
 function BudgetsPage() {
-  const [budgets, setBudgets] = useState(MOCK_BUDGETS[0]);
+  const [budgets, setBudgets] = useState(MOCK_BUDGETS[1]);
   // const saveBudget = (budget: Budget) => {
   //   const updatedBudgets = budgets.map((budget: Budget) => {
   //     return budget.id === budget.id ? budget : budget;

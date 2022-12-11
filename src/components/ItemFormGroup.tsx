@@ -9,7 +9,7 @@ interface ItemFormProps {
 function ItemFormGroup(props: ItemFormProps, key: string) {
   const { itemForm, onEdit } = props;
   return (
-    <InputGroup className="mb-1" key={key + "-group"}>
+    <InputGroup size="sm" className="mb-1" key={key + "-group"}>
       <Form.Control
         aria-label={"newname"}
         key={key + "-key"}
