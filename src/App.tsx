@@ -1,13 +1,19 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import BudgetsPage from "./components/BudgetsPage";
+import BudgetPage from "./components/BudgetPage";
 import GNavBar from "./components/GNavBar";
 
 export default function App() {
   return (
     <>
       <GNavBar />
-      <BudgetsPage />
+      <Router>
+        <Routes>
+          <Route path="/" element={<BudgetPage />} />
+          <Route path="/:id" element={<BudgetPage />} />
+        </Routes>
+      </Router>
     </>
   );
 }
