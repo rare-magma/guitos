@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { ItemForm } from "./components/ItemForm";
 
 export function calcTotal(values: Array<ItemForm>): string {
-  return values.reduce((total, n) => total + n.value, 0).toString();
+  return values
+    .filter((x) => !isNaN(x.value))
+    .reduce((total, n) => total + n.value, 0)
+    .toString();
 }
 
 export function getStorageValue(key: string, defaultValue: string) {
