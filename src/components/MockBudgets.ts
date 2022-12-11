@@ -14,12 +14,12 @@ export const MOCK_BUDGETS = [
         new ItemForm({
           id: 1,
           name: "rent",
-          value: 700,
+          value: 700.12,
         }),
         new ItemForm({
           id: 2,
           name: "food",
-          value: 300,
+          value: 300.03,
         }),
         new ItemForm({
           id: 3,
@@ -101,6 +101,46 @@ export const MOCK_BUDGETS = [
           name: "electricity",
           value: 50,
         }),
+        new ItemForm({
+          id: 19,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 20,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 21,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 22,
+          name: "rent",
+          value: 700,
+        }),
+        new ItemForm({
+          id: 23,
+          name: "food",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 24,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 25,
+          name: "electricity",
+          value: 50,
+        }),
+        new ItemForm({
+          id: 26,
+          name: "electricity",
+          value: 50,
+        }),
       ],
       total: 1250,
     }),
@@ -114,6 +154,61 @@ export const MOCK_BUDGETS = [
         }),
         new ItemForm({
           id: 2,
+          name: "sales",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 3,
+          name: "job",
+          value: 2000,
+        }),
+        new ItemForm({
+          id: 4,
+          name: "sales",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 5,
+          name: "job",
+          value: 2000,
+        }),
+        new ItemForm({
+          id: 6,
+          name: "sales",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 7,
+          name: "job",
+          value: 2000,
+        }),
+        new ItemForm({
+          id: 8,
+          name: "sales",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 9,
+          name: "job",
+          value: 2000,
+        }),
+        new ItemForm({
+          id: 10,
+          name: "sales",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 11,
+          name: "sales",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 12,
+          name: "sales",
+          value: 300,
+        }),
+        new ItemForm({
+          id: 13,
           name: "sales",
           value: 300,
         }),
