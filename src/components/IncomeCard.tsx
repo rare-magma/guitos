@@ -17,16 +17,17 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
   const addIncome = (incomeBeingEdited: Income) => {
     const newIncome = new Income();
     const newItemForm = new ItemForm();
+
     newItemForm.id = income.incomes.length + 2;
     newItemForm.name = "";
     newItemForm.value = 0;
-    newIncome.incomes = incomeBeingEdited.incomes.concat(newItemForm);
-    setTotal(calcTotal(newIncome.incomes));
-    setIncome(newIncome);
-  };
 
-  const recalcTotal = (incomeBeingEdited: Income) => {
-    setTotal(calcTotal(incomeBeingEdited.incomes));
+    newIncome.id = income.id;
+    newIncome.incomes = incomeBeingEdited.incomes.concat(newItemForm);
+    newIncome.total = calcTotal(newIncome.incomes);
+
+    setIncome(newIncome);
+    setTotal(calcTotal(newIncome.incomes));
   };
 
   const removeIncome = (id: number) => {
@@ -34,7 +35,9 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
     newIncome.id = income.id;
     newIncome.incomes = income.incomes.filter((item) => item.id !== id);
     newIncome.total = calcTotal(newIncome.incomes);
+
     setIncome(newIncome);
+    setTotal(calcTotal(newIncome.incomes));
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

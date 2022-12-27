@@ -12,15 +12,22 @@ interface ExpenseCardProps {
 
 function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
   const [expense, setExpense] = useState(initialExpense);
+  const [total, setTotal] = useState(calcTotal(expense.expenses));
 
   const addExpense = (expenseBeingEdited: Expense) => {
     const newExpense = new Expense();
     const newItemForm = new ItemForm();
+
     newItemForm.id = expense.expenses.length + 2;
     newItemForm.name = "";
     newItemForm.value = 0;
+
+    newExpense.id = expense.id;
     newExpense.expenses = expenseBeingEdited.expenses.concat(newItemForm);
+    newExpense.total = calcTotal(newExpense.expenses);
+
     setExpense(newExpense);
+    setTotal(calcTotal(newExpense.expenses));
   };
 
   const removeExpense = (id: number) => {
@@ -28,7 +35,9 @@ function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
     newExpense.id = expense.id;
     newExpense.expenses = expense.expenses.filter((item) => item.id !== id);
     newExpense.total = calcTotal(newExpense.expenses);
+
     setExpense(newExpense);
+    setTotal(calcTotal(newExpense.expenses));
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -86,7 +95,7 @@ function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
             className="text-right"
             aria-label={"expense-total"}
             key={expense.id + "total"}
-            defaultValue={calcTotal(expense.expenses)}
+            value={total}
             disabled
             readOnly
           />

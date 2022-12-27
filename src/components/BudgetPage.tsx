@@ -38,18 +38,21 @@ function BudgetPage() {
 
   useEffect(() => {
     setLoading(true);
-    budgetList !== null &&
-      Array.isArray(budgetList) &&
-      budgetList
-        .filter((budget: Budget) => budget.name === name)
-        .map((data: Budget) => {
-          setBudget(data);
-          setLoading(false);
-        });
-    //      budgetList.catch((e: React.SetStateAction<string | null>) => {
-    //        setError(e);
-    //        setLoading(false);
-    //      });
+    try {
+      budgetList !== null &&
+        Array.isArray(budgetList) &&
+        budgetList
+          .filter((budget: Budget) => budget.name === name)
+          .map((data: Budget) => {
+            setBudget(data);
+            setLoading(false);
+          });
+    } catch {
+      budgetList.catch((e: React.SetStateAction<string | null>) => {
+        setError(e);
+        setLoading(false);
+      });
+    }
   }, [budgetList, name, setBudgetList]);
 
   return (
@@ -80,7 +83,7 @@ function BudgetPage() {
                   <StatCard
                     stat={budget.stats}
                     onEdit={function (stat: Stat): void {
-                      throw new Error("Function not implemented.");
+                      throw new Error("Function not implemented." + stat);
                     }}
                     onChange={handleChange}
                   />
