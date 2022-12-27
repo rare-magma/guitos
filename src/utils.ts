@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { ItemForm } from "./components/ItemForm";
 
-export function calcTotal(values: Array<ItemForm>): string {
+export function calcTotal(values: Array<ItemForm>): number {
   return values
     .filter((x) => !isNaN(x.value))
-    .reduce((total, n) => total + n.value, 0)
-    .toString();
+    .reduce((total, n) => total + n.value, 0);
 }
 
-export function getStorageValue(key: string, defaultValue: string) {
+function getStorageValue(key: string, defaultValue: string) {
   const saved = localStorage.getItem(key);
   let initial;
   if (saved !== null) {

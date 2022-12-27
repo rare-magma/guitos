@@ -1,41 +1,66 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Budget } from "./Budget";
 import { useParams } from "react-router-dom";
-import { MOCK_BUDGETS } from "./MockBudgets";
 import { Container, Row, Col } from "react-bootstrap";
-import { Expense } from "./Expense";
 import ExpenseCard from "./ExpenseCard";
-import { Income } from "./Income";
 import IncomeCard from "./IncomeCard";
 import { Stat } from "./Stat";
 import StatCard from "./StatCard";
+import { useLocalStorage } from "../utils";
 
 function BudgetPage() {
   const [loading, setLoading] = useState(false);
   const [budget, setBudget] = useState<Budget | null>(null);
+  const [budgetList, setBudgetList] = useLocalStorage("budgetList", "");
   const [error, setError] = useState<string | null>(null);
   const params = useParams();
   const id = Number(params.id);
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleChange = (event: any) => {
+    const { type, name, value } = event.target;
+    let updatedValue = value;
+
+    if (type === "number") {
+      updatedValue = Number(updatedValue);
+    }
+    const change = {
+      [name]: updatedValue,
+    };
+
+    let updatedBudget: Budget;
+
+    setBudget((i) => {
+      updatedBudget = new Budget({ ...i, ...change });
+      return updatedBudget;
+    });
+  };
+
   useEffect(() => {
     setLoading(true);
-    MOCK_BUDGETS.filter((budget) => budget.id === id).map((data) => {
-      setBudget(data);
-      setLoading(false);
-    });
-    // .catch((e: React.SetStateAction<string | null>) => {
-    //   setError(e);
-    //   setLoading(false);
-    // });
-  }, [id]);
+    budgetList !== null &&
+      Array.isArray(budgetList) &&
+      budgetList
+        .filter((budget: Budget) => budget.id === id)
+        .map((data: Budget) => {
+          setBudget(data);
+          setLoading(false);
+        });
+    //      budgetList.catch((e: React.SetStateAction<string | null>) => {
+    //        setError(e);
+    //        setLoading(false);
+    //      });
+  }, [budgetList, id, setBudgetList]);
+
   return (
     <div>
       <>
-        {/* {loading && (
+        {loading && (
           <div className="center-page">
             <span className="spinner primary"></span>
             <p>Loading...</p>
           </div>
-        )} */}
+        )}
         {error && (
           <div className="row">
             <div className="card large error">
@@ -57,15 +82,19 @@ function BudgetPage() {
                     onEdit={function (stat: Stat): void {
                       throw new Error("Function not implemented.");
                     }}
+                    onChange={handleChange}
                   />
                   <div className="mt-3" />
 
-                  <IncomeCard income={budget.incomes} />
+                  <IncomeCard income={budget.incomes} onChange={handleChange} />
                 </div>
               </Col>
 
               <Col md="6">
-                <ExpenseCard expense={budget.expenses} />
+                <ExpenseCard
+                  expense={budget.expenses}
+                  onChange={handleChange}
+                />
               </Col>
             </Row>
           </Container>

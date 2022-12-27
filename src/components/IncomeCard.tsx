@@ -1,5 +1,5 @@
 import { Income } from "./Income";
-import React, { SyntheticEvent, useState } from "react";
+import React, { useState } from "react";
 import { ItemForm } from "./ItemForm";
 import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
@@ -7,14 +7,31 @@ import { calcTotal } from "../utils";
 
 interface IncomeCardProps {
   income: Income;
+  onChange: (income: Income) => void;
 }
 
 function IncomeCard({ income: initialIncome }: IncomeCardProps) {
   const [income, setIncome] = useState(initialIncome);
+  const [total, setTotal] = useState(calcTotal(income.incomes));
 
   const addIncome = (incomeBeingEdited: Income) => {
     const newIncome = new Income();
-    newIncome.incomes = incomeBeingEdited.incomes.concat(new ItemForm());
+    const newItemForm = new ItemForm();
+    newItemForm.id = income.incomes.length + 1;
+    newItemForm.name = "";
+    newItemForm.value = 0;
+    newIncome.incomes = incomeBeingEdited.incomes.concat(newItemForm);
+    setTotal(calcTotal(newIncome.incomes));
+    setIncome(newIncome);
+  };
+
+  const recalcTotal = (incomeBeingEdited: Income) => {
+    setTotal(calcTotal(incomeBeingEdited.incomes));
+  };
+
+  const removeIncome = (removeId: number) => {
+    const newIncome = new Income();
+    newIncome.incomes = income.incomes.filter((item) => item.id !== removeId);
     setIncome(newIncome);
   };
 
@@ -44,7 +61,13 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
       <Card.Body>
         {income.incomes.map(
           (item: ItemForm, i: React.Key | null | undefined) => (
-            <ItemFormGroup key={i} itemForm={item} onChange={handleChange} />
+            <ItemFormGroup
+              key={i}
+              itemForm={item}
+              onRemove={() => {
+                removeIncome(item.id);
+              }}
+            />
           )
         )}
         <div className="mt-3" />
@@ -69,9 +92,12 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
             className="text-right"
             aria-label={"income-total"}
             key={income.id + "total"}
-            defaultValue={calcTotal(income.incomes)}
+            value={total}
             disabled
             readOnly
+            onClick={() => {
+              recalcTotal(income);
+            }}
           />
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>

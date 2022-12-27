@@ -8,6 +8,7 @@ function formatDescription(description: string): string {
 interface StatCardProps {
   stat: Stat;
   onEdit: (stat: Stat) => void;
+  onChange: (stat: Stat) => void;
 }
 
 function StatCard(props: StatCardProps) {
@@ -68,7 +69,7 @@ function StatCard(props: StatCardProps) {
             maxLength={2}
             max={100}
           />
-          <InputGroup.Text>€</InputGroup.Text>
+          <InputGroup.Text>%</InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={stat.id + "savings"}>
           <InputGroup.Text>savings</InputGroup.Text>

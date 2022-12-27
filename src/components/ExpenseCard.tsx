@@ -7,6 +7,7 @@ import { calcTotal } from "../utils";
 
 interface ExpenseCardProps {
   expense: Expense;
+  onChange: (expense: Expense) => void;
 }
 
 function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
@@ -15,6 +16,12 @@ function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
   const addExpense = (expenseBeingEdited: Expense) => {
     const newExpense = new Expense();
     newExpense.expenses = expenseBeingEdited.expenses.concat(new ItemForm());
+    setExpense(newExpense);
+  };
+
+  const removeExpense = (id: number) => {
+    const newExpense = new Expense();
+    newExpense.expenses = expense.expenses.filter((item) => item.id !== id);
     setExpense(newExpense);
   };
 
@@ -44,7 +51,13 @@ function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
       <Card.Body>
         {expense.expenses.map(
           (item: ItemForm, i: React.Key | null | undefined) => (
-            <ItemFormGroup key={i} itemForm={item} onChange={handleChange} />
+            <ItemFormGroup
+              key={i}
+              itemForm={item}
+              onRemove={() => {
+                removeExpense(item.id);
+              }}
+            />
           )
         )}
         <div className="mt-3" />
