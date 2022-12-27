@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -8,6 +9,11 @@ import { useLocalStorage } from "../utils";
 
 function GNavBar() {
   const [budgetList, setBudgetList] = useLocalStorage("budgetList", "");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleUpload = (e: any) => {
@@ -40,47 +46,53 @@ function GNavBar() {
         <Navbar key={"navbar"} bg="light" expand={expand} className="mb-3">
           <Container fluid>
             <Navbar.Brand href="#">Guitos</Navbar.Brand>
-            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Nav className="justify-content-end flex-grow-1 pe-3">
-              <Nav.Link href="#import">
-                <Form>
-                  <Form.Group controlId="formFile">
-                    <Form.Label>Import</Form.Label>
-                    <Form.Control
-                      className="nav-link"
-                      type="file"
-                      size="sm"
-                      onChange={handleUpload}
-                      style={{ display: "none" }}
-                    />
-                  </Form.Group>
-                </Form>
-              </Nav.Link>
-              <Nav.Link href="#backup" onClick={handleDownload}>
-                Backup
-              </Nav.Link>
-              <NavDropdown
-                title="Month"
-                id={`offcanvasNavbarDropdown-expand-${expand}`}
-              >
-                {budgetList !== null &&
-                  Array.isArray(budgetList) &&
-                  budgetList?.map((budget, i) => (
-                    <NavDropdown.Item key={i} href={budget.id.toString()}>
+              {budgetList !== null && Array.isArray(budgetList) && (
+                <NavDropdown
+                  title="Month"
+                  id={`offcanvasNavbarDropdown-expand-${expand}`}
+                >
+                  {budgetList?.map((budget, i) => (
+                    <NavDropdown.Item key={i} href={budget.name.toString()}>
                       {budget.name}
                     </NavDropdown.Item>
                   ))}
-              </NavDropdown>
+                </NavDropdown>
+              )}
             </Nav>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
+            <Nav>
+              <Nav.Link>
+                <Form className="d-flex">
+                  <Form.Control
+                    type="search"
+                    placeholder="Search"
+                    className="m-auto"
+                    aria-label="Search"
+                  />
+                </Form>
+              </Nav.Link>
+              <Nav.Link href="#search">
+                <Button variant="outline-secondary">Search</Button>
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link href="#import">
+                <Form.Group controlId="import">
+                  <Button variant="outline-primary" onClick={handleClick}>
+                    Import
+                  </Button>
+                  <Form.Control
+                    type="file"
+                    ref={inputRef}
+                    onChange={handleUpload}
+                    style={{ display: "none" }}
+                  />
+                </Form.Group>
+              </Nav.Link>
+              <Nav.Link href="#backup" onClick={handleDownload}>
+                <Button variant="outline-success">Backup</Button>
+              </Nav.Link>
+            </Nav>
           </Container>
         </Navbar>
       ))}

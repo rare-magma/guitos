@@ -15,13 +15,19 @@ function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
 
   const addExpense = (expenseBeingEdited: Expense) => {
     const newExpense = new Expense();
-    newExpense.expenses = expenseBeingEdited.expenses.concat(new ItemForm());
+    const newItemForm = new ItemForm();
+    newItemForm.id = expense.expenses.length + 2;
+    newItemForm.name = "";
+    newItemForm.value = 0;
+    newExpense.expenses = expenseBeingEdited.expenses.concat(newItemForm);
     setExpense(newExpense);
   };
 
   const removeExpense = (id: number) => {
     const newExpense = new Expense();
+    newExpense.id = expense.id;
     newExpense.expenses = expense.expenses.filter((item) => item.id !== id);
+    newExpense.total = calcTotal(newExpense.expenses);
     setExpense(newExpense);
   };
 
@@ -49,17 +55,15 @@ function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
     <Card>
       <Card.Header>Expenses</Card.Header>
       <Card.Body>
-        {expense.expenses.map(
-          (item: ItemForm, i: React.Key | null | undefined) => (
-            <ItemFormGroup
-              key={i}
-              itemForm={item}
-              onRemove={() => {
-                removeExpense(item.id);
-              }}
-            />
-          )
-        )}
+        {expense.expenses.map((item: ItemForm) => (
+          <ItemFormGroup
+            key={item.id}
+            itemForm={item}
+            onRemove={() => {
+              removeExpense(item.id);
+            }}
+          />
+        ))}
         <div className="mt-3" />
         <div className="d-grid gap-2">
           <Button

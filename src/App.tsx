@@ -11,7 +11,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<BudgetPage />} />
-          <Route path="/:id" element={<BudgetPage />} />
+          <Route path="/:name" element={<BudgetPage />} />
         </Routes>
       </Router>
     </>

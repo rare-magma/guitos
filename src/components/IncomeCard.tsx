@@ -17,7 +17,7 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
   const addIncome = (incomeBeingEdited: Income) => {
     const newIncome = new Income();
     const newItemForm = new ItemForm();
-    newItemForm.id = income.incomes.length + 1;
+    newItemForm.id = income.incomes.length + 2;
     newItemForm.name = "";
     newItemForm.value = 0;
     newIncome.incomes = incomeBeingEdited.incomes.concat(newItemForm);
@@ -29,9 +29,11 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
     setTotal(calcTotal(incomeBeingEdited.incomes));
   };
 
-  const removeIncome = (removeId: number) => {
+  const removeIncome = (id: number) => {
     const newIncome = new Income();
-    newIncome.incomes = income.incomes.filter((item) => item.id !== removeId);
+    newIncome.id = income.id;
+    newIncome.incomes = income.incomes.filter((item) => item.id !== id);
+    newIncome.total = calcTotal(newIncome.incomes);
     setIncome(newIncome);
   };
 
@@ -59,17 +61,15 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
     <Card>
       <Card.Header>Income</Card.Header>
       <Card.Body>
-        {income.incomes.map(
-          (item: ItemForm, i: React.Key | null | undefined) => (
-            <ItemFormGroup
-              key={i}
-              itemForm={item}
-              onRemove={() => {
-                removeIncome(item.id);
-              }}
-            />
-          )
-        )}
+        {income.incomes.map((item: ItemForm) => (
+          <ItemFormGroup
+            key={item.id}
+            itemForm={item}
+            onRemove={() => {
+              removeIncome(item.id);
+            }}
+          />
+        ))}
         <div className="mt-3" />
         <div className="d-grid gap-2">
           <Button
@@ -95,9 +95,6 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
             value={total}
             disabled
             readOnly
-            onClick={() => {
-              recalcTotal(income);
-            }}
           />
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>

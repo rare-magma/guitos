@@ -14,7 +14,7 @@ function BudgetPage() {
   const [budgetList, setBudgetList] = useLocalStorage("budgetList", "");
   const [error, setError] = useState<string | null>(null);
   const params = useParams();
-  const id = Number(params.id);
+  const name = String(params.name);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (event: any) => {
@@ -41,7 +41,7 @@ function BudgetPage() {
     budgetList !== null &&
       Array.isArray(budgetList) &&
       budgetList
-        .filter((budget: Budget) => budget.id === id)
+        .filter((budget: Budget) => budget.name === name)
         .map((data: Budget) => {
           setBudget(data);
           setLoading(false);
@@ -50,7 +50,7 @@ function BudgetPage() {
     //        setError(e);
     //        setLoading(false);
     //      });
-  }, [budgetList, id, setBudgetList]);
+  }, [budgetList, name, setBudgetList]);
 
   return (
     <div>

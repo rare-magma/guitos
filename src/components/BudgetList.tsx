@@ -20,7 +20,7 @@ function BudgetList({ budgets, onSave }: BudgetListProps) {
   return (
     <div className="row">
       {/* {budgets.map((budget) => (
-        <div key={budget.id} className="cols-sm">
+        <div key={budget.name} className="cols-sm">
           {budget === budgetBeingEdited ? (
             <BudgetForm
               budget={budget}

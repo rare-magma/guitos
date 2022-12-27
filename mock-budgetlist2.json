@@ -1,6 +1,6 @@
 [
     {
-        "id": 10,
+        "version": 1,
         "name": "2022-07",
         "expenses": {
             "id": "2022-07-Expenses",
@@ -219,7 +219,7 @@
         }
     },
     {
-        "id": 11,
+        "version": 1,
         "name": "2022-06",
         "expenses": {
             "id": "2022-06-Expenses",

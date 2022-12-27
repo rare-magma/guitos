@@ -10,8 +10,8 @@ interface ItemFormProps {
 function ItemFormGroup({ itemForm: initialItemForm, onRemove }: ItemFormProps) {
   const [itemForm, setItemForm] = useState(initialItemForm);
 
-  const handleRemove = () => {
-    onRemove(itemForm);
+  const handleRemove = (item: ItemForm) => {
+    onRemove(item);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -55,7 +55,14 @@ function ItemFormGroup({ itemForm: initialItemForm, onRemove }: ItemFormProps) {
           maxLength={11}
         />
         <InputGroup.Text>€</InputGroup.Text>
-        <Button variant="outline-secondary" onClick={handleRemove}>
+        <Button
+          key={itemForm.id + "button"}
+          variant="text"
+          type="button"
+          onClick={() => {
+            handleRemove(itemForm);
+          }}
+        >
           -
         </Button>
       </InputGroup>

@@ -28,3 +28,14 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.btn-text {
+    color: #212529;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: .375rem;
+}
+.btn-text:hover {
+    color: #212529;
+    background-color: #dc3545;
+}

@@ -7,6 +7,7 @@ import { Stat } from "./Stat";
 export const MOCK_BUDGETS = [
   new Budget({
     id: 1,
+    version: 1,
     name: "2022-08",
     expenses: new Expense({
       id: "2022-08-Expenses",
@@ -226,6 +227,7 @@ export const MOCK_BUDGETS = [
   }),
   new Budget({
     id: 2,
+    version: 1,
     name: "2022-09",
     expenses: new Expense({
       id: "2022-09-Expenses",
@@ -350,6 +352,7 @@ export const MOCK_BUDGETS = [
   }),
   new Budget({
     id: 3,
+    version: 1,
     name: "2022-10",
     expenses: new Expense({
       id: "2022-10-Expenses",
@@ -474,6 +477,7 @@ export const MOCK_BUDGETS = [
   }),
   new Budget({
     id: 4,
+    version: 1,
     name: "2022-11",
     expenses: new Expense({
       id: "2022-11-Expenses",
@@ -598,6 +602,7 @@ export const MOCK_BUDGETS = [
   }),
   new Budget({
     id: 5,
+    version: 1,
     name: "2022-12",
     expenses: new Expense({
       id: "2022-12-Expenses",
