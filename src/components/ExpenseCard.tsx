@@ -1,5 +1,5 @@
 import { Expense } from "./Expense";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ItemForm } from "./ItemForm";
 import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
@@ -10,7 +10,7 @@ interface ExpenseCardProps {
   onChange: (expense: Expense) => void;
 }
 
-function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
+function ExpenseCard({ expense: initialExpense, onChange }: ExpenseCardProps) {
   const [expense, setExpense] = useState(initialExpense);
   const [total, setTotal] = useState(calcTotal(expense.expenses));
 
@@ -28,6 +28,7 @@ function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
 
     setExpense(newExpense);
     setTotal(calcTotal(newExpense.expenses));
+    onChange(newExpense);
   };
 
   const removeExpense = (id: number) => {
@@ -38,26 +39,28 @@ function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
 
     setExpense(newExpense);
     setTotal(calcTotal(newExpense.expenses));
+    onChange(newExpense);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChange = (event: any) => {
-    const { type, name, value } = event.target;
-    let updatedValue = value;
-
-    if (type === "number") {
-      updatedValue = Number(updatedValue);
-    }
-    const change = {
-      [name]: updatedValue,
-    };
-
-    let updatedExpense: Expense;
-
-    setExpense((i) => {
-      updatedExpense = new Expense({ ...i, ...change });
-      return updatedExpense;
+  const handleChange = (item: ItemForm) => {
+    const newExpense = new Expense();
+    newExpense.id = expense.id;
+    newExpense.expenses = expense.expenses.map((i) => {
+      if (i.id === item.id) {
+        return {
+          id: item.id,
+          name: item.name,
+          value: Number(item.value),
+          isNew: true,
+        };
+      }
+      return i;
     });
+
+    setExpense(newExpense);
+    setTotal(calcTotal(newExpense.expenses));
+    onChange(newExpense);
   };
 
   return (
@@ -68,6 +71,7 @@ function ExpenseCard({ expense: initialExpense }: ExpenseCardProps) {
           <ItemFormGroup
             key={item.id}
             itemForm={item}
+            onChange={handleChange}
             onRemove={() => {
               removeExpense(item.id);
             }}

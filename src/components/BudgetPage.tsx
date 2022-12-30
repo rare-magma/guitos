@@ -7,33 +7,44 @@ import IncomeCard from "./IncomeCard";
 import { Stat } from "./Stat";
 import StatCard from "./StatCard";
 import { useLocalStorage } from "../utils";
+import { Income } from "./Income";
+import { Expense } from "./Expense";
 
 function BudgetPage() {
   const [loading, setLoading] = useState(false);
   const [budget, setBudget] = useState<Budget | null>(null);
+
   const [budgetList, setBudgetList] = useLocalStorage("budgetList", "");
+
   const [error, setError] = useState<string | null>(null);
   const params = useParams();
   const name = String(params.name);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChange = (event: any) => {
-    const { type, name, value } = event.target;
-    let updatedValue = value;
-
-    if (type === "number") {
-      updatedValue = Number(updatedValue);
+  const handleChange = (item: any) => {
+    const newBudget = new Budget();
+    if (budget !== null && budget.name !== null) {
+      newBudget.name = budget.name;
     }
-    const change = {
-      [name]: updatedValue,
-    };
-
-    let updatedBudget: Budget;
-
-    setBudget((i) => {
-      updatedBudget = new Budget({ ...i, ...change });
-      return updatedBudget;
-    });
+    if (budget !== null && budget.incomes !== null) {
+      newBudget.incomes = budget.incomes;
+    }
+    if (budget !== null && budget.expenses !== null) {
+      newBudget.expenses = budget.expenses;
+    }
+    if (budget !== null && budget.stats !== null) {
+      newBudget.stats = budget.stats;
+    }
+    if (item instanceof Income) {
+      newBudget.incomes = item;
+    }
+    if (item instanceof Expense) {
+      newBudget.expenses = item;
+    }
+    if (item instanceof Stat) {
+      newBudget.stats = item;
+    }
+    setBudget(newBudget);
   };
 
   useEffect(() => {
@@ -80,13 +91,8 @@ function BudgetPage() {
             <Row>
               <Col md="6">
                 <div className="card-columns">
-                  <StatCard
-                    stat={budget.stats}
-                    onEdit={function (stat: Stat): void {
-                      throw new Error("Function not implemented." + stat);
-                    }}
-                    onChange={handleChange}
-                  />
+                  <StatCard budget={budget} onChange={handleChange} />
+
                   <div className="mt-3" />
 
                   <IncomeCard income={budget.incomes} onChange={handleChange} />

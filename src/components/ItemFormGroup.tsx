@@ -1,13 +1,19 @@
 import { useState } from "react";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { numberInputOnWheelPreventChange } from "../utils";
 import { ItemForm } from "./ItemForm";
 
 interface ItemFormProps {
   itemForm: ItemForm;
   onRemove: (itemForm: ItemForm) => void;
+  onChange: (itemForm: ItemForm) => void;
 }
 
-function ItemFormGroup({ itemForm: initialItemForm, onRemove }: ItemFormProps) {
+function ItemFormGroup({
+  itemForm: initialItemForm,
+  onRemove,
+  onChange,
+}: ItemFormProps) {
   const [itemForm, setItemForm] = useState(initialItemForm);
 
   const handleRemove = (item: ItemForm) => {
@@ -15,57 +21,72 @@ function ItemFormGroup({ itemForm: initialItemForm, onRemove }: ItemFormProps) {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChange = (event: any) => {
-    const { type, name, value } = event.target;
-    let updatedValue = value;
-
-    if (type === "number") {
-      updatedValue = Number(updatedValue);
-    }
-    const change = {
-      [name]: updatedValue,
-    };
-
-    let updatedItemForm: ItemForm;
-
-    setItemForm((i) => {
-      updatedItemForm = new ItemForm({ ...i, ...change });
-      return updatedItemForm;
+  const editItemName = (event: any) => {
+    const newItemForm = new ItemForm({
+      id: itemForm.id,
+      name: event.target.value,
+      value: itemForm.value,
     });
+
+    setItemForm(newItemForm);
+    onChange(newItemForm);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const editItemValue = (event: any) => {
+    const newItemForm = new ItemForm({
+      id: itemForm.id,
+      name: itemForm.name,
+      value: event.target.value,
+    });
+
+    setItemForm(newItemForm);
+    onChange(newItemForm);
   };
 
   return (
     <Form>
-      <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
-        <Form.Control
-          aria-label={"newname"}
-          key={itemForm.id + "-key"}
-          defaultValue={itemForm.name}
-          onChange={handleChange}
-          type="text"
-          maxLength={255}
-        />
-        <Form.Control
-          aria-label={"newvalue"}
-          key={itemForm.id + "-value"}
-          className="text-right"
-          defaultValue={itemForm.value}
-          onChange={handleChange}
-          type="number"
-          maxLength={11}
-        />
-        <InputGroup.Text>€</InputGroup.Text>
-        <Button
-          key={itemForm.id + "button"}
-          variant="text"
-          type="button"
-          onClick={() => {
-            handleRemove(itemForm);
-          }}
-        >
-          -
-        </Button>
-      </InputGroup>
+      <Row>
+        <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
+          <Col xs={7}>
+            <Form.Control
+              aria-label={"newname"}
+              key={itemForm.id + "-key"}
+              defaultValue={itemForm.name}
+              onChange={editItemName}
+              type="text"
+              maxLength={255}
+            />
+          </Col>
+          <Col xs={3}>
+            <Form.Control
+              aria-label={"newvalue"}
+              key={itemForm.id + "-value"}
+              className="text-right"
+              defaultValue={itemForm.value}
+              onChange={editItemValue}
+              type="number"
+              onWheelCapture={numberInputOnWheelPreventChange}
+              maxLength={11}
+            />
+          </Col>
+          <Col xs={1}>
+            <InputGroup.Text>€</InputGroup.Text>
+          </Col>
+          <Col xs={1}>
+            <Button
+              key={itemForm.id + "button"}
+              variant="text"
+              type="button"
+              onClick={() => {
+                handleRemove(itemForm);
+              }}
+            >
+              -
+            </Button>
+          </Col>
+        </InputGroup>
+      </Row>
     </Form>
   );
 }

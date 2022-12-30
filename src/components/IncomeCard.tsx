@@ -1,5 +1,5 @@
 import { Income } from "./Income";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ItemForm } from "./ItemForm";
 import { Card, Button, Form, InputGroup } from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
@@ -10,7 +10,7 @@ interface IncomeCardProps {
   onChange: (income: Income) => void;
 }
 
-function IncomeCard({ income: initialIncome }: IncomeCardProps) {
+function IncomeCard({ income: initialIncome, onChange }: IncomeCardProps) {
   const [income, setIncome] = useState(initialIncome);
   const [total, setTotal] = useState(calcTotal(income.incomes));
 
@@ -28,6 +28,7 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
 
     setIncome(newIncome);
     setTotal(calcTotal(newIncome.incomes));
+    onChange(newIncome);
   };
 
   const removeIncome = (id: number) => {
@@ -38,26 +39,28 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
 
     setIncome(newIncome);
     setTotal(calcTotal(newIncome.incomes));
+    onChange(newIncome);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChange = (event: any) => {
-    const { type, name, value } = event.target;
-    let updatedValue = value;
-
-    if (type === "number") {
-      updatedValue = Number(updatedValue);
-    }
-    const change = {
-      [name]: updatedValue,
-    };
-
-    let updatedIncome: Income;
-
-    setIncome((i) => {
-      updatedIncome = new Income({ ...i, ...change });
-      return updatedIncome;
+  const handleChange = (item: ItemForm) => {
+    const newIncome = new Income();
+    newIncome.id = income.id;
+    newIncome.incomes = income.incomes.map((i: ItemForm) => {
+      if (i.id === item.id) {
+        return {
+          id: item.id,
+          name: item.name,
+          value: Number(item.value),
+          isNew: true,
+        };
+      }
+      return i;
     });
+
+    setIncome(newIncome);
+    setTotal(calcTotal(newIncome.incomes));
+    onChange(newIncome);
   };
 
   return (
@@ -68,6 +71,7 @@ function IncomeCard({ income: initialIncome }: IncomeCardProps) {
           <ItemFormGroup
             key={item.id}
             itemForm={item}
+            onChange={handleChange}
             onRemove={() => {
               removeIncome(item.id);
             }}
