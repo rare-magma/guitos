@@ -7,26 +7,37 @@ export function round(number: number, precision: number) {
 }
 
 export function calcTotal(values: Array<ItemForm>): number {
-  const total = values
-    .filter((x) => !isNaN(x.value))
-    .reduce((total, n) => total + n.value, 0);
+  const total =
+    values &&
+    values
+      .filter((x) => !isNaN(x.value))
+      .reduce((total, n) => total + n.value, 0);
   return round(total, 2);
 }
 
 export function calcAvailable(value: Budget | null): number {
   if (value !== null) {
-    const expenseTotal = calcTotal(value.expenses.expenses);
-    const incomeTotal = calcTotal(value.incomes.incomes);
+    const expenseTotal = calcTotal(value.expenses.items);
+    const incomeTotal = calcTotal(value.incomes.items);
     return round(incomeTotal - expenseTotal, 2);
   }
   return 0;
 }
 
 export function calcWithGoal(value: Budget | null): number {
-  if (value !== null) {
+  if (value !== null && value.stats.goal !== null && !isNaN(value.stats.goal)) {
     const available = calcAvailable(value);
-    const savings = (value.stats.goal * calcTotal(value.incomes.incomes)) / 100;
+    const savings = (value.stats.goal * calcTotal(value.incomes.items)) / 100;
     return round(available - savings, 2);
+  }
+  return 0;
+}
+
+export function calcSaved(value: Budget | null): number {
+  if (value !== null && value.stats.goal !== null && !isNaN(value.stats.goal)) {
+    const available = calcTotal(value.incomes.items);
+    const saved = (value.stats.goal * available) / 100;
+    return round(saved, 2);
   }
   return 0;
 }

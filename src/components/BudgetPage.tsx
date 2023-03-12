@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { Budget } from "./Budget";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import ExpenseCard from "./ExpenseCard";
-import IncomeCard from "./IncomeCard";
+import TableCard from "./TableCard";
 import { Stat } from "./Stat";
 import StatCard from "./StatCard";
-import { useLocalStorage } from "../utils";
+import {
+  calcAvailable,
+  calcSaved,
+  calcWithGoal,
+  useLocalStorage,
+} from "../utils";
 import { Income } from "./Income";
 import { Expense } from "./Expense";
 
@@ -15,36 +19,79 @@ function BudgetPage() {
   const [budget, setBudget] = useState<Budget | null>(null);
 
   const [budgetList, setBudgetList] = useLocalStorage("budgetList", "");
-
   const [error, setError] = useState<string | null>(null);
   const params = useParams();
   const name = String(params.name);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChange = (item: any) => {
-    const newBudget = new Budget();
-    if (budget !== null && budget.name !== null) {
-      newBudget.name = budget.name;
-    }
-    if (budget !== null && budget.incomes !== null) {
-      newBudget.incomes = budget.incomes;
-    }
-    if (budget !== null && budget.expenses !== null) {
-      newBudget.expenses = budget.expenses;
-    }
-    if (budget !== null && budget.stats !== null) {
-      newBudget.stats = budget.stats;
-    }
-    if (item instanceof Income) {
+  const handleIncomeChange = (item: Income) => {
+    let newBudget: Budget;
+    if (budget !== null) {
+      newBudget = budget;
       newBudget.incomes = item;
+      newBudget.stats.available = calcAvailable(newBudget);
+      newBudget.stats.withGoal = calcWithGoal(newBudget);
+      newBudget.stats.saved = calcSaved(newBudget);
+
+      setBudget({
+        ...budget,
+        incomes: {
+          ...budget.incomes,
+          items: item.items,
+          total: item.total,
+          isNew: true,
+        },
+        stats: {
+          ...budget.stats,
+          available: newBudget.stats.available,
+          withGoal: newBudget.stats.withGoal,
+          saved: newBudget.stats.saved,
+          isNew: true,
+        },
+        isNew: true,
+      });
     }
-    if (item instanceof Expense) {
+  };
+
+  const handleExpenseChange = (item: Expense) => {
+    let newBudget: Budget;
+    if (budget !== null) {
+      newBudget = budget;
       newBudget.expenses = item;
+      newBudget.stats.available = calcAvailable(newBudget);
+      newBudget.stats.withGoal = calcWithGoal(newBudget);
+      newBudget.stats.saved = calcSaved(newBudget);
+
+      setBudget({
+        ...budget,
+        expenses: {
+          ...budget.expenses,
+          items: item.items,
+          total: item.total,
+          isNew: true,
+        },
+        stats: {
+          ...budget.stats,
+          available: newBudget.stats.available,
+          withGoal: newBudget.stats.withGoal,
+          saved: newBudget.stats.saved,
+          isNew: true,
+        },
+        isNew: true,
+      });
     }
-    if (item instanceof Stat) {
+  };
+
+  const handleChange = (item: Stat) => {
+    let newBudget: Budget;
+    if (budget !== null) {
+      newBudget = budget;
+      newBudget.version = budget.version + 1;
       newBudget.stats = item;
+      newBudget.stats.available = calcAvailable(newBudget);
+      newBudget.stats.withGoal = calcWithGoal(newBudget);
+      newBudget.stats.saved = calcSaved(newBudget);
+      setBudget(newBudget);
     }
-    setBudget(newBudget);
   };
 
   useEffect(() => {
@@ -64,7 +111,7 @@ function BudgetPage() {
         setLoading(false);
       });
     }
-  }, [budgetList, name, setBudgetList]);
+  }, [budgetList, name, budget, setBudgetList]);
 
   return (
     <div>
@@ -91,18 +138,23 @@ function BudgetPage() {
             <Row>
               <Col md="6">
                 <div className="card-columns">
-                  <StatCard budget={budget} onChange={handleChange} />
+                  <StatCard stat={budget.stats} onChange={handleChange} />
 
                   <div className="mt-3" />
 
-                  <IncomeCard income={budget.incomes} onChange={handleChange} />
+                  <TableCard
+                    items={budget.incomes}
+                    header="Incomes"
+                    onChange={handleIncomeChange}
+                  />
                 </div>
               </Col>
 
               <Col md="6">
-                <ExpenseCard
-                  expense={budget.expenses}
-                  onChange={handleChange}
+                <TableCard
+                  items={budget.expenses}
+                  header="Expenses"
+                  onChange={handleExpenseChange}
                 />
               </Col>
             </Row>

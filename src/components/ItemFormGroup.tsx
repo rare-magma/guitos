@@ -20,24 +20,24 @@ function ItemFormGroup({
     onRemove(item);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const editItemName = (event: any) => {
+  const editItemName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newItemForm = new ItemForm({
       id: itemForm.id,
       name: event.target.value,
       value: itemForm.value,
+      isNew: true,
     });
 
     setItemForm(newItemForm);
     onChange(newItemForm);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const editItemValue = (event: any) => {
+  const editItemValue = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newItemForm = new ItemForm({
       id: itemForm.id,
       name: itemForm.name,
-      value: event.target.value,
+      value: event.target.valueAsNumber,
+      isNew: true,
     });
 
     setItemForm(newItemForm);

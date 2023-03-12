@@ -1,74 +1,67 @@
 import { Stat } from "./Stat";
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { useState } from "react";
-import { Budget } from "./Budget";
-import {
-  calcAvailable,
-  calcWithGoal,
-  numberInputOnWheelPreventChange,
-} from "../utils";
+import { numberInputOnWheelPreventChange } from "../utils";
 
 interface StatCardProps {
-  budget: Budget;
+  stat: Stat;
   onChange: (stat: Stat) => void;
 }
 
-function StatCard({ budget: initialStat, onChange }: StatCardProps) {
+function StatCard({ stat: initialStat, onChange }: StatCardProps) {
   const [stat, setStat] = useState(initialStat);
-  const [available, setAvailable] = useState(calcAvailable(stat));
-  const [withGoal, setWithGoal] = useState(calcWithGoal(stat));
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (item: any) => {
-    const newStat = new Budget();
-    newStat.name = stat.name;
-    newStat.incomes = stat.incomes;
-    newStat.expenses = stat.expenses;
-    newStat.stats = stat.stats;
-    newStat.stats.goal = item.target.value;
-
-    setAvailable(calcAvailable(newStat));
-    setWithGoal(calcWithGoal(newStat));
-    onChange(newStat.stats);
+    let updatedStat: Stat;
+    setStat((s) => {
+      updatedStat = new Stat({
+        ...s,
+        goal: item.target.valueAsNumber,
+        isNew: true,
+      });
+      onChange(updatedStat);
+      return updatedStat;
+    });
   };
 
   return (
     <Card>
       <Card.Header>Stats</Card.Header>
       <Card.Body>
-        <InputGroup className="mb-1" key={stat.stats.id + "stats"}>
+        <InputGroup className="mb-1" key={stat.id + "stats"}>
           <InputGroup.Text>available</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"available"}
-            key={stat.stats.id + "available"}
-            value={available}
+            key={stat.id + "available"}
+            value={stat.available}
             onChange={handleChange}
             disabled
             readOnly
           />
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>
-        <InputGroup className="mb-1" key={stat.stats.id + "withGoal"}>
+        <InputGroup className="mb-1" key={stat.id + "withGoal"}>
           <InputGroup.Text>with goal</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"withGoal"}
-            key={stat.stats.id + "withGoal"}
-            value={withGoal}
+            key={stat.id + "withGoal"}
+            value={stat.withGoal}
             onChange={handleChange}
             disabled
             readOnly
           />
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>
-        <InputGroup className="mb-1" key={stat.stats.id + "goal"}>
+        <InputGroup className="mb-1" key={stat.id + "goal"}>
           <InputGroup.Text>goal</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"goal"}
-            key={stat.stats.id + "goal"}
-            defaultValue={stat.stats.goal}
+            key={stat.id + "goal"}
+            defaultValue={stat.goal}
             onChange={handleChange}
             onWheelCapture={numberInputOnWheelPreventChange}
             type="number"
@@ -77,26 +70,26 @@ function StatCard({ budget: initialStat, onChange }: StatCardProps) {
           />
           <InputGroup.Text>%</InputGroup.Text>
         </InputGroup>
-        <InputGroup className="mb-1" key={stat.stats.id + "saved"}>
+        <InputGroup className="mb-1" key={stat.id + "saved"}>
           <InputGroup.Text>saved</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"saved"}
-            key={stat.stats.id + "saved"}
-            value={stat.stats.saved}
+            key={stat.id + "saved"}
+            value={stat.saved}
             onChange={handleChange}
             disabled
             readOnly
           />
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>
-        <InputGroup className="mb-1" key={stat.stats.id + "savings"}>
+        <InputGroup className="mb-1" key={stat.id + "savings"}>
           <InputGroup.Text>savings</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"savings"}
-            key={stat.stats.id + "savings"}
-            value={stat.stats.savings}
+            key={stat.id + "savings"}
+            value={stat.savings}
             onChange={handleChange}
             disabled
             readOnly

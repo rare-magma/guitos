@@ -12,8 +12,7 @@ export class Budget {
     return this.name === undefined;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(initializer?: any) {
+  constructor(initializer?: Budget) {
     if (!initializer) return;
     if (initializer.version) this.version = initializer.version;
     if (initializer.name) this.name = initializer.name;

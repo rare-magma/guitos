@@ -1,5 +1,5 @@
 export class Stat {
-  id!: number;
+  id!: string;
   available!: number;
   withGoal!: number;
   saved!: number;
@@ -9,8 +9,7 @@ export class Stat {
     return this.id === undefined;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  constructor(initializer?: any) {
+  constructor(initializer?: Stat) {
     if (!initializer) return;
     if (initializer.id) this.id = initializer.id;
     if (initializer.available) this.available = initializer.available;

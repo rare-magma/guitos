@@ -7,7 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useLocalStorage } from "../utils";
 
-function GNavBar() {
+function NavBar() {
   const [budgetList, setBudgetList] = useLocalStorage("budgetList", "");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -15,10 +15,12 @@ function GNavBar() {
     inputRef.current?.click();
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleUpload = (e: any) => {
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileReader = new FileReader();
 
+    if (e.target.files === null) {
+      return;
+    }
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onloadend = () => {
       if (fileReader.result !== null) {
@@ -29,7 +31,7 @@ function GNavBar() {
 
   const handleDownload = () => {
     let filename = new Date().toISOString();
-    filename = "guitos-" + filename + ".json";
+    filename = `guitos-${filename}.json`;
     const url = window.URL.createObjectURL(
       new Blob([JSON.stringify(budgetList)])
     );
@@ -100,4 +102,4 @@ function GNavBar() {
   );
 }
 
-export default GNavBar;
+export default NavBar;
