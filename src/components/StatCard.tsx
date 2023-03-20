@@ -11,30 +11,26 @@ interface StatCardProps {
 function StatCard({ stat: initialStat, onChange }: StatCardProps) {
   const [stat, setStat] = useState(initialStat);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleChange = (item: any) => {
+  const handleChange = (item: React.ChangeEvent<HTMLInputElement>) => {
     let updatedStat: Stat;
-    setStat((s) => {
-      updatedStat = new Stat({
-        ...s,
-        goal: item.target.valueAsNumber,
-        isNew: true,
-      });
+    if (stat !== null) {
+      updatedStat = stat;
+      updatedStat.goal = item.target.valueAsNumber;
+      setStat(updatedStat);
       onChange(updatedStat);
-      return updatedStat;
-    });
+    }
   };
 
   return (
     <Card>
       <Card.Header>Stats</Card.Header>
       <Card.Body>
-        <InputGroup className="mb-1" key={stat.id + "stats"}>
+        <InputGroup className="mb-1" key={"stats"}>
           <InputGroup.Text>available</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"available"}
-            key={stat.id + "available"}
+            key={"available"}
             value={stat.available}
             onChange={handleChange}
             disabled
@@ -42,12 +38,12 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           />
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>
-        <InputGroup className="mb-1" key={stat.id + "withGoal"}>
+        <InputGroup className="mb-1" key={"withGoal"}>
           <InputGroup.Text>with goal</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"withGoal"}
-            key={stat.id + "withGoal"}
+            key={"withGoal"}
             value={stat.withGoal}
             onChange={handleChange}
             disabled
@@ -55,12 +51,12 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           />
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>
-        <InputGroup className="mb-1" key={stat.id + "goal"}>
+        <InputGroup className="mb-1" key={"goal"}>
           <InputGroup.Text>goal</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"goal"}
-            key={stat.id + "goal"}
+            key={"goal"}
             defaultValue={stat.goal}
             onChange={handleChange}
             onWheelCapture={numberInputOnWheelPreventChange}
@@ -70,12 +66,12 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           />
           <InputGroup.Text>%</InputGroup.Text>
         </InputGroup>
-        <InputGroup className="mb-1" key={stat.id + "saved"}>
+        <InputGroup className="mb-1" key={"saved"}>
           <InputGroup.Text>saved</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"saved"}
-            key={stat.id + "saved"}
+            key={"saved"}
             value={stat.saved}
             onChange={handleChange}
             disabled
@@ -83,12 +79,12 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           />
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>
-        <InputGroup className="mb-1" key={stat.id + "savings"}>
+        <InputGroup className="mb-1" key={"savings"}>
           <InputGroup.Text>savings</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"savings"}
-            key={stat.id + "savings"}
+            key={"savings"}
             value={stat.savings}
             onChange={handleChange}
             disabled

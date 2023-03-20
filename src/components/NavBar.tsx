@@ -1,45 +1,53 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useLocalStorage } from "../utils";
 
-function NavBar() {
-  const [budgetList, setBudgetList] = useLocalStorage("budgetList", "");
+interface NavBarProps {
+  selected?: string | null;
+  id?: string | null;
+  budgetNameList?: [];
+  onRename: (name?: string | null) => void;
+  onDownload: () => void;
+  onNew: () => void;
+  onRemove: (name: string) => void;
+  onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+function NavBar({
+  selected: initialSelectedName,
+  id: initialId,
+  budgetNameList: budgetNameList,
+  onRename,
+  onDownload,
+  onNew,
+  onRemove,
+  onUpload,
+}: NavBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleClick = () => {
-    inputRef.current?.click();
-  };
-
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fileReader = new FileReader();
-
-    if (e.target.files === null) {
-      return;
-    }
-    fileReader.readAsText(e.target.files[0], "UTF-8");
-    fileReader.onloadend = () => {
-      if (fileReader.result !== null) {
-        setBudgetList(JSON.parse(fileReader.result as string));
-      }
-    };
+  const handleNew = () => {
+    onNew();
   };
 
   const handleDownload = () => {
-    let filename = new Date().toISOString();
-    filename = `guitos-${filename}.json`;
-    const url = window.URL.createObjectURL(
-      new Blob([JSON.stringify(budgetList)])
-    );
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", filename);
-    document.body.appendChild(link);
-    link.click();
+    onDownload();
+  };
+
+  const handleRemove = (initialId?: string | null) => {
+    if (initialId) {
+      onRemove(initialId);
+    }
+  };
+
+  const editName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newName = event.target.value;
+    if (newName) {
+      onRename(newName);
+    }
   };
 
   return (
@@ -47,21 +55,32 @@ function NavBar() {
       {["md"].map((expand) => (
         <Navbar key={"navbar"} bg="light" expand={expand} className="mb-3">
           <Container fluid>
-            <Navbar.Brand href="#">Guitos</Navbar.Brand>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
-              {budgetList !== null && Array.isArray(budgetList) && (
+            <Nav>
+              {budgetNameList && budgetNameList.length > 0 && (
                 <NavDropdown
-                  title="Month"
+                  title="List"
                   id={`offcanvasNavbarDropdown-expand-${expand}`}
                 >
-                  {budgetList?.map((budget, i) => (
-                    <NavDropdown.Item key={i} href={budget.name.toString()}>
-                      {budget.name}
+                  {budgetNameList?.map((name, i) => (
+                    <NavDropdown.Item key={i} href={name}>
+                      {name}
                     </NavDropdown.Item>
                   ))}
                 </NavDropdown>
               )}
             </Nav>
+            {initialSelectedName && (
+              <Nav>
+                <Form.Control
+                  aria-label={"newname"}
+                  key={"newname-key"}
+                  defaultValue={initialSelectedName}
+                  onChange={editName}
+                  type="text"
+                  maxLength={25}
+                />
+              </Nav>
+            )}
             <Nav>
               <Nav.Link>
                 <Form className="d-flex">
@@ -73,26 +92,51 @@ function NavBar() {
                   />
                 </Form>
               </Nav.Link>
-              <Nav.Link href="#search">
+              <Nav.Link>
                 <Button variant="outline-secondary">Search</Button>
               </Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link href="#import">
+              <Nav.Link
+                onClick={() => {
+                  handleNew();
+                }}
+              >
+                <Button variant="outline-success">New</Button>
+              </Nav.Link>
+              <Nav.Link
+                onClick={() => {
+                  handleRemove(initialId);
+                }}
+              >
+                <Button variant="outline-success">Delete</Button>
+              </Nav.Link>
+              <Nav.Link>
                 <Form.Group controlId="import">
-                  <Button variant="outline-primary" onClick={handleClick}>
+                  <Button
+                    variant="outline-primary"
+                    onClick={() => {
+                      inputRef.current?.click();
+                    }}
+                  >
                     Import
                   </Button>
                   <Form.Control
                     type="file"
                     ref={inputRef}
-                    onChange={handleUpload}
+                    onChange={() => {
+                      onUpload;
+                    }}
                     style={{ display: "none" }}
                   />
                 </Form.Group>
               </Nav.Link>
-              <Nav.Link href="#backup" onClick={handleDownload}>
-                <Button variant="outline-success">Backup</Button>
+              <Nav.Link
+                onClick={() => {
+                  handleDownload();
+                }}
+              >
+                <Button variant="outline-success">Export</Button>
               </Nav.Link>
             </Nav>
           </Container>

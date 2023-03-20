@@ -25,7 +25,6 @@ function ItemFormGroup({
       id: itemForm.id,
       name: event.target.value,
       value: itemForm.value,
-      isNew: true,
     });
 
     setItemForm(newItemForm);
@@ -37,7 +36,6 @@ function ItemFormGroup({
       id: itemForm.id,
       name: itemForm.name,
       value: event.target.valueAsNumber,
-      isNew: true,
     });
 
     setItemForm(newItemForm);

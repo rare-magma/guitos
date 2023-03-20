@@ -2,9 +2,6 @@ export class ItemForm {
   id!: number;
   name!: string;
   value!: number;
-  get isNew(): boolean {
-    return this.id === undefined;
-  }
 
   constructor(initializer?: ItemForm) {
     if (!initializer) return;

@@ -25,17 +25,17 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
 .btn-text {
-    color: #212529;
-    background-color: #e9ecef;
-    border: 1px solid #ced4da;
-    border-radius: .375rem;
+  color: #212529;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
 }
 .btn-text:hover {
-    color: #212529;
-    background-color: #dc3545;
+  color: #212529;
+  background-color: #dc3545;
 }

@@ -35,7 +35,6 @@ function TableCard({
     newItemForm.name = "";
     newItemForm.value = 0;
 
-    newTable.id = table.id;
     newTable.items = tableBeingEdited.items.concat(newItemForm);
     newTable.total = calcTotal(newTable.items);
 
@@ -51,7 +50,6 @@ function TableCard({
     } else {
       newTable = new Expense();
     }
-    newTable.id = table.id;
     newTable.items = table.items.filter(
       (item: { id: number }) => item.id !== toBeDeleted.id
     );
@@ -69,14 +67,12 @@ function TableCard({
     } else {
       newTable = new Expense();
     }
-    newTable.id = table.id;
     newTable.items = table.items.map((i) => {
       if (i.id === item.id) {
         return {
           id: item.id,
           name: item.name,
           value: Number(item.value),
-          isNew: true,
         };
       }
       return i;
@@ -117,12 +113,12 @@ function TableCard({
         </div>
       </Card.Body>
       <Card.Footer className="d-grid gap-2">
-        <InputGroup className="mb-1" key={table.id + "-total-group-" + label}>
+        <InputGroup className="mb-1" key={"total-group-" + label}>
           <InputGroup.Text>total</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={label + "-table-total"}
-            key={label + table.id + "total"}
+            key={label + "total"}
             value={total}
             disabled
             readOnly
