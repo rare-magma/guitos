@@ -1,11 +1,13 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Dropdown, ButtonGroup } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import { BsPlusLg, BsXLg, BsUpload, BsDownload } from "react-icons/bs";
+import { Typeahead } from "react-bootstrap-typeahead";
+import { useNavigate } from "react-router-dom";
 
 interface NavBarProps {
   selected?: string | null;
@@ -29,6 +31,8 @@ function NavBar({
   onUpload,
 }: NavBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [selected, setSelected] = useState([]);
+  const navigate = useNavigate();
 
   const handleNew = () => {
     onNew();
@@ -56,6 +60,12 @@ function NavBar({
     //TODO
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSelect = (selected: any) => {
+    setSelected;
+    navigate("/" + selected, { replace: true });
+  };
+
   const editName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
     if (newName) {
@@ -68,67 +78,57 @@ function NavBar({
       {["md"].map((expand) => (
         <Navbar key={"navbar"} bg="light" expand={expand} className="mb-3">
           <Container fluid>
-            <Nav>
-              {budgetNameList && budgetNameList.length > 0 && (
-                <NavDropdown
-                  title="List"
-                  id={`offcanvasNavbarDropdown-expand-${expand}`}
-                >
-                  {budgetNameList?.map((name, i) => (
-                    <NavDropdown.Item key={i} href={name}>
-                      {name}
-                    </NavDropdown.Item>
-                  ))}
-                </NavDropdown>
-              )}
-            </Nav>
             {initialSelectedName && (
               <Nav>
                 <Form.Control
-                  aria-label={"budget-name"}
+                  aria-label={"budget name"}
                   key={"budget-name-key"}
                   defaultValue={initialSelectedName}
                   onChange={editName}
                   type="text"
-                  maxLength={25}
+                  maxLength={15}
                 />
               </Nav>
             )}
-            {/* <Nav>
-              <Nav.Link>
-                <Form className="d-flex">
-                  <Form.Control
-                    type="search"
-                    placeholder="Search"
-                    className="m-auto"
-                    aria-label="Search"
-                  />
-                </Form>
-              </Nav.Link>
-              <Nav.Link>
-                <Button variant="outline-secondary">Search</Button>
-              </Nav.Link>
-            </Nav> */}
+            <Nav>
+              {budgetNameList && budgetNameList.length > 0 && (
+                <Typeahead
+                  id="basic-example"
+                  onChange={handleSelect}
+                  options={budgetNameList}
+                  placeholder="Search list of budgets..."
+                  selected={selected}
+                />
+              )}
+            </Nav>
             <Nav>
               <Nav.Link
                 onClick={() => {
                   handleNew();
                 }}
               >
-                <Button variant="outline-success">New</Button>
+                <Button aria-label="new budget" variant="outline-success">
+                  <BsPlusLg />
+                </Button>
               </Nav.Link>
               <Nav.Link
                 onClick={() => {
                   handleRemove(initialId);
                 }}
               >
-                <Button variant="outline-danger">Delete</Button>
+                <Button aria-label="delete budget" variant="outline-danger">
+                  <BsXLg />
+                </Button>
               </Nav.Link>
               <Nav.Link href="#import" as="li">
                 <Form.Group controlId="import">
                   <Dropdown as={ButtonGroup}>
-                    <Button variant="outline-primary" onClick={handleClick}>
-                      Import
+                    <Button
+                      aria-label="import budget"
+                      variant="outline-primary"
+                      onClick={handleClick}
+                    >
+                      <BsUpload />
                     </Button>
                     <Form.Control
                       type="file"
@@ -158,7 +158,9 @@ function NavBar({
                   handleDownload();
                 }}
               >
-                <Button variant="outline-info">Export</Button>
+                <Button aria-label="export budget" variant="outline-info">
+                  <BsDownload />
+                </Button>
               </Nav.Link>
             </Nav>
           </Container>
