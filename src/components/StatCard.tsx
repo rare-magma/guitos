@@ -1,5 +1,5 @@
 import { Stat } from "./Stat";
-import { Button, Card, Form, InputGroup } from "react-bootstrap";
+import { Card, Form, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 import { numberInputOnWheelPreventChange } from "../utils";
 
@@ -15,7 +15,11 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
     let updatedStat: Stat;
     if (stat !== null) {
       updatedStat = stat;
-      updatedStat.goal = item.target.valueAsNumber;
+      if (item.target.ariaLabel === "reserves") {
+        updatedStat.reserves = item.target.valueAsNumber;
+      } else {
+        updatedStat.goal = item.target.valueAsNumber;
+      }
       setStat(updatedStat);
       onChange(updatedStat);
     }
@@ -23,7 +27,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
 
   return (
     <Card>
-      <Card.Header>Stats</Card.Header>
+      <Card.Header>Statistics</Card.Header>
       <Card.Body>
         <InputGroup className="mb-1" key={"stats"}>
           <InputGroup.Text>available</InputGroup.Text>
@@ -39,6 +43,21 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"withGoal"}>
+          <InputGroup.Text>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              className="bi bi-arrow-return-right"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"
+              />
+            </svg>
+          </InputGroup.Text>
           <InputGroup.Text>with goal</InputGroup.Text>
           <Form.Control
             className="text-right"
@@ -52,7 +71,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"goal"}>
-          <InputGroup.Text>goal</InputGroup.Text>
+          <InputGroup.Text>savings goal</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"goal"}
@@ -67,7 +86,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           <InputGroup.Text>%</InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"saved"}>
-          <InputGroup.Text>saved</InputGroup.Text>
+          <InputGroup.Text>savings estimate</InputGroup.Text>
           <Form.Control
             className="text-right"
             aria-label={"saved"}
@@ -79,21 +98,20 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           />
           <InputGroup.Text>€</InputGroup.Text>
         </InputGroup>
-        <InputGroup className="mb-1" key={"savings"}>
-          <InputGroup.Text>savings</InputGroup.Text>
+        <InputGroup className="mb-1" key={"reserves"}>
+          <InputGroup.Text>reserves</InputGroup.Text>
           <Form.Control
             className="text-right"
-            aria-label={"savings"}
-            key={"savings"}
-            value={stat.savings}
+            aria-label={"reserves"}
+            key={"reserves"}
+            value={stat.reserves}
             onChange={handleChange}
-            disabled
-            readOnly
+            onWheelCapture={numberInputOnWheelPreventChange}
+            type="number"
+            maxLength={2}
+            max={100}
           />
           <InputGroup.Text>€</InputGroup.Text>
-          <Button variant="primary" id="button-addon1">
-            +
-          </Button>
         </InputGroup>
       </Card.Body>
     </Card>

@@ -3,7 +3,7 @@ export class Stat {
   withGoal!: number;
   saved!: number;
   goal!: number;
-  savings!: number;
+  reserves!: number;
 
   constructor(initializer?: Stat) {
     if (!initializer) return;
@@ -11,6 +11,6 @@ export class Stat {
     if (initializer.withGoal) this.withGoal = initializer.withGoal;
     if (initializer.saved) this.saved = initializer.saved;
     if (initializer.goal) this.goal = initializer.goal;
-    if (initializer.savings) this.savings = initializer.savings;
+    if (initializer.reserves) this.reserves = initializer.reserves;
   }
 }

@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { Dropdown, ButtonGroup } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -43,6 +44,10 @@ function NavBar({
     }
   };
 
+  const handleCSVImport = () => {
+    //TODO
+  };
+
   const editName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
     if (newName) {
@@ -72,8 +77,8 @@ function NavBar({
             {initialSelectedName && (
               <Nav>
                 <Form.Control
-                  aria-label={"newname"}
-                  key={"newname-key"}
+                  aria-label={"budget-name"}
+                  key={"budget-name-key"}
                   defaultValue={initialSelectedName}
                   onChange={editName}
                   type="text"
@@ -81,7 +86,7 @@ function NavBar({
                 />
               </Nav>
             )}
-            <Nav>
+            {/* <Nav>
               <Nav.Link>
                 <Form className="d-flex">
                   <Form.Control
@@ -95,7 +100,7 @@ function NavBar({
               <Nav.Link>
                 <Button variant="outline-secondary">Search</Button>
               </Nav.Link>
-            </Nav>
+            </Nav> */}
             <Nav>
               <Nav.Link
                 onClick={() => {
@@ -109,26 +114,42 @@ function NavBar({
                   handleRemove(initialId);
                 }}
               >
-                <Button variant="outline-success">Delete</Button>
+                <Button variant="outline-danger">Delete</Button>
               </Nav.Link>
-              <Nav.Link>
+              <Nav.Link href="#import" as="li">
                 <Form.Group controlId="import">
-                  <Button
-                    variant="outline-primary"
-                    onClick={() => {
-                      inputRef.current?.click();
-                    }}
-                  >
-                    Import
-                  </Button>
-                  <Form.Control
-                    type="file"
-                    ref={inputRef}
-                    onChange={() => {
-                      onUpload;
-                    }}
-                    style={{ display: "none" }}
-                  />
+                  <Dropdown as={ButtonGroup}>
+                    <Button
+                      variant="outline-primary"
+                      onClick={() => {
+                        inputRef.current?.click();
+                      }}
+                    >
+                      Import
+                    </Button>
+                    <Form.Control
+                      type="file"
+                      ref={inputRef}
+                      onChange={() => {
+                        onUpload;
+                      }}
+                      style={{ display: "none" }}
+                    />
+                    <Dropdown.Toggle
+                      split
+                      variant="outline-primary"
+                      id="import-dropdown"
+                    />
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item
+                        onClick={handleCSVImport}
+                        href="#import-csv"
+                      >
+                        from CSV
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </Form.Group>
               </Nav.Link>
               <Nav.Link
@@ -136,7 +157,7 @@ function NavBar({
                   handleDownload();
                 }}
               >
-                <Button variant="outline-success">Export</Button>
+                <Button variant="outline-info">Export</Button>
               </Nav.Link>
             </Nav>
           </Container>

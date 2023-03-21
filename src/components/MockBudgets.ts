@@ -218,7 +218,7 @@ export const MOCK_BUDGETS = [
       withGoal: 300,
       saved: 400,
       goal: 45,
-      savings: 3000,
+      reserves: 3000,
     }),
   }),
   new Budget({
@@ -339,7 +339,7 @@ export const MOCK_BUDGETS = [
       withGoal: 300,
       saved: 400,
       goal: 45,
-      savings: 3000,
+      reserves: 3000,
     }),
   }),
   new Budget({
@@ -460,7 +460,7 @@ export const MOCK_BUDGETS = [
       withGoal: 300,
       saved: 400,
       goal: 45,
-      savings: 3000,
+      reserves: 3000,
     }),
   }),
   new Budget({
@@ -581,7 +581,7 @@ export const MOCK_BUDGETS = [
       withGoal: 300,
       saved: 400,
       goal: 45,
-      savings: 3000,
+      reserves: 3000,
     }),
   }),
   new Budget({
@@ -702,7 +702,7 @@ export const MOCK_BUDGETS = [
       withGoal: 300,
       saved: 400,
       goal: 45,
-      savings: 3000,
+      reserves: 3000,
     }),
   }),
 ];

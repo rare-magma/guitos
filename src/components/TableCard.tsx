@@ -22,7 +22,7 @@ function TableCard({
 
   const addTable = (tableBeingEdited: Income | Expense) => {
     let newTable;
-    if (label === "Incomes") {
+    if (label === "Revenue") {
       newTable = new Income();
     } else if (label === "Expenses") {
       newTable = new Expense();
@@ -117,7 +117,7 @@ function TableCard({
           <InputGroup.Text>total</InputGroup.Text>
           <Form.Control
             className="text-right"
-            aria-label={label + "-table-total"}
+            aria-label={label + "-total"}
             key={label + "total"}
             value={total}
             disabled

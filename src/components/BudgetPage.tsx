@@ -94,7 +94,7 @@ function BudgetPage() {
           withGoal: newBudget.stats.withGoal,
           saved: newBudget.stats.saved,
           goal: item.goal,
-          savings: item.savings,
+          reserves: item.reserves,
         },
       });
     }
@@ -131,7 +131,7 @@ function BudgetPage() {
         withGoal: 0,
         saved: 0,
         goal: 10,
-        savings: 0,
+        reserves: 0,
       },
     };
 
@@ -272,7 +272,7 @@ function BudgetPage() {
 
                   <TableCard
                     items={budget.incomes}
-                    header="Incomes"
+                    header="Revenue"
                     onChange={handleIncomeChange}
                   />
                 </div>
