@@ -34,8 +34,16 @@ function NavBar({
     onNew();
   };
 
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
+
   const handleDownload = () => {
     onDownload();
+  };
+
+  const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onUpload(event);
   };
 
   const handleRemove = (initialId?: string | null) => {
@@ -119,20 +127,13 @@ function NavBar({
               <Nav.Link href="#import" as="li">
                 <Form.Group controlId="import">
                   <Dropdown as={ButtonGroup}>
-                    <Button
-                      variant="outline-primary"
-                      onClick={() => {
-                        inputRef.current?.click();
-                      }}
-                    >
+                    <Button variant="outline-primary" onClick={handleClick}>
                       Import
                     </Button>
                     <Form.Control
                       type="file"
                       ref={inputRef}
-                      onChange={() => {
-                        onUpload;
-                      }}
+                      onChange={handleImport}
                       style={{ display: "none" }}
                     />
                     <Dropdown.Toggle
