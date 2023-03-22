@@ -62,8 +62,9 @@ function NavBar({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSelect = (selected: any) => {
-    setSelected;
+    setSelected(selected);
     navigate("/" + selected, { replace: true });
+    navigate(0);
   };
 
   const editName = (event: React.ChangeEvent<HTMLInputElement>) => {

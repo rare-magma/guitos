@@ -142,16 +142,19 @@ function BudgetPage() {
     setBudgetList(newBudgetList);
 
     navigate("/" + newBudget.name);
+    navigate(0);
   };
 
   const handleRemove = (toBeDeleted: string) => {
     const newBudgetList = budgetList.filter(
       (item: Budget) => item.id !== toBeDeleted
     );
+    const newBudget = newBudgetList.slice(-1);
 
-    setBudget(newBudgetList[-1]);
     setBudgetList(newBudgetList);
-    navigate("/" + budget?.name);
+    setBudget(newBudget[0]);
+    navigate("/" + newBudget[0]?.name);
+    navigate(0);
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
