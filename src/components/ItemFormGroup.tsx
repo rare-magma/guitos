@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { Button, Col, Form, InputGroup } from "react-bootstrap";
 import { BsCurrencyEuro, BsXLg } from "react-icons/bs";
 import { numberInputOnWheelPreventChange } from "../utils";
 import { ItemForm } from "./ItemForm";
