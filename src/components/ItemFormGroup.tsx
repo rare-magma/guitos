@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { BsCurrencyEuro, BsXLg } from "react-icons/bs";
 import { numberInputOnWheelPreventChange } from "../utils";
 import { ItemForm } from "./ItemForm";
 
@@ -44,47 +45,47 @@ function ItemFormGroup({
 
   return (
     <Form>
-      <Row>
-        <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
-          <Col xs={7}>
-            <Form.Control
-              aria-label={"newname"}
-              key={itemForm.id + "-key"}
-              defaultValue={itemForm.name}
-              onChange={editItemName}
-              type="text"
-              maxLength={255}
-            />
-          </Col>
-          <Col xs={3}>
-            <Form.Control
-              aria-label={"newvalue"}
-              key={itemForm.id + "-value"}
-              className="text-right"
-              defaultValue={itemForm.value}
-              onChange={editItemValue}
-              type="number"
-              onWheelCapture={numberInputOnWheelPreventChange}
-              maxLength={11}
-            />
-          </Col>
-          <Col xs={1}>
-            <InputGroup.Text>€</InputGroup.Text>
-          </Col>
-          <Col xs={1}>
-            <Button
-              key={itemForm.id + "button"}
-              variant="text"
-              type="button"
-              onClick={() => {
-                handleRemove(itemForm);
-              }}
-            >
-              -
-            </Button>
-          </Col>
-        </InputGroup>
-      </Row>
+      <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
+        <Col xs={7}>
+          <Form.Control
+            aria-label={"newname"}
+            key={itemForm.id + "-key"}
+            defaultValue={itemForm.name}
+            onChange={editItemName}
+            type="text"
+            maxLength={255}
+          />
+        </Col>
+        <Col xs={3}>
+          <Form.Control
+            aria-label={"newvalue"}
+            key={itemForm.id + "-value"}
+            className="text-right"
+            defaultValue={itemForm.value}
+            onChange={editItemValue}
+            type="number"
+            onWheelCapture={numberInputOnWheelPreventChange}
+            maxLength={11}
+          />
+        </Col>
+        <Col xs={1}>
+          <InputGroup.Text>
+            <BsCurrencyEuro />
+          </InputGroup.Text>
+        </Col>
+        <Col xs={1}>
+          <Button
+            key={itemForm.id + "button"}
+            variant="text"
+            type="button"
+            onClick={() => {
+              handleRemove(itemForm);
+            }}
+          >
+            <BsXLg />
+          </Button>
+        </Col>
+      </InputGroup>
     </Form>
   );
 }

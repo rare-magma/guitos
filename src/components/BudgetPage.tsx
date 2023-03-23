@@ -279,6 +279,7 @@ function BudgetPage() {
                     header="Revenue"
                     onChange={handleIncomeChange}
                   />
+                  <div className="mt-3" />
                 </div>
               </Col>
 

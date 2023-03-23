@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { ItemForm } from "./ItemForm";
-import { Card, Button, Form, InputGroup } from "react-bootstrap";
+import { Card, Button, Row, Col } from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
 import { calcTotal } from "../utils";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
+import { BsPlusLg } from "react-icons/bs";
 
 interface TableCardProps {
   items: Income | Expense;
@@ -85,7 +86,12 @@ function TableCard({
 
   return (
     <Card>
-      <Card.Header>{label}</Card.Header>
+      <Card.Header>
+        <Row>
+          <Col>{label}</Col>
+          <Col className="text-end">{total} €</Col>
+        </Row>
+      </Card.Header>
       <Card.Body>
         {table.items?.map((item: ItemForm) => (
           <ItemFormGroup
@@ -108,24 +114,10 @@ function TableCard({
             name=""
             value=""
           >
-            +
+            <BsPlusLg />
           </Button>
         </div>
       </Card.Body>
-      <Card.Footer className="d-grid gap-2">
-        <InputGroup className="mb-1" key={"total-group-" + label}>
-          <InputGroup.Text>total</InputGroup.Text>
-          <Form.Control
-            className="text-right"
-            aria-label={label + "-total"}
-            key={label + "total"}
-            value={total}
-            disabled
-            readOnly
-          />
-          <InputGroup.Text>€</InputGroup.Text>
-        </InputGroup>
-      </Card.Footer>
     </Card>
   );
 }

@@ -2,6 +2,7 @@ import { Stat } from "./Stat";
 import { Card, Form, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 import { numberInputOnWheelPreventChange } from "../utils";
+import { BsCurrencyEuro, BsPercent } from "react-icons/bs";
 
 interface StatCardProps {
   stat: Stat;
@@ -40,7 +41,9 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             disabled
             readOnly
           />
-          <InputGroup.Text>€</InputGroup.Text>
+          <InputGroup.Text>
+            <BsCurrencyEuro />
+          </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"withGoal"}>
           <InputGroup.Text>
@@ -68,7 +71,9 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             disabled
             readOnly
           />
-          <InputGroup.Text>€</InputGroup.Text>
+          <InputGroup.Text>
+            <BsCurrencyEuro />
+          </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"goal"}>
           <InputGroup.Text>savings goal</InputGroup.Text>
@@ -83,7 +88,9 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             maxLength={2}
             max={100}
           />
-          <InputGroup.Text>%</InputGroup.Text>
+          <InputGroup.Text>
+            <BsPercent />
+          </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"saved"}>
           <InputGroup.Text>savings estimate</InputGroup.Text>
@@ -96,7 +103,9 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             disabled
             readOnly
           />
-          <InputGroup.Text>€</InputGroup.Text>
+          <InputGroup.Text>
+            <BsCurrencyEuro />
+          </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"reserves"}>
           <InputGroup.Text>reserves</InputGroup.Text>
@@ -111,7 +120,9 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             maxLength={2}
             max={100}
           />
-          <InputGroup.Text>€</InputGroup.Text>
+          <InputGroup.Text>
+            <BsCurrencyEuro />
+          </InputGroup.Text>
         </InputGroup>
       </Card.Body>
     </Card>
