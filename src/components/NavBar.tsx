@@ -76,97 +76,92 @@ function NavBar({
 
   return (
     <>
-      {["md"].map((expand) => (
-        <Navbar key={"navbar"} bg="light" expand={expand} className="mb-3">
-          <Container fluid>
-            {initialSelectedName && (
-              <Nav>
-                <Form.Control
-                  aria-label={"budget name"}
-                  key={"budget-name-key"}
-                  defaultValue={initialSelectedName}
-                  onChange={editName}
-                  type="text"
-                  maxLength={15}
-                />
-              </Nav>
+      <Navbar key={"navbar"} bg="light">
+        <Container fluid>
+          {initialSelectedName && (
+            <Nav className="px-2">
+              <Form.Control
+                aria-label={"budget name"}
+                key={"budget-name-key"}
+                defaultValue={initialSelectedName}
+                onChange={editName}
+                type="text"
+                maxLength={25}
+              />
+            </Nav>
+          )}
+          <Nav className="justify-content-center">
+            {budgetNameList && budgetNameList.length > 0 && (
+              <Typeahead
+                id="basic-example"
+                onChange={handleSelect}
+                options={budgetNameList}
+                placeholder="Search list of budgets..."
+                selected={selected}
+              />
             )}
-            <Nav>
-              {budgetNameList && budgetNameList.length > 0 && (
-                <Typeahead
-                  id="basic-example"
-                  onChange={handleSelect}
-                  options={budgetNameList}
-                  placeholder="Search list of budgets..."
-                  selected={selected}
-                />
-              )}
-            </Nav>
-            <Nav>
-              <Nav.Link
-                onClick={() => {
-                  handleNew();
-                }}
-              >
-                <Button aria-label="new budget" variant="outline-success">
-                  <BsPlusLg />
-                </Button>
-              </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  handleRemove(initialId);
-                }}
-              >
-                <Button aria-label="delete budget" variant="outline-danger">
-                  <BsXLg />
-                </Button>
-              </Nav.Link>
-              <Nav.Link href="#import" as="li">
-                <Form.Group controlId="import">
-                  <Dropdown as={ButtonGroup}>
-                    <Button
-                      aria-label="import budget"
-                      variant="outline-primary"
-                      onClick={handleClick}
-                    >
-                      <BsUpload />
-                    </Button>
-                    <Form.Control
-                      type="file"
-                      ref={inputRef}
-                      onChange={handleImport}
-                      style={{ display: "none" }}
-                    />
-                    <Dropdown.Toggle
-                      split
-                      variant="outline-primary"
-                      id="import-dropdown"
-                    />
+          </Nav>
+          <Nav>
+            <Nav.Link
+              onClick={() => {
+                handleNew();
+              }}
+            >
+              <Button aria-label="new budget" variant="outline-success">
+                <BsPlusLg />
+              </Button>
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                handleRemove(initialId);
+              }}
+            >
+              <Button aria-label="delete budget" variant="outline-danger">
+                <BsXLg />
+              </Button>
+            </Nav.Link>
+            <Nav.Link href="#import" as="li">
+              <Form.Group controlId="import">
+                <Dropdown as={ButtonGroup}>
+                  <Button
+                    aria-label="import budget"
+                    variant="outline-primary"
+                    onClick={handleClick}
+                  >
+                    <BsUpload />
+                  </Button>
+                  <Form.Control
+                    type="file"
+                    ref={inputRef}
+                    onChange={handleImport}
+                    style={{ display: "none" }}
+                  />
+                  <Dropdown.Toggle
+                    split
+                    variant="outline-primary"
+                    id="import-dropdown"
+                  />
 
-                    <Dropdown.Menu>
-                      <Dropdown.Item
-                        onClick={handleCSVImport}
-                        href="#import-csv"
-                      >
-                        from CSV
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </Form.Group>
-              </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  handleDownload();
-                }}
-              >
-                <Button aria-label="export budget" variant="outline-info">
-                  <BsDownload />
-                </Button>
-              </Nav.Link>
-            </Nav>
-          </Container>
-        </Navbar>
-      ))}
+                  <Dropdown.Menu>
+                    <Dropdown.Item onClick={handleCSVImport} href="#import-csv">
+                      from CSV
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </Form.Group>
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                handleDownload();
+              }}
+            >
+              <Button aria-label="export budget" variant="outline-info">
+                <BsDownload />
+              </Button>
+            </Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
     </>
   );
 }
