@@ -266,6 +266,7 @@ function BudgetPage() {
 
         {budget && (
           <Container>
+            <div className="mt-3" />
             <Row>
               <Col md="6">
                 <div className="card-columns">
