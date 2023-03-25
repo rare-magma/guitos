@@ -9,11 +9,13 @@ import {
   calcAvailable,
   calcSaved,
   calcWithGoal,
+  convertCsvToBudget,
   useLocalStorage,
 } from "../utils";
 import { Income } from "./Income";
 import { Expense } from "./Expense";
 import NavBar from "./NavBar";
+import Papa from "papaparse";
 
 function BudgetPage() {
   const [loading, setLoading] = useState(false);
@@ -158,17 +160,40 @@ function BudgetPage() {
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fileReader = new FileReader();
-
-    if (e.target.files === null) {
+    const importedFiles = e.target.files;
+    const newBudgetList: string[] = [];
+    let newBudget: Budget;
+    if (importedFiles === null) {
       return;
     }
-    fileReader.readAsText(e.target.files[0], "UTF-8");
-    fileReader.onloadend = () => {
-      if (fileReader.result !== null) {
-        setBudgetList(JSON.parse(fileReader.result as string));
-      }
-    };
+
+    for (let i = 0; i < importedFiles.length; i++) {
+      const file = importedFiles[i];
+      const reader = new FileReader();
+      reader.readAsText(file, "UTF-8");
+
+      reader.onloadend = () => {
+        if (reader.result !== null) {
+          if (file.type === "text/csv") {
+            const csvObject = Papa.parse(reader.result as string, {
+              header: true,
+              skipEmptyLines: "greedy",
+            });
+
+            newBudget = convertCsvToBudget(
+              csvObject.data as string[],
+              file.name.slice(0, -4)
+            );
+            newBudgetList.push(newBudget as unknown as string);
+            setBudgetList(newBudgetList);
+          } else {
+            newBudget = JSON.parse(reader.result as string);
+            newBudgetList.push(newBudget as unknown as string);
+            setBudgetList(newBudgetList);
+          }
+        }
+      };
+    }
   };
 
   const handleDownload = () => {

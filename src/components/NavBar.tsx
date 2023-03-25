@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Dropdown, ButtonGroup, Offcanvas } from "react-bootstrap";
+import { Offcanvas } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -59,10 +59,6 @@ function NavBar({
     if (initialId) {
       onRemove(initialId);
     }
-  };
-
-  const handleCSVImport = () => {
-    //TODO
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -140,35 +136,20 @@ function NavBar({
                 </Nav.Link>
                 <Nav.Link href="#import" as="li">
                   <Form.Group controlId="import">
-                    <Dropdown as={ButtonGroup}>
-                      <Button
-                        aria-label="import budget"
-                        variant="outline-primary"
-                        onClick={handleClick}
-                      >
-                        {expanded ? "upload" : <BsUpload />}
-                      </Button>
-                      <Form.Control
-                        type="file"
-                        ref={inputRef}
-                        onChange={handleImport}
-                        style={{ display: "none" }}
-                      />
-                      <Dropdown.Toggle
-                        split
-                        variant="outline-primary"
-                        id="import-dropdown"
-                      />
-
-                      <Dropdown.Menu>
-                        <Dropdown.Item
-                          onClick={handleCSVImport}
-                          href="#import-csv"
-                        >
-                          from CSV
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
+                    <Button
+                      aria-label="import budget"
+                      variant="outline-primary"
+                      onClick={handleClick}
+                    >
+                      {expanded ? "import" : <BsUpload />}
+                    </Button>
+                    <Form.Control
+                      type="file"
+                      multiple
+                      ref={inputRef}
+                      onChange={handleImport}
+                      style={{ display: "none" }}
+                    />
                   </Form.Group>
                 </Nav.Link>
                 <Nav.Link

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Budget } from "./components/Budget";
 import { ItemForm } from "./components/ItemForm";
+import { CsvItem } from "./components/CsvItem";
 
 export function round(number: number, precision: number) {
   return +(Math.round(Number(number + "e+" + precision)) + "e-" + precision);
@@ -70,4 +71,61 @@ export const numberInputOnWheelPreventChange = (e: any) => {
   setTimeout(() => {
     e.target.focus();
   }, 0);
+};
+
+export const convertCsvToBudget = (csv: string[], date: string): Budget => {
+  const newId = crypto.randomUUID();
+  const emptyExpenses: ItemForm[] = [];
+  const emptyIncomes: ItemForm[] = [];
+  const newBudget = {
+    id: newId,
+    name: date,
+    expenses: {
+      items: emptyExpenses,
+      total: 0,
+    },
+    incomes: {
+      items: emptyIncomes,
+      total: 0,
+    },
+    stats: {
+      available: 0,
+      withGoal: 0,
+      saved: 0,
+      goal: 10,
+      reserves: 0,
+    },
+  };
+
+  csv.forEach((value: string, key: number) => {
+    const item = value as unknown as CsvItem;
+    const newItemForm = new ItemForm({
+      id: key,
+      name: item.name,
+      value: Number(item.value),
+    });
+
+    switch (item.type) {
+      case "expense":
+        newBudget.expenses.items.push(newItemForm);
+        newBudget.expenses.total = calcTotal(newBudget.expenses.items);
+        break;
+      case "income":
+        newBudget.incomes.items.push(newItemForm);
+        newBudget.incomes.total = calcTotal(newBudget.incomes.items);
+        break;
+      case "goal":
+        newBudget.stats.goal = item.value;
+        break;
+      case "reserves":
+        newBudget.stats.reserves = item.value;
+        break;
+    }
+  });
+
+  newBudget.stats.available = calcAvailable(newBudget);
+  newBudget.stats.withGoal = calcWithGoal(newBudget);
+  newBudget.stats.saved = calcSaved(newBudget);
+
+  return newBudget as unknown as Budget;
 };
