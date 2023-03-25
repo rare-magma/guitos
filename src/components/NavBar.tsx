@@ -1,19 +1,12 @@
 import { useRef, useState } from "react";
-import {
-  Dropdown,
-  ButtonGroup,
-  Offcanvas,
-  InputGroup,
-  Col,
-  Row,
-} from "react-bootstrap";
+import { Dropdown, ButtonGroup, Offcanvas } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { BsPlusLg, BsXLg, BsUpload, BsDownload } from "react-icons/bs";
-import { Input, Typeahead } from "react-bootstrap-typeahead";
+import { Typeahead } from "react-bootstrap-typeahead";
 import { useNavigate } from "react-router-dom";
 
 interface NavBarProps {
