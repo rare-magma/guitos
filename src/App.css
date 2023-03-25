@@ -40,3 +40,15 @@ input[type="number"] {
   color: #212529;
   background-color: #dc3545;
 }
+
+.btn-currency {
+  color: #212529;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+}
+
+.btn-currency:hover {
+  color: #212529;
+  background-color: #50fa7b;
+}

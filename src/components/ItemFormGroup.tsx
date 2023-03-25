@@ -75,7 +75,7 @@ function ItemFormGroup({
         <Col xs={1}>
           <Button
             key={itemForm.id + "button"}
-            variant="text"
+            variant="currency"
             type="button"
             onClick={() => {
               // handleCurrency(itemForm);
