@@ -50,7 +50,7 @@ function ItemFormGroup({
   return (
     <Form>
       <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
-        <Col xs={7}>
+        <Col xs={8}>
           <Form.Control
             aria-label={"newname"}
             key={itemForm.id + "-key"}
@@ -72,7 +72,8 @@ function ItemFormGroup({
             maxLength={11}
           />
         </Col>
-        <Col xs={1}>
+        {/* TODO currency support */}
+        {/* <Col xs={1}>
           <Button
             key={itemForm.id + "button"}
             variant="currency"
@@ -83,7 +84,7 @@ function ItemFormGroup({
           >
             <BsCurrencyEuro />
           </Button>
-        </Col>
+        </Col> */}
         <Col xs={1}>
           <Button
             key={itemForm.id + "button"}
