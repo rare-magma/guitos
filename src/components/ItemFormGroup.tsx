@@ -17,6 +17,10 @@ function ItemFormGroup({
 }: ItemFormProps) {
   const [itemForm, setItemForm] = useState(initialItemForm);
 
+  const handleCurrency = (item: ItemForm) => {
+    //TODO
+  };
+
   const handleRemove = (item: ItemForm) => {
     onRemove(item);
   };
@@ -69,9 +73,16 @@ function ItemFormGroup({
           />
         </Col>
         <Col xs={1}>
-          <InputGroup.Text>
+          <Button
+            key={itemForm.id + "button"}
+            variant="text"
+            type="button"
+            onClick={() => {
+              handleCurrency(itemForm);
+            }}
+          >
             <BsCurrencyEuro />
-          </InputGroup.Text>
+          </Button>
         </Col>
         <Col xs={1}>
           <Button
