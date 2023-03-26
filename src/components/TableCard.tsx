@@ -106,7 +106,7 @@ function TableCard({
         <div className="mt-3" />
         <div className="d-grid gap-2">
           <Button
-            variant="primary"
+            variant="outline-primary"
             size="sm"
             onClick={() => {
               addTable(table);
