@@ -109,7 +109,7 @@ function NavBar({
                     id="basic-example"
                     onChange={handleSelect}
                     className="p-2"
-                    options={budgetNameList}
+                    options={budgetNameList.sort().reverse()}
                     placeholder="Search list of budgets..."
                     selected={selected}
                   />
