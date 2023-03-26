@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Budget } from "./Budget";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import TableCard from "./TableCard";
 import { Stat } from "./Stat";
 import StatCard from "./StatCard";
@@ -15,7 +15,7 @@ import {
 import { Income } from "./Income";
 import { Expense } from "./Expense";
 import NavBar from "./NavBar";
-import Papa from "papaparse";
+import Papa, { ParseError } from "papaparse";
 
 function BudgetPage() {
   const [loading, setLoading] = useState(false);
@@ -23,6 +23,9 @@ function BudgetPage() {
 
   const [budgetList, setBudgetList] = useLocalStorage("budgetList", "");
   const [error, setError] = useState<string | null>(null);
+  const [csvError, setCsvError] = useState<ParseError[] | undefined>([]);
+  const [csvErrorFiles, setCsvErrorFiles] = useState<string[] | undefined>([]);
+  const [show, setShow] = useState(false);
   const params = useParams();
   const name = String(params.name);
   const navigate = useNavigate();
@@ -179,6 +182,18 @@ function BudgetPage() {
               header: true,
               skipEmptyLines: "greedy",
             });
+            if (csvObject.errors.length > 0) {
+              setCsvError(csvError?.concat(csvObject.errors));
+              setCsvErrorFiles(csvErrorFiles?.concat(file.name));
+              console.error("error importing " + file.name);
+              for (const i in csvObject.errors) {
+                const errormsg = csvObject.errors[i] as unknown as ParseError;
+                console.error(
+                  "on row " + errormsg.row + ": " + errormsg.message
+                );
+              }
+              setShow(true);
+            }
 
             newBudget = convertCsvToBudget(
               csvObject.data as string[],
@@ -278,16 +293,28 @@ function BudgetPage() {
         )}
 
         {error && (
-          <div className="row">
-            <div className="card large error">
-              <section>
-                <p>
-                  <span className="icon-alert inverse "></span> {error}
-                </p>
-              </section>
-            </div>
-          </div>
+          <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+            <Alert.Heading>Error</Alert.Heading>
+          </Alert>
         )}
+
+        {/* {csvError &&
+          show &&
+          csvErrorFiles &&
+          csvErrorFiles.map((file) => (
+            {csvError.map((error) => (
+                <Alert
+                  variant="danger"
+                  onClose={() => setShow(false)}
+                  dismissible
+                >
+                  <Alert.Heading>Error while importing {file}:</Alert.Heading>
+                  <p>{error.row}</p>;<p>{error.message}</p>;
+                </Alert>
+              ))
+            }
+
+          ))} */}
 
         {budget && (
           <Container>
