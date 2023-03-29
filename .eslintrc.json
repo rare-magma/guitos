@@ -1,16 +1,12 @@
 {
   "extends": [
+    "react-app",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
-  "plugins": [
-    "prettier",
-    "react",
-    "react-hooks",
-    "@typescript-eslint"
-  ],
+  "plugins": ["prettier", "react", "react-hooks", "@typescript-eslint"],
   "rules": {
     "eqeqeq": "error",
     "no-console": "warn",
@@ -41,10 +37,5 @@
     "es6": true,
     "jest": true
   },
-  "ignorePatterns": [
-    "node_modules",
-    "build",
-    "dist",
-    "public"
-  ]
+  "ignorePatterns": ["node_modules", "build", "dist", "public"]
 }
