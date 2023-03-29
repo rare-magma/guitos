@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "5.16.5",
-    "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "@types/jest": "29.5.0",
     "@types/node": "18.15.9",
@@ -23,7 +21,7 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "jest"
+    "test": "vitest"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +42,8 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@types/papaparse": "^5.3.7",
     "@types/react-table": "7.7.12",
     "@typescript-eslint/eslint-plugin": "5.46.0",
@@ -55,9 +55,11 @@
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "7.31.11",
     "eslint-plugin-react-hooks": "4.6.0",
+    "jsdom": "^21.1.1",
     "prettier": "2.8.1",
     "typescript": "4.9.4",
     "vite": "4.2.1",
-    "vite-plugin-eslint": "1.8.1"
+    "vite-plugin-eslint": "1.8.1",
+    "vitest": "^0.29.8"
   }
 }
