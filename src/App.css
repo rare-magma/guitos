@@ -11,7 +11,6 @@ body {
   background: var(--bgcolor);
 }
 
-.bg-light,
 .card,
 .form-control,
 .input-group-text,
@@ -20,6 +19,12 @@ body {
 .offcanvas-header {
   color: var(--textcolor);
   background: var(--bgcolor);
+}
+
+.bg-light {
+  color: var(--textcolor);
+  background: var(--bgcolor);
+  background-color: var(--bgcolor);
 }
 
 input.text-right.form-control {
