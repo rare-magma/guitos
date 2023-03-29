@@ -11,6 +11,7 @@ body {
   background: var(--bgcolor);
 }
 
+.bg-light,
 .card,
 .form-control,
 .input-group-text,
