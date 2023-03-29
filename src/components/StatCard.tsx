@@ -27,7 +27,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
   };
 
   return (
-    <Card>
+    <Card border="success">
       <Card.Header>Statistics</Card.Header>
       <Card.Body>
         <InputGroup className="mb-1" key={"stats"}>

@@ -85,7 +85,7 @@ function TableCard({
   };
 
   return (
-    <Card>
+    <Card border="success">
       <Card.Header>
         <Row>
           <Col>{label}</Col>
@@ -106,7 +106,7 @@ function TableCard({
         <div className="mt-3" />
         <div className="d-grid gap-2">
           <Button
-            variant="outline-primary"
+            variant="outline-success"
             size="sm"
             onClick={() => {
               addTable(table);

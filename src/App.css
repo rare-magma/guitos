@@ -1,4 +1,29 @@
+@media (prefers-color-scheme: dark) {
+  * {
+    --textcolor: #f8f8f2;
+    --bgcolor: #282a36;
+    --highlight: #50fa7b;
+  }
+}
+
+body {
+  color: var(--textcolor);
+  background: var(--bgcolor);
+}
+
+.card,
+.form-control,
+.input-group-text,
+.navbar,
+.offcanvas-body,
+.offcanvas-header {
+  color: var(--textcolor);
+  background: var(--bgcolor);
+}
+
 input.text-right.form-control {
+  color: var(--textcolor);
+  background: var(--bgcolor);
   text-align: right;
 }
 
