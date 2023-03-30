@@ -22,10 +22,9 @@ body {
 }
 
 .bg-light {
-  opacity: 1;
   color: var(--textcolor);
   background: var(--bgcolor);
-  background-color: var(rgba(var(--bgcolor), 1));
+  background-color: var(--bgcolor);
 }
 
 input.text-right.form-control {
