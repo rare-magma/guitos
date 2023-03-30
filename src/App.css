@@ -14,6 +14,9 @@ body {
 .card,
 .form-control,
 .input-group-text,
+input .input-group-text,
+input.form-control,
+input.text-right.form-control,
 .navbar,
 .offcanvas-body,
 .offcanvas-header {
@@ -21,15 +24,7 @@ body {
   background: var(--bgcolor);
 }
 
-.bg-light {
-  color: var(--textcolor);
-  background: var(--bgcolor);
-  background-color: var(--bgcolor);
-}
-
 input.text-right.form-control {
-  color: var(--textcolor);
-  background: var(--bgcolor);
   text-align: right;
 }
 
@@ -84,6 +79,6 @@ input[type="number"] {
   background-color: #50fa7b;
 }
 
-.navbar-light .navbar-toggler-icon {
+.navbar .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💸</text></svg>");
 }

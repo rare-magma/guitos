@@ -165,12 +165,12 @@ function BudgetPage() {
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const importedFiles = e.target.files;
     const newBudgetList: string[] = [];
-    let newBudget: Budget;
     if (importedFiles === null) {
       return;
     }
 
     for (let i = 0; i < importedFiles.length; i++) {
+      let newBudget: Budget;
       const file = importedFiles[i];
       const reader = new FileReader();
       reader.readAsText(file, "UTF-8");
@@ -203,8 +203,7 @@ function BudgetPage() {
             setBudgetList(newBudgetList);
           } else {
             newBudget = JSON.parse(reader.result as string);
-            newBudgetList.push(newBudget as unknown as string);
-            setBudgetList(newBudgetList);
+            setBudgetList(...budgetList, newBudget);
           }
         }
       };
@@ -254,20 +253,13 @@ function BudgetPage() {
     }
   }, [name, budget]);
 
-  let budgetNameList;
-  if (budgetList) {
-    budgetNameList = budgetList.map((data: Budget) => {
-      return data.name;
-    });
-  }
-
   return (
     <div>
       <>
         <NavBar
           selected={budget?.name || undefined}
           id={budget?.id || undefined}
-          budgetNameList={budgetNameList || []}
+          budgetNameList={budgetList}
           onRename={(e) => {
             handleRename(e);
           }}
