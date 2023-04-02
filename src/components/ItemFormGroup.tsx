@@ -49,17 +49,15 @@ function ItemFormGroup({
 
   return (
     <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
-      <Col xs={8}>
-        <Form.Control
-          aria-label={"newname"}
-          key={itemForm.id + "-key"}
-          defaultValue={itemForm.name}
-          onChange={editItemName}
-          type="text"
-          maxLength={255}
-        />
-      </Col>
-      <Col>
+      <Form.Control
+        aria-label={"newname"}
+        key={itemForm.id + "-key"}
+        defaultValue={itemForm.name}
+        onChange={editItemName}
+        type="text"
+        maxLength={255}
+      />
+      <Col xs="3">
         <Form.Control
           aria-label={"newvalue"}
           key={itemForm.id + "-value"}
@@ -84,18 +82,16 @@ function ItemFormGroup({
             <BsCurrencyEuro />
           </Button>
         </Col> */}
-      <Col xs={1}>
-        <Button
-          key={itemForm.id + "button"}
-          variant="delete"
-          type="button"
-          onClick={() => {
-            handleRemove(itemForm);
-          }}
-        >
-          <BsXLg />
-        </Button>
-      </Col>
+      <Button
+        key={itemForm.id + "button"}
+        variant="delete"
+        type="button"
+        onClick={() => {
+          handleRemove(itemForm);
+        }}
+      >
+        <BsXLg />
+      </Button>
     </InputGroup>
   );
 }
