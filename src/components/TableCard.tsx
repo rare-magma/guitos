@@ -85,8 +85,8 @@ function TableCard({
   };
 
   return (
-    <Card border="success">
-      <Card.Header>
+    <Card className={label + "-card"}>
+      <Card.Header className={label + "-card-header"}>
         <Row>
           <Col>{label}</Col>
           <Col className="text-end">{total} €</Col>
@@ -106,7 +106,7 @@ function TableCard({
         <div className="mt-3" />
         <div className="d-grid gap-2">
           <Button
-            variant="outline-success"
+            variant={label + "-plus-button"}
             size="sm"
             onClick={() => {
               addTable(table);
