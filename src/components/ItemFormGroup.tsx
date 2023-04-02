@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Col, Form, InputGroup } from "react-bootstrap";
-import { BsCurrencyEuro, BsXLg } from "react-icons/bs";
+import { BsXLg } from "react-icons/bs";
 import { numberInputOnWheelPreventChange } from "../utils";
 import { ItemForm } from "./ItemForm";
 
@@ -48,32 +48,31 @@ function ItemFormGroup({
   };
 
   return (
-    <Form>
-      <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
-        <Col xs={8}>
-          <Form.Control
-            aria-label={"newname"}
-            key={itemForm.id + "-key"}
-            defaultValue={itemForm.name}
-            onChange={editItemName}
-            type="text"
-            maxLength={255}
-          />
-        </Col>
-        <Col xs={3}>
-          <Form.Control
-            aria-label={"newvalue"}
-            key={itemForm.id + "-value"}
-            className="text-right"
-            defaultValue={itemForm.value}
-            onChange={editItemValue}
-            type="number"
-            onWheelCapture={numberInputOnWheelPreventChange}
-            maxLength={11}
-          />
-        </Col>
-        {/* TODO currency support */}
-        {/* <Col xs={1}>
+    <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
+      <Col xs={8}>
+        <Form.Control
+          aria-label={"newname"}
+          key={itemForm.id + "-key"}
+          defaultValue={itemForm.name}
+          onChange={editItemName}
+          type="text"
+          maxLength={255}
+        />
+      </Col>
+      <Col>
+        <Form.Control
+          aria-label={"newvalue"}
+          key={itemForm.id + "-value"}
+          className="text-right"
+          defaultValue={itemForm.value}
+          onChange={editItemValue}
+          type="number"
+          onWheelCapture={numberInputOnWheelPreventChange}
+          maxLength={11}
+        />
+      </Col>
+      {/* TODO currency support */}
+      {/* <Col xs={1}>
           <Button
             key={itemForm.id + "button"}
             variant="currency"
@@ -85,20 +84,19 @@ function ItemFormGroup({
             <BsCurrencyEuro />
           </Button>
         </Col> */}
-        <Col xs={1}>
-          <Button
-            key={itemForm.id + "button"}
-            variant="outline-secondary"
-            type="button"
-            onClick={() => {
-              handleRemove(itemForm);
-            }}
-          >
-            <BsXLg />
-          </Button>
-        </Col>
-      </InputGroup>
-    </Form>
+      <Col xs={1}>
+        <Button
+          key={itemForm.id + "button"}
+          variant="delete"
+          type="button"
+          onClick={() => {
+            handleRemove(itemForm);
+          }}
+        >
+          <BsXLg />
+        </Button>
+      </Col>
+    </InputGroup>
   );
 }
 
