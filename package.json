@@ -9,6 +9,7 @@
     "@types/react": "18.0.32",
     "@types/react-dom": "18.0.11",
     "bootstrap": "5.2.3",
+    "localforage": "1.10.0",
     "papaparse": "^5.4.1",
     "react": "18.2.0",
     "react-bootstrap": "2.7.2",

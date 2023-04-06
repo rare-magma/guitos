@@ -11,19 +11,28 @@ import {
   calcWithGoal,
   convertCsvToBudget,
   createNewBudget,
-  useLocalStorage,
 } from "../utils";
 import { Income } from "./Income";
 import { Expense } from "./Expense";
 import NavBar from "./NavBar";
 import Papa, { ParseError } from "papaparse";
+import localforage from "localforage";
 
 function BudgetPage() {
+  const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [budget, setBudget] = useState<Budget | null>(null);
 
-  const [budgetList, setBudgetList] = useLocalStorage("budgetList", "");
-  const [error, setError] = useState<string | null>(null);
+  const [budgetList, setBudgetList] = useState<Budget[]>([]);
+
+  let budgetNameList: { id: string; name: string }[] = [];
+  if (budgetList !== null && Array.isArray(budgetList)) {
+    budgetNameList = budgetList.map((b: Budget) => {
+      return { id: b.id, name: b.name };
+    });
+  }
+
   const [csvError, setCsvError] = useState<ParseError[] | undefined>([]);
   const [csvErrorFiles, setCsvErrorFiles] = useState<string[] | undefined>([]);
   const [show, setShow] = useState(false);
@@ -121,12 +130,21 @@ function BudgetPage() {
 
   const handleNew = () => {
     const newBudget = createNewBudget();
-    const newBudgetList = [...budgetList, newBudget];
-    setBudget(newBudget);
-    setBudgetList(newBudgetList);
-
-    navigate("/" + newBudget.name);
-    navigate(0);
+    let newBudgetList: Budget[] = [];
+    if (budgetList !== null) {
+      newBudgetList = budgetList.concat(newBudget);
+    } else {
+      newBudgetList = newBudgetList.concat(newBudget);
+    }
+    localforage
+      .setItem(newBudget.id, newBudget)
+      .then(() => {
+        setBudget(newBudget);
+        setBudgetList(newBudgetList);
+        navigate("/" + newBudget.name);
+        navigate(0);
+      })
+      .catch((e) => setError(e.message));
   };
 
   const handleRemove = (toBeDeleted: string) => {
@@ -135,10 +153,15 @@ function BudgetPage() {
     );
     const newBudget = newBudgetList.slice(-1);
 
-    setBudgetList(newBudgetList);
-    setBudget(newBudget[0]);
-    navigate("/" + newBudget[0]?.name);
-    navigate(0);
+    localforage
+      .removeItem(toBeDeleted)
+      .then(() => {
+        setBudgetList(newBudgetList);
+        setBudget(newBudget[0]);
+        navigate("/" + newBudget[0]?.name);
+        navigate(0);
+      })
+      .catch((e) => setError(e.message));
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -179,10 +202,24 @@ function BudgetPage() {
               file.name.slice(0, -4)
             );
             newBudgetList.push(newBudget as unknown as string);
-            setBudgetList(newBudgetList);
+            localforage
+              .setItem(newBudget.id, newBudget)
+              .then(() => {
+                setBudgetList(newBudgetList as unknown as Budget[]);
+                setBudget(budgetList[-1]);
+              })
+              .catch((e) => setError(e.message));
           } else {
-            newBudget = JSON.parse(reader.result as string);
-            setBudgetList(...budgetList, newBudget);
+            const list = JSON.parse(reader.result as string);
+            list.forEach((b: string) => {
+              localforage
+                .setItem((b as unknown as Budget).id, b)
+                .then(() => {
+                  setBudgetList(budgetList.concat(newBudget));
+                  setBudget(budgetList[-1]);
+                })
+                .catch((e) => setError(e.message));
+            });
           }
         }
       };
@@ -210,13 +247,19 @@ function BudgetPage() {
         return data;
       }
     });
-    setBudgetList(newBudgetList);
+    localforage
+      .setItem(budget.id, budget)
+      .then(() => {
+        setBudgetList(newBudgetList);
+        setSaved(true);
+      })
+      .catch((e) => setError(e.message));
   };
 
   useEffect(() => {
     setLoading(true);
     try {
-      if (budgetList !== null && Array.isArray(budgetList)) {
+      if (budgetList.length > 1 && Array.isArray(budgetList)) {
         budgetList
           .filter((budget: Budget) => budget.name === name)
           .map((data: Budget) => {
@@ -224,6 +267,24 @@ function BudgetPage() {
             save(data);
           });
         setLoading(false);
+      } else {
+        let list: Budget[] = [];
+        localforage
+          .iterate((value) => {
+            list = list.concat(value as unknown as Budget);
+          })
+          .then(() => {
+            setBudgetList(list);
+            if (list.length > 1 && Array.isArray(list)) {
+              list
+                .filter((budget: Budget) => budget.name === name)
+                .map((data: Budget) => {
+                  setBudget(data);
+                });
+            }
+            setLoading(false);
+          })
+          .catch((e) => console.error(e.message));
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
@@ -238,7 +299,7 @@ function BudgetPage() {
         <NavBar
           selected={budget?.name || undefined}
           id={budget?.id || undefined}
-          budgetNameList={budgetList}
+          budgetNameList={budgetNameList}
           onRename={(e) => {
             handleRename(e);
           }}

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Budget } from "./components/Budget";
 import { ItemForm } from "./components/ItemForm";
 import { CsvItem } from "./components/CsvItem";
@@ -42,27 +41,6 @@ export function calcSaved(value: Budget | null): number {
   }
   return 0;
 }
-
-function getStorageValue(key: string, defaultValue: string) {
-  const saved = localStorage.getItem(key);
-  let initial;
-  if (saved !== null) {
-    initial = JSON.parse(saved);
-  }
-  return initial || defaultValue;
-}
-
-export const useLocalStorage = (key: string, defaultValue: string) => {
-  const [value, setValue] = useState(() => {
-    return getStorageValue(key, defaultValue);
-  });
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
-
-  return [value, setValue];
-};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const numberInputOnWheelPreventChange = (e: any) => {
