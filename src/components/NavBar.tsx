@@ -14,7 +14,7 @@ import { Budget } from "./Budget";
 interface NavBarProps {
   selected?: string | null;
   id?: string | null;
-  budgetNameList: { id: string; label: string }[];
+  budgetNameList: { id: string; name: string }[];
   onRename: (name?: string | null) => void;
   onDownload: () => void;
   onNew: () => void;
@@ -126,11 +126,7 @@ function NavBar({
                   }}
                   className="p-2"
                   options={initialBudgetNameList
-                    .sort((a, b) =>
-                      (a as unknown as Budget).name.localeCompare(
-                        (b as unknown as Budget).name
-                      )
-                    )
+                    .sort((a, b) => a.name.localeCompare(b.name))
                     .reverse()}
                   placeholder="Search list of budgets..."
                 />
