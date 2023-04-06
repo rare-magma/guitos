@@ -10,6 +10,7 @@ import {
   calcSaved,
   calcWithGoal,
   convertCsvToBudget,
+  createNewBudget,
   useLocalStorage,
 } from "../utils";
 import { Income } from "./Income";
@@ -119,29 +120,7 @@ function BudgetPage() {
   };
 
   const handleNew = () => {
-    const newId = crypto.randomUUID();
-    const newBudget = {
-      id: newId,
-      name: "",
-      expenses: {
-        items: [{ id: 1, name: "", value: 0 }],
-        total: 0,
-      },
-      incomes: {
-        items: [{ id: 1, name: "", value: 0 }],
-        total: 0,
-      },
-      stats: {
-        available: 0,
-        withGoal: 0,
-        saved: 0,
-        goal: 10,
-        reserves: 0,
-      },
-    };
-
-    newBudget.name = new Date().getFullYear() + "-" + newId.slice(0, 8);
-
+    const newBudget = createNewBudget();
     const newBudgetList = [...budgetList, newBudget];
     setBudget(newBudget);
     setBudgetList(newBudgetList);
