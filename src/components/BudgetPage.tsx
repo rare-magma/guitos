@@ -27,7 +27,7 @@ function BudgetPage() {
   const [budgetList, setBudgetList] = useState<Budget[]>([]);
 
   let budgetNameList: { id: string; name: string }[] = [];
-  if (budgetList !== null && Array.isArray(budgetList)) {
+  if (budgetList.length > 1 && Array.isArray(budgetList)) {
     budgetNameList = budgetList.map((b: Budget) => {
       return { id: b.id, name: b.name };
     });
@@ -216,7 +216,7 @@ function BudgetPage() {
                 .setItem((b as unknown as Budget).id, b)
                 .then(() => {
                   setBudgetList(budgetList.concat(newBudget));
-                  setBudget(budgetList[-1]);
+                  setBudget(budgetList[0]);
                 })
                 .catch((e) => setError(e.message));
             });
