@@ -118,7 +118,7 @@ export const createNewBudget = (): Budget => {
       total: 0,
     },
     incomes: {
-      items: [{ id: 1, name: "", value: 0 }],
+      items: [{ id: 2, name: "", value: 0 }],
       total: 0,
     },
     stats: {

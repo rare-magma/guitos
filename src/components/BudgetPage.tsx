@@ -198,8 +198,6 @@ function BudgetPage() {
     const filteredList = budgetList.filter(
       (item: Budget) => item.id === selectedBudget[0].id
     );
-    console.log(JSON.stringify(filteredList));
-    console.log(JSON.stringify(selectedBudget));
     setBudget(filteredList[0]);
     navigate("/" + selectedBudget[0].name);
     navigate(0);
