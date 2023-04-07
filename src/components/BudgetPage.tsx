@@ -175,9 +175,11 @@ function BudgetPage() {
     localforage
       .removeItem(toBeDeleted)
       .then(() => {
-        const newBudgetList = budgetList.filter(
-          (item: Budget) => item.id !== toBeDeleted
-        );
+        const newBudgetList = budgetList
+          .filter((item: Budget) => item.id !== toBeDeleted)
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .reverse();
+
         setBudgetList(newBudgetList);
         setBudget(newBudgetList[0]);
         if (newBudgetList.length >= 1) {
