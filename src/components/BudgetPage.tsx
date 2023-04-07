@@ -17,6 +17,7 @@ import { Expense } from "./Expense";
 import NavBar from "./NavBar";
 import Papa, { ParseError } from "papaparse";
 import localforage from "localforage";
+import { Option } from "react-bootstrap-typeahead/types/types";
 
 function BudgetPage() {
   const [saved, setSaved] = useState(false);
@@ -27,7 +28,7 @@ function BudgetPage() {
   const [budgetList, setBudgetList] = useState<Budget[]>([]);
 
   let budgetNameList: { id: string; name: string }[] = [];
-  if (budgetList.length > 1 && Array.isArray(budgetList)) {
+  if (budgetList.length >= 1 && Array.isArray(budgetList)) {
     budgetNameList = budgetList.map((b: Budget) => {
       return { id: b.id, name: b.name };
     });
@@ -148,20 +149,35 @@ function BudgetPage() {
   };
 
   const handleRemove = (toBeDeleted: string) => {
-    const newBudgetList = budgetList.filter(
-      (item: Budget) => item.id !== toBeDeleted
-    );
-    const newBudget = newBudgetList.slice(-1);
-
     localforage
       .removeItem(toBeDeleted)
       .then(() => {
+        const newBudgetList = budgetList.filter(
+          (item: Budget) => item.id !== toBeDeleted
+        );
         setBudgetList(newBudgetList);
-        setBudget(newBudget[0]);
-        navigate("/" + newBudget[0]?.name);
-        navigate(0);
+        setBudget(newBudgetList[0]);
+        if (newBudgetList.length >= 1) {
+          navigate("/" + newBudgetList[0].name);
+          navigate(0);
+        }
       })
-      .catch((e) => setError(e.message));
+      .catch((e) => {
+        console.error(e);
+        setError(e.message);
+      });
+  };
+
+  const handleSelect = (budget: Option[]) => {
+    const selectedBudget = budget as unknown as Budget[];
+    const filteredList = budgetList.filter(
+      (item: Budget) => item.id === selectedBudget[0].id
+    );
+    console.log(JSON.stringify(filteredList));
+    console.log(JSON.stringify(selectedBudget));
+    setBudget(filteredList[0]);
+    navigate("/" + selectedBudget[0].name);
+    navigate(0);
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -259,7 +275,7 @@ function BudgetPage() {
   useEffect(() => {
     setLoading(true);
     try {
-      if (budgetList.length > 1 && Array.isArray(budgetList)) {
+      if (budgetList.length >= 1 && Array.isArray(budgetList)) {
         budgetList
           .filter((budget: Budget) => budget.name === name)
           .map((data: Budget) => {
@@ -275,7 +291,7 @@ function BudgetPage() {
           })
           .then(() => {
             setBudgetList(list);
-            if (list.length > 1 && Array.isArray(list)) {
+            if (list.length >= 1 && Array.isArray(list)) {
               list
                 .filter((budget: Budget) => budget.name === name)
                 .map((data: Budget) => {
@@ -288,6 +304,7 @@ function BudgetPage() {
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
+      console.error(e);
       setError(e);
       setLoading(false);
     }
@@ -314,6 +331,9 @@ function BudgetPage() {
           }}
           onRemove={(e) => {
             handleRemove(e);
+          }}
+          onSelect={(e) => {
+            handleSelect(e);
           }}
         />
 

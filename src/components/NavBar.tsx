@@ -9,7 +9,6 @@ import { BsPlusLg, BsXLg, BsUpload, BsDownload } from "react-icons/bs";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { useNavigate } from "react-router-dom";
 import { Option } from "react-bootstrap-typeahead/types/types";
-import { Budget } from "./Budget";
 
 interface NavBarProps {
   selected?: string | null;
@@ -19,6 +18,7 @@ interface NavBarProps {
   onDownload: () => void;
   onNew: () => void;
   onRemove: (name: string) => void;
+  onSelect: (budget: Option[]) => void;
   onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -30,6 +30,7 @@ function NavBar({
   onDownload,
   onNew,
   onRemove,
+  onSelect,
   onUpload,
 }: NavBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -76,9 +77,7 @@ function NavBar({
   };
 
   const handleSelect = (budget: Option[]) => {
-    const selectedBudget = budget as unknown as Budget[];
-    navigate("/" + selectedBudget[0].name);
-    navigate(0);
+    onSelect(budget);
   };
 
   const editName = (event: React.ChangeEvent<HTMLInputElement>) => {
