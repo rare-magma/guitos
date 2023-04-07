@@ -28,11 +28,11 @@ function BudgetPage() {
 
   let budgetNameList: ({ id: string; name: string } | undefined)[] = [];
   if (budgetList.length >= 1 && Array.isArray(budgetList)) {
-    budgetNameList = budgetList.map((b: Budget) => {
-      if (b && b.id !== undefined && b.name !== undefined) {
+    budgetNameList = budgetList
+      .filter((b: Budget) => b && b.id !== undefined && b.name !== undefined)
+      .map((b: Budget) => {
         return { id: b.id, name: b.name };
-      }
-    });
+      });
   }
 
   const [csvError, setCsvError] = useState<ParseError[] | undefined>([]);
@@ -146,7 +146,10 @@ function BudgetPage() {
         navigate("/" + newBudget.name);
         navigate(0);
       })
-      .catch((e) => setError(e.message));
+      .catch((e) => {
+        setError(e.message);
+        setShow(true);
+      });
   };
 
   const handleClone = () => {
@@ -168,7 +171,10 @@ function BudgetPage() {
           navigate("/" + newBudget.name);
           navigate(0);
         })
-        .catch((e) => setError(e.message));
+        .catch((e) => {
+          setError(e.message);
+          setShow(true);
+        });
     }
   };
 
@@ -189,8 +195,8 @@ function BudgetPage() {
         }
       })
       .catch((e) => {
-        console.error(e);
         setError(e.message);
+        setShow(true);
       });
   };
 
@@ -227,13 +233,6 @@ function BudgetPage() {
             if (csvObject.errors.length > 0) {
               setCsvError(csvError?.concat(csvObject.errors));
               setCsvErrorFiles(csvErrorFiles?.concat(file.name));
-              console.error("error importing " + file.name);
-              for (const i in csvObject.errors) {
-                const errormsg = csvObject.errors[i] as unknown as ParseError;
-                console.error(
-                  "on row " + errormsg.row + ": " + errormsg.message
-                );
-              }
               setShow(true);
             }
 
@@ -248,7 +247,10 @@ function BudgetPage() {
                 setBudgetList(newBudgetList as unknown as Budget[]);
                 setBudget(budgetList[-1]);
               })
-              .catch((e) => setError(e.message));
+              .catch((e) => {
+                setError(e.message);
+                setShow(true);
+              });
           } else {
             const list = JSON.parse(reader.result as string);
             list.forEach((b: string) => {
@@ -258,7 +260,10 @@ function BudgetPage() {
                   setBudgetList(budgetList.concat(newBudget));
                   setBudget(budgetList[0]);
                 })
-                .catch((e) => setError(e.message));
+                .catch((e) => {
+                  setError(e.message);
+                  setShow(true);
+                });
             });
           }
         }
@@ -292,7 +297,10 @@ function BudgetPage() {
       .then(() => {
         setBudgetList(newBudgetList);
       })
-      .catch((e) => setError(e.message));
+      .catch((e) => {
+        setError(e.message);
+        setShow(true);
+      });
   };
 
   useEffect(() => {
@@ -323,12 +331,14 @@ function BudgetPage() {
             }
             setLoading(false);
           })
-          .catch((e) => console.error(e.message));
+          .catch((e) => {
+            setError(e.message);
+            setShow(true);
+          });
       }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (e: any) {
-      console.error(e);
-      setError(e);
+    } catch (e: unknown) {
+      setError((e as Error).message);
+      setShow(true);
       setLoading(false);
     }
   }, [name, budget, loading]);
@@ -370,29 +380,34 @@ function BudgetPage() {
           </div>
         )}
 
-        {error && (
+        {error && show && (
           <Alert variant="danger" onClose={() => setShow(false)} dismissible>
             <Alert.Heading>{error}</Alert.Heading>
           </Alert>
         )}
 
-        {/* {csvError &&
+        {csvError &&
           show &&
           csvErrorFiles &&
           csvErrorFiles.map((file) => (
-            {csvError.map((error) => (
-                <Alert
-                  variant="danger"
-                  onClose={() => setShow(false)}
-                  dismissible
-                >
-                  <Alert.Heading>Error while importing {file}:</Alert.Heading>
-                  <p>{error.row}</p>;<p>{error.message}</p>;
-                </Alert>
-              ))
-            }
-
-          ))} */}
+            <Alert
+              key={file}
+              variant="danger"
+              onClose={() => setShow(false)}
+              dismissible
+            >
+              <Alert.Heading>
+                Errors found while importing {file}:
+              </Alert.Heading>
+              {csvError.map((error) => (
+                <>
+                  <p>
+                    On line {error.row}: {error.message}
+                  </p>
+                </>
+              ))}
+            </Alert>
+          ))}
 
         {budget && (
           <Container>
