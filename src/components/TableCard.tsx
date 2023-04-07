@@ -31,8 +31,13 @@ function TableCard({
       throw new Error("Messed up table type");
     }
     const newItemForm = new ItemForm();
+    const maxId = Math.max(
+      ...table.items.map((i) => {
+        return i.id;
+      })
+    );
 
-    newItemForm.id = table.items.length + 2;
+    newItemForm.id = maxId + 1;
     newItemForm.name = "";
     newItemForm.value = 0;
 
