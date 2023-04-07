@@ -6,8 +6,8 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { BsPlusLg, BsXLg, BsUpload, BsDownload } from "react-icons/bs";
+import { FaRegClone } from "react-icons/fa";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { useNavigate } from "react-router-dom";
 import { Option } from "react-bootstrap-typeahead/types/types";
 
 interface NavBarProps {
@@ -16,6 +16,7 @@ interface NavBarProps {
   budgetNameList: { id: string; name: string }[];
   onRename: (name?: string | null) => void;
   onDownload: () => void;
+  onClone: () => void;
   onNew: () => void;
   onRemove: (name: string) => void;
   onSelect: (budget: Option[]) => void;
@@ -27,6 +28,7 @@ function NavBar({
   id: initialId,
   budgetNameList: initialBudgetNameList,
   onRename,
+  onClone,
   onDownload,
   onNew,
   onRemove,
@@ -34,7 +36,6 @@ function NavBar({
   onUpload,
 }: NavBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
 
@@ -56,6 +57,10 @@ function NavBar({
 
   const handleNew = () => {
     onNew();
+  };
+
+  const handleClone = () => {
+    onClone();
   };
 
   const handleClick = () => {
@@ -115,7 +120,7 @@ function NavBar({
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end">
             <Nav>
-              {initialBudgetNameList && initialBudgetNameList.length > 0 && (
+              {initialBudgetNameList && initialBudgetNameList.length > 1 && (
                 <Typeahead
                   id="basic-example"
                   filterBy={["name"]}
@@ -141,15 +146,28 @@ function NavBar({
                   {expanded ? "new" : <BsPlusLg />}
                 </Button>
               </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  handleRemove(initialId);
-                }}
-              >
-                <Button aria-label="delete budget" variant="outline-danger">
-                  {expanded ? "delete" : <BsXLg />}
-                </Button>
-              </Nav.Link>
+              {initialBudgetNameList && initialBudgetNameList.length > 0 && (
+                <>
+                  <Nav.Link
+                    onClick={() => {
+                      handleClone();
+                    }}
+                  >
+                    <Button aria-label="clone budget" variant="outline-success">
+                      {expanded ? "clone" : <FaRegClone />}
+                    </Button>
+                  </Nav.Link>
+                  <Nav.Link
+                    onClick={() => {
+                      handleRemove(initialId);
+                    }}
+                  >
+                    <Button aria-label="delete budget" variant="outline-danger">
+                      {expanded ? "delete" : <BsXLg />}
+                    </Button>
+                  </Nav.Link>
+                </>
+              )}
               <Nav.Link href="#import" as="li">
                 <Form.Group controlId="import">
                   <Button

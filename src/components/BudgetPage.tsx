@@ -148,6 +148,29 @@ function BudgetPage() {
       .catch((e) => setError(e.message));
   };
 
+  const handleClone = () => {
+    if (budget !== null) {
+      const newBudget = budget;
+      newBudget.id = crypto.randomUUID();
+      newBudget.name = budget.name + "-clone";
+      let newBudgetList: Budget[] = [];
+      if (budgetList !== null) {
+        newBudgetList = budgetList.concat(newBudget);
+      } else {
+        newBudgetList = newBudgetList.concat(newBudget);
+      }
+      localforage
+        .setItem(newBudget.id, newBudget)
+        .then(() => {
+          setBudget(newBudget);
+          setBudgetList(newBudgetList);
+          navigate("/" + newBudget.name);
+          navigate(0);
+        })
+        .catch((e) => setError(e.message));
+    }
+  };
+
   const handleRemove = (toBeDeleted: string) => {
     localforage
       .removeItem(toBeDeleted)
@@ -319,6 +342,9 @@ function BudgetPage() {
           budgetNameList={budgetNameList}
           onRename={(e) => {
             handleRename(e);
+          }}
+          onClone={() => {
+            handleClone();
           }}
           onDownload={() => {
             handleDownload();
