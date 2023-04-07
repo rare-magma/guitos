@@ -37,7 +37,7 @@ function TableCard({
       })
     );
 
-    newItemForm.id = maxId + 1;
+    newItemForm.id = isNaN(maxId) ? 0 : maxId + 1;
     newItemForm.name = "";
     newItemForm.value = 0;
 
