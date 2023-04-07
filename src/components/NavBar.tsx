@@ -13,7 +13,7 @@ import { Option } from "react-bootstrap-typeahead/types/types";
 interface NavBarProps {
   selected?: string | null;
   id?: string | null;
-  budgetNameList: { id: string; name: string }[];
+  budgetNameList: ({ id: string; name: string } | undefined)[];
   onRename: (name?: string | null) => void;
   onDownload: () => void;
   onClone: () => void;

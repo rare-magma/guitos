@@ -20,17 +20,18 @@ import localforage from "localforage";
 import { Option } from "react-bootstrap-typeahead/types/types";
 
 function BudgetPage() {
-  const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [budget, setBudget] = useState<Budget | null>(null);
 
   const [budgetList, setBudgetList] = useState<Budget[]>([]);
 
-  let budgetNameList: { id: string; name: string }[] = [];
+  let budgetNameList: ({ id: string; name: string } | undefined)[] = [];
   if (budgetList.length >= 1 && Array.isArray(budgetList)) {
     budgetNameList = budgetList.map((b: Budget) => {
-      return { id: b.id, name: b.name };
+      if (b && b.id !== undefined && b.name !== undefined) {
+        return { id: b.id, name: b.name };
+      }
     });
   }
 
@@ -290,7 +291,6 @@ function BudgetPage() {
       .setItem(budget.id, budget)
       .then(() => {
         setBudgetList(newBudgetList);
-        setSaved(true);
       })
       .catch((e) => setError(e.message));
   };
@@ -300,8 +300,8 @@ function BudgetPage() {
     try {
       if (budgetList.length >= 1 && Array.isArray(budgetList)) {
         budgetList
-          .filter((budget: Budget) => budget.name === name)
-          .map((data: Budget) => {
+          .filter((budget: Budget) => budget && budget.name === name)
+          .forEach((data: Budget) => {
             setBudget(data);
             save(data);
           });
@@ -316,8 +316,8 @@ function BudgetPage() {
             setBudgetList(list);
             if (list.length >= 1 && Array.isArray(list)) {
               list
-                .filter((budget: Budget) => budget.name === name)
-                .map((data: Budget) => {
+                .filter((budget: Budget) => budget && budget.name === name)
+                .forEach((data: Budget) => {
                   setBudget(data);
                 });
             }
@@ -331,7 +331,7 @@ function BudgetPage() {
       setError(e);
       setLoading(false);
     }
-  }, [name, budget]);
+  }, [name, budget, loading]);
 
   return (
     <div>
@@ -372,7 +372,7 @@ function BudgetPage() {
 
         {error && (
           <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-            <Alert.Heading>Error</Alert.Heading>
+            <Alert.Heading>{error}</Alert.Heading>
           </Alert>
         )}
 
