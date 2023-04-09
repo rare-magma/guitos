@@ -68,6 +68,7 @@ function ItemFormGroup({
       />
       <Col xs="3">
         <OverlayTrigger
+          delay={100}
           placement="top"
           overlay={
             <Tooltip id={`tooltip-value-${itemForm.id}`}>
