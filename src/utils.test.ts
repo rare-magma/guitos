@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
 import {
   calcAvailable,
+  calcPercentage,
   calcSaved,
   calcTotal,
   calcWithGoal,
@@ -16,11 +17,11 @@ const testBudget = new Budget({
   name: "2023-03",
   expenses: {
     items: [{ id: 0, name: "name", value: 10 }],
-    total: 0,
+    total: 10,
   },
   incomes: {
     items: [{ id: 0, name: "name", value: 100 }],
-    total: 0,
+    total: 100,
   },
   stats: {
     available: 0,
@@ -89,6 +90,15 @@ test("round", () => {
 test("calcTotal", () => {
   expect(calcTotal([itemForm1, itemForm2])).eq(110);
   expect(calcTotal([])).eq(0);
+});
+
+test("calcPercentage", () => {
+  expect(calcPercentage(itemForm1.value, testBudget.incomes.total)).eq(10);
+  expect(calcPercentage(itemForm2.value, testBudget.incomes.total)).eq(100);
+  expect(calcPercentage(itemForm1.value, testBudget.expenses.total)).eq(100);
+  expect(calcPercentage(itemForm2.value, testBudget.expenses.total)).eq(1000);
+  expect(calcPercentage(0, testBudget.incomes.total)).eq(0);
+  expect(calcPercentage(0, testBudget.expenses.total)).eq(0);
 });
 
 test("calcAvailable", () => {

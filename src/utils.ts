@@ -15,6 +15,16 @@ export function calcTotal(values: Array<ItemForm>): number {
   return round(total, 2);
 }
 
+export function calcPercentage(
+  itemValue: number,
+  revenueTotal: number
+): number {
+  if (!isNaN(revenueTotal) && !isNaN(itemValue)) {
+    return round((itemValue * 100) / revenueTotal, 0);
+  }
+  return 0;
+}
+
 export function calcAvailable(value: Budget | null): number {
   if (value !== null) {
     const expenseTotal = calcTotal(value.expenses.items);
