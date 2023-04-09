@@ -5,11 +5,12 @@ import {
   Container,
   Row,
   Col,
-  Alert,
   Spinner,
   Button,
   Stack,
   Form,
+  Accordion,
+  Modal,
 } from "react-bootstrap";
 import TableCard from "./TableCard";
 import { Stat } from "./Stat";
@@ -27,6 +28,17 @@ import NavBar from "./NavBar";
 import Papa, { ParseError } from "papaparse";
 import localforage from "localforage";
 import { Option } from "react-bootstrap-typeahead/types/types";
+import { BsXLg } from "react-icons/bs";
+
+type CsvError = {
+  errors: ParseError[];
+  file: string;
+};
+
+type JsonError = {
+  errors: string;
+  file: string;
+};
 
 function BudgetPage() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -45,8 +57,8 @@ function BudgetPage() {
       });
   }
 
-  const [csvError, setCsvError] = useState<ParseError[] | undefined>([]);
-  const [csvErrorFiles, setCsvErrorFiles] = useState<string[] | undefined>([]);
+  const [csvError, setCsvError] = useState<CsvError[]>([]);
+  const [jsonError, setJsonError] = useState<JsonError[]>([]);
   const [show, setShow] = useState(false);
   const params = useParams();
   const name = String(params.name);
@@ -241,9 +253,15 @@ function BudgetPage() {
               skipEmptyLines: "greedy",
             });
             if (csvObject.errors.length > 0) {
-              setCsvError(csvError?.concat(csvObject.errors));
-              setCsvErrorFiles(csvErrorFiles?.concat(file.name));
+              csvError.push({
+                errors: csvObject.errors,
+                file: file.name,
+              });
+              setCsvError(csvError);
               setShow(true);
+              setLoading(false);
+
+              return;
             }
 
             newBudget = convertCsvToBudget(
@@ -262,19 +280,25 @@ function BudgetPage() {
                 setShow(true);
               });
           } else {
-            const list = JSON.parse(reader.result as string);
-            list.forEach((b: string) => {
-              localforage
-                .setItem((b as unknown as Budget).id, b)
-                .then(() => {
-                  setBudgetList(budgetList.concat(newBudget));
-                  setBudget(budgetList[0]);
-                })
-                .catch((e) => {
-                  setError(e.message);
-                  setShow(true);
-                });
-            });
+            try {
+              const list = JSON.parse(reader.result as string);
+              list.forEach((b: string) => {
+                localforage
+                  .setItem((b as unknown as Budget).id, b)
+                  .then(() => {
+                    setBudgetList(budgetList.concat(newBudget));
+                    setBudget(budgetList[0]);
+                  })
+                  .catch((e) => {
+                    setError(e.message);
+                    setShow(true);
+                  });
+              });
+            } catch (e) {
+              setJsonError([{ errors: e.toString(), file: file.name }]);
+              setShow(true);
+              setLoading(false);
+            }
           }
         }
       };
@@ -393,33 +417,134 @@ function BudgetPage() {
         )}
 
         {error && show && (
-          <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-            <Alert.Heading>{error}</Alert.Heading>
-          </Alert>
+          <Modal
+            dialogClassName="modal-90w mx-auto"
+            show={show}
+            onHide={() => setShow(false)}
+            centered
+          >
+            <Modal.Header>
+              Error:
+              <Button
+                className="align-self-end"
+                key={"modal-dismiss-button"}
+                variant="delete-modal"
+                type="button"
+                onClick={() => {
+                  setShow(false);
+                  setJsonError([]);
+                }}
+              >
+                <BsXLg />
+              </Button>
+            </Modal.Header>
+            <Modal.Body className="textarea mx-1">
+              <p className="code">{error}</p>
+            </Modal.Body>
+          </Modal>
         )}
 
-        {csvError &&
-          show &&
-          csvErrorFiles &&
-          csvErrorFiles.map((file) => (
-            <Alert
-              key={file}
-              variant="danger"
-              onClose={() => setShow(false)}
-              dismissible
-            >
-              <Alert.Heading>
-                Errors found while importing {file}:
-              </Alert.Heading>
-              {csvError.map((error) => (
-                <>
-                  <p>
-                    On line {error.row}: {error.message}
-                  </p>
-                </>
-              ))}
-            </Alert>
-          ))}
+        {jsonError && jsonError.length > 0 && show && (
+          <Modal
+            dialogClassName="modal-90w mx-auto"
+            show={show}
+            onHide={() => setShow(false)}
+            centered
+          >
+            <Modal.Header>
+              Errors found while importing:
+              <Button
+                className="align-self-end"
+                key={"modal-dismiss-button"}
+                variant="delete-modal"
+                type="button"
+                onClick={() => {
+                  setShow(false);
+                  setJsonError([]);
+                }}
+              >
+                <BsXLg />
+              </Button>
+            </Modal.Header>
+            <Modal.Body>
+              <Accordion flush>
+                {jsonError.map((jsonError: JsonError) => (
+                  <Accordion.Item
+                    key={jsonError.file + "-item"}
+                    eventKey={jsonError.file}
+                  >
+                    <Accordion.Header key={jsonError.file + "-header"}>
+                      {jsonError.file}
+                    </Accordion.Header>
+                    <Accordion.Body
+                      className="textarea code mx-1"
+                      key={jsonError.file + "-body"}
+                    >
+                      <p className="code" key={"error-" + jsonError.file + "-"}>
+                        <>
+                          {jsonError.errors}
+                          <br />
+                        </>
+                      </p>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                ))}
+              </Accordion>
+            </Modal.Body>
+          </Modal>
+        )}
+
+        {csvError && csvError.length > 0 && show && (
+          <Modal
+            dialogClassName="modal-90w mx-auto"
+            show={show}
+            onHide={() => setShow(false)}
+            centered
+          >
+            <Modal.Header>
+              Errors found while importing:
+              <Button
+                className="align-self-end"
+                key={"modal-dismiss-button"}
+                variant="delete-modal"
+                type="button"
+                onClick={() => {
+                  setShow(false);
+                  setCsvError([]);
+                }}
+              >
+                <BsXLg />
+              </Button>
+            </Modal.Header>
+            <Modal.Body>
+              <Accordion flush>
+                {csvError.map((csvError: CsvError) => (
+                  <Accordion.Item
+                    key={csvError.file + "-item"}
+                    eventKey={csvError.file}
+                  >
+                    <Accordion.Header key={csvError.file + "-header"}>
+                      {csvError.file}
+                    </Accordion.Header>
+                    <Accordion.Body
+                      className="textarea code mx-1"
+                      key={csvError.file + "-body"}
+                    >
+                      <p className="code" key={"error-" + csvError.file + "-"}>
+                        {csvError.errors.map((error, j) => (
+                          <>
+                            Line {error.row}: {error.message}
+                            <br />
+                          </>
+                        ))}
+                      </p>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                ))}
+              </Accordion>
+            </Modal.Body>
+          </Modal>
+        )}
 
         {!loading && !budget && budgetList.length < 1 && (
           <Container className="flex-grow-1">
