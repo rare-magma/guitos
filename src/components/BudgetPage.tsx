@@ -274,7 +274,7 @@ function BudgetPage() {
 
   const handleDownload = () => {
     let filename = new Date().toISOString();
-    filename = `guitos-${filename}.json`;
+    filename = `guitos-${filename.slice(0, -5)}.json`;
     const url = window.URL.createObjectURL(
       new Blob([JSON.stringify(budgetList)])
     );
