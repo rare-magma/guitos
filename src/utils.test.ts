@@ -97,6 +97,7 @@ test("calcPercentage", () => {
   expect(calcPercentage(itemForm2.value, testBudget.incomes.total)).eq(100);
   expect(calcPercentage(itemForm1.value, testBudget.expenses.total)).eq(100);
   expect(calcPercentage(itemForm2.value, testBudget.expenses.total)).eq(1000);
+  expect(calcPercentage(0, 0)).eq(0);
   expect(calcPercentage(0, testBudget.incomes.total)).eq(0);
   expect(calcPercentage(0, testBudget.expenses.total)).eq(0);
 });

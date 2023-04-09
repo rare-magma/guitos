@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ItemForm } from "./ItemForm";
 import {
   Card,
@@ -93,9 +93,10 @@ function TableCard({
       }
       return i;
     });
+    newTable.total = calcTotal(newTable.items);
 
     setTable(newTable);
-    setTotal(calcTotal(newTable.items));
+    setTotal(newTable.total);
     onChange(newTable);
   };
 
@@ -106,7 +107,7 @@ function TableCard({
           <Col>{label}</Col>
           <Col className="text-end">
             <OverlayTrigger
-              placement="top-end"
+              placement="top"
               overlay={
                 label === "Expenses" ? (
                   <Tooltip id={`tooltip-value-${label}`}>

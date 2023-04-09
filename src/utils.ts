@@ -19,7 +19,7 @@ export function calcPercentage(
   itemValue: number,
   revenueTotal: number
 ): number {
-  if (!isNaN(revenueTotal) && !isNaN(itemValue)) {
+  if (!isNaN(revenueTotal) && revenueTotal > 0 && !isNaN(itemValue)) {
     return round((itemValue * 100) / revenueTotal, 0);
   }
   return 0;
