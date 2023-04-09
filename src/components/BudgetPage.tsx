@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Budget } from "./Budget";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Row, Col, Alert } from "react-bootstrap";
+import { Container, Row, Col, Alert, Spinner } from "react-bootstrap";
 import TableCard from "./TableCard";
 import { Stat } from "./Stat";
 import StatCard from "./StatCard";
@@ -269,6 +269,7 @@ function BudgetPage() {
         }
       };
     }
+    setLoading(false);
   };
 
   const handleDownload = () => {
@@ -313,7 +314,6 @@ function BudgetPage() {
             setBudget(data);
             save(data);
           });
-        setLoading(false);
       } else {
         let list: Budget[] = [];
         localforage
@@ -329,7 +329,6 @@ function BudgetPage() {
                   setBudget(data);
                 });
             }
-            setLoading(false);
           })
           .catch((e) => {
             setError(e.message);
@@ -339,13 +338,14 @@ function BudgetPage() {
     } catch (e: unknown) {
       setError((e as Error).message);
       setShow(true);
+    } finally {
       setLoading(false);
     }
   }, [name, budget, loading]);
 
   return (
-    <div>
-      <>
+    <Container fluid className="vh-100">
+      <Row className="flex-column h-100 g-0">
         <NavBar
           selected={budget?.name || undefined}
           id={budget?.id || undefined}
@@ -363,6 +363,7 @@ function BudgetPage() {
             handleNew();
           }}
           onUpload={(e) => {
+            setLoading(true);
             handleUpload(e);
           }}
           onRemove={(e) => {
@@ -374,10 +375,11 @@ function BudgetPage() {
         />
 
         {loading && (
-          <div className="center-page">
-            <span className="spinner primary"></span>
-            <p>Select an item from the list...</p>
-          </div>
+          <Container fluid className="flex-grow-1">
+            <Row className="h-100 flex-grow-1 justify-content-center align-content-center">
+              <Spinner animation="border" role="status"></Spinner>
+            </Row>
+          </Container>
         )}
 
         {error && show && (
@@ -409,37 +411,38 @@ function BudgetPage() {
             </Alert>
           ))}
 
-        {budget && (
-          <Container>
-            <div className="mt-3" />
-            <Row>
-              <Col md="6">
-                <div className="card-columns">
-                  <StatCard stat={budget.stats} onChange={handleStatChange} />
+        {!loading && budget && (
+          <div className="mt-3">
+            <Container>
+              <Row>
+                <Col md="6">
+                  <div className="card-columns">
+                    <StatCard stat={budget.stats} onChange={handleStatChange} />
 
-                  <div className="mt-3" />
+                    <div className="mt-3" />
 
+                    <TableCard
+                      items={budget.incomes}
+                      header="Revenue"
+                      onChange={handleIncomeChange}
+                    />
+                    <div className="mt-3" />
+                  </div>
+                </Col>
+
+                <Col md="6">
                   <TableCard
-                    items={budget.incomes}
-                    header="Revenue"
-                    onChange={handleIncomeChange}
+                    items={budget.expenses}
+                    header="Expenses"
+                    onChange={handleExpenseChange}
                   />
-                  <div className="mt-3" />
-                </div>
-              </Col>
-
-              <Col md="6">
-                <TableCard
-                  items={budget.expenses}
-                  header="Expenses"
-                  onChange={handleExpenseChange}
-                />
-              </Col>
-            </Row>
-          </Container>
+                </Col>
+              </Row>
+            </Container>
+          </div>
         )}
-      </>
-    </div>
+      </Row>
+    </Container>
   );
 }
 
