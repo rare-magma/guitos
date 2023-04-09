@@ -13,7 +13,7 @@ import { Option } from "react-bootstrap-typeahead/types/types";
 interface NavBarProps {
   selected?: string | null;
   id?: string | null;
-  budgetNameList: ({ id: string; name: string } | undefined)[];
+  budgetNameList: { id: string; name: string }[];
   onRename: (name?: string | null) => void;
   onDownload: () => void;
   onClone: () => void;
@@ -63,10 +63,6 @@ function NavBar({
     onClone();
   };
 
-  const handleClick = () => {
-    inputRef.current?.click();
-  };
-
   const handleDownload = () => {
     onDownload();
   };
@@ -95,6 +91,11 @@ function NavBar({
   return (
     <Navbar variant={theme} key="md" expand="md" onToggle={setToggle}>
       <Container fluid>
+        {initialBudgetNameList && initialBudgetNameList.length < 1 && (
+          <Navbar.Brand className="flex-column flex-sm-row">
+            Guitos
+          </Navbar.Brand>
+        )}
         {initialSelectedName && (
           <Nav className="flex-column flex-sm-row">
             <Form.Control
@@ -107,7 +108,10 @@ function NavBar({
             />
           </Nav>
         )}
-        <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
+        <Navbar.Toggle
+          className="ms-auto"
+          aria-controls={`offcanvasNavbar-expand-md`}
+        />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-md`}
           aria-labelledby={`offcanvasNavbarLabel-expand-md`}
@@ -173,7 +177,9 @@ function NavBar({
                   <Button
                     aria-label="import budget"
                     variant="outline-primary"
-                    onClick={handleClick}
+                    onClick={() => {
+                      inputRef.current?.click();
+                    }}
                   >
                     {expanded ? "import" : <BsUpload />}
                   </Button>
@@ -186,15 +192,17 @@ function NavBar({
                   />
                 </Form.Group>
               </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  handleDownload();
-                }}
-              >
-                <Button aria-label="export budget" variant="outline-info">
-                  {expanded ? "download" : <BsDownload />}
-                </Button>
-              </Nav.Link>
+              {initialBudgetNameList && initialBudgetNameList.length > 0 && (
+                <Nav.Link
+                  onClick={() => {
+                    handleDownload();
+                  }}
+                >
+                  <Button aria-label="export budget" variant="outline-info">
+                    {expanded ? "download" : <BsDownload />}
+                  </Button>
+                </Nav.Link>
+              )}
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

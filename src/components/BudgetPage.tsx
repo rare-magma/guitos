@@ -1,7 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Budget } from "./Budget";
 import { useNavigate, useParams } from "react-router-dom";
-import { Container, Row, Col, Alert, Spinner } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Alert,
+  Spinner,
+  Button,
+  Stack,
+  Form,
+} from "react-bootstrap";
 import TableCard from "./TableCard";
 import { Stat } from "./Stat";
 import StatCard from "./StatCard";
@@ -20,13 +29,14 @@ import localforage from "localforage";
 import { Option } from "react-bootstrap-typeahead/types/types";
 
 function BudgetPage() {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [budget, setBudget] = useState<Budget | null>(null);
 
   const [budgetList, setBudgetList] = useState<Budget[]>([]);
 
-  let budgetNameList: ({ id: string; name: string } | undefined)[] = [];
+  let budgetNameList: { id: string; name: string }[] = [];
   if (budgetList.length >= 1 && Array.isArray(budgetList)) {
     budgetNameList = budgetList
       .filter((b: Budget) => b && b.id !== undefined && b.name !== undefined)
@@ -410,6 +420,50 @@ function BudgetPage() {
               ))}
             </Alert>
           ))}
+
+        {!loading && !budget && budgetList.length < 1 && (
+          <Container className="flex-grow-1">
+            <Row className="h-100 justify-content-center align-content-center align-self-center">
+              <Stack
+                gap={3}
+                className="justify-content-center align-content-center"
+              >
+                <Button
+                  className="w-25 align-self-center"
+                  aria-label="new budget"
+                  variant="outline-success"
+                  onClick={handleNew}
+                >
+                  new
+                </Button>
+                <Form.Group
+                  className="w-25 align-self-center justify-content-center align-content-center"
+                  controlId="import"
+                >
+                  <Button
+                    className="w-100"
+                    aria-label="import budget"
+                    variant="outline-primary"
+                    onClick={() => {
+                      inputRef.current?.click();
+                    }}
+                  >
+                    import
+                  </Button>
+                  <Form.Control
+                    type="file"
+                    multiple
+                    ref={inputRef}
+                    onChange={(e) => {
+                      handleUpload(e);
+                    }}
+                    style={{ display: "none" }}
+                  />
+                </Form.Group>
+              </Stack>
+            </Row>
+          </Container>
+        )}
 
         {!loading && budget && (
           <div className="mt-3">
