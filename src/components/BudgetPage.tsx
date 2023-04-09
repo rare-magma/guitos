@@ -42,27 +42,32 @@ type JsonError = {
 
 function BudgetPage() {
   const inputRef = useRef<HTMLInputElement>(null);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [budget, setBudget] = useState<Budget | null>(null);
-
-  const [budgetList, setBudgetList] = useState<Budget[]>([]);
-
-  let budgetNameList: { id: string; name: string }[] = [];
-  if (budgetList.length >= 1 && Array.isArray(budgetList)) {
-    budgetNameList = budgetList
-      .filter((b: Budget) => b && b.id !== undefined && b.name !== undefined)
-      .map((b: Budget) => {
-        return { id: b.id, name: b.name };
-      });
-  }
-
   const [csvError, setCsvError] = useState<CsvError[]>([]);
   const [jsonError, setJsonError] = useState<JsonError[]>([]);
   const [show, setShow] = useState(false);
+
+  const [budget, setBudget] = useState<Budget | null>(null);
+  const [budgetList, setBudgetList] = useState<Budget[]>([]);
+  const [budgetNameList, setBudgetNameList] = useState<
+    { id: string; name: string }[]
+  >([]);
+
   const params = useParams();
   const name = String(params.name);
   const navigate = useNavigate();
+
+  const calcBudgetListName = (list: Budget[]) => {
+    setBudgetNameList(
+      list
+        .filter((b: Budget) => b && b.id !== undefined && b.name !== undefined)
+        .map((b: Budget) => {
+          return { id: b.id, name: b.name };
+        })
+    );
+  };
 
   const handleIncomeChange = (item: Income) => {
     let newBudget: Budget;
@@ -272,8 +277,7 @@ function BudgetPage() {
             localforage
               .setItem(newBudget.id, newBudget)
               .then(() => {
-                setBudgetList(newBudgetList as unknown as Budget[]);
-                setBudget(budgetList[-1]);
+                setBudget(newBudget);
               })
               .catch((e) => {
                 setError(e.message);
@@ -283,11 +287,11 @@ function BudgetPage() {
             try {
               const list = JSON.parse(reader.result as string);
               list.forEach((b: string) => {
+                newBudgetList.push(b);
                 localforage
                   .setItem((b as unknown as Budget).id, b)
                   .then(() => {
-                    setBudgetList(budgetList.concat(newBudget));
-                    setBudget(budgetList[0]);
+                    setBudget(b as unknown as Budget);
                   })
                   .catch((e) => {
                     setError(e.message);
@@ -303,6 +307,9 @@ function BudgetPage() {
         }
       };
     }
+
+    setBudgetList(newBudgetList as unknown as Budget[]);
+    calcBudgetListName(newBudgetList as unknown as Budget[]);
     setLoading(false);
   };
 
@@ -348,6 +355,7 @@ function BudgetPage() {
             setBudget(data);
             save(data);
           });
+        calcBudgetListName(budgetList);
       } else {
         let list: Budget[] = [];
         localforage
@@ -362,6 +370,7 @@ function BudgetPage() {
                 .forEach((data: Budget) => {
                   setBudget(data);
                 });
+              calcBudgetListName(list);
             }
           })
           .catch((e) => {
