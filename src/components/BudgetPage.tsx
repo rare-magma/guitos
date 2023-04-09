@@ -388,7 +388,7 @@ function BudgetPage() {
 
   return (
     <Container fluid className="vh-100">
-      <Row className="flex-column h-100 g-0">
+      <Row className="flex-column h-99">
         <NavBar
           selected={budget?.name || undefined}
           id={budget?.id || undefined}
@@ -600,7 +600,7 @@ function BudgetPage() {
         )}
 
         {!loading && budget && (
-          <div className="mt-3">
+          <div className="my-3">
             <Container>
               <Row>
                 <Col md="6">
