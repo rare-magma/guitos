@@ -611,6 +611,7 @@ function BudgetPage() {
 
                     <TableCard
                       items={budget.incomes}
+                      revenueTotal={budget.incomes.total}
                       header="Revenue"
                       onChange={handleIncomeChange}
                     />
@@ -621,6 +622,7 @@ function BudgetPage() {
                 <Col md="6">
                   <TableCard
                     items={budget.expenses}
+                    revenueTotal={budget.incomes.total}
                     header="Expenses"
                     onChange={handleExpenseChange}
                   />

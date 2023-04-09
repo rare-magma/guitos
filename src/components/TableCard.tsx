@@ -1,25 +1,35 @@
 import { useState } from "react";
 import { ItemForm } from "./ItemForm";
-import { Card, Button, Row, Col } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  Row,
+  Col,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
-import { calcTotal } from "../utils";
+import { calcPercentage, calcTotal } from "../utils";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
 import { BsPlusLg } from "react-icons/bs";
 
 interface TableCardProps {
   items: Income | Expense;
+  revenueTotal: number;
   header: string;
   onChange: (table: Income | Expense) => void;
 }
 
 function TableCard({
   items: initialItems,
+  revenueTotal,
   header: label,
   onChange,
 }: TableCardProps) {
   const [table, setTable] = useState(initialItems);
   const [total, setTotal] = useState(calcTotal(table.items));
+  const revenuePercentage = calcPercentage(total, revenueTotal);
 
   const addTable = (tableBeingEdited: Income | Expense) => {
     let newTable;
@@ -94,7 +104,22 @@ function TableCard({
       <Card.Header className={label + "-card-header"}>
         <Row>
           <Col>{label}</Col>
-          <Col className="text-end">{total} €</Col>
+          <Col className="text-end">
+            <OverlayTrigger
+              placement="top-end"
+              overlay={
+                label === "Expenses" ? (
+                  <Tooltip id={`tooltip-value-${label}`}>
+                    {revenuePercentage}% of revenue
+                  </Tooltip>
+                ) : (
+                  <></>
+                )
+              }
+            >
+              <div>{total} €</div>
+            </OverlayTrigger>
+          </Col>
         </Row>
       </Card.Header>
       <Card.Body>
@@ -102,6 +127,7 @@ function TableCard({
           <ItemFormGroup
             key={item.id}
             itemForm={item}
+            costPercentage={calcPercentage(item.value, revenueTotal)}
             onChange={handleChange}
             onRemove={() => {
               removeTable(item);

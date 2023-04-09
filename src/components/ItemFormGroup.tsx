@@ -1,17 +1,26 @@
 import { useState } from "react";
-import { Button, Col, Form, InputGroup } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Form,
+  InputGroup,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 import { numberInputOnWheelPreventChange } from "../utils";
 import { ItemForm } from "./ItemForm";
 
 interface ItemFormProps {
   itemForm: ItemForm;
+  costPercentage: number;
   onRemove: (itemForm: ItemForm) => void;
   onChange: (itemForm: ItemForm) => void;
 }
 
 function ItemFormGroup({
   itemForm: initialItemForm,
+  costPercentage,
   onRemove,
   onChange,
 }: ItemFormProps) {
@@ -58,16 +67,25 @@ function ItemFormGroup({
         maxLength={255}
       />
       <Col xs="3">
-        <Form.Control
-          aria-label={"newvalue"}
-          key={itemForm.id + "-value"}
-          className="text-right"
-          defaultValue={itemForm.value}
-          onChange={editItemValue}
-          type="number"
-          onWheelCapture={numberInputOnWheelPreventChange}
-          maxLength={11}
-        />
+        <OverlayTrigger
+          placement="top"
+          overlay={
+            <Tooltip id={`tooltip-value-${itemForm.id}`}>
+              {costPercentage}% of revenue
+            </Tooltip>
+          }
+        >
+          <Form.Control
+            aria-label={"newvalue"}
+            key={itemForm.id + "-value"}
+            className="text-right"
+            defaultValue={itemForm.value}
+            onChange={editItemValue}
+            type="number"
+            onWheelCapture={numberInputOnWheelPreventChange}
+            maxLength={11}
+          />
+        </OverlayTrigger>
       </Col>
       {/* TODO currency support */}
       {/* <Col xs={1}>
