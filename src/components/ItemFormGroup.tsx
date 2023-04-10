@@ -57,25 +57,29 @@ function ItemFormGroup({
   };
 
   return (
-    <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
-      <Form.Control
-        aria-label={"newname"}
-        key={itemForm.id + "-key"}
-        defaultValue={itemForm.name}
-        onChange={editItemName}
-        type="text"
-        maxLength={255}
-      />
-      <Col xs="3">
-        <OverlayTrigger
-          delay={100}
-          placement="top"
-          overlay={
-            <Tooltip id={`tooltip-value-${itemForm.id}`}>
-              {costPercentage}% of revenue
-            </Tooltip>
-          }
-        >
+    <OverlayTrigger
+      delay={100}
+      placement="top"
+      overlay={
+        costPercentage > 0 ? (
+          <Tooltip id={`tooltip-value-${itemForm.id}`}>
+            {costPercentage}% of revenue
+          </Tooltip>
+        ) : (
+          <></>
+        )
+      }
+    >
+      <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
+        <Form.Control
+          aria-label={"newname"}
+          key={itemForm.id + "-key"}
+          defaultValue={itemForm.name}
+          onChange={editItemName}
+          type="text"
+          maxLength={255}
+        />
+        <Col xs="3">
           <Form.Control
             aria-label={"newvalue"}
             key={itemForm.id + "-value"}
@@ -86,10 +90,9 @@ function ItemFormGroup({
             onWheelCapture={numberInputOnWheelPreventChange}
             maxLength={11}
           />
-        </OverlayTrigger>
-      </Col>
-      {/* TODO currency support */}
-      {/* <Col xs={1}>
+        </Col>
+        {/* TODO currency support */}
+        {/* <Col xs={1}>
           <Button
             key={itemForm.id + "button"}
             variant="currency"
@@ -101,17 +104,18 @@ function ItemFormGroup({
             <BsCurrencyEuro />
           </Button>
         </Col> */}
-      <Button
-        key={itemForm.id + "button"}
-        variant="delete"
-        type="button"
-        onClick={() => {
-          handleRemove(itemForm);
-        }}
-      >
-        <BsXLg />
-      </Button>
-    </InputGroup>
+        <Button
+          key={itemForm.id + "button"}
+          variant="delete"
+          type="button"
+          onClick={() => {
+            handleRemove(itemForm);
+          }}
+        >
+          <BsXLg />
+        </Button>
+      </InputGroup>
+    </OverlayTrigger>
   );
 }
 
