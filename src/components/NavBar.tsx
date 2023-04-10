@@ -97,7 +97,7 @@ function NavBar({
           </Navbar.Brand>
         )}
         {initialSelectedName && (
-          <Nav className="flex-column flex-sm-row">
+          <Nav className="flex-column flex-sm-row mx-2">
             <Form.Control
               aria-label={"budget name"}
               key={"budget-name-key"}
@@ -124,21 +124,23 @@ function NavBar({
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end">
             <Nav>
-              {initialBudgetNameList && initialBudgetNameList.length > 1 && (
-                <Typeahead
-                  id="basic-example"
-                  filterBy={["name"]}
-                  labelKey="name"
-                  onChange={(budget: Option[]) => {
-                    handleSelect(budget);
-                  }}
-                  className="p-2"
-                  options={initialBudgetNameList
-                    .sort((a, b) => a.name.localeCompare(b.name))
-                    .reverse()}
-                  placeholder="Search list of budgets..."
-                />
-              )}
+              <Nav.Link>
+                {initialBudgetNameList && initialBudgetNameList.length > 1 && (
+                  <Typeahead
+                    id="basic-example"
+                    filterBy={["name"]}
+                    labelKey="name"
+                    onChange={(budget: Option[]) => {
+                      handleSelect(budget);
+                    }}
+                    className="w-100"
+                    options={initialBudgetNameList
+                      .sort((a, b) => a.name.localeCompare(b.name))
+                      .reverse()}
+                    placeholder="Search list of budgets..."
+                  />
+                )}
+              </Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link
@@ -146,7 +148,11 @@ function NavBar({
                   handleNew();
                 }}
               >
-                <Button aria-label="new budget" variant="outline-success">
+                <Button
+                  className="w-100"
+                  aria-label="new budget"
+                  variant="outline-success"
+                >
                   {expanded ? "new" : <BsPlusLg />}
                 </Button>
               </Nav.Link>
@@ -157,7 +163,11 @@ function NavBar({
                       handleClone();
                     }}
                   >
-                    <Button aria-label="clone budget" variant="outline-success">
+                    <Button
+                      className="w-100"
+                      aria-label="clone budget"
+                      variant="outline-success"
+                    >
                       {expanded ? "clone" : <FaRegClone />}
                     </Button>
                   </Nav.Link>
@@ -166,7 +176,11 @@ function NavBar({
                       handleRemove(initialId);
                     }}
                   >
-                    <Button aria-label="delete budget" variant="outline-danger">
+                    <Button
+                      className="w-100"
+                      aria-label="delete budget"
+                      variant="outline-danger"
+                    >
                       {expanded ? "delete" : <BsXLg />}
                     </Button>
                   </Nav.Link>
@@ -175,6 +189,7 @@ function NavBar({
               <Nav.Link href="#import" as="li">
                 <Form.Group controlId="import">
                   <Button
+                    className="w-100"
                     aria-label="import budget"
                     variant="outline-primary"
                     onClick={() => {
@@ -198,7 +213,11 @@ function NavBar({
                     handleDownload();
                   }}
                 >
-                  <Button aria-label="export budget" variant="outline-info">
+                  <Button
+                    className="w-100"
+                    aria-label="export budget"
+                    variant="outline-info"
+                  >
                     {expanded ? "download" : <BsDownload />}
                   </Button>
                 </Nav.Link>
