@@ -20,7 +20,13 @@ export function calcPercentage(
   revenueTotal: number
 ): number {
   if (!isNaN(revenueTotal) && revenueTotal > 0 && !isNaN(itemValue)) {
-    return round((itemValue * 100) / revenueTotal, 0);
+    const percentage = round((itemValue * 100) / revenueTotal, 2);
+
+    if (percentage >= 1) {
+      return round(percentage, 0);
+    } else {
+      return round(percentage, 1);
+    }
   }
   return 0;
 }
