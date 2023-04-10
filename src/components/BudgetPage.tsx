@@ -215,6 +215,7 @@ function BudgetPage() {
           .reverse();
 
         setBudgetList(newBudgetList);
+        calcBudgetListName(newBudgetList as unknown as Budget[]);
         setBudget(newBudgetList[0]);
         if (newBudgetList.length >= 1) {
           navigate("/" + newBudgetList[0].name);
@@ -238,6 +239,7 @@ function BudgetPage() {
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoading(true);
     const importedFiles = e.target.files;
     const newBudgetList: string[] = [];
     if (importedFiles === null) {
@@ -310,7 +312,6 @@ function BudgetPage() {
 
     setBudgetList(newBudgetList as unknown as Budget[]);
     calcBudgetListName(newBudgetList as unknown as Budget[]);
-    setLoading(false);
   };
 
   const handleDownload = () => {
@@ -346,7 +347,6 @@ function BudgetPage() {
   };
 
   useEffect(() => {
-    setLoading(true);
     try {
       if (budgetList.length >= 1 && Array.isArray(budgetList)) {
         budgetList
@@ -356,6 +356,7 @@ function BudgetPage() {
             save(data);
           });
         calcBudgetListName(budgetList);
+        setLoading(false);
       } else {
         let list: Budget[] = [];
         localforage
@@ -371,6 +372,7 @@ function BudgetPage() {
                   setBudget(data);
                 });
               calcBudgetListName(list);
+              setLoading(false);
             }
           })
           .catch((e) => {
@@ -381,7 +383,6 @@ function BudgetPage() {
     } catch (e: unknown) {
       setError((e as Error).message);
       setShow(true);
-    } finally {
       setLoading(false);
     }
   }, [name, budget, loading]);
@@ -405,7 +406,6 @@ function BudgetPage() {
           handleNew();
         }}
         onUpload={(e) => {
-          setLoading(true);
           handleUpload(e);
         }}
         onRemove={(e) => {
