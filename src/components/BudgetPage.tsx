@@ -387,251 +387,244 @@ function BudgetPage() {
   }, [name, budget, loading]);
 
   return (
-    <Container fluid className="vh-100">
-      <Row className="flex-column h-99">
-        <NavBar
-          selected={budget?.name || undefined}
-          id={budget?.id || undefined}
-          budgetNameList={budgetNameList}
-          onRename={(e) => {
-            handleRename(e);
-          }}
-          onClone={() => {
-            handleClone();
-          }}
-          onDownload={() => {
-            handleDownload();
-          }}
-          onNew={() => {
-            handleNew();
-          }}
-          onUpload={(e) => {
-            setLoading(true);
-            handleUpload(e);
-          }}
-          onRemove={(e) => {
-            handleRemove(e);
-          }}
-          onSelect={(e) => {
-            handleSelect(e);
-          }}
-        />
+    <Container fluid>
+      <NavBar
+        selected={budget?.name || undefined}
+        id={budget?.id || undefined}
+        budgetNameList={budgetNameList}
+        onRename={(e) => {
+          handleRename(e);
+        }}
+        onClone={() => {
+          handleClone();
+        }}
+        onDownload={() => {
+          handleDownload();
+        }}
+        onNew={() => {
+          handleNew();
+        }}
+        onUpload={(e) => {
+          setLoading(true);
+          handleUpload(e);
+        }}
+        onRemove={(e) => {
+          handleRemove(e);
+        }}
+        onSelect={(e) => {
+          handleSelect(e);
+        }}
+      />
 
-        {loading && (
-          <Container fluid className="flex-grow-1">
-            <Row className="h-100 flex-grow-1 justify-content-center align-content-center">
-              <Spinner animation="border" role="status"></Spinner>
-            </Row>
-          </Container>
-        )}
+      {loading && (
+        <Container
+          fluid
+          className="position-absolute top-50 start-50 translate-middle"
+        >
+          <Row className="justify-content-center">
+            <Spinner animation="border" role="status" />
+          </Row>
+        </Container>
+      )}
 
-        {error && show && (
-          <Modal
-            dialogClassName="modal-90w mx-auto"
-            show={show}
-            onHide={() => setShow(false)}
-            centered
-          >
-            <Modal.Header>
-              Error:
-              <Button
-                className="align-self-end"
-                key={"modal-dismiss-button"}
-                variant="delete-modal"
-                type="button"
-                onClick={() => {
-                  setShow(false);
-                  setJsonError([]);
-                }}
-              >
-                <BsXLg />
-              </Button>
-            </Modal.Header>
-            <Modal.Body className="textarea mx-1">
-              <p className="code">{error}</p>
-            </Modal.Body>
-          </Modal>
-        )}
+      {error && show && (
+        <Modal
+          dialogClassName="modal-90w mx-auto"
+          show={show}
+          onHide={() => setShow(false)}
+          centered
+        >
+          <Modal.Header>
+            Error:
+            <Button
+              className="align-self-end"
+              key={"modal-dismiss-button"}
+              variant="delete-modal"
+              type="button"
+              onClick={() => {
+                setShow(false);
+                setJsonError([]);
+              }}
+            >
+              <BsXLg />
+            </Button>
+          </Modal.Header>
+          <Modal.Body className="textarea mx-1">
+            <p className="code">{error}</p>
+          </Modal.Body>
+        </Modal>
+      )}
 
-        {jsonError && jsonError.length > 0 && show && (
-          <Modal
-            dialogClassName="modal-90w mx-auto"
-            show={show}
-            onHide={() => setShow(false)}
-            centered
-          >
-            <Modal.Header>
-              Errors found while importing:
-              <Button
-                className="align-self-end"
-                key={"modal-dismiss-button"}
-                variant="delete-modal"
-                type="button"
-                onClick={() => {
-                  setShow(false);
-                  setJsonError([]);
-                }}
-              >
-                <BsXLg />
-              </Button>
-            </Modal.Header>
-            <Modal.Body>
-              <Accordion flush>
-                {jsonError.map((jsonError: JsonError) => (
-                  <Accordion.Item
-                    key={jsonError.file + "-item"}
-                    eventKey={jsonError.file}
+      {jsonError && jsonError.length > 0 && show && (
+        <Modal
+          dialogClassName="modal-90w mx-auto"
+          show={show}
+          onHide={() => setShow(false)}
+          centered
+        >
+          <Modal.Header>
+            Errors found while importing:
+            <Button
+              className="align-self-end"
+              key={"modal-dismiss-button"}
+              variant="delete-modal"
+              type="button"
+              onClick={() => {
+                setShow(false);
+                setJsonError([]);
+              }}
+            >
+              <BsXLg />
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+            <Accordion flush>
+              {jsonError.map((jsonError: JsonError) => (
+                <Accordion.Item
+                  key={jsonError.file + "-item"}
+                  eventKey={jsonError.file}
+                >
+                  <Accordion.Header key={jsonError.file + "-header"}>
+                    {jsonError.file}
+                  </Accordion.Header>
+                  <Accordion.Body
+                    className="textarea code mx-1"
+                    key={jsonError.file + "-body"}
                   >
-                    <Accordion.Header key={jsonError.file + "-header"}>
-                      {jsonError.file}
-                    </Accordion.Header>
-                    <Accordion.Body
-                      className="textarea code mx-1"
-                      key={jsonError.file + "-body"}
-                    >
-                      <p className="code" key={"error-" + jsonError.file + "-"}>
+                    <p className="code" key={"error-" + jsonError.file + "-"}>
+                      <>
+                        {jsonError.errors}
+                        <br />
+                      </>
+                    </p>
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+          </Modal.Body>
+        </Modal>
+      )}
+
+      {csvError && csvError.length > 0 && show && (
+        <Modal
+          dialogClassName="modal-90w mx-auto"
+          show={show}
+          onHide={() => setShow(false)}
+          centered
+        >
+          <Modal.Header>
+            Errors found while importing:
+            <Button
+              className="align-self-end"
+              key={"modal-dismiss-button"}
+              variant="delete-modal"
+              type="button"
+              onClick={() => {
+                setShow(false);
+                setCsvError([]);
+              }}
+            >
+              <BsXLg />
+            </Button>
+          </Modal.Header>
+          <Modal.Body>
+            <Accordion flush>
+              {csvError.map((csvError: CsvError) => (
+                <Accordion.Item
+                  key={csvError.file + "-item"}
+                  eventKey={csvError.file}
+                >
+                  <Accordion.Header key={csvError.file + "-header"}>
+                    {csvError.file}
+                  </Accordion.Header>
+                  <Accordion.Body
+                    className="textarea code mx-1"
+                    key={csvError.file + "-body"}
+                  >
+                    <p className="code" key={"error-" + csvError.file + "-"}>
+                      {csvError.errors.map((error, j) => (
                         <>
-                          {jsonError.errors}
+                          Line {error.row}: {error.message}
                           <br />
                         </>
-                      </p>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                ))}
-              </Accordion>
-            </Modal.Body>
-          </Modal>
-        )}
+                      ))}
+                    </p>
+                  </Accordion.Body>
+                </Accordion.Item>
+              ))}
+            </Accordion>
+          </Modal.Body>
+        </Modal>
+      )}
 
-        {csvError && csvError.length > 0 && show && (
-          <Modal
-            dialogClassName="modal-90w mx-auto"
-            show={show}
-            onHide={() => setShow(false)}
-            centered
-          >
-            <Modal.Header>
-              Errors found while importing:
+      {!loading && !budget && budgetList.length < 1 && (
+        <Container className="position-absolute top-50 start-50 translate-middle">
+          <Row className="justify-content-center align-content-center">
+            <Stack gap={3}>
               <Button
-                className="align-self-end"
-                key={"modal-dismiss-button"}
-                variant="delete-modal"
-                type="button"
-                onClick={() => {
-                  setShow(false);
-                  setCsvError([]);
-                }}
+                className="w-25 align-self-center"
+                aria-label="new budget"
+                variant="outline-success"
+                onClick={handleNew}
               >
-                <BsXLg />
+                new
               </Button>
-            </Modal.Header>
-            <Modal.Body>
-              <Accordion flush>
-                {csvError.map((csvError: CsvError) => (
-                  <Accordion.Item
-                    key={csvError.file + "-item"}
-                    eventKey={csvError.file}
-                  >
-                    <Accordion.Header key={csvError.file + "-header"}>
-                      {csvError.file}
-                    </Accordion.Header>
-                    <Accordion.Body
-                      className="textarea code mx-1"
-                      key={csvError.file + "-body"}
-                    >
-                      <p className="code" key={"error-" + csvError.file + "-"}>
-                        {csvError.errors.map((error, j) => (
-                          <>
-                            Line {error.row}: {error.message}
-                            <br />
-                          </>
-                        ))}
-                      </p>
-                    </Accordion.Body>
-                  </Accordion.Item>
-                ))}
-              </Accordion>
-            </Modal.Body>
-          </Modal>
-        )}
-
-        {!loading && !budget && budgetList.length < 1 && (
-          <Container className="flex-grow-1">
-            <Row className="h-100 justify-content-center align-content-center align-self-center">
-              <Stack
-                gap={3}
-                className="justify-content-center align-content-center"
-              >
+              <Form.Group className="w-25 align-self-center" controlId="import">
                 <Button
-                  className="w-25 align-self-center"
-                  aria-label="new budget"
-                  variant="outline-success"
-                  onClick={handleNew}
+                  className="w-100"
+                  aria-label="import budget"
+                  variant="outline-primary"
+                  onClick={() => {
+                    inputRef.current?.click();
+                  }}
                 >
-                  new
+                  import
                 </Button>
-                <Form.Group
-                  className="w-25 align-self-center justify-content-center align-content-center"
-                  controlId="import"
-                >
-                  <Button
-                    className="w-100"
-                    aria-label="import budget"
-                    variant="outline-primary"
-                    onClick={() => {
-                      inputRef.current?.click();
-                    }}
-                  >
-                    import
-                  </Button>
-                  <Form.Control
-                    type="file"
-                    multiple
-                    ref={inputRef}
-                    onChange={(e) => {
-                      handleUpload(e);
-                    }}
-                    style={{ display: "none" }}
-                  />
-                </Form.Group>
-              </Stack>
-            </Row>
-          </Container>
-        )}
+                <Form.Control
+                  type="file"
+                  multiple
+                  ref={inputRef}
+                  onChange={(e) => {
+                    handleUpload(e);
+                  }}
+                  style={{ display: "none" }}
+                />
+              </Form.Group>
+            </Stack>
+          </Row>
+        </Container>
+      )}
 
-        {!loading && budget && (
-          <div className="my-3">
-            <Container>
-              <Row>
-                <Col md="6">
-                  <div className="card-columns">
-                    <StatCard stat={budget.stats} onChange={handleStatChange} />
+      {!loading && budget && (
+        <Container>
+          <Row className="mt-3">
+            <Col md="6">
+              <div className="card-columns">
+                <StatCard stat={budget.stats} onChange={handleStatChange} />
 
-                    <div className="mt-3" />
+                <div className="mt-3" />
 
-                    <TableCard
-                      items={budget.incomes}
-                      revenueTotal={budget.incomes.total}
-                      header="Revenue"
-                      onChange={handleIncomeChange}
-                    />
-                    <div className="mt-3" />
-                  </div>
-                </Col>
+                <TableCard
+                  items={budget.incomes}
+                  revenueTotal={budget.incomes.total}
+                  header="Revenue"
+                  onChange={handleIncomeChange}
+                />
+                <div className="mt-3" />
+              </div>
+            </Col>
 
-                <Col md="6">
-                  <TableCard
-                    items={budget.expenses}
-                    revenueTotal={budget.incomes.total}
-                    header="Expenses"
-                    onChange={handleExpenseChange}
-                  />
-                </Col>
-              </Row>
-            </Container>
-          </div>
-        )}
-      </Row>
+            <Col md="6" className="mb-3">
+              <TableCard
+                items={budget.expenses}
+                revenueTotal={budget.incomes.total}
+                header="Expenses"
+                onChange={handleExpenseChange}
+              />
+            </Col>
+          </Row>
+        </Container>
+      )}
     </Container>
   );
 }
