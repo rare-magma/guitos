@@ -36,6 +36,7 @@ function NavBar({
   onUpload,
 }: NavBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const typeRef = useRef();
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
 
@@ -79,6 +80,9 @@ function NavBar({
 
   const handleSelect = (budget: Option[]) => {
     onSelect(budget);
+    if (typeRef && typeRef.current) {
+      typeRef.current.clear();
+    }
   };
 
   const editName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +104,7 @@ function NavBar({
           <Nav className="flex-column flex-sm-row mx-2">
             <Form.Control
               aria-label={"budget name"}
-              key={"budget-name-key"}
+              key={"budget-name-key-" + initialSelectedName}
               defaultValue={initialSelectedName}
               onChange={editName}
               type="text"
@@ -127,9 +131,10 @@ function NavBar({
               <Nav.Link>
                 {initialBudgetNameList && initialBudgetNameList.length > 1 && (
                   <Typeahead
-                    id="basic-example"
+                    id="search-budget-list"
                     filterBy={["name"]}
                     labelKey="name"
+                    ref={typeRef}
                     onChange={(budget: Option[]) => {
                       handleSelect(budget);
                     }}
