@@ -92,7 +92,6 @@ function BudgetPage() {
           saved: newBudget.stats.saved,
         },
       });
-      save(budget);
     }
   };
 
@@ -119,7 +118,6 @@ function BudgetPage() {
           saved: newBudget.stats.saved,
         },
       });
-      save(budget);
     }
   };
 
@@ -143,66 +141,53 @@ function BudgetPage() {
           reserves: item.reserves,
         },
       });
-      save(budget);
     }
   };
 
   const handleRename = (newName?: string | null) => {
     let newBudget: Budget;
     if (budget !== null && newName) {
-      newBudget = budget;
-      newBudget.name = newName;
-      setBudget({
+      newBudget = {
         ...budget,
-        name: newBudget.name,
-      });
-      save(budget);
+        name: newName,
+      };
+      setBudget(newBudget);
     }
   };
 
   const handleNew = () => {
     const newBudget = createNewBudget();
+
     let newBudgetList: Budget[] = [];
     if (budgetList !== null) {
       newBudgetList = budgetList.concat(newBudget);
     } else {
       newBudgetList = newBudgetList.concat(newBudget);
     }
-    localforage
-      .setItem(newBudget.id, newBudget)
-      .then(() => {
-        setBudget(newBudget);
-        setBudgetList(newBudgetList);
-        calcBudgetListName(newBudgetList as unknown as Budget[]);
-      })
-      .catch((e) => {
-        setError(e.message);
-        setShow(true);
-      });
+
+    setBudget(newBudget);
+    setBudgetList(newBudgetList);
+    calcBudgetListName(newBudgetList);
   };
 
   const handleClone = () => {
     if (budget !== null) {
-      const newBudget = budget;
-      newBudget.id = crypto.randomUUID();
-      newBudget.name = budget.name + "-clone";
+      const newBudget = {
+        ...budget,
+        id: crypto.randomUUID(),
+        name: budget.name + "-clone",
+      };
+
       let newBudgetList: Budget[] = [];
       if (budgetList !== null) {
         newBudgetList = budgetList.concat(newBudget);
       } else {
         newBudgetList = newBudgetList.concat(newBudget);
       }
-      localforage
-        .setItem(newBudget.id, newBudget)
-        .then(() => {
-          setBudget(newBudget);
-          setBudgetList(newBudgetList);
-          calcBudgetListName(newBudgetList as unknown as Budget[]);
-        })
-        .catch((e) => {
-          setError(e.message);
-          setShow(true);
-        });
+
+      setBudget(newBudget);
+      setBudgetList(newBudgetList);
+      calcBudgetListName(newBudgetList);
     }
   };
 
@@ -313,10 +298,27 @@ function BudgetPage() {
   };
 
   const save = (budget: Budget) => {
-    localforage.setItem(budget.id, budget).catch((e) => {
-      setError(e.message);
-      setShow(true);
-    });
+    let list: Budget[] = [];
+    localforage
+      .setItem(budget.id, budget)
+      .then(() => {
+        localforage
+          .iterate((value) => {
+            list = list.concat(value as unknown as Budget);
+          })
+          .then(() => {
+            setBudgetList(list);
+            calcBudgetListName(list);
+          })
+          .catch((e) => {
+            setError(e.message);
+            setShow(true);
+          });
+      })
+      .catch((e) => {
+        setError(e.message);
+        setShow(true);
+      });
   };
 
   const loadFromDb = () => {
@@ -329,20 +331,15 @@ function BudgetPage() {
       .then(() => {
         setBudgetList(list);
         calcBudgetListName(list);
-        if (name.trim().length > 0) {
-          list
-            .filter((b: Budget) => b && b.name === name)
-            .forEach((data: Budget) => {
-              setBudget(data);
-            });
+        if (name.trim() !== "undefined") {
+          setBudget(list.filter((b: Budget) => b && b.name === name)[0]);
         } else {
-          budgetList
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .reverse()
-            .filter((b: Budget) => b && b.id === budgetList[0].id)
-            .forEach((data: Budget) => {
-              setBudget(data);
-            });
+          setBudget(
+            list
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .reverse()
+              .filter((b: Budget) => b && b.id === list[0].id)[0]
+          );
         }
         setLoading(false);
       })
@@ -352,20 +349,40 @@ function BudgetPage() {
       });
   };
 
-  // useWhatChanged([budget, name, loading]);
+  // useWhatChanged([budget, name]);
+
+  useEffect(() => {
+    if (budget) {
+      save(budget);
+    }
+  }, [budget]);
 
   useEffect(() => {
     try {
       if (budgetList.length >= 1 && Array.isArray(budgetList)) {
-        if (name.trim().length > 0) {
+        if (name.trim() !== "undefined") {
           budgetList
             .filter((b: Budget) => b && b.name === name)
             .forEach((data: Budget) => {
-              setBudget(data);
+              localforage
+                .getItem(data.id)
+                .then((b) => setBudget(b as unknown as Budget))
+                .catch((e) => {
+                  setError(e.message);
+                  setShow(true);
+                });
             });
         } else {
           budgetList.slice(0).forEach((data: Budget) => {
-            setBudget(data);
+            localforage
+              .getItem(data.id)
+              .then((b) => {
+                setBudget(b as unknown as Budget);
+              })
+              .catch((e) => {
+                setError(e.message);
+                setShow(true);
+              });
           });
         }
         calcBudgetListName(budgetList);
@@ -378,7 +395,7 @@ function BudgetPage() {
       setShow(true);
       setLoading(false);
     }
-  }, [name, budget, loading]);
+  }, [name, loading]);
 
   return (
     <Container fluid>
