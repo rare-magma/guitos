@@ -68,11 +68,10 @@ export const numberInputOnWheelPreventChange = (e: any) => {
 };
 
 export const convertCsvToBudget = (csv: string[], date: string): Budget => {
-  const newId = crypto.randomUUID();
   const emptyExpenses: ItemForm[] = [];
   const emptyIncomes: ItemForm[] = [];
   const newBudget = {
-    id: newId,
+    id: crypto.randomUUID(),
     name: date,
     expenses: {
       items: emptyExpenses,
@@ -86,7 +85,7 @@ export const convertCsvToBudget = (csv: string[], date: string): Budget => {
       available: 0,
       withGoal: 0,
       saved: 0,
-      goal: 10,
+      goal: 0,
       reserves: 0,
     },
   };
@@ -128,7 +127,7 @@ export const createNewBudget = (): Budget => {
   const newId = crypto.randomUUID();
   const newBudget = {
     id: newId,
-    name: "",
+    name: new Date().getFullYear() + "-" + newId.slice(0, 8),
     expenses: {
       items: [{ id: 1, name: "", value: 0 }],
       total: 0,
@@ -146,6 +145,5 @@ export const createNewBudget = (): Budget => {
     },
   };
 
-  newBudget.name = new Date().getFullYear() + "-" + newId.slice(0, 8);
   return newBudget;
 };
