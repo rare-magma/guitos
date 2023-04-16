@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@simbathesailor/use-what-changed": "2.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/papaparse": "^5.3.7",
