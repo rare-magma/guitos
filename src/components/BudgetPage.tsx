@@ -240,7 +240,7 @@ function BudgetPage() {
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     const importedFiles = e.target.files;
-    const newBudgetList: string[] = [];
+    const newBudgetList: Budget[] = [];
     if (importedFiles === null) {
       return;
     }
@@ -274,14 +274,14 @@ function BudgetPage() {
               csvObject.data as string[],
               file.name.slice(0, -4)
             );
-            newBudgetList.push(newBudget as unknown as string);
+            newBudgetList.push(newBudget);
             save(newBudget);
           } else {
             try {
               const list = JSON.parse(reader.result as string);
-              list.forEach((b: string) => {
+              list.forEach((b: Budget) => {
                 newBudgetList.push(b);
-                save(b as unknown as Budget);
+                save(b);
               });
             } catch (e) {
               setJsonError([
@@ -295,8 +295,8 @@ function BudgetPage() {
       };
     }
 
-    setBudgetList(newBudgetList as unknown as Budget[]);
-    calcBudgetListName(newBudgetList as unknown as Budget[]);
+    setBudgetList(newBudgetList);
+    calcBudgetListName(newBudgetList);
   };
 
   const handleDownload = () => {
