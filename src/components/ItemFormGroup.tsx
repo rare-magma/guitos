@@ -38,7 +38,7 @@ function ItemFormGroup({
     const newItemForm = new ItemForm({
       id: itemForm.id,
       name: event.target.value,
-      value: itemForm.value,
+      value: isNaN(itemForm.value) ? 0 : itemForm.value,
     });
 
     setItemForm(newItemForm);
@@ -49,7 +49,7 @@ function ItemFormGroup({
     const newItemForm = new ItemForm({
       id: itemForm.id,
       name: itemForm.name,
-      value: event.target.valueAsNumber,
+      value: isNaN(event.target.valueAsNumber) ? 0 : event.target.valueAsNumber,
     });
 
     setItemForm(newItemForm);

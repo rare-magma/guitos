@@ -88,7 +88,7 @@ function TableCard({
         return {
           id: item.id,
           name: item.name,
-          value: Number(item.value),
+          value: isNaN(item.value) ? 0 : Number(item.value),
         };
       }
       return i;
