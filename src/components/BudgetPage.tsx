@@ -92,6 +92,7 @@ function BudgetPage() {
           saved: newBudget.stats.saved,
         },
       });
+      save(budget);
     }
   };
 
@@ -118,6 +119,7 @@ function BudgetPage() {
           saved: newBudget.stats.saved,
         },
       });
+      save(budget);
     }
   };
 
@@ -141,6 +143,7 @@ function BudgetPage() {
           reserves: item.reserves,
         },
       });
+      save(budget);
     }
   };
 
@@ -272,24 +275,18 @@ function BudgetPage() {
               file.name.slice(0, -4)
             );
             newBudgetList.push(newBudget as unknown as string);
-            localforage.setItem(newBudget.id, newBudget).catch((e) => {
-              setError(e.message);
-              setShow(true);
-            });
+            save(newBudget);
           } else {
             try {
               const list = JSON.parse(reader.result as string);
               list.forEach((b: string) => {
                 newBudgetList.push(b);
-                localforage
-                  .setItem((b as unknown as Budget).id, b)
-                  .catch((e) => {
-                    setError(e.message);
-                    setShow(true);
-                  });
+                save(b as unknown as Budget);
               });
             } catch (e) {
-              setJsonError([{ errors: e.toString(), file: file.name }]);
+              setJsonError([
+                { errors: (e as string).toString(), file: file.name },
+              ]);
               setShow(true);
               setLoading(false);
             }
@@ -316,22 +313,10 @@ function BudgetPage() {
   };
 
   const save = (budget: Budget) => {
-    const newBudgetList = budgetList.map((data: Budget) => {
-      if (budget.id === data.id) {
-        return budget;
-      } else {
-        return data;
-      }
+    localforage.setItem(budget.id, budget).catch((e) => {
+      setError(e.message);
+      setShow(true);
     });
-    localforage
-      .setItem(budget.id, budget)
-      .then(() => {
-        setBudgetList(newBudgetList);
-      })
-      .catch((e) => {
-        setError(e.message);
-        setShow(true);
-      });
   };
 
   const loadFromDb = () => {
@@ -349,7 +334,6 @@ function BudgetPage() {
             .filter((b: Budget) => b && b.name === name)
             .forEach((data: Budget) => {
               setBudget(data);
-              save(data);
             });
         } else {
           budgetList
@@ -378,12 +362,10 @@ function BudgetPage() {
             .filter((b: Budget) => b && b.name === name)
             .forEach((data: Budget) => {
               setBudget(data);
-              save(data);
             });
         } else {
           budgetList.slice(0).forEach((data: Budget) => {
             setBudget(data);
-            save(data);
           });
         }
         calcBudgetListName(budgetList);
