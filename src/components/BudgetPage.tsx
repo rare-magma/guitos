@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Budget } from "./Budget";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Container,
   Row,
@@ -29,6 +29,7 @@ import Papa, { ParseError } from "papaparse";
 import localforage from "localforage";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { BsXLg } from "react-icons/bs";
+// import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 type CsvError = {
   errors: ParseError[];
@@ -57,7 +58,6 @@ function BudgetPage() {
 
   const params = useParams();
   const name = String(params.name);
-  const navigate = useNavigate();
 
   const calcBudgetListName = (list: Budget[]) => {
     setBudgetNameList(
@@ -170,8 +170,7 @@ function BudgetPage() {
       .then(() => {
         setBudget(newBudget);
         setBudgetList(newBudgetList);
-        navigate("/" + newBudget.name);
-        navigate(0);
+        calcBudgetListName(newBudgetList as unknown as Budget[]);
       })
       .catch((e) => {
         setError(e.message);
@@ -195,8 +194,7 @@ function BudgetPage() {
         .then(() => {
           setBudget(newBudget);
           setBudgetList(newBudgetList);
-          navigate("/" + newBudget.name);
-          navigate(0);
+          calcBudgetListName(newBudgetList as unknown as Budget[]);
         })
         .catch((e) => {
           setError(e.message);
@@ -216,10 +214,10 @@ function BudgetPage() {
 
         setBudgetList(newBudgetList);
         calcBudgetListName(newBudgetList as unknown as Budget[]);
-        setBudget(newBudgetList[0]);
         if (newBudgetList.length >= 1) {
-          navigate("/" + newBudgetList[0].name);
-          navigate(0);
+          setBudget(newBudgetList[0]);
+        } else {
+          setBudget(null);
         }
       })
       .catch((e) => {
@@ -234,8 +232,6 @@ function BudgetPage() {
       (item: Budget) => item.id === selectedBudget[0].id
     );
     setBudget(filteredList[0]);
-    navigate("/" + selectedBudget[0].name);
-    navigate(0);
   };
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -276,15 +272,10 @@ function BudgetPage() {
               file.name.slice(0, -4)
             );
             newBudgetList.push(newBudget as unknown as string);
-            localforage
-              .setItem(newBudget.id, newBudget)
-              .then(() => {
-                setBudget(newBudget);
-              })
-              .catch((e) => {
-                setError(e.message);
-                setShow(true);
-              });
+            localforage.setItem(newBudget.id, newBudget).catch((e) => {
+              setError(e.message);
+              setShow(true);
+            });
           } else {
             try {
               const list = JSON.parse(reader.result as string);
@@ -292,9 +283,6 @@ function BudgetPage() {
                 newBudgetList.push(b);
                 localforage
                   .setItem((b as unknown as Budget).id, b)
-                  .then(() => {
-                    setBudget(b as unknown as Budget);
-                  })
                   .catch((e) => {
                     setError(e.message);
                     setShow(true);
@@ -346,39 +334,62 @@ function BudgetPage() {
       });
   };
 
+  const loadFromDb = () => {
+    let list: Budget[] = [];
+
+    localforage
+      .iterate((value) => {
+        list = list.concat(value as unknown as Budget);
+      })
+      .then(() => {
+        setBudgetList(list);
+        calcBudgetListName(list);
+        if (name.trim().length > 0) {
+          list
+            .filter((b: Budget) => b && b.name === name)
+            .forEach((data: Budget) => {
+              setBudget(data);
+              save(data);
+            });
+        } else {
+          budgetList
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .reverse()
+            .filter((b: Budget) => b && b.id === budgetList[0].id)
+            .forEach((data: Budget) => {
+              setBudget(data);
+            });
+        }
+        setLoading(false);
+      })
+      .catch((e) => {
+        setError(e.message);
+        setShow(true);
+      });
+  };
+
+  // useWhatChanged([budget, name, loading]);
+
   useEffect(() => {
     try {
       if (budgetList.length >= 1 && Array.isArray(budgetList)) {
-        budgetList
-          .filter((budget: Budget) => budget && budget.name === name)
-          .forEach((data: Budget) => {
+        if (name.trim().length > 0) {
+          budgetList
+            .filter((b: Budget) => b && b.name === name)
+            .forEach((data: Budget) => {
+              setBudget(data);
+              save(data);
+            });
+        } else {
+          budgetList.slice(0).forEach((data: Budget) => {
             setBudget(data);
             save(data);
           });
+        }
         calcBudgetListName(budgetList);
         setLoading(false);
       } else {
-        let list: Budget[] = [];
-        localforage
-          .iterate((value) => {
-            list = list.concat(value as unknown as Budget);
-          })
-          .then(() => {
-            setBudgetList(list);
-            if (list.length >= 1 && Array.isArray(list)) {
-              list
-                .filter((budget: Budget) => budget && budget.name === name)
-                .forEach((data: Budget) => {
-                  setBudget(data);
-                });
-              calcBudgetListName(list);
-              setLoading(false);
-            }
-          })
-          .catch((e) => {
-            setError(e.message);
-            setShow(true);
-          });
+        loadFromDb();
       }
     } catch (e: unknown) {
       setError((e as Error).message);
@@ -596,7 +607,7 @@ function BudgetPage() {
       )}
 
       {!loading && budget && (
-        <Container>
+        <Container key={budget.id}>
           <Row className="mt-3">
             <Col md="6">
               <div className="card-columns">
