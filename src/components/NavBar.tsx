@@ -113,7 +113,7 @@ function NavBar({
           </Nav>
         )}
         <Navbar.Toggle
-          className="ms-auto"
+          className="px-2"
           aria-controls={`offcanvasNavbar-expand-md`}
         />
         <Navbar.Offcanvas
