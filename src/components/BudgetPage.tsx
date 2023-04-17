@@ -610,7 +610,11 @@ function BudgetPage() {
           <Row className="mt-3">
             <Col md="6">
               <div className="card-columns">
-                <StatCard stat={budget.stats} onChange={handleStatChange} />
+                <StatCard
+                  key={"stats-" + budget.expenses.total + budget.incomes.total}
+                  stat={budget.stats}
+                  onChange={handleStatChange}
+                />
 
                 <div className="mt-3" />
 
