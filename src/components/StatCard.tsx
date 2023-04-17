@@ -1,5 +1,11 @@
 import { Stat } from "./Stat";
-import { Card, Form, InputGroup } from "react-bootstrap";
+import {
+  Card,
+  Form,
+  InputGroup,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { useState } from "react";
 import { numberInputOnWheelPreventChange } from "../utils";
 import { BsCurrencyEuro, BsPercent } from "react-icons/bs";
@@ -31,7 +37,14 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
       <Card.Header className="stat-card-header">Statistics</Card.Header>
       <Card.Body>
         <InputGroup className="mb-1" key={"stats"}>
-          <InputGroup.Text>available</InputGroup.Text>
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip id={`tooltip-available`}>= revenue - expenses</Tooltip>
+            }
+          >
+            <InputGroup.Text>available</InputGroup.Text>
+          </OverlayTrigger>
           <Form.Control
             className="text-right"
             aria-label={"available"}
@@ -61,7 +74,16 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
               />
             </svg>
           </InputGroup.Text>
-          <InputGroup.Text>with goal</InputGroup.Text>
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip id={`tooltip-available`}>
+                = available - savings estimate
+              </Tooltip>
+            }
+          >
+            <InputGroup.Text>with goal</InputGroup.Text>
+          </OverlayTrigger>
           <Form.Control
             className="text-right"
             aria-label={"withGoal"}
@@ -76,7 +98,16 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"goal"}>
-          <InputGroup.Text>savings goal</InputGroup.Text>
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip id={`tooltip-available`}>
+                % of revenue that should go into savings
+              </Tooltip>
+            }
+          >
+            <InputGroup.Text>savings goal</InputGroup.Text>
+          </OverlayTrigger>
           <Form.Control
             className="text-right"
             aria-label={"goal"}
@@ -93,7 +124,16 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"saved"}>
-          <InputGroup.Text>savings estimate</InputGroup.Text>
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip id={`tooltip-available`}>
+                = goal * available / 100
+              </Tooltip>
+            }
+          >
+            <InputGroup.Text>savings estimate</InputGroup.Text>
+          </OverlayTrigger>
           <Form.Control
             className="text-right"
             aria-label={"saved"}
@@ -108,7 +148,14 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"reserves"}>
-          <InputGroup.Text>reserves</InputGroup.Text>
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip id={`tooltip-available`}>emergency fund/cash</Tooltip>
+            }
+          >
+            <InputGroup.Text>reserves</InputGroup.Text>
+          </OverlayTrigger>
           <Form.Control
             className="text-right"
             aria-label={"reserves"}
