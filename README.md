@@ -190,7 +190,7 @@ Please read [our contribution guidelines](docs/CONTRIBUTING.md), and thank you f
 
 ## Authors & contributors
 
-The original setup of this repository is by [Nuno Pires](https://github.com/rare-magma).
+The original setup of this repository is by [Nuno](https://github.com/rare-magma).
 
 For a full list of all authors and contributors, see [the contributors page](https://github.com/rare-magma/guitos/contributors).
 
