@@ -5,7 +5,7 @@
 </h1>
 
 <div align="center">
-  guitos
+  Guitos
   <br />
   <a href="#about"><strong>Explore the screenshots »</strong></a>
   <br />
@@ -21,21 +21,21 @@
 <br />
 
 [![Project license](https://img.shields.io/github/license/rare-magma/guitos.svg?style=flat-square)](LICENSE)
-
 [![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/rare-magma/guitos/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
 [![code with love by rare-magma](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-rare-magma-ff1414.svg?style=flat-square)](https://github.com/rare-magma)
 
 </div>
 
-<details open="open">
+<details>
 <summary>Table of Contents</summary>
 
 - [About](#about)
-  - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
+- [Built With](#built-with)
+- [Hosted On](#hosted-on)
 - [Roadmap](#roadmap)
 - [Support](#support)
 - [Project assistance](#project-assistance)
@@ -51,7 +51,7 @@
 
 ## About
 
-[guitos](https://guitos.app) is a simple budgeting app that helps you figure out where your money went and plan your budget ahead of time.
+Guitos is a simple budgeting app that helps you figure out where your money went and plan your budget ahead of time.
 
 It stores data in your browser's local storage ([IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)). Your private financial data doesn't leave your browser.
 
@@ -72,25 +72,6 @@ Guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cas
 | <img src="docs/images/horizontal-light.png" title="Horizontal Light" width="100%"> | <img src="docs/images/vertical-light.png" title="Vertical Light" width="100%"> |
 
 </details>
-
-### Built With
-
-- [React](https://react.dev/)
-- [Bootstrap](https://getbootstrap.com/)
-- [React Bootstrap](https://react-bootstrap.github.io/)
-- [React Bootstrap Typeahead](https://ericgio.github.io/react-bootstrap-typeahead/)
-- [React Icons](https://react-icons.github.io/react-icons/)
-- [React Router](https://reactrouter.com/)
-- [localForage](https://localforage.github.io/localForage/)
-- [PapaParse](https://papaparse.com/)
-- [Vite](https://vitejs.dev/)
-- [Typescript](https://www.typescriptlang.org/)
-- [Dracula](https://draculatheme.com/)
-- [Dracula.min Light](https://github.com/AshGrowem/Dracula.min#dracula.min-Light)
-
-### Hosted On
-
-- [Cloudflare Pages](https://pages.cloudflare.com/)
 
 ## Getting Started
 
@@ -158,13 +139,28 @@ JSON:
 ]
 ```
 
+## Built With
+
+- [React](https://react.dev/)
+- [Bootstrap](https://getbootstrap.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [React Bootstrap Typeahead](https://ericgio.github.io/react-bootstrap-typeahead/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React Router](https://reactrouter.com/)
+- [localForage](https://localforage.github.io/localForage/)
+- [PapaParse](https://papaparse.com/)
+- [Vite](https://vitejs.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Dracula](https://draculatheme.com/)
+- [Dracula.min Light](https://github.com/AshGrowem/Dracula.min#dracula.min-Light)
+
+## Hosted On
+
+- [Cloudflare Pages](https://pages.cloudflare.com/)
+
 ## Roadmap
 
 See the [open issues](https://github.com/rare-magma/guitos/issues) for a list of proposed features (and known issues).
-
-- [Top Feature Requests](https://github.com/rare-magma/guitos/issues?q=label%3Aenhancement+is%3Aopen+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
-- [Top Bugs](https://github.com/rare-magma/guitos/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc) (Add your votes using the 👍 reaction)
-- [Newest Bugs](https://github.com/rare-magma/guitos/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
 
 ## Support
 
