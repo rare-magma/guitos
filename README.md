@@ -98,7 +98,7 @@ However, if you'd like to use it offline, follow the instructions for your devic
 or
 
 1. Visit [guitos.app](https://guitos.app)
-2. Import previous data from CSV or JSON files.
+2. Import previous data from single/multiple CSV files or a single JSON file.
    Make sure they follow the required structure:
 
 CSV:
@@ -112,6 +112,10 @@ income,sale,100
 goal,goal,10
 reserves,reserves,0
 ```
+
+- Note that the name of the csv file is parsed as the name of the budget:
+
+  2023-04.csv results in a budget with the name of "2023-04".
 
 JSON:
 
