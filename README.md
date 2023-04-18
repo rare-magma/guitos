@@ -1,6 +1,5 @@
 <h1 align="center">
   <a href="https://github.com/rare-magma/guitos">
-    <!-- Please provide path to your logo here -->
     <img src="docs/images/logo.svg" alt="Logo" width="100" height="100">
   </a>
 </h1>
@@ -52,48 +51,112 @@
 
 ## About
 
-> **[?]**
-> Provide general information about your project here.
-> What problem does it (intend to) solve?
-> What is the purpose of your project?
-> Why did you undertake it?
-> You don't have to answer all the questions -- just the ones relevant to your project.
+[guitos](https://guitos.app) is a simple budgeting app that helps you figure out where your money went and plan your budget ahead of time.
+
+It stores data in your browser's local storage ([IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)). Your private financial data doesn't leave your browser.
+
+Guitos was initially created to replace a spreadsheet and as an opportunity to learn React.
+
+Guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cash.
 
 <details>
 <summary>Screenshots</summary>
 <br>
 
-> **[?]**
-> Please provide your screenshots here.
+|                           Horizontal Layout                            |                          Vertical Layout                           |
+| :--------------------------------------------------------------------: | :----------------------------------------------------------------: |
+| <img src="docs/images/horizontal.png" title="Horizontal" width="100%"> | <img src="docs/images/vertical.png" title="Vertical" width="100%"> |
 
-|                               Home Page                               |                               Login Page                               |
-| :-------------------------------------------------------------------: | :--------------------------------------------------------------------: |
-| <img src="docs/images/screenshot.png" title="Home Page" width="100%"> | <img src="docs/images/screenshot.png" title="Login Page" width="100%"> |
+|                                    Light theme                                     |                                  Light theme                                   |
+| :--------------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
+| <img src="docs/images/horizontal-light.png" title="Horizontal Light" width="100%"> | <img src="docs/images/vertical-light.png" title="Vertical Light" width="100%"> |
 
 </details>
 
 ### Built With
 
-> **[?]**
-> Please provide the technologies that are used in the project.
+- [React](https://react.dev/)
+- [Bootstrap](https://getbootstrap.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [React Bootstrap Typeahead](https://ericgio.github.io/react-bootstrap-typeahead/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React Router](https://reactrouter.com/)
+- [localForage](https://localforage.github.io/localForage/)
+- [PapaParse](https://papaparse.com/)
+- [Vite](https://vitejs.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Dracula](https://draculatheme.com/)
+- [Dracula.min Light](https://github.com/AshGrowem/Dracula.min#dracula.min-Light)
+
+### Hosted On
+
+- [Cloudflare Pages](https://pages.cloudflare.com/)
 
 ## Getting Started
 
 ### Prerequisites
 
-> **[?]**
-> What are the project requirements/dependencies?
+Any modern browser with javascript enabled.
 
 ### Installation
 
-> **[?]**
-> Describe how to install and get started with the project.
+It's not necessary to install anything in order to use this app.
+
+However, if you'd like to use it offline, follow the instructions for your device on:
+[web.dev](https://web.dev/learn/pwa/progressive-web-apps/#desktop-and-laptops)
 
 ## Usage
 
-> **[?]**
-> How does one go about using it?
-> Provide various use cases and code examples here.
+1. Visit [guitos.app](https://guitos.app)
+2. Create a new budget and name it according to your preferred budget period (ideally `YYYY`, `YYYY-MM` or `YYYY-WN`)
+3. Input your revenue for the period (salary, sales, etc.)
+4. Fill in the expenses (groceries, electricity, etc.)
+5. Change the savings goal to your preference
+6. Update the reserves field with the current value of your emergency fund / cash
+
+or
+
+1. Visit [guitos.app](https://guitos.app)
+2. Import previous data from CSV or JSON files.
+   Make sure they follow the required structure:
+
+CSV:
+
+```csv
+type,name,value
+expense,rent,1000.00
+expense,food,200.00
+income,salary,2000.00
+income,sale,100
+goal,goal,10
+reserves,reserves,0
+```
+
+JSON:
+
+```json
+[
+  {
+    "id": "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+    "name": "2023-03",
+    "expenses": {
+      "items": [{ "id": 1, "name": "expense1", "value": 10 }],
+      "total": 10
+    },
+    "incomes": {
+      "items": [{ "id": 2, "name": "income1", "value": 100 }],
+      "total": 100
+    },
+    "stats": {
+      "available": 0,
+      "withGoal": 0,
+      "saved": 0,
+      "goal": "10",
+      "reserves": "0"
+    }
+  }
+]
+```
 
 ## Roadmap
 
@@ -146,12 +209,21 @@ See [LICENSE](LICENSE) for more information.
 
 ## Acknowledgements
 
-React
-Bootstrap
-React-Bootstrap
-React-Icons
-LocalForage
-PapaParse
-Vite
-Eslint
-Prettier
+- [r/personalfinance](https://www.reddit.com/r/personalfinance/wiki/budgeting/)
+- [React](https://react.dev/)
+- [Bootstrap](https://getbootstrap.com/)
+- [React Bootstrap](https://react-bootstrap.github.io/)
+- [React Bootstrap Typeahead](https://ericgio.github.io/react-bootstrap-typeahead/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React Router](https://reactrouter.com/)
+- [localForage](https://localforage.github.io/localForage/)
+- [PapaParse](https://papaparse.com/)
+- [Vite](https://vitejs.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Dracula](https://draculatheme.com/)
+- [Dracula.min Light](https://github.com/AshGrowem/Dracula.min#dracula.min-Light)
+- [Cloudflare Pages](https://pages.cloudflare.com/)
+- [Eslint](https://eslint.org/)
+- [Prettier](https://prettier.io/)
+- [Choose a license](https://choosealicense.com/)
+- [Hands on React](https://handsonreact.com)
