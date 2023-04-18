@@ -16,11 +16,11 @@ const testBudget = new Budget({
   id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
   name: "2023-03",
   expenses: {
-    items: [{ id: 0, name: "name", value: 10 }],
+    items: [{ id: 1, name: "name", value: 10 }],
     total: 10,
   },
   incomes: {
-    items: [{ id: 0, name: "name", value: 100 }],
+    items: [{ id: 2, name: "name", value: 100 }],
     total: 100,
   },
   stats: {
