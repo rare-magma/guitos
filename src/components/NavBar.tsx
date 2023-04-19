@@ -101,7 +101,7 @@ function NavBar({
           </Navbar.Brand>
         )}
         {initialSelectedName && (
-          <Nav className="flex-column flex-sm-row mx-2">
+          <Nav className="flex-column flex-sm-row me-2">
             <Form.Control
               aria-label={"budget name"}
               key={"budget-name-key-" + initialId}
@@ -128,7 +128,7 @@ function NavBar({
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end">
             <Nav>
-              <Nav.Link>
+              <Nav className="m-2">
                 {initialBudgetNameList && initialBudgetNameList.length > 1 && (
                   <Typeahead
                     id="search-budget-list"
@@ -145,10 +145,11 @@ function NavBar({
                     placeholder="Search list of budgets..."
                   />
                 )}
-              </Nav.Link>
+              </Nav>
             </Nav>
             <Nav>
-              <Nav.Link
+              <Nav
+                className="m-2"
                 onClick={() => {
                   handleNew();
                 }}
@@ -160,10 +161,11 @@ function NavBar({
                 >
                   {expanded ? "new" : <BsPlusLg />}
                 </Button>
-              </Nav.Link>
+              </Nav>
               {initialBudgetNameList && initialBudgetNameList.length > 0 && (
                 <>
-                  <Nav.Link
+                  <Nav
+                    className="m-2"
                     onClick={() => {
                       handleClone();
                     }}
@@ -175,8 +177,9 @@ function NavBar({
                     >
                       {expanded ? "clone" : <FaRegClone />}
                     </Button>
-                  </Nav.Link>
-                  <Nav.Link
+                  </Nav>
+                  <Nav
+                    className="m-2"
                     onClick={() => {
                       handleRemove(initialId);
                     }}
@@ -188,10 +191,10 @@ function NavBar({
                     >
                       {expanded ? "delete" : <BsXLg />}
                     </Button>
-                  </Nav.Link>
+                  </Nav>
                 </>
               )}
-              <Nav.Link href="#import" as="li">
+              <Nav className="m-2" href="#import" as="li">
                 <Form.Group controlId="import">
                   <Button
                     className="w-100"
@@ -211,9 +214,10 @@ function NavBar({
                     style={{ display: "none" }}
                   />
                 </Form.Group>
-              </Nav.Link>
+              </Nav>
               {initialBudgetNameList && initialBudgetNameList.length > 0 && (
-                <Nav.Link
+                <Nav
+                  className="m-2"
                   onClick={() => {
                     handleDownload();
                   }}
@@ -225,7 +229,7 @@ function NavBar({
                   >
                     {expanded ? "download" : <BsDownload />}
                   </Button>
-                </Nav.Link>
+                </Nav>
               )}
             </Nav>
           </Offcanvas.Body>
