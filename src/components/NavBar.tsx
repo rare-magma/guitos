@@ -104,7 +104,7 @@ function NavBar({
           <Nav className="flex-column flex-sm-row mx-2">
             <Form.Control
               aria-label={"budget name"}
-              key={"budget-name-key-" + initialSelectedName}
+              key={"budget-name-key-" + initialId}
               defaultValue={initialSelectedName}
               onChange={editName}
               type="text"
