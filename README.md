@@ -52,7 +52,7 @@ Guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cas
 
 ### Prerequisites
 
-Any modern browser with javascript enabled.
+1. Any modern browser with javascript enabled.
 
 ### Installation
 
@@ -63,14 +63,17 @@ However, if you'd like to use it offline, follow the instructions for your devic
 
 ## Usage
 
+### From scratch:
+
 1. Visit [guitos.app](https://guitos.app)
-2. Create a new budget and name it according to your preferred budget period (ideally `YYYY`, `YYYY-MM` or `YYYY-WN`)
-3. Input your revenue for the period (salary, sales, etc.)
+2. Create a new budget and name it according to your preferred budget period
+   - ideally in one of the following formats: `YYYY-MM` or `YYYY-WN`
+3. Input your revenue for the respective period (salary, sales, etc.)
 4. Fill in the expenses (groceries, electricity, etc.)
 5. Change the savings goal to your preference
 6. Update the reserves field with the current value of your emergency fund / cash
 
-or
+### In case you have a backup/would like to import data from another source:
 
 1. Visit [guitos.app](https://guitos.app)
 2. Import previous data from single/multiple CSV files or a single JSON file.
