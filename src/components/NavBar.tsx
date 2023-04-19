@@ -97,7 +97,7 @@ function NavBar({
       <Container fluid>
         {initialBudgetNameList && initialBudgetNameList.length < 1 && (
           <Navbar.Brand className="flex-column flex-sm-row">
-            Guitos
+            guitos
           </Navbar.Brand>
         )}
         {initialSelectedName && (
@@ -123,7 +123,7 @@ function NavBar({
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-              Guitos
+              guitos
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end">

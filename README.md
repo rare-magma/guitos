@@ -1,4 +1,4 @@
-# 💸 Guitos
+# 💸 guitos
 
 <details>
 <summary>Table of Contents</summary>
@@ -20,17 +20,15 @@
 - [Acknowledgements](#acknowledgements)
 </details>
 
-<br>
-
 ## About
 
-Guitos is a simple budgeting app that helps you figure out where your money went and plan your budget ahead of time.
+guitos is a simple budgeting app that helps you figure out where your money went and plan your budget ahead of time.
 
 It stores data in your browser's local storage ([IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)). Your private financial data doesn't leave your browser.
 
-Guitos was initially created to replace a spreadsheet and as an opportunity to learn React.
+guitos was initially created to replace a spreadsheet and as an opportunity to learn React.
 
-Guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cash.
+guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cash.
 
 <br>
 <details>
@@ -46,7 +44,6 @@ Guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cas
 | <img src="docs/images/horizontal-light.png" title="Horizontal Light" width="100%"> | <img src="docs/images/vertical-light.png" title="Vertical Light" width="100%"> |
 
 </details>
-<br>
 
 ## Getting Started
 
@@ -76,7 +73,7 @@ However, if you'd like to use it offline, follow the instructions for your devic
 ### In case you have a backup/would like to import data from another source:
 
 1. Visit [guitos.app](https://guitos.app)
-2. Import previous data from single/multiple CSV files or a single JSON file.
+2. Import data from single/multiple CSV files or a single JSON file.
    Make sure they follow the required structure:
 
 ### CSV data model:
@@ -91,7 +88,7 @@ goal,goal,10
 reserves,reserves,0
 ```
 
-- Note that the name of the csv file is parsed as the name of the budget:
+- Note that the name of the CSV file is parsed as the name of the budget:
 
   2023-04.csv results in a budget with the name of "2023-04".
 
@@ -120,6 +117,8 @@ reserves,reserves,0
   }
 ]
 ```
+
+- Note that the ID of each budget inside the JSON file should be a [v4 UUID](<https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)>) as created by the `crypto.randomUUID()` [method](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID).
 
 ## Built With
 
