@@ -1,30 +1,4 @@
-<h1 align="center">
-  <a href="https://github.com/rare-magma/guitos">
-    <img src="docs/images/logo.svg" alt="Logo" width="100" height="100">
-  </a>
-</h1>
-
-<div align="center">
-  Guitos
-  <br />
-  <a href="#about"><strong>Explore the screenshots »</strong></a>
-  <br />
-  <br />
-  <a href="https://github.com/rare-magma/guitos/issues/new?assignees=&labels=bug&template=01_BUG_REPORT.md&title=bug%3A+">Report a Bug</a>
-  ·
-  <a href="https://github.com/rare-magma/guitos/issues/new?assignees=&labels=enhancement&template=02_FEATURE_REQUEST.md&title=feat%3A+">Request a Feature</a>
-  .
-  <a href="https://github.com/rare-magma/guitos/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+">Ask a Question</a>
-</div>
-
-<div align="center">
-<br />
-
-[![Project license](https://img.shields.io/github/license/rare-magma/guitos.svg?style=flat-square)](LICENSE)
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/rare-magma/guitos/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
-[![code with love by rare-magma](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-rare-magma-ff1414.svg?style=flat-square)](https://github.com/rare-magma)
-
-</div>
+# 💸 Guitos
 
 <details>
 <summary>Table of Contents</summary>
@@ -44,10 +18,9 @@
 - [Security](#security)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
-
 </details>
 
----
+<br>
 
 ## About
 
@@ -59,6 +32,7 @@ Guitos was initially created to replace a spreadsheet and as an opportunity to l
 
 Guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cash.
 
+<br>
 <details>
 <summary>Screenshots</summary>
 <br>
@@ -72,6 +46,7 @@ Guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cas
 | <img src="docs/images/horizontal-light.png" title="Horizontal Light" width="100%"> | <img src="docs/images/vertical-light.png" title="Vertical Light" width="100%"> |
 
 </details>
+<br>
 
 ## Getting Started
 
@@ -101,7 +76,7 @@ or
 2. Import previous data from single/multiple CSV files or a single JSON file.
    Make sure they follow the required structure:
 
-CSV:
+### CSV data model:
 
 ```csv
 type,name,value
@@ -117,7 +92,7 @@ reserves,reserves,0
 
   2023-04.csv results in a budget with the name of "2023-04".
 
-JSON:
+### JSON data model:
 
 ```json
 [
