@@ -232,7 +232,9 @@ function NavBar({
                 </Nav>
               )}
               <Navbar.Brand className="version justify-content-end align-self-end m-2">
-                v{APP_VERSION}
+                <a href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md">
+                  v{APP_VERSION}
+                </a>
               </Navbar.Brand>
             </Nav>
           </Offcanvas.Body>

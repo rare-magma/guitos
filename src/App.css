@@ -35,6 +35,15 @@ body {
   background: var(--bgcolor);
 }
 
+a {
+  text-decoration: none;
+  color: var(--selection);
+}
+
+a:hover {
+  border-bottom: 1px solid;
+}
+
 .accordion-button:not(.collapsed)::after,
 .accordion-button::after {
   filter: invert(58%) sepia(93%) saturate(2284%) hue-rotate(322deg)
