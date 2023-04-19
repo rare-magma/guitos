@@ -231,6 +231,9 @@ function NavBar({
                   </Button>
                 </Nav>
               )}
+              <Navbar.Brand className="version justify-content-end align-self-end m-2">
+                v{APP_VERSION}
+              </Navbar.Brand>
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
