@@ -7,8 +7,13 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { useState } from "react";
-import { numberInputOnWheelPreventChange } from "../utils";
-import { BsCurrencyEuro, BsPercent } from "react-icons/bs";
+import {
+  currencyCode,
+  numberInputOnWheelPreventChange,
+  userLang,
+} from "../utils";
+import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
+import { BsPercent } from "react-icons/bs";
 
 interface StatCardProps {
   stat: Stat;
@@ -17,20 +22,30 @@ interface StatCardProps {
 
 function StatCard({ stat: initialStat, onChange }: StatCardProps) {
   const [stat, setStat] = useState(initialStat);
+  const [intlConfig] = useState<CurrencyInputProps["intlConfig"]>({
+    locale: userLang,
+    currency: currencyCode,
+  });
 
-  const handleChange = (item: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (item: React.ChangeEvent<HTMLInputElement>) => {
     let updatedStat: Stat;
     if (stat !== null) {
       updatedStat = stat;
-      if (item.target.ariaLabel === "reserves") {
-        updatedStat.reserves = item.target.valueAsNumber;
-      } else {
-        updatedStat.goal = item.target.valueAsNumber;
-      }
+      updatedStat.goal = item.target.valueAsNumber;
       setStat(updatedStat);
       onChange(updatedStat);
     }
   };
+
+  function handleReserveChange(value: string | undefined): void {
+    let updatedStat: Stat;
+    if (stat !== null) {
+      updatedStat = stat;
+      updatedStat.reserves = Number(value);
+      setStat(updatedStat);
+      onChange(updatedStat);
+    }
+  }
 
   return (
     <Card className="stat-card">
@@ -45,18 +60,16 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           >
             <InputGroup.Text>available</InputGroup.Text>
           </OverlayTrigger>
-          <Form.Control
-            className="text-right"
+          <CurrencyInput
+            id="available"
+            key={stat.available}
+            className="text-right form-control"
             aria-label={"available"}
-            key={"available"}
-            value={stat.available}
-            onChange={handleChange}
-            disabled
-            readOnly
+            name="available"
+            intlConfig={intlConfig}
+            disabled={true}
+            defaultValue={stat.available}
           />
-          <InputGroup.Text>
-            <BsCurrencyEuro />
-          </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"withGoal"}>
           <InputGroup.Text>
@@ -84,18 +97,16 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           >
             <InputGroup.Text>with goal</InputGroup.Text>
           </OverlayTrigger>
-          <Form.Control
-            className="text-right"
-            aria-label={"withGoal"}
-            key={"withGoal"}
-            value={stat.withGoal}
-            onChange={handleChange}
-            disabled
-            readOnly
+          <CurrencyInput
+            id="with-goal"
+            key={stat.withGoal}
+            className="text-right form-control"
+            aria-label={"with-goal"}
+            name="with-goal"
+            intlConfig={intlConfig}
+            disabled={true}
+            defaultValue={stat.withGoal}
           />
-          <InputGroup.Text>
-            <BsCurrencyEuro />
-          </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"goal"}>
           <OverlayTrigger
@@ -106,14 +117,14 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
               </Tooltip>
             }
           >
-            <InputGroup.Text>savings goal</InputGroup.Text>
+            <InputGroup.Text>savings goal %</InputGroup.Text>
           </OverlayTrigger>
           <Form.Control
             className="text-right"
             aria-label={"goal"}
             key={"goal"}
             defaultValue={stat.goal}
-            onChange={handleChange}
+            onChange={handleInputChange}
             onWheelCapture={numberInputOnWheelPreventChange}
             type="number"
             maxLength={2}
@@ -128,24 +139,21 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             placement="top"
             overlay={
               <Tooltip id={`tooltip-available`}>
-                = goal * available / 100
+                = savings goal * available / 100
               </Tooltip>
             }
           >
             <InputGroup.Text>savings estimate</InputGroup.Text>
           </OverlayTrigger>
-          <Form.Control
-            className="text-right"
+          <CurrencyInput
+            id="saved"
+            className="text-right form-control"
             aria-label={"saved"}
-            key={"saved"}
-            value={stat.saved}
-            onChange={handleChange}
-            disabled
-            readOnly
+            name="saved"
+            intlConfig={intlConfig}
+            disabled={true}
+            defaultValue={stat.saved}
           />
-          <InputGroup.Text>
-            <BsCurrencyEuro />
-          </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"reserves"}>
           <OverlayTrigger
@@ -156,20 +164,16 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           >
             <InputGroup.Text>reserves</InputGroup.Text>
           </OverlayTrigger>
-          <Form.Control
-            className="text-right"
+          <CurrencyInput
+            id="reserves"
+            className="text-right form-control"
             aria-label={"reserves"}
-            key={"reserves"}
-            value={stat.reserves}
-            onChange={handleChange}
-            onWheelCapture={numberInputOnWheelPreventChange}
-            type="number"
-            maxLength={2}
-            max={100}
+            name="reserves"
+            intlConfig={intlConfig}
+            defaultValue={stat.reserves}
+            maxLength={20}
+            onValueChange={(value) => handleReserveChange(value)}
           />
-          <InputGroup.Text>
-            <BsCurrencyEuro />
-          </InputGroup.Text>
         </InputGroup>
       </Card.Body>
     </Card>

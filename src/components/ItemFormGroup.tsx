@@ -8,8 +8,9 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
-import { numberInputOnWheelPreventChange } from "../utils";
+import { currencyCode, userLang } from "../utils";
 import { ItemForm } from "./ItemForm";
+import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 
 interface ItemFormProps {
   itemForm: ItemForm;
@@ -25,16 +26,16 @@ function ItemFormGroup({
   onChange,
 }: ItemFormProps) {
   const [itemForm, setItemForm] = useState(initialItemForm);
-
-  // const handleCurrency = (item: ItemForm) => {
-  //   //TODO
-  // };
+  const [intlConfig] = useState<CurrencyInputProps["intlConfig"]>({
+    locale: userLang,
+    currency: currencyCode,
+  });
 
   const handleRemove = (item: ItemForm) => {
     onRemove(item);
   };
 
-  const editItemName = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newItemForm = new ItemForm({
       id: itemForm.id,
       name: event.target.value,
@@ -45,16 +46,16 @@ function ItemFormGroup({
     onChange(newItemForm);
   };
 
-  const editItemValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function handleValueChange(value: string | undefined): void {
     const newItemForm = new ItemForm({
       id: itemForm.id,
       name: itemForm.name,
-      value: isNaN(event.target.valueAsNumber) ? 0 : event.target.valueAsNumber,
+      value: isNaN(Number(value)) ? 0 : Number(value),
     });
 
     setItemForm(newItemForm);
     onChange(newItemForm);
-  };
+  }
 
   return (
     <OverlayTrigger
@@ -72,38 +73,27 @@ function ItemFormGroup({
     >
       <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
         <Form.Control
-          aria-label={"newname"}
+          aria-label={"item-name"}
           key={itemForm.id + "-key"}
           defaultValue={itemForm.name}
-          onChange={editItemName}
+          onChange={handleNameChange}
           type="text"
           maxLength={255}
         />
         <Col xs="3">
-          <Form.Control
-            aria-label={"newvalue"}
+          <CurrencyInput
+            id="item-value"
             key={itemForm.id + "-value"}
-            className="text-right"
+            className="text-right form-control"
+            aria-label={"item-value"}
+            name="item-value"
+            intlConfig={intlConfig}
             defaultValue={itemForm.value}
-            onChange={editItemValue}
-            type="number"
-            onWheelCapture={numberInputOnWheelPreventChange}
-            maxLength={11}
+            allowNegativeValue={false}
+            maxLength={20}
+            onValueChange={(value) => handleValueChange(value)}
           />
         </Col>
-        {/* TODO currency support */}
-        {/* <Col xs={1}>
-          <Button
-            key={itemForm.id + "button"}
-            variant="currency"
-            type="button"
-            onClick={() => {
-              // handleCurrency(itemForm);
-            }}
-          >
-            <BsCurrencyEuro />
-          </Button>
-        </Col> */}
         <Button
           key={itemForm.id + "button"}
           variant="delete"
