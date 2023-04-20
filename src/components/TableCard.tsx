@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
-import { calcPercentage, calcTotal } from "../utils";
+import { calcPercentage, calcTotal, intlFormat, userLang } from "../utils";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
 import { BsPlusLg } from "react-icons/bs";
@@ -118,7 +118,7 @@ function TableCard({
                 )
               }
             >
-              <div>{total} €</div>
+              <div>{intlFormat(total * 100, userLang)}</div>
             </OverlayTrigger>
           </Col>
         </Row>
