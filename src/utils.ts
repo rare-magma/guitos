@@ -1,6 +1,25 @@
 import { Budget } from "./components/Budget";
 import { ItemForm } from "./components/ItemForm";
 import { CsvItem } from "./components/CsvItem";
+import { dinero, toDecimal } from "dinero.js";
+import * as dineroCurrencies from "@dinero.js/currencies";
+import { currencies } from "./currencies";
+import { Currency } from "dinero.js";
+
+export const userLang = navigator.language;
+
+export const countryCode =
+  userLang.split("-").length >= 2
+    ? userLang.split("-")[1].toUpperCase()
+    : userLang.toUpperCase();
+
+export const currencyCode = currencies[
+  countryCode as keyof typeof currencies
+] as unknown as string;
+
+const dineroCurrency = dineroCurrencies[
+  currencyCode as keyof typeof dineroCurrencies
+] as Currency<number>;
 
 export function round(number: number, precision: number) {
   return +(Math.round(Number(number + "e+" + precision)) + "e-" + precision);
@@ -147,3 +166,20 @@ export const createNewBudget = (): Budget => {
 
   return newBudget;
 };
+
+export function intlFormat(
+  amount: number,
+  locale: Intl.LocalesArgument,
+  options = {}
+) {
+  function transformer({ value, currency }): string {
+    return Number(value).toLocaleString(locale, {
+      ...options,
+      style: "currency",
+      currency: currency.code,
+    });
+  }
+  const dineroObject = dinero({ amount: amount, currency: dineroCurrency });
+
+  return toDecimal(dineroObject, transformer);
+}
