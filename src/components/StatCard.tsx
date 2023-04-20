@@ -172,6 +172,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             intlConfig={intlConfig}
             defaultValue={stat.reserves}
             maxLength={20}
+            allowNegativeValue={false}
             onValueChange={(value) => handleReserveChange(value)}
           />
         </InputGroup>
