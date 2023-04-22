@@ -80,7 +80,7 @@ function ItemFormGroup({
           type="text"
           maxLength={255}
         />
-        <Col xs="3">
+        <Col xs="4">
           <CurrencyInput
             id="item-value"
             key={itemForm.id + "-value"}
