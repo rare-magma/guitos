@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/rare-magma/guitos/compare/v0.3.0...v0.3.1) (2023-04-22)
+
+
+### Bug Fixes
+
+* semantic-release config ([f5d67ef](https://github.com/rare-magma/guitos/commit/f5d67ef2f743158184e8c70caf6063e5cac44070))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
