@@ -127,8 +127,11 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             onChange={handleInputChange}
             onWheelCapture={numberInputOnWheelPreventChange}
             type="number"
-            maxLength={2}
-            max={100}
+            onInput={(e) => {
+              e.target.value = Number(
+                Math.max(0, e.target.value).toString().slice(0, 2)
+              );
+            }}
           />
           <InputGroup.Text>
             <BsPercent />
@@ -147,6 +150,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           </OverlayTrigger>
           <CurrencyInput
             id="saved"
+            key={stat.saved}
             className="text-right form-control"
             aria-label={"saved"}
             name="saved"
