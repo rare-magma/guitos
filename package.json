@@ -48,6 +48,8 @@
     ]
   },
   "devDependencies": {
+    "@semantic-release/changelog": "6.0.3",
+    "@semantic-release/git": "10.0.1",
     "@simbathesailor/use-what-changed": "2.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -65,7 +67,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "jsdom": "^21.1.1",
     "prettier": "2.8.7",
-    "semantic-release": "^21.0.1",
+    "semantic-release": "21.0.1",
     "typescript": "5.0.4",
     "vite": "4.2.1",
     "vite-plugin-eslint": "1.8.1",
