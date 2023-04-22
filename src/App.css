@@ -298,3 +298,6 @@ input[type="number"] {
   max-height: 65vh;
   overflow: auto;
 }
+.input-group-sm > .form-control {
+  font-size: 1rem;
+}
