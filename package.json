@@ -7,6 +7,10 @@
       "main"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rare-magma/guitos"
+  },
   "dependencies": {
     "@dinero.js/currencies": "2.0.0-alpha.14",
     "@testing-library/user-event": "14.4.3",
