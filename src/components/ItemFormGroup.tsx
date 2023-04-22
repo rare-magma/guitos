@@ -90,7 +90,7 @@ function ItemFormGroup({
             intlConfig={intlConfig}
             defaultValue={itemForm.value}
             allowNegativeValue={false}
-            maxLength={20}
+            maxLength={14}
             onValueChange={(value) => handleValueChange(value)}
           />
         </Col>
