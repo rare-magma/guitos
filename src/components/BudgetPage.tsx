@@ -229,24 +229,22 @@ function BudgetPage() {
     setBudget(filteredList[0]);
   };
 
-  const handleGoBack = () => {
+  const handleGo = (step: number, limit: number) => {
     const sortedList = budgetList.sort((a, b) => a.name.localeCompare(b.name));
     if (budget) {
       const index = sortedList.findIndex((b) => b.name.includes(budget.name));
-      if (index !== 0) {
-        handleSelect([sortedList[index - 1] as unknown as Option[]]);
+      if (index !== limit) {
+        handleSelect([sortedList[index + step] as unknown as Option[]]);
       }
     }
   };
 
+  const handleGoBack = () => {
+    handleGo(-1, 0);
+  };
+
   const handleGoForward = () => {
-    const sortedList = budgetList.sort((a, b) => a.name.localeCompare(b.name));
-    if (budget) {
-      const index = sortedList.findIndex((b) => b.name.includes(budget.name));
-      if (index !== sortedList.length - 1) {
-        handleSelect([sortedList[index + 1] as unknown as Option[]]);
-      }
-    }
+    handleGo(1, budgetList.length - 1);
   };
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
