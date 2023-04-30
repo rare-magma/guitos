@@ -54,7 +54,7 @@ function NavBar({
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
 
-  useHotkeys("/", () => focusSearch(), { preventDefault: true });
+  useHotkeys(["/", "f"], () => focusSearch(), { preventDefault: true });
   useHotkeys("r", () => focusRename(), { preventDefault: true });
 
   useEffect(() => {
