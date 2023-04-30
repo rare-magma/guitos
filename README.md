@@ -80,13 +80,15 @@ However, if you'd like to use it offline, follow the instructions for your devic
 
 Keyboard shortcuts can be triggered when no input field is selected.
 
-| Action               | Shortcut |
-| -------------------- | -------- |
-| Clone current budget | C        |
-| Create new budget    | A        |
-| Export data          | S        |
-| Go to older budget   | PageDown |
-| Go to newer budget   | PageUp   |
+| Action                | Shortcut |
+| --------------------- | -------- |
+| Clone current budget  | C        |
+| Create new budget     | A        |
+| Export data           | S        |
+| Go to older budget    | PageDown |
+| Go to newer budget    | PageUp   |
+| Rename current budget | R        |
+| Search budget list    | F or /   |
 
 ### CSV data model:
 
