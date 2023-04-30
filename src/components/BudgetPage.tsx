@@ -29,6 +29,7 @@ import Papa, { ParseError } from "papaparse";
 import localforage from "localforage";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { BsXLg } from "react-icons/bs";
+import { useHotkeys } from "react-hotkeys-hook";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 type CsvError = {
@@ -58,6 +59,10 @@ function BudgetPage() {
 
   const params = useParams();
   const name = String(params.name);
+
+  useHotkeys("ctrl+s", () => handleExport(), { preventDefault: true });
+  useHotkeys("ctrl+b", () => handleNew(), { preventDefault: true });
+  useHotkeys("ctrl+c", () => handleClone(), { preventDefault: true });
 
   const calcBudgetListName = (list: Budget[]) => {
     setBudgetNameList(
