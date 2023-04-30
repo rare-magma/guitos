@@ -1,3 +1,11 @@
+# [0.5.0](https://github.com/rare-magma/guitos/compare/v0.4.0...v0.5.0) (2023-04-30)
+
+
+### Features
+
+* add F to search shortcuts ([0b009f1](https://github.com/rare-magma/guitos/commit/0b009f130beaefaa8c3b0b66e4eeee5d4d3e7e26))
+* add search/rename shortcuts ([05f854d](https://github.com/rare-magma/guitos/commit/05f854dc53ace0cc8ff0614cc35605f8cd05b00d))
+
 # [0.4.0](https://github.com/rare-magma/guitos/compare/v0.3.1...v0.4.0) (2023-04-30)
 
 
