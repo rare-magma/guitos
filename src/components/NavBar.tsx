@@ -16,6 +16,7 @@ import {
 import { FaRegClone } from "react-icons/fa";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { Option } from "react-bootstrap-typeahead/types/types";
+import { useHotkeys } from "react-hotkeys-hook";
 
 interface NavBarProps {
   budgetNameList: { id: string; name: string }[];
@@ -48,8 +49,13 @@ function NavBar({
 }: NavBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef();
+  const nameRef = useRef();
+
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
+
+  useHotkeys("/", () => focusSearch(), { preventDefault: true });
+  useHotkeys("r", () => focusRename(), { preventDefault: true });
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
@@ -62,6 +68,14 @@ function NavBar({
       setTheme(event.matches ? "dark" : "light")
     );
   }, []);
+
+  const focusSearch = () => {
+    typeRef.current.focus();
+  };
+
+  const focusRename = () => {
+    nameRef.current.focus();
+  };
 
   const setToggle = () => {
     setExpanded(!expanded);
@@ -155,6 +169,7 @@ function NavBar({
                   aria-label={"budget name"}
                   key={"budget-name-key-" + initialId}
                   defaultValue={initialSelectedName}
+                  ref={nameRef}
                   onChange={editName}
                   type="text"
                   maxLength={25}
