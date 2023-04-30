@@ -110,6 +110,9 @@ input.text-right.form-control {
 
 input.text-right.form-control {
   text-align: right;
+}
+
+.straight-corners {
   border-radius: 0;
 }
 

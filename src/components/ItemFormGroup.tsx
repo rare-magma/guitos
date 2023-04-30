@@ -84,7 +84,7 @@ function ItemFormGroup({
           <CurrencyInput
             id="item-value"
             key={itemForm.id + "-value"}
-            className="text-right form-control"
+            className="text-right form-control straight-corners"
             aria-label={"item-value"}
             name="item-value"
             intlConfig={intlConfig}
