@@ -46,12 +46,19 @@ function TableCard({
     } else {
       throw new Error("Messed up table type");
     }
+
     const newItemForm = new ItemForm();
-    const maxId = Math.max(
-      ...table.items.map((i) => {
-        return i.id;
-      })
-    );
+
+    let maxId;
+    if (table.items.length !== 0) {
+      maxId = Math.max(
+        ...table.items.map((i) => {
+          return i.id;
+        })
+      );
+    } else {
+      maxId = 0;
+    }
 
     newItemForm.id = isNaN(maxId) ? 0 : maxId + 1;
     newItemForm.name = "";
