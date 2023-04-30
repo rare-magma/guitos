@@ -1,3 +1,16 @@
+# [0.6.0](https://github.com/rare-magma/guitos/compare/v0.5.0...v0.6.0) (2023-04-30)
+
+
+### Bug Fixes
+
+* stats straight corners ([21c608d](https://github.com/rare-magma/guitos/commit/21c608d51f5a04a5d8dc321b6e8bf626fa66eded))
+* wrong new item id if list of items went to 0 ([5e5d072](https://github.com/rare-magma/guitos/commit/5e5d0725406a8d0aaa3d75023ccaa15e1e84473f))
+
+
+### Features
+
+* add goal/reserves shortcuts ([7462a79](https://github.com/rare-magma/guitos/commit/7462a79621a3df2edd820651b3a3326bc482671d))
+
 # [0.5.0](https://github.com/rare-magma/guitos/compare/v0.4.0...v0.5.0) (2023-04-30)
 
 
