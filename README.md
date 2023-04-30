@@ -78,11 +78,13 @@ However, if you'd like to use it offline, follow the instructions for your devic
 
 ### Keyboard shortcuts:
 
+Keyboard shortcuts can be triggered when no input field is selected.
+
 | Action               | Shortcut |
 | -------------------- | -------- |
-| Clone current budget | CTRL + C |
-| Create new budget    | CTRL + B |
-| Export data          | CTRL + S |
+| Clone current budget | C        |
+| Create new budget    | A        |
+| Export data          | S        |
 
 ### CSV data model:
 
