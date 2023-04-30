@@ -5,6 +5,7 @@ import { dinero, toDecimal } from "dinero.js";
 import * as dineroCurrencies from "@dinero.js/currencies";
 import { currencies } from "./currencies";
 import { Currency } from "dinero.js";
+import { MutableRefObject } from "react";
 
 export const userLang = navigator.language;
 
@@ -184,3 +185,11 @@ export function intlFormat(
 
   return toDecimal(dineroObject, transformer);
 }
+
+export const focusRef = (
+  ref: MutableRefObject<HTMLInputElement | undefined>
+) => {
+  if (ref.current) {
+    ref.current.focus();
+  }
+};

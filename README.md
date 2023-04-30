@@ -89,6 +89,8 @@ Keyboard shortcuts can be triggered when no input field is selected.
 | Go to newer budget    | PageUp   |
 | Rename current budget | R        |
 | Search budget list    | F or /   |
+| Focus savings goal    | G        |
+| Focus reserves        | E        |
 
 ### CSV data model:
 

@@ -6,14 +6,16 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   currencyCode,
+  focusRef,
   numberInputOnWheelPreventChange,
   userLang,
 } from "../utils";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { BsPercent } from "react-icons/bs";
+import { useHotkeys } from "react-hotkeys-hook";
 
 interface StatCardProps {
   stat: Stat;
@@ -26,6 +28,12 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
     locale: userLang,
     currency: currencyCode,
   });
+
+  const goalRef = useRef<HTMLInputElement>();
+  const reservesRef = useRef<HTMLInputElement>();
+
+  useHotkeys("g", () => focusRef(goalRef), { preventDefault: true });
+  useHotkeys("e", () => focusRef(reservesRef), { preventDefault: true });
 
   const handleInputChange = (item: React.ChangeEvent<HTMLInputElement>) => {
     let updatedStat: Stat;
@@ -127,6 +135,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             onChange={handleInputChange}
             onWheelCapture={numberInputOnWheelPreventChange}
             type="number"
+            ref={goalRef}
             onInput={(e) => {
               e.target.value = Number(
                 Math.max(0, e.target.value).toString().slice(0, 2)
@@ -177,6 +186,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             defaultValue={stat.reserves}
             maxLength={14}
             allowNegativeValue={false}
+            ref={reservesRef}
             onValueChange={(value) => handleReserveChange(value)}
           />
         </InputGroup>

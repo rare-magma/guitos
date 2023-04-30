@@ -17,6 +17,7 @@ import { FaRegClone } from "react-icons/fa";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
+import { focusRef } from "../utils";
 
 interface NavBarProps {
   budgetNameList: { id: string; name: string }[];
@@ -47,15 +48,15 @@ function NavBar({
   onRename,
   onSelect,
 }: NavBarProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>();
   const typeRef = useRef();
-  const nameRef = useRef();
+  const nameRef = useRef<HTMLInputElement>();
 
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
 
-  useHotkeys(["/", "f"], () => focusSearch(), { preventDefault: true });
-  useHotkeys("r", () => focusRename(), { preventDefault: true });
+  useHotkeys(["/", "f"], () => focusRef(typeRef), { preventDefault: true });
+  useHotkeys("r", () => focusRef(nameRef), { preventDefault: true });
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
@@ -68,14 +69,6 @@ function NavBar({
       setTheme(event.matches ? "dark" : "light")
     );
   }, []);
-
-  const focusSearch = () => {
-    typeRef.current.focus();
-  };
-
-  const focusRename = () => {
-    nameRef.current.focus();
-  };
 
   const setToggle = () => {
     setExpanded(!expanded);
@@ -105,7 +98,7 @@ function NavBar({
 
   const handleSelect = (budget: Option[]) => {
     onSelect(budget);
-    if (typeRef && typeRef.current) {
+    if (typeRef.current) {
       typeRef.current.clear();
     }
   };
