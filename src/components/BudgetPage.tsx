@@ -60,9 +60,9 @@ function BudgetPage() {
   const params = useParams();
   const name = String(params.name);
 
-  useHotkeys("ctrl+s", () => handleExport(), { preventDefault: true });
-  useHotkeys("ctrl+b", () => handleNew(), { preventDefault: true });
-  useHotkeys("ctrl+c", () => handleClone(), { preventDefault: true });
+  useHotkeys("s", () => handleExport(), { preventDefault: true });
+  useHotkeys("a", () => handleNew(), { preventDefault: true });
+  useHotkeys("c", () => handleClone(), { preventDefault: true });
 
   const calcBudgetListName = (list: Budget[]) => {
     setBudgetNameList(
