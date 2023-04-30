@@ -76,6 +76,14 @@ However, if you'd like to use it offline, follow the instructions for your devic
 2. Import data from single/multiple CSV files or a single JSON file.
    Make sure they follow the required structure:
 
+### Keyboard shortcuts:
+
+| Action               | Shortcut |
+| -------------------- | -------- |
+| Clone current budget | CTRL + C |
+| Create new budget    | CTRL + B |
+| Export data          | CTRL + S |
+
 ### CSV data model:
 
 ```csv
