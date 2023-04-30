@@ -222,7 +222,7 @@ function BudgetPage() {
     setBudget(filteredList[0]);
   };
 
-  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     const importedFiles = e.target.files;
     const newBudgetList: Budget[] = [];
@@ -284,7 +284,7 @@ function BudgetPage() {
     calcBudgetListName(newBudgetList);
   };
 
-  const handleDownload = () => {
+  const handleExport = () => {
     let filename = new Date().toISOString();
     filename = `guitos-${filename.slice(0, -5)}.json`;
     const url = window.URL.createObjectURL(
@@ -409,14 +409,14 @@ function BudgetPage() {
         onClone={() => {
           handleClone();
         }}
-        onDownload={() => {
-          handleDownload();
+        onExport={() => {
+          handleExport();
         }}
         onNew={() => {
           handleNew();
         }}
-        onUpload={(e) => {
-          handleUpload(e);
+        onImport={(e) => {
+          handleImport(e);
         }}
         onRemove={(e) => {
           handleRemove(e);
@@ -595,7 +595,7 @@ function BudgetPage() {
                   multiple
                   ref={inputRef}
                   onChange={(e) => {
-                    handleUpload(e);
+                    handleImport(e);
                   }}
                   style={{ display: "none" }}
                 />

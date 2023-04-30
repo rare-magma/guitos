@@ -15,12 +15,12 @@ interface NavBarProps {
   id?: string | null;
   budgetNameList: { id: string; name: string }[];
   onRename: (name?: string | null) => void;
-  onDownload: () => void;
+  onExport: () => void;
   onClone: () => void;
   onNew: () => void;
   onRemove: (name: string) => void;
   onSelect: (budget: Option[]) => void;
-  onUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function NavBar({
@@ -29,11 +29,11 @@ function NavBar({
   budgetNameList: initialBudgetNameList,
   onRename,
   onClone,
-  onDownload,
+  onExport,
   onNew,
   onRemove,
   onSelect,
-  onUpload,
+  onImport,
 }: NavBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef();
@@ -64,12 +64,12 @@ function NavBar({
     onClone();
   };
 
-  const handleDownload = () => {
-    onDownload();
+  const handleExport = () => {
+    onExport();
   };
 
   const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onUpload(event);
+    onImport(event);
   };
 
   const handleRemove = (initialId?: string | null) => {
@@ -219,7 +219,7 @@ function NavBar({
                 <Nav
                   className="m-2"
                   onClick={() => {
-                    handleDownload();
+                    handleExport();
                   }}
                 >
                   <Button
@@ -227,7 +227,7 @@ function NavBar({
                     aria-label="export budget"
                     variant="outline-info"
                   >
-                    {expanded ? "download" : <BsDownload />}
+                    {expanded ? "export" : <BsDownload />}
                   </Button>
                 </Nav>
               )}
