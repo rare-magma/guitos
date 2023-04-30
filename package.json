@@ -8,7 +8,7 @@
     "@types/dinero.js": "1.9.0",
     "@types/jest": "29.5.1",
     "@types/node": "18.16.3",
-    "@types/react": "18.0.37",
+    "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
     "bootstrap": "5.2.3",
     "dinero.js": "2.0.0-alpha.14",
