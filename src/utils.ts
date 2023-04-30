@@ -62,8 +62,9 @@ export function calcAvailable(value: Budget | null): number {
 export function calcWithGoal(value: Budget | null): number {
   if (value !== null && value.stats.goal !== null && !isNaN(value.stats.goal)) {
     const available = calcAvailable(value);
-    const reserves = (value.stats.goal * calcTotal(value.incomes.items)) / 100;
-    return round(available - reserves, 2);
+    const availableWithGoal =
+      (value.stats.goal * calcTotal(value.incomes.items)) / 100;
+    return round(available - availableWithGoal, 2);
   }
   return 0;
 }
