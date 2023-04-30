@@ -129,10 +129,10 @@ export const convertCsvToBudget = (csv: string[], date: string): Budget => {
         newBudget.incomes.total = calcTotal(newBudget.incomes.items);
         break;
       case "goal":
-        newBudget.stats.goal = item.value;
+        newBudget.stats.goal = Number(item.value);
         break;
       case "reserves":
-        newBudget.stats.reserves = item.value;
+        newBudget.stats.reserves = Number(item.value);
         break;
     }
   });

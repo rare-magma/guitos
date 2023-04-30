@@ -73,8 +73,8 @@ const testBudgetCsv = {
     available: 900,
     withGoal: 690,
     saved: 210,
-    goal: "10",
-    reserves: "0",
+    goal: 10,
+    reserves: 0,
   },
 };
 
