@@ -5,35 +5,46 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { BsPlusLg, BsXLg, BsUpload, BsDownload } from "react-icons/bs";
+import {
+  BsPlusLg,
+  BsXLg,
+  BsUpload,
+  BsDownload,
+  BsArrowLeft,
+  BsArrowRight,
+} from "react-icons/bs";
 import { FaRegClone } from "react-icons/fa";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { Option } from "react-bootstrap-typeahead/types/types";
 
 interface NavBarProps {
-  selected?: string | null;
-  id?: string | null;
   budgetNameList: { id: string; name: string }[];
-  onRename: (name?: string | null) => void;
-  onExport: () => void;
+  id?: string | null;
+  selected?: string | null;
   onClone: () => void;
+  onExport: () => void;
+  onGoBack: () => void;
+  onGoForward: () => void;
+  onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onNew: () => void;
   onRemove: (name: string) => void;
+  onRename: (name?: string | null) => void;
   onSelect: (budget: Option[]) => void;
-  onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function NavBar({
-  selected: initialSelectedName,
-  id: initialId,
   budgetNameList: initialBudgetNameList,
-  onRename,
+  id: initialId,
+  selected: initialSelectedName,
   onClone,
   onExport,
+  onGoBack,
+  onGoForward,
+  onImport,
   onNew,
   onRemove,
+  onRename,
   onSelect,
-  onImport,
 }: NavBarProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const typeRef = useRef();
@@ -85,6 +96,14 @@ function NavBar({
     }
   };
 
+  const handleGoBack = () => {
+    onGoBack();
+  };
+
+  const handleGoForward = () => {
+    onGoForward();
+  };
+
   const editName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
     if (newName) {
@@ -94,28 +113,62 @@ function NavBar({
 
   return (
     <Navbar variant={theme} key="md" expand="md" onToggle={setToggle}>
-      <Container fluid>
+      <Container fluid className="flex-row">
         {initialBudgetNameList && initialBudgetNameList.length < 1 && (
-          <Navbar.Brand className="flex-column flex-sm-row">
-            guitos
-          </Navbar.Brand>
+          <Navbar.Brand className="flex-sm-row">guitos</Navbar.Brand>
         )}
-        {initialSelectedName && (
-          <Nav className="flex-column flex-sm-row me-2">
-            <Form.Control
-              aria-label={"budget name"}
-              key={"budget-name-key-" + initialId}
-              defaultValue={initialSelectedName}
-              onChange={editName}
-              type="text"
-              maxLength={25}
+        <Nav className="flex-row flex-grow-1">
+          {initialSelectedName && (
+            <Nav className="flex-row">
+              {initialBudgetNameList && initialBudgetNameList.length > 1 && (
+                <>
+                  <Nav.Item
+                    className="me-1 my-2"
+                    onClick={() => {
+                      handleGoBack();
+                    }}
+                  >
+                    <Button
+                      aria-label="go to older budget"
+                      variant="Expenses-plus-button"
+                    >
+                      <BsArrowLeft />
+                    </Button>
+                  </Nav.Item>
+                  <Nav.Item
+                    className="m-2"
+                    onClick={() => {
+                      handleGoForward();
+                    }}
+                  >
+                    <Button
+                      aria-label="go to newer budget"
+                      variant="Expenses-plus-button"
+                    >
+                      <BsArrowRight />
+                    </Button>
+                  </Nav.Item>
+                </>
+              )}
+              <Nav.Item className="m-2 me-3">
+                <Form.Control
+                  aria-label={"budget name"}
+                  key={"budget-name-key-" + initialId}
+                  defaultValue={initialSelectedName}
+                  onChange={editName}
+                  type="text"
+                  maxLength={25}
+                />
+              </Nav.Item>
+            </Nav>
+          )}
+          <Nav className="flex-grow-1">
+            <Navbar.Toggle
+              className="ms-auto ms-2 my-2"
+              aria-controls={`offcanvasNavbar-expand-md`}
             />
           </Nav>
-        )}
-        <Navbar.Toggle
-          className="px-2"
-          aria-controls={`offcanvasNavbar-expand-md`}
-        />
+        </Nav>
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-md`}
           aria-labelledby={`offcanvasNavbarLabel-expand-md`}

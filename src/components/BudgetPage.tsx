@@ -63,6 +63,8 @@ function BudgetPage() {
   useHotkeys("s", () => handleExport(), { preventDefault: true });
   useHotkeys("a", () => handleNew(), { preventDefault: true });
   useHotkeys("c", () => handleClone(), { preventDefault: true });
+  useHotkeys("pageup", () => handleGoForward(), { preventDefault: true });
+  useHotkeys("pagedown", () => handleGoBack(), { preventDefault: true });
 
   const calcBudgetListName = (list: Budget[]) => {
     setBudgetNameList(
@@ -225,6 +227,26 @@ function BudgetPage() {
       (item: Budget) => item.id === selectedBudget[0].id
     );
     setBudget(filteredList[0]);
+  };
+
+  const handleGoBack = () => {
+    const sortedList = budgetList.sort((a, b) => a.name.localeCompare(b.name));
+    if (budget) {
+      const index = sortedList.findIndex((b) => b.name.includes(budget.name));
+      if (index !== 0) {
+        handleSelect([sortedList[index - 1] as unknown as Option[]]);
+      }
+    }
+  };
+
+  const handleGoForward = () => {
+    const sortedList = budgetList.sort((a, b) => a.name.localeCompare(b.name));
+    if (budget) {
+      const index = sortedList.findIndex((b) => b.name.includes(budget.name));
+      if (index !== sortedList.length - 1) {
+        handleSelect([sortedList[index + 1] as unknown as Option[]]);
+      }
+    }
   };
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -416,6 +438,12 @@ function BudgetPage() {
         }}
         onExport={() => {
           handleExport();
+        }}
+        onGoBack={() => {
+          handleGoBack();
+        }}
+        onGoForward={() => {
+          handleGoForward();
         }}
         onNew={() => {
           handleNew();

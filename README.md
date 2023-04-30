@@ -85,6 +85,8 @@ Keyboard shortcuts can be triggered when no input field is selected.
 | Clone current budget | C        |
 | Create new budget    | A        |
 | Export data          | S        |
+| Go to older budget   | PageDown |
+| Go to newer budget   | PageUp   |
 
 ### CSV data model:
 
