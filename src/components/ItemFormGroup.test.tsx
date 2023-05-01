@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import ItemFormGroup from "./ItemFormGroup";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
@@ -12,7 +12,7 @@ describe("ItemFormGroup", () => {
     render(
       <ItemFormGroup
         itemForm={itemForm1}
-        costPercentage={0}
+        costPercentage={1}
         onRemove={onRemove}
         onChange={onChange}
       />
@@ -39,5 +39,11 @@ describe("ItemFormGroup", () => {
     await userEvent.click(screen.getByRole("button"));
 
     expect(onRemove).toHaveBeenCalledTimes(1);
+  });
+
+  it("shows tooltip when user hovers over", async () => {
+    fireEvent.mouseOver(screen.getByDisplayValue("name1"));
+
+    expect(await screen.findByText("1% of revenue")).toBeInTheDocument();
   });
 });
