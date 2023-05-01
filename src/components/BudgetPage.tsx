@@ -470,6 +470,7 @@ function BudgetPage() {
 
       {error && show && (
         <Modal
+          data-testid="error-modal"
           dialogClassName="modal-90w mx-auto"
           show={show}
           onHide={() => setShow(false)}
@@ -498,12 +499,14 @@ function BudgetPage() {
 
       {jsonError && jsonError.length > 0 && show && (
         <Modal
+          key="json-error-modal"
+          data-testid="json-error-modal"
           dialogClassName="modal-90w mx-auto"
           show={show}
           onHide={() => setShow(false)}
           centered
         >
-          <Modal.Header>
+          <Modal.Header key="json-error-modal-header">
             Errors found while importing:
             <Button
               className="align-self-end"
@@ -518,21 +521,21 @@ function BudgetPage() {
               <BsXLg />
             </Button>
           </Modal.Header>
-          <Modal.Body>
-            <Accordion flush>
-              {jsonError.map((jsonError: JsonError) => (
+          <Modal.Body key="json-error-modal-body">
+            <Accordion key="json-error-modal-accordion" flush>
+              {jsonError.map((jsonError: JsonError, i: number) => (
                 <Accordion.Item
-                  key={jsonError.file + "-item"}
+                  key={jsonError.file + "-item-" + i}
                   eventKey={jsonError.file}
                 >
-                  <Accordion.Header key={jsonError.file + "-header"}>
+                  <Accordion.Header key={jsonError.file + "-header-" + i}>
                     {jsonError.file}
                   </Accordion.Header>
                   <Accordion.Body
                     className="textarea code mx-1"
-                    key={jsonError.file + "-body"}
+                    key={jsonError.file + "-body-" + i}
                   >
-                    <p className="code" key={"error-" + jsonError.file + "-"}>
+                    <p className="code" key={jsonError.file + "-error-" + i}>
                       <>
                         {jsonError.errors}
                         <br />
@@ -548,12 +551,14 @@ function BudgetPage() {
 
       {csvError && csvError.length > 0 && show && (
         <Modal
+          key="csv-error-modal"
+          data-testid="csv-error-modal"
           dialogClassName="modal-90w mx-auto"
           show={show}
           onHide={() => setShow(false)}
           centered
         >
-          <Modal.Header>
+          <Modal.Header key="csv-error-modal-header">
             Errors found while importing:
             <Button
               className="align-self-end"
@@ -568,26 +573,26 @@ function BudgetPage() {
               <BsXLg />
             </Button>
           </Modal.Header>
-          <Modal.Body>
-            <Accordion flush>
-              {csvError.map((csvError: CsvError) => (
+          <Modal.Body key="csv-error-modal-body">
+            <Accordion key="csv-error-modal-accordion" flush>
+              {csvError.map((csvError: CsvError, i: number) => (
                 <Accordion.Item
-                  key={csvError.file + "-item"}
+                  key={csvError.file + "-item-" + i}
                   eventKey={csvError.file}
                 >
-                  <Accordion.Header key={csvError.file + "-header"}>
+                  <Accordion.Header key={csvError.file + "-header-" + i}>
                     {csvError.file}
                   </Accordion.Header>
                   <Accordion.Body
                     className="textarea code mx-1"
-                    key={csvError.file + "-body"}
+                    key={csvError.file + "-body-" + i}
                   >
-                    <p className="code" key={"error-" + csvError.file + "-"}>
-                      {csvError.errors.map((error, j) => (
-                        <>
+                    <p className="code" key={csvError.file + "-csv-error-" + i}>
+                      {csvError.errors.map((error) => (
+                        <span key={error.row}>
                           Line {error.row}: {error.message}
                           <br />
-                        </>
+                        </span>
                       ))}
                     </p>
                   </Accordion.Body>
