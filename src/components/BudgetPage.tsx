@@ -20,6 +20,7 @@ import {
   calcSaved,
   calcWithGoal,
   convertCsvToBudget,
+  createBudgetNameList,
   createNewBudget,
 } from "../utils";
 import { Income } from "./Income";
@@ -65,16 +66,6 @@ function BudgetPage() {
   useHotkeys("c", () => handleClone(), { preventDefault: true });
   useHotkeys("pageup", () => handleGoForward(), { preventDefault: true });
   useHotkeys("pagedown", () => handleGoBack(), { preventDefault: true });
-
-  const calcBudgetListName = (list: Budget[]) => {
-    setBudgetNameList(
-      list
-        .filter((b: Budget) => b && b.id !== undefined && b.name !== undefined)
-        .map((b: Budget) => {
-          return { id: b.id, name: b.name };
-        })
-    );
-  };
 
   const handleIncomeChange = (item: Income) => {
     let newBudget: Budget;
@@ -174,7 +165,7 @@ function BudgetPage() {
 
     setBudget(newBudget);
     setBudgetList(newBudgetList);
-    calcBudgetListName(newBudgetList);
+    setBudgetNameList(createBudgetNameList(newBudgetList));
   };
 
   const handleClone = () => {
@@ -194,7 +185,7 @@ function BudgetPage() {
 
       setBudget(newBudget);
       setBudgetList(newBudgetList);
-      calcBudgetListName(newBudgetList);
+      setBudgetNameList(createBudgetNameList(newBudgetList));
     }
   };
 
@@ -208,7 +199,9 @@ function BudgetPage() {
           .reverse();
 
         setBudgetList(newBudgetList);
-        calcBudgetListName(newBudgetList as unknown as Budget[]);
+        setBudgetNameList(
+          createBudgetNameList(newBudgetList as unknown as Budget[])
+        );
         if (newBudgetList.length >= 1) {
           setBudget(newBudgetList[0]);
         } else {
@@ -306,7 +299,7 @@ function BudgetPage() {
     }
 
     setBudgetList(newBudgetList);
-    calcBudgetListName(newBudgetList);
+    setBudgetNameList(createBudgetNameList(newBudgetList));
   };
 
   const handleExport = () => {
@@ -333,7 +326,7 @@ function BudgetPage() {
           })
           .then(() => {
             setBudgetList(list);
-            calcBudgetListName(list);
+            setBudgetNameList(createBudgetNameList(list));
           })
           .catch((e) => {
             setError(e.message);
@@ -355,7 +348,7 @@ function BudgetPage() {
       })
       .then(() => {
         setBudgetList(list);
-        calcBudgetListName(list);
+        setBudgetNameList(createBudgetNameList(list));
         if (name.trim() !== "undefined") {
           setBudget(list.filter((b: Budget) => b && b.name === name)[0]);
         } else {
@@ -410,7 +403,7 @@ function BudgetPage() {
               });
           });
         }
-        calcBudgetListName(budgetList);
+        setBudgetNameList(createBudgetNameList(budgetList));
         setLoading(false);
       } else {
         loadFromDb();

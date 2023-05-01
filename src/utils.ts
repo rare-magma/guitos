@@ -5,7 +5,7 @@ import { dinero, toDecimal } from "dinero.js";
 import * as dineroCurrencies from "@dinero.js/currencies";
 import { currencies } from "./currencies";
 import { Currency } from "dinero.js";
-import { MutableRefObject } from "react";
+import { MutableRefObject, useRef } from "react";
 
 export const userLang = navigator.language;
 
@@ -192,4 +192,14 @@ export const focusRef = (
   if (ref.current) {
     ref.current.focus();
   }
+};
+
+export const createBudgetNameList = (
+  list: Budget[]
+): { id: string; name: string }[] => {
+  return list
+    .filter((b: Budget) => b && b.id !== undefined && b.name !== undefined)
+    .map((b: Budget) => {
+      return { id: b.id, name: b.name };
+    });
 };
