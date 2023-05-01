@@ -22,7 +22,7 @@
 
 ## About
 
-guitos is a simple budgeting app that helps you figure out where your money went and plan your budget ahead of time.
+guitos is a budgeting app that helps you figure out where your money went and plan your budget ahead of time.
 
 It stores data in your browser's local storage ([IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)). Your private financial data doesn't leave your browser.
 
