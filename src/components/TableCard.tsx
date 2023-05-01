@@ -39,6 +39,7 @@ function TableCard({
 
   const addTable = (tableBeingEdited: Income | Expense) => {
     let newTable;
+
     if (label === "Revenue") {
       newTable = new Income();
     } else if (label === "Expenses") {
@@ -139,7 +140,7 @@ function TableCard({
       <Card.Body>
         {table.items?.map((item: ItemForm) => (
           <ItemFormGroup
-            key={item.id}
+            key={label + "-" + item.id}
             itemForm={item}
             costPercentage={calcPercentage(item.value, revenueTotal)}
             onChange={handleChange}

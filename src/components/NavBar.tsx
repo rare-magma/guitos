@@ -268,6 +268,7 @@ function NavBar({
                     {expanded ? "import" : <BsUpload />}
                   </Button>
                   <Form.Control
+                    data-testid="import-form-control"
                     type="file"
                     multiple
                     ref={inputRef}

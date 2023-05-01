@@ -509,6 +509,7 @@ function BudgetPage() {
           <Modal.Header key="json-error-modal-header">
             Errors found while importing:
             <Button
+              data-testid="json-error-close"
               className="align-self-end"
               key={"modal-dismiss-button"}
               variant="delete-modal"
@@ -561,6 +562,7 @@ function BudgetPage() {
           <Modal.Header key="csv-error-modal-header">
             Errors found while importing:
             <Button
+              data-testid="csv-error-close"
               className="align-self-end"
               key={"modal-dismiss-button"}
               variant="delete-modal"

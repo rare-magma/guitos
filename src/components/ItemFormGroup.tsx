@@ -73,8 +73,9 @@ function ItemFormGroup({
     >
       <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
         <Form.Control
+          id={"item-" + itemForm.id + "-name"}
           aria-label={"item-name"}
-          key={itemForm.id + "-key"}
+          key={itemForm.id + "-name"}
           defaultValue={itemForm.name}
           onChange={handleNameChange}
           type="text"
@@ -82,7 +83,7 @@ function ItemFormGroup({
         />
         <Col xs="4">
           <CurrencyInput
-            id="item-value"
+            id={"item-" + itemForm.id + "-value"}
             key={itemForm.id + "-value"}
             className="text-right form-control straight-corners"
             aria-label={"item-value"}
@@ -95,6 +96,7 @@ function ItemFormGroup({
           />
         </Col>
         <Button
+          id={"item-" + itemForm.id + "-button"}
           key={itemForm.id + "button"}
           variant="delete"
           type="button"

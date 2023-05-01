@@ -128,6 +128,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             <InputGroup.Text>savings goal %</InputGroup.Text>
           </OverlayTrigger>
           <Form.Control
+            data-testid="goal-input"
             className="text-right"
             aria-label={"goal"}
             key={"goal"}
