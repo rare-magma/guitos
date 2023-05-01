@@ -36,13 +36,17 @@ guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cas
 <summary>Screenshots</summary>
 <br>
 
-|                           Horizontal Layout                            |                          Vertical Layout                           |
+|                           Horizontal layout                            |                          Vertical layout                           |
 | :--------------------------------------------------------------------: | :----------------------------------------------------------------: |
 | <img src="docs/images/horizontal.png" title="Horizontal" width="100%"> | <img src="docs/images/vertical.png" title="Vertical" width="100%"> |
 
 |                                    Light theme                                     |                                  Light theme                                   |
 | :--------------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
-| <img src="docs/images/horizontal-light.png" title="Horizontal Light" width="100%"> | <img src="docs/images/vertical-light.png" title="Vertical Light" width="100%"> |
+| <img src="docs/images/horizontal-light.png" title="Horizontal light" width="100%"> | <img src="docs/images/vertical-light.png" title="Vertical light" width="100%"> |
+
+|                             Tooltip                              |                                     Initial state                                     |
+| :--------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
+| <img src="docs/images/tooltip.png" title="Tooltip" width="100%"> | <img src="docs/images/initial-state-vertical.png" title="Initial state" width="100%"> |
 
 </details>
 
