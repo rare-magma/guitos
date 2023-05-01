@@ -17,6 +17,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
+      - name: Install dependencies
+        run: npm clean-install
+      - name: Run tests
+        run: npm run test -- --run
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v3
         with:
