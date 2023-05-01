@@ -8,6 +8,7 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
+- [Notes](#notes)
 - [Built With](#built-with)
 - [Hosted On](#hosted-on)
 - [Roadmap](#roadmap)
@@ -116,19 +117,25 @@ reserves,reserves,0
     "id": "035c2de4-00a4-403c-8f0e-f81339be9a4e",
     "name": "2023-03",
     "expenses": {
-      "items": [{ "id": 1, "name": "expense1", "value": 10 }],
-      "total": 10
+      "items": [
+        { "id": 1, "name": "expense1", "value": 10 },
+        { "id": 2, "name": "expense2", "value": 20 }
+      ],
+      "total": 30
     },
     "incomes": {
-      "items": [{ "id": 1, "name": "income1", "value": 100 }],
-      "total": 100
+      "items": [
+        { "id": 1, "name": "income1", "value": 100 },
+        { "id": 2, "name": "income2", "value": 200 }
+      ],
+      "total": 300
     },
     "stats": {
-      "available": 0,
-      "withGoal": 0,
-      "saved": 0,
+      "available": 270,
+      "withGoal": 240,
+      "saved": 270,
       "goal": 10,
-      "reserves": 0
+      "reserves": 100
     }
   }
 ]
@@ -136,7 +143,13 @@ reserves,reserves,0
 
 - Note that the ID of each budget inside the JSON file should be a [v4 UUID](<https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)>) as created by the `crypto.randomUUID()` [method](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID).
 
-- guitos tries to load an existing budget when visiting guitos.app/`budget-name`
+## Notes
+
+- There is no undo/redo functionality. Export frequently to avoid data loss!
+  - This is planned to be implemented on [#16](https://github.com/rare-magma/guitos/issues/16)
+- guitos uses floating point math so it can be inaccurate due to rounding errors.
+  - There are plans to improve accuracy on [#19](https://github.com/rare-magma/guitos/issues/19)
+- guitos tries to load an existing budget when visiting `guitos.app/budget-name`
 
 ## Built With
 
@@ -208,7 +221,6 @@ See [LICENSE](LICENSE) for more information.
 ## Acknowledgements
 
 - [r/personalfinance](https://www.reddit.com/r/personalfinance/wiki/budgeting/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
 - [Choose a license](https://choosealicense.com/)
