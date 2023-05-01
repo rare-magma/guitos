@@ -1,3 +1,11 @@
+## [0.6.1](https://github.com/rare-magma/guitos/compare/v0.6.0...v0.6.1) (2023-05-01)
+
+
+### Bug Fixes
+
+* csv import setting goal and reserves values as strings ([5fd4fba](https://github.com/rare-magma/guitos/commit/5fd4fba4618ec6f5e4bda03a7ab5cc4b5dd78e30))
+* unique key warning thrown during import ([dea2087](https://github.com/rare-magma/guitos/commit/dea2087cd64a69f8f61b4dfe1e3e783e97f31d1c))
+
 # [0.6.0](https://github.com/rare-magma/guitos/compare/v0.5.0...v0.6.0) (2023-04-30)
 
 
