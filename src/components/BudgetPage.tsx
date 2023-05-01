@@ -625,7 +625,7 @@ function BudgetPage() {
                   type="file"
                   multiple
                   ref={inputRef}
-                  onChange={(e) => {
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     handleImport(e);
                   }}
                   style={{ display: "none" }}

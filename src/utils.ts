@@ -5,7 +5,7 @@ import { dinero, toDecimal } from "dinero.js";
 import * as dineroCurrencies from "@dinero.js/currencies";
 import { currencies } from "./currencies";
 import { Currency } from "dinero.js";
-import { MutableRefObject, useRef } from "react";
+import { MutableRefObject } from "react";
 
 export const userLang = navigator.language;
 

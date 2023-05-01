@@ -255,7 +255,7 @@ function NavBar({
                   </Nav>
                 </>
               )}
-              <Nav className="m-2" href="#import" as="li">
+              <Nav className="m-2" as="li">
                 <Form.Group controlId="import">
                   <Button
                     className="w-100"
