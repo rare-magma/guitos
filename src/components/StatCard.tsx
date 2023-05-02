@@ -125,7 +125,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
               </Tooltip>
             }
           >
-            <InputGroup.Text>savings goal %</InputGroup.Text>
+            <InputGroup.Text>savings goal</InputGroup.Text>
           </OverlayTrigger>
           <Form.Control
             data-testid="goal-input"
@@ -137,9 +137,9 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             onWheelCapture={numberInputOnWheelPreventChange}
             type="number"
             ref={goalRef}
-            onInput={(e) => {
-              e.target.value = Number(
-                Math.max(0, e.target.value).toString().slice(0, 2)
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+              e.target.valueAsNumber = Number(
+                Math.max(0, e.target.valueAsNumber).toString().slice(0, 2)
               );
             }}
           />
