@@ -132,7 +132,6 @@ input[type="number"] {
 .btn-currency,
 .btn-outline-secondary,
 .btn-text {
-  color: var(--textcolor);
   background-color: var(--bgcolor);
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
@@ -181,6 +180,7 @@ input[type="number"] {
   border: 1px solid var(--red);
   border-radius: 0.375rem;
 }
+
 .btn-delete-modal:focus-visible,
 .btn-delete-modal:hover,
 .btn-outline-danger:focus-visible,
@@ -301,6 +301,12 @@ input[type="number"] {
   max-height: 65vh;
   overflow: auto;
 }
+
 .input-group-sm > .form-control {
   font-size: 1rem;
+}
+
+.navbar-toggler {
+  border: 1px solid var(--comment);
+  border-radius: 0.375rem;
 }

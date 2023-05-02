@@ -181,11 +181,19 @@ function NavBar({
           id={`offcanvasNavbar-expand-md`}
           aria-labelledby={`offcanvasNavbarLabel-expand-md`}
           placement="end"
+          show={expanded}
         >
-          <Offcanvas.Header closeButton>
+          <Offcanvas.Header>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
               guitos
             </Offcanvas.Title>
+            <Button
+              aria-label="close menu"
+              variant="outline-secondary"
+              onClick={() => setExpanded(false)}
+            >
+              {<BsXLg />}
+            </Button>
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end">
             <Nav>
