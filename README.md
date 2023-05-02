@@ -65,7 +65,15 @@ However, if you'd like to use it offline, follow the instructions for your devic
 
 ## Usage
 
-### From scratch:
+### Use case example
+
+I receive a salary at the end of each month and around that time I create a new budget to plan the expenses/savings goals/etc.
+
+I frequently add a new expense before I purchase it so I can see the impact on the budget and prepare accordingly.
+
+Later, I can compare the budget with previous months to understand where the money is going by hovering the mouse/tapping on a single expense. A tooltip pops up and shows its value in percentage of revenue (see the tooltip screenshot above).
+
+### Starting from scratch:
 
 1. Visit [guitos.app](https://guitos.app)
 2. Create a new budget and name it according to your preferred budget period
@@ -154,6 +162,9 @@ reserves,reserves,0
 - guitos uses floating point math so it can be inaccurate due to rounding errors.
   - There are plans to improve accuracy on [#19](https://github.com/rare-magma/guitos/issues/19)
 - guitos tries to load an existing budget when visiting `guitos.app/budget-name`
+- The interface theme is set automatically by your browser and/or operating system's configuration.
+- The currency is formatted according to your browser's preferred languages.
+  - Example: English (United States) browser language displays values in US Dollars. English (India) uses Indian Rupees.
 
 ## Built With
 
