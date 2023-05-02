@@ -1,3 +1,10 @@
+## [0.6.2](https://github.com/rare-magma/guitos/compare/v0.6.1...v0.6.2) (2023-05-02)
+
+
+### Bug Fixes
+
+* toggle and close menu buttons border color ([ed79760](https://github.com/rare-magma/guitos/commit/ed797608a0d58203ef80c947affcdbefda0bbba5))
+
 ## [0.6.1](https://github.com/rare-magma/guitos/compare/v0.6.0...v0.6.1) (2023-05-01)
 
 
