@@ -38,7 +38,6 @@
 | <img src="docs/images/tooltip.png" title="Tooltip" width="100%"> | <img src="docs/images/initial-state-vertical.png" title="Initial state" width="100%"> |
 
 </details>
-<br>
 
 ## About
 
