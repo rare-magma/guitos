@@ -21,17 +21,6 @@
 - [Acknowledgements](#acknowledgements)
 </details>
 
-## About
-
-guitos is a personal budgeting app that helps you figure out where your money went, plan your budget ahead of time and analyze past expenditures.
-
-It stores data in your browser's local storage ([IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)). Your private financial data doesn't leave your browser.
-
-guitos was initially created to replace a spreadsheet and as an opportunity to learn React.
-
-guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cash.
-
-<br>
 <details>
 <summary>Screenshots</summary>
 <br>
@@ -49,6 +38,17 @@ guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cas
 | <img src="docs/images/tooltip.png" title="Tooltip" width="100%"> | <img src="docs/images/initial-state-vertical.png" title="Initial state" width="100%"> |
 
 </details>
+<br>
+
+## About
+
+guitos is a personal budgeting app that helps you figure out where your money went, plan your budget ahead of time and analyze past expenditures.
+
+It stores data in your browser's local storage ([IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)). Your private financial data doesn't leave your browser.
+
+guitos was initially created to replace a spreadsheet and as an opportunity to learn React.
+
+guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cash.
 
 ## Getting Started
 
