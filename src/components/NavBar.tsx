@@ -325,16 +325,16 @@ function NavBar({
                 </>
               )}
               <Nav className="m-2" as="li">
-                <Form.Group controlId="import">
-                  <OverlayTrigger
-                    delay={250}
-                    placement="bottom"
-                    overlay={
-                      <Tooltip id={`tooltip-import-budget`}>
-                        import budget
-                      </Tooltip>
-                    }
-                  >
+                <OverlayTrigger
+                  delay={250}
+                  placement="bottom"
+                  overlay={
+                    <Tooltip id={`tooltip-import-budget`}>
+                      import budget
+                    </Tooltip>
+                  }
+                >
+                  <Form.Group controlId="import">
                     <Button
                       className="w-100"
                       aria-label="import budget"
@@ -345,16 +345,16 @@ function NavBar({
                     >
                       {expanded ? "import" : <BsUpload />}
                     </Button>
-                  </OverlayTrigger>
-                  <Form.Control
-                    data-testid="import-form-control"
-                    type="file"
-                    multiple
-                    ref={inputRef}
-                    onChange={handleImport}
-                    style={{ display: "none" }}
-                  />
-                </Form.Group>
+                    <Form.Control
+                      data-testid="import-form-control"
+                      type="file"
+                      multiple
+                      ref={inputRef}
+                      onChange={handleImport}
+                      style={{ display: "none" }}
+                    />
+                  </Form.Group>
+                </OverlayTrigger>
               </Nav>
               {initialBudgetNameList && initialBudgetNameList.length > 0 && (
                 <Nav
