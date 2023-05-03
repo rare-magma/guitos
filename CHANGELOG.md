@@ -1,3 +1,16 @@
+# [0.7.0](https://github.com/rare-magma/guitos/compare/v0.6.2...v0.7.0) (2023-05-03)
+
+
+### Bug Fixes
+
+* close menu on button click ([07a1d24](https://github.com/rare-magma/guitos/commit/07a1d247f2cdd7410c39391c5657baa1f27db07b))
+
+
+### Features
+
+* add tooltips to all buttons ([fa49d04](https://github.com/rare-magma/guitos/commit/fa49d04521541454092d1ac78a07036195755da8))
+* show budget name on menu title ([b7cf2a3](https://github.com/rare-magma/guitos/commit/b7cf2a329818615331911169121626422f80ab03))
+
 ## [0.6.2](https://github.com/rare-magma/guitos/compare/v0.6.1...v0.6.2) (2023-05-02)
 
 
