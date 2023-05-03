@@ -33,7 +33,7 @@ describe("NavBar", () => {
     );
   });
   it("renders initial state", async () => {
-    expect(screen.getByText("guitos")).toBeInTheDocument();
+    expect(screen.getByText("2023-04")).toBeInTheDocument();
 
     const newButton = screen.getAllByRole("button", { name: "new budget" });
     await userEvent.click(newButton[0]);
