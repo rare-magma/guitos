@@ -24,7 +24,7 @@ describe("BudgetPage", () => {
       jsonBlob as unknown as File
     );
 
-    const jsonErrorModal = screen.getByTestId("json-error-modal");
+    const jsonErrorModal = await screen.findByTestId("json-error-modal");
     expect(jsonErrorModal).toBeInTheDocument();
 
     const closeButton = screen.getByTestId("json-error-close");
@@ -42,7 +42,7 @@ describe("BudgetPage", () => {
       csvBlob as unknown as File
     );
 
-    const csvErrorModal = screen.getByTestId("csv-error-modal");
+    const csvErrorModal = await screen.findByTestId("csv-error-modal");
     expect(csvErrorModal).toBeInTheDocument();
 
     const closeButton = screen.getByTestId("csv-error-close");
