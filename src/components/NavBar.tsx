@@ -218,7 +218,7 @@ function NavBar({
         >
           <Offcanvas.Header>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-              guitos
+              {initialSelectedName ? initialSelectedName : "guitos"}
             </Offcanvas.Title>
             <Button
               aria-label="close menu"
