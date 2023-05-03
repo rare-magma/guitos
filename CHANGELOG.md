@@ -1,3 +1,10 @@
+## [0.7.1](https://github.com/rare-magma/guitos/compare/v0.7.0...v0.7.1) (2023-05-03)
+
+
+### Bug Fixes
+
+* scrollbar flickering due to tooltip popup ([f536a30](https://github.com/rare-magma/guitos/commit/f536a3060768676400da369e6ce7667bb54bb694))
+
 # [0.7.0](https://github.com/rare-magma/guitos/compare/v0.6.2...v0.7.0) (2023-05-03)
 
 
