@@ -139,7 +139,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
             ref={goalRef}
             onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
               e.target.valueAsNumber = Number(
-                Math.max(0, e.target.valueAsNumber).toString().slice(0, 2)
+                Math.max(0, Number(e.target.value)).toString().slice(0, 2)
               );
             }}
           />
