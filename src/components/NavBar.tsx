@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Offcanvas } from "react-bootstrap";
+import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -140,12 +140,22 @@ function NavBar({
                       handleGoBack();
                     }}
                   >
-                    <Button
-                      aria-label="go to older budget"
-                      variant="Expenses-plus-button"
+                    <OverlayTrigger
+                      delay={250}
+                      placement="bottom"
+                      overlay={
+                        <Tooltip id={`tooltip-go-to-older-budget`}>
+                          go to older budget
+                        </Tooltip>
+                      }
                     >
-                      <BsArrowLeft />
-                    </Button>
+                      <Button
+                        aria-label="go to older budget"
+                        variant="Expenses-plus-button"
+                      >
+                        <BsArrowLeft />
+                      </Button>
+                    </OverlayTrigger>
                   </Nav.Item>
                   <Nav.Item
                     className="m-2"
@@ -153,25 +163,43 @@ function NavBar({
                       handleGoForward();
                     }}
                   >
-                    <Button
-                      aria-label="go to newer budget"
-                      variant="Expenses-plus-button"
+                    <OverlayTrigger
+                      delay={250}
+                      placement="bottom"
+                      overlay={
+                        <Tooltip id={`tooltip-go-to-newer-budget`}>
+                          go to newer budget
+                        </Tooltip>
+                      }
                     >
-                      <BsArrowRight />
-                    </Button>
+                      <Button
+                        aria-label="go to newer budget"
+                        variant="Expenses-plus-button"
+                      >
+                        <BsArrowRight />
+                      </Button>
+                    </OverlayTrigger>
                   </Nav.Item>
                 </>
               )}
               <Nav.Item className="m-2 me-3">
-                <Form.Control
-                  aria-label={"budget name"}
-                  key={"budget-name-key-" + initialId}
-                  defaultValue={initialSelectedName}
-                  ref={nameRef}
-                  onChange={editName}
-                  type="text"
-                  maxLength={25}
-                />
+                <OverlayTrigger
+                  delay={250}
+                  placement="bottom"
+                  overlay={
+                    <Tooltip id={`tooltip-budget-name`}>budget name</Tooltip>
+                  }
+                >
+                  <Form.Control
+                    aria-label={"budget name"}
+                    key={"budget-name-key-" + initialId}
+                    defaultValue={initialSelectedName}
+                    ref={nameRef}
+                    onChange={editName}
+                    type="text"
+                    maxLength={25}
+                  />
+                </OverlayTrigger>
               </Nav.Item>
             </Nav>
           )}
@@ -228,13 +256,21 @@ function NavBar({
                   handleNew();
                 }}
               >
-                <Button
-                  className="w-100"
-                  aria-label="new budget"
-                  variant="outline-success"
+                <OverlayTrigger
+                  delay={250}
+                  placement="bottom"
+                  overlay={
+                    <Tooltip id={`tooltip-new-budget`}>new budget</Tooltip>
+                  }
                 >
-                  {expanded ? "new" : <BsPlusLg />}
-                </Button>
+                  <Button
+                    className="w-100"
+                    aria-label="new budget"
+                    variant="outline-success"
+                  >
+                    {expanded ? "new" : <BsPlusLg />}
+                  </Button>
+                </OverlayTrigger>
               </Nav>
               {initialBudgetNameList && initialBudgetNameList.length > 0 && (
                 <>
@@ -244,13 +280,23 @@ function NavBar({
                       handleClone();
                     }}
                   >
-                    <Button
-                      className="w-100"
-                      aria-label="clone budget"
-                      variant="outline-success"
+                    <OverlayTrigger
+                      delay={250}
+                      placement="bottom"
+                      overlay={
+                        <Tooltip id={`tooltip-clone-budget`}>
+                          clone budget
+                        </Tooltip>
+                      }
                     >
-                      {expanded ? "clone" : <FaRegClone />}
-                    </Button>
+                      <Button
+                        className="w-100"
+                        aria-label="clone budget"
+                        variant="outline-success"
+                      >
+                        {expanded ? "clone" : <FaRegClone />}
+                      </Button>
+                    </OverlayTrigger>
                   </Nav>
                   <Nav
                     className="m-2"
@@ -258,28 +304,48 @@ function NavBar({
                       handleRemove(initialId);
                     }}
                   >
-                    <Button
-                      className="w-100"
-                      aria-label="delete budget"
-                      variant="outline-danger"
+                    <OverlayTrigger
+                      delay={250}
+                      placement="bottom"
+                      overlay={
+                        <Tooltip id={`tooltip-delete-budget`}>
+                          delete budget
+                        </Tooltip>
+                      }
                     >
-                      {expanded ? "delete" : <BsXLg />}
-                    </Button>
+                      <Button
+                        className="w-100"
+                        aria-label="delete budget"
+                        variant="outline-danger"
+                      >
+                        {expanded ? "delete" : <BsXLg />}
+                      </Button>
+                    </OverlayTrigger>
                   </Nav>
                 </>
               )}
               <Nav className="m-2" as="li">
                 <Form.Group controlId="import">
-                  <Button
-                    className="w-100"
-                    aria-label="import budget"
-                    variant="outline-primary"
-                    onClick={() => {
-                      inputRef.current?.click();
-                    }}
+                  <OverlayTrigger
+                    delay={250}
+                    placement="bottom"
+                    overlay={
+                      <Tooltip id={`tooltip-import-budget`}>
+                        import budget
+                      </Tooltip>
+                    }
                   >
-                    {expanded ? "import" : <BsUpload />}
-                  </Button>
+                    <Button
+                      className="w-100"
+                      aria-label="import budget"
+                      variant="outline-primary"
+                      onClick={() => {
+                        inputRef.current?.click();
+                      }}
+                    >
+                      {expanded ? "import" : <BsUpload />}
+                    </Button>
+                  </OverlayTrigger>
                   <Form.Control
                     data-testid="import-form-control"
                     type="file"
@@ -297,20 +363,40 @@ function NavBar({
                     handleExport();
                   }}
                 >
-                  <Button
-                    className="w-100"
-                    aria-label="export budget"
-                    variant="outline-info"
+                  <OverlayTrigger
+                    delay={250}
+                    placement="bottom"
+                    overlay={
+                      <Tooltip id={`tooltip-export-budget`}>
+                        export budget
+                      </Tooltip>
+                    }
                   >
-                    {expanded ? "export" : <BsDownload />}
-                  </Button>
+                    <Button
+                      className="w-100"
+                      aria-label="export budget"
+                      variant="outline-info"
+                    >
+                      {expanded ? "export" : <BsDownload />}
+                    </Button>
+                  </OverlayTrigger>
                 </Nav>
               )}
-              <Navbar.Brand className="version justify-content-end align-self-end m-2">
-                <a href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md">
-                  v{APP_VERSION}
-                </a>
-              </Navbar.Brand>
+              <OverlayTrigger
+                delay={250}
+                placement="bottom"
+                overlay={
+                  <Tooltip id={`tooltip-guitos-version`}>
+                    guitos version
+                  </Tooltip>
+                }
+              >
+                <Navbar.Brand className="version justify-content-end align-self-end m-2">
+                  <a href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md">
+                    v{APP_VERSION}
+                  </a>
+                </Navbar.Brand>
+              </OverlayTrigger>
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

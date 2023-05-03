@@ -95,17 +95,25 @@ function ItemFormGroup({
             onValueChange={(value) => handleValueChange(value)}
           />
         </Col>
-        <Button
-          id={"item-" + itemForm.id + "-button"}
-          key={itemForm.id + "button"}
-          variant="delete"
-          type="button"
-          onClick={() => {
-            handleRemove(itemForm);
-          }}
+        <OverlayTrigger
+          delay={250}
+          placement="top"
+          overlay={
+            <Tooltip id={`tooltip-delete-itemformgroup`}>delete item</Tooltip>
+          }
         >
-          <BsXLg />
-        </Button>
+          <Button
+            id={"item-" + itemForm.id + "-button"}
+            key={itemForm.id + "button"}
+            variant="delete"
+            type="button"
+            onClick={() => {
+              handleRemove(itemForm);
+            }}
+          >
+            <BsXLg />
+          </Button>
+        </OverlayTrigger>
       </InputGroup>
     </OverlayTrigger>
   );

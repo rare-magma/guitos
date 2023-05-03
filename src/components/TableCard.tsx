@@ -151,17 +151,25 @@ function TableCard({
         ))}
         <div className="mt-3" />
         <div className="d-grid gap-2">
-          <Button
-            variant={label + "-plus-button"}
-            size="sm"
-            onClick={() => {
-              addTable(table);
-            }}
-            name=""
-            value=""
+          <OverlayTrigger
+            delay={250}
+            placement="top"
+            overlay={
+              <Tooltip id={`tooltip-new-itemformgroup`}>add new item</Tooltip>
+            }
           >
-            <BsPlusLg />
-          </Button>
+            <Button
+              variant={label + "-plus-button"}
+              size="sm"
+              onClick={() => {
+                addTable(table);
+              }}
+              name=""
+              value=""
+            >
+              <BsPlusLg />
+            </Button>
+          </OverlayTrigger>
         </div>
       </Card.Body>
     </Card>
