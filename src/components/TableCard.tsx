@@ -124,7 +124,10 @@ function TableCard({
               placement="top"
               overlay={
                 label === "Expenses" ? (
-                  <Tooltip id={`tooltip-value-${label}`}>
+                  <Tooltip
+                    id={`tooltip-value-${label}`}
+                    style={{ position: "fixed" }}
+                  >
                     {revenuePercentage}% of revenue
                   </Tooltip>
                 ) : (
@@ -155,7 +158,12 @@ function TableCard({
             delay={250}
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-new-itemformgroup`}>add new item</Tooltip>
+              <Tooltip
+                id={`tooltip-new-itemformgroup`}
+                style={{ position: "fixed" }}
+              >
+                add new item
+              </Tooltip>
             }
           >
             <Button

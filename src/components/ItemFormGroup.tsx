@@ -63,7 +63,10 @@ function ItemFormGroup({
       placement="top"
       overlay={
         costPercentage > 0 ? (
-          <Tooltip id={`tooltip-value-${itemForm.id}`}>
+          <Tooltip
+            id={`tooltip-value-${itemForm.id}`}
+            style={{ position: "fixed" }}
+          >
             {costPercentage}% of revenue
           </Tooltip>
         ) : (
@@ -99,7 +102,12 @@ function ItemFormGroup({
           delay={250}
           placement="top"
           overlay={
-            <Tooltip id={`tooltip-delete-itemformgroup`}>delete item</Tooltip>
+            <Tooltip
+              id={`tooltip-delete-itemformgroup`}
+              style={{ position: "fixed" }}
+            >
+              delete item
+            </Tooltip>
           }
         >
           <Button

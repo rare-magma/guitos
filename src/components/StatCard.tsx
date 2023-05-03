@@ -63,7 +63,9 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           <OverlayTrigger
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-available`}>= revenue - expenses</Tooltip>
+              <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
+                = revenue - expenses
+              </Tooltip>
             }
           >
             <InputGroup.Text>available</InputGroup.Text>
@@ -98,7 +100,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           <OverlayTrigger
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-available`}>
+              <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
                 = available - savings estimate
               </Tooltip>
             }
@@ -120,7 +122,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           <OverlayTrigger
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-available`}>
+              <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
                 % of revenue that should go into savings
               </Tooltip>
             }
@@ -151,7 +153,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           <OverlayTrigger
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-available`}>
+              <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
                 = savings goal * available / 100
               </Tooltip>
             }
@@ -173,7 +175,9 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           <OverlayTrigger
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-available`}>emergency fund/cash</Tooltip>
+              <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
+                emergency fund/cash
+              </Tooltip>
             }
           >
             <InputGroup.Text>reserves</InputGroup.Text>

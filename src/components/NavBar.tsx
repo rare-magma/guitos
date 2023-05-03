@@ -144,7 +144,10 @@ function NavBar({
                       delay={250}
                       placement="bottom"
                       overlay={
-                        <Tooltip id={`tooltip-go-to-older-budget`}>
+                        <Tooltip
+                          id={`tooltip-go-to-older-budget`}
+                          style={{ position: "fixed" }}
+                        >
                           go to older budget
                         </Tooltip>
                       }
@@ -167,7 +170,10 @@ function NavBar({
                       delay={250}
                       placement="bottom"
                       overlay={
-                        <Tooltip id={`tooltip-go-to-newer-budget`}>
+                        <Tooltip
+                          id={`tooltip-go-to-newer-budget`}
+                          style={{ position: "fixed" }}
+                        >
                           go to newer budget
                         </Tooltip>
                       }
@@ -187,7 +193,12 @@ function NavBar({
                   delay={250}
                   placement="bottom"
                   overlay={
-                    <Tooltip id={`tooltip-budget-name`}>budget name</Tooltip>
+                    <Tooltip
+                      id={`tooltip-budget-name`}
+                      style={{ position: "fixed" }}
+                    >
+                      budget name
+                    </Tooltip>
                   }
                 >
                   <Form.Control
@@ -260,7 +271,12 @@ function NavBar({
                   delay={250}
                   placement="bottom"
                   overlay={
-                    <Tooltip id={`tooltip-new-budget`}>new budget</Tooltip>
+                    <Tooltip
+                      id={`tooltip-new-budget`}
+                      style={{ position: "fixed" }}
+                    >
+                      new budget
+                    </Tooltip>
                   }
                 >
                   <Button
@@ -284,7 +300,10 @@ function NavBar({
                       delay={250}
                       placement="bottom"
                       overlay={
-                        <Tooltip id={`tooltip-clone-budget`}>
+                        <Tooltip
+                          id={`tooltip-clone-budget`}
+                          style={{ position: "fixed" }}
+                        >
                           clone budget
                         </Tooltip>
                       }
@@ -308,7 +327,10 @@ function NavBar({
                       delay={250}
                       placement="bottom"
                       overlay={
-                        <Tooltip id={`tooltip-delete-budget`}>
+                        <Tooltip
+                          id={`tooltip-delete-budget`}
+                          style={{ position: "fixed" }}
+                        >
                           delete budget
                         </Tooltip>
                       }
@@ -329,7 +351,10 @@ function NavBar({
                   delay={250}
                   placement="bottom"
                   overlay={
-                    <Tooltip id={`tooltip-import-budget`}>
+                    <Tooltip
+                      id={`tooltip-import-budget`}
+                      style={{ position: "fixed" }}
+                    >
                       import budget
                     </Tooltip>
                   }
@@ -367,7 +392,10 @@ function NavBar({
                     delay={250}
                     placement="bottom"
                     overlay={
-                      <Tooltip id={`tooltip-export-budget`}>
+                      <Tooltip
+                        id={`tooltip-export-budget`}
+                        style={{ position: "fixed" }}
+                      >
                         export budget
                       </Tooltip>
                     }
@@ -386,7 +414,10 @@ function NavBar({
                 delay={250}
                 placement="bottom"
                 overlay={
-                  <Tooltip id={`tooltip-guitos-version`}>
+                  <Tooltip
+                    id={`tooltip-guitos-version`}
+                    style={{ position: "fixed" }}
+                  >
                     guitos version
                   </Tooltip>
                 }
