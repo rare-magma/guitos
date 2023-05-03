@@ -75,23 +75,28 @@ function NavBar({
   };
 
   const handleNew = () => {
+    setExpanded(false);
     onNew();
   };
 
   const handleClone = () => {
+    setExpanded(false);
     onClone();
   };
 
   const handleExport = () => {
+    setExpanded(false);
     onExport();
   };
 
   const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setExpanded(false);
     onImport(event);
   };
 
   const handleRemove = (initialId?: string | null) => {
     if (initialId) {
+      setExpanded(false);
       onRemove(initialId);
     }
   };
