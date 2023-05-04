@@ -6,18 +6,10 @@ import StatCard from "./StatCard";
 
 describe("StatCard", () => {
   const onChange = vi.fn();
-  const onAutoGoal = vi.fn();
 
   beforeEach(() => {
-    render(
-      <StatCard
-        stat={testBudget.stats}
-        onChange={onChange}
-        onAutoGoal={onAutoGoal}
-      />
-    );
+    render(<StatCard stat={testBudget.stats} onChange={onChange} />);
   });
-
   it("renders initial state", () => {
     expect(screen.getByText("Statistics")).toBeInTheDocument();
     expect(screen.getByDisplayValue("$90")).toBeInTheDocument();
@@ -37,13 +29,5 @@ describe("StatCard", () => {
 
     expect(onChange).toHaveBeenCalledTimes(5);
     expect(screen.getByDisplayValue("95")).toBeInTheDocument();
-  });
-
-  it("triggers onAutoGoal when user clicks button", async () => {
-    await userEvent.click(
-      screen.getByRole("button", { name: "calculate savings goal" })
-    );
-
-    expect(onAutoGoal).toHaveBeenCalledTimes(1);
   });
 });
