@@ -1,3 +1,10 @@
+## [0.8.1](https://github.com/rare-magma/guitos/compare/v0.8.0...v0.8.1) (2023-05-04)
+
+
+### Reverts
+
+* Revert "feat: add button for calculating savings goal automatically" ([ddf4e98](https://github.com/rare-magma/guitos/commit/ddf4e98bc4b14571961a71616858778d6ed2a630))
+
 # [0.8.0](https://github.com/rare-magma/guitos/compare/v0.7.1...v0.8.0) (2023-05-04)
 
 
