@@ -1,5 +1,6 @@
 import { Stat } from "./Stat";
 import {
+  Button,
   Card,
   Form,
   InputGroup,
@@ -8,22 +9,25 @@ import {
 } from "react-bootstrap";
 import { useRef, useState } from "react";
 import {
+  calcAutoGoal,
   currencyCode,
   focusRef,
   numberInputOnWheelPreventChange,
   userLang,
 } from "../utils";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
-import { BsPercent } from "react-icons/bs";
+import { BsGear, BsPercent } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
 
 interface StatCardProps {
   stat: Stat;
   onChange: (stat: Stat) => void;
+  onAutoGoal: (stat: Stat) => void;
 }
 
-function StatCard({ stat: initialStat, onChange }: StatCardProps) {
+function StatCard({ stat: initialStat, onChange, onAutoGoal }: StatCardProps) {
   const [stat, setStat] = useState(initialStat);
+  const [autoGoal, setAutoGoal] = useState(false);
   const [intlConfig] = useState<CurrencyInputProps["intlConfig"]>({
     locale: userLang,
     currency: currencyCode,
@@ -54,6 +58,11 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
       onChange(updatedStat);
     }
   }
+
+  const handleAutoGoal = () => {
+    onAutoGoal(stat);
+    setAutoGoal(true);
+  };
 
   return (
     <Card className="stat-card">
@@ -129,11 +138,30 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           >
             <InputGroup.Text>savings goal</InputGroup.Text>
           </OverlayTrigger>
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip id={`tooltip-auto-goal`} style={{ position: "fixed" }}>
+                calculate savings goal
+              </Tooltip>
+            }
+          >
+            <Button
+              aria-label="calculate savings goal"
+              variant="outline-primary"
+              className="input-group-text auto-goal"
+              onClick={() => {
+                handleAutoGoal();
+              }}
+            >
+              <BsGear />
+            </Button>
+          </OverlayTrigger>
           <Form.Control
             data-testid="goal-input"
             className="text-right"
             aria-label={"goal"}
-            key={"goal"}
+            key={"auto-goal-" + autoGoal}
             defaultValue={stat.goal}
             onChange={handleInputChange}
             onWheelCapture={numberInputOnWheelPreventChange}

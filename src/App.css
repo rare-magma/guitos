@@ -310,3 +310,8 @@ input[type="number"] {
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
 }
+
+.auto-goal {
+  border: 1px solid var(--comment);
+  border-radius: 0.375rem;
+}

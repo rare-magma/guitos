@@ -16,6 +16,7 @@ import TableCard from "./TableCard";
 import { Stat } from "./Stat";
 import StatCard from "./StatCard";
 import {
+  calcAutoGoal,
   calcAvailable,
   calcSaved,
   calcWithGoal,
@@ -137,6 +138,30 @@ function BudgetPage() {
           saved: newBudget.stats.saved,
           goal: item.goal,
           reserves: item.reserves,
+        },
+      });
+    }
+  };
+
+  const handleAutoGoal = (item: Stat) => {
+    let newBudget: Budget;
+    if (budget !== null) {
+      newBudget = budget;
+      newBudget.stats = item;
+      newBudget.stats.goal = calcAutoGoal(budget);
+      newBudget.stats.available = calcAvailable(newBudget);
+      newBudget.stats.withGoal = calcWithGoal(newBudget);
+      newBudget.stats.saved = calcSaved(newBudget);
+
+      setBudget({
+        ...budget,
+        stats: {
+          ...budget.stats,
+          available: newBudget.stats.available,
+          withGoal: newBudget.stats.withGoal,
+          saved: newBudget.stats.saved,
+          goal: newBudget.stats.goal,
+          reserves: newBudget.stats.reserves,
         },
       });
     }
@@ -645,6 +670,7 @@ function BudgetPage() {
                   key={"stats-" + budget.expenses.total + budget.incomes.total}
                   stat={budget.stats}
                   onChange={handleStatChange}
+                  onAutoGoal={handleAutoGoal}
                 />
 
                 <div className="mt-3" />

@@ -79,6 +79,19 @@ export function calcSaved(value: Budget | null): number {
   return 0;
 }
 
+export function calcAutoGoal(value: Budget | null): number {
+  if (value !== null && value.stats.goal !== null && !isNaN(value.stats.goal)) {
+    const incomeTotal = calcTotal(value.incomes.items);
+    const available = calcAvailable(value);
+
+    if (incomeTotal > 0 && available > 0) {
+      const autoGoal = (available * 100) / incomeTotal;
+      return round(autoGoal, 2);
+    }
+  }
+  return 0;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const numberInputOnWheelPreventChange = (e: any) => {
   e.target.blur();
