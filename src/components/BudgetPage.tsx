@@ -24,6 +24,7 @@ import {
   createBudgetNameList,
   createNewBudget,
   initialCurrencyCode,
+  roundBig,
   userLang,
 } from "../utils";
 import { Income } from "./Income";
@@ -84,7 +85,7 @@ function BudgetPage() {
     if (budget !== null) {
       newBudget = budget;
       newBudget.incomes = item;
-      newBudget.stats.available = calcAvailable(newBudget);
+      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
       newBudget.stats.withGoal = calcWithGoal(newBudget);
       newBudget.stats.saved = calcSaved(newBudget);
 
@@ -110,7 +111,7 @@ function BudgetPage() {
     if (budget !== null) {
       newBudget = budget;
       newBudget.expenses = item;
-      newBudget.stats.available = calcAvailable(newBudget);
+      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
       newBudget.stats.withGoal = calcWithGoal(newBudget);
       newBudget.stats.saved = calcSaved(newBudget);
 
@@ -136,7 +137,7 @@ function BudgetPage() {
     if (budget !== null) {
       newBudget = budget;
       newBudget.stats = item;
-      newBudget.stats.available = calcAvailable(newBudget);
+      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
       newBudget.stats.withGoal = calcWithGoal(newBudget);
       newBudget.stats.saved = calcSaved(newBudget);
 
@@ -160,7 +161,7 @@ function BudgetPage() {
       newBudget = budget;
       newBudget.stats = item;
       newBudget.stats.goal = calcAutoGoal(budget);
-      newBudget.stats.available = calcAvailable(newBudget);
+      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
       newBudget.stats.withGoal = calcWithGoal(newBudget);
       newBudget.stats.saved = calcSaved(newBudget);
 

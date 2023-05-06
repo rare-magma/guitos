@@ -160,8 +160,6 @@ reserves,reserves,0
 
 - There is no undo/redo functionality. Export frequently to avoid data loss!
   - This is planned to be implemented on [#16](https://github.com/rare-magma/guitos/issues/16)
-- guitos uses floating point math so it can be inaccurate due to rounding errors.
-  - There are plans to improve accuracy on [#19](https://github.com/rare-magma/guitos/issues/19)
 - guitos tries to load an existing budget when visiting `guitos.app/budget-name`
 - The interface theme is set automatically by your browser and/or operating system's configuration.
 - The currency is initially selected according to your browser's preferred languages.

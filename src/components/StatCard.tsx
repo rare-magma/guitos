@@ -41,6 +41,7 @@ function StatCard({
       updatedStat = stat;
       updatedStat.goal = item.target.valueAsNumber;
       setStat(updatedStat);
+      setAutoGoal(false);
       onChange(updatedStat);
     }
   };
@@ -138,7 +139,7 @@ function StatCard({
             placement="top"
             overlay={
               <Tooltip id={`tooltip-auto-goal`} style={{ position: "fixed" }}>
-                calculate savings goal
+                estimate savings goal
               </Tooltip>
             }
           >
@@ -146,6 +147,7 @@ function StatCard({
               aria-label="calculate savings goal"
               variant="outline-primary"
               className="input-group-text auto-goal"
+              style={{ color: "var(--textcolor)" }}
               onClick={() => {
                 handleAutoGoal();
               }}

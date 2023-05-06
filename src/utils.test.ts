@@ -8,30 +8,33 @@ import {
   calcWithGoal,
   convertCsvToBudget,
   createBudgetNameList,
-  round,
+  roundBig,
 } from "./utils";
 import Papa from "papaparse";
 import {
   itemForm1,
   itemForm2,
+  testBigBudget,
   testBudget,
   testBudget2,
   testBudgetCsv,
   testCsv,
 } from "./setupTests";
+import Big from "big.js";
 
 test("round", () => {
-  expect(round(123.123, 5)).eq(123.123);
-  expect(round(123.123, 2)).eq(123.12);
-  expect(round(123.125, 2)).eq(123.13);
-  expect(round(123.123, 1)).eq(123.1);
-  expect(round(123.126, 1)).eq(123.1);
-  expect(round(123.126, 0)).eq(123);
+  expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
+  expect(roundBig(Big(123.123), 2)).eq(123.12);
+  expect(roundBig(Big(1.125324235131234), 2)).eq(1.13);
+  expect(roundBig(Big(123.124), 2)).eq(123.12);
+  expect(roundBig(Big(123.125), 2)).eq(123.13);
+  expect(roundBig(Big(123.125), 1)).eq(123.1);
+  expect(roundBig(Big(123.126), 0)).eq(123);
 });
 
 test("calcTotal", () => {
-  expect(calcTotal([itemForm1, itemForm2])).eq(110);
-  expect(calcTotal([])).eq(0);
+  expect(calcTotal([itemForm1, itemForm2])).toEqual(Big(110));
+  expect(calcTotal([])).toEqual(Big(0));
 });
 
 test("calcPercentage", () => {
@@ -45,8 +48,8 @@ test("calcPercentage", () => {
 });
 
 test("calcAvailable", () => {
-  expect(calcAvailable(testBudget)).eq(90);
-  expect(calcAvailable(null)).eq(0);
+  expect(calcAvailable(testBudget)).toEqual(Big(90));
+  expect(calcAvailable(null)).toEqual(Big(0));
 });
 
 test("calcWithGoal", () => {
@@ -60,7 +63,7 @@ test("calcSaved", () => {
 });
 
 test("calcAutoGoal", () => {
-  expect(calcAutoGoal(testBudget)).eq(90);
+  expect(calcAutoGoal(testBigBudget)).eq(93.36298);
   expect(calcAutoGoal(null)).eq(0);
 });
 

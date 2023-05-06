@@ -13,13 +13,14 @@ import {
   calcPercentage,
   calcTotal,
   intlFormat,
-  round,
+  roundBig,
   userLang,
 } from "../utils";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
 import { BsPlusLg } from "react-icons/bs";
 import { CurrencyInputProps } from "react-currency-input-field";
+import Big from "big.js";
 
 interface TableCardProps {
   items: Income | Expense;
@@ -37,7 +38,7 @@ function TableCard({
   onChange,
 }: TableCardProps) {
   const [table, setTable] = useState(initialItems);
-  const [total, setTotal] = useState(calcTotal(table.items));
+  const [total, setTotal] = useState(roundBig(calcTotal(table.items), 2));
   const revenuePercentage = calcPercentage(total, revenueTotal);
 
   const addTable = (tableBeingEdited: Income | Expense) => {
@@ -69,10 +70,10 @@ function TableCard({
     newItemForm.value = 0;
 
     newTable.items = tableBeingEdited.items.concat(newItemForm);
-    newTable.total = calcTotal(newTable.items);
+    newTable.total = roundBig(calcTotal(newTable.items), 2);
 
     setTable(newTable);
-    setTotal(calcTotal(newTable.items));
+    setTotal(roundBig(calcTotal(newTable.items), 2));
     onChange(newTable);
   };
 
@@ -86,10 +87,10 @@ function TableCard({
     newTable.items = table.items.filter(
       (item: { id: number }) => item.id !== toBeDeleted.id
     );
-    newTable.total = calcTotal(newTable.items);
+    newTable.total = roundBig(calcTotal(newTable.items), 2);
 
     setTable(newTable);
-    setTotal(calcTotal(newTable.items));
+    setTotal(roundBig(calcTotal(newTable.items), 2));
     onChange(newTable);
   };
 
@@ -110,7 +111,7 @@ function TableCard({
       }
       return i;
     });
-    newTable.total = calcTotal(newTable.items);
+    newTable.total = roundBig(calcTotal(newTable.items), 2);
 
     setTable(newTable);
     setTotal(newTable.total);
@@ -143,7 +144,7 @@ function TableCard({
             >
               <div>
                 {intlFormat(
-                  round(total * 100, 2),
+                  roundBig(Big(total).mul(100), 2),
                   userLang,
                   intlConfig?.currency as string
                 )}

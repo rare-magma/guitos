@@ -6,6 +6,7 @@ import * as dineroCurrencies from "@dinero.js/currencies";
 import { currenciesMap } from "./currenciesMap";
 import { Currency } from "dinero.js";
 import { MutableRefObject } from "react";
+import Big from "big.js";
 
 export const userLang = navigator.language;
 
@@ -18,17 +19,17 @@ export const initialCurrencyCode = currenciesMap[
   countryCode as keyof typeof currenciesMap
 ] as unknown as string;
 
-export function round(number: number, precision: number) {
-  return +(Math.round(Number(number + "e+" + precision)) + "e-" + precision);
+export function roundBig(number: Big, precision: number): number {
+  return Big(number).round(precision, 1).toNumber();
 }
 
-export function calcTotal(values: Array<ItemForm>): number {
+export function calcTotal(values: Array<ItemForm>): Big {
   const total =
     values &&
     values
       .filter((x) => !isNaN(x.value))
-      .reduce((total, n) => total + n.value, 0);
-  return round(total, 2);
+      .reduce((total, n) => Big(total).add(n.value).toNumber(), 0);
+  return Big(total);
 }
 
 export function calcPercentage(
@@ -36,32 +37,33 @@ export function calcPercentage(
   revenueTotal: number
 ): number {
   if (!isNaN(revenueTotal) && revenueTotal > 0 && !isNaN(itemValue)) {
-    const percentage = round((itemValue * 100) / revenueTotal, 2);
+    const percentage = Big(itemValue).mul(100).div(revenueTotal);
 
-    if (percentage >= 1) {
-      return round(percentage, 0);
+    if (percentage.gte(1)) {
+      return roundBig(percentage, 0);
     } else {
-      return round(percentage, 1);
+      return roundBig(percentage, 1);
     }
   }
   return 0;
 }
 
-export function calcAvailable(value: Budget | null): number {
+export function calcAvailable(value: Budget | null): Big {
   if (value !== null) {
     const expenseTotal = calcTotal(value.expenses.items);
     const incomeTotal = calcTotal(value.incomes.items);
-    return round(incomeTotal - expenseTotal, 2);
+    return incomeTotal.sub(expenseTotal);
   }
-  return 0;
+  return Big(0);
 }
 
 export function calcWithGoal(value: Budget | null): number {
   if (value !== null && value.stats.goal !== null && !isNaN(value.stats.goal)) {
     const available = calcAvailable(value);
-    const availableWithGoal =
-      (value.stats.goal * calcTotal(value.incomes.items)) / 100;
-    return round(available - availableWithGoal, 2);
+    const availableWithGoal = Big(value.stats.goal)
+      .mul(calcTotal(value.incomes.items))
+      .div(100);
+    return roundBig(available.sub(availableWithGoal), 2);
   }
   return 0;
 }
@@ -69,8 +71,8 @@ export function calcWithGoal(value: Budget | null): number {
 export function calcSaved(value: Budget | null): number {
   if (value !== null && value.stats.goal !== null && !isNaN(value.stats.goal)) {
     const available = calcTotal(value.incomes.items);
-    const saved = (value.stats.goal * available) / 100;
-    return round(saved, 2);
+    const saved = Big(value.stats.goal).mul(available).div(100);
+    return roundBig(saved, 2);
   }
   return 0;
 }
@@ -80,9 +82,9 @@ export function calcAutoGoal(value: Budget | null): number {
     const incomeTotal = calcTotal(value.incomes.items);
     const available = calcAvailable(value);
 
-    if (incomeTotal > 0 && available > 0) {
-      const autoGoal = (available * 100) / incomeTotal;
-      return round(autoGoal, 2);
+    if (incomeTotal.gt(0) && available.gt(0)) {
+      const autoGoal = available.mul(100).div(incomeTotal);
+      return roundBig(autoGoal, 5);
     }
   }
   return 0;
@@ -131,11 +133,17 @@ export const convertCsvToBudget = (csv: string[], date: string): Budget => {
     switch (item.type) {
       case "expense":
         newBudget.expenses.items.push(newItemForm);
-        newBudget.expenses.total = calcTotal(newBudget.expenses.items);
+        newBudget.expenses.total = roundBig(
+          calcTotal(newBudget.expenses.items),
+          2
+        );
         break;
       case "income":
         newBudget.incomes.items.push(newItemForm);
-        newBudget.incomes.total = calcTotal(newBudget.incomes.items);
+        newBudget.incomes.total = roundBig(
+          calcTotal(newBudget.incomes.items),
+          2
+        );
         break;
       case "goal":
         newBudget.stats.goal = Number(item.value);
@@ -146,7 +154,7 @@ export const convertCsvToBudget = (csv: string[], date: string): Budget => {
     }
   });
 
-  newBudget.stats.available = calcAvailable(newBudget);
+  newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
   newBudget.stats.withGoal = calcWithGoal(newBudget);
   newBudget.stats.saved = calcSaved(newBudget);
 

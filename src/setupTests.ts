@@ -78,6 +78,32 @@ export const testBudget2 = new Budget({
   },
 });
 
+export const testBigBudget = new Budget({
+  id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+  name: "2023-03",
+  expenses: {
+    items: [
+      { id: 1, name: "name", value: 11378.64 },
+      { id: 4, name: "name2", value: 11378.64 },
+    ],
+    total: 22757.28,
+  },
+  incomes: {
+    items: [
+      { id: 2, name: "name", value: 100.03 },
+      { id: 3, name: "name2", value: 342783.83 },
+    ],
+    total: 342883.86,
+  },
+  stats: {
+    available: 320126.58,
+    withGoal: 148684.65,
+    saved: 171441.93,
+    goal: 50,
+    reserves: 200,
+  },
+});
+
 export const testJSONErrorBudget = `{
   id: "03123AAA5c2de4-00a4-403c-8f0e-f81339be9a4e",
   na2me: "2023-03",
