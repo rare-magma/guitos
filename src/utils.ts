@@ -36,11 +36,7 @@ export function calcPercentage(
   if (!isNaN(revenueTotal) && revenueTotal > 0 && !isNaN(itemValue)) {
     const percentage = Big(itemValue).mul(100).div(revenueTotal);
 
-    if (percentage.gte(1)) {
-      return roundBig(percentage, 0);
-    } else {
-      return roundBig(percentage, 1);
-    }
+    return roundBig(percentage, percentage.gte(1) ? 0 : 1);
   }
   return 0;
 }
