@@ -319,3 +319,8 @@ input[type="number"] {
   min-width: inherit;
   overflow-x: hidden !important;
 }
+
+.auto-goal {
+  border: 1px solid var(--comment);
+  border-radius: 0.375rem;
+}

@@ -1,5 +1,6 @@
 import { expect, test } from "vitest";
 import {
+  calcAutoGoal,
   calcAvailable,
   calcPercentage,
   calcSaved,
@@ -56,6 +57,11 @@ test("calcWithGoal", () => {
 test("calcSaved", () => {
   expect(calcSaved(testBudget)).eq(10);
   expect(calcSaved(null)).eq(0);
+});
+
+test("calcAutoGoal", () => {
+  expect(calcAutoGoal(testBudget)).eq(90);
+  expect(calcAutoGoal(null)).eq(0);
 });
 
 test("convertCsvToBudget", () => {
