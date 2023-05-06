@@ -63,6 +63,7 @@ function NavBar({
 
   useHotkeys(["/", "f"], () => focusRef(typeRef), { preventDefault: true });
   useHotkeys("r", () => focusRef(nameRef), { preventDefault: true });
+  useHotkeys("t", () => focusRef(currencyRef), { preventDefault: true });
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
