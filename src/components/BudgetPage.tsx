@@ -1,17 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Budget } from "./Budget";
 import { useParams } from "react-router-dom";
-import {
-  Container,
-  Row,
-  Col,
-  Spinner,
-  Button,
-  Stack,
-  Form,
-  Accordion,
-  Modal,
-} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import TableCard from "./TableCard";
 import { Stat } from "./Stat";
 import StatCard from "./StatCard";
@@ -30,23 +20,14 @@ import {
 import { Income } from "./Income";
 import { Expense } from "./Expense";
 import NavBar from "./NavBar";
-import Papa, { ParseError } from "papaparse";
+import Papa from "papaparse";
 import { Option } from "react-bootstrap-typeahead/types/types";
-import { BsXLg } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
 import { budgetsDB, optionsDB } from "../App";
 import { CurrencyInputProps } from "react-currency-input-field";
+import ErrorModal, { CsvError, JsonError } from "./ErrorModal";
+import LandingPage from "./LandingPage";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
-
-type CsvError = {
-  errors: ParseError[];
-  file: string;
-};
-
-type JsonError = {
-  errors: string;
-  file: string;
-};
 
 function BudgetPage() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -526,191 +507,28 @@ function BudgetPage() {
         }}
       />
 
-      {loading && (
-        <Container
-          fluid
-          className="position-absolute top-50 start-50 translate-middle"
-        >
-          <Row className="justify-content-center">
-            <Spinner animation="border" role="status" />
-          </Row>
-        </Container>
-      )}
+      <LandingPage
+        loading={loading}
+        budget={budget || null}
+        budgetList={budgetList}
+        inputRef={inputRef}
+        onNew={handleNew}
+        onImport={(e) => {
+          handleImport(e);
+        }}
+      />
 
-      {error && show && (
-        <Modal
-          data-testid="error-modal"
-          dialogClassName="modal-90w mx-auto"
-          show={show}
-          onHide={() => setShow(false)}
-          centered
-        >
-          <Modal.Header>
-            Error:
-            <Button
-              className="align-self-end"
-              key={"modal-dismiss-button"}
-              variant="delete-modal"
-              type="button"
-              onClick={() => {
-                setShow(false);
-                setJsonError([]);
-              }}
-            >
-              <BsXLg />
-            </Button>
-          </Modal.Header>
-          <Modal.Body className="textarea mx-1">
-            <p className="code">{error}</p>
-          </Modal.Body>
-        </Modal>
-      )}
-
-      {jsonError && jsonError.length > 0 && show && (
-        <Modal
-          key="json-error-modal"
-          data-testid="json-error-modal"
-          dialogClassName="modal-90w mx-auto"
-          show={show}
-          onHide={() => setShow(false)}
-          centered
-        >
-          <Modal.Header key="json-error-modal-header">
-            Errors found while importing:
-            <Button
-              data-testid="json-error-close"
-              className="align-self-end"
-              key={"modal-dismiss-button"}
-              variant="delete-modal"
-              type="button"
-              onClick={() => {
-                setShow(false);
-                setJsonError([]);
-              }}
-            >
-              <BsXLg />
-            </Button>
-          </Modal.Header>
-          <Modal.Body key="json-error-modal-body">
-            <Accordion key="json-error-modal-accordion" flush>
-              {jsonError.map((jsonError: JsonError, i: number) => (
-                <Accordion.Item
-                  key={jsonError.file + "-item-" + i}
-                  eventKey={jsonError.file}
-                >
-                  <Accordion.Header key={jsonError.file + "-header-" + i}>
-                    {jsonError.file}
-                  </Accordion.Header>
-                  <Accordion.Body
-                    className="textarea code mx-1"
-                    key={jsonError.file + "-body-" + i}
-                  >
-                    <p className="code" key={jsonError.file + "-error-" + i}>
-                      <>
-                        {jsonError.errors}
-                        <br />
-                      </>
-                    </p>
-                  </Accordion.Body>
-                </Accordion.Item>
-              ))}
-            </Accordion>
-          </Modal.Body>
-        </Modal>
-      )}
-
-      {csvError && csvError.length > 0 && show && (
-        <Modal
-          key="csv-error-modal"
-          data-testid="csv-error-modal"
-          dialogClassName="modal-90w mx-auto"
-          show={show}
-          onHide={() => setShow(false)}
-          centered
-        >
-          <Modal.Header key="csv-error-modal-header">
-            Errors found while importing:
-            <Button
-              data-testid="csv-error-close"
-              className="align-self-end"
-              key={"modal-dismiss-button"}
-              variant="delete-modal"
-              type="button"
-              onClick={() => {
-                setShow(false);
-                setCsvError([]);
-              }}
-            >
-              <BsXLg />
-            </Button>
-          </Modal.Header>
-          <Modal.Body key="csv-error-modal-body">
-            <Accordion key="csv-error-modal-accordion" flush>
-              {csvError.map((csvError: CsvError, i: number) => (
-                <Accordion.Item
-                  key={csvError.file + "-item-" + i}
-                  eventKey={csvError.file}
-                >
-                  <Accordion.Header key={csvError.file + "-header-" + i}>
-                    {csvError.file}
-                  </Accordion.Header>
-                  <Accordion.Body
-                    className="textarea code mx-1"
-                    key={csvError.file + "-body-" + i}
-                  >
-                    <p className="code" key={csvError.file + "-csv-error-" + i}>
-                      {csvError.errors.map((error) => (
-                        <span key={error.row}>
-                          Line {error.row}: {error.message}
-                          <br />
-                        </span>
-                      ))}
-                    </p>
-                  </Accordion.Body>
-                </Accordion.Item>
-              ))}
-            </Accordion>
-          </Modal.Body>
-        </Modal>
-      )}
-
-      {!loading && !budget && budgetList.length < 1 && (
-        <Container className="position-absolute top-50 start-50 translate-middle">
-          <Row className="justify-content-center align-content-center">
-            <Stack gap={3}>
-              <Button
-                className="w-25 align-self-center"
-                aria-label="new budget"
-                variant="outline-success"
-                onClick={handleNew}
-              >
-                new
-              </Button>
-              <Form.Group className="w-25 align-self-center" controlId="import">
-                <Button
-                  className="w-100"
-                  aria-label="import budget"
-                  variant="outline-primary"
-                  onClick={() => {
-                    inputRef.current?.click();
-                  }}
-                >
-                  import
-                </Button>
-                <Form.Control
-                  type="file"
-                  multiple
-                  ref={inputRef}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    handleImport(e);
-                  }}
-                  style={{ display: "none" }}
-                />
-              </Form.Group>
-            </Stack>
-          </Row>
-        </Container>
-      )}
+      <ErrorModal
+        error={error}
+        show={show}
+        jsonError={jsonError}
+        csvError={csvError}
+        onShow={setShow}
+        onError={() => {
+          setJsonError([]);
+          setCsvError([]);
+        }}
+      />
 
       {!loading && budget && (
         <Container key={budget.id}>
