@@ -8,6 +8,7 @@ import {
   calcWithGoal,
   convertCsvToBudget,
   createBudgetNameList,
+  intlFormat,
   roundBig,
 } from "./utils";
 import Papa from "papaparse";
@@ -92,4 +93,15 @@ test("createBudgetNameList", () => {
     expectedResult
   );
   expect(createBudgetNameList([])).toEqual([]);
+});
+
+test("intlFormat", () => {
+  expect(intlFormat(123.45, "JPY")).eq("¥123");
+  expect(intlFormat(123.45, "EUR")).eq("€123.45");
+  expect(intlFormat(123.45, "USD")).eq("$123.45");
+  expect(intlFormat(123.45, "CAD")).eq("CA$123.45");
+  expect(intlFormat(123.45, "GBP")).eq("£123.45");
+  expect(intlFormat(123.45, "CNY")).eq("CN¥123.45");
+  expect(intlFormat(123.45, "AUD")).eq("A$123.45");
+  expect(calcAutoGoal(null)).eq(0);
 });

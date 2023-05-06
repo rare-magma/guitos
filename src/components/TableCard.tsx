@@ -144,8 +144,7 @@ function TableCard({
             >
               <div>
                 {intlFormat(
-                  roundBig(Big(total).mul(100), 2),
-                  userLang,
+                  roundBig(Big(total), 2),
                   intlConfig?.currency as string
                 )}
               </div>

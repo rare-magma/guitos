@@ -1,10 +1,7 @@
 import { Budget } from "./components/Budget";
 import { ItemForm } from "./components/ItemForm";
 import { CsvItem } from "./components/CsvItem";
-import { dinero, toDecimal } from "dinero.js";
-import * as dineroCurrencies from "@dinero.js/currencies";
 import { currenciesMap } from "./currenciesMap";
-import { Currency } from "dinero.js";
 import { MutableRefObject } from "react";
 import Big from "big.js";
 
@@ -186,27 +183,12 @@ export const createNewBudget = (): Budget => {
   return newBudget;
 };
 
-export function intlFormat(
-  amount: number,
-  locale: Intl.LocalesArgument,
-  currencyCode: string,
-  options = {}
-) {
-  function transformer({ value, currency }): string {
-    return Number(value).toLocaleString(locale, {
-      ...options,
-      style: "currency",
-      currency: currency.code,
-    });
-  }
-
-  const dineroCurrency = dineroCurrencies[
-    currencyCode as keyof typeof dineroCurrencies
-  ] as Currency<number>;
-
-  const dineroObject = dinero({ amount: amount, currency: dineroCurrency });
-
-  return toDecimal(dineroObject, transformer);
+export function intlFormat(amount: number, currencyCode: string) {
+  return new Intl.NumberFormat(userLang, {
+    style: "currency",
+    currency: currencyCode,
+    currencyDisplay: "symbol",
+  }).format(amount);
 }
 
 export const focusRef = (
