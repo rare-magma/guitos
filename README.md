@@ -179,6 +179,7 @@ reserves,reserves,0
 - [React Currency Input Field](https://github.com/cchanxzy/react-currency-input-field)
 - [React Hotkeys Hook](https://github.com/JohannesKlauss/react-hotkeys-hook)
 - [Dinero.js](https://github.com/dinerojs/dinero.js)
+- [Big.js](https://github.com/MikeMcl/big.js)
 - [localForage](https://localforage.github.io/localForage/)
 - [PapaParse](https://papaparse.com/)
 - [Vite](https://vitejs.dev/)
