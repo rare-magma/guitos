@@ -1,3 +1,11 @@
+# [0.9.0](https://github.com/rare-magma/guitos/compare/v0.8.1...v0.9.0) (2023-05-06)
+
+
+### Features
+
+* add currency setting override option ([81e70b9](https://github.com/rare-magma/guitos/commit/81e70b9b18bba46d825ea99e4cd311a9414bddff)), closes [#39](https://github.com/rare-magma/guitos/issues/39)
+* add shortcut to change currency setting ([5dac9b8](https://github.com/rare-magma/guitos/commit/5dac9b8a75ae79d91afafc1305638c92bae2dcab))
+
 ## [0.8.1](https://github.com/rare-magma/guitos/compare/v0.8.0...v0.8.1) (2023-05-04)
 
 
