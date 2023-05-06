@@ -21,12 +21,12 @@ export function roundBig(number: Big, precision: number): number {
 }
 
 export function calcTotal(values: Array<ItemForm>): Big {
-  const total =
-    values &&
+  let total = Big(0);
+  values &&
     values
       .filter((x) => !isNaN(x.value))
-      .reduce((total, n) => Big(total).add(n.value).toNumber(), 0);
-  return Big(total);
+      .forEach((i) => (total = total.add(Big(i.value))));
+  return total;
 }
 
 export function calcPercentage(

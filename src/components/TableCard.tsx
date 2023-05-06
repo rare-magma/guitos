@@ -9,13 +9,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import ItemFormGroup from "./ItemFormGroup";
-import {
-  calcPercentage,
-  calcTotal,
-  intlFormat,
-  roundBig,
-  userLang,
-} from "../utils";
+import { calcPercentage, calcTotal, intlFormat, roundBig } from "../utils";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
 import { BsPlusLg } from "react-icons/bs";
