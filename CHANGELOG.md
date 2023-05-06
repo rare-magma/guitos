@@ -1,3 +1,11 @@
+# [0.10.0](https://github.com/rare-magma/guitos/compare/v0.9.0...v0.10.0) (2023-05-06)
+
+
+### Features
+
+* add button for calculating savings goal automatically ([af6f7b9](https://github.com/rare-magma/guitos/commit/af6f7b9166e14823e94099ce9b46863c117cba7a))
+* use big decimal for better precision on all calculations ([7235743](https://github.com/rare-magma/guitos/commit/723574356fff03ebe8044be7d05130fae736530b)), closes [#19](https://github.com/rare-magma/guitos/issues/19)
+
 # [0.9.0](https://github.com/rare-magma/guitos/compare/v0.8.1...v0.9.0) (2023-05-06)
 
 
