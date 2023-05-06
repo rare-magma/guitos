@@ -166,7 +166,7 @@ reserves,reserves,0
 - The interface theme is set automatically by your browser and/or operating system's configuration.
 - The currency is initially selected according to your browser's preferred languages.
   - Example: English (United States) browser language displays values in US Dollars. English (India) uses Indian Rupees.
-  - It's possible to override it by selecting a different currency code.
+  - It's possible to override it by selecting a different currency code based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
 
 ## Built With
 
