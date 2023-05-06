@@ -98,6 +98,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
 | Search budget list    | F or /   |
 | Focus savings goal    | G        |
 | Focus reserves        | E        |
+| Change currency       | T        |
 
 ### In case you have a backup/would like to import data from another source:
 
@@ -163,8 +164,9 @@ reserves,reserves,0
   - There are plans to improve accuracy on [#19](https://github.com/rare-magma/guitos/issues/19)
 - guitos tries to load an existing budget when visiting `guitos.app/budget-name`
 - The interface theme is set automatically by your browser and/or operating system's configuration.
-- The currency is formatted according to your browser's preferred languages.
+- The currency is initially selected according to your browser's preferred languages.
   - Example: English (United States) browser language displays values in US Dollars. English (India) uses Indian Rupees.
+  - It's possible to override it by selecting a different currency code.
 
 ## Built With
 
