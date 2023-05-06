@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import NavBar from "./NavBar";
-import { budgetNameList, testBudget } from "../setupTests";
+import { budgetNameList, intlConfig, testBudget } from "../setupTests";
 
 describe("NavBar", () => {
   const onClone = vi.fn();
@@ -14,10 +14,13 @@ describe("NavBar", () => {
   const onRemove = vi.fn();
   const onRename = vi.fn();
   const onSelect = vi.fn();
+  const onSetCurrency = vi.fn();
+
   beforeEach(() => {
     render(
       <NavBar
         budgetNameList={budgetNameList}
+        currency={intlConfig.currency}
         selected={"2023-04"}
         id={"035c2de4-00a4-403c-8f0e-f81339be9a4e"}
         onClone={onClone}
@@ -29,9 +32,11 @@ describe("NavBar", () => {
         onRemove={onRemove}
         onRename={onRename}
         onSelect={onSelect}
+        onSetCurrency={onSetCurrency}
       />
     );
   });
+
   it("renders initial state", async () => {
     expect(screen.getByText("2023-04")).toBeInTheDocument();
 
@@ -73,5 +78,13 @@ describe("NavBar", () => {
 
     expect(onRename).toHaveBeenCalledTimes(11);
     expect(screen.getByDisplayValue("2023-04change name")).toBeInTheDocument();
+  });
+
+  it("triggers onSetCurrency when currency is selected from dropdown", async () => {
+    const newButton = screen.getAllByRole("button", { name: "new budget" });
+    await userEvent.click(newButton[0]);
+    await userEvent.type(screen.getByPlaceholderText("USD"), "CAD");
+    await userEvent.click(screen.getByText("CAD"));
+    expect(onSetCurrency).toHaveBeenCalledTimes(1);
   });
 });

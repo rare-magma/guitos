@@ -22,15 +22,18 @@ import {
   convertCsvToBudget,
   createBudgetNameList,
   createNewBudget,
+  initialCurrencyCode,
+  userLang,
 } from "../utils";
 import { Income } from "./Income";
 import { Expense } from "./Expense";
 import NavBar from "./NavBar";
 import Papa, { ParseError } from "papaparse";
-import localforage from "localforage";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { BsXLg } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
+import { budgetsDB, optionsDB } from "../App";
+import { CurrencyInputProps } from "react-currency-input-field";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 type CsvError = {
@@ -51,6 +54,14 @@ function BudgetPage() {
   const [csvError, setCsvError] = useState<CsvError[]>([]);
   const [jsonError, setJsonError] = useState<JsonError[]>([]);
   const [show, setShow] = useState(false);
+
+  const [currency, setCurrency] = useState<string>(initialCurrencyCode);
+  const [intlConfig, setIntlConfig] = useState<
+    CurrencyInputProps["intlConfig"]
+  >({
+    locale: userLang,
+    currency: currency,
+  });
 
   const [budget, setBudget] = useState<Budget | null>(null);
   const [budgetList, setBudgetList] = useState<Budget[]>([]);
@@ -190,7 +201,7 @@ function BudgetPage() {
   };
 
   const handleRemove = (toBeDeleted: string) => {
-    localforage
+    budgetsDB
       .removeItem(toBeDeleted)
       .then(() => {
         const newBudgetList = budgetList
@@ -238,6 +249,14 @@ function BudgetPage() {
 
   const handleGoForward = () => {
     handleGo(1, budgetList.length - 1);
+  };
+
+  const handleSetCurrency = (c: string) => {
+    optionsDB.setItem("currencyCode", c).catch((e) => {
+      setError(e.message);
+    });
+    setCurrency(c);
+    setIntlConfig({ locale: userLang, currency: c as string });
   };
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -317,10 +336,10 @@ function BudgetPage() {
 
   const save = (budget: Budget) => {
     let list: Budget[] = [];
-    localforage
+    budgetsDB
       .setItem(budget.id, budget)
       .then(() => {
-        localforage
+        budgetsDB
           .iterate((value) => {
             list = list.concat(value as unknown as Budget);
           })
@@ -342,13 +361,14 @@ function BudgetPage() {
   const loadFromDb = () => {
     let list: Budget[] = [];
 
-    localforage
+    budgetsDB
       .iterate((value) => {
         list = list.concat(value as unknown as Budget);
       })
       .then(() => {
         setBudgetList(list);
         setBudgetNameList(createBudgetNameList(list));
+
         if (name.trim() !== "undefined") {
           setBudget(list.filter((b: Budget) => b && b.name === name)[0]);
         } else {
@@ -359,6 +379,19 @@ function BudgetPage() {
               .filter((b: Budget) => b && b.id === list[0].id)[0]
           );
         }
+
+        optionsDB
+          .getItem("currencyCode")
+          .then((c) => {
+            if (c) {
+              setCurrency(c as string);
+              setIntlConfig({ locale: userLang, currency: c as string });
+            }
+          })
+          .catch((e) => {
+            setError(e.message);
+          });
+
         setLoading(false);
       })
       .catch((e) => {
@@ -382,7 +415,7 @@ function BudgetPage() {
           budgetList
             .filter((b: Budget) => b && b.name === name)
             .forEach((data: Budget) => {
-              localforage
+              budgetsDB
                 .getItem(data.id)
                 .then((b) => setBudget(b as unknown as Budget))
                 .catch((e) => {
@@ -392,7 +425,7 @@ function BudgetPage() {
             });
         } else {
           budgetList.slice(0).forEach((data: Budget) => {
-            localforage
+            budgetsDB
               .getItem(data.id)
               .then((b) => {
                 setBudget(b as unknown as Budget);
@@ -403,6 +436,19 @@ function BudgetPage() {
               });
           });
         }
+
+        optionsDB
+          .getItem("currencyCode")
+          .then((c) => {
+            if (c) {
+              setCurrency(c as string);
+              setIntlConfig({ locale: userLang, currency: c as string });
+            }
+          })
+          .catch((e) => {
+            setError(e.message);
+          });
+
         setBudgetNameList(createBudgetNameList(budgetList));
         setLoading(false);
       } else {
@@ -421,6 +467,7 @@ function BudgetPage() {
         selected={budget?.name || undefined}
         id={budget?.id || undefined}
         budgetNameList={budgetNameList}
+        currency={currency || initialCurrencyCode}
         onRename={(e) => {
           handleRename(e);
         }}
@@ -447,6 +494,9 @@ function BudgetPage() {
         }}
         onSelect={(e) => {
           handleSelect(e);
+        }}
+        onSetCurrency={(e) => {
+          handleSetCurrency(e);
         }}
       />
 
@@ -644,6 +694,7 @@ function BudgetPage() {
                 <StatCard
                   key={"stats-" + budget.expenses.total + budget.incomes.total}
                   stat={budget.stats}
+                  intlConfig={intlConfig}
                   onChange={handleStatChange}
                 />
 
@@ -651,6 +702,7 @@ function BudgetPage() {
 
                 <TableCard
                   items={budget.incomes}
+                  intlConfig={intlConfig}
                   revenueTotal={budget.incomes.total}
                   header="Revenue"
                   onChange={handleIncomeChange}
@@ -662,6 +714,7 @@ function BudgetPage() {
             <Col md="6" className="mb-3">
               <TableCard
                 items={budget.expenses}
+                intlConfig={intlConfig}
                 revenueTotal={budget.incomes.total}
                 header="Expenses"
                 onChange={handleExpenseChange}

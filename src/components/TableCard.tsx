@@ -19,11 +19,13 @@ import {
 import { Expense } from "./Expense";
 import { Income } from "./Income";
 import { BsPlusLg } from "react-icons/bs";
+import { CurrencyInputProps } from "react-currency-input-field";
 
 interface TableCardProps {
   items: Income | Expense;
   revenueTotal: number;
   header: string;
+  intlConfig: CurrencyInputProps["intlConfig"];
   onChange: (table: Income | Expense) => void;
 }
 
@@ -31,6 +33,7 @@ function TableCard({
   items: initialItems,
   revenueTotal,
   header: label,
+  intlConfig,
   onChange,
 }: TableCardProps) {
   const [table, setTable] = useState(initialItems);
@@ -115,7 +118,10 @@ function TableCard({
   };
 
   return (
-    <Card className={label + "-card"}>
+    <Card
+      key={"table-" + label + intlConfig?.currency}
+      className={label + "-card"}
+    >
       <Card.Header className={label + "-card-header"}>
         <Row>
           <Col>{label}</Col>
@@ -135,7 +141,13 @@ function TableCard({
                 )
               }
             >
-              <div>{intlFormat(round(total * 100, 2), userLang)}</div>
+              <div>
+                {intlFormat(
+                  round(total * 100, 2),
+                  userLang,
+                  intlConfig?.currency as string
+                )}
+              </div>
             </OverlayTrigger>
           </Col>
         </Row>
@@ -145,6 +157,7 @@ function TableCard({
           <ItemFormGroup
             key={label + "-" + item.id}
             itemForm={item}
+            intlConfig={intlConfig}
             costPercentage={calcPercentage(item.value, revenueTotal)}
             onChange={handleChange}
             onRemove={() => {

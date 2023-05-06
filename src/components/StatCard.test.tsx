@@ -1,15 +1,22 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { testBudget } from "../setupTests";
+import { intlConfig, testBudget } from "../setupTests";
 import StatCard from "./StatCard";
 
 describe("StatCard", () => {
   const onChange = vi.fn();
 
   beforeEach(() => {
-    render(<StatCard stat={testBudget.stats} onChange={onChange} />);
+    render(
+      <StatCard
+        intlConfig={intlConfig}
+        stat={testBudget.stats}
+        onChange={onChange}
+      />
+    );
   });
+
   it("renders initial state", () => {
     expect(screen.getByText("Statistics")).toBeInTheDocument();
     expect(screen.getByDisplayValue("$90")).toBeInTheDocument();

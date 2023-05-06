@@ -8,13 +8,13 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
-import { currencyCode, userLang } from "../utils";
 import { ItemForm } from "./ItemForm";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 
 interface ItemFormProps {
   itemForm: ItemForm;
   costPercentage: number;
+  intlConfig: CurrencyInputProps["intlConfig"];
   onRemove: (itemForm: ItemForm) => void;
   onChange: (itemForm: ItemForm) => void;
 }
@@ -22,15 +22,11 @@ interface ItemFormProps {
 function ItemFormGroup({
   itemForm: initialItemForm,
   costPercentage,
+  intlConfig,
   onRemove,
   onChange,
 }: ItemFormProps) {
   const [itemForm, setItemForm] = useState(initialItemForm);
-  const [intlConfig] = useState<CurrencyInputProps["intlConfig"]>({
-    locale: userLang,
-    currency: currencyCode,
-  });
-
   const handleRemove = (item: ItemForm) => {
     onRemove(item);
   };

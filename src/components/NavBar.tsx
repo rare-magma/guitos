@@ -18,11 +18,13 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { focusRef } from "../utils";
+import { currenciesList } from "../currenciesList";
 
 interface NavBarProps {
   budgetNameList: { id: string; name: string }[];
   id?: string | null;
   selected?: string | null;
+  currency: string;
   onClone: () => void;
   onExport: () => void;
   onGoBack: () => void;
@@ -32,12 +34,14 @@ interface NavBarProps {
   onRemove: (name: string) => void;
   onRename: (name?: string | null) => void;
   onSelect: (budget: Option[]) => void;
+  onSetCurrency: (currency: string) => void;
 }
 
 function NavBar({
   budgetNameList: initialBudgetNameList,
   id: initialId,
   selected: initialSelectedName,
+  currency,
   onClone,
   onExport,
   onGoBack,
@@ -47,9 +51,11 @@ function NavBar({
   onRemove,
   onRename,
   onSelect,
+  onSetCurrency,
 }: NavBarProps) {
-  const inputRef = useRef<HTMLInputElement>();
+  const importRef = useRef<HTMLInputElement>();
   const typeRef = useRef();
+  const currencyRef = useRef();
   const nameRef = useRef<HTMLInputElement>();
 
   const [expanded, setExpanded] = useState(false);
@@ -102,6 +108,7 @@ function NavBar({
   };
 
   const handleSelect = (budget: Option[]) => {
+    setExpanded(false);
     onSelect(budget);
     if (typeRef.current) {
       typeRef.current.clear();
@@ -114,6 +121,14 @@ function NavBar({
 
   const handleGoForward = () => {
     onGoForward();
+  };
+
+  const handleSetCurrency = (c: string) => {
+    setExpanded(false);
+    onSetCurrency(c);
+    if (currencyRef.current) {
+      currencyRef.current.clear();
+    }
   };
 
   const editName = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -207,6 +222,7 @@ function NavBar({
                     defaultValue={initialSelectedName}
                     ref={nameRef}
                     onChange={editName}
+                    style={expanded ? {} : { minWidth: "12ch" }}
                     type="text"
                     maxLength={25}
                   />
@@ -248,6 +264,7 @@ function NavBar({
                     filterBy={["name"]}
                     labelKey="name"
                     ref={typeRef}
+                    style={expanded ? {} : { minWidth: "10ch" }}
                     onChange={(budget: Option[]) => {
                       handleSelect(budget);
                     }}
@@ -365,7 +382,7 @@ function NavBar({
                       aria-label="import budget"
                       variant="outline-primary"
                       onClick={() => {
-                        inputRef.current?.click();
+                        importRef.current?.click();
                       }}
                     >
                       {expanded ? "import" : <BsUpload />}
@@ -374,7 +391,7 @@ function NavBar({
                       data-testid="import-form-control"
                       type="file"
                       multiple
-                      ref={inputRef}
+                      ref={importRef}
                       onChange={handleImport}
                       style={{ display: "none" }}
                     />
@@ -382,33 +399,63 @@ function NavBar({
                 </OverlayTrigger>
               </Nav>
               {initialBudgetNameList && initialBudgetNameList.length > 0 && (
-                <Nav
-                  className="m-2"
-                  onClick={() => {
-                    handleExport();
-                  }}
-                >
-                  <OverlayTrigger
-                    delay={250}
-                    placement="bottom"
-                    overlay={
-                      <Tooltip
-                        id={`tooltip-export-budget`}
-                        style={{ position: "fixed" }}
-                      >
-                        export budget
-                      </Tooltip>
-                    }
+                <>
+                  <Nav
+                    className="m-2"
+                    onClick={() => {
+                      handleExport();
+                    }}
                   >
-                    <Button
-                      className="w-100"
-                      aria-label="export budget"
-                      variant="outline-info"
+                    <OverlayTrigger
+                      delay={250}
+                      placement="bottom"
+                      overlay={
+                        <Tooltip
+                          id={`tooltip-export-budget`}
+                          style={{ position: "fixed" }}
+                        >
+                          export budget
+                        </Tooltip>
+                      }
                     >
-                      {expanded ? "export" : <BsDownload />}
-                    </Button>
-                  </OverlayTrigger>
-                </Nav>
+                      <Button
+                        className="w-100"
+                        aria-label="export budget"
+                        variant="outline-info"
+                      >
+                        {expanded ? "export" : <BsDownload />}
+                      </Button>
+                    </OverlayTrigger>
+                  </Nav>
+                  <Nav className="m-2">
+                    <Typeahead
+                      id="currency-option-list"
+                      aria-label="select currency option"
+                      ref={currencyRef}
+                      maxResults={currenciesList.length}
+                      maxHeight="30vh"
+                      paginate={false}
+                      onChange={(c: Option[]) => {
+                        if (currenciesList.includes(c[0] as string)) {
+                          handleSetCurrency(c[0] as string);
+                        }
+                      }}
+                      className="w-100 fixed-width-font"
+                      style={
+                        expanded
+                          ? {}
+                          : {
+                              maxWidth: "6ch",
+                              minWidth: "6ch",
+                            }
+                      }
+                      options={currenciesList.sort((a, b) =>
+                        a.localeCompare(b)
+                      )}
+                      placeholder={currency}
+                    />
+                  </Nav>
+                </>
               )}
               <OverlayTrigger
                 delay={250}

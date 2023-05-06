@@ -310,3 +310,12 @@ input[type="number"] {
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
 }
+
+.fixed-width-font {
+  font-family: ui-monospace, SF Mono, Menlo, Monaco, Andale Mono, monospace;
+}
+
+.dropdown-menu {
+  min-width: inherit;
+  overflow-x: hidden !important;
+}

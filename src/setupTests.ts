@@ -165,3 +165,5 @@ export const itemForm2 = new ItemForm({
   name: "name2",
   value: 100,
 });
+
+export const intlConfig = { locale: "en-US", currency: "USD" };

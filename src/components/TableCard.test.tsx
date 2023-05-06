@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import TableCard from "./TableCard";
-import { testBudget } from "../setupTests";
+import { intlConfig, testBudget } from "../setupTests";
 
 describe("TableCard", () => {
   const onChange = vi.fn();
@@ -11,6 +11,7 @@ describe("TableCard", () => {
     render(
       <TableCard
         items={testBudget.expenses}
+        intlConfig={intlConfig}
         revenueTotal={0}
         header={"Expenses"}
         onChange={onChange}

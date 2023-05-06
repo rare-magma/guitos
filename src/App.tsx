@@ -4,12 +4,17 @@ import "./App.css";
 import BudgetPage from "./components/BudgetPage";
 import localforage from "localforage";
 
-export default function App() {
-  localforage.config({
-    name: "guitos",
-    storeName: "budgets",
-  });
+export const budgetsDB = localforage.createInstance({
+  name: "guitos",
+  storeName: "budgets",
+});
 
+export const optionsDB = localforage.createInstance({
+  name: "guitos",
+  storeName: "options",
+});
+
+export default function App() {
   return (
     <>
       <Router>

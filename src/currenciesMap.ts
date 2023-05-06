@@ -1,4 +1,4 @@
-export const currencies = {
+export const currenciesMap = {
   AD: "EUR",
   AE: "AED",
   AF: "AFN",

@@ -7,28 +7,19 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { useRef, useState } from "react";
-import {
-  currencyCode,
-  focusRef,
-  numberInputOnWheelPreventChange,
-  userLang,
-} from "../utils";
+import { focusRef, numberInputOnWheelPreventChange } from "../utils";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { BsPercent } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
 
 interface StatCardProps {
   stat: Stat;
+  intlConfig: CurrencyInputProps["intlConfig"];
   onChange: (stat: Stat) => void;
 }
 
-function StatCard({ stat: initialStat, onChange }: StatCardProps) {
+function StatCard({ stat: initialStat, intlConfig, onChange }: StatCardProps) {
   const [stat, setStat] = useState(initialStat);
-  const [intlConfig] = useState<CurrencyInputProps["intlConfig"]>({
-    locale: userLang,
-    currency: currencyCode,
-  });
-
   const goalRef = useRef<HTMLInputElement>();
   const reservesRef = useRef<HTMLInputElement>();
 
@@ -56,7 +47,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
   }
 
   return (
-    <Card className="stat-card">
+    <Card className="stat-card" key={"stat-" + intlConfig?.currency}>
       <Card.Header className="stat-card-header">Statistics</Card.Header>
       <Card.Body>
         <InputGroup className="mb-1" key={"stats"}>
@@ -72,7 +63,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           </OverlayTrigger>
           <CurrencyInput
             id="available"
-            key={stat.available}
+            key={stat.available + "-available"}
             className="text-right form-control"
             aria-label={"available"}
             name="available"
@@ -109,7 +100,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           </OverlayTrigger>
           <CurrencyInput
             id="with-goal"
-            key={stat.withGoal}
+            key={stat.withGoal + "-withGoal"}
             className="text-right form-control"
             aria-label={"with-goal"}
             name="with-goal"
@@ -162,7 +153,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           </OverlayTrigger>
           <CurrencyInput
             id="saved"
-            key={stat.saved}
+            key={stat.saved + "-saved"}
             className="text-right form-control"
             aria-label={"saved"}
             name="saved"
@@ -184,6 +175,7 @@ function StatCard({ stat: initialStat, onChange }: StatCardProps) {
           </OverlayTrigger>
           <CurrencyInput
             id="reserves"
+            key={stat.reserves + "-reserves"}
             className="text-right form-control"
             aria-label={"reserves"}
             name="reserves"

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import ItemFormGroup from "./ItemFormGroup";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { itemForm1 } from "../setupTests";
+import { intlConfig, itemForm1 } from "../setupTests";
 
 describe("ItemFormGroup", () => {
   const onRemove = vi.fn();
@@ -12,12 +12,14 @@ describe("ItemFormGroup", () => {
     render(
       <ItemFormGroup
         itemForm={itemForm1}
+        intlConfig={intlConfig}
         costPercentage={1}
         onRemove={onRemove}
         onChange={onChange}
       />
     );
   });
+
   it("renders initial state", () => {
     expect(screen.getByDisplayValue("name1")).toBeInTheDocument();
     expect(screen.getByDisplayValue("$10")).toBeInTheDocument();
