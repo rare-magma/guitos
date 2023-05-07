@@ -1,3 +1,10 @@
+# [0.11.0](https://github.com/rare-magma/guitos/compare/v0.10.0...v0.11.0) (2023-05-07)
+
+
+### Features
+
+* cleaner stats labels ([c3ff0a5](https://github.com/rare-magma/guitos/commit/c3ff0a5a83081c239037b7e7997f03d602c77196))
+
 # [0.10.0](https://github.com/rare-magma/guitos/compare/v0.9.0...v0.10.0) (2023-05-06)
 
 
