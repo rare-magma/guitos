@@ -29,8 +29,10 @@ function StatCard({
   const [stat, setStat] = useState(initialStat);
   const [autoGoal, setAutoGoal] = useState(false);
 
-  const goalRef = useRef<HTMLInputElement>();
-  const reservesRef = useRef<HTMLInputElement>();
+  const goalRef =
+    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
+  const reservesRef =
+    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
 
   useHotkeys("g", () => focusRef(goalRef), { preventDefault: true });
   useHotkeys("e", () => focusRef(reservesRef), { preventDefault: true });
