@@ -227,7 +227,7 @@ function StatCard({
           </OverlayTrigger>
           <CurrencyInput
             id="reserves"
-            key={stat.reserves + "-reserves"}
+            key={"reserves"}
             className="text-right form-control"
             aria-label={"reserves"}
             name="reserves"
