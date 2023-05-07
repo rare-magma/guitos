@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import ItemFormGroup from "./ItemFormGroup";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { intlConfig, itemForm1 } from "../setupTests";
+import { intlConfig, itemForm1 } from "../../setupTests";
 
 describe("ItemFormGroup", () => {
   const onRemove = vi.fn();

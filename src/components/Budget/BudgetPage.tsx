@@ -2,9 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Budget } from "./Budget";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import TableCard from "./TableCard";
-import { Stat } from "./Stat";
-import StatCard from "./StatCard";
 import {
   calcAutoGoal,
   calcAvailable,
@@ -16,17 +13,20 @@ import {
   initialCurrencyCode,
   roundBig,
   userLang,
-} from "../utils";
-import { Income } from "./Income";
-import { Expense } from "./Expense";
-import NavBar from "./NavBar";
+} from "../../utils";
 import Papa from "papaparse";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
-import { budgetsDB, optionsDB } from "../App";
+import { budgetsDB, optionsDB } from "../../App";
 import { CurrencyInputProps } from "react-currency-input-field";
-import ErrorModal, { CsvError, JsonError } from "./ErrorModal";
-import LandingPage from "./LandingPage";
+import ErrorModal, { CsvError, JsonError } from "../ErrorModal/ErrorModal";
+import LandingPage from "../LandingPage/LandingPage";
+import NavBar from "../NavBar/NavBar";
+import { Stat } from "../StatCard/Stat";
+import StatCard from "../StatCard/StatCard";
+import { Expense } from "../TableCard/Expense";
+import { Income } from "../TableCard/Income";
+import TableCard from "../TableCard/TableCard";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 function BudgetPage() {

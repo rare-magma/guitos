@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ItemForm } from "./ItemForm";
+import { ItemForm } from "../ItemForm/ItemForm";
 import {
   Card,
   Button,
@@ -8,13 +8,13 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
-import ItemFormGroup from "./ItemFormGroup";
-import { calcPercentage, calcTotal, intlFormat, roundBig } from "../utils";
-import { Expense } from "./Expense";
-import { Income } from "./Income";
 import { BsPlusLg } from "react-icons/bs";
 import { CurrencyInputProps } from "react-currency-input-field";
 import Big from "big.js";
+import { roundBig, calcTotal, calcPercentage, intlFormat } from "../../utils";
+import ItemFormGroup from "../ItemForm/ItemFormGroup";
+import { Expense } from "./Expense";
+import { Income } from "./Income";
 
 interface TableCardProps {
   items: Income | Expense;

@@ -1,6 +1,6 @@
-import { Expense } from "./Expense";
-import { Income } from "./Income";
-import { Stat } from "./Stat";
+import { Stat } from "../StatCard/Stat";
+import { Expense } from "../TableCard/Expense";
+import { Income } from "../TableCard/Income";
 
 export class Budget {
   id!: string;

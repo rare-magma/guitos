@@ -17,8 +17,8 @@ import { FaRegClone } from "react-icons/fa";
 import { Typeahead } from "react-bootstrap-typeahead";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
-import { focusRef } from "../utils";
-import { currenciesList } from "../currenciesList";
+import { focusRef } from "../../utils";
+import { currenciesList } from "../../currenciesList";
 
 interface NavBarProps {
   budgetNameList: { id: string; name: string }[];
@@ -140,7 +140,13 @@ function NavBar({
   };
 
   return (
-    <Navbar variant={theme} key="md" expand="md" onToggle={setToggle}>
+    <Navbar
+      variant={theme}
+      key="md"
+      expand="md"
+      onToggle={setToggle}
+      data-testid="header"
+    >
       <Container fluid className="flex-row">
         {initialBudgetNameList && initialBudgetNameList.length < 1 && (
           <Navbar.Brand className="flex-sm-row">guitos</Navbar.Brand>

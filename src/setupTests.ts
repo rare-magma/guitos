@@ -7,8 +7,8 @@ import { expect, afterEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
 import matchers from "@testing-library/jest-dom/matchers";
 import { randomUUID } from "node:crypto";
-import { Budget } from "./components/Budget";
-import { ItemForm } from "./components/ItemForm";
+import { ItemForm } from "./components/ItemForm/ItemForm";
+import { Budget } from "./components/Budget/Budget";
 
 window.crypto.randomUUID = randomUUID;
 
@@ -42,11 +42,11 @@ export const testBudget = new Budget({
   id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
   name: "2023-03",
   expenses: {
-    items: [{ id: 1, name: "name", value: 10 }],
+    items: [{ id: 1, name: "expense1", value: 10 }],
     total: 10,
   },
   incomes: {
-    items: [{ id: 2, name: "name", value: 100 }],
+    items: [{ id: 2, name: "income1", value: 100 }],
     total: 100,
   },
   stats: {

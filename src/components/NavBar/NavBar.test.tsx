@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import NavBar from "./NavBar";
-import { budgetNameList, intlConfig, testBudget } from "../setupTests";
+import { budgetNameList, intlConfig, testBudget } from "../../setupTests";
 
 describe("NavBar", () => {
   const onClone = vi.fn();
@@ -60,6 +60,11 @@ describe("NavBar", () => {
     expect(onGoForward).toHaveBeenCalledTimes(1);
   });
 
+  it("triggers onClone when clone button is pressed", async () => {
+    await userEvent.click(screen.getByLabelText("clone budget"));
+    expect(onClone).toHaveBeenCalledTimes(1);
+  });
+
   it("triggers onImport when import button is pressed", async () => {
     await userEvent.upload(
       screen.getByTestId("import-form-control"),
@@ -78,6 +83,16 @@ describe("NavBar", () => {
 
     expect(onRename).toHaveBeenCalledTimes(11);
     expect(screen.getByDisplayValue("2023-04change name")).toBeInTheDocument();
+  });
+
+  it("triggers onSelect when user selects budget", async () => {
+    await userEvent.type(
+      screen.getByPlaceholderText("Search list of budgets..."),
+      "2023-05"
+    );
+    await userEvent.click(screen.getByText("2023-05"));
+
+    expect(onSelect).toHaveBeenCalledTimes(1);
   });
 
   it("triggers onSetCurrency when currency is selected from dropdown", async () => {

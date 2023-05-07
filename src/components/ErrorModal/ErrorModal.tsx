@@ -51,6 +51,7 @@ function ErrorModal({
             Error:
             <Button
               className="align-self-end"
+              data-testid="error-modal-dismiss"
               key={"modal-dismiss-button"}
               variant="delete-modal"
               type="button"

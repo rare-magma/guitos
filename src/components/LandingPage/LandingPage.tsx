@@ -1,6 +1,6 @@
 import { Button, Container, Form, Row, Spinner, Stack } from "react-bootstrap";
-import { Budget } from "./Budget";
 import { RefObject } from "react";
+import { Budget } from "../Budget/Budget";
 
 interface LandingPageProps {
   loading: boolean;
@@ -65,6 +65,7 @@ function LandingPage({
                 </Button>
                 <Form.Control
                   type="file"
+                  data-testid="import-form-control-landing-page"
                   multiple
                   ref={inputRef}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {

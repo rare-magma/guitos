@@ -1,4 +1,4 @@
-import { ItemForm } from "./ItemForm";
+import { ItemForm } from "../ItemForm/ItemForm";
 
 export class Expense {
   items: Array<ItemForm> = [];

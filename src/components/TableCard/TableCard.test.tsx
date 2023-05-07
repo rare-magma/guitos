@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import TableCard from "./TableCard";
-import { intlConfig, testBudget } from "../setupTests";
+import { intlConfig, testBudget } from "../../setupTests";
 
 describe("TableCard", () => {
   const onChange = vi.fn();
@@ -18,16 +18,30 @@ describe("TableCard", () => {
       />
     );
   });
-  it("renders initial state", () => {
-    expect(screen.getByDisplayValue("name")).toBeInTheDocument();
+  it("renders initial Expenses state", () => {
+    expect(screen.getByDisplayValue("expense1")).toBeInTheDocument();
     expect(screen.getByDisplayValue("$10")).toBeInTheDocument();
   });
 
+  it("renders initial Revenue state", () => {
+    render(
+      <TableCard
+        items={testBudget.incomes}
+        intlConfig={intlConfig}
+        revenueTotal={0}
+        header={"Revenue"}
+        onChange={onChange}
+      />
+    );
+    expect(screen.getByDisplayValue("income1")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("$100")).toBeInTheDocument();
+  });
+
   it("triggers onChange when user changes input", async () => {
-    await userEvent.type(screen.getByDisplayValue("name"), "change name");
+    await userEvent.type(screen.getByDisplayValue("expense1"), "change name");
 
     expect(onChange).toHaveBeenCalledTimes(11);
-    expect(screen.getByDisplayValue("namechange name")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("expense1change name")).toBeInTheDocument();
 
     await userEvent.type(screen.getByDisplayValue("$10"), "123");
 

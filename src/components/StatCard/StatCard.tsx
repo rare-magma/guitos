@@ -8,10 +8,10 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { useRef, useState } from "react";
-import { focusRef, numberInputOnWheelPreventChange } from "../utils";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { BsGear, BsPercent } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
+import { focusRef, numberInputOnWheelPreventChange } from "../../utils";
 
 interface StatCardProps {
   stat: Stat;

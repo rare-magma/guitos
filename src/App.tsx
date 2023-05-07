@@ -1,8 +1,8 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import BudgetPage from "./components/BudgetPage";
 import localforage from "localforage";
+import BudgetPage from "./components/Budget/BudgetPage";
 
 export const budgetsDB = localforage.createInstance({
   name: "guitos",
