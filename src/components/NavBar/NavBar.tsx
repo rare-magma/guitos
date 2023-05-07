@@ -19,6 +19,7 @@ import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { focusRef } from "../../utils";
 import { currenciesList } from "../../currenciesList";
+import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
 
 interface NavBarProps {
   budgetNameList: { id: string; name: string }[];
@@ -53,17 +54,31 @@ function NavBar({
   onSelect,
   onSetCurrency,
 }: NavBarProps) {
-  const importRef = useRef<HTMLInputElement>();
-  const typeRef = useRef();
-  const currencyRef = useRef();
-  const nameRef = useRef<HTMLInputElement>();
+  const importRef =
+    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
+  const typeRef = useRef<TypeaheadRef>(null);
+  const currencyRef = useRef<TypeaheadRef>(null);
+  const nameRef =
+    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
 
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
 
-  useHotkeys(["/", "f"], () => focusRef(typeRef), { preventDefault: true });
+  useHotkeys(
+    ["/", "f"],
+    () =>
+      focusRef(typeRef as unknown as React.MutableRefObject<HTMLInputElement>),
+    { preventDefault: true }
+  );
   useHotkeys("r", () => focusRef(nameRef), { preventDefault: true });
-  useHotkeys("t", () => focusRef(currencyRef), { preventDefault: true });
+  useHotkeys(
+    "t",
+    () =>
+      focusRef(
+        currencyRef as unknown as React.MutableRefObject<HTMLInputElement>
+      ),
+    { preventDefault: true }
+  );
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
