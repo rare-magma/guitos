@@ -12,9 +12,13 @@ export default defineConfig(() => {
     },
     plugins: [react(), eslint()],
     test: {
+      coverage: {
+        provider: "c8",
+      },
       globals: true,
       environment: "jsdom",
       setupFiles: "./src/setupTests.ts",
+      reporters: ["default", "html"],
     },
   };
 });
