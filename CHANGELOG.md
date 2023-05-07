@@ -1,3 +1,10 @@
+## [0.11.1](https://github.com/rare-magma/guitos/compare/v0.11.0...v0.11.1) (2023-05-07)
+
+
+### Bug Fixes
+
+* issue with reserves input ([72a71b6](https://github.com/rare-magma/guitos/commit/72a71b6c4b3983893df8a1cbe77ece925a9be9db))
+
 # [0.11.0](https://github.com/rare-magma/guitos/compare/v0.10.0...v0.11.0) (2023-05-07)
 
 
