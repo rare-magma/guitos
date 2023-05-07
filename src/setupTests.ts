@@ -11,6 +11,7 @@ import { ItemForm } from "./components/ItemForm/ItemForm";
 import { Budget } from "./components/Budget/Budget";
 
 window.crypto.randomUUID = randomUUID;
+// global.URL.createObjectURL = vi.fn();
 
 vi.mock("crypto", () => ({
   randomUUID: () => "035c2de4-00a4-403c-8f0e-f81339be9a4e",
