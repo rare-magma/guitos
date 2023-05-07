@@ -85,6 +85,12 @@ describe("NavBar", () => {
     expect(screen.getByDisplayValue("2023-04change name")).toBeInTheDocument();
   });
 
+  it("triggers onRemove when user clicks delete budget button", async () => {
+    await userEvent.click(screen.getByLabelText("delete budget"));
+
+    expect(onRemove).toHaveBeenCalledTimes(1);
+  });
+
   it("triggers onSelect when user selects budget", async () => {
     await userEvent.type(
       screen.getByPlaceholderText("Search list of budgets..."),
