@@ -324,3 +324,23 @@ input[type="number"] {
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
 }
+
+.popover {
+  color: var(--textcolor);
+  background: var(--bgcolor);
+  border: 1px solid var(--comment);
+  border-radius: 0.375rem;
+  width: auto;
+}
+
+.popover-header {
+  color: var(--textcolor);
+  background: var(--bgcolor);
+  border: 0px solid var(--comment);
+  border-bottom: 1px solid var(--comment);
+}
+
+.popover .popover-arrow::before,
+.popover .popover-arrow::after {
+  border-top-color: var(--comment);
+}

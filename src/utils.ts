@@ -41,6 +41,41 @@ export function calcPercentage(
   return 0;
 }
 
+export function calc(
+  itemValue: number,
+  change: number,
+  operation: string
+): number {
+  let total = 0;
+  if (!isNaN(itemValue) && change > 0) {
+    let newValue = Big(itemValue);
+    const changeValue = Big(change);
+    switch (operation) {
+      case "add":
+        newValue = newValue.add(changeValue);
+        break;
+      case "sub":
+        newValue = newValue.sub(changeValue);
+        break;
+      case "mul":
+        newValue = newValue.mul(changeValue);
+        break;
+      case "div":
+        newValue = newValue.div(changeValue);
+        break;
+      default:
+        throw new Error("operation not implemented");
+    }
+    total = roundBig(newValue, 2);
+  }
+
+  if (total >= 0) {
+    return total;
+  } else {
+    return 0;
+  }
+}
+
 export function calcAvailable(value: Budget | null): Big {
   if (value !== null) {
     const expenseTotal = calcTotal(value.expenses.items);

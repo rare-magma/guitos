@@ -44,8 +44,20 @@ describe("ItemFormGroup", () => {
   });
 
   it("shows tooltip when user hovers over", async () => {
-    fireEvent.mouseOver(screen.getByDisplayValue("name1"));
+    fireEvent.mouseOver(screen.getByDisplayValue("$10,123"));
 
     expect(await screen.findByText("1% of revenue")).toBeInTheDocument();
+  });
+
+  it("opens popover when clicking the button", async () => {
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: "select operations to change item value amount",
+      })
+    );
+
+    expect(
+      screen.getByLabelText("select type of operation on item value")
+    ).toBeInTheDocument();
   });
 });
