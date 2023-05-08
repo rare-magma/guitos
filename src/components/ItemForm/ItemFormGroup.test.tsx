@@ -38,7 +38,7 @@ describe("ItemFormGroup", () => {
   });
 
   it("triggers onRemove when user clicks delete button", async () => {
-    await userEvent.click(screen.getByRole("button"));
+    await userEvent.click(screen.getByRole("button", { name: "delete item" }));
 
     expect(onRemove).toHaveBeenCalledTimes(1);
   });

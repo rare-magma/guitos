@@ -50,13 +50,13 @@ describe("TableCard", () => {
   });
 
   it("triggers onChange when user adds new item", async () => {
-    await userEvent.click(screen.getAllByRole("button")[1]);
+    await userEvent.click(screen.getByRole("button", { name: "add item" }));
 
     expect(onChange).toHaveBeenCalledTimes(15);
   });
 
   it("triggers onChange when user deletes an item", async () => {
-    await userEvent.click(screen.getAllByRole("button")[0]);
+    await userEvent.click(screen.getByRole("button", { name: "delete item" }));
 
     expect(onChange).toHaveBeenCalledTimes(16);
   });
