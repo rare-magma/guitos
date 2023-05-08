@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import NavBar from "./NavBar";
-import { budgetNameList, intlConfig, testBudget } from "../../setupTests";
+import { budgetNameList, testIntlConfig, testBudget } from "../../setupTests";
 
 describe("NavBar", () => {
   const onClone = vi.fn();
@@ -20,7 +20,7 @@ describe("NavBar", () => {
     render(
       <NavBar
         budgetNameList={budgetNameList}
-        currency={intlConfig.currency}
+        currency={testIntlConfig.currency}
         selected={"2023-04"}
         id={"035c2de4-00a4-403c-8f0e-f81339be9a4e"}
         onClone={onClone}

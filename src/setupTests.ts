@@ -193,4 +193,4 @@ export const itemForm2 = new ItemForm({
   value: 100,
 });
 
-export const intlConfig = { locale: "en-US", currency: "USD" };
+export const testIntlConfig = { locale: "en-US", currency: "USD" };

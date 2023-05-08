@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import ItemFormGroup from "./ItemFormGroup";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { intlConfig, itemForm1 } from "../../setupTests";
+import { testIntlConfig, itemForm1 } from "../../setupTests";
 
 describe("ItemFormGroup", () => {
   const onRemove = vi.fn();
@@ -12,7 +12,7 @@ describe("ItemFormGroup", () => {
     render(
       <ItemFormGroup
         itemForm={itemForm1}
-        intlConfig={intlConfig}
+        intlConfig={testIntlConfig}
         costPercentage={1}
         onRemove={onRemove}
         onChange={onChange}

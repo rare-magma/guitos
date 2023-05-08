@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { intlConfig, testBudget } from "../../setupTests";
+import { testIntlConfig, testBudget } from "../../setupTests";
 import StatCard from "./StatCard";
 
 describe("StatCard", () => {
@@ -11,7 +11,7 @@ describe("StatCard", () => {
   beforeEach(() => {
     render(
       <StatCard
-        intlConfig={intlConfig}
+        intlConfig={testIntlConfig}
         stat={testBudget.stats}
         onChange={onChange}
         onAutoGoal={onAutoGoal}
