@@ -75,6 +75,7 @@ function ItemFormGroup({
           id={"item-" + itemForm.id + "-name"}
           aria-label={"item-name"}
           key={itemForm.id + "-name"}
+          autoFocus
           defaultValue={itemForm.name}
           onChange={handleNameChange}
           type="text"
