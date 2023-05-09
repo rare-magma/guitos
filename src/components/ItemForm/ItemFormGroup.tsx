@@ -10,7 +10,7 @@ import {
 import { BsXLg } from "react-icons/bs";
 import { ItemForm } from "./ItemForm";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
-import { calc } from "../../utils";
+import { calc, parseLocaleNumber } from "../../utils";
 import CalculateButton from "../CalculateButton/CalculateButton";
 
 interface ItemFormProps {
