@@ -1,3 +1,10 @@
+## [0.12.1](https://github.com/rare-magma/guitos/compare/v0.12.0...v0.12.1) (2023-05-09)
+
+
+### Bug Fixes
+
+* input with decimals doesn't work ([ea63d1f](https://github.com/rare-magma/guitos/commit/ea63d1f8e171fd41d5e4179ce35b3f93773d720c)), closes [#43](https://github.com/rare-magma/guitos/issues/43)
+
 # [0.12.0](https://github.com/rare-magma/guitos/compare/v0.11.1...v0.12.0) (2023-05-08)
 
 
