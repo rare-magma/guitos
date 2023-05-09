@@ -1,3 +1,11 @@
+# [0.12.0](https://github.com/rare-magma/guitos/compare/v0.11.1...v0.12.0) (2023-05-08)
+
+
+### Features
+
+* add operation button for item value ([faeb092](https://github.com/rare-magma/guitos/commit/faeb09285cae42e19507b30a27e650a39fab32ae))
+* focus item name upon adding new item in table ([3edbf06](https://github.com/rare-magma/guitos/commit/3edbf06b30bb2f173c37e32f37410957b2942d6f)), closes [#42](https://github.com/rare-magma/guitos/issues/42)
+
 ## [0.11.1](https://github.com/rare-magma/guitos/compare/v0.11.0...v0.11.1) (2023-05-07)
 
 
