@@ -1,3 +1,10 @@
+## [0.12.2](https://github.com/rare-magma/guitos/compare/v0.12.1...v0.12.2) (2023-05-09)
+
+
+### Bug Fixes
+
+* error if locale didn't match country code ([ca74521](https://github.com/rare-magma/guitos/commit/ca745212063f65b5819d787f7a4b4312b2b29d57))
+
 ## [0.12.1](https://github.com/rare-magma/guitos/compare/v0.12.0...v0.12.1) (2023-05-09)
 
 
