@@ -9,6 +9,7 @@ import {
   convertCsvToBudget,
   createBudgetNameList,
   intlFormat,
+  parseLocaleNumber,
   roundBig,
 } from "./utils";
 import Papa from "papaparse";
@@ -104,4 +105,11 @@ test("intlFormat", () => {
   expect(intlFormat(123.45, "CNY")).eq("CN¥123.45");
   expect(intlFormat(123.45, "AUD")).eq("A$123.45");
   expect(calcAutoGoal(null)).eq(0);
+});
+
+test("parseLocaleNumber", () => {
+  expect(parseLocaleNumber("123.45", "en-US")).eq(123.45);
+  expect(parseLocaleNumber("123,45", "es")).eq(123.45);
+  expect(parseLocaleNumber("12.054.100,55", "de-DE")).eq(12054100.55);
+  expect(parseLocaleNumber("1,20,54,100.55", "en-IN")).eq(12054100.55);
 });
