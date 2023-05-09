@@ -11,7 +11,11 @@ import { useRef, useState } from "react";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { BsGear, BsPercent } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
-import { focusRef, numberInputOnWheelPreventChange } from "../../utils";
+import {
+  focusRef,
+  numberInputOnWheelPreventChange,
+  parseLocaleNumber,
+} from "../../utils";
 
 interface StatCardProps {
   stat: Stat;
@@ -50,9 +54,9 @@ function StatCard({
 
   function handleReserveChange(value: string | undefined): void {
     let updatedStat: Stat;
-    if (stat !== null) {
+    if (stat !== null && value) {
       updatedStat = stat;
-      updatedStat.reserves = Number(value);
+      updatedStat.reserves = parseLocaleNumber(value, intlConfig?.locale);
       setStat(updatedStat);
       onChange(updatedStat);
     }

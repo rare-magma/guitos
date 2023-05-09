@@ -1,8 +1,12 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import ItemFormGroup from "./ItemFormGroup";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { testIntlConfig, itemForm1 } from "../../setupTests";
+import {
+  testIntlConfig,
+  itemForm1,
+  testSpanishIntlConfig,
+} from "../../setupTests";
 
 describe("ItemFormGroup", () => {
   const onRemove = vi.fn();
@@ -59,5 +63,30 @@ describe("ItemFormGroup", () => {
     expect(
       screen.getByLabelText("select type of operation on item value")
     ).toBeInTheDocument();
+  });
+
+  it("transforms decimal separator based on locale", async () => {
+    cleanup();
+
+    render(
+      <ItemFormGroup
+        itemForm={itemForm1}
+        intlConfig={testSpanishIntlConfig}
+        costPercentage={1}
+        onRemove={onRemove}
+        onChange={onChange}
+      />
+    );
+
+    await userEvent.clear(screen.getByDisplayValue("10123 €"));
+    await userEvent.type(screen.getByLabelText("item-value"), "123,12");
+
+    expect(screen.getByDisplayValue("123,12 €")).toBeInTheDocument();
+
+    expect(onChange).toBeCalledWith({
+      id: 1,
+      name: "name1change name",
+      value: 123.12,
+    });
   });
 });

@@ -50,8 +50,9 @@ function ItemFormGroup({
           if (event) newItemForm.name = event.target.value;
           break;
         case "value":
-          if (value)
-            newItemForm.value = isNaN(Number(value)) ? 0 : Number(value);
+          if (value) {
+            newItemForm.value = parseLocaleNumber(value, intlConfig?.locale);
+          }
           break;
         default:
           if (changeValue) {
