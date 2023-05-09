@@ -1,4 +1,6 @@
 export const currenciesMap = {
+  // Latin American Spanish locale
+  419: "USD",
   AD: "EUR",
   AE: "AED",
   AF: "AFN",
@@ -6,10 +8,14 @@ export const currenciesMap = {
   AI: "XCD",
   AL: "ALL",
   AM: "AMD",
+  // Aragonés locale
+  AN: "EUR",
   AO: "AOA",
   AQ: "USD",
   AR: "ARS",
   AS: "USD",
+  // Asturian locale
+  AST: "EUR",
   AT: "EUR",
   AU: "AUD",
   AW: "AWG",
@@ -58,6 +64,8 @@ export const currenciesMap = {
   CZ: "CZK",
   DE: "EUR",
   DJ: "DJF",
+  // Danish locale
+  DA: "DKK",
   DK: "DKK",
   DM: "XCD",
   DO: "DOP",
@@ -66,10 +74,18 @@ export const currenciesMap = {
   EE: "EUR",
   EG: "EGP",
   EH: "MAD",
+  // Greek locale
+  EL: "EUR",
   ER: "ERN",
   ES: "EUR",
   ET: "ETB",
+  // Basque locale
+  EU: "EUR",
+  // Persian locale
+  FA: "IRR",
   FI: "EUR",
+  // Philippines locale
+  FIL: "PHP",
   FJ: "FJD",
   FK: "FKP",
   FM: "USD",
@@ -94,6 +110,10 @@ export const currenciesMap = {
   GU: "USD",
   GW: "XOF",
   GY: "GYD",
+  // Hebrew locale
+  HE: "ILS",
+  // Hindi locale
+  HI: "INR",
   HK: "HKD",
   HM: "AUD",
   HN: "HNL",
@@ -110,6 +130,8 @@ export const currenciesMap = {
   IR: "IRR",
   IS: "ISK",
   IT: "EUR",
+  // Japanese locale
+  JA: "JPY",
   JE: "GBP",
   JM: "JMD",
   JO: "JOD",
@@ -119,8 +141,12 @@ export const currenciesMap = {
   KG: "KGS",
   KH: "KHR",
   KI: "AUD",
+  // Kazhak locale
+  KK: "KZT",
   KM: "KMF",
   KN: "XCD",
+  // Korean locale
+  KO: "KRW",
   KP: "KPW",
   KR: "KRW",
   KW: "KWD",
@@ -131,6 +157,8 @@ export const currenciesMap = {
   LC: "XCD",
   LI: "CHF",
   LK: "LKR",
+  // Laos locale
+  LO: "LAK",
   LR: "LRD",
   LS: "LSL",
   LT: "EUR",
@@ -161,6 +189,8 @@ export const currenciesMap = {
   MY: "MYR",
   MZ: "MZN",
   NA: "NAD",
+  // Norway locale
+  NB: "NOK",
   NC: "XPF",
   NE: "XOF",
   NF: "AUD",
@@ -214,6 +244,8 @@ export const currenciesMap = {
   SX: "ANG",
   SY: "SYP",
   SZ: "SZL",
+  // Telugu locale
+  TE: "INR",
   TC: "USD",
   TD: "XAF",
   TF: "EUR",

@@ -1,5 +1,5 @@
 import { ItemForm } from "./components/ItemForm/ItemForm";
-import { currenciesMap } from "./currenciesMap";
+import { currenciesMap } from "./lists/currenciesMap";
 import { MutableRefObject } from "react";
 import Big from "big.js";
 import { Budget } from "./components/Budget/Budget";
@@ -7,14 +7,23 @@ import { CsvItem } from "./components/Budget/CsvItem";
 
 export const userLang = navigator.language;
 
-export const countryCode =
-  userLang.split("-").length >= 2
-    ? userLang.split("-")[1].toUpperCase()
-    : userLang.toUpperCase();
+export function getCountryCode(locale: string): string {
+  return locale.split("-").length >= 2
+    ? locale.split("-")[1].toUpperCase()
+    : locale.toUpperCase();
+}
 
-export const initialCurrencyCode = currenciesMap[
-  countryCode as keyof typeof currenciesMap
-] as unknown as string;
+export function getCurrencyCode(country: string): string {
+  if (currenciesMap[country as keyof typeof currenciesMap] !== undefined) {
+    return currenciesMap[
+      country as keyof typeof currenciesMap
+    ] as unknown as string;
+  }
+  return "USD";
+}
+
+export const countryCode = getCountryCode(userLang);
+export const initialCurrencyCode = getCurrencyCode(countryCode);
 
 export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();

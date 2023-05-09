@@ -18,7 +18,7 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { focusRef } from "../../utils";
-import { currenciesList } from "../../currenciesList";
+import { currenciesList } from "../../lists/currenciesList";
 import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
 
 interface NavBarProps {

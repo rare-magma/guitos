@@ -8,6 +8,8 @@ import {
   calcWithGoal,
   convertCsvToBudget,
   createBudgetNameList,
+  getCountryCode,
+  getCurrencyCode,
   intlFormat,
   parseLocaleNumber,
   roundBig,
@@ -23,6 +25,9 @@ import {
   testCsv,
 } from "./setupTests";
 import Big from "big.js";
+import { currenciesMap } from "./lists/currenciesMap";
+import { chromeLocalesList } from "./lists/chromeLocalesList";
+import { firefoxLocalesList } from "./lists/firefoxLocalesList";
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
@@ -104,7 +109,23 @@ test("intlFormat", () => {
   expect(intlFormat(123.45, "GBP")).eq("£123.45");
   expect(intlFormat(123.45, "CNY")).eq("CN¥123.45");
   expect(intlFormat(123.45, "AUD")).eq("A$123.45");
-  expect(calcAutoGoal(null)).eq(0);
+
+  for (const key in currenciesMap) {
+    const currencyCode = currenciesMap[
+      key as keyof typeof currenciesMap
+    ] as unknown as string;
+
+    expect(intlFormat(1, currencyCode)).toBeTruthy();
+  }
+});
+test("intlFormat", () => {
+  [firefoxLocalesList, chromeLocalesList].forEach((list) => {
+    list.forEach((locale) => {
+      const countryCode = getCountryCode(locale);
+      const currencyCode = getCurrencyCode(countryCode);
+      expect(intlFormat(1, currencyCode)).toBeTruthy();
+    });
+  });
 });
 
 test("parseLocaleNumber", () => {
