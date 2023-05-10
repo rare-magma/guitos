@@ -1,6 +1,6 @@
 {
   "name": "guitos",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "private": true,
   "dependencies": {
     "@testing-library/user-event": "14.4.3",
