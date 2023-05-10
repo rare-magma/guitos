@@ -32,7 +32,7 @@ import TableCard from "../TableCard/TableCard";
 function BudgetPage() {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [csvError, setCsvError] = useState<CsvError[]>([]);
   const [jsonError, setJsonError] = useState<JsonError[]>([]);

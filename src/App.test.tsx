@@ -9,8 +9,7 @@ describe("App", () => {
 
   it("renders initial state", () => {
     waitFor(() => expect(screen.getAllByText("guitos")).toBeInTheDocument());
-    expect(screen.getByText("new")).toBeInTheDocument();
-    expect(screen.getByText("import")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toBeInTheDocument();
     expect(screen.getByText(/v/)).toBeInTheDocument();
   });
 
