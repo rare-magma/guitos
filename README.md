@@ -166,6 +166,14 @@ reserves,reserves,0
   - Example: English (United States) browser language displays values in US Dollars. English (India) uses Indian Rupees.
   - It's possible to override it by selecting a different currency code based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
 
+## Known issues
+
+- Cannot input decimal separator (comma or full stop signs) on expense/income/reserves values:
+  - guitos uses [react-currency-input-field](https://github.com/cchanxzy/react-currency-input-field/) to format the income/expense values.
+  - `react-currency-input-field` formats these values according to the current browser's locale (language setting). If the locale uses `.` as the official decimal separator, then only this separator is allowed to be input.
+    - See the following Wikipedia article for a reference: [Decimal separator](https://en.wikipedia.org/wiki/Decimal_separator)
+  - Changing the browser locale to one that uses the preferred decimal separator should mitigate the problem.
+
 ## Built With
 
 - [React](https://react.dev/)
