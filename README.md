@@ -172,7 +172,7 @@ reserves,reserves,0
   - guitos uses [react-currency-input-field](https://github.com/cchanxzy/react-currency-input-field/) to format the income/expense values.
   - `react-currency-input-field` formats these values according to the current browser/phone's locale (language setting). If the locale uses `.` as the official decimal separator, then only this separator is allowed to be input.
     - See the following Wikipedia article for a reference: [Decimal separator](https://en.wikipedia.org/wiki/Decimal_separator)
-  - Changing the browser/phone locale to one that uses the preferred decimal separator should mitigate the problem.
+  - Changing the browser/phone's locale to one that uses the preferred decimal separator should mitigate the problem.
 
 ## Built With
 
