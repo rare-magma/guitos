@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Col,
   Form,
   InputGroup,
   OverlayTrigger,
+  Popover,
   Tooltip,
 } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
@@ -30,6 +31,7 @@ function ItemFormGroup({
 }: ItemFormProps) {
   const [itemForm, setItemForm] = useState(initialItemForm);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   const [changed, setChanged] = useState(false);
   const handleRemove = (item: ItemForm) => {
     onRemove(item);
@@ -74,6 +76,7 @@ function ItemFormGroup({
     const close = (e: { key: string }) => {
       if (e.key === "Escape") {
         setShowOverlay(false);
+        setShowDelete(false);
       }
     };
     window.addEventListener("keydown", close);
@@ -152,15 +155,43 @@ function ItemFormGroup({
         onShow={handleShow}
       />
       <OverlayTrigger
-        delay={250}
+        trigger="click"
+        key="top"
         placement="top"
+        show={showDelete}
         overlay={
-          <Tooltip
-            id={`tooltip-delete-itemformgroup`}
-            style={{ position: "fixed" }}
-          >
-            delete item
-          </Tooltip>
+          <Popover id={`popover-delete-button`}>
+            <Popover.Body>
+              <OverlayTrigger
+                delay={250}
+                placement="top"
+                overlay={
+                  <Tooltip
+                    id={`tooltip-delete-itemformgroup`}
+                    style={{ position: "fixed" }}
+                  >
+                    delete item
+                  </Tooltip>
+                }
+              >
+                <Button
+                  id={"item-" + itemForm.id + "-button"}
+                  aria-label="confirm item deletion"
+                  key={itemForm.id + "button"}
+                  variant="delete"
+                  type="button"
+                  size="sm"
+                  autoFocus
+                  onClick={() => {
+                    setShowDelete(!showDelete);
+                    handleRemove(itemForm);
+                  }}
+                >
+                  <BsXLg />
+                </Button>
+              </OverlayTrigger>
+            </Popover.Body>
+          </Popover>
         }
       >
         <Button
@@ -170,7 +201,7 @@ function ItemFormGroup({
           variant="delete"
           type="button"
           onClick={() => {
-            handleRemove(itemForm);
+            setShowDelete(!showDelete);
           }}
         >
           <BsXLg />

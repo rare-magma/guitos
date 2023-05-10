@@ -57,6 +57,9 @@ describe("TableCard", () => {
 
   it("triggers onChange when user deletes an item", async () => {
     await userEvent.click(screen.getByRole("button", { name: "delete item" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "confirm item deletion" })
+    );
 
     expect(onChange).toHaveBeenCalledTimes(16);
   });

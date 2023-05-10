@@ -47,6 +47,9 @@ describe("BudgetPage", () => {
       name: "delete budget",
     });
     await userEvent.click(deleteButton[0]);
+    await userEvent.click(
+      screen.getByRole("button", { name: "confirm budget deletion" })
+    );
     budgetsDB.length().then((e) => expect(e).toBe(0));
   });
 

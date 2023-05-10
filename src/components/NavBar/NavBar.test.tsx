@@ -87,6 +87,9 @@ describe("NavBar", () => {
 
   it("triggers onRemove when user clicks delete budget button", async () => {
     await userEvent.click(screen.getByLabelText("delete budget"));
+    await userEvent.click(
+      screen.getByRole("button", { name: "confirm budget deletion" })
+    );
 
     expect(onRemove).toHaveBeenCalledTimes(1);
   });

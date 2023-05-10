@@ -343,4 +343,5 @@ input[type="number"] {
 .popover .popover-arrow::before,
 .popover .popover-arrow::after {
   border-top-color: var(--comment);
+  border-bottom-color: var(--comment);
 }

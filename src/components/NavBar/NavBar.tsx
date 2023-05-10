@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Offcanvas, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -62,6 +62,7 @@ function NavBar({
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
 
   const [expanded, setExpanded] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
   const [theme, setTheme] = useState("light");
 
   useHotkeys(
@@ -153,6 +154,16 @@ function NavBar({
       onRename(newName);
     }
   };
+
+  useEffect(() => {
+    const close = (e: { key: string }) => {
+      if (e.key === "Escape") {
+        setShowDelete(false);
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
 
   return (
     <Navbar
@@ -359,19 +370,46 @@ function NavBar({
                   <Nav
                     className="m-2"
                     onClick={() => {
-                      handleRemove(initialId);
+                      setShowDelete(!showDelete);
                     }}
                   >
                     <OverlayTrigger
-                      delay={250}
+                      trigger="click"
+                      key="nav-deletion-overlay"
                       placement="bottom"
+                      show={showDelete}
                       overlay={
-                        <Tooltip
-                          id={`tooltip-delete-budget`}
-                          style={{ position: "fixed" }}
-                        >
-                          delete budget
-                        </Tooltip>
+                        <Popover id={`nav-popover-delete-button`}>
+                          <Popover.Body>
+                            <OverlayTrigger
+                              delay={250}
+                              placement="bottom"
+                              overlay={
+                                <Tooltip
+                                  id={`nav-tooltip-delete-budget`}
+                                  style={{ position: "fixed" }}
+                                >
+                                  delete budget
+                                </Tooltip>
+                              }
+                            >
+                              <Button
+                                id={"budget-deletion-button"}
+                                aria-label="confirm budget deletion"
+                                key={"budget-deletion-button"}
+                                variant="delete"
+                                type="button"
+                                autoFocus
+                                onClick={() => {
+                                  setShowDelete(!showDelete);
+                                  handleRemove(initialId);
+                                }}
+                              >
+                                {expanded ? "delete budget" : <BsXLg />}
+                              </Button>
+                            </OverlayTrigger>
+                          </Popover.Body>
+                        </Popover>
                       }
                     >
                       <Button

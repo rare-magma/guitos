@@ -41,8 +41,11 @@ describe("ItemFormGroup", () => {
     expect(screen.getByDisplayValue("$10,123")).toBeInTheDocument();
   });
 
-  it("triggers onRemove when user clicks delete button", async () => {
+  it("triggers onRemove when user clicks delete confirmation button", async () => {
     await userEvent.click(screen.getByRole("button", { name: "delete item" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "confirm item deletion" })
+    );
 
     expect(onRemove).toHaveBeenCalledTimes(1);
   });
