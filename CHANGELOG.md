@@ -1,3 +1,10 @@
+## [0.14.2](https://github.com/rare-magma/guitos/compare/v0.14.1...v0.14.2) (2023-05-11)
+
+
+### Bug Fixes
+
+* publish action directory ([88ab549](https://github.com/rare-magma/guitos/commit/88ab5494acff8b67ee3409b30e19147cd5e47517))
+
 ## [0.14.1](https://github.com/rare-magma/guitos/compare/v0.14.0...v0.14.1) (2023-05-11)
 
 
