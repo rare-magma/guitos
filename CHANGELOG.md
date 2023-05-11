@@ -1,3 +1,10 @@
+# [0.14.0](https://github.com/rare-magma/guitos/compare/v0.13.0...v0.14.0) (2023-05-11)
+
+
+### Features
+
+* clean up design ([4641faa](https://github.com/rare-magma/guitos/commit/4641faaf9582577ce9d22d8082005067d230e336))
+
 # [0.13.0](https://github.com/rare-magma/guitos/compare/v0.12.2...v0.13.0) (2023-05-11)
 
 
