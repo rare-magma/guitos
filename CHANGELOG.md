@@ -1,3 +1,10 @@
+## [0.14.3](https://github.com/rare-magma/guitos/compare/v0.14.2...v0.14.3) (2023-05-11)
+
+
+### Bug Fixes
+
+* add branch name to publish job ([33e05df](https://github.com/rare-magma/guitos/commit/33e05df8618296d51a03898582d01bc0036b34df))
+
 ## [0.14.2](https://github.com/rare-magma/guitos/compare/v0.14.1...v0.14.2) (2023-05-11)
 
 
