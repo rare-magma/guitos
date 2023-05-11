@@ -29,3 +29,4 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: guitos
           directory: build
+          branch: main
