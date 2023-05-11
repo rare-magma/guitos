@@ -41,6 +41,7 @@ a {
 }
 
 a:hover {
+  color: var(--cyan);
   border-bottom: 1px solid;
 }
 
@@ -66,7 +67,7 @@ a:hover {
 .dropdown,
 .dropdown-item,
 .dropdown-item:hover,
-.dropdown-menu,
+.dropdown-item:focus,
 .navbar,
 .offcanvas-body,
 .offcanvas-header {
@@ -74,6 +75,8 @@ a:hover {
   background: var(--bgcolor);
 }
 
+.dropdown-menu,
+.dropdown-menu.show,
 .accordion,
 .accordion-button,
 .accordion-button:focus,
@@ -92,7 +95,6 @@ a:hover {
 }
 
 .form-control,
-.form-control:focus,
 .input-group-text,
 .modal-content,
 .modal-item,
@@ -102,6 +104,17 @@ input.text-right.form-control {
   color: var(--textcolor);
   background: var(--bgcolor);
   border: 1px solid var(--comment);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus,
+.dropdown-item:focus-visible,
+input.text-right.form-control:focus,
+.form-control:focus {
+  color: var(--textcolor);
+  background: var(--bgcolor);
+  border: 1px solid var(--pink);
+  box-shadow: 0 0 0;
 }
 
 .input-group-text {
@@ -126,6 +139,18 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.btn:focus-visible {
+  box-shadow: none !important;
+  background-color: var(--comment);
+  color: var(--bgcolor);
+}
+
+.btn.show,
+.btn:hover {
+  color: var(--bgcolor);
+  background-color: var(--comment);
 }
 
 .btn-close,
@@ -154,7 +179,7 @@ input[type="number"] {
 
 .btn-Expenses-plus-button {
   color: var(--purple);
-  border: 1px solid var(--purple);
+  border: 1px solid var(--comment);
 }
 .btn-Expenses-plus-button:focus-visible,
 .btn-Expenses-plus-button:hover {
@@ -165,7 +190,7 @@ input[type="number"] {
 
 .btn-Revenue-plus-button {
   color: var(--highlight);
-  border: 1px solid var(--highlight);
+  border: 1px solid var(--comment);
 }
 .btn-Revenue-plus-button:focus-visible,
 .btn-Revenue-plus-button:hover {
@@ -241,30 +266,30 @@ input[type="number"] {
 }
 
 .Expenses-card {
-  border: 1px solid var(--purple);
+  border: 1px solid var(--comment);
 }
 
 .Expenses-card-header {
   background-color: var(--selection);
-  border-bottom: 1px solid var(--purple);
+  border-bottom: 1px solid var(--comment);
 }
 
 .Revenue-card {
-  border: 1px solid var(--highlight);
+  border: 1px solid var(--comment);
 }
 
 .Revenue-card-header {
   background-color: var(--selection);
-  border-bottom: 1px solid var(--highlight);
+  border-bottom: 1px solid var(--comment);
 }
 
 .stat-card {
-  border: 1px solid var(--cyan);
+  border: 1px solid var(--comment);
 }
 
 .stat-card-header {
   background-color: var(--selection);
-  border-bottom: 1px solid var(--cyan);
+  border-bottom: 1px solid var(--comment);
 }
 
 .navbar .navbar-toggler-icon {
@@ -306,6 +331,7 @@ input[type="number"] {
   font-size: 1rem;
 }
 
+.auto-goal,
 .navbar-toggler {
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
@@ -318,11 +344,6 @@ input[type="number"] {
 .dropdown-menu {
   min-width: inherit;
   overflow-x: hidden !important;
-}
-
-.auto-goal {
-  border: 1px solid var(--comment);
-  border-radius: 0.375rem;
 }
 
 .popover {
