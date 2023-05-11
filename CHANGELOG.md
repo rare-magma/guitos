@@ -1,3 +1,10 @@
+## [0.14.1](https://github.com/rare-magma/guitos/compare/v0.14.0...v0.14.1) (2023-05-11)
+
+
+### Performance Improvements
+
+* setup npm cache in gh actions ([cb2333d](https://github.com/rare-magma/guitos/commit/cb2333db4fa2daf7f991afa6fd1eabc041ccfb95))
+
 # [0.14.0](https://github.com/rare-magma/guitos/compare/v0.13.0...v0.14.0) (2023-05-11)
 
 
