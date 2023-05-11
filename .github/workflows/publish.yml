@@ -4,9 +4,8 @@ on:
     types: [published]
 jobs:
   publish:
-    runs-on: ubuntu-latest
     name: publish to cloudflare pages
-    needs: release
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
