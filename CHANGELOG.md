@@ -1,3 +1,15 @@
+# [0.13.0](https://github.com/rare-magma/guitos/compare/v0.12.2...v0.13.0) (2023-05-11)
+
+
+### Bug Fixes
+
+* loading state not triggered on startup ([c719e71](https://github.com/rare-magma/guitos/commit/c719e715acafecb1194cf51a4d685c18dfe6a2b0))
+
+
+### Features
+
+* add delete confirmation buttons ([90cf696](https://github.com/rare-magma/guitos/commit/90cf6960d0cc0f44e2097919f6286affaab52c37))
+
 ## [0.12.2](https://github.com/rare-magma/guitos/compare/v0.12.1...v0.12.2) (2023-05-09)
 
 
