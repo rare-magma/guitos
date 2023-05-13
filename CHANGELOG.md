@@ -1,3 +1,10 @@
+## [0.15.1](https://github.com/rare-magma/guitos/compare/v0.15.0...v0.15.1) (2023-05-13)
+
+
+### Bug Fixes
+
+* close popover with click/tap outside of it ([e06899c](https://github.com/rare-magma/guitos/commit/e06899c8a4283e35f1d6e0b6d5e7c92ac967dc2c))
+
 # [0.15.0](https://github.com/rare-magma/guitos/compare/v0.14.3...v0.15.0) (2023-05-13)
 
 
