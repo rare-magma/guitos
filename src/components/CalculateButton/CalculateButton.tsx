@@ -12,7 +12,6 @@ import { ItemForm } from "../ItemForm/ItemForm";
 import { useState } from "react";
 
 interface CalculateButtonProps {
-  show: boolean;
   itemForm: ItemForm;
   intlConfig: CurrencyInputProps["intlConfig"];
   onCalculate: (changeValue: number, operation: string) => void;
@@ -20,7 +19,6 @@ interface CalculateButtonProps {
 }
 
 function CalculateButton({
-  show,
   itemForm,
   intlConfig,
   onCalculate,
@@ -46,7 +44,7 @@ function CalculateButton({
         trigger="click"
         key="top"
         placement="top"
-        show={show}
+        rootClose={true}
         overlay={
           <Popover id={`popover-calculate-button`}>
             <Popover.Body>

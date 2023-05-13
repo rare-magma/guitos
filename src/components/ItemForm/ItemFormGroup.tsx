@@ -146,7 +146,6 @@ function ItemFormGroup({
         </Col>
       </OverlayTrigger>
       <CalculateButton
-        show={showOverlay}
         itemForm={itemForm}
         intlConfig={intlConfig}
         onCalculate={(changeValue, operation) =>
@@ -158,7 +157,7 @@ function ItemFormGroup({
         trigger="click"
         key="top"
         placement="top"
-        show={showDelete}
+        rootClose={true}
         overlay={
           <Popover id={`popover-delete-button`}>
             <Popover.Body>
