@@ -4,7 +4,8 @@
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
   "plugins": [
     "jest-dom",
@@ -33,6 +34,7 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 6,
+    "project": ["./tsconfig.json"],
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
