@@ -22,7 +22,7 @@ describe("LandingPage", () => {
     );
   });
 
-  it("renders initial state", async () => {
+  it("renders initial state", () => {
     expect(
       screen.getAllByRole("button", { name: "new budget" })[0]
     ).toBeInTheDocument();
@@ -45,7 +45,7 @@ describe("LandingPage", () => {
     expect(onImport).toHaveBeenCalledTimes(1);
   });
 
-  it("renders loading spinner", async () => {
+  it("renders loading spinner", () => {
     render(
       <LandingPage
         loading={true}

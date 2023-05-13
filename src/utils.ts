@@ -191,9 +191,10 @@ export const convertCsvToBudget = (csv: string[], date: string): Budget => {
 
 export const createNewBudget = (): Budget => {
   const newId = crypto.randomUUID();
+  const year = new Date().getFullYear();
   const newBudget = {
     id: newId,
-    name: new Date().getFullYear() + "-" + newId.slice(0, 8),
+    name: `${year}-${newId.slice(0, 8)}`,
     expenses: {
       items: [{ id: 1, name: "", value: 0 }],
       total: 0,

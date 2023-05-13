@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import App from "./App";
 import userEvent from "@testing-library/user-event";
 
@@ -8,7 +8,7 @@ describe("App", () => {
   });
 
   it("renders initial state", () => {
-    waitFor(() => expect(screen.getAllByText("guitos")).toBeInTheDocument());
+    expect(screen.getAllByText("guitos")[0]).toBeInTheDocument();
     expect(screen.getByRole("status")).toBeInTheDocument();
     expect(screen.getByText(/v/)).toBeInTheDocument();
   });

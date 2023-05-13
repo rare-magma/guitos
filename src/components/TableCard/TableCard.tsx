@@ -114,6 +114,7 @@ function TableCard({
 
   return (
     <Card
+      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
       key={"table-" + label + intlConfig?.currency}
       className={label + "-card"}
     >
@@ -149,7 +150,7 @@ function TableCard({
       <Card.Body>
         {table.items?.map((item: ItemForm) => (
           <ItemFormGroup
-            key={label + "-" + item.id}
+            key={`${label}-${item.id}`}
             itemForm={item}
             intlConfig={intlConfig}
             costPercentage={calcPercentage(item.value, revenueTotal)}

@@ -97,17 +97,17 @@ function ErrorModal({
             <Accordion key="json-error-modal-accordion" flush>
               {jsonError.map((jsonError: JsonError, i: number) => (
                 <Accordion.Item
-                  key={jsonError.file + "-item-" + i}
+                  key={`${jsonError.file}-item-${i}`}
                   eventKey={jsonError.file}
                 >
-                  <Accordion.Header key={jsonError.file + "-header-" + i}>
+                  <Accordion.Header key={`${jsonError.file}-header-${i}`}>
                     {jsonError.file}
                   </Accordion.Header>
                   <Accordion.Body
                     className="textarea code mx-1"
-                    key={jsonError.file + "-body-" + i}
+                    key={`${jsonError.file}-body-${i}`}
                   >
-                    <p className="code" key={jsonError.file + "-error-" + i}>
+                    <p className="code" key={`${jsonError.file}-error-${i}`}>
                       <>
                         {jsonError.errors}
                         <br />
@@ -150,17 +150,17 @@ function ErrorModal({
             <Accordion key="csv-error-modal-accordion" flush>
               {csvError.map((csvError: CsvError, i: number) => (
                 <Accordion.Item
-                  key={csvError.file + "-item-" + i}
+                  key={`${csvError.file}-item-${i}`}
                   eventKey={csvError.file}
                 >
-                  <Accordion.Header key={csvError.file + "-header-" + i}>
+                  <Accordion.Header key={`${csvError.file}-header-${i}`}>
                     {csvError.file}
                   </Accordion.Header>
                   <Accordion.Body
                     className="textarea code mx-1"
-                    key={csvError.file + "-body-" + i}
+                    key={`${csvError.file}-body-${i}`}
                   >
-                    <p className="code" key={csvError.file + "-csv-error-" + i}>
+                    <p className="code" key={`${csvError.file}-csverror-${i}`}>
                       {csvError.errors.map((error) => (
                         <span key={error.row}>
                           Line {error.row}: {error.message}

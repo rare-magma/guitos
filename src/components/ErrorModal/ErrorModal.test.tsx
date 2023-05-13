@@ -39,7 +39,7 @@ describe("ErrorModal", () => {
     );
   });
 
-  it("renders initial state", async () => {
+  it("renders initial state", () => {
     expect(screen.getByText("Thrown error")).toBeInTheDocument();
     expect(
       screen.getAllByText("Errors found while importing:")[0]

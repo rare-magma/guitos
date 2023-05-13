@@ -226,8 +226,8 @@ function BudgetPage() {
           setBudget(null);
         }
       })
-      .catch((e) => {
-        setError(e.message);
+      .catch((e: unknown) => {
+        if (e instanceof Error) setError(e.message);
         setShow(true);
       });
   };
@@ -260,10 +260,10 @@ function BudgetPage() {
 
   const handleSetCurrency = (c: string) => {
     optionsDB.setItem("currencyCode", c).catch((e) => {
-      setError(e.message);
+      if (e instanceof Error) setError(e.message);
     });
     setCurrency(c);
-    setIntlConfig({ locale: userLang, currency: c as string });
+    setIntlConfig({ locale: userLang, currency: c });
   };
 
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -307,7 +307,7 @@ function BudgetPage() {
             save(newBudget);
           } else {
             try {
-              const list = JSON.parse(reader.result as string);
+              const list = JSON.parse(reader.result as string) as Budget[];
               list.forEach((b: Budget) => {
                 newBudgetList.push(b);
                 save(b);
@@ -348,19 +348,19 @@ function BudgetPage() {
       .then(() => {
         budgetsDB
           .iterate((value) => {
-            list = list.concat(value as unknown as Budget);
+            list = list.concat(value as Budget);
           })
           .then(() => {
             setBudgetList(list);
             setBudgetNameList(createBudgetNameList(list));
           })
-          .catch((e) => {
-            setError(e.message);
+          .catch((e: unknown) => {
+            if (e instanceof Error) setError(e.message);
             setShow(true);
           });
       })
-      .catch((e) => {
-        setError(e.message);
+      .catch((e: unknown) => {
+        if (e instanceof Error) setError(e.message);
         setShow(true);
       });
   };
@@ -370,7 +370,7 @@ function BudgetPage() {
 
     budgetsDB
       .iterate((value) => {
-        list = list.concat(value as unknown as Budget);
+        list = list.concat(value as Budget);
       })
       .then(() => {
         setBudgetList(list);
@@ -396,13 +396,13 @@ function BudgetPage() {
             }
           })
           .catch((e) => {
-            setError(e.message);
+            if (e instanceof Error) setError(e.message);
           });
 
         setLoading(false);
       })
       .catch((e) => {
-        setError(e.message);
+        if (e instanceof Error) setError(e.message);
         setShow(true);
       });
   };
@@ -424,9 +424,9 @@ function BudgetPage() {
             .forEach((data: Budget) => {
               budgetsDB
                 .getItem(data.id)
-                .then((b) => setBudget(b as unknown as Budget))
+                .then((b) => setBudget(b as Budget))
                 .catch((e) => {
-                  setError(e.message);
+                  if (e instanceof Error) setError(e.message);
                   setShow(true);
                 });
             });
@@ -435,10 +435,10 @@ function BudgetPage() {
             budgetsDB
               .getItem(data.id)
               .then((b) => {
-                setBudget(b as unknown as Budget);
+                setBudget(b as Budget);
               })
               .catch((e) => {
-                setError(e.message);
+                if (e instanceof Error) setError(e.message);
                 setShow(true);
               });
           });
@@ -453,7 +453,7 @@ function BudgetPage() {
             }
           })
           .catch((e) => {
-            setError(e.message);
+            if (e instanceof Error) setError(e.message);
           });
 
         setBudgetNameList(createBudgetNameList(budgetList));
@@ -536,6 +536,7 @@ function BudgetPage() {
             <Col md="6">
               <div className="card-columns">
                 <StatCard
+                  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                   key={"stats-" + budget.expenses.total + budget.incomes.total}
                   stat={budget.stats}
                   intlConfig={intlConfig}

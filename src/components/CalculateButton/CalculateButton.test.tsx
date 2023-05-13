@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import CalculateButton from "./CalculateButton";
 import { vi } from "vitest";
 import { testIntlConfig, itemForm1 } from "../../setupTests";
-import { act } from "react-dom/test-utils";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
@@ -12,7 +11,6 @@ describe("CalculateButton", () => {
   beforeEach(() => {
     render(
       <CalculateButton
-        show={true}
         itemForm={itemForm1}
         intlConfig={testIntlConfig}
         onCalculate={onCalculate}
@@ -21,7 +19,7 @@ describe("CalculateButton", () => {
     );
   });
 
-  it.todo("renders initial state", async () => {
+  it.todo("renders initial state", () => {
     expect(
       screen.getByLabelText("select operations to change item value amount")
     ).toBeInTheDocument();
@@ -44,13 +42,11 @@ describe("CalculateButton", () => {
       })
     );
 
-    act(async () => {
-      await userEvent.click(
-        screen.getByRole("button", {
-          name: "accept change item value amount",
-        })
-      );
-    });
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: "accept change item value amount",
+      })
+    );
 
     expect(onShow).toHaveBeenCalledTimes(2);
   });

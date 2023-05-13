@@ -64,6 +64,7 @@ function StatCard({
   };
 
   return (
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     <Card className="stat-card" key={"stat-" + intlConfig?.currency}>
       <Card.Header className="stat-card-header">Statistics</Card.Header>
       <Card.Body>
@@ -80,7 +81,7 @@ function StatCard({
           </OverlayTrigger>
           <CurrencyInput
             id="available"
-            key={stat.available + "-available"}
+            key={`${stat.available}-available`}
             className="text-right form-control"
             aria-label={"available"}
             name="available"
@@ -117,7 +118,7 @@ function StatCard({
           </InputGroup.Text>
           <CurrencyInput
             id="with-goal"
-            key={stat.withGoal + "-withGoal"}
+            key={`${stat.withGoal}-withGoal`}
             className="text-right form-control"
             aria-label={"with-goal"}
             name="with-goal"
@@ -161,6 +162,7 @@ function StatCard({
             data-testid="goal-input"
             className="text-right"
             aria-label={"goal"}
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             key={"auto-goal-" + autoGoal}
             defaultValue={stat.goal}
             onChange={handleInputChange}
@@ -205,7 +207,7 @@ function StatCard({
           </InputGroup.Text>
           <CurrencyInput
             id="saved"
-            key={stat.saved + "-saved"}
+            key={`${stat.saved}-saved`}
             className="text-right form-control"
             aria-label={"saved"}
             name="saved"

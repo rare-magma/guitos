@@ -251,6 +251,7 @@ function NavBar({
                 >
                   <Form.Control
                     aria-label={"budget name"}
+                    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                     key={"budget-name-key-" + initialId}
                     defaultValue={initialSelectedName}
                     ref={nameRef}

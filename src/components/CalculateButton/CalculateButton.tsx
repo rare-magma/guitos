@@ -27,7 +27,7 @@ function CalculateButton({
   const [operation, setOperation] = useState("add");
   const [changeValue, setChangeValue] = useState(0);
 
-  const handleCalculate = (itemForm: ItemForm) => {
+  const handleCalculate = () => {
     if (changeValue > 0) {
       onCalculate(changeValue, operation);
     }
@@ -51,7 +51,7 @@ function CalculateButton({
               <InputGroup
                 size="sm"
                 className="mb-1"
-                key={itemForm.id + "-operation-group"}
+                key={`${itemForm.id}-operation-group`}
               >
                 <Dropdown>
                   <Dropdown.Toggle
@@ -94,8 +94,8 @@ function CalculateButton({
                   </Dropdown.Menu>
                 </Dropdown>
                 <CurrencyInput
-                  id={"item-" + itemForm.id + "-operation-value"}
-                  key={itemForm.id + "operation-value"}
+                  id={`item-${itemForm.id}-operation-value`}
+                  key={`item-${itemForm.id}-operation-value`}
                   className="text-right form-control straight-corners"
                   aria-label={"change item value amount"}
                   name="item-operate-value"
@@ -109,13 +109,13 @@ function CalculateButton({
                   }
                 />
                 <Button
-                  id={"item-" + itemForm.id + "-trigger-operation-button"}
-                  key={itemForm.id + "-trigger-operation-button"}
+                  id={`item-${itemForm.id}-trigger-operation-button`}
+                  key={`${itemForm.id}-trigger-operation-button`}
                   aria-label={"accept change item value amount"}
                   variant="outline-secondary"
                   type="button"
                   onClick={() => {
-                    handleCalculate(itemForm);
+                    handleCalculate();
                   }}
                 >
                   <BsCheckLg />
@@ -126,8 +126,8 @@ function CalculateButton({
         }
       >
         <Button
-          id={"item-" + itemForm.id + "operate-button"}
-          key={itemForm.id + "-operate-button"}
+          id={`item-${itemForm.id}-operate-button`}
+          key={`${itemForm.id}-operate-button`}
           aria-label={"select operations to change item value amount"}
           aria-haspopup="dialog"
           variant="outline-secondary"

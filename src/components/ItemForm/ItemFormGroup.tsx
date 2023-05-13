@@ -84,7 +84,7 @@ function ItemFormGroup({
   }, []);
 
   return (
-    <InputGroup size="sm" className="mb-1" key={itemForm.id + "-group"}>
+    <InputGroup size="sm" className="mb-1" key={`${itemForm.id}-group`}>
       <OverlayTrigger
         delay={250}
         placement="top"
@@ -102,9 +102,9 @@ function ItemFormGroup({
         }
       >
         <Form.Control
-          id={"item-" + itemForm.id + "-name"}
+          id={`item-${itemForm.id}-name`}
           aria-label={"item-name"}
-          key={itemForm.id + "-name"}
+          key={`${itemForm.id}-name`}
           autoFocus
           defaultValue={itemForm.name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -132,7 +132,8 @@ function ItemFormGroup({
       >
         <Col xs="4">
           <CurrencyInput
-            id={"item-" + itemForm.id + "-value"}
+            id={`item-${itemForm.id}-value`}
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             key={itemForm.id + "-value-" + changed}
             className="text-right form-control straight-corners"
             aria-label={"item-value"}
@@ -174,9 +175,9 @@ function ItemFormGroup({
                 }
               >
                 <Button
-                  id={"item-" + itemForm.id + "-button"}
+                  id={`item-${itemForm.id}-delete-confirmation-button`}
                   aria-label="confirm item deletion"
-                  key={itemForm.id + "button"}
+                  key={`${itemForm.id}-delete-confirmation-button`}
                   variant="delete"
                   type="button"
                   size="sm"
@@ -194,9 +195,9 @@ function ItemFormGroup({
         }
       >
         <Button
-          id={"item-" + itemForm.id + "-button"}
+          id={`item-${itemForm.id}-button`}
           aria-label="delete item"
-          key={itemForm.id + "button"}
+          key={`${itemForm.id}-button`}
           variant="delete"
           type="button"
           onClick={() => {

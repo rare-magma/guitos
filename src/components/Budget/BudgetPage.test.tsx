@@ -18,13 +18,13 @@ describe("BudgetPage", () => {
     await userEvent.click(newButton[0]);
   });
 
-  it("renders initial state", async () => {
+  it("renders initial state", () => {
     expect(screen.getByLabelText("delete budget")).toBeInTheDocument();
     expect(budgetsDB.config("name")).toBe("guitos");
     expect(budgetsDB.config("storeName")).toBe("budgets");
   });
 
-  it("sets up db correctly", async () => {
+  it("sets up db correctly", () => {
     expect(budgetsDB.config("name")).toBe("guitos");
     expect(budgetsDB.config("storeName")).toBe("budgets");
     expect(optionsDB.config("name")).toBe("guitos");
@@ -32,11 +32,12 @@ describe("BudgetPage", () => {
   });
 
   it("saves currency code to db", async () => {
-    budgetsDB.keys().then((e) => expect(e).not.toBeNull);
+    await expect(budgetsDB.keys()).resolves.not.toBeNull();
 
-    await userEvent.type(screen.getByPlaceholderText("USD"), "CAD");
-    await userEvent.click(screen.getByText("CAD"));
-
+    await act(async () => {
+      await userEvent.type(screen.getByPlaceholderText("USD"), "CAD");
+      await userEvent.click(screen.getByText("CAD"));
+    });
     const currencyOption = await optionsDB.getItem("currencyCode");
     expect(currencyOption).toBe("CAD");
   });
@@ -44,7 +45,7 @@ describe("BudgetPage", () => {
   it.todo(
     "removes budget from db when clicking on delete budget button",
     async () => {
-      budgetsDB.length().then((e) => expect(e).toBe(1));
+      await expect(budgetsDB.length()).resolves.toBe(1);
       const deleteButton = screen.getAllByRole("button", {
         name: "delete budget",
       });
@@ -52,7 +53,7 @@ describe("BudgetPage", () => {
       await userEvent.click(
         screen.getByRole("button", { name: "confirm budget deletion" })
       );
-      budgetsDB.length().then((e) => expect(e).toBe(0));
+      await expect(budgetsDB.length()).resolves.toBe(0);
     }
   );
 
@@ -82,54 +83,54 @@ describe("BudgetPage", () => {
       new Blob([JSON.stringify(testBudget)]) as File
     );
 
-    budgetsDB.length().then((e) => expect(e).toBe(1));
-    budgetsDB.getItem("035c2de4-00a4-403c-8f0e-f81339be9a4e").then((e) => {
-      expect((e as unknown as Budget).name).toBe("2023-035c2de4");
-      expect(JSON.stringify(e)).toBe(
-        '{"id":"035c2de4-00a4-403c-8f0e-f81339be9a4e","name":"2023-035c2de4","expenses":{"items":[{"id":1,"name":"","value":0}],"total":0},"incomes":{"items":[{"id":1,"name":"","value":0}],"total":0},"stats":{"available":0,"withGoal":0,"saved":0,"goal":10,"reserves":0}}'
-      );
-    });
-    budgetsDB.clear();
+    await expect(budgetsDB.length()).resolves.toBe(1);
+    await budgetsDB
+      .getItem("035c2de4-00a4-403c-8f0e-f81339be9a4e")
+      .then((e) => {
+        expect((e as Budget).name).toBe("2023-035c2de4");
+        expect(JSON.stringify(e)).toBe(
+          '{"id":"035c2de4-00a4-403c-8f0e-f81339be9a4e","name":"2023-035c2de4","expenses":{"items":[{"id":1,"name":"","value":0}],"total":0},"incomes":{"items":[{"id":1,"name":"","value":0}],"total":0},"stats":{"available":0,"withGoal":0,"saved":0,"goal":10,"reserves":0}}'
+        );
+      });
+    await budgetsDB.clear();
   });
 
   it.todo("doesn't save faulty json to db", async () => {
-    budgetsDB.clear();
-    budgetsDB.length().then((e) => expect(e).toBe(0));
+    await budgetsDB.clear();
+    await expect(budgetsDB.length()).resolves.toBe(0);
     await userEvent.upload(
       screen.getByTestId("import-form-control"),
       new Blob([JSON.stringify(testJSONErrorBudget)]) as File
     );
 
-    act(() => {
-      budgetsDB.length().then((e) => expect(e).toBe(0));
-    });
+    await expect(budgetsDB.length()).resolves.toBe(0);
   });
 
   it.todo("saves imported csv to db", async () => {
-    budgetsDB.clear();
+    await budgetsDB.clear();
     await userEvent.upload(
       screen.getByTestId("import-form-control"),
       new File([testCsv], "test.csv", { type: "text/csv" })
     );
-    budgetsDB.getItem("035c2de4-00a4-403c-8f0e-f81339be9a4e").then((e) => {
-      expect((e as unknown as Budget).name).toBe("test");
-      expect(JSON.stringify(e)).toBe(
-        '{"id":"035c2de4-00a4-403c-8f0e-f81339be9a4e","name":"test","expenses":{"items":[{"name":"rent","value":1000},{"id":1,"name":"food","value":200}],"total":1200},"incomes":{"items":[{"id":2,"name":"salary","value":2000},{"id":3,"name":"sale","value":100}],"total":2100},"stats":{"available":900,"withGoal":690,"saved":210,"goal":10,"reserves":0}}'
-      );
-    });
-    budgetsDB.clear();
+    await budgetsDB
+      .getItem("035c2de4-00a4-403c-8f0e-f81339be9a4e")
+      .then((e) => {
+        expect((e as Budget).name).toBe("test");
+        expect(JSON.stringify(e)).toBe(
+          '{"id":"035c2de4-00a4-403c-8f0e-f81339be9a4e","name":"test","expenses":{"items":[{"name":"rent","value":1000},{"id":1,"name":"food","value":200}],"total":1200},"incomes":{"items":[{"id":2,"name":"salary","value":2000},{"id":3,"name":"sale","value":100}],"total":2100},"stats":{"available":900,"withGoal":690,"saved":210,"goal":10,"reserves":0}}'
+        );
+      });
+    await budgetsDB.clear();
   });
 
   it.todo("doesn't save faulty csv to db", async () => {
-    budgetsDB.clear();
-    budgetsDB.length().then((e) => expect(e).toBe(0));
+    await budgetsDB.clear();
+    await expect(budgetsDB.length()).resolves.toBe(0);
     await userEvent.upload(
       screen.getByTestId("import-form-control"),
       new File([testCsvError], "test.csv", { type: "text/csv" })
     );
 
-    act(() => {
-      budgetsDB.length().then((e) => expect(e).toBe(0));
-    });
+    await expect(budgetsDB.length()).resolves.toBe(0);
   });
 });
