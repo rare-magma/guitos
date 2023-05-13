@@ -11,11 +11,7 @@ import { useRef, useState } from "react";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { BsGear, BsPercent } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
-import {
-  focusRef,
-  numberInputOnWheelPreventChange,
-  parseLocaleNumber,
-} from "../../utils";
+import { focusRef, parseLocaleNumber } from "../../utils";
 
 interface StatCardProps {
   stat: Stat;
@@ -168,7 +164,7 @@ function StatCard({
             key={"auto-goal-" + autoGoal}
             defaultValue={stat.goal}
             onChange={handleInputChange}
-            onWheelCapture={numberInputOnWheelPreventChange}
+            onWheel={(e) => e.target instanceof HTMLElement && e.target.blur()}
             type="number"
             ref={goalRef}
             onInput={(e: React.ChangeEvent<HTMLInputElement>) => {

@@ -127,15 +127,6 @@ export function calcAutoGoal(value: Budget | null): number {
   return 0;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const numberInputOnWheelPreventChange = (e: any) => {
-  e.target.blur();
-  e.stopPropagation();
-  setTimeout(() => {
-    e.target.focus();
-  }, 0);
-};
-
 export const convertCsvToBudget = (csv: string[], date: string): Budget => {
   const emptyExpenses: ItemForm[] = [];
   const emptyIncomes: ItemForm[] = [];
