@@ -1,3 +1,10 @@
+# [0.15.0](https://github.com/rare-magma/guitos/compare/v0.14.3...v0.15.0) (2023-05-13)
+
+
+### Features
+
+* improve consistency of border colors ([4b4f8cb](https://github.com/rare-magma/guitos/commit/4b4f8cbff0a6cb0879a8782f8cc93eb264843c10))
+
 ## [0.14.3](https://github.com/rare-magma/guitos/compare/v0.14.2...v0.14.3) (2023-05-11)
 
 
