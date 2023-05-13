@@ -13,7 +13,6 @@
 - [Hosted On](#hosted-on)
 - [Roadmap](#roadmap)
 - [Support](#support)
-- [Project assistance](#project-assistance)
 - [Contributing](#contributing)
 - [Authors & contributors](#authors--contributors)
 - [Security](#security)
@@ -206,15 +205,6 @@ Reach out to the maintainer at one of the following places:
 
 - [GitHub issues](https://github.com/rare-magma/guitos/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
 - Contact options listed on [this GitHub profile](https://github.com/rare-magma)
-
-## Project assistance
-
-If you want to say **thank you** or/and support active development of guitos:
-
-- Add a [GitHub Star](https://github.com/rare-magma/guitos) to the project.
-- Write interesting articles about the project on your personal blog.
-
-Together, we can make guitos **better**!
 
 ## Contributing
 
