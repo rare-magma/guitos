@@ -1,3 +1,10 @@
+## [0.16.1](https://github.com/rare-magma/guitos/compare/v0.16.0...v0.16.1) (2023-05-14)
+
+
+### Performance Improvements
+
+* reduce css size with purgecss plugin ([b946134](https://github.com/rare-magma/guitos/commit/b9461342b0ba21a4a40ea4822db2e2b15b4f55cd))
+
 # [0.16.0](https://github.com/rare-magma/guitos/compare/v0.15.1...v0.16.0) (2023-05-14)
 
 
