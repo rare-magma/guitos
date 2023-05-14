@@ -1,3 +1,10 @@
+# [0.16.0](https://github.com/rare-magma/guitos/compare/v0.15.1...v0.16.0) (2023-05-14)
+
+
+### Features
+
+* set up PWA and update checks ([cd0c317](https://github.com/rare-magma/guitos/commit/cd0c317015475bf78973ef9714d6e6ae642964f0))
+
 ## [0.15.1](https://github.com/rare-magma/guitos/compare/v0.15.0...v0.15.1) (2023-05-13)
 
 
