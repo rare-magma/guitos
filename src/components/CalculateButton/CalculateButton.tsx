@@ -99,6 +99,7 @@ function CalculateButton({
                   className="text-right form-control straight-corners"
                   aria-label={"change item value amount"}
                   name="item-operate-value"
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus
                   intlConfig={intlConfig}
                   defaultValue={0}

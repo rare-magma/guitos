@@ -5,7 +5,8 @@
     "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:jsx-a11y/recommended"
   ],
   "plugins": [
     "jest-dom",
@@ -13,7 +14,8 @@
     "react",
     "react-hooks",
     "@typescript-eslint",
-    "testing-library"
+    "testing-library",
+    "jsx-a11y"
   ],
   "rules": {
     "eqeqeq": "error",

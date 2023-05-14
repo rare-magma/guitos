@@ -400,6 +400,7 @@ function NavBar({
                                 key={"budget-deletion-button"}
                                 variant="delete"
                                 type="button"
+                                // eslint-disable-next-line jsx-a11y/no-autofocus
                                 autoFocus
                                 onClick={() => {
                                   setShowDelete(!showDelete);

@@ -105,6 +105,7 @@ function ItemFormGroup({
           id={`item-${itemForm.id}-name`}
           aria-label={"item-name"}
           key={`${itemForm.id}-name`}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
           defaultValue={itemForm.name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -181,6 +182,7 @@ function ItemFormGroup({
                   variant="delete"
                   type="button"
                   size="sm"
+                  // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus
                   onClick={() => {
                     setShowDelete(!showDelete);
