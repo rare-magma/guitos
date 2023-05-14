@@ -236,5 +236,8 @@ See [LICENSE](LICENSE) for more information.
 - [r/personalfinance](https://www.reddit.com/r/personalfinance/wiki/budgeting/)
 - [Eslint](https://eslint.org/)
 - [Prettier](https://prettier.io/)
+- [semantic-release](https://semantic-release.gitbook.io/semantic-release/)
+- [vite-plugin-pwa](https://github.com/vite-pwa/vite-plugin-pwa)
+- [PurgeCSS](https://purgecss.com/)
 - [Choose a license](https://choosealicense.com/)
 - [Hands on React](https://handsonreact.com)
