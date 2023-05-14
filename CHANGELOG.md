@@ -1,3 +1,10 @@
+## [0.16.2](https://github.com/rare-magma/guitos/compare/v0.16.1...v0.16.2) (2023-05-14)
+
+
+### Reverts
+
+* Revert "perf: reduce css size with purgecss plugin" ([1380375](https://github.com/rare-magma/guitos/commit/138037578b2b616ef7466c4a21c7303935a5cb34))
+
 ## [0.16.1](https://github.com/rare-magma/guitos/compare/v0.16.0...v0.16.1) (2023-05-14)
 
 
