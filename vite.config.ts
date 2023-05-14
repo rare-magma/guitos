@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import eslint from "vite-plugin-eslint";
+import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig(() => {
   return {
@@ -10,7 +11,28 @@ export default defineConfig(() => {
     define: {
       APP_VERSION: JSON.stringify(process.env.npm_package_version),
     },
-    plugins: [react(), eslint()],
+    plugins: [
+      react(),
+      eslint(),
+      VitePWA({
+        manifest: {
+          theme_color: "#282a36",
+          background_color: "#282a36",
+          display: "standalone",
+          scope: "/",
+          start_url: "/",
+          short_name: "guitos",
+          name: "guitos",
+          icons: [
+            {
+              src: "favicon.svg",
+              sizes: "any",
+              type: "image/svg+xml",
+            },
+          ],
+        },
+      }),
+    ],
     test: {
       coverage: {
         provider: "c8",
