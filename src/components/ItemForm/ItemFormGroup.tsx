@@ -105,6 +105,7 @@ function ItemFormGroup({
           id={`item-${itemForm.id}-name`}
           aria-label={"item-name"}
           key={`${itemForm.id}-name`}
+          className="w-25"
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus
           defaultValue={itemForm.name}
@@ -131,21 +132,19 @@ function ItemFormGroup({
           )
         }
       >
-        <Col xs="4">
-          <CurrencyInput
-            id={`item-${itemForm.id}-value`}
-            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-            key={itemForm.id + "-value-" + changed}
-            className="text-right form-control straight-corners"
-            aria-label={"item-value"}
-            name="item-value"
-            intlConfig={intlConfig}
-            defaultValue={itemForm.value}
-            allowNegativeValue={false}
-            maxLength={14}
-            onValueChange={(value) => handleChange("value", value)}
-          />
-        </Col>
+        <CurrencyInput
+          id={`item-${itemForm.id}-value`}
+          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+          key={itemForm.id + "-value-" + changed}
+          className="text-right form-control straight-corners"
+          aria-label={"item-value"}
+          name="item-value"
+          intlConfig={intlConfig}
+          defaultValue={itemForm.value}
+          allowNegativeValue={false}
+          maxLength={14}
+          onValueChange={(value) => handleChange("value", value)}
+        />
       </OverlayTrigger>
       <CalculateButton
         itemForm={itemForm}
