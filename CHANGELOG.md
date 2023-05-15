@@ -1,3 +1,10 @@
+## [0.16.3](https://github.com/rare-magma/guitos/compare/v0.16.2...v0.16.3) (2023-05-15)
+
+
+### Bug Fixes
+
+* focused value border color ([e217e9f](https://github.com/rare-magma/guitos/commit/e217e9f406d6cf76bfbfe1c2266aff2263af92e8))
+
 ## [0.16.2](https://github.com/rare-magma/guitos/compare/v0.16.1...v0.16.2) (2023-05-14)
 
 
