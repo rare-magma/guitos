@@ -13,6 +13,7 @@ import { useRef, useState } from "react";
 
 interface CalculateButtonProps {
   itemForm: ItemForm;
+  label: string;
   intlConfig: CurrencyInputProps["intlConfig"];
   onCalculate: (changeValue: number, operation: string) => void;
 }
@@ -20,6 +21,7 @@ interface CalculateButtonProps {
 function CalculateButton({
   itemForm,
   intlConfig,
+  label,
   onCalculate,
 }: CalculateButtonProps) {
   const [operation, setOperation] = useState("add");
@@ -90,7 +92,7 @@ function CalculateButton({
                   </Dropdown.Menu>
                 </Dropdown>
                 <CurrencyInput
-                  id={`item-${itemForm.id}-operation-value`}
+                  id={`${label}-${itemForm.id}-operation-value`}
                   key={`item-${itemForm.id}-operation-value`}
                   className="text-right form-control straight-corners"
                   aria-label={"change item value amount"}
@@ -122,7 +124,7 @@ function CalculateButton({
         }
       >
         <Button
-          id={`item-${itemForm.id}-operate-button`}
+          id={`${label}-${itemForm.id}-operate-button`}
           key={`${itemForm.id}-operate-button`}
           aria-label={"select operations to change item value amount"}
           aria-haspopup="dialog"

@@ -154,6 +154,7 @@ function TableCard({
             key={`${label}-${item.id}`}
             itemForm={item}
             intlConfig={intlConfig}
+            label={label}
             costPercentage={calcPercentage(item.value, revenueTotal)}
             inputRef={inputRef}
             onChange={handleChange}

@@ -7,15 +7,19 @@ import {
   itemForm1,
   testSpanishIntlConfig,
 } from "../../setupTests";
+import React from "react";
 
 describe("ItemFormGroup", () => {
   const onRemove = vi.fn();
   const onChange = vi.fn();
+  const ref = React.createRef<HTMLInputElement>();
 
   beforeEach(() => {
     render(
       <ItemFormGroup
         itemForm={itemForm1}
+        label="Expenses"
+        inputRef={ref}
         intlConfig={testIntlConfig}
         costPercentage={1}
         onRemove={onRemove}
@@ -42,9 +46,11 @@ describe("ItemFormGroup", () => {
   });
 
   it("triggers onRemove when user clicks delete confirmation button", async () => {
-    await userEvent.click(screen.getByRole("button", { name: "delete item" }));
     await userEvent.click(
-      screen.getByRole("button", { name: "confirm item deletion" })
+      screen.getByRole("button", { name: "delete item 1" })
+    );
+    await userEvent.click(
+      screen.getByRole("button", { name: "confirm item 1 deletion" })
     );
 
     expect(onRemove).toHaveBeenCalledTimes(1);
@@ -74,6 +80,8 @@ describe("ItemFormGroup", () => {
     render(
       <ItemFormGroup
         itemForm={itemForm1}
+        label="Expenses"
+        inputRef={ref}
         intlConfig={testSpanishIntlConfig}
         costPercentage={1}
         onRemove={onRemove}
@@ -82,7 +90,7 @@ describe("ItemFormGroup", () => {
     );
 
     await userEvent.clear(screen.getByDisplayValue("10123 €"));
-    await userEvent.type(screen.getByLabelText("item-value"), "123,12");
+    await userEvent.type(screen.getByLabelText("item 1 value"), "123,12");
 
     expect(screen.getByDisplayValue("123,12 €")).toBeInTheDocument();
 

@@ -16,6 +16,7 @@ import CalculateButton from "../CalculateButton/CalculateButton";
 interface ItemFormProps {
   itemForm: ItemForm;
   costPercentage: number;
+  label: string;
   intlConfig: CurrencyInputProps["intlConfig"];
   inputRef: RefObject<HTMLInputElement>;
   onChange: (itemForm: ItemForm) => void;
@@ -27,6 +28,7 @@ function ItemFormGroup({
   costPercentage,
   intlConfig,
   inputRef,
+  label,
   onRemove,
   onChange,
 }: ItemFormProps) {
@@ -88,8 +90,8 @@ function ItemFormGroup({
         }
       >
         <Form.Control
-          id={`item-${itemForm.id}-name`}
-          aria-label={"item-name"}
+          id={`${label}-${itemForm.id}-name`}
+          aria-label={`item ${itemForm.id} name`}
           key={`${itemForm.id}-name`}
           className="w-25"
           ref={inputRef}
@@ -118,11 +120,11 @@ function ItemFormGroup({
         }
       >
         <CurrencyInput
-          id={`item-${itemForm.id}-value`}
+          id={`${label}-${itemForm.id}-value`}
           // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
           key={itemForm.id + "-value-" + changed}
           className="text-right form-control straight-corners"
-          aria-label={"item-value"}
+          aria-label={`item ${itemForm.id} value`}
           name="item-value"
           intlConfig={intlConfig}
           defaultValue={itemForm.value}
@@ -133,6 +135,7 @@ function ItemFormGroup({
       </OverlayTrigger>
       <CalculateButton
         itemForm={itemForm}
+        label={label}
         intlConfig={intlConfig}
         onCalculate={(changeValue, operation) =>
           handleChange(operation, "", undefined, changeValue)
@@ -160,7 +163,7 @@ function ItemFormGroup({
               >
                 <Button
                   id={`item-${itemForm.id}-delete-confirmation-button`}
-                  aria-label="confirm item deletion"
+                  aria-label={`confirm item ${itemForm.id} deletion`}
                   key={`${itemForm.id}-delete-confirmation-button`}
                   variant="delete"
                   type="button"
@@ -178,8 +181,8 @@ function ItemFormGroup({
         }
       >
         <Button
-          id={`item-${itemForm.id}-button`}
-          aria-label="delete item"
+          id={`delete-${label}-${itemForm.id}-button`}
+          aria-label={`delete item ${itemForm.id}`}
           key={`${itemForm.id}-button`}
           variant="delete"
           type="button"
