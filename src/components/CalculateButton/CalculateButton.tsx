@@ -24,13 +24,14 @@ function CalculateButton({
 }: CalculateButtonProps) {
   const [operation, setOperation] = useState("add");
   const [changeValue, setChangeValue] = useState(0);
-  const ref = useRef<HTMLButtonElement>(null);
+  const opButtonRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCalculate = () => {
     if (changeValue > 0) {
       onCalculate(changeValue, operation);
     }
-    ref?.current?.click();
+    opButtonRef?.current?.click();
   };
 
   return (
@@ -94,12 +95,11 @@ function CalculateButton({
                   className="text-right form-control straight-corners"
                   aria-label={"change item value amount"}
                   name="item-operate-value"
-                  // eslint-disable-next-line jsx-a11y/no-autofocus
-                  autoFocus
                   intlConfig={intlConfig}
                   defaultValue={0}
                   allowNegativeValue={false}
                   maxLength={14}
+                  ref={inputRef}
                   onValueChange={(value) =>
                     setChangeValue(isNaN(Number(value)) ? 0 : Number(value))
                   }
@@ -128,7 +128,12 @@ function CalculateButton({
           aria-haspopup="dialog"
           variant="outline-secondary"
           type="button"
-          ref={ref}
+          ref={opButtonRef}
+          onClick={() => {
+            setTimeout(() => {
+              inputRef.current?.focus();
+            }, 0);
+          }}
         >
           <BsPlusSlashMinus />
         </Button>

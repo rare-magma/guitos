@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ItemForm } from "../ItemForm/ItemForm";
 import {
   Card,
@@ -34,6 +34,7 @@ function TableCard({
   const [table, setTable] = useState(initialItems);
   const [total, setTotal] = useState(roundBig(calcTotal(table.items), 2));
   const revenuePercentage = calcPercentage(total, revenueTotal);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const addTable = (tableBeingEdited: Income | Expense) => {
     let newTable;
@@ -154,6 +155,7 @@ function TableCard({
             itemForm={item}
             intlConfig={intlConfig}
             costPercentage={calcPercentage(item.value, revenueTotal)}
+            inputRef={inputRef}
             onChange={handleChange}
             onRemove={() => {
               removeTable(item);
@@ -180,6 +182,9 @@ function TableCard({
               size="sm"
               onClick={() => {
                 addTable(table);
+                setTimeout(() => {
+                  inputRef.current?.focus();
+                }, 0);
               }}
               name=""
               value=""

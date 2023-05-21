@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import {
   Button,
   Form,
@@ -17,6 +17,7 @@ interface ItemFormProps {
   itemForm: ItemForm;
   costPercentage: number;
   intlConfig: CurrencyInputProps["intlConfig"];
+  inputRef: RefObject<HTMLInputElement>;
   onChange: (itemForm: ItemForm) => void;
   onRemove: (itemForm: ItemForm) => void;
 }
@@ -25,11 +26,13 @@ function ItemFormGroup({
   itemForm: initialItemForm,
   costPercentage,
   intlConfig,
+  inputRef,
   onRemove,
   onChange,
 }: ItemFormProps) {
   const [itemForm, setItemForm] = useState(initialItemForm);
   const [changed, setChanged] = useState(false);
+  const deleteButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleRemove = (item: ItemForm) => {
     onRemove(item);
@@ -89,8 +92,7 @@ function ItemFormGroup({
           aria-label={"item-name"}
           key={`${itemForm.id}-name`}
           className="w-25"
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus
+          ref={inputRef}
           defaultValue={itemForm.name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             handleChange("name", undefined, e)
@@ -163,8 +165,7 @@ function ItemFormGroup({
                   variant="delete"
                   type="button"
                   size="sm"
-                  // eslint-disable-next-line jsx-a11y/no-autofocus
-                  autoFocus
+                  ref={deleteButtonRef}
                   onClick={() => {
                     handleRemove(itemForm);
                   }}
@@ -182,6 +183,11 @@ function ItemFormGroup({
           key={`${itemForm.id}-button`}
           variant="delete"
           type="button"
+          onClick={() => {
+            setTimeout(() => {
+              deleteButtonRef.current?.focus();
+            }, 0);
+          }}
         >
           <BsXLg />
         </Button>

@@ -60,6 +60,7 @@ function NavBar({
   const currencyRef = useRef<TypeaheadRef>(null);
   const nameRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
+  const deleteButtonRef = useRef<HTMLButtonElement>(null);
 
   const [expanded, setExpanded] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
@@ -400,8 +401,7 @@ function NavBar({
                                 key={"budget-deletion-button"}
                                 variant="delete"
                                 type="button"
-                                // eslint-disable-next-line jsx-a11y/no-autofocus
-                                autoFocus
+                                ref={deleteButtonRef}
                                 onClick={() => {
                                   setShowDelete(!showDelete);
                                   handleRemove(initialId);
@@ -418,6 +418,11 @@ function NavBar({
                         className="w-100"
                         aria-label="delete budget"
                         variant="outline-danger"
+                        onClick={() => {
+                          setTimeout(() => {
+                            deleteButtonRef.current?.focus();
+                          }, 0);
+                        }}
                       >
                         {expanded ? "delete" : <BsXLg />}
                       </Button>
