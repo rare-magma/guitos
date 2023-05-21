@@ -1,3 +1,10 @@
+## [0.16.4](https://github.com/rare-magma/guitos/compare/v0.16.3...v0.16.4) (2023-05-21)
+
+
+### Bug Fixes
+
+* close item popover on change accepted ([af72075](https://github.com/rare-magma/guitos/commit/af7207553bb57584213999d4b711ba9e9681ea6c))
+
 ## [0.16.3](https://github.com/rare-magma/guitos/compare/v0.16.2...v0.16.3) (2023-05-15)
 
 
