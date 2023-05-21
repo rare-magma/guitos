@@ -2,25 +2,6 @@
   "name": "guitos",
   "version": "0.16.3",
   "private": true,
-  "dependencies": {
-    "@testing-library/user-event": "14.4.3",
-    "@types/jest": "29.5.1",
-    "@types/node": "20.1.0",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
-    "big.js": "6.2.1",
-    "bootstrap": "5.2.3",
-    "localforage": "1.10.0",
-    "papaparse": "5.4.1",
-    "react": "18.2.0",
-    "react-bootstrap": "2.7.4",
-    "react-bootstrap-typeahead": "6.1.2",
-    "react-currency-input-field": "3.6.10",
-    "react-dom": "18.2.0",
-    "react-hotkeys-hook": "4.4.0",
-    "react-icons": "4.8.0",
-    "react-router-dom": "6.11.1"
-  },
   "scripts": {
     "start": "vite",
     "build": "vite build",
@@ -46,6 +27,25 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@testing-library/user-event": "14.4.3",
+    "@types/jest": "29.5.1",
+    "@types/node": "20.1.0",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
+    "big.js": "6.2.1",
+    "bootstrap": "5.2.3",
+    "localforage": "1.10.0",
+    "papaparse": "5.4.1",
+    "react": "18.2.0",
+    "react-bootstrap": "2.7.4",
+    "react-bootstrap-typeahead": "6.1.2",
+    "react-currency-input-field": "3.6.10",
+    "react-dom": "18.2.0",
+    "react-hotkeys-hook": "4.4.0",
+    "react-icons": "4.8.0",
+    "react-router-dom": "6.11.1"
   },
   "devDependencies": {
     "@semantic-release/changelog": "6.0.3",
