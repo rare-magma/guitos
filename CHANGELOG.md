@@ -1,3 +1,11 @@
+## [0.16.6](https://github.com/rare-magma/guitos/compare/v0.16.5...v0.16.6) (2023-05-21)
+
+
+### Bug Fixes
+
+* add missing aria-labels ([c4ba3a9](https://github.com/rare-magma/guitos/commit/c4ba3a9d32b0892f2122fc5e555586cd8c52013b))
+* unique id a11y issues ([eaa84cf](https://github.com/rare-magma/guitos/commit/eaa84cf0e4171ee3c5e583781f4cb908fca38331))
+
 ## [0.16.5](https://github.com/rare-magma/guitos/compare/v0.16.4...v0.16.5) (2023-05-21)
 
 
