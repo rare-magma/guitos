@@ -179,7 +179,7 @@ function TableCard({
           >
             <Button
               variant={label + "-plus-button"}
-              aria-label="add item"
+              aria-label={`add item to ${label}`}
               size="sm"
               onClick={() => {
                 addTable(table);

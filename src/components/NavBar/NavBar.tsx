@@ -283,7 +283,7 @@ function NavBar({
               {initialSelectedName ? initialSelectedName : "guitos"}
             </Offcanvas.Title>
             <Button
-              aria-label="close menu"
+              aria-label="close navigation"
               variant="outline-secondary"
               onClick={() => setExpanded(false)}
             >
@@ -537,7 +537,10 @@ function NavBar({
                 }
               >
                 <Navbar.Brand className="version justify-content-end align-self-end m-2">
-                  <a href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md">
+                  <a
+                    aria-label="open guitos changelog"
+                    href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md"
+                  >
                     v{APP_VERSION}
                   </a>
                 </Navbar.Brand>

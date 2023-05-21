@@ -50,7 +50,9 @@ describe("TableCard", () => {
   });
 
   it("triggers onChange when user adds new item", async () => {
-    await userEvent.click(screen.getByRole("button", { name: "add item" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "add item to Expenses" })
+    );
 
     expect(onChange).toHaveBeenCalledTimes(15);
   });

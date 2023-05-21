@@ -82,6 +82,7 @@ function ErrorModal({
             <Button
               data-testid="json-error-close"
               className="align-self-end"
+              aria-label="dismiss error message"
               key={"modal-dismiss-button"}
               variant="delete-modal"
               type="button"
@@ -94,7 +95,11 @@ function ErrorModal({
             </Button>
           </Modal.Header>
           <Modal.Body key="json-error-modal-body">
-            <Accordion key="json-error-modal-accordion" flush>
+            <Accordion
+              aria-label="error list"
+              key="json-error-modal-accordion"
+              flush
+            >
               {jsonError.map((jsonError: JsonError, i: number) => (
                 <Accordion.Item
                   key={`${jsonError.file}-item-${i}`}
@@ -136,6 +141,7 @@ function ErrorModal({
               data-testid="csv-error-close"
               className="align-self-end"
               key={"modal-dismiss-button"}
+              aria-label="dismiss error message"
               variant="delete-modal"
               type="button"
               onClick={() => {
@@ -147,7 +153,11 @@ function ErrorModal({
             </Button>
           </Modal.Header>
           <Modal.Body key="csv-error-modal-body">
-            <Accordion key="csv-error-modal-accordion" flush>
+            <Accordion
+              aria-label="error list"
+              key="csv-error-modal-accordion"
+              flush
+            >
               {csvError.map((csvError: CsvError, i: number) => (
                 <Accordion.Item
                   key={`${csvError.file}-item-${i}`}
