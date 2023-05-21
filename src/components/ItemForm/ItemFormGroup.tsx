@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Button,
-  Col,
   Form,
   InputGroup,
   OverlayTrigger,
@@ -30,9 +29,8 @@ function ItemFormGroup({
   onChange,
 }: ItemFormProps) {
   const [itemForm, setItemForm] = useState(initialItemForm);
-  const [showOverlay, setShowOverlay] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
   const [changed, setChanged] = useState(false);
+
   const handleRemove = (item: ItemForm) => {
     onRemove(item);
   };
@@ -67,21 +65,6 @@ function ItemFormGroup({
       onChange(newItemForm);
     }
   };
-
-  function handleShow(): void {
-    setShowOverlay(!showOverlay);
-  }
-
-  useEffect(() => {
-    const close = (e: { key: string }) => {
-      if (e.key === "Escape") {
-        setShowOverlay(false);
-        setShowDelete(false);
-      }
-    };
-    window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
-  }, []);
 
   return (
     <InputGroup size="sm" className="mb-1" key={`${itemForm.id}-group`}>
@@ -152,7 +135,6 @@ function ItemFormGroup({
         onCalculate={(changeValue, operation) =>
           handleChange(operation, "", undefined, changeValue)
         }
-        onShow={handleShow}
       />
       <OverlayTrigger
         trigger="click"
@@ -184,7 +166,6 @@ function ItemFormGroup({
                   // eslint-disable-next-line jsx-a11y/no-autofocus
                   autoFocus
                   onClick={() => {
-                    setShowDelete(!showDelete);
                     handleRemove(itemForm);
                   }}
                 >
@@ -201,9 +182,6 @@ function ItemFormGroup({
           key={`${itemForm.id}-button`}
           variant="delete"
           type="button"
-          onClick={() => {
-            setShowDelete(!showDelete);
-          }}
         >
           <BsXLg />
         </Button>

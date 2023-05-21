@@ -9,33 +9,28 @@ import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { BsDashLg, BsXLg, BsCheckLg, BsPlusSlashMinus } from "react-icons/bs";
 import { CgMathPlus, CgMathDivide } from "react-icons/cg";
 import { ItemForm } from "../ItemForm/ItemForm";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 interface CalculateButtonProps {
   itemForm: ItemForm;
   intlConfig: CurrencyInputProps["intlConfig"];
   onCalculate: (changeValue: number, operation: string) => void;
-  onShow: () => void;
 }
 
 function CalculateButton({
   itemForm,
   intlConfig,
   onCalculate,
-  onShow,
 }: CalculateButtonProps) {
   const [operation, setOperation] = useState("add");
   const [changeValue, setChangeValue] = useState(0);
+  const ref = useRef<HTMLButtonElement>(null);
 
   const handleCalculate = () => {
     if (changeValue > 0) {
       onCalculate(changeValue, operation);
     }
-    onShow();
-  };
-
-  const handleShow = () => {
-    onShow();
+    ref?.current?.click();
   };
 
   return (
@@ -133,9 +128,7 @@ function CalculateButton({
           aria-haspopup="dialog"
           variant="outline-secondary"
           type="button"
-          onClick={() => {
-            handleShow();
-          }}
+          ref={ref}
         >
           <BsPlusSlashMinus />
         </Button>
