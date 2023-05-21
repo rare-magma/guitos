@@ -1,3 +1,10 @@
+## [0.16.5](https://github.com/rare-magma/guitos/compare/v0.16.4...v0.16.5) (2023-05-21)
+
+
+### Bug Fixes
+
+* remove autofocus usage ([b9d68e7](https://github.com/rare-magma/guitos/commit/b9d68e780f7eb88eabc234633b742cf5cec59bdc))
+
 ## [0.16.4](https://github.com/rare-magma/guitos/compare/v0.16.3...v0.16.4) (2023-05-21)
 
 
