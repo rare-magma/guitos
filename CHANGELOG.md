@@ -1,3 +1,10 @@
+# [0.17.0](https://github.com/rare-magma/guitos/compare/v0.16.6...v0.17.0) (2023-05-22)
+
+
+### Features
+
+* add export as CSV option ([07e8cb5](https://github.com/rare-magma/guitos/commit/07e8cb5c3b6caf8a8f46bc1c481c7285cd78234e)), closes [#40](https://github.com/rare-magma/guitos/issues/40)
+
 ## [0.16.6](https://github.com/rare-magma/guitos/compare/v0.16.5...v0.16.6) (2023-05-21)
 
 
