@@ -75,6 +75,9 @@ describe("NavBar", () => {
 
   it("triggers onExport when export button is pressed", async () => {
     await userEvent.click(screen.getByLabelText("export budget"));
+    await userEvent.click(
+      screen.getByRole("button", { name: "export budget as json" })
+    );
     expect(onExport).toHaveBeenCalledTimes(1);
   });
 

@@ -86,18 +86,19 @@ Later, I can compare the budget with previous months to understand where the mon
 
 Keyboard shortcuts can be triggered when no input field is selected.
 
-| Action                | Shortcut |
-| --------------------- | -------- |
-| Clone current budget  | C        |
-| Create new budget     | A        |
-| Export data           | S        |
-| Go to older budget    | PageDown |
-| Go to newer budget    | PageUp   |
-| Rename current budget | R        |
-| Search budget list    | F or /   |
-| Focus savings goal    | G        |
-| Focus reserves        | E        |
-| Change currency       | T        |
+| Action                       | Shortcut |
+| ---------------------------- | -------- |
+| Clone current budget         | C        |
+| Create new budget            | A        |
+| Export data as JSON          | S        |
+| Export current budget as CSV | D        |
+| Go to older budget           | PageDown |
+| Go to newer budget           | PageUp   |
+| Rename current budget        | R        |
+| Search budget list           | F or /   |
+| Focus savings goal           | G        |
+| Focus reserves               | E        |
+| Change currency              | T        |
 
 ### In case you have a backup/would like to import data from another source:
 

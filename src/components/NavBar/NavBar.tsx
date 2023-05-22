@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Offcanvas, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
+import {
+  InputGroup,
+  Offcanvas,
+  OverlayTrigger,
+  Popover,
+  Tooltip,
+} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -27,7 +33,7 @@ interface NavBarProps {
   selected?: string | null;
   currency: string;
   onClone: () => void;
-  onExport: () => void;
+  onExport: (t: string) => void;
   onGoBack: () => void;
   onGoForward: () => void;
   onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -61,9 +67,10 @@ function NavBar({
   const nameRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
+  const exportButtonRef = useRef<HTMLButtonElement>(null);
+  const exportJSONButtonRef = useRef<HTMLButtonElement>(null);
 
   const [expanded, setExpanded] = useState(false);
-  const [showDelete, setShowDelete] = useState(false);
   const [theme, setTheme] = useState("light");
 
   useHotkeys(
@@ -108,9 +115,9 @@ function NavBar({
     onClone();
   };
 
-  const handleExport = () => {
+  const handleExport = (t: string) => {
     setExpanded(false);
-    onExport();
+    onExport(t);
   };
 
   const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -155,16 +162,6 @@ function NavBar({
       onRename(newName);
     }
   };
-
-  useEffect(() => {
-    const close = (e: { key: string }) => {
-      if (e.key === "Escape") {
-        setShowDelete(false);
-      }
-    };
-    window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
-  }, []);
 
   return (
     <Navbar
@@ -369,17 +366,12 @@ function NavBar({
                       </Button>
                     </OverlayTrigger>
                   </Nav>
-                  <Nav
-                    className="m-2"
-                    onClick={() => {
-                      setShowDelete(!showDelete);
-                    }}
-                  >
+                  <Nav className="m-2">
                     <OverlayTrigger
                       trigger="click"
                       key="nav-deletion-overlay"
                       placement="bottom"
-                      show={showDelete}
+                      rootClose={true}
                       overlay={
                         <Popover id={`nav-popover-delete-button`}>
                           <Popover.Body>
@@ -403,7 +395,6 @@ function NavBar({
                                 type="button"
                                 ref={deleteButtonRef}
                                 onClick={() => {
-                                  setShowDelete(!showDelete);
                                   handleRemove(initialId);
                                 }}
                               >
@@ -467,28 +458,73 @@ function NavBar({
               </Nav>
               {initialBudgetNameList && initialBudgetNameList.length > 0 && (
                 <>
-                  <Nav
-                    className="m-2"
-                    onClick={() => {
-                      handleExport();
-                    }}
-                  >
+                  <Nav className="m-2">
                     <OverlayTrigger
-                      delay={250}
+                      trigger="click"
+                      key="nav-export-overlay"
                       placement="bottom"
+                      rootClose={true}
                       overlay={
-                        <Tooltip
-                          id={`tooltip-export-budget`}
-                          style={{ position: "fixed" }}
-                        >
-                          export budget
-                        </Tooltip>
+                        <Popover id={`nav-popover-export-button`}>
+                          <Popover.Body>
+                            <OverlayTrigger
+                              delay={250}
+                              placement="bottom"
+                              overlay={
+                                <Tooltip
+                                  id={`nav-tooltip-export-budget`}
+                                  style={{ position: "fixed" }}
+                                >
+                                  export budget
+                                </Tooltip>
+                              }
+                            >
+                              <InputGroup
+                                size="sm"
+                                className="mb-1"
+                                key={`export-button-group`}
+                              >
+                                <Button
+                                  id={"budget-export-csv-button"}
+                                  aria-label="export budget as csv"
+                                  key={"budget-export-csv-button"}
+                                  variant="outline-info"
+                                  type="button"
+                                  onClick={() => {
+                                    handleExport("csv");
+                                  }}
+                                >
+                                  CSV
+                                </Button>
+                                <Button
+                                  id={"budget-export-json-button"}
+                                  aria-label="export budget as json"
+                                  key={"budget-export-json-button"}
+                                  variant="outline-info"
+                                  type="button"
+                                  ref={exportJSONButtonRef}
+                                  onClick={() => {
+                                    handleExport("json");
+                                  }}
+                                >
+                                  JSON
+                                </Button>
+                              </InputGroup>
+                            </OverlayTrigger>
+                          </Popover.Body>
+                        </Popover>
                       }
                     >
                       <Button
                         className="w-100"
                         aria-label="export budget"
+                        ref={exportButtonRef}
                         variant="outline-info"
+                        onClick={() => {
+                          setTimeout(() => {
+                            exportJSONButtonRef.current?.focus();
+                          }, 0);
+                        }}
                       >
                         {expanded ? "export" : <BsDownload />}
                       </Button>

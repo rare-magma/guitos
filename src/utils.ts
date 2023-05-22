@@ -258,3 +258,24 @@ export function parseLocaleNumber(
       .replace(new RegExp("\\" + decimalSeparator), ".")
   );
 }
+
+export function budgetToCsv(budget: Budget) {
+  const header = ["type", "name", "value"];
+
+  const expenses = budget.expenses.items.map((expense) => {
+    return ["expense", expense.name, expense.value].join(",");
+  });
+
+  const incomes = budget.incomes.items.map((income) => {
+    return ["income", income.name, income.value].join(",");
+  });
+
+  const stats = ["goal", "goal", budget.stats.goal.toString()].join(",");
+  const reserves = [
+    "reserves",
+    "reserves",
+    budget.stats.reserves.toString(),
+  ].join(",");
+
+  return [header, ...expenses, ...incomes, stats, reserves].join("\n");
+}

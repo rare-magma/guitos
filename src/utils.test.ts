@@ -1,5 +1,6 @@
 import { expect, test } from "vitest";
 import {
+  budgetToCsv,
   calcAutoGoal,
   calcAvailable,
   calcPercentage,
@@ -133,4 +134,14 @@ test("parseLocaleNumber", () => {
   expect(parseLocaleNumber("123,45", "es")).eq(123.45);
   expect(parseLocaleNumber("12.054.100,55", "de-DE")).eq(12054100.55);
   expect(parseLocaleNumber("1,20,54,100.55", "en-IN")).eq(12054100.55);
+});
+
+test("budgetToCsv", () => {
+  expect(budgetToCsv(testBigBudget)).eq(`type,name,value
+expense,name,11378.64
+expense,name2,11378.64
+income,name,100.03
+income,name2,342783.83
+goal,goal,50
+reserves,reserves,200`);
 });

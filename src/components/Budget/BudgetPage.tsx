@@ -3,6 +3,7 @@ import { Budget } from "./Budget";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import {
+  budgetToCsv,
   calcAutoGoal,
   calcAvailable,
   calcSaved,
@@ -55,7 +56,8 @@ function BudgetPage() {
   const params = useParams();
   const name = String(params.name);
 
-  useHotkeys("s", () => handleExport(), { preventDefault: true });
+  useHotkeys("s", () => handleExportJSON(), { preventDefault: true });
+  useHotkeys("d", () => handleExportCSV(), { preventDefault: true });
   useHotkeys("a", () => handleNew(), { preventDefault: true });
   useHotkeys("c", () => handleClone(), { preventDefault: true });
   useHotkeys("pageup", () => handleGoForward(), { preventDefault: true });
@@ -328,7 +330,12 @@ function BudgetPage() {
     setBudgetNameList(createBudgetNameList(newBudgetList));
   };
 
-  const handleExport = () => {
+  const handleExport = (t: string) => {
+    if (t === "csv") handleExportCSV();
+    if (t === "json") handleExportJSON();
+  };
+
+  const handleExportJSON = () => {
     let filename = new Date().toISOString();
     filename = `guitos-${filename.slice(0, -5)}.json`;
     const url = window.URL.createObjectURL(
@@ -339,6 +346,19 @@ function BudgetPage() {
     link.setAttribute("download", filename);
     document.body.appendChild(link);
     link.click();
+  };
+
+  const handleExportCSV = () => {
+    if (budget) {
+      const filename = `${budget.name}.csv`;
+
+      const url = window.URL.createObjectURL(new Blob([budgetToCsv(budget)]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+    }
   };
 
   const save = (budget: Budget) => {
@@ -481,8 +501,8 @@ function BudgetPage() {
         onClone={() => {
           handleClone();
         }}
-        onExport={() => {
-          handleExport();
+        onExport={(t) => {
+          handleExport(t);
         }}
         onGoBack={() => {
           handleGoBack();
