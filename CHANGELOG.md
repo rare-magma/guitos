@@ -1,3 +1,10 @@
+## [0.17.1](https://github.com/rare-magma/guitos/compare/v0.17.0...v0.17.1) (2023-05-22)
+
+
+### Bug Fixes
+
+* prevent exporting empty budget as json ([f88a91e](https://github.com/rare-magma/guitos/commit/f88a91e6c9fba05c9afbf22a61bda44a7da0b594))
+
 # [0.17.0](https://github.com/rare-magma/guitos/compare/v0.16.6...v0.17.0) (2023-05-22)
 
 
