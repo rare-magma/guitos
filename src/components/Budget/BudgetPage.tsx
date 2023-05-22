@@ -336,16 +336,18 @@ function BudgetPage() {
   };
 
   const handleExportJSON = () => {
-    let filename = new Date().toISOString();
-    filename = `guitos-${filename.slice(0, -5)}.json`;
-    const url = window.URL.createObjectURL(
-      new Blob([JSON.stringify(budgetList)])
-    );
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", filename);
-    document.body.appendChild(link);
-    link.click();
+    if (budget) {
+      let filename = new Date().toISOString();
+      filename = `guitos-${filename.slice(0, -5)}.json`;
+      const url = window.URL.createObjectURL(
+        new Blob([JSON.stringify(budgetList)])
+      );
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename);
+      document.body.appendChild(link);
+      link.click();
+    }
   };
 
   const handleExportCSV = () => {
