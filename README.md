@@ -9,6 +9,7 @@
   - [Installation](#installation)
 - [Usage](#usage)
 - [Notes](#notes)
+- [Related Projects](#related-projects)
 - [Built With](#built-with)
 - [Hosted On](#hosted-on)
 - [Roadmap](#roadmap)
@@ -173,6 +174,10 @@ reserves,reserves,0
   - `react-currency-input-field` formats these values according to the current browser/phone's locale (language setting). If the locale uses `.` as the official decimal separator, then only this separator is allowed to be input.
     - See the following Wikipedia article for a reference: [Decimal separator](https://en.wikipedia.org/wiki/Decimal_separator)
   - Changing the browser/phone's locale to one that uses the preferred decimal separator should mitigate the problem.
+
+## Related Projects
+
+- [guitos-exporter](https://github.com/rare-magma/guitos-exporter): Bash script that uploads the data from guitos JSON backups to influxdb
 
 ## Built With
 
