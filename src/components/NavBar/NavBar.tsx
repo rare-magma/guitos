@@ -621,6 +621,8 @@ function NavBar({
                   <a
                     aria-label="open guitos changelog"
                     href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     v{APP_VERSION}
                   </a>
