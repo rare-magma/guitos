@@ -83,24 +83,6 @@ Later, I can compare the budget with previous months to understand where the mon
 5. Change the savings goal to your preference
 6. Update the reserves field with the current value of your emergency fund / cash
 
-### Keyboard shortcuts:
-
-Keyboard shortcuts can be triggered when no input field is selected.
-
-| Action                       | Shortcut |
-| ---------------------------- | -------- |
-| Clone current budget         | C        |
-| Create new budget            | A        |
-| Export data as JSON          | S        |
-| Export current budget as CSV | D        |
-| Go to older budget           | PageDown |
-| Go to newer budget           | PageUp   |
-| Rename current budget        | R        |
-| Search budget list           | F or /   |
-| Focus savings goal           | G        |
-| Focus reserves               | E        |
-| Change currency              | T        |
-
 ### In case you have a backup/would like to import data from another source:
 
 1. Visit [guitos.app](https://guitos.app)
@@ -156,6 +138,24 @@ reserves,reserves,0
 ```
 
 - Note that the ID of each budget inside the JSON file should be a [v4 UUID](<https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)>) as created by the `crypto.randomUUID()` [method](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID).
+
+### Keyboard shortcuts:
+
+Keyboard shortcuts can be triggered when no input field is selected.
+
+| Action                       | Shortcut |
+| ---------------------------- | -------- |
+| Clone current budget         | C        |
+| Create new budget            | A        |
+| Export data as JSON          | S        |
+| Export current budget as CSV | D        |
+| Go to older budget           | PageDown |
+| Go to newer budget           | PageUp   |
+| Rename current budget        | R        |
+| Search budget list           | F or /   |
+| Focus savings goal           | G        |
+| Focus reserves               | E        |
+| Change currency              | T        |
 
 ## Notes
 
