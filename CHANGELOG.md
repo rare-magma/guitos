@@ -1,3 +1,10 @@
+# [0.18.0](https://github.com/rare-magma/guitos/compare/v0.17.1...v0.18.0) (2023-05-26)
+
+
+### Features
+
+* add help buttons and link to repo ([68deb54](https://github.com/rare-magma/guitos/commit/68deb54895259ea1096c2b57b0520dbf32ff5c2a))
+
 ## [0.17.1](https://github.com/rare-magma/guitos/compare/v0.17.0...v0.17.1) (2023-05-22)
 
 
