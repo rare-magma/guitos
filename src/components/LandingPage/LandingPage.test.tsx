@@ -23,11 +23,10 @@ describe("LandingPage", () => {
   });
 
   it("renders initial state", () => {
+    expect(screen.getByLabelText("new budget")).toBeInTheDocument();
+    expect(screen.getByLabelText("import budget")).toBeInTheDocument();
     expect(
-      screen.getAllByRole("button", { name: "new budget" })[0]
-    ).toBeInTheDocument();
-    expect(
-      screen.getAllByRole("button", { name: "import budget" })[0]
+      screen.getByLabelText("open instructions in new tab")
     ).toBeInTheDocument();
   });
 
@@ -43,6 +42,17 @@ describe("LandingPage", () => {
       testBudget as unknown as File
     );
     expect(onImport).toHaveBeenCalledTimes(1);
+  });
+
+  it("opens instructions in new tab", async () => {
+    const instructionsButton = screen.getByLabelText(
+      "open instructions in new tab"
+    );
+    await userEvent.click(instructionsButton);
+    expect(instructionsButton).toHaveAttribute(
+      "href",
+      "https://github.com/rare-magma/guitos#getting-started"
+    );
   });
 
   it("renders loading spinner", () => {

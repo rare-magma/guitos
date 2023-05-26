@@ -306,6 +306,10 @@ input[type="number"] {
   font-family: ui-monospace, SF Mono, Menlo, Monaco, Andale Mono, monospace;
 }
 
+.brand {
+  color: var(--textcolor);
+}
+
 .pre,
 .textarea {
   font-size: 0.9em;

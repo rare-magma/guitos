@@ -18,6 +18,7 @@ import {
   BsDownload,
   BsArrowLeft,
   BsArrowRight,
+  BsQuestionLg,
 } from "react-icons/bs";
 import { FaRegClone } from "react-icons/fa";
 import { Typeahead } from "react-bootstrap-typeahead";
@@ -173,7 +174,27 @@ function NavBar({
     >
       <Container fluid className="flex-row">
         {initialBudgetNameList && initialBudgetNameList.length < 1 && (
-          <Navbar.Brand className="flex-sm-row">guitos</Navbar.Brand>
+          <OverlayTrigger
+            delay={250}
+            placement="bottom"
+            overlay={
+              <Tooltip id={`tooltip-guitos-repo`} style={{ position: "fixed" }}>
+                open repository in new tab
+              </Tooltip>
+            }
+          >
+            <Navbar.Brand className="flex-sm-row">
+              <a
+                className="brand"
+                aria-label="open guitos repository"
+                href="https://github.com/rare-magma/guitos"
+                target="_blank"
+                rel="noreferrer"
+              >
+                guitos
+              </a>
+            </Navbar.Brand>
+          </OverlayTrigger>
         )}
         <Nav className="flex-row flex-grow-1">
           {initialSelectedName && (
@@ -560,6 +581,30 @@ function NavBar({
                   </Nav>
                 </>
               )}
+              <Nav className="m-2">
+                <OverlayTrigger
+                  delay={250}
+                  placement="bottom"
+                  overlay={
+                    <Tooltip
+                      id={`tooltip-guitos-instructions`}
+                      style={{ position: "fixed" }}
+                    >
+                      open instructions in new tab
+                    </Tooltip>
+                  }
+                >
+                  <Button
+                    className="w-100"
+                    aria-label="open instructions in new tab"
+                    variant="outline-info"
+                    href="https://github.com/rare-magma/guitos#getting-started"
+                    target="_blank"
+                  >
+                    {expanded ? "instructions" : <BsQuestionLg />}
+                  </Button>
+                </OverlayTrigger>
+              </Nav>
               <OverlayTrigger
                 delay={250}
                 placement="bottom"

@@ -66,6 +66,7 @@ describe("NavBar", () => {
   });
 
   it("triggers onImport when import button is pressed", async () => {
+    await userEvent.click(screen.getByLabelText("import budget"));
     await userEvent.upload(
       screen.getByTestId("import-form-control"),
       testBudget as unknown as File
@@ -73,10 +74,19 @@ describe("NavBar", () => {
     expect(onImport).toHaveBeenCalledTimes(1);
   });
 
-  it("triggers onExport when export button is pressed", async () => {
+  it("triggers onExport when export json button is pressed", async () => {
     await userEvent.click(screen.getByLabelText("export budget"));
     await userEvent.click(
       screen.getByRole("button", { name: "export budget as json" })
+    );
+    expect(onExport).toHaveBeenCalledTimes(1);
+  });
+
+  it("triggers onExport when export csv button is pressed", async () => {
+    onExport.mockClear();
+    await userEvent.click(screen.getByLabelText("export budget"));
+    await userEvent.click(
+      screen.getByRole("button", { name: "export budget as csv" })
     );
     expect(onExport).toHaveBeenCalledTimes(1);
   });
@@ -113,5 +123,43 @@ describe("NavBar", () => {
     await userEvent.type(screen.getByPlaceholderText("USD"), "CAD");
     await userEvent.click(screen.getByText("CAD"));
     expect(onSetCurrency).toHaveBeenCalledTimes(1);
+  });
+
+  it("opens instructions in new tab", async () => {
+    const instructionsButton = screen.getByLabelText(
+      "open instructions in new tab"
+    );
+    await userEvent.click(instructionsButton);
+    expect(instructionsButton).toHaveAttribute(
+      "href",
+      "https://github.com/rare-magma/guitos#getting-started"
+    );
+  });
+
+  it("opens guitos repo in new tab", async () => {
+    render(
+      <NavBar
+        budgetNameList={[]}
+        currency={testIntlConfig.currency}
+        selected={null}
+        id={"035c2de4-00a4-403c-8f0e-f81339be9a4e"}
+        onClone={onClone}
+        onExport={onExport}
+        onGoBack={onGoBack}
+        onGoForward={onGoForward}
+        onImport={onImport}
+        onNew={onNew}
+        onRemove={onRemove}
+        onRename={onRename}
+        onSelect={onSelect}
+        onSetCurrency={onSetCurrency}
+      />
+    );
+    const guitosButton = screen.getByLabelText("open guitos repository");
+    await userEvent.click(guitosButton);
+    expect(guitosButton).toHaveAttribute(
+      "href",
+      "https://github.com/rare-magma/guitos"
+    );
   });
 });

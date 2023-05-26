@@ -74,6 +74,15 @@ function LandingPage({
                   style={{ display: "none" }}
                 />
               </Form.Group>
+              <Button
+                className="w-25 align-self-center"
+                aria-label="open instructions in new tab"
+                variant="outline-info"
+                href="https://github.com/rare-magma/guitos#getting-started"
+                target="_blank"
+              >
+                help
+              </Button>
             </Stack>
           </Row>
         </Container>
