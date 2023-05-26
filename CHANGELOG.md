@@ -1,3 +1,10 @@
+## [0.18.1](https://github.com/rare-magma/guitos/compare/v0.18.0...v0.18.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* open changelog in new tab ([5ab9fe4](https://github.com/rare-magma/guitos/commit/5ab9fe4ddfad653942363194c863cd8a97b54d45))
+
 # [0.18.0](https://github.com/rare-magma/guitos/compare/v0.17.1...v0.18.0) (2023-05-26)
 
 
