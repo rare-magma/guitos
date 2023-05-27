@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import App from "./App";
+import App, { budgetsDB, optionsDB } from "./App";
 import userEvent from "@testing-library/user-event";
 
 describe("App", () => {
@@ -11,6 +11,12 @@ describe("App", () => {
     expect(screen.getAllByText("guitos")[0]).toBeInTheDocument();
     expect(screen.getByRole("status")).toBeInTheDocument();
     expect(screen.getByText(/v/)).toBeInTheDocument();
+    expect(budgetsDB.config("name")).toBe("guitos");
+    expect(budgetsDB.config("storeName")).toBe("budgets");
+    expect(budgetsDB.config("name")).toBe("guitos");
+    expect(budgetsDB.config("storeName")).toBe("budgets");
+    expect(optionsDB.config("name")).toBe("guitos");
+    expect(optionsDB.config("storeName")).toBe("options");
   });
 
   it("shows new budget when clicking new button", async () => {
