@@ -6,62 +6,163 @@ import { testIntlConfig, itemForm1 } from "../../setupTests";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
-  const onShow = vi.fn();
 
   beforeEach(() => {
     render(
       <CalculateButton
         itemForm={itemForm1}
         intlConfig={testIntlConfig}
+        label="Expense"
         onCalculate={onCalculate}
-        onShow={onShow}
       />
     );
   });
 
-  it.todo("renders initial state", () => {
+  it("renders initial state", () => {
     expect(
       screen.getByLabelText("select operations to change item value amount")
     ).toBeInTheDocument();
   });
 
-  it.todo("opens popover when clicking the button", async () => {
-    await userEvent.click(
+  it("opens popover when clicking the button", async () => {
+    const button = screen.getByRole("button", {
+      name: "select operations to change item value amount",
+    });
+    await userEvent.click(button);
+
+    expect(
       screen.getByRole("button", {
-        name: "select operations to change item value amount",
+        name: "select type of operation on item value",
       })
-    );
+    ).toBeInTheDocument();
 
-    expect(onShow).toHaveBeenCalledTimes(1);
-  });
+    expect(
+      screen.getByLabelText("change item value amount")
+    ).toBeInTheDocument();
 
-  it.todo("closes when clicking the button", async () => {
-    await userEvent.click(
-      screen.getByRole("button", {
-        name: "select operations to change item value amount",
-      })
-    );
-
-    await userEvent.click(
+    expect(
       screen.getByRole("button", {
         name: "accept change item value amount",
       })
-    );
-
-    expect(onShow).toHaveBeenCalledTimes(2);
+    ).toBeInTheDocument();
   });
 
-  it.todo("closes when presing Escape key", async () => {
-    await userEvent.click(
-      screen.getByRole("button", {
-        name: "select operations to change item value amount",
-      })
-    );
+  it("closes when clicking the button", async () => {
+    const button = screen.getByRole("button", {
+      name: "select operations to change item value amount",
+    });
+    await userEvent.click(button);
+
+    const button2 = screen.getByRole("button", {
+      name: "select type of operation on item value",
+    });
+
+    await userEvent.click(button);
+
+    expect(button2).not.toBeInTheDocument();
+  });
+
+  it("closes when pressing Escape key", async () => {
+    const button = screen.getByRole("button", {
+      name: "select operations to change item value amount",
+    });
+    await userEvent.click(button);
+
+    const button2 = screen.getByRole("button", {
+      name: "select type of operation on item value",
+    });
 
     await userEvent.type(
       screen.getByLabelText("change item value amount"),
       "{Escape}"
     );
-    expect(onShow).toHaveBeenCalledTimes(4);
+
+    expect(button2).not.toBeInTheDocument();
+  });
+
+  it("calls onCalculate when accepting change > 0", async () => {
+    const button = screen.getByRole("button", {
+      name: "select operations to change item value amount",
+    });
+    await userEvent.click(button);
+    const acceptButton = screen.getByRole("button", {
+      name: "accept change item value amount",
+    });
+
+    await userEvent.type(
+      screen.getByLabelText("change item value amount"),
+      "123"
+    );
+    await userEvent.click(acceptButton);
+
+    expect(onCalculate).toHaveBeenCalledTimes(1);
+    expect(onCalculate).toHaveBeenCalledWith(123, "add");
+    onCalculate.mockClear();
+  });
+
+  it("calls onCalculate with sub", async () => {
+    const button = screen.getByRole("button", {
+      name: "select operations to change item value amount",
+    });
+    await userEvent.click(button);
+    const acceptButton = screen.getByRole("button", {
+      name: "accept change item value amount",
+    });
+
+    await userEvent.type(
+      screen.getByLabelText("change item value amount"),
+      "123"
+    );
+
+    await userEvent.click(screen.getByLabelText("subtract to item value"));
+    await userEvent.click(acceptButton);
+
+    expect(onCalculate).toHaveBeenCalledTimes(1);
+    expect(onCalculate).toHaveBeenCalledWith(123, "sub");
+    onCalculate.mockClear();
+  });
+
+  it("calls onCalculate with mul", async () => {
+    const button = screen.getByRole("button", {
+      name: "select operations to change item value amount",
+    });
+    await userEvent.click(button);
+    const acceptButton = screen.getByRole("button", {
+      name: "accept change item value amount",
+    });
+
+    await userEvent.type(
+      screen.getByLabelText("change item value amount"),
+      "123"
+    );
+
+    await userEvent.click(screen.getByLabelText("multiply item value"));
+    await userEvent.click(acceptButton);
+
+    expect(onCalculate).toHaveBeenCalledTimes(1);
+    expect(onCalculate).toHaveBeenCalledWith(123, "mul");
+    onCalculate.mockClear();
+  });
+
+  it("calls onCalculate with div", async () => {
+    const button = screen.getByRole("button", {
+      name: "select operations to change item value amount",
+    });
+    await userEvent.click(button);
+    const acceptButton = screen.getByRole("button", {
+      name: "accept change item value amount",
+    });
+
+    await userEvent.type(
+      screen.getByLabelText("change item value amount"),
+      "123"
+    );
+
+    await userEvent.click(screen.getByLabelText("divide item value"));
+    await userEvent.click(acceptButton);
+
+    expect(onCalculate).toHaveBeenCalledTimes(1);
+    expect(onCalculate).toHaveBeenCalledWith(123, "div");
+    onCalculate.mockClear();
   });
 });
