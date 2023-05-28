@@ -1,25 +1,27 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import BudgetPage from "./BudgetPage";
-import {
-  testBudget,
-  testCsv,
-  testCsvError,
-  testJSONErrorBudget,
-} from "../../setupTests";
 
 describe("BudgetPage", () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     render(<BudgetPage />);
-    const newButton = screen.getAllByRole("button", { name: "new budget" });
-    await userEvent.click(newButton[0]);
   });
 
-  it("renders initial state", () => {
+  it("renders initial state", async () => {
+    const newButton = screen.getAllByRole("button", { name: "new budget" });
+    await userEvent.click(newButton[0]);
     expect(screen.getByLabelText("delete budget")).toBeInTheDocument();
   });
 
-  it.todo("removes budget when clicking on delete budget button", async () => {
+  it("responds to new budget keyboard shortcut", async () => {
+    await userEvent.type(screen.getByTestId("header"), "a");
+    expect(screen.getByText("2023-035c2de4")).toBeInTheDocument();
+  });
+
+  it("removes budget when clicking on delete budget button", async () => {
+    const newButton = screen.getAllByRole("button", { name: "new budget" });
+    await userEvent.click(newButton[0]);
+
     const deleteButton = screen.getAllByRole("button", {
       name: "delete budget",
     });
@@ -31,6 +33,9 @@ describe("BudgetPage", () => {
   });
 
   it("clones budget when clicking on clone budget button", async () => {
+    const newButton = screen.getAllByRole("button", { name: "new budget" });
+    await userEvent.click(newButton[0]);
+
     const cloneButton = screen.getAllByRole("button", {
       name: "clone budget",
     });
@@ -38,52 +43,52 @@ describe("BudgetPage", () => {
     expect(screen.getByText("2023-035c2de4-clone")).toBeInTheDocument();
   });
 
-  it.todo("responds to save budget keyboard shortcut", async () => {
-    // await userEvent.type(screen.getByTestId("header"), "s");
-  });
+  it("responds to clone budget keyboard shortcut", async () => {
+    const newButton = screen.getAllByRole("button", { name: "new budget" });
+    await userEvent.click(newButton[0]);
 
-  it.todo("responds to new budget keyboard shortcut", async () => {
-    await userEvent.type(screen.getByTestId("header"), "a");
-  });
-
-  it.todo("responds to clone budget keyboard shortcut", async () => {
     await userEvent.type(screen.getByTestId("header"), "c");
-    expect(screen.getByText("2023-035c2de4-clone-clone")).toBeInTheDocument();
+    expect(screen.getByText("2023-035c2de4-clone")).toBeInTheDocument();
   });
 
-  it.todo("responds to go back keyboard shortcut", async () => {
-    await userEvent.type(screen.getByTestId("header"), "{pagedown}");
-  });
+  it("responds to changes", async () => {
+    const newButton = screen.getAllByRole("button", { name: "new budget" });
+    await userEvent.click(newButton[0]);
 
-  it.todo("responds to go forward keyboard shortcut", async () => {
-    await userEvent.type(screen.getByTestId("header"), "{pageup}");
-  });
+    // revenue change
+    await userEvent.type(screen.getAllByDisplayValue("$0")[4], "200");
+    expect(screen.getAllByDisplayValue("$200")[1]).toBeInTheDocument();
 
-  it.todo("saves imported json to db", async () => {
-    await userEvent.upload(
-      screen.getByTestId("import-form-control"),
-      new Blob([JSON.stringify(testBudget)]) as File
+    // expense change
+    await act(async () => {
+      await userEvent.type(screen.getAllByDisplayValue("$0")[1], "13");
+    });
+
+    expect(screen.getByDisplayValue("$13")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("$187")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("$167")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("$20")).toBeInTheDocument();
+
+    // stat change
+    await userEvent.type(screen.getByLabelText("reserves"), "2");
+    expect(screen.getByDisplayValue("$2")).toBeInTheDocument();
+
+    // auto goal change
+    await userEvent.click(
+      screen.getByRole("button", { name: "calculate savings goal" })
     );
-  });
 
-  it.todo("doesn't save faulty json to db", async () => {
-    await userEvent.upload(
-      screen.getByTestId("import-form-control"),
-      new Blob([JSON.stringify(testJSONErrorBudget)]) as File
-    );
-  });
+    expect(screen.getByDisplayValue("93.5")).toBeInTheDocument();
+    expect(screen.getAllByDisplayValue("$0")[0]).toBeInTheDocument();
+    expect(screen.getAllByDisplayValue("$187")[0]).toBeInTheDocument();
 
-  it.todo("saves imported csv to db", async () => {
-    await userEvent.upload(
-      screen.getByTestId("import-form-control"),
-      new File([testCsv], "test.csv", { type: "text/csv" })
-    );
-  });
+    // rename change
+    await userEvent.type(screen.getByLabelText("budget name"), "change");
+    expect(screen.getByText("2023-035c2de4-clonechange")).toBeInTheDocument();
 
-  it.todo("doesn't save faulty csv to db", async () => {
-    await userEvent.upload(
-      screen.getByTestId("import-form-control"),
-      new File([testCsvError], "test.csv", { type: "text/csv" })
-    );
+    // currency change
+    await userEvent.type(screen.getByPlaceholderText("USD"), "CAD");
+    await userEvent.click(screen.getByText("CAD"));
+    expect(screen.getByDisplayValue("CA$200")).toBeInTheDocument();
   });
 });
