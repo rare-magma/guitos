@@ -74,6 +74,8 @@ function NavBar({
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
 
+  useHotkeys("pageup", () => handleGoForward(), { preventDefault: true });
+  useHotkeys("pagedown", () => handleGoBack(), { preventDefault: true });
   useHotkeys(
     ["/", "f"],
     () =>

@@ -60,8 +60,6 @@ function BudgetPage() {
   useHotkeys("d", () => handleExportCSV(), { preventDefault: true });
   useHotkeys("a", () => handleNew(), { preventDefault: true });
   useHotkeys("c", () => handleClone(), { preventDefault: true });
-  useHotkeys("pageup", () => handleGoForward(), { preventDefault: true });
-  useHotkeys("pagedown", () => handleGoBack(), { preventDefault: true });
 
   const handleIncomeChange = (item: Income) => {
     let newBudget: Budget;

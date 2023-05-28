@@ -55,8 +55,18 @@ describe("NavBar", () => {
   it("triggers onGo* when back/fwd buttons are pressed", async () => {
     await userEvent.click(screen.getByLabelText("go to older budget"));
     expect(onGoBack).toHaveBeenCalledTimes(1);
+    onGoBack.mockClear();
 
     await userEvent.click(screen.getByLabelText("go to newer budget"));
+    expect(onGoForward).toHaveBeenCalledTimes(1);
+    onGoForward.mockClear();
+  });
+
+  it("triggers onGo* when back/fwd shortcuts are pressed", async () => {
+    await userEvent.type(screen.getByTestId("header"), "{pagedown}");
+    expect(onGoBack).toHaveBeenCalledTimes(1);
+
+    await userEvent.type(screen.getByTestId("header"), "{pageup}");
     expect(onGoForward).toHaveBeenCalledTimes(1);
   });
 
