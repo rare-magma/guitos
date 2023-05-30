@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  InputGroup,
-  Offcanvas,
-  OverlayTrigger,
-  Popover,
-  Tooltip,
-} from "react-bootstrap";
+import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -15,7 +9,6 @@ import {
   BsPlusLg,
   BsXLg,
   BsUpload,
-  BsDownload,
   BsArrowLeft,
   BsArrowRight,
   BsQuestionLg,
@@ -27,6 +20,9 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { focusRef } from "../../utils";
 import { currenciesList } from "../../lists/currenciesList";
 import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
+import { NavBarItem } from "./NavBarItem";
+import { NavBarDelete } from "./NavBarDelete";
+import { NavBarExport } from "./NavBarExport";
 
 interface NavBarProps {
   budgetNameList: { id: string; name: string }[];
@@ -203,58 +199,24 @@ function NavBar({
             <Nav className="flex-row">
               {initialBudgetNameList && initialBudgetNameList.length > 1 && (
                 <>
-                  <Nav.Item
-                    className="me-1 my-2"
-                    onClick={() => {
-                      handleGoBack();
-                    }}
-                  >
-                    <OverlayTrigger
-                      delay={250}
-                      placement="bottom"
-                      overlay={
-                        <Tooltip
-                          id={`tooltip-go-to-older-budget`}
-                          style={{ position: "fixed" }}
-                        >
-                          go to older budget
-                        </Tooltip>
-                      }
-                    >
-                      <Button
-                        aria-label="go to older budget"
-                        variant="Expenses-plus-button"
-                      >
-                        <BsArrowLeft />
-                      </Button>
-                    </OverlayTrigger>
-                  </Nav.Item>
-                  <Nav.Item
-                    className="m-2"
-                    onClick={() => {
-                      handleGoForward();
-                    }}
-                  >
-                    <OverlayTrigger
-                      delay={250}
-                      placement="bottom"
-                      overlay={
-                        <Tooltip
-                          id={`tooltip-go-to-newer-budget`}
-                          style={{ position: "fixed" }}
-                        >
-                          go to newer budget
-                        </Tooltip>
-                      }
-                    >
-                      <Button
-                        aria-label="go to newer budget"
-                        variant="Expenses-plus-button"
-                      >
-                        <BsArrowRight />
-                      </Button>
-                    </OverlayTrigger>
-                  </Nav.Item>
+                  <NavBarItem
+                    itemClassName={"me-1 my-2"}
+                    onClick={handleGoBack}
+                    tooltipID={"tooltip-go-to-older-budget"}
+                    tooltipText={"go to older budget"}
+                    buttonAriaLabel={"go to older budget"}
+                    buttonVariant={"Expenses-plus-button"}
+                    buttonIcon={<BsArrowLeft />}
+                  />
+                  <NavBarItem
+                    itemClassName={"m-2"}
+                    onClick={handleGoForward}
+                    tooltipID={"tooltip-go-to-newer-budget"}
+                    tooltipText={"go to newer budget"}
+                    buttonAriaLabel={"go to newer budget"}
+                    buttonVariant={"Expenses-plus-button"}
+                    buttonIcon={<BsArrowRight />}
+                  />
                 </>
               )}
               <Nav.Item className="m-2 me-3">
@@ -333,115 +295,36 @@ function NavBar({
               </Nav>
             </Nav>
             <Nav>
-              <Nav
-                className="m-2"
+              <NavBarItem
+                itemClassName={"m-2"}
                 onClick={() => {
                   handleNew();
                 }}
-              >
-                <OverlayTrigger
-                  delay={250}
-                  placement="bottom"
-                  overlay={
-                    <Tooltip
-                      id={`tooltip-new-budget`}
-                      style={{ position: "fixed" }}
-                    >
-                      new budget
-                    </Tooltip>
-                  }
-                >
-                  <Button
-                    className="w-100"
-                    aria-label="new budget"
-                    variant="outline-success"
-                  >
-                    {expanded ? "new" : <BsPlusLg />}
-                  </Button>
-                </OverlayTrigger>
-              </Nav>
+                tooltipID={"tooltip-new-budget"}
+                tooltipText={"new budget"}
+                buttonAriaLabel={"new budget"}
+                buttonClassName="w-100"
+                buttonVariant={"outline-success"}
+                buttonIcon={expanded ? "new" : <BsPlusLg />}
+              />
               {initialBudgetNameList && initialBudgetNameList.length > 0 && (
                 <>
-                  <Nav
-                    className="m-2"
-                    onClick={() => {
-                      handleClone();
-                    }}
-                  >
-                    <OverlayTrigger
-                      delay={250}
-                      placement="bottom"
-                      overlay={
-                        <Tooltip
-                          id={`tooltip-clone-budget`}
-                          style={{ position: "fixed" }}
-                        >
-                          clone budget
-                        </Tooltip>
-                      }
-                    >
-                      <Button
-                        className="w-100"
-                        aria-label="clone budget"
-                        variant="outline-success"
-                      >
-                        {expanded ? "clone" : <FaRegClone />}
-                      </Button>
-                    </OverlayTrigger>
-                  </Nav>
-                  <Nav className="m-2">
-                    <OverlayTrigger
-                      trigger="click"
-                      key="nav-deletion-overlay"
-                      placement="bottom"
-                      rootClose={true}
-                      overlay={
-                        <Popover id={`nav-popover-delete-button`}>
-                          <Popover.Body>
-                            <OverlayTrigger
-                              delay={250}
-                              placement="bottom"
-                              overlay={
-                                <Tooltip
-                                  id={`nav-tooltip-delete-budget`}
-                                  style={{ position: "fixed" }}
-                                >
-                                  delete budget
-                                </Tooltip>
-                              }
-                            >
-                              <Button
-                                id={"budget-deletion-button"}
-                                aria-label="confirm budget deletion"
-                                key={"budget-deletion-button"}
-                                variant="delete"
-                                type="button"
-                                ref={deleteButtonRef}
-                                onClick={() => {
-                                  handleRemove(initialId);
-                                }}
-                              >
-                                {expanded ? "delete budget" : <BsXLg />}
-                              </Button>
-                            </OverlayTrigger>
-                          </Popover.Body>
-                        </Popover>
-                      }
-                    >
-                      <Button
-                        className="w-100"
-                        aria-label="delete budget"
-                        variant="outline-danger"
-                        onClick={() => {
-                          setTimeout(() => {
-                            deleteButtonRef.current?.focus();
-                          }, 0);
-                        }}
-                      >
-                        {expanded ? "delete" : <BsXLg />}
-                      </Button>
-                    </OverlayTrigger>
-                  </Nav>
+                  <NavBarItem
+                    itemClassName={"m-2"}
+                    onClick={handleClone}
+                    tooltipID={"tooltip-clone-budget"}
+                    tooltipText={"clone budget"}
+                    buttonAriaLabel={"clone budget"}
+                    buttonClassName="w-100"
+                    buttonVariant={"outline-success"}
+                    buttonIcon={expanded ? "clone" : <FaRegClone />}
+                  />
+                  <NavBarDelete
+                    deleteButtonRef={deleteButtonRef}
+                    handleRemove={() => handleRemove(initialId)}
+                    initialId={initialId}
+                    expanded={expanded}
+                  />
                 </>
               )}
               <Nav className="m-2" as="li">
@@ -481,78 +364,12 @@ function NavBar({
               </Nav>
               {initialBudgetNameList && initialBudgetNameList.length > 0 && (
                 <>
-                  <Nav className="m-2">
-                    <OverlayTrigger
-                      trigger="click"
-                      key="nav-export-overlay"
-                      placement="bottom"
-                      rootClose={true}
-                      overlay={
-                        <Popover id={`nav-popover-export-button`}>
-                          <Popover.Body>
-                            <OverlayTrigger
-                              delay={250}
-                              placement="bottom"
-                              overlay={
-                                <Tooltip
-                                  id={`nav-tooltip-export-budget`}
-                                  style={{ position: "fixed" }}
-                                >
-                                  export budget
-                                </Tooltip>
-                              }
-                            >
-                              <InputGroup
-                                size="sm"
-                                className="mb-1"
-                                key={`export-button-group`}
-                              >
-                                <Button
-                                  id={"budget-export-csv-button"}
-                                  aria-label="export budget as csv"
-                                  key={"budget-export-csv-button"}
-                                  variant="outline-info"
-                                  type="button"
-                                  onClick={() => {
-                                    handleExport("csv");
-                                  }}
-                                >
-                                  CSV
-                                </Button>
-                                <Button
-                                  id={"budget-export-json-button"}
-                                  aria-label="export budget as json"
-                                  key={"budget-export-json-button"}
-                                  variant="outline-info"
-                                  type="button"
-                                  ref={exportJSONButtonRef}
-                                  onClick={() => {
-                                    handleExport("json");
-                                  }}
-                                >
-                                  JSON
-                                </Button>
-                              </InputGroup>
-                            </OverlayTrigger>
-                          </Popover.Body>
-                        </Popover>
-                      }
-                    >
-                      <Button
-                        className="w-100"
-                        aria-label="export budget"
-                        ref={exportButtonRef}
-                        variant="outline-info"
-                        onClick={() => {
-                          setTimeout(() => {
-                            exportJSONButtonRef.current?.focus();
-                          }, 0);
-                        }}
-                      >
-                        {expanded ? "export" : <BsDownload />}
-                      </Button>
-                    </OverlayTrigger>
-                  </Nav>
+                  <NavBarExport
+                    exportButtonRef={exportButtonRef}
+                    exportJSONButtonRef={exportJSONButtonRef}
+                    handleExport={handleExport}
+                    expanded={expanded}
+                  />
                   <Nav className="m-2">
                     <Typeahead
                       id="currency-option-list"
@@ -583,30 +400,20 @@ function NavBar({
                   </Nav>
                 </>
               )}
-              <Nav className="m-2">
-                <OverlayTrigger
-                  delay={250}
-                  placement="bottom"
-                  overlay={
-                    <Tooltip
-                      id={`tooltip-guitos-instructions`}
-                      style={{ position: "fixed" }}
-                    >
-                      open instructions in new tab
-                    </Tooltip>
-                  }
-                >
-                  <Button
-                    className="w-100"
-                    aria-label="open instructions in new tab"
-                    variant="outline-info"
-                    href="https://github.com/rare-magma/guitos#getting-started"
-                    target="_blank"
-                  >
-                    {expanded ? "instructions" : <BsQuestionLg />}
-                  </Button>
-                </OverlayTrigger>
-              </Nav>
+              <NavBarItem
+                itemClassName={"m-2"}
+                onClick={() => {
+                  return undefined;
+                }}
+                tooltipID={"tooltip-guitos-instructions"}
+                tooltipText={"open instructions in new tab"}
+                buttonAriaLabel={"open instructions in new tab"}
+                buttonClassName="w-100"
+                buttonVariant={"outline-info"}
+                buttonLink="https://github.com/rare-magma/guitos#getting-started"
+                buttonIcon={expanded ? "instructions" : <BsQuestionLg />}
+                target="_blank"
+              />
               <OverlayTrigger
                 delay={250}
                 placement="bottom"
