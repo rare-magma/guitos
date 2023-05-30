@@ -30,13 +30,25 @@ describe("StatCard", () => {
   it("triggers onChange when user changes input", async () => {
     await userEvent.type(screen.getByLabelText("reserves"), "2");
 
-    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toBeCalledWith({
+      available: 90,
+      goal: 10,
+      reserves: 2002,
+      saved: 10,
+      withGoal: 80,
+    });
     expect(screen.getByDisplayValue("$2,002")).toBeInTheDocument();
 
     await userEvent.clear(screen.getByTestId("goal-input"));
     await userEvent.type(screen.getByTestId("goal-input"), "95");
 
-    expect(onChange).toHaveBeenCalledTimes(5);
+    expect(onChange).toBeCalledWith({
+      available: 90,
+      goal: 95,
+      reserves: 2002,
+      saved: 10,
+      withGoal: 80,
+    });
     expect(screen.getByDisplayValue("95")).toBeInTheDocument();
   });
 
@@ -45,6 +57,12 @@ describe("StatCard", () => {
       screen.getByRole("button", { name: "calculate savings goal" })
     );
 
-    expect(onAutoGoal).toHaveBeenCalledTimes(1);
+    expect(onAutoGoal).toBeCalledWith({
+      available: 90,
+      goal: 95,
+      reserves: 2002,
+      saved: 10,
+      withGoal: 80,
+    });
   });
 });

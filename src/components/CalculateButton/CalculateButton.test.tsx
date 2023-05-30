@@ -95,9 +95,7 @@ describe("CalculateButton", () => {
     );
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toHaveBeenCalledTimes(1);
-    expect(onCalculate).toHaveBeenCalledWith(123, "add");
-    onCalculate.mockClear();
+    expect(onCalculate).toBeCalledWith(123, "add");
   });
 
   it("calls onCalculate with sub", async () => {
@@ -117,9 +115,7 @@ describe("CalculateButton", () => {
     await userEvent.click(screen.getByLabelText("subtract to item value"));
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toHaveBeenCalledTimes(1);
-    expect(onCalculate).toHaveBeenCalledWith(123, "sub");
-    onCalculate.mockClear();
+    expect(onCalculate).toBeCalledWith(123, "sub");
   });
 
   it("calls onCalculate with mul", async () => {
@@ -139,9 +135,7 @@ describe("CalculateButton", () => {
     await userEvent.click(screen.getByLabelText("multiply item value"));
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toHaveBeenCalledTimes(1);
-    expect(onCalculate).toHaveBeenCalledWith(123, "mul");
-    onCalculate.mockClear();
+    expect(onCalculate).toBeCalledWith(123, "mul");
   });
 
   it("calls onCalculate with div", async () => {
@@ -161,8 +155,6 @@ describe("CalculateButton", () => {
     await userEvent.click(screen.getByLabelText("divide item value"));
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toHaveBeenCalledTimes(1);
-    expect(onCalculate).toHaveBeenCalledWith(123, "div");
-    onCalculate.mockClear();
+    expect(onCalculate).toBeCalledWith(123, "div");
   });
 });

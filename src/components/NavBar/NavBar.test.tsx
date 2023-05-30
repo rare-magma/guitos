@@ -54,25 +54,25 @@ describe("NavBar", () => {
 
   it("triggers onGo* when back/fwd buttons are pressed", async () => {
     await userEvent.click(screen.getByLabelText("go to older budget"));
-    expect(onGoBack).toHaveBeenCalledTimes(1);
+    expect(onGoBack).toBeCalledTimes(1);
     onGoBack.mockClear();
 
     await userEvent.click(screen.getByLabelText("go to newer budget"));
-    expect(onGoForward).toHaveBeenCalledTimes(1);
+    expect(onGoForward).toBeCalledTimes(1);
     onGoForward.mockClear();
   });
 
   it("triggers onGo* when back/fwd shortcuts are pressed", async () => {
     await userEvent.type(screen.getByTestId("header"), "{pagedown}");
-    expect(onGoBack).toHaveBeenCalledTimes(1);
+    expect(onGoBack).toBeCalledTimes(1);
 
     await userEvent.type(screen.getByTestId("header"), "{pageup}");
-    expect(onGoForward).toHaveBeenCalledTimes(1);
+    expect(onGoForward).toBeCalledTimes(1);
   });
 
   it("triggers onClone when clone button is pressed", async () => {
     await userEvent.click(screen.getByLabelText("clone budget"));
-    expect(onClone).toHaveBeenCalledTimes(1);
+    expect(onClone).toBeCalledTimes(1);
   });
 
   it("triggers onImport when import button is pressed", async () => {
@@ -81,7 +81,7 @@ describe("NavBar", () => {
       screen.getByTestId("import-form-control"),
       testBudget as unknown as File
     );
-    expect(onImport).toHaveBeenCalledTimes(1);
+    expect(onImport).toBeCalledTimes(1);
   });
 
   it("triggers onExport when export json button is pressed", async () => {
@@ -89,22 +89,21 @@ describe("NavBar", () => {
     await userEvent.click(
       screen.getByRole("button", { name: "export budget as json" })
     );
-    expect(onExport).toHaveBeenCalledTimes(1);
+    expect(onExport).toBeCalledWith("json");
   });
 
   it("triggers onExport when export csv button is pressed", async () => {
-    onExport.mockClear();
     await userEvent.click(screen.getByLabelText("export budget"));
     await userEvent.click(
       screen.getByRole("button", { name: "export budget as csv" })
     );
-    expect(onExport).toHaveBeenCalledTimes(1);
+    expect(onExport).toBeCalledWith("csv");
   });
 
   it("triggers onRename when user changes budget name input", async () => {
     await userEvent.type(screen.getByDisplayValue("2023-04"), "change name");
 
-    expect(onRename).toHaveBeenCalledTimes(11);
+    expect(onRename).toBeCalledWith("2023-04change name");
     expect(screen.getByDisplayValue("2023-04change name")).toBeInTheDocument();
   });
 
@@ -114,7 +113,7 @@ describe("NavBar", () => {
       screen.getByRole("button", { name: "confirm budget deletion" })
     );
 
-    expect(onRemove).toHaveBeenCalledTimes(1);
+    expect(onRemove).toBeCalledWith("035c2de4-00a4-403c-8f0e-f81339be9a4e");
   });
 
   it("triggers onSelect when user selects budget", async () => {
@@ -124,7 +123,12 @@ describe("NavBar", () => {
     );
     await userEvent.click(screen.getByText("2023-05"));
 
-    expect(onSelect).toHaveBeenCalledTimes(1);
+    expect(onSelect).toBeCalledWith([
+      {
+        id: "036c2de4-00a4-402c-8f0e-f81339be9a4e",
+        name: "2023-05",
+      },
+    ]);
   });
 
   it("triggers onSetCurrency when currency is selected from dropdown", async () => {
@@ -132,7 +136,7 @@ describe("NavBar", () => {
     await userEvent.click(newButton[0]);
     await userEvent.type(screen.getByPlaceholderText("USD"), "CAD");
     await userEvent.click(screen.getByText("CAD"));
-    expect(onSetCurrency).toHaveBeenCalledTimes(1);
+    expect(onSetCurrency).toBeCalledWith("CAD");
   });
 
   it("opens instructions in new tab", async () => {

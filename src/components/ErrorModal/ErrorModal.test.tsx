@@ -55,20 +55,20 @@ describe("ErrorModal", () => {
     expect(screen.getByTestId("error-modal")).toBeInTheDocument();
     await userEvent.click(screen.getByTestId("error-modal-dismiss"));
 
-    expect(onShow).toHaveBeenCalledTimes(1);
+    expect(onShow).toBeCalledWith(false);
   });
 
   it("closes json error when clicking the button", async () => {
     expect(screen.getByTestId("json-error-close")).toBeInTheDocument();
     await userEvent.click(screen.getByTestId("json-error-close"));
 
-    expect(onShow).toHaveBeenCalledTimes(2);
+    expect(onShow).toBeCalledWith(false);
   });
 
   it("closes csv error when clicking the button", async () => {
     expect(screen.getByTestId("csv-error-close")).toBeInTheDocument();
     await userEvent.click(screen.getByTestId("csv-error-close"));
 
-    expect(onShow).toHaveBeenCalledTimes(3);
+    expect(onShow).toBeCalledWith(false);
   });
 });

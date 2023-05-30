@@ -40,12 +40,30 @@ describe("TableCard", () => {
   it("triggers onChange when user changes input", async () => {
     await userEvent.type(screen.getByDisplayValue("expense1"), "change name");
 
-    expect(onChange).toHaveBeenCalledTimes(11);
+    expect(onChange).toBeCalledWith({
+      items: [
+        {
+          id: 1,
+          name: "expense1change name",
+          value: 10,
+        },
+      ],
+      total: 10,
+    });
     expect(screen.getByDisplayValue("expense1change name")).toBeInTheDocument();
 
     await userEvent.type(screen.getByDisplayValue("$10"), "123");
 
-    expect(onChange).toHaveBeenCalledTimes(14);
+    expect(onChange).toBeCalledWith({
+      items: [
+        {
+          id: 1,
+          name: "expense1change name",
+          value: 10123,
+        },
+      ],
+      total: 10123,
+    });
     expect(screen.getByDisplayValue("$10,123")).toBeInTheDocument();
   });
 
@@ -54,10 +72,24 @@ describe("TableCard", () => {
       screen.getByRole("button", { name: "add item to Expenses" })
     );
 
-    expect(onChange).toHaveBeenCalledTimes(15);
+    expect(onChange).toBeCalledWith({
+      items: [
+        {
+          id: 1,
+          name: "expense1change name",
+          value: 10123,
+        },
+        {
+          id: 2,
+          name: "",
+          value: 0,
+        },
+      ],
+      total: 10123,
+    });
   });
 
-  it("triggers onChange when user deletes an item", async () => {
+  it("triggers onChange when user deletes items", async () => {
     await userEvent.click(
       screen.getByRole("button", { name: "delete item 1" })
     );
@@ -65,6 +97,9 @@ describe("TableCard", () => {
       screen.getByRole("button", { name: "confirm item 1 deletion" })
     );
 
-    expect(onChange).toHaveBeenCalledTimes(16);
+    expect(onChange).toBeCalledWith({
+      items: [],
+      total: 0,
+    });
   });
 });

@@ -36,12 +36,20 @@ describe("ItemFormGroup", () => {
   it("triggers onChange when user changes input", async () => {
     await userEvent.type(screen.getByDisplayValue("name1"), "change name");
 
-    expect(onChange).toHaveBeenCalledTimes(11);
+    expect(onChange).toBeCalledWith({
+      id: 1,
+      name: "name1change name",
+      value: 10,
+    });
     expect(screen.getByDisplayValue("name1change name")).toBeInTheDocument();
 
     await userEvent.type(screen.getByDisplayValue("$10"), "123");
 
-    expect(onChange).toHaveBeenCalledTimes(14);
+    expect(onChange).toBeCalledWith({
+      id: 1,
+      name: "name1change name",
+      value: 10123,
+    });
     expect(screen.getByDisplayValue("$10,123")).toBeInTheDocument();
   });
 
@@ -53,7 +61,11 @@ describe("ItemFormGroup", () => {
       screen.getByRole("button", { name: "confirm item 1 deletion" })
     );
 
-    expect(onRemove).toHaveBeenCalledTimes(1);
+    expect(onRemove).toBeCalledWith({
+      id: 1,
+      name: "name1change name",
+      value: 10123,
+    });
   });
 
   it("shows tooltip when user hovers over", async () => {
