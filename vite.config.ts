@@ -38,6 +38,7 @@ export default defineConfig(() => {
         provider: "c8",
       },
       globals: true,
+      mockReset: true,
       environment: "jsdom",
       setupFiles: "./src/setupTests.ts",
       reporters: ["default", "html"],
