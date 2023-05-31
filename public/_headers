@@ -1,0 +1,8 @@
+/*
+  X-Frame-Options: DENY
+  Referrer-Policy: no-referrer
+  Permissions-Policy: accelerometer=(), autoplay=(self), camera=(), display-capture=(self), fullscreen=(self), geolocation=(self), gyroscope=(self), magnetometer=(self), microphone=(), payment=(), picture-in-picture=(self), sync-xhr=(), usb=()
+  Content-Security-Policy: default-src 'self';
+
+https://guitos.pages.dev/*
+  X-Robots-Tag: noindex
