@@ -1,3 +1,10 @@
+# [0.19.0](https://github.com/rare-magma/guitos/compare/v0.18.1...v0.19.0) (2023-05-31)
+
+
+### Features
+
+* add security headers ([5b2b1e4](https://github.com/rare-magma/guitos/commit/5b2b1e46732379f5a8061a73d1a13affb922e30a))
+
 ## [0.18.1](https://github.com/rare-magma/guitos/compare/v0.18.0...v0.18.1) (2023-05-26)
 
 
