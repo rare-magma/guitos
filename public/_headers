@@ -2,7 +2,7 @@
   X-Frame-Options: DENY
   Referrer-Policy: no-referrer
   Permissions-Policy: accelerometer=(), autoplay=(self), camera=(), display-capture=(self), fullscreen=(self), geolocation=(self), gyroscope=(self), magnetometer=(self), microphone=(), payment=(), picture-in-picture=(self), sync-xhr=(), usb=()
-  Content-Security-Policy: default-src 'self'; img-src https://guitos.app https://www.w3.org data:;
+  Content-Security-Policy-Report-Only: default-src 'self'; img-src https://guitos.app https://www.w3.org data: ; worker-src 'self' data: ;
 
 https://guitos.pages.dev/*
   X-Robots-Tag: noindex
