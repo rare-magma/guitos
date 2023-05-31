@@ -1,3 +1,10 @@
+## [0.19.1](https://github.com/rare-magma/guitos/compare/v0.19.0...v0.19.1) (2023-05-31)
+
+
+### Bug Fixes
+
+* loading guitos emoji ([0aa8a04](https://github.com/rare-magma/guitos/commit/0aa8a0486c3196fe25d93483aa523c097c14deb8))
+
 # [0.19.0](https://github.com/rare-magma/guitos/compare/v0.18.1...v0.19.0) (2023-05-31)
 
 
