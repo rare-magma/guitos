@@ -371,7 +371,7 @@ input[type="number"] {
   border-bottom-color: var(--comment);
 }
 
-/* currency placeholder */
-input[type="text"]::-webkit-input-placeholder {
+input[type="text"]::placeholder {
   color: var(--comment);
+  opacity: 1;
 }
