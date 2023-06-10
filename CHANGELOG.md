@@ -1,3 +1,10 @@
+## [0.19.2](https://github.com/rare-magma/guitos/compare/v0.19.1...v0.19.2) (2023-06-10)
+
+
+### Bug Fixes
+
+* item value input initial selection ([4c4cfce](https://github.com/rare-magma/guitos/commit/4c4cfce6c05266c93404258c742454fbb0dd1640))
+
 ## [0.19.1](https://github.com/rare-magma/guitos/compare/v0.19.0...v0.19.1) (2023-05-31)
 
 
