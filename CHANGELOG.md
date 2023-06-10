@@ -1,3 +1,10 @@
+## [0.19.3](https://github.com/rare-magma/guitos/compare/v0.19.2...v0.19.3) (2023-06-10)
+
+
+### Bug Fixes
+
+* item value input initial selection for all currencies ([b8b0b25](https://github.com/rare-magma/guitos/commit/b8b0b25c1931690e3b8d0191673d56c6af5a9f44))
+
 ## [0.19.2](https://github.com/rare-magma/guitos/compare/v0.19.1...v0.19.2) (2023-06-10)
 
 
