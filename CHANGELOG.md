@@ -1,3 +1,10 @@
+## [0.19.5](https://github.com/rare-magma/guitos/compare/v0.19.4...v0.19.5) (2023-06-10)
+
+
+### Bug Fixes
+
+* placeholder color on firefox ([7f366e9](https://github.com/rare-magma/guitos/commit/7f366e9c1645bcb5feefe92f6ccc39389b6fab2d))
+
 ## [0.19.4](https://github.com/rare-magma/guitos/compare/v0.19.3...v0.19.4) (2023-06-10)
 
 
