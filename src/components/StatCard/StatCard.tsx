@@ -238,6 +238,9 @@ function StatCard({
             maxLength={14}
             allowNegativeValue={false}
             ref={reservesRef}
+            onFocus={() => {
+              reservesRef.current?.setSelectionRange(0, 25);
+            }}
             onValueChange={(value) => handleReserveChange(value)}
           />
         </InputGroup>

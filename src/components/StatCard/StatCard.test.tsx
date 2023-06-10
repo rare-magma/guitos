@@ -33,11 +33,11 @@ describe("StatCard", () => {
     expect(onChange).toBeCalledWith({
       available: 90,
       goal: 10,
-      reserves: 2002,
+      reserves: 2,
       saved: 10,
       withGoal: 80,
     });
-    expect(screen.getByDisplayValue("$2,002")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("$2")).toBeInTheDocument();
 
     await userEvent.clear(screen.getByTestId("goal-input"));
     await userEvent.type(screen.getByTestId("goal-input"), "95");
@@ -45,7 +45,7 @@ describe("StatCard", () => {
     expect(onChange).toBeCalledWith({
       available: 90,
       goal: 95,
-      reserves: 2002,
+      reserves: 2,
       saved: 10,
       withGoal: 80,
     });
@@ -60,7 +60,7 @@ describe("StatCard", () => {
     expect(onAutoGoal).toBeCalledWith({
       available: 90,
       goal: 95,
-      reserves: 2002,
+      reserves: 2,
       saved: 10,
       withGoal: 80,
     });

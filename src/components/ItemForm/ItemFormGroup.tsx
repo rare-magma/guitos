@@ -133,7 +133,7 @@ function ItemFormGroup({
           maxLength={14}
           ref={valueRef}
           onFocus={() => {
-            valueRef.current?.setSelectionRange(0, itemForm.value + 2);
+            valueRef.current?.setSelectionRange(0, 25);
           }}
           onValueChange={(value) => handleChange("value", value)}
         />
