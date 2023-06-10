@@ -370,3 +370,8 @@ input[type="number"] {
   border-top-color: var(--comment);
   border-bottom-color: var(--comment);
 }
+
+/* currency placeholder */
+input[type="text"]::-webkit-input-placeholder {
+  color: var(--comment);
+}
