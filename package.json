@@ -75,7 +75,7 @@
     "prettier": "2.8.8",
     "semantic-release": "21.0.2",
     "typescript": "5.0.4",
-    "vite": "4.3.5",
+    "vite": "4.3.9",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-pwa": "0.15.0",
     "vitest": "0.31.0"
