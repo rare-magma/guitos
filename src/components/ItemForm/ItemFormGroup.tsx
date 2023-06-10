@@ -35,6 +35,7 @@ function ItemFormGroup({
   const [itemForm, setItemForm] = useState(initialItemForm);
   const [changed, setChanged] = useState(false);
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
+  const valueRef = useRef<HTMLInputElement>(null);
 
   const handleRemove = (item: ItemForm) => {
     onRemove(item);
@@ -130,6 +131,10 @@ function ItemFormGroup({
           defaultValue={itemForm.value}
           allowNegativeValue={false}
           maxLength={14}
+          ref={valueRef}
+          onFocus={() => {
+            valueRef.current?.setSelectionRange(0, itemForm.value + 2);
+          }}
           onValueChange={(value) => handleChange("value", value)}
         />
       </OverlayTrigger>

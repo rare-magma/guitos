@@ -48,9 +48,9 @@ describe("ItemFormGroup", () => {
     expect(onChange).toBeCalledWith({
       id: 1,
       name: "name1change name",
-      value: 10123,
+      value: 123,
     });
-    expect(screen.getByDisplayValue("$10,123")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
   });
 
   it("triggers onRemove when user clicks delete confirmation button", async () => {
@@ -64,12 +64,12 @@ describe("ItemFormGroup", () => {
     expect(onRemove).toBeCalledWith({
       id: 1,
       name: "name1change name",
-      value: 10123,
+      value: 123,
     });
   });
 
   it("shows tooltip when user hovers over", async () => {
-    fireEvent.mouseOver(screen.getByDisplayValue("$10,123"));
+    fireEvent.mouseOver(screen.getByDisplayValue("$123"));
 
     expect(await screen.findByText("1% of revenue")).toBeInTheDocument();
   });
@@ -101,7 +101,7 @@ describe("ItemFormGroup", () => {
       />
     );
 
-    await userEvent.clear(screen.getByDisplayValue("10123 €"));
+    await userEvent.clear(screen.getByDisplayValue("123 €"));
     await userEvent.type(screen.getByLabelText("item 1 value"), "123,12");
 
     expect(screen.getByDisplayValue("123,12 €")).toBeInTheDocument();

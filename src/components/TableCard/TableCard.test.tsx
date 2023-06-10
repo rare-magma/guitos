@@ -59,12 +59,12 @@ describe("TableCard", () => {
         {
           id: 1,
           name: "expense1change name",
-          value: 10123,
+          value: 123,
         },
       ],
-      total: 10123,
+      total: 123,
     });
-    expect(screen.getByDisplayValue("$10,123")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
   });
 
   it("triggers onChange when user adds new item", async () => {
@@ -77,7 +77,7 @@ describe("TableCard", () => {
         {
           id: 1,
           name: "expense1change name",
-          value: 10123,
+          value: 123,
         },
         {
           id: 2,
@@ -85,7 +85,7 @@ describe("TableCard", () => {
           value: 0,
         },
       ],
-      total: 10123,
+      total: 123,
     });
   });
 
