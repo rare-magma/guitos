@@ -1,3 +1,10 @@
+## [0.19.4](https://github.com/rare-magma/guitos/compare/v0.19.3...v0.19.4) (2023-06-10)
+
+
+### Bug Fixes
+
+* set correct index.html theme-color and description ([397b697](https://github.com/rare-magma/guitos/commit/397b6970ffe6a627e9781c0860883ef873c654ac))
+
 ## [0.19.3](https://github.com/rare-magma/guitos/compare/v0.19.2...v0.19.3) (2023-06-10)
 
 
