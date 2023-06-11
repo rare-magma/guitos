@@ -1,3 +1,11 @@
+# [0.20.0](https://github.com/rare-magma/guitos/compare/v0.19.6...v0.20.0) (2023-06-11)
+
+
+### Features
+
+* add charts view ([3cdd941](https://github.com/rare-magma/guitos/commit/3cdd94130e9a72105e09753fcef2e788a6a98718))
+* add go to current month's budget shortcut ([71f1ae4](https://github.com/rare-magma/guitos/commit/71f1ae43779ac0f0bd42bc55609daede3ea920bd))
+
 ## [0.19.6](https://github.com/rare-magma/guitos/compare/v0.19.5...v0.19.6) (2023-06-11)
 
 
