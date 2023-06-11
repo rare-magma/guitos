@@ -1,3 +1,10 @@
+## [0.19.6](https://github.com/rare-magma/guitos/compare/v0.19.5...v0.19.6) (2023-06-11)
+
+
+### Bug Fixes
+
+* 💸 box size ([20069fb](https://github.com/rare-magma/guitos/commit/20069fb61cb9f347b3af4adccd58ae9de969f6d7))
+
 ## [0.19.5](https://github.com/rare-magma/guitos/compare/v0.19.4...v0.19.5) (2023-06-10)
 
 
