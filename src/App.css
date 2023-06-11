@@ -292,6 +292,10 @@ input[type="number"] {
   border-bottom: 1px solid var(--comment);
 }
 
+.stat-card-footer {
+  border-top: 1px solid var(--comment);
+}
+
 .navbar .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>💸</text></svg>");
 }
@@ -374,4 +378,20 @@ input[type="number"] {
 input[type="text"]::placeholder {
   color: var(--comment);
   opacity: 1;
+}
+
+.charts-button,
+.charts-button:hover,
+.charts-button:focus-visible {
+  border: 0px solid var(--comment);
+  padding-top: 0em;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  padding-bottom: 0em;
+}
+
+.recharts-default-tooltip,
+.recharts-tooltip-wrapper {
+  border: 1px solid var(--comment);
+  background-color: var(--bgcolor);
 }

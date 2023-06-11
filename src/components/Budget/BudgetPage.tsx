@@ -28,12 +28,14 @@ import StatCard from "../StatCard/StatCard";
 import { Expense } from "../TableCard/Expense";
 import { Income } from "../TableCard/Income";
 import TableCard from "../TableCard/TableCard";
+import ChartsPage from "../ChartsPage/ChartsPage";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 function BudgetPage() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [loading, setLoading] = useState(true);
+  const [showGraphs, setShowGraphs] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [csvError, setCsvError] = useState<CsvError[]>([]);
   const [jsonError, setJsonError] = useState<JsonError[]>([]);
@@ -56,10 +58,15 @@ function BudgetPage() {
   const params = useParams();
   const name = String(params.name);
 
-  useHotkeys("s", () => handleExportJSON(), { preventDefault: true });
+  useHotkeys("s", () => handleExportJSON(), {
+    preventDefault: true,
+  });
   useHotkeys("d", () => handleExportCSV(), { preventDefault: true });
-  useHotkeys("a", () => handleNew(), { preventDefault: true });
-  useHotkeys("c", () => handleClone(), { preventDefault: true });
+  useHotkeys("a", () => !showGraphs && handleNew(), { preventDefault: true });
+  useHotkeys("c", () => !showGraphs && handleClone(), { preventDefault: true });
+  useHotkeys("i", () => !showGraphs && budget && setShowGraphs(true), {
+    preventDefault: true,
+  });
 
   const handleIncomeChange = (item: Income) => {
     let newBudget: Budget;
@@ -502,9 +509,47 @@ function BudgetPage() {
 
   return (
     <Container fluid>
+      {!showGraphs && (
+        <NavBar
+          selected={budget?.name || undefined}
+          id={budget?.id || undefined}
+          budgetNameList={budgetNameList}
+          currency={currency || initialCurrencyCode}
+          onRename={(e) => {
+            handleRename(e);
+          }}
+          onClone={() => {
+            handleClone();
+          }}
+          onExport={(t) => {
+            handleExport(t);
+          }}
+          onGoBack={() => {
+            handleGoBack();
+          }}
           onGoHome={() => {
             handleGoHome();
           }}
+          onGoForward={() => {
+            handleGoForward();
+          }}
+          onNew={() => {
+            handleNew();
+          }}
+          onImport={(e) => {
+            handleImport(e);
+          }}
+          onRemove={(e) => {
+            handleRemove(e);
+          }}
+          onSelect={(e) => {
+            handleSelect(e);
+          }}
+          onSetCurrency={(e) => {
+            handleSetCurrency(e);
+          }}
+        />
+      )}
 
       <LandingPage
         loading={loading}
@@ -529,7 +574,16 @@ function BudgetPage() {
         }}
       />
 
-      {!loading && budget && (
+      {showGraphs && (
+        <ChartsPage
+          budgetList={budgetList.sort((a, b) => a.name.localeCompare(b.name))}
+          currency={currency || initialCurrencyCode}
+          intlConfig={intlConfig}
+          onShowGraphs={() => setShowGraphs(false)}
+        />
+      )}
+
+      {!loading && !showGraphs && budget && (
         <Container key={budget.id}>
           <Row className="mt-3">
             <Col md="6">
@@ -541,6 +595,7 @@ function BudgetPage() {
                   intlConfig={intlConfig}
                   onChange={handleStatChange}
                   onAutoGoal={handleAutoGoal}
+                  onShowGraphs={() => setShowGraphs(true)}
                 />
 
                 <div className="mt-3" />

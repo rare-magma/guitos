@@ -2,14 +2,16 @@ import { Stat } from "./Stat";
 import {
   Button,
   Card,
+  Col,
   Form,
   InputGroup,
   OverlayTrigger,
+  Row,
   Tooltip,
 } from "react-bootstrap";
 import { useRef, useState } from "react";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
-import { BsGear, BsPercent } from "react-icons/bs";
+import { BsGear, BsGraphUp, BsPercent } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
 import { focusRef, parseLocaleNumber } from "../../utils";
 
@@ -18,6 +20,7 @@ interface StatCardProps {
   intlConfig: CurrencyInputProps["intlConfig"];
   onChange: (stat: Stat) => void;
   onAutoGoal: (stat: Stat) => void;
+  onShowGraphs: () => void;
 }
 
 function StatCard({
@@ -25,6 +28,7 @@ function StatCard({
   intlConfig,
   onChange,
   onAutoGoal,
+  onShowGraphs,
 }: StatCardProps) {
   const [stat, setStat] = useState(initialStat);
   const [autoGoal, setAutoGoal] = useState(false);
@@ -63,10 +67,40 @@ function StatCard({
     setAutoGoal(true);
   };
 
+  const handleShowGraphs = () => {
+    onShowGraphs();
+  };
+
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     <Card className="stat-card" key={"stat-" + intlConfig?.currency}>
-      <Card.Header className="stat-card-header">Statistics</Card.Header>
+      <Card.Header className="stat-card-header">
+        <Row>
+          <Col className="align-self-center">Statistics</Col>
+          <Col className="text-end">
+            <OverlayTrigger
+              placement="top"
+              overlay={
+                <Tooltip id={`tooltip-graphs`} style={{ position: "fixed" }}>
+                  open charts view
+                </Tooltip>
+              }
+            >
+              <Button
+                aria-label="open charts view"
+                className="charts-button"
+                variant="outline-primary"
+                style={{ color: "var(--textcolor)" }}
+                onClick={() => {
+                  handleShowGraphs();
+                }}
+              >
+                <BsGraphUp />
+              </Button>
+            </OverlayTrigger>
+          </Col>
+        </Row>
+      </Card.Header>
       <Card.Body>
         <InputGroup className="mb-1" key={"stats"}>
           <OverlayTrigger

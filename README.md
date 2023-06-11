@@ -37,6 +37,10 @@
 | :--------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
 | <img src="docs/images/tooltip.png" title="Tooltip" width="100%"> | <img src="docs/images/initial-state-vertical.png" title="Initial state" width="100%"> |
 
+|                                 Charts                                  |                                 Charts light theme                                 |
+| :---------------------------------------------------------------------: | :--------------------------------------------------------------------------------: |
+| <img src="docs/images/vertical-charts.png" title="Charts" width="100%"> | <img src="docs/images/vertical-charts-light.png" title="Light theme" width="100%"> |
+
 </details>
 
 ## About
@@ -157,6 +161,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
 | Focus savings goal           | G        |
 | Focus reserves               | E        |
 | Change currency              | T        |
+| Toggle charts view           | I        |
 
 ## Notes
 
@@ -190,6 +195,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
 - [React Router](https://reactrouter.com/)
 - [React Currency Input Field](https://github.com/cchanxzy/react-currency-input-field)
 - [React Hotkeys Hook](https://github.com/JohannesKlauss/react-hotkeys-hook)
+- [Recharts](https://github.com/recharts/recharts)
 - [Big.js](https://github.com/MikeMcl/big.js)
 - [localForage](https://localforage.github.io/localForage/)
 - [PapaParse](https://papaparse.com/)
