@@ -250,6 +250,18 @@ function BudgetPage() {
     }
   };
 
+  const handleGoHome = () => {
+    if (budget) {
+      const name = new Date().toISOString();
+      const index = budgetList.findIndex((b) =>
+        b.name.includes(name.slice(0, 7))
+      );
+      if (index !== -1) {
+        handleSelect([budgetList[index] as unknown as Option[]]);
+      }
+    }
+  };
+
   const handleGoBack = () => {
     handleGo(-1, 0);
   };
@@ -490,42 +502,9 @@ function BudgetPage() {
 
   return (
     <Container fluid>
-      <NavBar
-        selected={budget?.name || undefined}
-        id={budget?.id || undefined}
-        budgetNameList={budgetNameList}
-        currency={currency || initialCurrencyCode}
-        onRename={(e) => {
-          handleRename(e);
-        }}
-        onClone={() => {
-          handleClone();
-        }}
-        onExport={(t) => {
-          handleExport(t);
-        }}
-        onGoBack={() => {
-          handleGoBack();
-        }}
-        onGoForward={() => {
-          handleGoForward();
-        }}
-        onNew={() => {
-          handleNew();
-        }}
-        onImport={(e) => {
-          handleImport(e);
-        }}
-        onRemove={(e) => {
-          handleRemove(e);
-        }}
-        onSelect={(e) => {
-          handleSelect(e);
-        }}
-        onSetCurrency={(e) => {
-          handleSetCurrency(e);
-        }}
-      />
+          onGoHome={() => {
+            handleGoHome();
+          }}
 
       <LandingPage
         loading={loading}

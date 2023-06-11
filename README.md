@@ -150,6 +150,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
 | Export data as JSON          | S        |
 | Export current budget as CSV | D        |
 | Go to older budget           | PageDown |
+| Go to current month's budget | Home     |
 | Go to newer budget           | PageUp   |
 | Rename current budget        | R        |
 | Search budget list           | F or /   |

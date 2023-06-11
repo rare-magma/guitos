@@ -32,6 +32,7 @@ interface NavBarProps {
   onClone: () => void;
   onExport: (t: string) => void;
   onGoBack: () => void;
+  onGoHome: () => void;
   onGoForward: () => void;
   onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onNew: () => void;
@@ -49,6 +50,7 @@ function NavBar({
   onClone,
   onExport,
   onGoBack,
+  onGoHome,
   onGoForward,
   onImport,
   onNew,
@@ -72,6 +74,7 @@ function NavBar({
 
   useHotkeys("pageup", () => handleGoForward(), { preventDefault: true });
   useHotkeys("pagedown", () => handleGoBack(), { preventDefault: true });
+  useHotkeys("Home", () => handleGoHome(), { preventDefault: true });
   useHotkeys(
     ["/", "f"],
     () =>
@@ -141,6 +144,10 @@ function NavBar({
 
   const handleGoBack = () => {
     onGoBack();
+  };
+
+  const handleGoHome = () => {
+    onGoHome();
   };
 
   const handleGoForward = () => {

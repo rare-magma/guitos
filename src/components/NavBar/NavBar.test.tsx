@@ -8,6 +8,7 @@ describe("NavBar", () => {
   const onClone = vi.fn();
   const onExport = vi.fn();
   const onGoBack = vi.fn();
+  const onGoHome = vi.fn();
   const onGoForward = vi.fn();
   const onImport = vi.fn();
   const onNew = vi.fn();
@@ -26,6 +27,7 @@ describe("NavBar", () => {
         onClone={onClone}
         onExport={onExport}
         onGoBack={onGoBack}
+        onGoHome={onGoHome}
         onGoForward={onGoForward}
         onImport={onImport}
         onNew={onNew}
@@ -65,6 +67,9 @@ describe("NavBar", () => {
   it("triggers onGo* when back/fwd shortcuts are pressed", async () => {
     await userEvent.type(screen.getByTestId("header"), "{pagedown}");
     expect(onGoBack).toBeCalledTimes(1);
+
+    await userEvent.type(screen.getByTestId("header"), "{home}");
+    expect(onGoHome).toBeCalledTimes(1);
 
     await userEvent.type(screen.getByTestId("header"), "{pageup}");
     expect(onGoForward).toBeCalledTimes(1);
@@ -160,6 +165,7 @@ describe("NavBar", () => {
         onClone={onClone}
         onExport={onExport}
         onGoBack={onGoBack}
+        onGoHome={onGoHome}
         onGoForward={onGoForward}
         onImport={onImport}
         onNew={onNew}
