@@ -380,16 +380,6 @@ input[type="text"]::placeholder {
   opacity: 1;
 }
 
-.charts-button,
-.charts-button:hover,
-.charts-button:focus-visible {
-  border: 0px solid var(--comment);
-  padding-top: 0em;
-  padding-left: 0.3em;
-  padding-right: 0.3em;
-  padding-bottom: 0em;
-}
-
 .recharts-default-tooltip,
 .recharts-tooltip-wrapper {
   border: 1px solid var(--comment);

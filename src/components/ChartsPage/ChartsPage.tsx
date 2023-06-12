@@ -7,7 +7,17 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Budget } from "../Budget/Budget";
-import { Card, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  InputGroup,
+  OverlayTrigger,
+  Row,
+  Tooltip,
+} from "react-bootstrap";
 import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
 import { BsArrowLeft, BsPercent } from "react-icons/bs";
 import { intlFormat, median, roundBig } from "../../utils";
@@ -105,15 +115,25 @@ function ChartsPage({
 
   return (
     <Container className="mb-3">
-      <NavBarItem
-        itemClassName={"me-1 my-2"}
-        onClick={handleShowGraphs}
-        tooltipID={"tooltip-go-to-budgets"}
-        tooltipText={"go back to budgets"}
-        buttonAriaLabel={"go back to budgets"}
-        buttonVariant={"Expenses-plus-button"}
-        buttonIcon={<BsArrowLeft />}
-      />
+      <OverlayTrigger
+        delay={250}
+        placement="bottom"
+        overlay={
+          <Tooltip id={"tooltip-go-to-budgets"} style={{ position: "fixed" }}>
+            go back to budgets
+          </Tooltip>
+        }
+      >
+        <Button
+          className="me-1 mb-1 mt-3"
+          aria-label={"go back to budgets"}
+          variant={"Expenses-plus-button"}
+          onClick={handleShowGraphs}
+        >
+          <BsArrowLeft />
+        </Button>
+      </OverlayTrigger>
+
       <Card className="stat-card mt-3">
         <Card.Header className="stat-card-header">
           Revenue vs expenses
@@ -157,36 +177,42 @@ function ChartsPage({
           </ResponsiveContainer>
         </Card.Body>
         <Card.Footer className="stat-card-footer">
-          <InputGroup size="sm" className="mb-1">
-            <InputGroup.Text>revenue median</InputGroup.Text>
-            <CurrencyInput
-              disabled
-              className="text-right form-control"
-              aria-label={"reserves"}
-              name="reserves"
-              intlConfig={intlConfig}
-              defaultValue={median(
-                budgetList.map((b: Budget) => {
-                  return b.incomes.total;
-                })
-              )}
-            />
-          </InputGroup>
-          <InputGroup size="sm" className="mb-1">
-            <InputGroup.Text>expenses median</InputGroup.Text>
-            <CurrencyInput
-              disabled
-              className="text-right form-control"
-              aria-label={"reserves"}
-              name="reserves"
-              intlConfig={intlConfig}
-              defaultValue={median(
-                budgetList.map((b: Budget) => {
-                  return b.expenses.total;
-                })
-              )}
-            />
-          </InputGroup>
+          <Row>
+            <Col md={6}>
+              <InputGroup size="sm" className="mb-1">
+                <InputGroup.Text>median revenue</InputGroup.Text>
+                <CurrencyInput
+                  disabled
+                  className="text-right form-control"
+                  aria-label={"reserves"}
+                  name="reserves"
+                  intlConfig={intlConfig}
+                  defaultValue={median(
+                    budgetList.map((b: Budget) => {
+                      return b.incomes.total;
+                    })
+                  )}
+                />
+              </InputGroup>
+            </Col>
+            <Col>
+              <InputGroup size="sm" className="mb-1">
+                <InputGroup.Text>median expenses</InputGroup.Text>
+                <CurrencyInput
+                  disabled
+                  className="text-right form-control"
+                  aria-label={"reserves"}
+                  name="reserves"
+                  intlConfig={intlConfig}
+                  defaultValue={median(
+                    budgetList.map((b: Budget) => {
+                      return b.expenses.total;
+                    })
+                  )}
+                />
+              </InputGroup>
+            </Col>
+          </Row>
         </Card.Footer>
       </Card>
       <Row>
@@ -230,7 +256,7 @@ function ChartsPage({
             </Card.Body>
             <Card.Footer className="stat-card-footer">
               <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text>median</InputGroup.Text>
+                <InputGroup.Text>median savings</InputGroup.Text>
                 <CurrencyInput
                   disabled
                   className="text-right form-control"
@@ -288,7 +314,7 @@ function ChartsPage({
             </Card.Body>
             <Card.Footer className="stat-card-footer">
               <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text>median</InputGroup.Text>
+                <InputGroup.Text>median reserves</InputGroup.Text>
                 <CurrencyInput
                   disabled
                   className="text-right form-control"
@@ -357,36 +383,42 @@ function ChartsPage({
               </ResponsiveContainer>
             </Card.Body>
             <Card.Footer className="stat-card-footer">
-              <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text>available median</InputGroup.Text>
-                <CurrencyInput
-                  disabled
-                  className="text-right form-control"
-                  aria-label={"reserves"}
-                  name="reserves"
-                  intlConfig={intlConfig}
-                  defaultValue={median(
-                    budgetList.map((b: Budget) => {
-                      return b.stats.available;
-                    })
-                  )}
-                />
-              </InputGroup>
-              <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text>with goal median</InputGroup.Text>
-                <CurrencyInput
-                  disabled
-                  className="text-right form-control"
-                  aria-label={"reserves"}
-                  name="reserves"
-                  intlConfig={intlConfig}
-                  defaultValue={median(
-                    budgetList.map((b: Budget) => {
-                      return b.stats.withGoal;
-                    })
-                  )}
-                />
-              </InputGroup>
+              <Row>
+                <Col lg={6}>
+                  <InputGroup size="sm" className="mb-1">
+                    <InputGroup.Text>median available</InputGroup.Text>
+                    <CurrencyInput
+                      disabled
+                      className="text-right form-control"
+                      aria-label={"reserves"}
+                      name="reserves"
+                      intlConfig={intlConfig}
+                      defaultValue={median(
+                        budgetList.map((b: Budget) => {
+                          return b.stats.available;
+                        })
+                      )}
+                    />
+                  </InputGroup>
+                </Col>
+                <Col>
+                  <InputGroup size="sm" className="mb-1">
+                    <InputGroup.Text>median with goal</InputGroup.Text>
+                    <CurrencyInput
+                      disabled
+                      className="text-right form-control"
+                      aria-label={"reserves"}
+                      name="reserves"
+                      intlConfig={intlConfig}
+                      defaultValue={median(
+                        budgetList.map((b: Budget) => {
+                          return b.stats.withGoal;
+                        })
+                      )}
+                    />
+                  </InputGroup>
+                </Col>
+              </Row>
             </Card.Footer>
           </Card>
         </Col>
@@ -428,7 +460,7 @@ function ChartsPage({
             </Card.Body>
             <Card.Footer className="stat-card-footer">
               <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text>median</InputGroup.Text>
+                <InputGroup.Text>median goal</InputGroup.Text>
                 <Form.Control
                   className="text-right"
                   aria-label={"median"}

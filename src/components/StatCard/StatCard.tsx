@@ -74,7 +74,7 @@ function StatCard({
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     <Card className="stat-card" key={"stat-" + intlConfig?.currency}>
-      <Card.Header className="stat-card-header">
+      <Card.Header className="stat-card-header py-0">
         <Row>
           <Col className="align-self-center">Statistics</Col>
           <Col className="text-end">
@@ -88,7 +88,8 @@ function StatCard({
             >
               <Button
                 aria-label="open charts view"
-                className="charts-button"
+                className="my-1"
+                size="sm"
                 variant="outline-primary"
                 style={{ color: "var(--textcolor)" }}
                 onClick={() => {

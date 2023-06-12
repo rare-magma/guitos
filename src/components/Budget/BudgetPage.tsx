@@ -585,7 +585,7 @@ function BudgetPage() {
 
       {!loading && !showGraphs && budget && (
         <Container key={budget.id}>
-          <Row className="mt-3">
+          <Row className="mt-1">
             <Col md="6">
               <div className="card-columns">
                 <StatCard
