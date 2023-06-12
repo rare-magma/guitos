@@ -13,6 +13,7 @@ import {
   getCountryCode,
   getCurrencyCode,
   intlFormat,
+  median,
   parseLocaleNumber,
   roundBig,
 } from "./utils";
@@ -156,4 +157,15 @@ test("calc", () => {
   expect(calc(0, 100, "mul")).eq(0);
   expect(calc(0, 100, "div")).eq(0);
   expect(() => calc(0, 100, "sqrt")).toThrowError();
+});
+
+test("median", () => {
+  expect(median([123.43, 100, 300, -500])).eq(111.715);
+  expect(median([123.43, 100, 300, 500])).eq(211.715);
+  expect(median([123.45, 100, 300])).eq(123.45);
+  expect(median([123.45, 100])).eq(111.725);
+  expect(median([123.45])).eq(123.45);
+  expect(median([0])).eq(0);
+  expect(median([])).eq(0);
+  expect(median([-1, -2])).eq(-1.5);
 });

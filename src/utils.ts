@@ -282,7 +282,12 @@ export function budgetToCsv(budget: Budget) {
 
 export const median = (arr: number[]): number => {
   if (!arr.length) return 0;
-  const s = [...arr].sort((a, b) => a - b);
+  const s = [...arr].sort((a, b) => Big(a).minus(b).toNumber());
   const mid = Math.floor(s.length / 2);
-  return s.length % 2 === 0 ? (s[mid - 1] + s[mid]) / 2 : s[mid];
+  return s.length % 2 === 0
+    ? Big(s[mid - 1])
+        .plus(s[mid])
+        .div(2)
+        .toNumber()
+    : s[mid];
 };
