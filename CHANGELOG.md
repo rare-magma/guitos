@@ -1,3 +1,10 @@
+## [0.20.1](https://github.com/rare-magma/guitos/compare/v0.20.0...v0.20.1) (2023-06-12)
+
+
+### Bug Fixes
+
+* inconsistent margins, responsive chart legends ([88bf6d5](https://github.com/rare-magma/guitos/commit/88bf6d570928ad0bd7b8cf52a9c995cd8b27b843))
+
 # [0.20.0](https://github.com/rare-magma/guitos/compare/v0.19.6...v0.20.0) (2023-06-11)
 
 
