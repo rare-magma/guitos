@@ -41,7 +41,6 @@ export default defineConfig(() => {
       mockClear: true,
       environment: "jsdom",
       setupFiles: "./src/setupTests.ts",
-      reporters: ["default", "html"],
     },
   };
 });
