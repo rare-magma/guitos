@@ -35,7 +35,7 @@ export default defineConfig(() => {
     ],
     test: {
       coverage: {
-        provider: "c8",
+        provider: "v8",
       },
       globals: true,
       mockClear: true,
