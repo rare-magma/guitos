@@ -29,6 +29,7 @@ interface ChartProps {
   legendValues1: number[];
   legend2?: string;
   legendValues2?: number[];
+  unit?: string;
 }
 
 function Chart({
@@ -47,6 +48,7 @@ function Chart({
   legend2,
   legendValues1,
   legendValues2,
+  unit,
 }: ChartProps) {
   const tickFormatter = (value: number, index: number) => {
     return intlFormat(value, intlConfig?.currency as string);
@@ -65,12 +67,16 @@ function Chart({
             margin={{
               top: 10,
               right: 0,
-              left: 20,
+              left: unit ? 0 : 20,
               bottom: 0,
             }}
           >
             <XAxis stroke="var(--textcolor)" dataKey="name" minTickGap={10} />
-            <YAxis stroke="var(--textcolor)" tickFormatter={tickFormatter} />
+            {unit ? (
+              <YAxis stroke="var(--textcolor)" unit={unit} />
+            ) : (
+              <YAxis stroke="var(--textcolor)" tickFormatter={tickFormatter} />
+            )}
             <Tooltip
               content={
                 <ChartTooltip

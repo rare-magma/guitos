@@ -141,6 +141,7 @@ function ChartsPage({ budgetList, intlConfig, onShowGraphs }: GraphProps) {
             areaStroke1={"cyan"}
             areaFill1={"cyan"}
             legend1={"median goal"}
+            unit="%"
           />
         </Col>
       </Row>
