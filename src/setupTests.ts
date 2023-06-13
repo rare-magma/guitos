@@ -195,3 +195,5 @@ export const itemForm2 = new ItemForm({
 
 export const testIntlConfig = { locale: "en-US", currency: "USD" };
 export const testSpanishIntlConfig = { locale: "es-ES", currency: "EUR" };
+
+export const testBudgetList = [testBudget, testBudget2, testBigBudget];
