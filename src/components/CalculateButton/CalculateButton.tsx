@@ -29,11 +29,20 @@ function CalculateButton({
   const opButtonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const handleKeyPress = (e: { key: string }) => {
+    if (e.key === "Enter") {
+      handleCalculate();
+      if (changeValue > 0) {
+        opButtonRef?.current?.click();
+      }
+      setChangeValue(0);
+    }
+  };
+
   const handleCalculate = () => {
     if (changeValue > 0) {
       onCalculate(changeValue, operation);
     }
-    opButtonRef?.current?.click();
   };
 
   return (
@@ -101,6 +110,7 @@ function CalculateButton({
                   defaultValue={0}
                   allowNegativeValue={false}
                   maxLength={14}
+                  onKeyUp={handleKeyPress}
                   ref={inputRef}
                   onValueChange={(value) =>
                     setChangeValue(isNaN(Number(value)) ? 0 : Number(value))
@@ -114,6 +124,7 @@ function CalculateButton({
                   type="button"
                   onClick={() => {
                     handleCalculate();
+                    opButtonRef?.current?.click();
                   }}
                 >
                   <BsCheckLg />

@@ -98,6 +98,23 @@ describe("CalculateButton", () => {
     expect(onCalculate).toBeCalledWith(123, "add");
   });
 
+  it("calls onCalculate when change > 0 and enter is pressed", async () => {
+    const button = screen.getByRole("button", {
+      name: "select operations to change item value amount",
+    });
+    await userEvent.click(button);
+    await userEvent.type(
+      screen.getByLabelText("change item value amount"),
+      "123"
+    );
+    await userEvent.type(
+      screen.getByLabelText("change item value amount"),
+      "{enter}"
+    );
+
+    expect(onCalculate).toBeCalledWith(123, "add");
+  });
+
   it("calls onCalculate with sub", async () => {
     const button = screen.getByRole("button", {
       name: "select operations to change item value amount",
