@@ -1,3 +1,10 @@
+# [0.21.0](https://github.com/rare-magma/guitos/compare/v0.20.1...v0.21.0) (2023-06-21)
+
+
+### Features
+
+* execute item value operation on enter keypress ([7886336](https://github.com/rare-magma/guitos/commit/788633678c60fd36f986dd4fd24898af4584da46))
+
 ## [0.20.1](https://github.com/rare-magma/guitos/compare/v0.20.0...v0.20.1) (2023-06-12)
 
 
