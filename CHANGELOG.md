@@ -1,3 +1,10 @@
+## [0.22.1](https://github.com/rare-magma/guitos/compare/v0.22.0...v0.22.1) (2023-06-25)
+
+
+### Bug Fixes
+
+* monospace font selection for values ([19219df](https://github.com/rare-magma/guitos/commit/19219dfd1df6dcb70c89f469305e7270b8925353))
+
 # [0.22.0](https://github.com/rare-magma/guitos/compare/v0.21.0...v0.22.0) (2023-06-25)
 
 
