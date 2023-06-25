@@ -12,6 +12,7 @@ import { intlFormat, median } from "../../utils";
 import { Budget } from "../Budget/Budget";
 import ChartTooltip from "./ChartTooltip";
 import { BsPercent } from "react-icons/bs";
+import useDynamicYAxisWidth from "./DynamicYAxis";
 
 interface ChartProps {
   header: string;
@@ -50,6 +51,9 @@ function Chart({
   legendValues2,
   unit,
 }: ChartProps) {
+  const { yAxisWidth, setChartRef } = useDynamicYAxisWidth({
+    yAxisWidthModifier: (x) => x + 10,
+  });
   const tickFormatter = (value: number, index: number) => {
     return intlFormat(value, intlConfig?.currency as string);
   };
@@ -64,6 +68,7 @@ function Chart({
         >
           <AreaChart
             data={budgetList}
+            ref={setChartRef}
             margin={{
               top: 10,
               right: 0,
@@ -75,12 +80,14 @@ function Chart({
               <YAxis
                 stroke="var(--textcolor)"
                 style={{ fontFamily: "ui-monospace, monospace" }}
+                width={yAxisWidth}
                 unit={unit}
               />
             ) : (
               <YAxis
                 stroke="var(--textcolor)"
                 style={{ fontFamily: "ui-monospace, monospace" }}
+                width={yAxisWidth}
                 tickFormatter={tickFormatter}
               />
             )}
