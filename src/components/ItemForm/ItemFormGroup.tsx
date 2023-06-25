@@ -124,7 +124,7 @@ function ItemFormGroup({
           id={`${label}-${itemForm.id}-value`}
           // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
           key={itemForm.id + "-value-" + changed}
-          className="text-right form-control straight-corners currency-font"
+          className="text-right form-control straight-corners fixed-width-font"
           aria-label={`item ${itemForm.id} value`}
           name="item-value"
           intlConfig={intlConfig}

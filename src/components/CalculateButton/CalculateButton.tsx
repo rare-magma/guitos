@@ -103,7 +103,7 @@ function CalculateButton({
                 <CurrencyInput
                   id={`${label}-${itemForm.id}-operation-value`}
                   key={`item-${itemForm.id}-operation-value`}
-                  className="text-right form-control straight-corners currency-font"
+                  className="text-right form-control straight-corners fixed-width-font"
                   aria-label={"change item value amount"}
                   name="item-operate-value"
                   intlConfig={intlConfig}
