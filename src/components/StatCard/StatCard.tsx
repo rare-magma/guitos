@@ -117,7 +117,7 @@ function StatCard({
           <CurrencyInput
             id="available"
             key={`${stat.available}-available`}
-            className="text-right form-control"
+            className="text-right form-control currency-font"
             aria-label={"available"}
             name="available"
             intlConfig={intlConfig}
@@ -154,7 +154,7 @@ function StatCard({
           <CurrencyInput
             id="with-goal"
             key={`${stat.withGoal}-withGoal`}
-            className="text-right form-control"
+            className="text-right form-control currency-font"
             aria-label={"with-goal"}
             name="with-goal"
             intlConfig={intlConfig}
@@ -195,7 +195,7 @@ function StatCard({
           </OverlayTrigger>
           <Form.Control
             data-testid="goal-input"
-            className="text-right"
+            className="text-right currency-font"
             aria-label={"goal"}
             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             key={"auto-goal-" + autoGoal}
@@ -243,7 +243,7 @@ function StatCard({
           <CurrencyInput
             id="saved"
             key={`${stat.saved}-saved`}
-            className="text-right form-control"
+            className="text-right form-control currency-font"
             aria-label={"saved"}
             name="saved"
             intlConfig={intlConfig}
@@ -265,7 +265,7 @@ function StatCard({
           <CurrencyInput
             id="reserves"
             key={"reserves"}
-            className="text-right form-control"
+            className="text-right form-control currency-font"
             aria-label={"reserves"}
             name="reserves"
             intlConfig={intlConfig}

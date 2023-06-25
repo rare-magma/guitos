@@ -122,7 +122,7 @@ function TableCard({
       <Card.Header className={label + "-card-header"}>
         <Row>
           <Col>{label}</Col>
-          <Col className="text-end">
+          <Col className="text-end currency-font">
             <OverlayTrigger
               placement="top"
               overlay={

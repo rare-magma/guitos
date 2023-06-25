@@ -67,15 +67,22 @@ function Chart({
             margin={{
               top: 10,
               right: 0,
-              left: unit ? 0 : 20,
               bottom: 0,
             }}
           >
             <XAxis stroke="var(--textcolor)" dataKey="name" minTickGap={10} />
             {unit ? (
-              <YAxis stroke="var(--textcolor)" unit={unit} />
+              <YAxis
+                stroke="var(--textcolor)"
+                style={{ fontFamily: "ui-monospace, monospace" }}
+                unit={unit}
+              />
             ) : (
-              <YAxis stroke="var(--textcolor)" tickFormatter={tickFormatter} />
+              <YAxis
+                stroke="var(--textcolor)"
+                style={{ fontFamily: "ui-monospace, monospace" }}
+                tickFormatter={tickFormatter}
+              />
             )}
             <Tooltip
               content={
@@ -113,7 +120,7 @@ function Chart({
             <InputGroup size="sm" className="mb-1">
               <InputGroup.Text>{legend1}</InputGroup.Text>
               <Form.Control
-                className="text-right"
+                className="text-right currency-font"
                 aria-label={"median"}
                 defaultValue={median(legendValues1)}
                 type="number"
@@ -129,7 +136,7 @@ function Chart({
               <InputGroup.Text>{legend1}</InputGroup.Text>
               <CurrencyInput
                 disabled
-                className="text-right form-control"
+                className="text-right form-control currency-font"
                 aria-label={legend1}
                 intlConfig={intlConfig}
                 defaultValue={median(legendValues1)}
@@ -142,7 +149,7 @@ function Chart({
                 <InputGroup.Text>{legend1}</InputGroup.Text>
                 <CurrencyInput
                   disabled
-                  className="text-right form-control"
+                  className="text-right form-control currency-font"
                   aria-label={legend1}
                   intlConfig={intlConfig}
                   defaultValue={median(legendValues1)}
@@ -156,7 +163,7 @@ function Chart({
                 <InputGroup.Text>{legend2}</InputGroup.Text>
                 <CurrencyInput
                   disabled
-                  className="text-right form-control"
+                  className="text-right form-control currency-font"
                   aria-label={legend2}
                   intlConfig={intlConfig}
                   defaultValue={median(legendValues2)}

@@ -385,3 +385,7 @@ input[type="text"]::placeholder {
   border: 1px solid var(--comment);
   background-color: var(--bgcolor);
 }
+
+.currency-font {
+  font-family: ui-monospace, monospace;
+}
