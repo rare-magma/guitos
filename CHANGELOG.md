@@ -1,3 +1,15 @@
+# [0.22.0](https://github.com/rare-magma/guitos/compare/v0.21.0...v0.22.0) (2023-06-25)
+
+
+### Bug Fixes
+
+* chart y axis width ([e7463cb](https://github.com/rare-magma/guitos/commit/e7463cbe20422d3cbfb9d1538ef7caf68e53b244))
+
+
+### Features
+
+* use monospace font for values ([cf2e6dc](https://github.com/rare-magma/guitos/commit/cf2e6dcffcbc072c4bc15c784f9eeb3233ffa63c))
+
 # [0.21.0](https://github.com/rare-magma/guitos/compare/v0.20.1...v0.21.0) (2023-06-21)
 
 
