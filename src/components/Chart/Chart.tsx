@@ -75,7 +75,12 @@ function Chart({
               bottom: 0,
             }}
           >
-            <XAxis stroke="var(--textcolor)" dataKey="name" minTickGap={10} />
+            <XAxis
+              stroke="var(--textcolor)"
+              dataKey="name"
+              minTickGap={10}
+              tick={{ transform: "translate(0, 10)" }}
+            />
             {unit ? (
               <YAxis
                 stroke="var(--textcolor)"
