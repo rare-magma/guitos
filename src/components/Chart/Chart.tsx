@@ -127,7 +127,7 @@ function Chart({
             <InputGroup size="sm" className="mb-1">
               <InputGroup.Text>{legend1}</InputGroup.Text>
               <Form.Control
-                className="text-right fixed-width-font"
+                className="text-end fixed-width-font"
                 aria-label={"median"}
                 defaultValue={median(legendValues1)}
                 type="number"
@@ -143,7 +143,7 @@ function Chart({
               <InputGroup.Text>{legend1}</InputGroup.Text>
               <CurrencyInput
                 disabled
-                className="text-right form-control fixed-width-font"
+                className="text-end form-control fixed-width-font"
                 aria-label={legend1}
                 intlConfig={intlConfig}
                 defaultValue={median(legendValues1)}
@@ -156,7 +156,7 @@ function Chart({
                 <InputGroup.Text>{legend1}</InputGroup.Text>
                 <CurrencyInput
                   disabled
-                  className="text-right form-control fixed-width-font"
+                  className="text-end form-control fixed-width-font"
                   aria-label={legend1}
                   intlConfig={intlConfig}
                   defaultValue={median(legendValues1)}
@@ -170,7 +170,7 @@ function Chart({
                 <InputGroup.Text>{legend2}</InputGroup.Text>
                 <CurrencyInput
                   disabled
-                  className="text-right form-control fixed-width-font"
+                  className="text-end form-control fixed-width-font"
                   aria-label={legend2}
                   intlConfig={intlConfig}
                   defaultValue={median(legendValues2)}

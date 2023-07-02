@@ -100,7 +100,7 @@ a:hover {
 .modal-item,
 input .input-group-text,
 input.form-control,
-input.text-right.form-control {
+input.text-end.form-control {
   color: var(--textcolor);
   background: var(--bgcolor);
   border: 1px solid var(--comment);
@@ -109,7 +109,7 @@ input.text-right.form-control {
 .dropdown-item:hover,
 .dropdown-item:focus,
 .dropdown-item:focus-visible,
-input.text-right.form-control:focus,
+input.text-end.form-control:focus,
 .form-control:focus {
   color: var(--textcolor);
   background: var(--bgcolor);
@@ -119,10 +119,6 @@ input.text-right.form-control:focus,
 
 .input-group-text {
   background-color: var(--selection);
-}
-
-input.text-right.form-control {
-  text-align: right;
 }
 
 .straight-corners {
