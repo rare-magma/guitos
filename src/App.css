@@ -304,6 +304,8 @@ input[type="number"] {
   font-size: 0.9em;
   color: var(--selection);
 }
+
+.fixed-width-font,
 .version,
 .code,
 .textarea {
@@ -343,10 +345,6 @@ input[type="number"] {
 .navbar-toggler {
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
-}
-
-.fixed-width-font {
-  font-family: ui-monospace, SF Mono, Menlo, Monaco, Andale Mono, monospace;
 }
 
 .dropdown-menu {
