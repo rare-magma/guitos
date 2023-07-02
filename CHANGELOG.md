@@ -1,3 +1,11 @@
+## [0.22.2](https://github.com/rare-magma/guitos/compare/v0.22.1...v0.22.2) (2023-07-02)
+
+
+### Bug Fixes
+
+* chart tooltip spacing ([1bbf01d](https://github.com/rare-magma/guitos/commit/1bbf01df7b6a11cb3fcb72cd810120c5ac7bfad9))
+* use fixed width font on chart tooltip ([36e299f](https://github.com/rare-magma/guitos/commit/36e299f3a690950341e3dc861d95eb51833a0aa2))
+
 ## [0.22.1](https://github.com/rare-magma/guitos/compare/v0.22.0...v0.22.1) (2023-06-25)
 
 
