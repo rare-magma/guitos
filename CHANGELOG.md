@@ -1,3 +1,10 @@
+## [0.22.3](https://github.com/rare-magma/guitos/compare/v0.22.2...v0.22.3) (2023-07-02)
+
+
+### Bug Fixes
+
+* charts X axis spacing ([b7eafa8](https://github.com/rare-magma/guitos/commit/b7eafa8963f148d3e94f665c90ed34afd7de632b))
+
 ## [0.22.2](https://github.com/rare-magma/guitos/compare/v0.22.1...v0.22.2) (2023-07-02)
 
 
