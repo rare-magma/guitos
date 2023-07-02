@@ -26,20 +26,19 @@ function ChartTooltip({
         <Row>{label}</Row>
         {payload.length > 1 ? (
           <>
-            <Row>
+            <Row className="me-1">
               <Col>{`${key1 || ""}:`}</Col>
-              <Col className="text-right fixed-width-font">
+              <Col className="text-end fixed-width-font">
                 {`${intlFormat(
                   roundBig(Big(payload[0].value), 2),
                   intlConfig?.currency as string
                 )}`}
               </Col>
             </Row>
-            <Row>
+            <Row className="me-1 flex-md-nowrap">
               <Col>{`${key2 || ""}:`}</Col>
-              <Col className="text-right fixed-width-font">
+              <Col className="text-end fixed-width-font col-md-auto">
                 {intlFormat(
-                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                   roundBig(Big(payload[1].value), 2),
                   intlConfig?.currency as string
                 )}
@@ -47,12 +46,12 @@ function ChartTooltip({
             </Row>
           </>
         ) : (
-          <Row>
+          <Row className="me-1">
             <Col>{`${key1 || ""}:`}</Col>
             {key1 === "goal" ? (
-              <Col className="text-right fixed-width-font">{`${payload[0].value}%`}</Col>
+              <Col className="text-end fixed-width-font">{`${payload[0].value}%`}</Col>
             ) : (
-              <Col className="text-right fixed-width-font">
+              <Col className="text-end fixed-width-font">
                 {`${intlFormat(
                   roundBig(Big(payload[0].value), 2),
                   intlConfig?.currency as string
