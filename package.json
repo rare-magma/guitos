@@ -29,11 +29,6 @@
     ]
   },
   "dependencies": {
-    "@testing-library/user-event": "14.4.3",
-    "@types/jest": "29.5.1",
-    "@types/node": "20.2.5",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.6",
     "big.js": "6.2.1",
     "bootstrap": "5.3.0",
     "localforage": "1.10.0",
@@ -49,6 +44,11 @@
     "recharts": "2.6.2"
   },
   "devDependencies": {
+    "@testing-library/user-event": "14.4.3",
+    "@types/jest": "29.5.1",
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.6",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@simbathesailor/use-what-changed": "2.0.0",
