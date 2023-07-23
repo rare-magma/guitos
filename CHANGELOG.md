@@ -1,3 +1,10 @@
+## [0.22.4](https://github.com/rare-magma/guitos/compare/v0.22.3...v0.22.4) (2023-07-23)
+
+
+### Performance Improvements
+
+* optimize index.css ([6569bec](https://github.com/rare-magma/guitos/commit/6569bec4b128873c61489914ea7132304e50414d))
+
 ## [0.22.3](https://github.com/rare-magma/guitos/compare/v0.22.2...v0.22.3) (2023-07-02)
 
 
