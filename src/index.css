@@ -1,11 +1,11 @@
 body {
-  margin: 0;
   font-family: system-ui, sans-serif;
+  margin: 0;
 }
 
 code {
-  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
-    "DejaVu Sans Mono", monospace;
+  font-family: ui-monospace, Cascadia Code, Source Code Pro, Menlo, Consolas,
+    DejaVu Sans Mono, monospace;
 }
 
 html {
