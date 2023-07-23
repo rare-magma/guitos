@@ -287,7 +287,6 @@ function BudgetPage() {
   };
 
   const handleImportCsv = (fileReader: FileReader, file: File) => {
-    let newBudget: Budget;
     const newBudgetList: Budget[] = [];
     const csvObject = Papa.parse(fileReader.result as string, {
       header: true,
@@ -304,8 +303,7 @@ function BudgetPage() {
 
       return;
     }
-    // eslint-disable-next-line prefer-const
-    newBudget = convertCsvToBudget(
+    const newBudget = convertCsvToBudget(
       csvObject.data as string[],
       file.name.slice(0, -4)
     );
