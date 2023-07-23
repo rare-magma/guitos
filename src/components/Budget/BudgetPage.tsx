@@ -280,71 +280,79 @@ function BudgetPage() {
   const handleSetCurrency = (c: string) => {
     optionsDB.setItem("currencyCode", c).catch((e) => {
       if (e instanceof Error) setError(e.message);
+      setShow(true);
     });
     setCurrency(c);
     setIntlConfig({ locale: userLang, currency: c });
   };
 
+  const handleImportCsv = (fileReader: FileReader, file: File) => {
+    let newBudget: Budget;
+    const newBudgetList: Budget[] = [];
+    const csvObject = Papa.parse(fileReader.result as string, {
+      header: true,
+      skipEmptyLines: "greedy",
+    });
+    if (csvObject.errors.length > 0) {
+      csvError.push({
+        errors: csvObject.errors,
+        file: file.name,
+      });
+      setCsvError(csvError);
+      setShow(true);
+      setLoading(false);
+
+      return;
+    }
+    // eslint-disable-next-line prefer-const
+    newBudget = convertCsvToBudget(
+      csvObject.data as string[],
+      file.name.slice(0, -4)
+    );
+    newBudgetList.push(newBudget);
+    save(newBudget);
+    setBudgetList(newBudgetList);
+    setBudgetNameList(createBudgetNameList(newBudgetList));
+  };
+
+  const handleImportJSON = (fileReader: FileReader, file: File) => {
+    const newBudgetList: Budget[] = [];
+    try {
+      const list = JSON.parse(fileReader.result as string) as Budget[];
+      list.forEach((b: Budget) => {
+        newBudgetList.push(b);
+        save(b);
+      });
+      setBudgetList(newBudgetList);
+      setBudgetNameList(createBudgetNameList(newBudgetList));
+    } catch (e) {
+      setJsonError([{ errors: (e as string).toString(), file: file.name }]);
+      setShow(true);
+      setLoading(false);
+    }
+  };
+
   const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoading(true);
     const importedFiles = e.target.files;
-    const newBudgetList: Budget[] = [];
     if (importedFiles === null) {
       return;
     }
 
     for (let i = 0; i < importedFiles.length; i++) {
-      let newBudget: Budget;
       const file = importedFiles[i];
       const reader = new FileReader();
       reader.readAsText(file, "UTF-8");
-
       reader.onloadend = () => {
         if (reader.result !== null) {
           if (file.type === "text/csv") {
-            const csvObject = Papa.parse(reader.result as string, {
-              header: true,
-              skipEmptyLines: "greedy",
-            });
-            if (csvObject.errors.length > 0) {
-              csvError.push({
-                errors: csvObject.errors,
-                file: file.name,
-              });
-              setCsvError(csvError);
-              setShow(true);
-              setLoading(false);
-
-              return;
-            }
-
-            newBudget = convertCsvToBudget(
-              csvObject.data as string[],
-              file.name.slice(0, -4)
-            );
-            newBudgetList.push(newBudget);
-            save(newBudget);
+            handleImportCsv(reader, file);
           } else {
-            try {
-              const list = JSON.parse(reader.result as string) as Budget[];
-              list.forEach((b: Budget) => {
-                newBudgetList.push(b);
-                save(b);
-              });
-            } catch (e) {
-              setJsonError([
-                { errors: (e as string).toString(), file: file.name },
-              ]);
-              setShow(true);
-              setLoading(false);
-            }
+            handleImportJSON(reader, file);
           }
         }
       };
     }
-
-    setBudgetList(newBudgetList);
-    setBudgetNameList(createBudgetNameList(newBudgetList));
   };
 
   const handleExport = (t: string) => {
@@ -426,19 +434,35 @@ function BudgetPage() {
           );
         }
 
-        optionsDB
-          .getItem("currencyCode")
-          .then((c) => {
-            if (c) {
-              setCurrency(c as string);
-              setIntlConfig({ locale: userLang, currency: c as string });
-            }
-          })
-          .catch((e) => {
-            if (e instanceof Error) setError(e.message);
-          });
-
+        loadCurrencyOption();
         setLoading(false);
+      })
+      .catch((e) => {
+        if (e instanceof Error) setError(e.message);
+        setShow(true);
+      });
+  };
+
+  const loadBudget = (list: Budget[]) => {
+    list.forEach((data: Budget) => {
+      budgetsDB
+        .getItem(data.id)
+        .then((b) => setBudget(b as Budget))
+        .catch((e) => {
+          if (e instanceof Error) setError(e.message);
+          setShow(true);
+        });
+    });
+  };
+
+  const loadCurrencyOption = () => {
+    optionsDB
+      .getItem("currencyCode")
+      .then((c) => {
+        if (c) {
+          setCurrency(c as string);
+          setIntlConfig({ locale: userLang, currency: c as string });
+        }
       })
       .catch((e) => {
         if (e instanceof Error) setError(e.message);
@@ -449,52 +473,19 @@ function BudgetPage() {
   // useWhatChanged([budget, name]);
 
   useEffect(() => {
-    if (budget) {
-      save(budget);
-    }
+    budget && save(budget);
   }, [budget]);
 
   useEffect(() => {
     try {
       if (budgetList.length >= 1 && Array.isArray(budgetList)) {
         if (name.trim() !== "undefined") {
-          budgetList
-            .filter((b: Budget) => b && b.name === name)
-            .forEach((data: Budget) => {
-              budgetsDB
-                .getItem(data.id)
-                .then((b) => setBudget(b as Budget))
-                .catch((e) => {
-                  if (e instanceof Error) setError(e.message);
-                  setShow(true);
-                });
-            });
+          loadBudget(budgetList.filter((b: Budget) => b && b.name === name));
         } else {
-          budgetList.slice(0).forEach((data: Budget) => {
-            budgetsDB
-              .getItem(data.id)
-              .then((b) => {
-                setBudget(b as Budget);
-              })
-              .catch((e) => {
-                if (e instanceof Error) setError(e.message);
-                setShow(true);
-              });
-          });
+          loadBudget(budgetList.slice(0));
         }
 
-        optionsDB
-          .getItem("currencyCode")
-          .then((c) => {
-            if (c) {
-              setCurrency(c as string);
-              setIntlConfig({ locale: userLang, currency: c as string });
-            }
-          })
-          .catch((e) => {
-            if (e instanceof Error) setError(e.message);
-          });
-
+        loadCurrencyOption();
         setBudgetNameList(createBudgetNameList(budgetList));
         setLoading(false);
       } else {
@@ -505,6 +496,7 @@ function BudgetPage() {
       setShow(true);
       setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, loading]);
 
   return (
@@ -577,7 +569,6 @@ function BudgetPage() {
       {showGraphs && (
         <ChartsPage
           budgetList={budgetList.sort((a, b) => a.name.localeCompare(b.name))}
-          currency={currency || initialCurrencyCode}
           intlConfig={intlConfig}
           onShowGraphs={() => setShowGraphs(false)}
         />
