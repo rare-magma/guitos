@@ -470,6 +470,7 @@ function BudgetPage() {
 
   useEffect(() => {
     budget && save(budget);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [budget]);
 
   useEffect(() => {
