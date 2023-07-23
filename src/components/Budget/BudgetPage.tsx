@@ -68,6 +68,11 @@ function BudgetPage() {
     preventDefault: true,
   });
 
+  const handleError = (e: unknown) => {
+    if (e instanceof Error) setError(e.message);
+    setShow(true);
+  };
+
   const handleIncomeChange = (item: Income) => {
     let newBudget: Budget;
     if (budget !== null) {
@@ -234,8 +239,7 @@ function BudgetPage() {
         }
       })
       .catch((e: unknown) => {
-        if (e instanceof Error) setError(e.message);
-        setShow(true);
+        handleError(e);
       });
   };
 
@@ -279,8 +283,7 @@ function BudgetPage() {
 
   const handleSetCurrency = (c: string) => {
     optionsDB.setItem("currencyCode", c).catch((e) => {
-      if (e instanceof Error) setError(e.message);
-      setShow(true);
+      handleError(e);
     });
     setCurrency(c);
     setIntlConfig({ locale: userLang, currency: c });
@@ -400,13 +403,11 @@ function BudgetPage() {
             setBudgetNameList(createBudgetNameList(list));
           })
           .catch((e: unknown) => {
-            if (e instanceof Error) setError(e.message);
-            setShow(true);
+            handleError(e);
           });
       })
       .catch((e: unknown) => {
-        if (e instanceof Error) setError(e.message);
-        setShow(true);
+        handleError(e);
       });
   };
 
@@ -436,8 +437,7 @@ function BudgetPage() {
         setLoading(false);
       })
       .catch((e) => {
-        if (e instanceof Error) setError(e.message);
-        setShow(true);
+        handleError(e);
       });
   };
 
@@ -447,8 +447,7 @@ function BudgetPage() {
         .getItem(data.id)
         .then((b) => setBudget(b as Budget))
         .catch((e) => {
-          if (e instanceof Error) setError(e.message);
-          setShow(true);
+          handleError(e);
         });
     });
   };
@@ -463,8 +462,7 @@ function BudgetPage() {
         }
       })
       .catch((e) => {
-        if (e instanceof Error) setError(e.message);
-        setShow(true);
+        handleError(e);
       });
   };
 
@@ -490,8 +488,7 @@ function BudgetPage() {
         loadFromDb();
       }
     } catch (e: unknown) {
-      setError((e as Error).message);
-      setShow(true);
+      handleError(e);
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
