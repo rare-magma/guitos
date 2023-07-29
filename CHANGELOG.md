@@ -1,3 +1,10 @@
+# [0.23.0](https://github.com/rare-magma/guitos/compare/v0.22.4...v0.23.0) (2023-07-29)
+
+
+### Features
+
+* cleaner style without header bgcolor, dedup css ([db88472](https://github.com/rare-magma/guitos/commit/db88472f6c2e8484d890dfc31922f90b0686239e))
+
 ## [0.22.4](https://github.com/rare-magma/guitos/compare/v0.22.3...v0.22.4) (2023-07-23)
 
 
