@@ -117,11 +117,6 @@ input.text-end.form-control:focus {
   box-shadow: 0 0 0;
   color: var(--textcolor);
 }
-
-.input-group-text {
-  background-color: var(--selection);
-}
-
 .straight-corners {
   border-radius: 0;
 }
@@ -265,30 +260,15 @@ input[type="number"] {
   color: var(--textcolor);
 }
 
-.Expenses-card {
-  border: 1px solid var(--comment);
-}
-
-.Expenses-card-header {
-  background-color: var(--selection);
-  border-bottom: 1px solid var(--comment);
-}
-
+.Expenses-card,
+.stat-card,
 .Revenue-card {
   border: 1px solid var(--comment);
 }
 
+.Expenses-card-header,
+.stat-card-header,
 .Revenue-card-header {
-  background-color: var(--selection);
-  border-bottom: 1px solid var(--comment);
-}
-
-.stat-card {
-  border: 1px solid var(--comment);
-}
-
-.stat-card-header {
-  background-color: var(--selection);
   border-bottom: 1px solid var(--comment);
 }
 
