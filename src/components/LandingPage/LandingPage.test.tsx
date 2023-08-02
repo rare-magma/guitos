@@ -18,7 +18,7 @@ describe("LandingPage", () => {
         inputRef={inputRefMock}
         onNew={onNew}
         onImport={onImport}
-      />
+      />,
     );
   });
 
@@ -26,7 +26,7 @@ describe("LandingPage", () => {
     expect(screen.getByLabelText("new budget")).toBeInTheDocument();
     expect(screen.getByLabelText("import budget")).toBeInTheDocument();
     expect(
-      screen.getByLabelText("open instructions in new tab")
+      screen.getByLabelText("open instructions in new tab"),
     ).toBeInTheDocument();
   });
 
@@ -39,19 +39,19 @@ describe("LandingPage", () => {
   it("triggers onImport", async () => {
     await userEvent.upload(
       screen.getByTestId("import-form-control-landing-page"),
-      testBudget as unknown as File
+      testBudget as unknown as File,
     );
     expect(onImport).toBeCalledTimes(1);
   });
 
   it("opens instructions in new tab", async () => {
     const instructionsButton = screen.getByLabelText(
-      "open instructions in new tab"
+      "open instructions in new tab",
     );
     await userEvent.click(instructionsButton);
     expect(instructionsButton).toHaveAttribute(
       "href",
-      "https://github.com/rare-magma/guitos#getting-started"
+      "https://github.com/rare-magma/guitos#getting-started",
     );
   });
 
@@ -64,7 +64,7 @@ describe("LandingPage", () => {
         inputRef={inputRefMock}
         onNew={onNew}
         onImport={onImport}
-      />
+      />,
     );
     expect(screen.getByRole("status")).toBeInTheDocument();
   });

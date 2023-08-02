@@ -33,7 +33,7 @@ describe("Chart", () => {
         legendValues1={testBudgetList.map((b: Budget) => {
           return b.incomes.total;
         })}
-      />
+      />,
     );
   });
 

@@ -39,7 +39,7 @@ describe("App", () => {
       .then((e) => userEvent.click(e[0]));
 
     await userEvent.click(
-      screen.getByRole("button", { name: "confirm budget deletion" })
+      screen.getByRole("button", { name: "confirm budget deletion" }),
     );
 
     expect(screen.queryByLabelText("delete budget")).not.toBeInTheDocument();

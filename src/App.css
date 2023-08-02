@@ -289,7 +289,13 @@ input[type="number"] {
 .fixed-width-font,
 .textarea,
 .version {
-  font-family: ui-monospace, SF Mono, Menlo, Monaco, Andale Mono, monospace;
+  font-family:
+    ui-monospace,
+    SF Mono,
+    Menlo,
+    Monaco,
+    Andale Mono,
+    monospace;
 }
 
 .brand {

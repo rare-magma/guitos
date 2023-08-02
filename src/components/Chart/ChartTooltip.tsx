@@ -31,7 +31,7 @@ function ChartTooltip({
               <Col className="text-end fixed-width-font">
                 {`${intlFormat(
                   roundBig(Big(payload[0].value), 2),
-                  intlConfig?.currency as string
+                  intlConfig?.currency as string,
                 )}`}
               </Col>
             </Row>
@@ -40,7 +40,7 @@ function ChartTooltip({
               <Col className="text-end fixed-width-font col-md-auto">
                 {intlFormat(
                   roundBig(Big(payload[1].value), 2),
-                  intlConfig?.currency as string
+                  intlConfig?.currency as string,
                 )}
               </Col>
             </Row>
@@ -54,7 +54,7 @@ function ChartTooltip({
               <Col className="text-end fixed-width-font">
                 {`${intlFormat(
                   roundBig(Big(payload[0].value), 2),
-                  intlConfig?.currency as string
+                  intlConfig?.currency as string,
                 )}`}
               </Col>
             )}

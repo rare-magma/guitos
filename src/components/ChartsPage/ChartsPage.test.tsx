@@ -27,7 +27,7 @@ describe("ChartsPage", () => {
         budgetList={testBudgetList}
         intlConfig={testIntlConfig}
         onShowGraphs={onShowGraphs}
-      />
+      />,
     );
   });
 

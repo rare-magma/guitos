@@ -24,7 +24,7 @@ describe("ItemFormGroup", () => {
         costPercentage={1}
         onRemove={onRemove}
         onChange={onChange}
-      />
+      />,
     );
   });
 
@@ -55,10 +55,10 @@ describe("ItemFormGroup", () => {
 
   it("triggers onRemove when user clicks delete confirmation button", async () => {
     await userEvent.click(
-      screen.getByRole("button", { name: "delete item 1" })
+      screen.getByRole("button", { name: "delete item 1" }),
     );
     await userEvent.click(
-      screen.getByRole("button", { name: "confirm item 1 deletion" })
+      screen.getByRole("button", { name: "confirm item 1 deletion" }),
     );
 
     expect(onRemove).toBeCalledWith({
@@ -78,11 +78,11 @@ describe("ItemFormGroup", () => {
     await userEvent.click(
       screen.getByRole("button", {
         name: "select operations to change item value amount",
-      })
+      }),
     );
 
     expect(
-      screen.getByLabelText("select type of operation on item value")
+      screen.getByLabelText("select type of operation on item value"),
     ).toBeInTheDocument();
   });
 
@@ -98,7 +98,7 @@ describe("ItemFormGroup", () => {
         costPercentage={1}
         onRemove={onRemove}
         onChange={onChange}
-      />
+      />,
     );
 
     await userEvent.clear(screen.getByDisplayValue("123 €"));

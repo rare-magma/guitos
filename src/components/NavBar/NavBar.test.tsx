@@ -35,7 +35,7 @@ describe("NavBar", () => {
         onRename={onRename}
         onSelect={onSelect}
         onSetCurrency={onSetCurrency}
-      />
+      />,
     );
   });
 
@@ -48,7 +48,7 @@ describe("NavBar", () => {
     await userEvent.click(newButton[0]);
 
     expect(
-      screen.getByPlaceholderText("Search list of budgets...")
+      screen.getByPlaceholderText("Search list of budgets..."),
     ).toBeInTheDocument();
     expect(screen.getByLabelText("go to older budget")).toBeInTheDocument();
     expect(screen.getByLabelText("go to newer budget")).toBeInTheDocument();
@@ -84,7 +84,7 @@ describe("NavBar", () => {
     await userEvent.click(screen.getByLabelText("import budget"));
     await userEvent.upload(
       screen.getByTestId("import-form-control"),
-      testBudget as unknown as File
+      testBudget as unknown as File,
     );
     expect(onImport).toBeCalledTimes(1);
   });
@@ -92,7 +92,7 @@ describe("NavBar", () => {
   it("triggers onExport when export json button is pressed", async () => {
     await userEvent.click(screen.getByLabelText("export budget"));
     await userEvent.click(
-      screen.getByRole("button", { name: "export budget as json" })
+      screen.getByRole("button", { name: "export budget as json" }),
     );
     expect(onExport).toBeCalledWith("json");
   });
@@ -100,7 +100,7 @@ describe("NavBar", () => {
   it("triggers onExport when export csv button is pressed", async () => {
     await userEvent.click(screen.getByLabelText("export budget"));
     await userEvent.click(
-      screen.getByRole("button", { name: "export budget as csv" })
+      screen.getByRole("button", { name: "export budget as csv" }),
     );
     expect(onExport).toBeCalledWith("csv");
   });
@@ -115,7 +115,7 @@ describe("NavBar", () => {
   it("triggers onRemove when user clicks delete budget button", async () => {
     await userEvent.click(screen.getByLabelText("delete budget"));
     await userEvent.click(
-      screen.getByRole("button", { name: "confirm budget deletion" })
+      screen.getByRole("button", { name: "confirm budget deletion" }),
     );
 
     expect(onRemove).toBeCalledWith("035c2de4-00a4-403c-8f0e-f81339be9a4e");
@@ -124,7 +124,7 @@ describe("NavBar", () => {
   it("triggers onSelect when user selects budget", async () => {
     await userEvent.type(
       screen.getByPlaceholderText("Search list of budgets..."),
-      "2023-05"
+      "2023-05",
     );
     await userEvent.click(screen.getByText("2023-05"));
 
@@ -146,12 +146,12 @@ describe("NavBar", () => {
 
   it("opens instructions in new tab", async () => {
     const instructionsButton = screen.getByLabelText(
-      "open instructions in new tab"
+      "open instructions in new tab",
     );
     await userEvent.click(instructionsButton);
     expect(instructionsButton).toHaveAttribute(
       "href",
-      "https://github.com/rare-magma/guitos#getting-started"
+      "https://github.com/rare-magma/guitos#getting-started",
     );
   });
 
@@ -173,13 +173,13 @@ describe("NavBar", () => {
         onRename={onRename}
         onSelect={onSelect}
         onSetCurrency={onSetCurrency}
-      />
+      />,
     );
     const guitosButton = screen.getByLabelText("open guitos repository");
     await userEvent.click(guitosButton);
     expect(guitosButton).toHaveAttribute(
       "href",
-      "https://github.com/rare-magma/guitos"
+      "https://github.com/rare-magma/guitos",
     );
   });
 });

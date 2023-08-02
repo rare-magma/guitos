@@ -45,7 +45,7 @@ function ItemFormGroup({
     operation: string,
     value?: string,
     event?: React.ChangeEvent<HTMLInputElement>,
-    changeValue?: number
+    changeValue?: number,
   ) => {
     let newItemForm: ItemForm;
     if (itemForm !== null) {

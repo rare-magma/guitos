@@ -40,7 +40,7 @@ export function calcTotal(values: Array<ItemForm>): Big {
 
 export function calcPercentage(
   itemValue: number,
-  revenueTotal: number
+  revenueTotal: number,
 ): number {
   if (!isNaN(revenueTotal) && revenueTotal > 0 && !isNaN(itemValue)) {
     const percentage = Big(itemValue).mul(100).div(revenueTotal);
@@ -53,7 +53,7 @@ export function calcPercentage(
 export function calc(
   itemValue: number,
   change: number,
-  operation: string
+  operation: string,
 ): number {
   let total = 0;
   if (!isNaN(itemValue) && change > 0) {
@@ -163,14 +163,14 @@ export const convertCsvToBudget = (csv: string[], date: string): Budget => {
         newBudget.expenses.items.push(newItemForm);
         newBudget.expenses.total = roundBig(
           calcTotal(newBudget.expenses.items),
-          2
+          2,
         );
         break;
       case "income":
         newBudget.incomes.items.push(newItemForm);
         newBudget.incomes.total = roundBig(
           calcTotal(newBudget.incomes.items),
-          2
+          2,
         );
         break;
       case "goal":
@@ -224,7 +224,7 @@ export function intlFormat(amount: number, currencyCode: string) {
 }
 
 export const focusRef = (
-  ref: MutableRefObject<HTMLInputElement | undefined>
+  ref: MutableRefObject<HTMLInputElement | undefined>,
 ) => {
   if (ref.current) {
     ref.current.focus();
@@ -232,7 +232,7 @@ export const focusRef = (
 };
 
 export const createBudgetNameList = (
-  list: Budget[]
+  list: Budget[],
 ): { id: string; name: string }[] => {
   return list
     .filter((b: Budget) => b && b.id !== undefined && b.name !== undefined)
@@ -243,7 +243,7 @@ export const createBudgetNameList = (
 
 export function parseLocaleNumber(
   stringNumber: string,
-  locale: string | undefined
+  locale: string | undefined,
 ): number {
   const thousandSeparator = Intl.NumberFormat(locale)
     .format(11111)
@@ -255,7 +255,7 @@ export function parseLocaleNumber(
   return parseFloat(
     stringNumber
       .replace(new RegExp("\\" + thousandSeparator, "g"), "")
-      .replace(new RegExp("\\" + decimalSeparator), ".")
+      .replace(new RegExp("\\" + decimalSeparator), "."),
   );
 }
 

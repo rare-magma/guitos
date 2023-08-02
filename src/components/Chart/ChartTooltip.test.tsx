@@ -10,7 +10,7 @@ describe("ChartTooltip", () => {
         label="label"
         payload={[{ name: "name", value: 123, unit: "$" }]}
         intlConfig={testIntlConfig}
-      />
+      />,
     );
   });
 
@@ -26,7 +26,7 @@ describe("ChartTooltip", () => {
         payload={[{ name: "goal", value: 123, unit: "%" }]}
         key1="goal"
         intlConfig={testIntlConfig}
-      />
+      />,
     );
     expect(screen.getByText("123%")).toBeInTheDocument();
   });
@@ -42,7 +42,7 @@ describe("ChartTooltip", () => {
         key1="revenue"
         key2="expenses"
         intlConfig={testIntlConfig}
-      />
+      />,
     );
     expect(screen.getByText("$456.00")).toBeInTheDocument();
     expect(screen.getByText("$789.00")).toBeInTheDocument();

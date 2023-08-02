@@ -8,7 +8,7 @@ describe("CsvItem", () => {
       value: 2,
     });
     expect(JSON.stringify(newCsvItem)).toBe(
-      '{"type":"expense","name":"expense1","value":2}'
+      '{"type":"expense","name":"expense1","value":2}',
     );
   });
   it("returns empty when there's no initialization", () => {

@@ -27,7 +27,7 @@ describe("BudgetPage", () => {
     });
     await userEvent.click(deleteButton[0]);
     await userEvent.click(
-      screen.getByRole("button", { name: "confirm budget deletion" })
+      screen.getByRole("button", { name: "confirm budget deletion" }),
     );
     expect(screen.queryByRole("button", { name: "delete budget" })).toBeNull();
   });
@@ -75,7 +75,7 @@ describe("BudgetPage", () => {
 
     // auto goal change
     await userEvent.click(
-      screen.getByRole("button", { name: "calculate savings goal" })
+      screen.getByRole("button", { name: "calculate savings goal" }),
     );
 
     expect(screen.getByDisplayValue("93.5")).toBeInTheDocument();

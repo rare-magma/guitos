@@ -54,7 +54,7 @@ function TableCard({
       maxId = Math.max(
         ...table.items.map((i) => {
           return i.id;
-        })
+        }),
       );
     } else {
       maxId = 0;
@@ -80,7 +80,7 @@ function TableCard({
       newTable = new Expense();
     }
     newTable.items = table.items.filter(
-      (item: { id: number }) => item.id !== toBeDeleted.id
+      (item: { id: number }) => item.id !== toBeDeleted.id,
     );
     newTable.total = roundBig(calcTotal(newTable.items), 2);
 
@@ -141,7 +141,7 @@ function TableCard({
               <div>
                 {intlFormat(
                   roundBig(Big(total), 2),
-                  intlConfig?.currency as string
+                  intlConfig?.currency as string,
                 )}
               </div>
             </OverlayTrigger>

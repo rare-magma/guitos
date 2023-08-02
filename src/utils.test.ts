@@ -83,7 +83,7 @@ test("convertCsvToBudget", () => {
     skipEmptyLines: "greedy",
   });
   expect(convertCsvToBudget(csvObject.data as string[], "2023-03")).toEqual(
-    testBudgetCsv
+    testBudgetCsv,
   );
 });
 
@@ -99,7 +99,7 @@ test("createBudgetNameList", () => {
     },
   ];
   expect(createBudgetNameList([testBudget, testBudget2])).toEqual(
-    expectedResult
+    expectedResult,
   );
   expect(createBudgetNameList([])).toEqual([]);
 });

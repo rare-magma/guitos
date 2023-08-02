@@ -14,13 +14,13 @@ describe("CalculateButton", () => {
         intlConfig={testIntlConfig}
         label="Expense"
         onCalculate={onCalculate}
-      />
+      />,
     );
   });
 
   it("renders initial state", () => {
     expect(
-      screen.getByLabelText("select operations to change item value amount")
+      screen.getByLabelText("select operations to change item value amount"),
     ).toBeInTheDocument();
   });
 
@@ -33,17 +33,17 @@ describe("CalculateButton", () => {
     expect(
       screen.getByRole("button", {
         name: "select type of operation on item value",
-      })
+      }),
     ).toBeInTheDocument();
 
     expect(
-      screen.getByLabelText("change item value amount")
+      screen.getByLabelText("change item value amount"),
     ).toBeInTheDocument();
 
     expect(
       screen.getByRole("button", {
         name: "accept change item value amount",
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -74,7 +74,7 @@ describe("CalculateButton", () => {
 
     await userEvent.type(
       screen.getByLabelText("change item value amount"),
-      "{Escape}"
+      "{Escape}",
     );
 
     expect(button2).not.toBeInTheDocument();
@@ -91,7 +91,7 @@ describe("CalculateButton", () => {
 
     await userEvent.type(
       screen.getByLabelText("change item value amount"),
-      "123"
+      "123",
     );
     await userEvent.click(acceptButton);
 
@@ -105,11 +105,11 @@ describe("CalculateButton", () => {
     await userEvent.click(button);
     await userEvent.type(
       screen.getByLabelText("change item value amount"),
-      "123"
+      "123",
     );
     await userEvent.type(
       screen.getByLabelText("change item value amount"),
-      "{enter}"
+      "{enter}",
     );
 
     expect(onCalculate).toBeCalledWith(123, "add");
@@ -126,7 +126,7 @@ describe("CalculateButton", () => {
 
     await userEvent.type(
       screen.getByLabelText("change item value amount"),
-      "123"
+      "123",
     );
 
     await userEvent.click(screen.getByLabelText("subtract to item value"));
@@ -146,7 +146,7 @@ describe("CalculateButton", () => {
 
     await userEvent.type(
       screen.getByLabelText("change item value amount"),
-      "123"
+      "123",
     );
 
     await userEvent.click(screen.getByLabelText("multiply item value"));
@@ -166,7 +166,7 @@ describe("CalculateButton", () => {
 
     await userEvent.type(
       screen.getByLabelText("change item value amount"),
-      "123"
+      "123",
     );
 
     await userEvent.click(screen.getByLabelText("divide item value"));

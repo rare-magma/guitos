@@ -230,7 +230,7 @@ function BudgetPage() {
 
         setBudgetList(newBudgetList);
         setBudgetNameList(
-          createBudgetNameList(newBudgetList as unknown as Budget[])
+          createBudgetNameList(newBudgetList as unknown as Budget[]),
         );
         if (newBudgetList.length >= 1) {
           setBudget(newBudgetList[0]);
@@ -246,7 +246,7 @@ function BudgetPage() {
   const handleSelect = (budget: Option[]) => {
     const selectedBudget = budget as unknown as Budget[];
     const filteredList = budgetList.filter(
-      (item: Budget) => item.id === selectedBudget[0].id
+      (item: Budget) => item.id === selectedBudget[0].id,
     );
     setBudget(filteredList[0]);
   };
@@ -265,7 +265,7 @@ function BudgetPage() {
     if (budget) {
       const name = new Date().toISOString();
       const index = budgetList.findIndex((b) =>
-        b.name.includes(name.slice(0, 7))
+        b.name.includes(name.slice(0, 7)),
       );
       if (index !== -1) {
         handleSelect([budgetList[index] as unknown as Option[]]);
@@ -308,7 +308,7 @@ function BudgetPage() {
     }
     const newBudget = convertCsvToBudget(
       csvObject.data as string[],
-      file.name.slice(0, -4)
+      file.name.slice(0, -4),
     );
     newBudgetList.push(newBudget);
     save(newBudget);
@@ -366,7 +366,7 @@ function BudgetPage() {
       let filename = new Date().toISOString();
       filename = `guitos-${filename.slice(0, -5)}.json`;
       const url = window.URL.createObjectURL(
-        new Blob([JSON.stringify(budgetList)])
+        new Blob([JSON.stringify(budgetList)]),
       );
       const link = document.createElement("a");
       link.href = url;
@@ -429,7 +429,7 @@ function BudgetPage() {
             list
               .sort((a, b) => a.name.localeCompare(b.name))
               .reverse()
-              .filter((b: Budget) => b && b.id === list[0].id)[0]
+              .filter((b: Budget) => b && b.id === list[0].id)[0],
           );
         }
 

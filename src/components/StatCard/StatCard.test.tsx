@@ -15,7 +15,7 @@ describe("StatCard", () => {
         stat={testBudget.stats}
         onChange={onChange}
         onAutoGoal={onAutoGoal}
-      />
+      />,
     );
   });
 
@@ -54,7 +54,7 @@ describe("StatCard", () => {
 
   it("triggers onAutoGoal when user clicks button", async () => {
     await userEvent.click(
-      screen.getByRole("button", { name: "calculate savings goal" })
+      screen.getByRole("button", { name: "calculate savings goal" }),
     );
 
     expect(onAutoGoal).toBeCalledWith({

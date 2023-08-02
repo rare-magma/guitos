@@ -79,16 +79,16 @@ function NavBar({
     ["/", "f"],
     () =>
       focusRef(typeRef as unknown as React.MutableRefObject<HTMLInputElement>),
-    { preventDefault: true }
+    { preventDefault: true },
   );
   useHotkeys("r", () => focusRef(nameRef), { preventDefault: true });
   useHotkeys(
     "t",
     () =>
       focusRef(
-        currencyRef as unknown as React.MutableRefObject<HTMLInputElement>
+        currencyRef as unknown as React.MutableRefObject<HTMLInputElement>,
       ),
-    { preventDefault: true }
+    { preventDefault: true },
   );
 
   useEffect(() => {
@@ -99,7 +99,7 @@ function NavBar({
     }
 
     mediaQueryList.addEventListener("change", (event) =>
-      setTheme(event.matches ? "dark" : "light")
+      setTheme(event.matches ? "dark" : "light"),
     );
   }, []);
 
@@ -400,7 +400,7 @@ function NavBar({
                             }
                       }
                       options={currenciesList.sort((a, b) =>
-                        a.localeCompare(b)
+                        a.localeCompare(b),
                       )}
                       placeholder={currency}
                     />

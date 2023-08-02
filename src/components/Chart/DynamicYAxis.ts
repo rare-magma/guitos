@@ -26,7 +26,7 @@ const useDynamicYAxisWidth = (props: void | Props): ReturnValues => {
     (chartRef: any) => {
       if (chartRef != null && chartRef.container != null) {
         const tickValueElements = chartRef.container.querySelectorAll(
-          RECHART_CERTESIAN_AXIS_TICK_VALUE_SELECTOR
+          RECHART_CERTESIAN_AXIS_TICK_VALUE_SELECTOR,
         );
         const highestWidth = [...tickValueElements]
           .map((el) => {
@@ -45,7 +45,7 @@ const useDynamicYAxisWidth = (props: void | Props): ReturnValues => {
         setYAxisWidthState(highestWidth);
       }
     },
-    [setYAxisWidthState]
+    [setYAxisWidthState],
   );
 
   const yAxisWidth = useMemo(() => {

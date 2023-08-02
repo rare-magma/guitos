@@ -15,7 +15,7 @@ describe("TableCard", () => {
         revenueTotal={0}
         header={"Expenses"}
         onChange={onChange}
-      />
+      />,
     );
   });
   it("renders initial Expenses state", () => {
@@ -31,7 +31,7 @@ describe("TableCard", () => {
         revenueTotal={0}
         header={"Revenue"}
         onChange={onChange}
-      />
+      />,
     );
     expect(screen.getByDisplayValue("income1")).toBeInTheDocument();
     expect(screen.getByDisplayValue("$100")).toBeInTheDocument();
@@ -69,7 +69,7 @@ describe("TableCard", () => {
 
   it("triggers onChange when user adds new item", async () => {
     await userEvent.click(
-      screen.getByRole("button", { name: "add item to Expenses" })
+      screen.getByRole("button", { name: "add item to Expenses" }),
     );
 
     expect(onChange).toBeCalledWith({
@@ -91,10 +91,10 @@ describe("TableCard", () => {
 
   it("triggers onChange when user deletes items", async () => {
     await userEvent.click(
-      screen.getByRole("button", { name: "delete item 1" })
+      screen.getByRole("button", { name: "delete item 1" }),
     );
     await userEvent.click(
-      screen.getByRole("button", { name: "confirm item 1 deletion" })
+      screen.getByRole("button", { name: "confirm item 1 deletion" }),
     );
 
     expect(onChange).toBeCalledWith({

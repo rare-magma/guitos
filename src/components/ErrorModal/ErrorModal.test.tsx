@@ -35,19 +35,19 @@ describe("ErrorModal", () => {
         ]}
         onShow={onShow}
         onError={onError}
-      />
+      />,
     );
   });
 
   it("renders initial state", () => {
     expect(screen.getByText("Thrown error")).toBeInTheDocument();
     expect(
-      screen.getAllByText("Errors found while importing:")[0]
+      screen.getAllByText("Errors found while importing:")[0],
     ).toBeInTheDocument();
     expect(
       screen.getByText(
-        "SyntaxError: Expected ',' or '}' after property value in JSON at position 209"
-      )
+        "SyntaxError: Expected ',' or '}' after property value in JSON at position 209",
+      ),
     ).toBeInTheDocument();
   });
 
