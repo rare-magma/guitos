@@ -41,7 +41,7 @@
     "react-hotkeys-hook": "4.4.0",
     "react-icons": "4.8.0",
     "react-router-dom": "6.11.1",
-    "recharts": "2.6.2"
+    "recharts": "2.7.2"
   },
   "devDependencies": {
     "@testing-library/user-event": "14.4.3",
