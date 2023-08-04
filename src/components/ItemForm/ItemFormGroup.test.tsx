@@ -13,21 +13,25 @@ describe("ItemFormGroup", () => {
   const onRemove = vi.fn();
   const onChange = vi.fn();
   const ref = React.createRef<HTMLInputElement>();
+  const comp = (
+    <ItemFormGroup
+      itemForm={itemForm1}
+      label="Expenses"
+      inputRef={ref}
+      intlConfig={testIntlConfig}
+      costPercentage={1}
+      onRemove={onRemove}
+      onChange={onChange}
+    />
+  );
 
   beforeEach(() => {
-    render(
-      <ItemFormGroup
-        itemForm={itemForm1}
-        label="Expenses"
-        inputRef={ref}
-        intlConfig={testIntlConfig}
-        costPercentage={1}
-        onRemove={onRemove}
-        onChange={onChange}
-      />,
-    );
+    render(comp);
   });
 
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
+  });
   it("renders initial state", () => {
     expect(screen.getByDisplayValue("name1")).toBeInTheDocument();
     expect(screen.getByDisplayValue("$10")).toBeInTheDocument();

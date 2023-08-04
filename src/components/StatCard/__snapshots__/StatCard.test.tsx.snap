@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`StatCard > matches snapshot 1`] = `
+<StatCard
+  intlConfig={
+    {
+      "currency": "USD",
+      "locale": "en-US",
+    }
+  }
+  onAutoGoal={[MockFunction spy]}
+  onChange={[MockFunction spy]}
+  onShowGraphs={[MockFunction spy]}
+  stat={
+    {
+      "available": 90,
+      "goal": 10,
+      "reserves": 200,
+      "saved": 10,
+      "withGoal": 80,
+    }
+  }
+/>
+`;

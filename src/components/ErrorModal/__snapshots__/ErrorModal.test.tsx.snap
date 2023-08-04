@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ErrorModal > matches snapshot 1`] = `
+<ErrorModal
+  csvError={
+    [
+      {
+        "errors": [
+          {
+            "code": "TooFewFields",
+            "message": "Line 0: Too few fields: expected 3 fields but parsed 2",
+            "row": 0,
+            "type": "FieldMismatch",
+          },
+        ],
+        "file": "123.csv",
+      },
+    ]
+  }
+  error="Thrown error"
+  jsonError={
+    [
+      {
+        "errors": "SyntaxError: Expected ',' or '}' after property value in JSON at position 209",
+        "file": "123.json",
+      },
+    ]
+  }
+  onError={[MockFunction spy]}
+  onShow={[MockFunction spy]}
+  show={true}
+/>
+`;

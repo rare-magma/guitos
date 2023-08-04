@@ -3,17 +3,21 @@ import { testIntlConfig } from "../../setupTests";
 import ChartTooltip from "./ChartTooltip";
 
 describe("ChartTooltip", () => {
+  const comp = (
+    <ChartTooltip
+      active={true}
+      label="label"
+      payload={[{ name: "name", value: 123, unit: "$" }]}
+      intlConfig={testIntlConfig}
+    />
+  );
   beforeEach(() => {
-    render(
-      <ChartTooltip
-        active={true}
-        label="label"
-        payload={[{ name: "name", value: 123, unit: "$" }]}
-        intlConfig={testIntlConfig}
-      />,
-    );
+    render(comp);
   });
 
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
+  });
   it("renders initial state", () => {
     expect(screen.getByText("label")).toBeInTheDocument();
     expect(screen.getByText("$123.00")).toBeInTheDocument();

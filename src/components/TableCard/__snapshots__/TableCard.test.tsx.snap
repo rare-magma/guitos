@@ -1,0 +1,27 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TableCard > matches snapshot 1`] = `
+<TableCard
+  header="Expenses"
+  intlConfig={
+    {
+      "currency": "USD",
+      "locale": "en-US",
+    }
+  }
+  items={
+    {
+      "items": [
+        {
+          "id": 1,
+          "name": "expense1",
+          "value": 10,
+        },
+      ],
+      "total": 10,
+    }
+  }
+  onChange={[MockFunction spy]}
+  revenueTotal={0}
+/>
+`;

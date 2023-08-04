@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ItemFormGroup > matches snapshot 1`] = `
+<ItemFormGroup
+  costPercentage={1}
+  inputRef={
+    {
+      "current": <input
+        aria-label="item 1 name"
+        class="w-25 form-control"
+        id="Expenses-1-name"
+        maxlength="255"
+        type="text"
+        value="name1"
+      />,
+    }
+  }
+  intlConfig={
+    {
+      "currency": "USD",
+      "locale": "en-US",
+    }
+  }
+  itemForm={
+    ItemForm {
+      "id": 1,
+      "name": "name1",
+      "value": 10,
+    }
+  }
+  label="Expenses"
+  onChange={[MockFunction spy]}
+  onRemove={[MockFunction spy]}
+/>
+`;

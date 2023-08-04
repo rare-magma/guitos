@@ -5,6 +5,21 @@ import { Budget } from "../Budget/Budget";
 import { vi } from "vitest";
 
 describe("Chart", () => {
+  const comp = (
+    <Chart
+      header={"chart header"}
+      budgetList={testBudgetList}
+      intlConfig={testIntlConfig}
+      tooltipKey1={"tooltipKey1"}
+      areaDataKey1={"revenue"}
+      areaStroke1={"highlight"}
+      areaFill1={"highlight"}
+      legend1={"median revenue"}
+      legendValues1={testBudgetList.map((b: Budget) => {
+        return b.incomes.total;
+      })}
+    />
+  );
   beforeAll(() => {
     vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockReturnValue(800);
     vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(800);
@@ -20,21 +35,7 @@ describe("Chart", () => {
       disconnect: vi.fn(),
     }));
 
-    render(
-      <Chart
-        header={"chart header"}
-        budgetList={testBudgetList}
-        intlConfig={testIntlConfig}
-        tooltipKey1={"tooltipKey1"}
-        areaDataKey1={"revenue"}
-        areaStroke1={"highlight"}
-        areaFill1={"highlight"}
-        legend1={"median revenue"}
-        legendValues1={testBudgetList.map((b: Budget) => {
-          return b.incomes.total;
-        })}
-      />,
-    );
+    render(comp);
   });
 
   afterEach(() => {
@@ -42,6 +43,9 @@ describe("Chart", () => {
     vi.restoreAllMocks();
   });
 
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
+  });
   it("renders initial state", () => {
     expect(screen.getByText("chart header")).toBeInTheDocument();
     expect(screen.getByText("median revenue")).toBeInTheDocument();

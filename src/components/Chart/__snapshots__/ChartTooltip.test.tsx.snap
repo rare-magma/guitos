@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChartTooltip > matches snapshot 1`] = `
+<ChartTooltip
+  active={true}
+  intlConfig={
+    {
+      "currency": "USD",
+      "locale": "en-US",
+    }
+  }
+  label="label"
+  payload={
+    [
+      {
+        "name": "name",
+        "unit": "$",
+        "value": 123,
+      },
+    ]
+  }
+/>
+`;

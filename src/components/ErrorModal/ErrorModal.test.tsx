@@ -7,38 +7,42 @@ describe("ErrorModal", () => {
   const onError = vi.fn();
   const onShow = vi.fn();
 
+  const comp = (
+    <ErrorModal
+      error={"Thrown error"}
+      show={true}
+      jsonError={[
+        {
+          errors:
+            "SyntaxError: Expected ',' or '}' after property value in JSON at position 209",
+          file: "123.json",
+        },
+      ]}
+      csvError={[
+        {
+          errors: [
+            {
+              type: "FieldMismatch",
+              code: "TooFewFields",
+              message: "Line 0: Too few fields: expected 3 fields but parsed 2",
+              row: 0,
+            },
+          ],
+          file: "123.csv",
+        },
+      ]}
+      onShow={onShow}
+      onError={onError}
+    />
+  );
+
   beforeEach(() => {
-    render(
-      <ErrorModal
-        error={"Thrown error"}
-        show={true}
-        jsonError={[
-          {
-            errors:
-              "SyntaxError: Expected ',' or '}' after property value in JSON at position 209",
-            file: "123.json",
-          },
-        ]}
-        csvError={[
-          {
-            errors: [
-              {
-                type: "FieldMismatch",
-                code: "TooFewFields",
-                message:
-                  "Line 0: Too few fields: expected 3 fields but parsed 2",
-                row: 0,
-              },
-            ],
-            file: "123.csv",
-          },
-        ]}
-        onShow={onShow}
-        onError={onError}
-      />,
-    );
+    render(comp);
   });
 
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
+  });
   it("renders initial state", () => {
     expect(screen.getByText("Thrown error")).toBeInTheDocument();
     expect(

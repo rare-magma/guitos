@@ -3,16 +3,16 @@ import App, { budgetsDB, optionsDB } from "./App";
 import userEvent from "@testing-library/user-event";
 
 describe("App", () => {
+  const comp = <App />;
+
   beforeEach(() => {
-    render(<App />);
+    render(comp);
   });
 
   it("renders initial state", () => {
     expect(screen.getAllByText("guitos")[0]).toBeInTheDocument();
     expect(screen.getByRole("status")).toBeInTheDocument();
     expect(screen.getByText(/v/)).toBeInTheDocument();
-    expect(budgetsDB.config("name")).toBe("guitos");
-    expect(budgetsDB.config("storeName")).toBe("budgets");
     expect(budgetsDB.config("name")).toBe("guitos");
     expect(budgetsDB.config("storeName")).toBe("budgets");
     expect(optionsDB.config("name")).toBe("guitos");

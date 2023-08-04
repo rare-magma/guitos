@@ -6,16 +6,21 @@ import { testIntlConfig, itemForm1 } from "../../setupTests";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
+  const comp = (
+    <CalculateButton
+      itemForm={itemForm1}
+      intlConfig={testIntlConfig}
+      label="Expense"
+      onCalculate={onCalculate}
+    />
+  );
 
   beforeEach(() => {
-    render(
-      <CalculateButton
-        itemForm={itemForm1}
-        intlConfig={testIntlConfig}
-        label="Expense"
-        onCalculate={onCalculate}
-      />,
-    );
+    render(comp);
+  });
+
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", () => {

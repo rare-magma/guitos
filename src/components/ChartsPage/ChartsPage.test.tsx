@@ -6,6 +6,13 @@ import userEvent from "@testing-library/user-event";
 
 describe("ChartsPage", () => {
   const onShowGraphs = vi.fn();
+  const comp = (
+    <ChartsPage
+      budgetList={testBudgetList}
+      intlConfig={testIntlConfig}
+      onShowGraphs={onShowGraphs}
+    />
+  );
 
   beforeAll(() => {
     vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockReturnValue(800);
@@ -22,13 +29,7 @@ describe("ChartsPage", () => {
       disconnect: vi.fn(),
     }));
 
-    render(
-      <ChartsPage
-        budgetList={testBudgetList}
-        intlConfig={testIntlConfig}
-        onShowGraphs={onShowGraphs}
-      />,
-    );
+    render(comp);
   });
 
   afterEach(() => {
@@ -36,6 +37,9 @@ describe("ChartsPage", () => {
     vi.restoreAllMocks();
   });
 
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
+  });
   it("renders initial state", () => {
     expect(screen.getByLabelText("go back to budgets")).toBeInTheDocument();
     expect(screen.getByText("Revenue vs expenses")).toBeInTheDocument();

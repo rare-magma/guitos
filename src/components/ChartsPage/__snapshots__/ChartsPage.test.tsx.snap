@@ -1,0 +1,120 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChartsPage > matches snapshot 1`] = `
+<ChartsPage
+  budgetList={
+    [
+      Budget {
+        "expenses": {
+          "items": [
+            {
+              "id": 1,
+              "name": "expense1",
+              "value": 10,
+            },
+          ],
+          "total": 10,
+        },
+        "id": "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+        "incomes": {
+          "items": [
+            {
+              "id": 2,
+              "name": "income1",
+              "value": 100,
+            },
+          ],
+          "total": 100,
+        },
+        "name": "2023-03",
+        "stats": {
+          "available": 90,
+          "goal": 10,
+          "reserves": 200,
+          "saved": 10,
+          "withGoal": 80,
+        },
+      },
+      Budget {
+        "expenses": {
+          "items": [
+            {
+              "id": 1,
+              "name": "name",
+              "value": 50,
+            },
+          ],
+          "total": 50,
+        },
+        "id": "135b2ce4-00a4-403c-8f0e-f81339be9a4e",
+        "incomes": {
+          "items": [
+            {
+              "id": 2,
+              "name": "name",
+              "value": 200,
+            },
+          ],
+          "total": 200,
+        },
+        "name": "2023-04",
+        "stats": {
+          "available": 150,
+          "goal": 35,
+          "reserves": 30,
+          "saved": 20,
+          "withGoal": 130,
+        },
+      },
+      Budget {
+        "expenses": {
+          "items": [
+            {
+              "id": 1,
+              "name": "name",
+              "value": 11378.64,
+            },
+            {
+              "id": 4,
+              "name": "name2",
+              "value": 11378.64,
+            },
+          ],
+          "total": 22757.28,
+        },
+        "id": "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+        "incomes": {
+          "items": [
+            {
+              "id": 2,
+              "name": "name",
+              "value": 100.03,
+            },
+            {
+              "id": 3,
+              "name": "name2",
+              "value": 342783.83,
+            },
+          ],
+          "total": 342883.86,
+        },
+        "name": "2023-03",
+        "stats": {
+          "available": 320126.58,
+          "goal": 50,
+          "reserves": 200,
+          "saved": 171441.93,
+          "withGoal": 148684.65,
+        },
+      },
+    ]
+  }
+  intlConfig={
+    {
+      "currency": "USD",
+      "locale": "en-US",
+    }
+  }
+  onShowGraphs={[MockFunction spy]}
+/>
+`;

@@ -8,18 +8,23 @@ describe("LandingPage", () => {
   const inputRefMock: { current: HTMLInputElement | null } = { current: null };
   const onNew = vi.fn();
   const onImport = vi.fn();
+  const comp = (
+    <LandingPage
+      loading={false}
+      budget={null}
+      budgetList={[]}
+      inputRef={inputRefMock}
+      onNew={onNew}
+      onImport={onImport}
+    />
+  );
 
   beforeEach(() => {
-    render(
-      <LandingPage
-        loading={false}
-        budget={null}
-        budgetList={[]}
-        inputRef={inputRefMock}
-        onNew={onNew}
-        onImport={onImport}
-      />,
-    );
+    render(comp);
+  });
+
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", () => {

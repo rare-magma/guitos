@@ -6,17 +6,22 @@ import { testIntlConfig, testBudget } from "../../setupTests";
 
 describe("TableCard", () => {
   const onChange = vi.fn();
+  const comp = (
+    <TableCard
+      items={testBudget.expenses}
+      intlConfig={testIntlConfig}
+      revenueTotal={0}
+      header={"Expenses"}
+      onChange={onChange}
+    />
+  );
 
   beforeEach(() => {
-    render(
-      <TableCard
-        items={testBudget.expenses}
-        intlConfig={testIntlConfig}
-        revenueTotal={0}
-        header={"Expenses"}
-        onChange={onChange}
-      />,
-    );
+    render(comp);
+  });
+
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
   });
   it("renders initial Expenses state", () => {
     expect(screen.getByDisplayValue("expense1")).toBeInTheDocument();

@@ -16,29 +16,33 @@ describe("NavBar", () => {
   const onRename = vi.fn();
   const onSelect = vi.fn();
   const onSetCurrency = vi.fn();
+  const comp = (
+    <NavBar
+      budgetNameList={budgetNameList}
+      currency={testIntlConfig.currency}
+      selected={"2023-04"}
+      id={"035c2de4-00a4-403c-8f0e-f81339be9a4e"}
+      onClone={onClone}
+      onExport={onExport}
+      onGoBack={onGoBack}
+      onGoHome={onGoHome}
+      onGoForward={onGoForward}
+      onImport={onImport}
+      onNew={onNew}
+      onRemove={onRemove}
+      onRename={onRename}
+      onSelect={onSelect}
+      onSetCurrency={onSetCurrency}
+    />
+  );
 
   beforeEach(() => {
-    render(
-      <NavBar
-        budgetNameList={budgetNameList}
-        currency={testIntlConfig.currency}
-        selected={"2023-04"}
-        id={"035c2de4-00a4-403c-8f0e-f81339be9a4e"}
-        onClone={onClone}
-        onExport={onExport}
-        onGoBack={onGoBack}
-        onGoHome={onGoHome}
-        onGoForward={onGoForward}
-        onImport={onImport}
-        onNew={onNew}
-        onRemove={onRemove}
-        onRename={onRename}
-        onSelect={onSelect}
-        onSetCurrency={onSetCurrency}
-      />,
-    );
+    render(comp);
   });
 
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
+  });
   it("renders initial state", async () => {
     expect(screen.getByText("2023-04")).toBeInTheDocument();
 

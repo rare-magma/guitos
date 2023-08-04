@@ -3,8 +3,14 @@ import userEvent from "@testing-library/user-event";
 import BudgetPage from "./BudgetPage";
 
 describe("BudgetPage", () => {
+  const comp = <BudgetPage />;
+
   beforeEach(() => {
-    render(<BudgetPage />);
+    render(comp);
+  });
+
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", async () => {

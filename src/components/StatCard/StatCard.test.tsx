@@ -7,16 +7,23 @@ import StatCard from "./StatCard";
 describe("StatCard", () => {
   const onChange = vi.fn();
   const onAutoGoal = vi.fn();
+  const onShowGraphs = vi.fn();
+  const comp = (
+    <StatCard
+      intlConfig={testIntlConfig}
+      stat={testBudget.stats}
+      onChange={onChange}
+      onAutoGoal={onAutoGoal}
+      onShowGraphs={onShowGraphs}
+    />
+  );
 
   beforeEach(() => {
-    render(
-      <StatCard
-        intlConfig={testIntlConfig}
-        stat={testBudget.stats}
-        onChange={onChange}
-        onAutoGoal={onAutoGoal}
-      />,
-    );
+    render(comp);
+  });
+
+  it("matches snapshot", () => {
+    expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", () => {
@@ -64,5 +71,13 @@ describe("StatCard", () => {
       saved: 10,
       withGoal: 80,
     });
+  });
+
+  it("triggers onShowGraphs when user clicks button", async () => {
+    await userEvent.click(
+      screen.getByRole("button", { name: "open charts view" }),
+    );
+
+    expect(onShowGraphs).toBeCalledTimes(1);
   });
 });

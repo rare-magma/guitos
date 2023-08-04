@@ -1,0 +1,684 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App > matches snapshot 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="container-fluid"
+      >
+        <nav
+          class="navbar navbar-expand-md navbar-light"
+          data-testid="header"
+        >
+          <div
+            class="flex-row container-fluid"
+          >
+            <span
+              class="flex-sm-row navbar-brand"
+            >
+              <a
+                aria-label="open guitos repository"
+                class="brand"
+                href="https://github.com/rare-magma/guitos"
+                rel="noreferrer"
+                target="_blank"
+              >
+                guitos
+              </a>
+            </span>
+            <div
+              class="flex-row flex-grow-1 navbar-nav"
+            >
+              <div
+                class="flex-grow-1 navbar-nav"
+              >
+                <button
+                  aria-controls="offcanvasNavbar-expand-md"
+                  aria-label="Toggle navigation"
+                  class="ms-auto ms-2 my-2 navbar-toggler collapsed"
+                  type="button"
+                >
+                  <span
+                    class="navbar-toggler-icon"
+                  />
+                </button>
+              </div>
+            </div>
+            <div
+              aria-labelledby="offcanvasNavbarLabel-expand-md"
+              class="offcanvas offcanvas-end"
+              id="offcanvasNavbar-expand-md"
+            >
+              <div
+                class="offcanvas-header"
+              >
+                <div
+                  class="offcanvas-title h5"
+                  id="offcanvasNavbarLabel-expand-md"
+                >
+                  guitos
+                </div>
+                <button
+                  aria-label="close navigation"
+                  class="btn btn-outline-secondary"
+                  type="button"
+                >
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 16 16"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                class="justify-content-end offcanvas-body"
+              >
+                <div
+                  class="navbar-nav"
+                >
+                  <div
+                    class="m-2 navbar-nav"
+                  />
+                </div>
+                <div
+                  class="navbar-nav"
+                >
+                  <div
+                    class="m-2 nav-item"
+                  >
+                    <button
+                      aria-label="new budget"
+                      class="w-100 btn btn-outline-success"
+                      type="button"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height="1em"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 16 16"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+                          fill-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <li
+                    class="m-2 navbar-nav"
+                  >
+                    <div>
+                      <button
+                        aria-label="import budget"
+                        class="w-100 btn btn-outline-primary"
+                        type="button"
+                      >
+                        <svg
+                          fill="currentColor"
+                          height="1em"
+                          stroke="currentColor"
+                          stroke-width="0"
+                          viewBox="0 0 16 16"
+                          width="1em"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+                          />
+                          <path
+                            d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"
+                          />
+                        </svg>
+                      </button>
+                      <input
+                        class="form-control"
+                        data-testid="import-form-control"
+                        id="import"
+                        multiple=""
+                        style="display: none;"
+                        type="file"
+                      />
+                    </div>
+                  </li>
+                  <div
+                    class="m-2 nav-item"
+                  >
+                    <a
+                      aria-label="open instructions in new tab"
+                      class="w-100 btn btn-outline-info"
+                      href="https://github.com/rare-magma/guitos#getting-started"
+                      role="button"
+                      tabindex="0"
+                      target="_blank"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height="1em"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 16 16"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14Z"
+                          fill-rule="evenodd"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                  <span
+                    class="version justify-content-end align-self-end m-2 navbar-brand"
+                  >
+                    <a
+                      aria-label="open guitos changelog"
+                      href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      v
+                      0.23.0
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div
+          class="position-absolute top-50 start-50 translate-middle container-fluid"
+        >
+          <div
+            class="justify-content-center row"
+          >
+            <div
+              class="spinner-border"
+              role="status"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="container-fluid"
+      >
+        <nav
+          class="navbar navbar-expand-md navbar-light"
+          data-testid="header"
+        >
+          <div
+            class="flex-row container-fluid"
+          >
+            <span
+              class="flex-sm-row navbar-brand"
+            >
+              <a
+                aria-label="open guitos repository"
+                class="brand"
+                href="https://github.com/rare-magma/guitos"
+                rel="noreferrer"
+                target="_blank"
+              >
+                guitos
+              </a>
+            </span>
+            <div
+              class="flex-row flex-grow-1 navbar-nav"
+            >
+              <div
+                class="flex-grow-1 navbar-nav"
+              >
+                <button
+                  aria-controls="offcanvasNavbar-expand-md"
+                  aria-label="Toggle navigation"
+                  class="ms-auto ms-2 my-2 navbar-toggler collapsed"
+                  type="button"
+                >
+                  <span
+                    class="navbar-toggler-icon"
+                  />
+                </button>
+              </div>
+            </div>
+            <div
+              aria-labelledby="offcanvasNavbarLabel-expand-md"
+              class="offcanvas offcanvas-end"
+              id="offcanvasNavbar-expand-md"
+            >
+              <div
+                class="offcanvas-header"
+              >
+                <div
+                  class="offcanvas-title h5"
+                  id="offcanvasNavbarLabel-expand-md"
+                >
+                  guitos
+                </div>
+                <button
+                  aria-label="close navigation"
+                  class="btn btn-outline-secondary"
+                  type="button"
+                >
+                  <svg
+                    fill="currentColor"
+                    height="1em"
+                    stroke="currentColor"
+                    stroke-width="0"
+                    viewBox="0 0 16 16"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div
+                class="justify-content-end offcanvas-body"
+              >
+                <div
+                  class="navbar-nav"
+                >
+                  <div
+                    class="m-2 navbar-nav"
+                  />
+                </div>
+                <div
+                  class="navbar-nav"
+                >
+                  <div
+                    class="m-2 nav-item"
+                  >
+                    <button
+                      aria-label="new budget"
+                      class="w-100 btn btn-outline-success"
+                      type="button"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height="1em"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 16 16"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+                          fill-rule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                  <li
+                    class="m-2 navbar-nav"
+                  >
+                    <div>
+                      <button
+                        aria-label="import budget"
+                        class="w-100 btn btn-outline-primary"
+                        type="button"
+                      >
+                        <svg
+                          fill="currentColor"
+                          height="1em"
+                          stroke="currentColor"
+                          stroke-width="0"
+                          viewBox="0 0 16 16"
+                          width="1em"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+                          />
+                          <path
+                            d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"
+                          />
+                        </svg>
+                      </button>
+                      <input
+                        class="form-control"
+                        data-testid="import-form-control"
+                        id="import"
+                        multiple=""
+                        style="display: none;"
+                        type="file"
+                      />
+                    </div>
+                  </li>
+                  <div
+                    class="m-2 nav-item"
+                  >
+                    <a
+                      aria-label="open instructions in new tab"
+                      class="w-100 btn btn-outline-info"
+                      href="https://github.com/rare-magma/guitos#getting-started"
+                      role="button"
+                      tabindex="0"
+                      target="_blank"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height="1em"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 16 16"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14Z"
+                          fill-rule="evenodd"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                  <span
+                    class="version justify-content-end align-self-end m-2 navbar-brand"
+                  >
+                    <a
+                      aria-label="open guitos changelog"
+                      href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      v
+                      0.23.0
+                    </a>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div
+          class="position-absolute top-50 start-50 translate-middle container-fluid"
+        >
+          <div
+            class="justify-content-center row"
+          >
+            <div
+              class="spinner-border"
+              role="status"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="container-fluid"
+    >
+      <nav
+        class="navbar navbar-expand-md navbar-light"
+        data-testid="header"
+      >
+        <div
+          class="flex-row container-fluid"
+        >
+          <span
+            class="flex-sm-row navbar-brand"
+          >
+            <a
+              aria-label="open guitos repository"
+              class="brand"
+              href="https://github.com/rare-magma/guitos"
+              rel="noreferrer"
+              target="_blank"
+            >
+              guitos
+            </a>
+          </span>
+          <div
+            class="flex-row flex-grow-1 navbar-nav"
+          >
+            <div
+              class="flex-grow-1 navbar-nav"
+            >
+              <button
+                aria-controls="offcanvasNavbar-expand-md"
+                aria-label="Toggle navigation"
+                class="ms-auto ms-2 my-2 navbar-toggler collapsed"
+                type="button"
+              >
+                <span
+                  class="navbar-toggler-icon"
+                />
+              </button>
+            </div>
+          </div>
+          <div
+            aria-labelledby="offcanvasNavbarLabel-expand-md"
+            class="offcanvas offcanvas-end"
+            id="offcanvasNavbar-expand-md"
+          >
+            <div
+              class="offcanvas-header"
+            >
+              <div
+                class="offcanvas-title h5"
+                id="offcanvasNavbarLabel-expand-md"
+              >
+                guitos
+              </div>
+              <button
+                aria-label="close navigation"
+                class="btn btn-outline-secondary"
+                type="button"
+              >
+                <svg
+                  fill="currentColor"
+                  height="1em"
+                  stroke="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 16 16"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div
+              class="justify-content-end offcanvas-body"
+            >
+              <div
+                class="navbar-nav"
+              >
+                <div
+                  class="m-2 navbar-nav"
+                />
+              </div>
+              <div
+                class="navbar-nav"
+              >
+                <div
+                  class="m-2 nav-item"
+                >
+                  <button
+                    aria-label="new budget"
+                    class="w-100 btn btn-outline-success"
+                    type="button"
+                  >
+                    <svg
+                      fill="currentColor"
+                      height="1em"
+                      stroke="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 16 16"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+                <li
+                  class="m-2 navbar-nav"
+                >
+                  <div>
+                    <button
+                      aria-label="import budget"
+                      class="w-100 btn btn-outline-primary"
+                      type="button"
+                    >
+                      <svg
+                        fill="currentColor"
+                        height="1em"
+                        stroke="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 16 16"
+                        width="1em"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"
+                        />
+                        <path
+                          d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"
+                        />
+                      </svg>
+                    </button>
+                    <input
+                      class="form-control"
+                      data-testid="import-form-control"
+                      id="import"
+                      multiple=""
+                      style="display: none;"
+                      type="file"
+                    />
+                  </div>
+                </li>
+                <div
+                  class="m-2 nav-item"
+                >
+                  <a
+                    aria-label="open instructions in new tab"
+                    class="w-100 btn btn-outline-info"
+                    href="https://github.com/rare-magma/guitos#getting-started"
+                    role="button"
+                    tabindex="0"
+                    target="_blank"
+                  >
+                    <svg
+                      fill="currentColor"
+                      height="1em"
+                      stroke="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 16 16"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14Z"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </a>
+                </div>
+                <span
+                  class="version justify-content-end align-self-end m-2 navbar-brand"
+                >
+                  <a
+                    aria-label="open guitos changelog"
+                    href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    v
+                    0.23.0
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div
+        class="position-absolute top-50 start-50 translate-middle container-fluid"
+      >
+        <div
+          class="justify-content-center row"
+        >
+          <div
+            class="spinner-border"
+            role="status"
+          />
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
