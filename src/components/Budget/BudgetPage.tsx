@@ -6,6 +6,7 @@ import {
   budgetToCsv,
   calcAutoGoal,
   calcAvailable,
+  calcPercentage,
   calcSaved,
   calcWithGoal,
   convertCsvToBudget,
@@ -57,6 +58,10 @@ function BudgetPage() {
 
   const params = useParams();
   const name = String(params.name);
+  const revenuePercentage = calcPercentage(
+    budget?.expenses.total || 0,
+    budget?.incomes.total || 0,
+  );
 
   useHotkeys("s", () => handleExportJSON(), {
     preventDefault: true,
@@ -579,6 +584,7 @@ function BudgetPage() {
                   // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                   key={"stats-" + budget.expenses.total + budget.incomes.total}
                   stat={budget.stats}
+                  revenuePercentage={revenuePercentage}
                   intlConfig={intlConfig}
                   onChange={handleStatChange}
                   onAutoGoal={handleAutoGoal}

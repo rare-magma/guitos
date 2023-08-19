@@ -372,3 +372,11 @@ input[type="text"]::placeholder {
   background-color: var(--bgcolor);
   border: 1px solid var(--comment);
 }
+
+.progress {
+  background-color: var(--comment);
+}
+
+.progress-bar {
+  background-color: var(--pink);
+}

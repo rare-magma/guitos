@@ -6,6 +6,7 @@ import {
   Form,
   InputGroup,
   OverlayTrigger,
+  ProgressBar,
   Row,
   Tooltip,
 } from "react-bootstrap";
@@ -17,6 +18,7 @@ import { focusRef, parseLocaleNumber } from "../../utils";
 
 interface StatCardProps {
   stat: Stat;
+  revenuePercentage: number;
   intlConfig: CurrencyInputProps["intlConfig"];
   onChange: (stat: Stat) => void;
   onAutoGoal: (stat: Stat) => void;
@@ -25,6 +27,7 @@ interface StatCardProps {
 
 function StatCard({
   stat: initialStat,
+  revenuePercentage,
   intlConfig,
   onChange,
   onAutoGoal,
@@ -75,9 +78,31 @@ function StatCard({
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     <Card className="stat-card" key={"stat-" + intlConfig?.currency}>
       <Card.Header className="stat-card-header py-0">
-        <Row>
-          <Col className="align-self-center">Statistics</Col>
-          <Col className="text-end">
+        <Row className="mb-1">
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip
+                id={`tooltip-value-statistics-bar`}
+                style={{ position: "fixed" }}
+              >
+                {revenuePercentage}% of revenue spent
+              </Tooltip>
+            }
+          >
+            <Col className="align-self-center">
+              Statistics
+              <ProgressBar
+                min={0}
+                max={100}
+                now={revenuePercentage}
+                label={`${revenuePercentage}%`}
+                visuallyHidden
+                style={{ height: "3px" }}
+              />
+            </Col>
+          </OverlayTrigger>
+          <Col xs="auto" className="text-end">
             <OverlayTrigger
               placement="top"
               overlay={
@@ -124,6 +149,25 @@ function StatCard({
             disabled={true}
             defaultValue={stat.available}
           />
+          <OverlayTrigger
+            placement="top"
+            overlay={
+              <Tooltip
+                id={`tooltip-value-available-perc`}
+                style={{ position: "fixed" }}
+              >
+                % of revenue available
+              </Tooltip>
+            }
+          >
+            <InputGroup.Text>
+              {revenuePercentage <= 100 && stat.available > 0
+                ? 100 - revenuePercentage
+                : 0}
+
+              <BsPercent />
+            </InputGroup.Text>
+          </OverlayTrigger>
         </InputGroup>
         <InputGroup className="mb-1" key={"withGoal"}>
           <InputGroup.Text>

@@ -11,6 +11,7 @@ exports[`StatCard > matches snapshot 1`] = `
   onAutoGoal={[MockFunction spy]}
   onChange={[MockFunction spy]}
   onShowGraphs={[MockFunction spy]}
+  revenuePercentage={10}
   stat={
     {
       "available": 90,

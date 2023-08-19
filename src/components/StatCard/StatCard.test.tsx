@@ -12,6 +12,7 @@ describe("StatCard", () => {
     <StatCard
       intlConfig={testIntlConfig}
       stat={testBudget.stats}
+      revenuePercentage={10}
       onChange={onChange}
       onAutoGoal={onAutoGoal}
       onShowGraphs={onShowGraphs}
