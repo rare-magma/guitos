@@ -120,33 +120,33 @@ function TableCard({
       className={label + "-card"}
     >
       <Card.Header className={label + "-card-header"}>
-        <Row>
-          <Col>{label}</Col>
-          <Col className="text-end fixed-width-font">
-            <OverlayTrigger
-              placement="top"
-              overlay={
-                label === "Expenses" ? (
-                  <Tooltip
-                    id={`tooltip-value-${label}`}
-                    style={{ position: "fixed" }}
-                  >
-                    {revenuePercentage}% of revenue
-                  </Tooltip>
-                ) : (
-                  <></>
-                )
-              }
-            >
+        <OverlayTrigger
+          placement="top"
+          overlay={
+            label === "Expenses" ? (
+              <Tooltip
+                id={`tooltip-value-${label}`}
+                style={{ position: "fixed" }}
+              >
+                {revenuePercentage}% of revenue
+              </Tooltip>
+            ) : (
+              <></>
+            )
+          }
+        >
+          <Row>
+            <Col>{label}</Col>
+            <Col className="text-end fixed-width-font">
               <div>
                 {intlFormat(
                   roundBig(Big(total), 2),
                   intlConfig?.currency as string,
                 )}
               </div>
-            </OverlayTrigger>
-          </Col>
-        </Row>
+            </Col>
+          </Row>
+        </OverlayTrigger>
       </Card.Header>
       <Card.Body>
         {table.items?.map((item: ItemForm) => (
