@@ -1,3 +1,15 @@
+# [0.24.0](https://github.com/rare-magma/guitos/compare/v0.23.0...v0.24.0) (2023-08-19)
+
+
+### Bug Fixes
+
+* expenses header tooltip ([ee09ef3](https://github.com/rare-magma/guitos/commit/ee09ef391610f8ef119248a323302cc80acdca2f))
+
+
+### Features
+
+* add % of revenue spent progress bar and info ([2156712](https://github.com/rare-magma/guitos/commit/21567123b7009953da7bfeff45e35218f998e63a))
+
 # [0.23.0](https://github.com/rare-magma/guitos/compare/v0.22.4...v0.23.0) (2023-07-29)
 
 
