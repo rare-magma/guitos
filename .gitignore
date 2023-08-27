@@ -13,6 +13,7 @@
 /build
 
 # misc
+todo.md
 loc.txt
 .DS_Store
 .env.local
