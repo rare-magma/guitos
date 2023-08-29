@@ -1,3 +1,10 @@
+## [0.24.1](https://github.com/rare-magma/guitos/compare/v0.24.0...v0.24.1) (2023-08-29)
+
+
+### Bug Fixes
+
+* add macOS favicon ([b88c898](https://github.com/rare-magma/guitos/commit/b88c89890e6b0c651af65922a286353ed3928d13))
+
 # [0.24.0](https://github.com/rare-magma/guitos/compare/v0.23.0...v0.24.0) (2023-08-19)
 
 
