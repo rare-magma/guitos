@@ -6,6 +6,12 @@
       "src": "favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
+    },
+    {
+      "platform": "macOS",
+      "src": "favicon.png",
+      "sizes": "any",
+      "type": "image/png"
     }
   ],
   "id": "/",
