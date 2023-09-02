@@ -54,7 +54,7 @@ function Chart({
   const { yAxisWidth, setChartRef } = useDynamicYAxisWidth({
     yAxisWidthModifier: (x) => x + 10,
   });
-  const tickFormatter = (value: number, index: number) => {
+  const tickFormatter = (value: number) => {
     return intlFormat(value, intlConfig?.currency as string);
   };
 

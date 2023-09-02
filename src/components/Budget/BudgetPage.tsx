@@ -19,7 +19,6 @@ import {
 import Papa from "papaparse";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
-import { budgetsDB, optionsDB } from "../../App";
 import { CurrencyInputProps } from "react-currency-input-field";
 import ErrorModal, { CsvError, JsonError } from "../ErrorModal/ErrorModal";
 import LandingPage from "../LandingPage/LandingPage";
@@ -30,6 +29,7 @@ import { Expense } from "../TableCard/Expense";
 import { Income } from "../TableCard/Income";
 import TableCard from "../TableCard/TableCard";
 import ChartsPage from "../ChartsPage/ChartsPage";
+import { budgetsDB, optionsDB } from "../../db";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 function BudgetPage() {

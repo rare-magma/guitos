@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import App, { budgetsDB, optionsDB } from "./App";
+import App from "./App";
 import userEvent from "@testing-library/user-event";
+import { budgetsDB, optionsDB } from "./db";
 
 describe("App", () => {
   const comp = <App />;
