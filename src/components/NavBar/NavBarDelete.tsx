@@ -8,12 +8,12 @@ interface NavBarDeleteProps {
   expanded: boolean;
 }
 
-export const NavBarDelete = ({
+export function NavBarDelete({
   deleteButtonRef,
   handleRemove,
   initialId,
   expanded,
-}: NavBarDeleteProps) => {
+}: NavBarDeleteProps) {
   return (
     <Nav className="m-2">
       <OverlayTrigger
@@ -69,4 +69,4 @@ export const NavBarDelete = ({
       </OverlayTrigger>
     </Nav>
   );
-};
+}

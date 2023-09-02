@@ -14,7 +14,7 @@ interface NavItemProps {
   target?: string;
 }
 
-export const NavBarItem = ({
+export function NavBarItem({
   itemClassName,
   onClick,
   tooltipID,
@@ -25,7 +25,7 @@ export const NavBarItem = ({
   buttonLink,
   buttonIcon,
   target,
-}: NavItemProps) => {
+}: NavItemProps) {
   return (
     <Nav.Item
       className={itemClassName}
@@ -54,4 +54,4 @@ export const NavBarItem = ({
       </OverlayTrigger>
     </Nav.Item>
   );
-};
+}

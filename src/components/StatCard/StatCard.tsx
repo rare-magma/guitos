@@ -44,7 +44,7 @@ function StatCard({
   useHotkeys("g", () => focusRef(goalRef), { preventDefault: true });
   useHotkeys("e", () => focusRef(reservesRef), { preventDefault: true });
 
-  const handleInputChange = (item: React.ChangeEvent<HTMLInputElement>) => {
+  function handleInputChange(item: React.ChangeEvent<HTMLInputElement>) {
     let updatedStat: Stat;
     if (stat !== null) {
       updatedStat = stat;
@@ -53,7 +53,7 @@ function StatCard({
       setAutoGoal(false);
       onChange(updatedStat);
     }
-  };
+  }
 
   function handleReserveChange(value: string | undefined): void {
     let updatedStat: Stat;
@@ -65,14 +65,14 @@ function StatCard({
     }
   }
 
-  const handleAutoGoal = () => {
+  function handleAutoGoal() {
     onAutoGoal(stat);
     setAutoGoal(true);
-  };
+  }
 
-  const handleShowGraphs = () => {
+  function handleShowGraphs() {
     onShowGraphs();
-  };
+  }
 
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands

@@ -29,7 +29,7 @@ function CalculateButton({
   const opButtonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleKeyPress = (e: { key: string }) => {
+  function handleKeyPress(e: { key: string }) {
     if (e.key === "Enter") {
       handleCalculate();
       if (changeValue > 0) {
@@ -37,13 +37,13 @@ function CalculateButton({
       }
       setChangeValue(0);
     }
-  };
+  }
 
-  const handleCalculate = () => {
+  function handleCalculate() {
     if (changeValue > 0) {
       onCalculate(changeValue, operation);
     }
-  };
+  }
 
   return (
     <>

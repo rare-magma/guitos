@@ -29,13 +29,13 @@ function ErrorModal({
   onError,
   onShow,
 }: ErrorModalProps) {
-  const handleShow = (value: boolean) => {
+  function handleShow(value: boolean) {
     onShow(value);
-  };
+  }
 
-  const handleError = () => {
+  function handleError() {
     onError();
-  };
+  }
 
   return (
     <>

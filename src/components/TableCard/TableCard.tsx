@@ -36,7 +36,7 @@ function TableCard({
   const revenuePercentage = calcPercentage(total, revenueTotal);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const addTable = (tableBeingEdited: Income | Expense) => {
+  function addTable(tableBeingEdited: Income | Expense) {
     let newTable;
 
     if (label === "Revenue") {
@@ -70,9 +70,9 @@ function TableCard({
     setTable(newTable);
     setTotal(roundBig(calcTotal(newTable.items), 2));
     onChange(newTable);
-  };
+  }
 
-  const removeTable = (toBeDeleted: ItemForm) => {
+  function removeTable(toBeDeleted: ItemForm) {
     let newTable;
     if (toBeDeleted.constructor.name === "Income") {
       newTable = new Income();
@@ -87,9 +87,9 @@ function TableCard({
     setTable(newTable);
     setTotal(roundBig(calcTotal(newTable.items), 2));
     onChange(newTable);
-  };
+  }
 
-  const handleChange = (item: ItemForm) => {
+  function handleChange(item: ItemForm) {
     let newTable;
     if (item.constructor.name === "Income") {
       newTable = new Income();
@@ -111,7 +111,7 @@ function TableCard({
     setTable(newTable);
     setTotal(newTable.total);
     onChange(newTable);
-  };
+  }
 
   return (
     <Card

@@ -37,16 +37,16 @@ function ItemFormGroup({
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
   const valueRef = useRef<HTMLInputElement>(null);
 
-  const handleRemove = (item: ItemForm) => {
+  function handleRemove(item: ItemForm) {
     onRemove(item);
-  };
+  }
 
-  const handleChange = (
+  function handleChange(
     operation: string,
     value?: string,
     event?: React.ChangeEvent<HTMLInputElement>,
     changeValue?: number,
-  ) => {
+  ) {
     let newItemForm: ItemForm;
     if (itemForm !== null) {
       newItemForm = itemForm;
@@ -70,7 +70,7 @@ function ItemFormGroup({
       setItemForm(newItemForm);
       onChange(newItemForm);
     }
-  };
+  }
 
   return (
     <InputGroup size="sm" className="mb-1" key={`${itemForm.id}-group`}>

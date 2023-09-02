@@ -19,7 +19,7 @@ type ReturnValues = {
   setChartRef: (chartRef: any) => void;
 };
 
-const useDynamicYAxisWidth = (props: void | Props): ReturnValues => {
+function useDynamicYAxisWidth(props: void | Props): ReturnValues {
   const { yAxisWidthModifier } = props || {};
   const [yAxisWidthState, setYAxisWidthState] = useState(undefined);
 
@@ -60,6 +60,6 @@ const useDynamicYAxisWidth = (props: void | Props): ReturnValues => {
     yAxisWidth,
     setChartRef,
   };
-};
+}
 
 export default useDynamicYAxisWidth;

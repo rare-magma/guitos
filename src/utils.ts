@@ -127,7 +127,7 @@ export function calcAutoGoal(value: Budget | null): number {
   return 0;
 }
 
-export const convertCsvToBudget = (csv: string[], date: string): Budget => {
+export function convertCsvToBudget(csv: string[], date: string): Budget {
   const emptyExpenses: ItemForm[] = [];
   const emptyIncomes: ItemForm[] = [];
   const newBudget = {
@@ -187,9 +187,9 @@ export const convertCsvToBudget = (csv: string[], date: string): Budget => {
   newBudget.stats.saved = calcSaved(newBudget);
 
   return newBudget as unknown as Budget;
-};
+}
 
-export const createNewBudget = (): Budget => {
+export function createNewBudget(): Budget {
   const newId = crypto.randomUUID();
   const year = new Date().getFullYear();
   const newBudget = {
@@ -213,7 +213,7 @@ export const createNewBudget = (): Budget => {
   };
 
   return newBudget;
-};
+}
 
 export function intlFormat(amount: number, currencyCode: string) {
   return new Intl.NumberFormat(userLang, {
@@ -223,23 +223,21 @@ export function intlFormat(amount: number, currencyCode: string) {
   }).format(amount);
 }
 
-export const focusRef = (
-  ref: MutableRefObject<HTMLInputElement | undefined>,
-) => {
+export function focusRef(ref: MutableRefObject<HTMLInputElement | undefined>) {
   if (ref.current) {
     ref.current.focus();
   }
-};
+}
 
-export const createBudgetNameList = (
+export function createBudgetNameList(
   list: Budget[],
-): { id: string; name: string }[] => {
+): { id: string; name: string }[] {
   return list
     .filter((b: Budget) => b && b.id !== undefined && b.name !== undefined)
     .map((b: Budget) => {
       return { id: b.id, name: b.name };
     });
-};
+}
 
 export function parseLocaleNumber(
   stringNumber: string,
@@ -280,7 +278,7 @@ export function budgetToCsv(budget: Budget) {
   return [header, ...expenses, ...incomes, stats, reserves].join("\n");
 }
 
-export const median = (arr: number[]): number => {
+export function median(arr: number[]): number {
   if (!arr.length) return 0;
   const s = [...arr].sort((a, b) => Big(a).minus(b).toNumber());
   const mid = Math.floor(s.length / 2);
@@ -290,4 +288,4 @@ export const median = (arr: number[]): number => {
         .div(2)
         .toNumber()
     : s[mid];
-};
+}

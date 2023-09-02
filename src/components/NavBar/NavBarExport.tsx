@@ -15,12 +15,12 @@ interface NavBarExportProps {
   expanded: boolean;
 }
 
-export const NavBarExport = ({
+export function NavBarExport({
   exportButtonRef,
   exportJSONButtonRef,
   handleExport,
   expanded,
-}: NavBarExportProps) => {
+}: NavBarExportProps) {
   return (
     <Nav className="m-2">
       <OverlayTrigger
@@ -95,4 +95,4 @@ export const NavBarExport = ({
       </OverlayTrigger>
     </Nav>
   );
-};
+}

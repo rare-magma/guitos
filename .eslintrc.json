@@ -21,6 +21,7 @@
   ],
   "rules": {
     "eqeqeq": "error",
+    "func-style": ["error", "declaration"],
     "no-console": "warn",
     "no-undef": "off",
     "no-unused-vars": "off",

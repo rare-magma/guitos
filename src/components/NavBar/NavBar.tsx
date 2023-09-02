@@ -103,71 +103,71 @@ function NavBar({
     );
   }, []);
 
-  const setToggle = () => {
+  function setToggle() {
     setExpanded(!expanded);
-  };
+  }
 
-  const handleNew = () => {
+  function handleNew() {
     setExpanded(false);
     onNew();
-  };
+  }
 
-  const handleClone = () => {
+  function handleClone() {
     setExpanded(false);
     onClone();
-  };
+  }
 
-  const handleExport = (t: string) => {
+  function handleExport(t: string) {
     setExpanded(false);
     onExport(t);
-  };
+  }
 
-  const handleImport = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function handleImport(event: React.ChangeEvent<HTMLInputElement>) {
     setExpanded(false);
     onImport(event);
-  };
+  }
 
-  const handleRemove = (initialId?: string | null) => {
+  function handleRemove(initialId?: string | null) {
     if (initialId) {
       setExpanded(false);
       onRemove(initialId);
     }
-  };
+  }
 
-  const handleSelect = (budget: Option[]) => {
+  function handleSelect(budget: Option[]) {
     setExpanded(false);
     onSelect(budget);
     if (typeRef.current) {
       typeRef.current.clear();
     }
-  };
+  }
 
-  const handleGoBack = () => {
+  function handleGoBack() {
     onGoBack();
-  };
+  }
 
-  const handleGoHome = () => {
+  function handleGoHome() {
     onGoHome();
-  };
+  }
 
-  const handleGoForward = () => {
+  function handleGoForward() {
     onGoForward();
-  };
+  }
 
-  const handleSetCurrency = (c: string) => {
+  function handleSetCurrency(c: string) {
     setExpanded(false);
     onSetCurrency(c);
     if (currencyRef.current) {
       currencyRef.current.clear();
     }
-  };
+  }
 
-  const editName = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function editName(event: React.ChangeEvent<HTMLInputElement>) {
     const newName = event.target.value;
     if (newName) {
       onRename(newName);
     }
-  };
+  }
 
   return (
     <Navbar

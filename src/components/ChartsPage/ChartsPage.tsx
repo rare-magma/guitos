@@ -23,9 +23,9 @@ function ChartsPage({ budgetList, intlConfig, onShowGraphs }: GraphProps) {
     preventDefault: true,
   });
 
-  const handleShowGraphs = () => {
+  function handleShowGraphs() {
     onShowGraphs();
-  };
+  }
 
   return (
     <Container className="mb-3">

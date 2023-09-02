@@ -73,12 +73,12 @@ function BudgetPage() {
     preventDefault: true,
   });
 
-  const handleError = (e: unknown) => {
+  function handleError(e: unknown) {
     if (e instanceof Error) setError(e.message);
     setShow(true);
-  };
+  }
 
-  const handleIncomeChange = (item: Income) => {
+  function handleIncomeChange(item: Income) {
     let newBudget: Budget;
     if (budget !== null) {
       newBudget = budget;
@@ -102,9 +102,9 @@ function BudgetPage() {
         },
       });
     }
-  };
+  }
 
-  const handleExpenseChange = (item: Expense) => {
+  function handleExpenseChange(item: Expense) {
     let newBudget: Budget;
     if (budget !== null) {
       newBudget = budget;
@@ -128,9 +128,9 @@ function BudgetPage() {
         },
       });
     }
-  };
+  }
 
-  const handleStatChange = (item: Stat) => {
+  function handleStatChange(item: Stat) {
     let newBudget: Budget;
     if (budget !== null) {
       newBudget = budget;
@@ -151,9 +151,9 @@ function BudgetPage() {
         },
       });
     }
-  };
+  }
 
-  const handleAutoGoal = (item: Stat) => {
+  function handleAutoGoal(item: Stat) {
     let newBudget: Budget;
     if (budget !== null) {
       newBudget = budget;
@@ -175,9 +175,9 @@ function BudgetPage() {
         },
       });
     }
-  };
+  }
 
-  const handleRename = (newName?: string | null) => {
+  function handleRename(newName?: string | null) {
     let newBudget: Budget;
     if (budget !== null && newName) {
       newBudget = {
@@ -186,9 +186,9 @@ function BudgetPage() {
       };
       setBudget(newBudget);
     }
-  };
+  }
 
-  const handleNew = () => {
+  function handleNew() {
     const newBudget = createNewBudget();
 
     let newBudgetList: Budget[] = [];
@@ -201,9 +201,9 @@ function BudgetPage() {
     setBudget(newBudget);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
-  };
+  }
 
-  const handleClone = () => {
+  function handleClone() {
     if (budget !== null) {
       const newBudget = {
         ...budget,
@@ -222,9 +222,9 @@ function BudgetPage() {
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
     }
-  };
+  }
 
-  const handleRemove = (toBeDeleted: string) => {
+  function handleRemove(toBeDeleted: string) {
     budgetsDB
       .removeItem(toBeDeleted)
       .then(() => {
@@ -246,17 +246,17 @@ function BudgetPage() {
       .catch((e: unknown) => {
         handleError(e);
       });
-  };
+  }
 
-  const handleSelect = (budget: Option[]) => {
+  function handleSelect(budget: Option[]) {
     const selectedBudget = budget as unknown as Budget[];
     const filteredList = budgetList.filter(
       (item: Budget) => item.id === selectedBudget[0].id,
     );
     setBudget(filteredList[0]);
-  };
+  }
 
-  const handleGo = (step: number, limit: number) => {
+  function handleGo(step: number, limit: number) {
     const sortedList = budgetList.sort((a, b) => a.name.localeCompare(b.name));
     if (budget) {
       const index = sortedList.findIndex((b) => b.name.includes(budget.name));
@@ -264,9 +264,9 @@ function BudgetPage() {
         handleSelect([sortedList[index + step] as unknown as Option[]]);
       }
     }
-  };
+  }
 
-  const handleGoHome = () => {
+  function handleGoHome() {
     if (budget) {
       const name = new Date().toISOString();
       const index = budgetList.findIndex((b) =>
@@ -276,25 +276,25 @@ function BudgetPage() {
         handleSelect([budgetList[index] as unknown as Option[]]);
       }
     }
-  };
+  }
 
-  const handleGoBack = () => {
+  function handleGoBack() {
     handleGo(-1, 0);
-  };
+  }
 
-  const handleGoForward = () => {
+  function handleGoForward() {
     handleGo(1, budgetList.length - 1);
-  };
+  }
 
-  const handleSetCurrency = (c: string) => {
+  function handleSetCurrency(c: string) {
     optionsDB.setItem("currencyCode", c).catch((e) => {
       handleError(e);
     });
     setCurrency(c);
     setIntlConfig({ locale: userLang, currency: c });
-  };
+  }
 
-  const handleImportCsv = (fileReader: FileReader, file: File) => {
+  function handleImportCsv(fileReader: FileReader, file: File) {
     const newBudgetList: Budget[] = [];
     const csvObject = Papa.parse(fileReader.result as string, {
       header: true,
@@ -319,9 +319,9 @@ function BudgetPage() {
     save(newBudget);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
-  };
+  }
 
-  const handleImportJSON = (fileReader: FileReader, file: File) => {
+  function handleImportJSON(fileReader: FileReader, file: File) {
     const newBudgetList: Budget[] = [];
     try {
       const list = JSON.parse(fileReader.result as string) as Budget[];
@@ -336,9 +336,9 @@ function BudgetPage() {
       setShow(true);
       setLoading(false);
     }
-  };
+  }
 
-  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
     setLoading(true);
     const importedFiles = e.target.files;
     if (importedFiles === null) {
@@ -359,14 +359,14 @@ function BudgetPage() {
         }
       };
     }
-  };
+  }
 
-  const handleExport = (t: string) => {
+  function handleExport(t: string) {
     if (t === "csv") handleExportCSV();
     if (t === "json") handleExportJSON();
-  };
+  }
 
-  const handleExportJSON = () => {
+  function handleExportJSON() {
     if (budget) {
       let filename = new Date().toISOString();
       filename = `guitos-${filename.slice(0, -5)}.json`;
@@ -379,9 +379,9 @@ function BudgetPage() {
       document.body.appendChild(link);
       link.click();
     }
-  };
+  }
 
-  const handleExportCSV = () => {
+  function handleExportCSV() {
     if (budget) {
       const filename = `${budget.name}.csv`;
 
@@ -392,9 +392,9 @@ function BudgetPage() {
       document.body.appendChild(link);
       link.click();
     }
-  };
+  }
 
-  const save = (budget: Budget) => {
+  function save(budget: Budget) {
     let list: Budget[] = [];
     budgetsDB
       .setItem(budget.id, budget)
@@ -414,9 +414,9 @@ function BudgetPage() {
       .catch((e: unknown) => {
         handleError(e);
       });
-  };
+  }
 
-  const loadFromDb = () => {
+  function loadFromDb() {
     let list: Budget[] = [];
 
     budgetsDB
@@ -444,9 +444,9 @@ function BudgetPage() {
       .catch((e) => {
         handleError(e);
       });
-  };
+  }
 
-  const loadBudget = (list: Budget[]) => {
+  function loadBudget(list: Budget[]) {
     list.forEach((data: Budget) => {
       budgetsDB
         .getItem(data.id)
@@ -455,9 +455,9 @@ function BudgetPage() {
           handleError(e);
         });
     });
-  };
+  }
 
-  const loadCurrencyOption = () => {
+  function loadCurrencyOption() {
     optionsDB
       .getItem("currencyCode")
       .then((c) => {
@@ -469,7 +469,7 @@ function BudgetPage() {
       .catch((e) => {
         handleError(e);
       });
-  };
+  }
 
   // useWhatChanged([budget, name]);
 

@@ -19,13 +19,13 @@ function LandingPage({
   onNew,
   onImport,
 }: LandingPageProps) {
-  const handleNew = () => {
+  function handleNew() {
     onNew();
-  };
+  }
 
-  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
     onImport(e);
-  };
+  }
 
   return (
     <>
