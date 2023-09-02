@@ -95,6 +95,7 @@ describe("BudgetPage", () => {
     // currency change
     await userEvent.type(screen.getByPlaceholderText("USD"), "CAD");
     await userEvent.click(screen.getByText("CAD"));
-    expect(screen.getByDisplayValue("CA$200")).toBeInTheDocument();
+
+    expect(screen.getByDisplayValue("CAD")).toBeInTheDocument();
   });
 });

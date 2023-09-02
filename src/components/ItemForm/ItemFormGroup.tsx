@@ -9,15 +9,15 @@ import {
 } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 import { ItemForm } from "./ItemForm";
-import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
+import CurrencyInput from "react-currency-input-field";
 import { calc, parseLocaleNumber } from "../../utils";
 import CalculateButton from "../CalculateButton/CalculateButton";
+import { useConfig } from "../../context/ConfigContext";
 
 interface ItemFormProps {
   itemForm: ItemForm;
   costPercentage: number;
   label: string;
-  intlConfig: CurrencyInputProps["intlConfig"];
   inputRef: RefObject<HTMLInputElement>;
   onChange: (itemForm: ItemForm) => void;
   onRemove: (itemForm: ItemForm) => void;
@@ -26,7 +26,6 @@ interface ItemFormProps {
 function ItemFormGroup({
   itemForm: initialItemForm,
   costPercentage,
-  intlConfig,
   inputRef,
   label,
   onRemove,
@@ -36,6 +35,7 @@ function ItemFormGroup({
   const [changed, setChanged] = useState(false);
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
   const valueRef = useRef<HTMLInputElement>(null);
+  const { intlConfig } = useConfig();
 
   function handleRemove(item: ItemForm) {
     onRemove(item);
@@ -141,7 +141,6 @@ function ItemFormGroup({
       <CalculateButton
         itemForm={itemForm}
         label={label}
-        intlConfig={intlConfig}
         onCalculate={(changeValue, operation) =>
           handleChange(operation, "", undefined, changeValue)
         }

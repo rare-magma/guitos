@@ -9,6 +9,8 @@ import * as matchers from "@testing-library/jest-dom/matchers";
 import { randomUUID } from "node:crypto";
 import { ItemForm } from "./components/ItemForm/ItemForm";
 import { Budget } from "./components/Budget/Budget";
+import { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
+import * as AppContext from "./context/ConfigContext";
 
 window.crypto.randomUUID = randomUUID;
 // global.URL.createObjectURL = vi.fn();
@@ -197,3 +199,27 @@ export const testIntlConfig = { locale: "en-US", currency: "USD" };
 export const testSpanishIntlConfig = { locale: "es-ES", currency: "EUR" };
 
 export const testBudgetList = [testBudget, testBudget2, testBigBudget];
+
+export const testContext = {
+  intlConfig: testIntlConfig || undefined,
+  setIntlConfig: (value: IntlConfig) => {
+    value;
+  },
+  currency: "USD",
+  handleCurrency: (value: string) => {
+    value;
+  },
+};
+
+export const testSpanishContext = {
+  intlConfig: testSpanishIntlConfig,
+  setIntlConfig: (value: IntlConfig) => {
+    value;
+  },
+  currency: "EUR",
+  handleCurrency: (value: string) => {
+    value;
+  },
+};
+
+vi.spyOn(AppContext, "useConfig").mockImplementation(() => testContext);

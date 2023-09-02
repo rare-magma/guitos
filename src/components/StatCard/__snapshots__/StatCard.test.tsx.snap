@@ -2,12 +2,6 @@
 
 exports[`StatCard > matches snapshot 1`] = `
 <StatCard
-  intlConfig={
-    {
-      "currency": "USD",
-      "locale": "en-US",
-    }
-  }
   onAutoGoal={[MockFunction spy]}
   onChange={[MockFunction spy]}
   onShowGraphs={[MockFunction spy]}

@@ -23,12 +23,12 @@ import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
 import { NavBarItem } from "./NavBarItem";
 import { NavBarDelete } from "./NavBarDelete";
 import { NavBarExport } from "./NavBarExport";
+import { useConfig } from "../../context/ConfigContext";
 
 interface NavBarProps {
   budgetNameList: { id: string; name: string }[];
   id?: string | null;
   selected?: string | null;
-  currency: string;
   onClone: () => void;
   onExport: (t: string) => void;
   onGoBack: () => void;
@@ -39,14 +39,12 @@ interface NavBarProps {
   onRemove: (name: string) => void;
   onRename: (name?: string | null) => void;
   onSelect: (budget: Option[]) => void;
-  onSetCurrency: (currency: string) => void;
 }
 
 function NavBar({
   budgetNameList: initialBudgetNameList,
   id: initialId,
   selected: initialSelectedName,
-  currency,
   onClone,
   onExport,
   onGoBack,
@@ -57,7 +55,6 @@ function NavBar({
   onRemove,
   onRename,
   onSelect,
-  onSetCurrency,
 }: NavBarProps) {
   const importRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
@@ -71,6 +68,7 @@ function NavBar({
 
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
+  const { currency, handleCurrency } = useConfig();
 
   useHotkeys("pageup", () => handleGoForward(), { preventDefault: true });
   useHotkeys("pagedown", () => handleGoBack(), { preventDefault: true });
@@ -152,14 +150,6 @@ function NavBar({
 
   function handleGoForward() {
     onGoForward();
-  }
-
-  function handleSetCurrency(c: string) {
-    setExpanded(false);
-    onSetCurrency(c);
-    if (currencyRef.current) {
-      currencyRef.current.clear();
-    }
   }
 
   function editName(event: React.ChangeEvent<HTMLInputElement>) {
@@ -387,7 +377,7 @@ function NavBar({
                       paginate={false}
                       onChange={(c: Option[]) => {
                         if (currenciesList.includes(c[0] as string)) {
-                          handleSetCurrency(c[0] as string);
+                          handleCurrency(c[0] as string);
                         }
                       }}
                       className="w-100 fixed-width-font"

@@ -113,12 +113,6 @@ exports[`Chart > matches snapshot 1`] = `
     ]
   }
   header="chart header"
-  intlConfig={
-    {
-      "currency": "USD",
-      "locale": "en-US",
-    }
-  }
   legend1="median revenue"
   legendValues1={
     [

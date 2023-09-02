@@ -1,13 +1,12 @@
 import Big from "big.js";
 import { Container, Row, Col } from "react-bootstrap";
 import { intlFormat, roundBig } from "../../utils";
-import { CurrencyInputProps } from "react-currency-input-field";
+import { useConfig } from "../../context/ConfigContext";
 
 interface ChartTooltipProps {
   active?: boolean;
   payload?: { name: string; value: number; unit: string }[];
   label?: string;
-  intlConfig: CurrencyInputProps["intlConfig"];
   key1?: string;
   key2?: string;
 }
@@ -16,10 +15,11 @@ function ChartTooltip({
   active,
   payload,
   label,
-  intlConfig,
   key1,
   key2,
 }: ChartTooltipProps) {
+  const { intlConfig } = useConfig();
+
   if (active && payload?.length && intlConfig?.currency) {
     return (
       <Container className="m-2">

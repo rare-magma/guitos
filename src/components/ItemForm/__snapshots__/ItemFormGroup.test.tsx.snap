@@ -15,12 +15,6 @@ exports[`ItemFormGroup > matches snapshot 1`] = `
       />,
     }
   }
-  intlConfig={
-    {
-      "currency": "USD",
-      "locale": "en-US",
-    }
-  }
   itemForm={
     ItemForm {
       "id": 1,

@@ -5,22 +5,21 @@ import {
   OverlayTrigger,
   Popover,
 } from "react-bootstrap";
-import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
+import CurrencyInput from "react-currency-input-field";
 import { BsDashLg, BsXLg, BsCheckLg, BsPlusSlashMinus } from "react-icons/bs";
 import { CgMathPlus, CgMathDivide } from "react-icons/cg";
 import { ItemForm } from "../ItemForm/ItemForm";
 import { useRef, useState } from "react";
+import { useConfig } from "../../context/ConfigContext";
 
 interface CalculateButtonProps {
   itemForm: ItemForm;
   label: string;
-  intlConfig: CurrencyInputProps["intlConfig"];
   onCalculate: (changeValue: number, operation: string) => void;
 }
 
 function CalculateButton({
   itemForm,
-  intlConfig,
   label,
   onCalculate,
 }: CalculateButtonProps) {
@@ -28,6 +27,7 @@ function CalculateButton({
   const [changeValue, setChangeValue] = useState(0);
   const opButtonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { intlConfig } = useConfig();
 
   function handleKeyPress(e: { key: string }) {
     if (e.key === "Enter") {

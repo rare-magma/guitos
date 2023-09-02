@@ -2,14 +2,13 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import CalculateButton from "./CalculateButton";
 import { vi } from "vitest";
-import { testIntlConfig, itemForm1 } from "../../setupTests";
+import { itemForm1 } from "../../setupTests";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
   const comp = (
     <CalculateButton
       itemForm={itemForm1}
-      intlConfig={testIntlConfig}
       label="Expense"
       onCalculate={onCalculate}
     />

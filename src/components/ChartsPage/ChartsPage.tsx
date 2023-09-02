@@ -7,18 +7,16 @@ import {
   Row,
   Tooltip,
 } from "react-bootstrap";
-import { CurrencyInputProps } from "react-currency-input-field";
 import { BsArrowLeft } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
 import Chart from "../Chart/Chart";
 
 interface GraphProps {
   budgetList: Budget[];
-  intlConfig: CurrencyInputProps["intlConfig"];
   onShowGraphs: () => void;
 }
 
-function ChartsPage({ budgetList, intlConfig, onShowGraphs }: GraphProps) {
+function ChartsPage({ budgetList, onShowGraphs }: GraphProps) {
   useHotkeys("i", () => onShowGraphs(), {
     preventDefault: true,
   });
@@ -51,7 +49,6 @@ function ChartsPage({ budgetList, intlConfig, onShowGraphs }: GraphProps) {
       <Chart
         header={"Revenue vs expenses"}
         budgetList={budgetList}
-        intlConfig={intlConfig}
         tooltipKey1={"revenue"}
         tooltipKey2={"expenses"}
         legendValues1={budgetList.map((b: Budget) => {
@@ -75,7 +72,6 @@ function ChartsPage({ budgetList, intlConfig, onShowGraphs }: GraphProps) {
           <Chart
             header={"Savings"}
             budgetList={budgetList}
-            intlConfig={intlConfig}
             tooltipKey1={"saved"}
             legendValues1={budgetList.map((b: Budget) => {
               return b.stats.saved;
@@ -91,7 +87,6 @@ function ChartsPage({ budgetList, intlConfig, onShowGraphs }: GraphProps) {
           <Chart
             header={"Reserves"}
             budgetList={budgetList}
-            intlConfig={intlConfig}
             tooltipKey1={"reserves"}
             legendValues1={budgetList.map((b: Budget) => {
               return b.stats.reserves;
@@ -108,7 +103,6 @@ function ChartsPage({ budgetList, intlConfig, onShowGraphs }: GraphProps) {
           <Chart
             header={"Available vs with goal"}
             budgetList={budgetList}
-            intlConfig={intlConfig}
             tooltipKey1={"available"}
             tooltipKey2={"with goal"}
             legendValues1={budgetList.map((b: Budget) => {
@@ -132,7 +126,6 @@ function ChartsPage({ budgetList, intlConfig, onShowGraphs }: GraphProps) {
           <Chart
             header={"Savings goal"}
             budgetList={budgetList}
-            intlConfig={intlConfig}
             tooltipKey1={"goal"}
             legendValues1={budgetList.map((b: Budget) => {
               return b.stats.goal;

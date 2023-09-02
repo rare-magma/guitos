@@ -18,7 +18,6 @@ exports[`NavBar > matches snapshot 1`] = `
       },
     ]
   }
-  currency="USD"
   id="035c2de4-00a4-403c-8f0e-f81339be9a4e"
   onClone={[MockFunction spy]}
   onExport={[MockFunction spy]}
@@ -30,7 +29,6 @@ exports[`NavBar > matches snapshot 1`] = `
   onRemove={[MockFunction spy]}
   onRename={[MockFunction spy]}
   onSelect={[MockFunction spy]}
-  onSetCurrency={[MockFunction spy]}
   selected="2023-04"
 />
 `;

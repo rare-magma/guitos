@@ -2,12 +2,9 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import ItemFormGroup from "./ItemFormGroup";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import {
-  testIntlConfig,
-  itemForm1,
-  testSpanishIntlConfig,
-} from "../../setupTests";
+import { itemForm1, testSpanishContext } from "../../setupTests";
 import React from "react";
+import * as AppContext from "../../context/ConfigContext";
 
 describe("ItemFormGroup", () => {
   const onRemove = vi.fn();
@@ -18,7 +15,6 @@ describe("ItemFormGroup", () => {
       itemForm={itemForm1}
       label="Expenses"
       inputRef={ref}
-      intlConfig={testIntlConfig}
       costPercentage={1}
       onRemove={onRemove}
       onChange={onChange}
@@ -93,12 +89,15 @@ describe("ItemFormGroup", () => {
   it("transforms decimal separator based on locale", async () => {
     cleanup();
 
+    vi.spyOn(AppContext, "useConfig").mockImplementation(
+      () => testSpanishContext,
+    );
+
     render(
       <ItemFormGroup
         itemForm={itemForm1}
         label="Expenses"
         inputRef={ref}
-        intlConfig={testSpanishIntlConfig}
         costPercentage={1}
         onRemove={onRemove}
         onChange={onChange}

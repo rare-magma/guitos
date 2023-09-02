@@ -1,5 +1,5 @@
 import { Card, Row, Col, InputGroup, Form } from "react-bootstrap";
-import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
+import CurrencyInput from "react-currency-input-field";
 import {
   ResponsiveContainer,
   Tooltip,
@@ -13,11 +13,11 @@ import { Budget } from "../Budget/Budget";
 import ChartTooltip from "./ChartTooltip";
 import { BsPercent } from "react-icons/bs";
 import useDynamicYAxisWidth from "./DynamicYAxis";
+import { useConfig } from "../../context/ConfigContext";
 
 interface ChartProps {
   header: string;
   budgetList: Budget[];
-  intlConfig: CurrencyInputProps["intlConfig"];
   tooltipKey1: string;
   tooltipKey2?: string;
   areaDataKey1: string;
@@ -36,7 +36,6 @@ interface ChartProps {
 function Chart({
   header,
   budgetList,
-  intlConfig,
   tooltipKey1,
   tooltipKey2,
   areaDataKey1,
@@ -54,6 +53,8 @@ function Chart({
   const { yAxisWidth, setChartRef } = useDynamicYAxisWidth({
     yAxisWidthModifier: (x) => x + 10,
   });
+  const { intlConfig } = useConfig();
+
   function tickFormatter(value: number) {
     return (
       (intlConfig?.currency && intlFormat(value, intlConfig.currency)) ?? ""
@@ -99,13 +100,7 @@ function Chart({
               />
             )}
             <Tooltip
-              content={
-                <ChartTooltip
-                  key1={tooltipKey1}
-                  key2={tooltipKey2}
-                  intlConfig={intlConfig}
-                />
-              }
+              content={<ChartTooltip key1={tooltipKey1} key2={tooltipKey2} />}
               contentStyle={{ backgroundColor: "var(--bgcolor)" }}
               itemStyle={{ color: "var(--textcolor)" }}
             />

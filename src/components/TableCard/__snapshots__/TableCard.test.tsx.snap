@@ -3,12 +3,6 @@
 exports[`TableCard > matches snapshot 1`] = `
 <TableCard
   header="Expenses"
-  intlConfig={
-    {
-      "currency": "USD",
-      "locale": "en-US",
-    }
-  }
   items={
     {
       "items": [

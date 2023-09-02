@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { testIntlConfig, testBudgetList } from "../../setupTests";
+import { testBudgetList } from "../../setupTests";
 import Chart from "./Chart";
 import { Budget } from "../Budget/Budget";
 import { vi } from "vitest";
@@ -9,7 +9,6 @@ describe("Chart", () => {
     <Chart
       header={"chart header"}
       budgetList={testBudgetList}
-      intlConfig={testIntlConfig}
       tooltipKey1={"tooltipKey1"}
       areaDataKey1={"revenue"}
       areaStroke1={"highlight"}

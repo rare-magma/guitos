@@ -12,14 +12,12 @@ import {
   convertCsvToBudget,
   createBudgetNameList,
   createNewBudget,
-  initialCurrencyCode,
   roundBig,
   userLang,
 } from "../../utils";
 import Papa from "papaparse";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
-import { CurrencyInputProps } from "react-currency-input-field";
 import ErrorModal, { CsvError, JsonError } from "../ErrorModal/ErrorModal";
 import LandingPage from "../LandingPage/LandingPage";
 import NavBar from "../NavBar/NavBar";
@@ -29,7 +27,8 @@ import { Expense } from "../TableCard/Expense";
 import { Income } from "../TableCard/Income";
 import TableCard from "../TableCard/TableCard";
 import ChartsPage from "../ChartsPage/ChartsPage";
-import { budgetsDB, optionsDB } from "../../db";
+import { budgetsDB, optionsDB } from "../../context/db";
+import { useConfig } from "../../context/ConfigContext";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 function BudgetPage() {
@@ -41,14 +40,6 @@ function BudgetPage() {
   const [csvError, setCsvError] = useState<CsvError[]>([]);
   const [jsonError, setJsonError] = useState<JsonError[]>([]);
   const [show, setShow] = useState(false);
-
-  const [currency, setCurrency] = useState<string>(initialCurrencyCode);
-  const [intlConfig, setIntlConfig] = useState<
-    CurrencyInputProps["intlConfig"]
-  >({
-    locale: userLang,
-    currency: currency,
-  });
 
   const [budget, setBudget] = useState<Budget | null>(null);
   const [budgetList, setBudgetList] = useState<Budget[]>([]);
@@ -62,6 +53,8 @@ function BudgetPage() {
     budget?.expenses.total ?? 0,
     budget?.incomes.total ?? 0,
   );
+
+  const { setIntlConfig, handleCurrency } = useConfig();
 
   useHotkeys("s", () => handleExportJSON(), {
     preventDefault: true,
@@ -286,14 +279,6 @@ function BudgetPage() {
     handleGo(1, budgetList.length - 1);
   }
 
-  function handleSetCurrency(c: string) {
-    optionsDB.setItem("currencyCode", c).catch((e) => {
-      handleError(e);
-    });
-    setCurrency(c);
-    setIntlConfig({ locale: userLang, currency: c });
-  }
-
   function handleImportCsv(fileReader: FileReader, file: File) {
     const newBudgetList: Budget[] = [];
     const csvObject = Papa.parse(fileReader.result as string, {
@@ -461,7 +446,7 @@ function BudgetPage() {
       .getItem("currencyCode")
       .then((c) => {
         if (c) {
-          setCurrency(c as string);
+          handleCurrency(c as string);
           setIntlConfig({ locale: userLang, currency: c as string });
         }
       })
@@ -506,7 +491,6 @@ function BudgetPage() {
           selected={budget?.name ?? undefined}
           id={budget?.id ?? undefined}
           budgetNameList={budgetNameList}
-          currency={currency || initialCurrencyCode}
           onRename={(e) => {
             handleRename(e);
           }}
@@ -537,9 +521,6 @@ function BudgetPage() {
           onSelect={(e) => {
             handleSelect(e);
           }}
-          onSetCurrency={(e) => {
-            handleSetCurrency(e);
-          }}
         />
       )}
 
@@ -569,7 +550,6 @@ function BudgetPage() {
       {showGraphs && (
         <ChartsPage
           budgetList={budgetList.sort((a, b) => a.name.localeCompare(b.name))}
-          intlConfig={intlConfig}
           onShowGraphs={() => setShowGraphs(false)}
         />
       )}
@@ -584,7 +564,6 @@ function BudgetPage() {
                   key={"stats-" + budget.expenses.total + budget.incomes.total}
                   stat={budget.stats}
                   revenuePercentage={revenuePercentage}
-                  intlConfig={intlConfig}
                   onChange={handleStatChange}
                   onAutoGoal={handleAutoGoal}
                   onShowGraphs={() => setShowGraphs(true)}
@@ -594,7 +573,6 @@ function BudgetPage() {
 
                 <TableCard
                   items={budget.incomes}
-                  intlConfig={intlConfig}
                   revenueTotal={budget.incomes.total}
                   header="Revenue"
                   onChange={handleIncomeChange}
@@ -606,7 +584,6 @@ function BudgetPage() {
             <Col md="6" className="mb-3">
               <TableCard
                 items={budget.expenses}
-                intlConfig={intlConfig}
                 revenueTotal={budget.incomes.total}
                 header="Expenses"
                 onChange={handleExpenseChange}

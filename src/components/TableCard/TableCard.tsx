@@ -9,18 +9,17 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { BsPlusLg } from "react-icons/bs";
-import { CurrencyInputProps } from "react-currency-input-field";
 import Big from "big.js";
 import { roundBig, calcTotal, calcPercentage, intlFormat } from "../../utils";
 import ItemFormGroup from "../ItemForm/ItemFormGroup";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
+import { useConfig } from "../../context/ConfigContext";
 
 interface TableCardProps {
   items: Income | Expense;
   revenueTotal: number;
   header: string;
-  intlConfig: CurrencyInputProps["intlConfig"];
   onChange: (table: Income | Expense) => void;
 }
 
@@ -28,13 +27,13 @@ function TableCard({
   items: initialItems,
   revenueTotal,
   header: label,
-  intlConfig,
   onChange,
 }: TableCardProps) {
   const [table, setTable] = useState(initialItems);
   const [total, setTotal] = useState(roundBig(calcTotal(table.items), 2));
   const revenuePercentage = calcPercentage(total, revenueTotal);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { intlConfig } = useConfig();
 
   function addTable(tableBeingEdited: Income | Expense) {
     let newTable;
@@ -151,7 +150,6 @@ function TableCard({
           <ItemFormGroup
             key={`${label}-${item.id}`}
             itemForm={item}
-            intlConfig={intlConfig}
             label={label}
             costPercentage={calcPercentage(item.value, revenueTotal)}
             inputRef={inputRef}

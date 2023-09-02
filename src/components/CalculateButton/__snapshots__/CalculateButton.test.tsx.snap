@@ -2,12 +2,6 @@
 
 exports[`CalculateButton > matches snapshot 1`] = `
 <CalculateButton
-  intlConfig={
-    {
-      "currency": "USD",
-      "locale": "en-US",
-    }
-  }
   itemForm={
     ItemForm {
       "id": 1,

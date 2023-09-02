@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { testIntlConfig, testBudget } from "../../setupTests";
+import { testBudget } from "../../setupTests";
 import StatCard from "./StatCard";
 
 describe("StatCard", () => {
@@ -10,7 +10,6 @@ describe("StatCard", () => {
   const onShowGraphs = vi.fn();
   const comp = (
     <StatCard
-      intlConfig={testIntlConfig}
       stat={testBudget.stats}
       revenuePercentage={10}
       onChange={onChange}

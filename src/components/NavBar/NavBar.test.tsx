@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import NavBar from "./NavBar";
-import { budgetNameList, testIntlConfig, testBudget } from "../../setupTests";
+import { budgetNameList, testBudget } from "../../setupTests";
 
 describe("NavBar", () => {
   const onClone = vi.fn();
@@ -15,11 +15,9 @@ describe("NavBar", () => {
   const onRemove = vi.fn();
   const onRename = vi.fn();
   const onSelect = vi.fn();
-  const onSetCurrency = vi.fn();
   const comp = (
     <NavBar
       budgetNameList={budgetNameList}
-      currency={testIntlConfig.currency}
       selected={"2023-04"}
       id={"035c2de4-00a4-403c-8f0e-f81339be9a4e"}
       onClone={onClone}
@@ -32,7 +30,6 @@ describe("NavBar", () => {
       onRemove={onRemove}
       onRename={onRename}
       onSelect={onSelect}
-      onSetCurrency={onSetCurrency}
     />
   );
 
@@ -140,14 +137,6 @@ describe("NavBar", () => {
     ]);
   });
 
-  it("triggers onSetCurrency when currency is selected from dropdown", async () => {
-    const newButton = screen.getAllByRole("button", { name: "new budget" });
-    await userEvent.click(newButton[0]);
-    await userEvent.type(screen.getByPlaceholderText("USD"), "CAD");
-    await userEvent.click(screen.getByText("CAD"));
-    expect(onSetCurrency).toBeCalledWith("CAD");
-  });
-
   it("opens instructions in new tab", async () => {
     const instructionsButton = screen.getByLabelText(
       "open instructions in new tab",
@@ -163,7 +152,6 @@ describe("NavBar", () => {
     render(
       <NavBar
         budgetNameList={[]}
-        currency={testIntlConfig.currency}
         selected={null}
         id={"035c2de4-00a4-403c-8f0e-f81339be9a4e"}
         onClone={onClone}
@@ -176,7 +164,6 @@ describe("NavBar", () => {
         onRemove={onRemove}
         onRename={onRename}
         onSelect={onSelect}
-        onSetCurrency={onSetCurrency}
       />,
     );
     const guitosButton = screen.getByLabelText("open guitos repository");

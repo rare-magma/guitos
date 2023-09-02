@@ -11,15 +11,15 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { useRef, useState } from "react";
-import CurrencyInput, { CurrencyInputProps } from "react-currency-input-field";
+import CurrencyInput from "react-currency-input-field";
 import { BsGear, BsGraphUp, BsPercent } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
 import { focusRef, parseLocaleNumber } from "../../utils";
+import { useConfig } from "../../context/ConfigContext";
 
 interface StatCardProps {
   stat: Stat;
   revenuePercentage: number;
-  intlConfig: CurrencyInputProps["intlConfig"];
   onChange: (stat: Stat) => void;
   onAutoGoal: (stat: Stat) => void;
   onShowGraphs: () => void;
@@ -28,13 +28,13 @@ interface StatCardProps {
 function StatCard({
   stat: initialStat,
   revenuePercentage,
-  intlConfig,
   onChange,
   onAutoGoal,
   onShowGraphs,
 }: StatCardProps) {
   const [stat, setStat] = useState(initialStat);
   const [autoGoal, setAutoGoal] = useState(false);
+  const { intlConfig } = useConfig();
 
   const goalRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
