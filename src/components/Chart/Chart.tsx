@@ -55,7 +55,9 @@ function Chart({
     yAxisWidthModifier: (x) => x + 10,
   });
   function tickFormatter(value: number) {
-    return intlConfig?.currency && intlFormat(value, intlConfig.currency);
+    return (
+      (intlConfig?.currency && intlFormat(value, intlConfig.currency)) ?? ""
+    );
   }
 
   return (
