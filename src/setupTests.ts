@@ -5,7 +5,7 @@
 import "@testing-library/jest-dom";
 import { expect, afterEach, vi } from "vitest";
 import { cleanup } from "@testing-library/react";
-import matchers from "@testing-library/jest-dom/matchers";
+import * as matchers from "@testing-library/jest-dom/matchers";
 import { randomUUID } from "node:crypto";
 import { ItemForm } from "./components/ItemForm/ItemForm";
 import { Budget } from "./components/Budget/Budget";
