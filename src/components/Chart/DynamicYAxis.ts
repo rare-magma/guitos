@@ -10,14 +10,14 @@ import { useState, useCallback, useMemo } from "react";
 const RECHART_CERTESIAN_AXIS_TICK_VALUE_SELECTOR = `.recharts-cartesian-axis-tick-value[orientation="left"],
 .recharts-cartesian-axis-tick-value[orientation="right"]`;
 
-type Props = {
+interface Props {
   yAxisWidthModifier?: (width: number) => number;
-};
+}
 
-type ReturnValues = {
+interface ReturnValues {
   yAxisWidth: undefined | number;
   setChartRef: (chartRef: any) => void;
-};
+}
 
 function useDynamicYAxisWidth(props: void | Props): ReturnValues {
   const { yAxisWidthModifier } = props || {};
@@ -25,14 +25,14 @@ function useDynamicYAxisWidth(props: void | Props): ReturnValues {
 
   const setChartRef = useCallback(
     (chartRef: any) => {
-      if (chartRef != null && chartRef.container != null) {
+      if (chartRef?.container != null) {
         const tickValueElements = chartRef.container.querySelectorAll(
           RECHART_CERTESIAN_AXIS_TICK_VALUE_SELECTOR,
         );
         const highestWidth = [...tickValueElements]
           .map((el) => {
             const boundingRect = el.getBoundingClientRect();
-            if (boundingRect != null && boundingRect.width != null) {
+            if (boundingRect?.width != null) {
               return boundingRect.width;
             }
             return 0;

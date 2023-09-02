@@ -20,41 +20,41 @@ function ChartTooltip({
   key1,
   key2,
 }: ChartTooltipProps) {
-  if (active && payload && payload.length) {
+  if (active && payload?.length && intlConfig?.currency) {
     return (
       <Container className="m-2">
         <Row>{label}</Row>
         {payload.length > 1 ? (
           <>
             <Row className="me-1">
-              <Col>{`${key1 || ""}:`}</Col>
+              <Col>{`${key1 ?? ""}:`}</Col>
               <Col className="text-end fixed-width-font">
                 {`${intlFormat(
                   roundBig(Big(payload[0].value), 2),
-                  intlConfig?.currency as string,
+                  intlConfig.currency,
                 )}`}
               </Col>
             </Row>
             <Row className="me-1 flex-md-nowrap">
-              <Col>{`${key2 || ""}:`}</Col>
+              <Col>{`${key2 ?? ""}:`}</Col>
               <Col className="text-end fixed-width-font col-md-auto">
                 {intlFormat(
                   roundBig(Big(payload[1].value), 2),
-                  intlConfig?.currency as string,
+                  intlConfig.currency,
                 )}
               </Col>
             </Row>
           </>
         ) : (
           <Row className="me-1">
-            <Col>{`${key1 || ""}:`}</Col>
+            <Col>{`${key1 ?? ""}:`}</Col>
             {key1 === "goal" ? (
               <Col className="text-end fixed-width-font">{`${payload[0].value}%`}</Col>
             ) : (
               <Col className="text-end fixed-width-font">
                 {`${intlFormat(
                   roundBig(Big(payload[0].value), 2),
-                  intlConfig?.currency as string,
+                  intlConfig.currency,
                 )}`}
               </Col>
             )}

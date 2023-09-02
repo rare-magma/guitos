@@ -29,7 +29,7 @@ export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();
 }
 
-export function calcTotal(values: Array<ItemForm>): Big {
+export function calcTotal(values: ItemForm[]): Big {
   let total = Big(0);
   values &&
     values
@@ -94,8 +94,8 @@ export function calcAvailable(value: Budget | null): Big {
   return Big(0);
 }
 
-export function calcWithGoal(value: Budget | null): number {
-  if (value !== null && value.stats.goal !== null && !isNaN(value.stats.goal)) {
+export function calcWithGoal(value: Budget): number {
+  if (value.stats.goal !== null && !isNaN(value.stats.goal)) {
     const available = calcAvailable(value);
     const availableWithGoal = Big(value.stats.goal)
       .mul(calcTotal(value.incomes.items))
@@ -105,8 +105,8 @@ export function calcWithGoal(value: Budget | null): number {
   return 0;
 }
 
-export function calcSaved(value: Budget | null): number {
-  if (value !== null && value.stats.goal !== null && !isNaN(value.stats.goal)) {
+export function calcSaved(value: Budget): number {
+  if (value.stats.goal !== null && !isNaN(value.stats.goal)) {
     const available = calcTotal(value.incomes.items);
     const saved = Big(value.stats.goal).mul(available).div(100);
     return roundBig(saved, 2);
@@ -114,8 +114,8 @@ export function calcSaved(value: Budget | null): number {
   return 0;
 }
 
-export function calcAutoGoal(value: Budget | null): number {
-  if (value !== null && value.stats.goal !== null && !isNaN(value.stats.goal)) {
+export function calcAutoGoal(value: Budget): number {
+  if (value.stats.goal !== null && !isNaN(value.stats.goal)) {
     const incomeTotal = calcTotal(value.incomes.items);
     const available = calcAvailable(value);
 
@@ -233,7 +233,7 @@ export function createBudgetNameList(
   list: Budget[],
 ): { id: string; name: string }[] {
   return list
-    .filter((b: Budget) => b && b.id !== undefined && b.name !== undefined)
+    .filter((b: Budget) => b?.id !== undefined && b.name !== undefined)
     .map((b: Budget) => {
       return { id: b.id, name: b.name };
     });

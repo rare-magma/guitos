@@ -5,8 +5,9 @@
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:jsx-a11y/recommended"
   ],
   "plugins": [
@@ -41,6 +42,7 @@
   "parserOptions": {
     "ecmaVersion": 6,
     "project": ["./tsconfig.json"],
+    "tsconfigRootDir": ".",
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true

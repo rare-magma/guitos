@@ -59,8 +59,8 @@ function BudgetPage() {
   const params = useParams();
   const name = String(params.name);
   const revenuePercentage = calcPercentage(
-    budget?.expenses.total || 0,
-    budget?.incomes.total || 0,
+    budget?.expenses.total ?? 0,
+    budget?.incomes.total ?? 0,
   );
 
   useHotkeys("s", () => handleExportJSON(), {
@@ -345,8 +345,7 @@ function BudgetPage() {
       return;
     }
 
-    for (let i = 0; i < importedFiles.length; i++) {
-      const file = importedFiles[i];
+    for (const file of importedFiles) {
       const reader = new FileReader();
       reader.readAsText(file, "UTF-8");
       reader.onloadend = () => {
@@ -504,8 +503,8 @@ function BudgetPage() {
     <Container fluid>
       {!showGraphs && (
         <NavBar
-          selected={budget?.name || undefined}
-          id={budget?.id || undefined}
+          selected={budget?.name ?? undefined}
+          id={budget?.id ?? undefined}
           budgetNameList={budgetNameList}
           currency={currency || initialCurrencyCode}
           onRename={(e) => {
@@ -546,7 +545,7 @@ function BudgetPage() {
 
       <LandingPage
         loading={loading}
-        budget={budget || null}
+        budget={budget ?? null}
         budgetList={budgetList}
         inputRef={inputRef}
         onNew={handleNew}

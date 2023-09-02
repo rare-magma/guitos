@@ -139,10 +139,8 @@ function TableCard({
             <Col>{label}</Col>
             <Col className="text-end fixed-width-font">
               <div>
-                {intlFormat(
-                  roundBig(Big(total), 2),
-                  intlConfig?.currency as string,
-                )}
+                {intlConfig?.currency &&
+                  intlFormat(roundBig(Big(total), 2), intlConfig?.currency)}
               </div>
             </Col>
           </Row>

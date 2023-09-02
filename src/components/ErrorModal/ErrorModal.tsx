@@ -2,15 +2,15 @@ import { ParseError } from "papaparse";
 import { Accordion, Button, Modal } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 
-export type CsvError = {
+export interface CsvError {
   errors: ParseError[];
   file: string;
-};
+}
 
-export type JsonError = {
+export interface JsonError {
   errors: string;
   file: string;
-};
+}
 
 interface ErrorModalProps {
   error: string | null;

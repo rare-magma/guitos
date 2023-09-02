@@ -1,7 +1,7 @@
 import { ItemForm } from "../ItemForm/ItemForm";
 
 export class Income {
-  items: Array<ItemForm> = [];
+  items: ItemForm[] = [];
   total = 0;
 
   constructor(initializer?: Income) {

@@ -64,17 +64,14 @@ test("calcAvailable", () => {
 
 test("calcWithGoal", () => {
   expect(calcWithGoal(testBudget)).eq(80);
-  expect(calcWithGoal(null)).eq(0);
 });
 
 test("calcSaved", () => {
   expect(calcSaved(testBudget)).eq(10);
-  expect(calcSaved(null)).eq(0);
 });
 
 test("calcAutoGoal", () => {
   expect(calcAutoGoal(testBigBudget)).eq(93.36298);
-  expect(calcAutoGoal(null)).eq(0);
 });
 
 test("convertCsvToBudget", () => {
