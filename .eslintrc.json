@@ -1,8 +1,9 @@
 {
   "extends": [
-    "react-app",
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:react-hooks/recommended",
     "plugin:prettier/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -13,6 +14,7 @@
     "prettier",
     "react",
     "react-hooks",
+    "react-refresh",
     "@typescript-eslint",
     "testing-library",
     "jsx-a11y"
@@ -28,6 +30,7 @@
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react-refresh/only-export-components": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "error",
@@ -48,5 +51,10 @@
     "es6": true,
     "jest": true
   },
-  "ignorePatterns": ["node_modules", "build", "dist", "public"]
+  "ignorePatterns": ["node_modules", "build", "dist", "public"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
