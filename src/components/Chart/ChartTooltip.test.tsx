@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import { testIntlConfig } from "../../setupTests";
 import ChartTooltip from "./ChartTooltip";
 
 describe("ChartTooltip", () => {
@@ -8,7 +7,6 @@ describe("ChartTooltip", () => {
       active={true}
       label="label"
       payload={[{ name: "name", value: 123, unit: "$" }]}
-      intlConfig={testIntlConfig}
     />
   );
   beforeEach(() => {
@@ -29,7 +27,6 @@ describe("ChartTooltip", () => {
         label="goal"
         payload={[{ name: "goal", value: 123, unit: "%" }]}
         key1="goal"
-        intlConfig={testIntlConfig}
       />,
     );
     expect(screen.getByText("123%")).toBeInTheDocument();
@@ -45,7 +42,6 @@ describe("ChartTooltip", () => {
         ]}
         key1="revenue"
         key2="expenses"
-        intlConfig={testIntlConfig}
       />,
     );
     expect(screen.getByText("$456.00")).toBeInTheDocument();

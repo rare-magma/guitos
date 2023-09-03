@@ -3,12 +3,6 @@
 exports[`ChartTooltip > matches snapshot 1`] = `
 <ChartTooltip
   active={true}
-  intlConfig={
-    {
-      "currency": "USD",
-      "locale": "en-US",
-    }
-  }
   label="label"
   payload={
     [

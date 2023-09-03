@@ -1,5 +1,6 @@
-import { render } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import { ConfigProvider, useConfig } from "./ConfigContext";
+import { configContextSpy } from "../setupTests";
 
 function TestComponent() {
   const { intlConfig, currency } = useConfig();
@@ -22,5 +23,14 @@ describe("ConfigProvider", () => {
     expect(getByLabelText("currency").textContent).toEqual("USD");
     expect(getByLabelText("locale").textContent).toEqual("en-US");
     expect(getByLabelText("c").textContent).toEqual("USD");
+  });
+
+  it.skip("throws error when not used within provider", () => {
+    // configContextSpy.mockClear();
+    configContextSpy.mockReset();
+    cleanup();
+    expect(() => render(<TestComponent />)).toThrow(
+      "useConfig must be used within a Config provider",
+    );
   });
 });

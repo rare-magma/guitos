@@ -1,18 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { testIntlConfig, testBudgetList } from "../../setupTests";
 import { vi } from "vitest";
 import ChartsPage from "./ChartsPage";
 import userEvent from "@testing-library/user-event";
 
 describe("ChartsPage", () => {
   const onShowGraphs = vi.fn();
-  const comp = (
-    <ChartsPage
-      budgetList={testBudgetList}
-      intlConfig={testIntlConfig}
-      onShowGraphs={onShowGraphs}
-    />
-  );
+  const comp = <ChartsPage onShowGraphs={onShowGraphs} />;
 
   beforeAll(() => {
     vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockReturnValue(800);

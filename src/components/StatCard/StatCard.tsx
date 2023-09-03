@@ -16,25 +16,20 @@ import { BsGear, BsGraphUp, BsPercent } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
 import { focusRef, parseLocaleNumber } from "../../utils";
 import { useConfig } from "../../context/ConfigContext";
+import { useBudget } from "../../context/BudgetContext";
 
 interface StatCardProps {
-  stat: Stat;
-  revenuePercentage: number;
-  onChange: (stat: Stat) => void;
-  onAutoGoal: (stat: Stat) => void;
+  onChange: (stat: Stat | undefined) => void;
+  onAutoGoal: (stat: Stat | undefined) => void;
   onShowGraphs: () => void;
 }
 
-function StatCard({
-  stat: initialStat,
-  revenuePercentage,
-  onChange,
-  onAutoGoal,
-  onShowGraphs,
-}: StatCardProps) {
-  const [stat, setStat] = useState(initialStat);
-  const [autoGoal, setAutoGoal] = useState(false);
+function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
   const { intlConfig } = useConfig();
+  const { revenuePercentage, budget } = useBudget();
+
+  const [stat, setStat] = useState(budget?.stats);
+  const [autoGoal, setAutoGoal] = useState(false);
 
   const goalRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
@@ -46,7 +41,7 @@ function StatCard({
 
   function handleInputChange(item: React.ChangeEvent<HTMLInputElement>) {
     let updatedStat: Stat;
-    if (stat !== null) {
+    if (stat) {
       updatedStat = stat;
       updatedStat.goal = item.target.valueAsNumber;
       setStat(updatedStat);
@@ -57,7 +52,7 @@ function StatCard({
 
   function handleReserveChange(value: string | undefined): void {
     let updatedStat: Stat;
-    if (stat !== null && value) {
+    if (stat && value) {
       updatedStat = stat;
       updatedStat.reserves = parseLocaleNumber(value, intlConfig?.locale);
       setStat(updatedStat);
@@ -75,8 +70,7 @@ function StatCard({
   }
 
   return (
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    <Card className="stat-card" key={"stat-" + intlConfig?.currency}>
+    <Card className="stat-card" key={`stat-${intlConfig?.currency}`}>
       <Card.Header className="stat-card-header py-0">
         <Row className="mb-1">
           <OverlayTrigger
@@ -141,13 +135,13 @@ function StatCard({
           </OverlayTrigger>
           <CurrencyInput
             id="available"
-            key={`${stat.available}-available`}
+            key={`${stat?.available}-available`}
             className="text-end form-control fixed-width-font"
             aria-label={"available"}
             name="available"
             intlConfig={intlConfig}
             disabled={true}
-            defaultValue={stat.available}
+            defaultValue={stat?.available}
           />
           <OverlayTrigger
             placement="top"
@@ -161,7 +155,7 @@ function StatCard({
             }
           >
             <InputGroup.Text>
-              {revenuePercentage <= 100 && stat.available > 0
+              {revenuePercentage <= 100 && stat && stat.available > 0
                 ? 100 - revenuePercentage
                 : 0}
 
@@ -197,13 +191,13 @@ function StatCard({
           </InputGroup.Text>
           <CurrencyInput
             id="with-goal"
-            key={`${stat.withGoal}-withGoal`}
+            key={`${stat?.withGoal}-withGoal`}
             className="text-end form-control fixed-width-font"
             aria-label={"with-goal"}
             name="with-goal"
             intlConfig={intlConfig}
             disabled={true}
-            defaultValue={stat.withGoal}
+            defaultValue={stat?.withGoal}
           />
         </InputGroup>
         <InputGroup className="mb-1" key={"goal"}>
@@ -241,9 +235,8 @@ function StatCard({
             data-testid="goal-input"
             className="text-end fixed-width-font"
             aria-label={"goal"}
-            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-            key={"auto-goal-" + autoGoal}
-            defaultValue={stat.goal}
+            key={`auto-goal-${autoGoal}`}
+            defaultValue={stat?.goal}
             onChange={handleInputChange}
             onWheel={(e) => e.target instanceof HTMLElement && e.target.blur()}
             type="number"
@@ -286,13 +279,13 @@ function StatCard({
           </InputGroup.Text>
           <CurrencyInput
             id="saved"
-            key={`${stat.saved}-saved`}
+            key={`${stat?.saved}-saved`}
             className="text-end form-control fixed-width-font"
             aria-label={"saved"}
             name="saved"
             intlConfig={intlConfig}
             disabled={true}
-            defaultValue={stat.saved}
+            defaultValue={stat?.saved}
           />
         </InputGroup>
         <InputGroup className="mb-1" key={"reserves"}>
@@ -313,7 +306,7 @@ function StatCard({
             aria-label={"reserves"}
             name="reserves"
             intlConfig={intlConfig}
-            defaultValue={stat.reserves}
+            defaultValue={stat?.reserves}
             maxLength={14}
             allowNegativeValue={false}
             ref={reservesRef}

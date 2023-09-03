@@ -16,6 +16,5 @@ exports[`TableCard > matches snapshot 1`] = `
     }
   }
   onChange={[MockFunction spy]}
-  revenueTotal={0}
 />
 `;

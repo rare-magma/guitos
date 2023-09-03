@@ -2,8 +2,6 @@
 
 exports[`LandingPage > matches snapshot 1`] = `
 <LandingPage
-  budget={null}
-  budgetList={[]}
   inputRef={
     {
       "current": <input

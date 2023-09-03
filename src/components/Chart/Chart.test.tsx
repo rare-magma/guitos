@@ -8,7 +8,6 @@ describe("Chart", () => {
   const comp = (
     <Chart
       header={"chart header"}
-      budgetList={testBudgetList}
       tooltipKey1={"tooltipKey1"}
       areaDataKey1={"revenue"}
       areaStroke1={"highlight"}

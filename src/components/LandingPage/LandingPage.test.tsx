@@ -2,7 +2,11 @@ import { render, screen } from "@testing-library/react";
 import LandingPage from "./LandingPage";
 import { vi } from "vitest";
 import userEvent from "@testing-library/user-event";
-import { testBudget } from "../../setupTests";
+import {
+  budgetContextSpy,
+  testBudget,
+  testEmptyBudgetContext,
+} from "../../setupTests";
 
 describe("LandingPage", () => {
   const inputRefMock: { current: HTMLInputElement | null } = { current: null };
@@ -11,8 +15,6 @@ describe("LandingPage", () => {
   const comp = (
     <LandingPage
       loading={false}
-      budget={null}
-      budgetList={[]}
       inputRef={inputRefMock}
       onNew={onNew}
       onImport={onImport}
@@ -20,6 +22,7 @@ describe("LandingPage", () => {
   );
 
   beforeEach(() => {
+    budgetContextSpy.mockReturnValue(testEmptyBudgetContext);
     render(comp);
   });
 
@@ -64,8 +67,6 @@ describe("LandingPage", () => {
     render(
       <LandingPage
         loading={true}
-        budget={null}
-        budgetList={[]}
         inputRef={inputRefMock}
         onNew={onNew}
         onImport={onImport}

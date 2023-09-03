@@ -9,7 +9,6 @@ describe("TableCard", () => {
   const comp = (
     <TableCard
       items={testBudget.expenses}
-      revenueTotal={0}
       header={"Expenses"}
       onChange={onChange}
     />
@@ -31,7 +30,6 @@ describe("TableCard", () => {
     render(
       <TableCard
         items={testBudget.incomes}
-        revenueTotal={0}
         header={"Revenue"}
         onChange={onChange}
       />,

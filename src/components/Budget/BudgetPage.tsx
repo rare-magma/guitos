@@ -6,7 +6,6 @@ import {
   budgetToCsv,
   calcAutoGoal,
   calcAvailable,
-  calcPercentage,
   calcSaved,
   calcWithGoal,
   convertCsvToBudget,
@@ -29,6 +28,7 @@ import TableCard from "../TableCard/TableCard";
 import ChartsPage from "../ChartsPage/ChartsPage";
 import { budgetsDB, optionsDB } from "../../context/db";
 import { useConfig } from "../../context/ConfigContext";
+import { useBudget } from "../../context/BudgetContext";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 function BudgetPage() {
@@ -41,18 +41,10 @@ function BudgetPage() {
   const [jsonError, setJsonError] = useState<JsonError[]>([]);
   const [show, setShow] = useState(false);
 
-  const [budget, setBudget] = useState<Budget | null>(null);
-  const [budgetList, setBudgetList] = useState<Budget[]>([]);
-  const [budgetNameList, setBudgetNameList] = useState<
-    { id: string; name: string }[]
-  >([]);
-
+  const { budget, setBudget, budgetList, setBudgetList, setBudgetNameList } =
+    useBudget();
   const params = useParams();
   const name = String(params.name);
-  const revenuePercentage = calcPercentage(
-    budget?.expenses.total ?? 0,
-    budget?.incomes.total ?? 0,
-  );
 
   const { setIntlConfig, handleCurrency } = useConfig();
 
@@ -72,8 +64,8 @@ function BudgetPage() {
   }
 
   function handleIncomeChange(item: Income) {
-    let newBudget: Budget;
-    if (budget !== null) {
+    let newBudget: Budget | undefined;
+    if (budget) {
       newBudget = budget;
       newBudget.incomes = item;
       newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
@@ -99,7 +91,7 @@ function BudgetPage() {
 
   function handleExpenseChange(item: Expense) {
     let newBudget: Budget;
-    if (budget !== null) {
+    if (budget) {
       newBudget = budget;
       newBudget.expenses = item;
       newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
@@ -123,9 +115,9 @@ function BudgetPage() {
     }
   }
 
-  function handleStatChange(item: Stat) {
+  function handleStatChange(item: Stat | undefined) {
     let newBudget: Budget;
-    if (budget !== null) {
+    if (budget && item) {
       newBudget = budget;
       newBudget.stats = item;
       newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
@@ -146,9 +138,9 @@ function BudgetPage() {
     }
   }
 
-  function handleAutoGoal(item: Stat) {
+  function handleAutoGoal(item: Stat | undefined) {
     let newBudget: Budget;
-    if (budget !== null) {
+    if (budget && item) {
       newBudget = budget;
       newBudget.stats = item;
       newBudget.stats.goal = calcAutoGoal(budget);
@@ -172,7 +164,7 @@ function BudgetPage() {
 
   function handleRename(newName?: string | null) {
     let newBudget: Budget;
-    if (budget !== null && newName) {
+    if (budget && newName) {
       newBudget = {
         ...budget,
         name: newName,
@@ -185,7 +177,7 @@ function BudgetPage() {
     const newBudget = createNewBudget();
 
     let newBudgetList: Budget[] = [];
-    if (budgetList !== null) {
+    if (budgetList) {
       newBudgetList = budgetList.concat(newBudget);
     } else {
       newBudgetList = newBudgetList.concat(newBudget);
@@ -197,7 +189,7 @@ function BudgetPage() {
   }
 
   function handleClone() {
-    if (budget !== null) {
+    if (budget) {
       const newBudget = {
         ...budget,
         id: crypto.randomUUID(),
@@ -205,7 +197,7 @@ function BudgetPage() {
       };
 
       let newBudgetList: Budget[] = [];
-      if (budgetList !== null) {
+      if (budgetList) {
         newBudgetList = budgetList.concat(newBudget);
       } else {
         newBudgetList = newBudgetList.concat(newBudget);
@@ -218,43 +210,46 @@ function BudgetPage() {
   }
 
   function handleRemove(toBeDeleted: string) {
-    budgetsDB
-      .removeItem(toBeDeleted)
-      .then(() => {
-        const newBudgetList = budgetList
-          .filter((item: Budget) => item.id !== toBeDeleted)
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .reverse();
+    budgetList &&
+      budgetsDB
+        .removeItem(toBeDeleted)
+        .then(() => {
+          const newBudgetList = budgetList
+            .filter((item: Budget) => item.id !== toBeDeleted)
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .reverse();
 
-        setBudgetList(newBudgetList);
-        setBudgetNameList(
-          createBudgetNameList(newBudgetList as unknown as Budget[]),
-        );
-        if (newBudgetList.length >= 1) {
-          setBudget(newBudgetList[0]);
-        } else {
-          setBudget(null);
-        }
-      })
-      .catch((e: unknown) => {
-        handleError(e);
-      });
+          setBudgetList(newBudgetList);
+          setBudgetNameList(
+            createBudgetNameList(newBudgetList as unknown as Budget[]),
+          );
+          if (newBudgetList.length >= 1) {
+            setBudget(newBudgetList[0]);
+          } else {
+            setBudget(undefined);
+          }
+        })
+        .catch((e: unknown) => {
+          handleError(e);
+        });
   }
 
-  function handleSelect(budget: Option[]) {
-    const selectedBudget = budget as unknown as Budget[];
-    const filteredList = budgetList.filter(
-      (item: Budget) => item.id === selectedBudget[0].id,
-    );
-    setBudget(filteredList[0]);
+  function handleSelect(o: Option[] | undefined) {
+    if (o) {
+      const selectedBudget = o as unknown as Budget[];
+      const filteredList =
+        selectedBudget &&
+        budgetList?.filter((item: Budget) => item.id === selectedBudget[0].id);
+      filteredList && setBudget(filteredList[0]);
+    }
   }
 
   function handleGo(step: number, limit: number) {
-    const sortedList = budgetList.sort((a, b) => a.name.localeCompare(b.name));
+    const sortedList = budgetList?.sort((a, b) => a.name.localeCompare(b.name));
     if (budget) {
-      const index = sortedList.findIndex((b) => b.name.includes(budget.name));
-      if (index !== limit) {
-        handleSelect([sortedList[index + step] as unknown as Option[]]);
+      const index = sortedList?.findIndex((b) => b.name.includes(budget.name));
+      if (index !== limit && sortedList) {
+        handleSelect([sortedList[(index ?? 0) + step] as unknown as Option[]]);
       }
     }
   }
@@ -262,21 +257,21 @@ function BudgetPage() {
   function handleGoHome() {
     if (budget) {
       const name = new Date().toISOString();
-      const index = budgetList.findIndex((b) =>
+      const index = budgetList?.findIndex((b) =>
         b.name.includes(name.slice(0, 7)),
       );
-      if (index !== -1) {
+      if (index !== -1 && budgetList && index) {
         handleSelect([budgetList[index] as unknown as Option[]]);
       }
     }
   }
 
   function handleGoBack() {
-    handleGo(-1, 0);
+    budgetList && handleGo(-1, 0);
   }
 
   function handleGoForward() {
-    handleGo(1, budgetList.length - 1);
+    budgetList && handleGo(1, budgetList.length - 1);
   }
 
   function handleImportCsv(fileReader: FileReader, file: File) {
@@ -329,7 +324,6 @@ function BudgetPage() {
     if (importedFiles === null) {
       return;
     }
-
     for (const file of importedFiles) {
       const reader = new FileReader();
       reader.readAsText(file, "UTF-8");
@@ -464,7 +458,7 @@ function BudgetPage() {
 
   useEffect(() => {
     try {
-      if (budgetList.length >= 1 && Array.isArray(budgetList)) {
+      if (budgetList && budgetList.length >= 1 && Array.isArray(budgetList)) {
         if (name.trim() !== "undefined") {
           loadBudget(budgetList.filter((b: Budget) => b && b.name === name));
         } else {
@@ -488,9 +482,6 @@ function BudgetPage() {
     <Container fluid>
       {!showGraphs && (
         <NavBar
-          selected={budget?.name ?? undefined}
-          id={budget?.id ?? undefined}
-          budgetNameList={budgetNameList}
           onRename={(e) => {
             handleRename(e);
           }}
@@ -526,8 +517,6 @@ function BudgetPage() {
 
       <LandingPage
         loading={loading}
-        budget={budget ?? null}
-        budgetList={budgetList}
         inputRef={inputRef}
         onNew={handleNew}
         onImport={(e) => {
@@ -547,23 +536,15 @@ function BudgetPage() {
         }}
       />
 
-      {showGraphs && (
-        <ChartsPage
-          budgetList={budgetList.sort((a, b) => a.name.localeCompare(b.name))}
-          onShowGraphs={() => setShowGraphs(false)}
-        />
-      )}
+      {showGraphs && <ChartsPage onShowGraphs={() => setShowGraphs(false)} />}
 
-      {!loading && !showGraphs && budget && (
+      {!loading && !showGraphs && budget?.id && (
         <Container key={budget.id}>
           <Row className="mt-1">
             <Col md="6">
               <div className="card-columns">
                 <StatCard
-                  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                  key={"stats-" + budget.expenses.total + budget.incomes.total}
-                  stat={budget.stats}
-                  revenuePercentage={revenuePercentage}
+                  key={budget?.expenses.total + budget?.incomes.total}
                   onChange={handleStatChange}
                   onAutoGoal={handleAutoGoal}
                   onShowGraphs={() => setShowGraphs(true)}
@@ -573,7 +554,6 @@ function BudgetPage() {
 
                 <TableCard
                   items={budget.incomes}
-                  revenueTotal={budget.incomes.total}
                   header="Revenue"
                   onChange={handleIncomeChange}
                 />
@@ -584,7 +564,6 @@ function BudgetPage() {
             <Col md="6" className="mb-3">
               <TableCard
                 items={budget.expenses}
-                revenueTotal={budget.incomes.total}
                 header="Expenses"
                 onChange={handleExpenseChange}
               />

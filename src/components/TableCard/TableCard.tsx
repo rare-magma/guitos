@@ -15,23 +15,22 @@ import ItemFormGroup from "../ItemForm/ItemFormGroup";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
 import { useConfig } from "../../context/ConfigContext";
+import { useBudget } from "../../context/BudgetContext";
 
 interface TableCardProps {
   items: Income | Expense;
-  revenueTotal: number;
   header: string;
   onChange: (table: Income | Expense) => void;
 }
 
 function TableCard({
   items: initialItems,
-  revenueTotal,
   header: label,
   onChange,
 }: TableCardProps) {
   const [table, setTable] = useState(initialItems);
-  const [total, setTotal] = useState(roundBig(calcTotal(table.items), 2));
-  const revenuePercentage = calcPercentage(total, revenueTotal);
+  const [total, setTotal] = useState(roundBig(calcTotal(table?.items), 2));
+  const { budget, revenuePercentage } = useBudget();
   const inputRef = useRef<HTMLInputElement>(null);
   const { intlConfig } = useConfig();
 
@@ -49,7 +48,7 @@ function TableCard({
     const newItemForm = new ItemForm();
 
     let maxId;
-    if (table.items.length !== 0) {
+    if (table && table.items.length !== 0) {
       maxId = Math.max(
         ...table.items.map((i) => {
           return i.id;
@@ -114,8 +113,7 @@ function TableCard({
 
   return (
     <Card
-      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-      key={"table-" + label + intlConfig?.currency}
+      key={`table-${label}-${intlConfig?.currency}`}
       className={label + "-card"}
     >
       <Card.Header className={label + "-card-header"}>
@@ -146,12 +144,14 @@ function TableCard({
         </OverlayTrigger>
       </Card.Header>
       <Card.Body>
-        {table.items?.map((item: ItemForm) => (
+        {table?.items?.map((item: ItemForm) => (
           <ItemFormGroup
             key={`${label}-${item.id}`}
             itemForm={item}
             label={label}
-            costPercentage={calcPercentage(item.value, revenueTotal)}
+            costPercentage={
+              budget ? calcPercentage(item.value, budget.incomes.total) : 0
+            }
             inputRef={inputRef}
             onChange={handleChange}
             onRemove={() => {

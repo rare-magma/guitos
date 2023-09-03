@@ -2,7 +2,11 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import NavBar from "./NavBar";
-import { budgetNameList, testBudget } from "../../setupTests";
+import {
+  budgetContextSpy,
+  testBudget,
+  testEmptyBudgetContext,
+} from "../../setupTests";
 
 describe("NavBar", () => {
   const onClone = vi.fn();
@@ -17,9 +21,6 @@ describe("NavBar", () => {
   const onSelect = vi.fn();
   const comp = (
     <NavBar
-      budgetNameList={budgetNameList}
-      selected={"2023-04"}
-      id={"035c2de4-00a4-403c-8f0e-f81339be9a4e"}
       onClone={onClone}
       onExport={onExport}
       onGoBack={onGoBack}
@@ -41,7 +42,7 @@ describe("NavBar", () => {
     expect(comp).toMatchSnapshot();
   });
   it("renders initial state", async () => {
-    expect(screen.getByText("2023-04")).toBeInTheDocument();
+    expect(screen.getByText("2023-03")).toBeInTheDocument();
 
     const newButton = screen.getAllByRole("button", { name: "new budget" });
     await userEvent.click(newButton[0]);
@@ -107,10 +108,10 @@ describe("NavBar", () => {
   });
 
   it("triggers onRename when user changes budget name input", async () => {
-    await userEvent.type(screen.getByDisplayValue("2023-04"), "change name");
+    await userEvent.type(screen.getByDisplayValue("2023-03"), "change name");
 
-    expect(onRename).toBeCalledWith("2023-04change name");
-    expect(screen.getByDisplayValue("2023-04change name")).toBeInTheDocument();
+    expect(onRename).toBeCalledWith("2023-03change name");
+    expect(screen.getByDisplayValue("2023-03change name")).toBeInTheDocument();
   });
 
   it("triggers onRemove when user clicks delete budget button", async () => {
@@ -125,14 +126,14 @@ describe("NavBar", () => {
   it("triggers onSelect when user selects budget", async () => {
     await userEvent.type(
       screen.getByPlaceholderText("Search list of budgets..."),
-      "2023-05",
+      "2023-04",
     );
-    await userEvent.click(screen.getByText("2023-05"));
+    await userEvent.click(screen.getByText("2023-04"));
 
     expect(onSelect).toBeCalledWith([
       {
-        id: "036c2de4-00a4-402c-8f0e-f81339be9a4e",
-        name: "2023-05",
+        id: "135b2ce4-00a4-403c-8f0e-f81339be9a4e",
+        name: "2023-04",
       },
     ]);
   });
@@ -149,23 +150,8 @@ describe("NavBar", () => {
   });
 
   it("opens guitos repo in new tab", async () => {
-    render(
-      <NavBar
-        budgetNameList={[]}
-        selected={null}
-        id={"035c2de4-00a4-403c-8f0e-f81339be9a4e"}
-        onClone={onClone}
-        onExport={onExport}
-        onGoBack={onGoBack}
-        onGoHome={onGoHome}
-        onGoForward={onGoForward}
-        onImport={onImport}
-        onNew={onNew}
-        onRemove={onRemove}
-        onRename={onRename}
-        onSelect={onSelect}
-      />,
-    );
+    budgetContextSpy.mockReturnValue(testEmptyBudgetContext);
+    render(comp);
     const guitosButton = screen.getByLabelText("open guitos repository");
     await userEvent.click(guitosButton);
     expect(guitosButton).toHaveAttribute(

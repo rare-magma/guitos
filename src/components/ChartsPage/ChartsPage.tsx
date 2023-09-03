@@ -10,13 +10,15 @@ import {
 import { BsArrowLeft } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
 import Chart from "../Chart/Chart";
+import { useBudget } from "../../context/BudgetContext";
 
 interface GraphProps {
-  budgetList: Budget[];
   onShowGraphs: () => void;
 }
 
-function ChartsPage({ budgetList, onShowGraphs }: GraphProps) {
+function ChartsPage({ onShowGraphs }: GraphProps) {
+  const { budgetList } = useBudget();
+
   useHotkeys("i", () => onShowGraphs(), {
     preventDefault: true,
   });
@@ -48,16 +50,19 @@ function ChartsPage({ budgetList, onShowGraphs }: GraphProps) {
 
       <Chart
         header={"Revenue vs expenses"}
-        budgetList={budgetList}
         tooltipKey1={"revenue"}
         tooltipKey2={"expenses"}
-        legendValues1={budgetList.map((b: Budget) => {
-          return b.incomes.total;
-        })}
+        legendValues1={
+          budgetList?.map((b: Budget) => {
+            return b.incomes.total;
+          }) ?? []
+        }
         areaDataKey1={"incomes.total"}
-        legendValues2={budgetList.map((b: Budget) => {
-          return b.expenses.total;
-        })}
+        legendValues2={
+          budgetList?.map((b: Budget) => {
+            return b.expenses.total;
+          }) ?? []
+        }
         areaDataKey2={"expenses.total"}
         areaStroke1={"highlight"}
         areaFill1={"highlight"}
@@ -71,11 +76,12 @@ function ChartsPage({ budgetList, onShowGraphs }: GraphProps) {
         <Col md="6">
           <Chart
             header={"Savings"}
-            budgetList={budgetList}
             tooltipKey1={"saved"}
-            legendValues1={budgetList.map((b: Budget) => {
-              return b.stats.saved;
-            })}
+            legendValues1={
+              budgetList?.map((b: Budget) => {
+                return b.stats.saved;
+              }) ?? []
+            }
             areaDataKey1={"stats.saved"}
             areaStroke1={"highlight"}
             areaFill1={"highlight"}
@@ -86,11 +92,12 @@ function ChartsPage({ budgetList, onShowGraphs }: GraphProps) {
           <div className="mt-3" />
           <Chart
             header={"Reserves"}
-            budgetList={budgetList}
             tooltipKey1={"reserves"}
-            legendValues1={budgetList.map((b: Budget) => {
-              return b.stats.reserves;
-            })}
+            legendValues1={
+              budgetList?.map((b: Budget) => {
+                return b.stats.reserves;
+              }) ?? []
+            }
             areaDataKey1={"stats.reserves"}
             areaStroke1={"purple"}
             areaFill1={"purple"}
@@ -102,16 +109,19 @@ function ChartsPage({ budgetList, onShowGraphs }: GraphProps) {
         <Col md="6">
           <Chart
             header={"Available vs with goal"}
-            budgetList={budgetList}
             tooltipKey1={"available"}
             tooltipKey2={"with goal"}
-            legendValues1={budgetList.map((b: Budget) => {
-              return b.stats.available;
-            })}
+            legendValues1={
+              budgetList?.map((b: Budget) => {
+                return b.stats.available;
+              }) ?? []
+            }
             areaDataKey1={"stats.available"}
-            legendValues2={budgetList.map((b: Budget) => {
-              return b.stats.withGoal;
-            })}
+            legendValues2={
+              budgetList?.map((b: Budget) => {
+                return b.stats.withGoal;
+              }) ?? []
+            }
             areaDataKey2={"stats.withGoal"}
             areaStroke1={"highlight"}
             areaFill1={"highlight"}
@@ -125,11 +135,12 @@ function ChartsPage({ budgetList, onShowGraphs }: GraphProps) {
           <div className="mb-3" />
           <Chart
             header={"Savings goal"}
-            budgetList={budgetList}
             tooltipKey1={"goal"}
-            legendValues1={budgetList.map((b: Budget) => {
-              return b.stats.goal;
-            })}
+            legendValues1={
+              budgetList?.map((b: Budget) => {
+                return b.stats.goal;
+              }) ?? []
+            }
             areaDataKey1={"stats.goal"}
             areaStroke1={"cyan"}
             areaFill1={"cyan"}

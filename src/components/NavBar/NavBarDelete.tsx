@@ -1,19 +1,20 @@
 import { Button, Nav, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
+import { useBudget } from "../../context/BudgetContext";
 
 interface NavBarDeleteProps {
   deleteButtonRef: React.RefObject<HTMLButtonElement>;
   handleRemove: (i: string) => void;
-  initialId: string | null | undefined;
   expanded: boolean;
 }
 
 export function NavBarDelete({
   deleteButtonRef,
   handleRemove,
-  initialId,
   expanded,
 }: NavBarDeleteProps) {
+  const { budget } = useBudget();
+
   return (
     <Nav className="m-2">
       <OverlayTrigger
@@ -44,7 +45,7 @@ export function NavBarDelete({
                   type="button"
                   ref={deleteButtonRef}
                   onClick={() => {
-                    initialId && handleRemove(initialId);
+                    budget?.id && handleRemove(budget.id);
                   }}
                 >
                   {expanded ? "delete budget" : <BsXLg />}

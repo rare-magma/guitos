@@ -1,24 +1,17 @@
 import { Button, Container, Form, Row, Spinner, Stack } from "react-bootstrap";
 import { RefObject } from "react";
-import { Budget } from "../Budget/Budget";
+import { useBudget } from "../../context/BudgetContext";
 
 interface LandingPageProps {
   loading: boolean;
-  budget: Budget | null;
-  budgetList: Budget[];
   inputRef: RefObject<HTMLInputElement>;
   onNew: () => void;
   onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function LandingPage({
-  loading,
-  budget,
-  budgetList,
-  inputRef,
-  onNew,
-  onImport,
-}: LandingPageProps) {
+function LandingPage({ loading, inputRef, onNew, onImport }: LandingPageProps) {
+  const { budget, budgetList } = useBudget();
+
   function handleNew() {
     onNew();
   }
@@ -40,7 +33,7 @@ function LandingPage({
         </Container>
       )}
 
-      {!loading && !budget && budgetList.length < 1 && (
+      {!loading && !budget && budgetList && budgetList.length < 1 && (
         <Container className="position-absolute top-50 start-50 translate-middle">
           <Row className="justify-content-center align-content-center">
             <Stack gap={3}>

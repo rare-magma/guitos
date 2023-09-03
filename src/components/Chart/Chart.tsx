@@ -9,15 +9,14 @@ import {
   Area,
 } from "recharts";
 import { intlFormat, median } from "../../utils";
-import { Budget } from "../Budget/Budget";
 import ChartTooltip from "./ChartTooltip";
 import { BsPercent } from "react-icons/bs";
 import useDynamicYAxisWidth from "./DynamicYAxis";
 import { useConfig } from "../../context/ConfigContext";
+import { useBudget } from "../../context/BudgetContext";
 
 interface ChartProps {
   header: string;
-  budgetList: Budget[];
   tooltipKey1: string;
   tooltipKey2?: string;
   areaDataKey1: string;
@@ -35,7 +34,6 @@ interface ChartProps {
 
 function Chart({
   header,
-  budgetList,
   tooltipKey1,
   tooltipKey2,
   areaDataKey1,
@@ -50,10 +48,12 @@ function Chart({
   legendValues2,
   unit,
 }: ChartProps) {
+  const { budgetList } = useBudget();
+  const { intlConfig } = useConfig();
+
   const { yAxisWidth, setChartRef } = useDynamicYAxisWidth({
     yAxisWidthModifier: (x) => x + 10,
   });
-  const { intlConfig } = useConfig();
 
   function tickFormatter(value: number) {
     return (
@@ -70,7 +70,7 @@ function Chart({
           aspect={window.innerWidth < window.innerHeight ? 1.6 : 3.4}
         >
           <AreaChart
-            data={budgetList}
+            data={budgetList?.sort((a, b) => a.name.localeCompare(b.name))}
             ref={setChartRef}
             margin={{
               top: 10,
@@ -131,7 +131,7 @@ function Chart({
               <Form.Control
                 className="text-end fixed-width-font"
                 aria-label={"median"}
-                defaultValue={median(legendValues1)}
+                defaultValue={legendValues1 && median(legendValues1)}
                 type="number"
                 disabled
               />
@@ -148,7 +148,7 @@ function Chart({
                 className="text-end form-control fixed-width-font"
                 aria-label={legend1}
                 intlConfig={intlConfig}
-                defaultValue={median(legendValues1)}
+                defaultValue={legendValues1 && median(legendValues1)}
               />
             </InputGroup>
           )}
@@ -161,7 +161,7 @@ function Chart({
                   className="text-end form-control fixed-width-font"
                   aria-label={legend1}
                   intlConfig={intlConfig}
-                  defaultValue={median(legendValues1)}
+                  defaultValue={legendValues1 && median(legendValues1)}
                 />
               </InputGroup>
             </Col>

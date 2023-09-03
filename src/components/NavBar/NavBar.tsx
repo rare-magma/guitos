@@ -24,11 +24,9 @@ import { NavBarItem } from "./NavBarItem";
 import { NavBarDelete } from "./NavBarDelete";
 import { NavBarExport } from "./NavBarExport";
 import { useConfig } from "../../context/ConfigContext";
+import { useBudget } from "../../context/BudgetContext";
 
 interface NavBarProps {
-  budgetNameList: { id: string; name: string }[];
-  id?: string | null;
-  selected?: string | null;
   onClone: () => void;
   onExport: (t: string) => void;
   onGoBack: () => void;
@@ -42,9 +40,6 @@ interface NavBarProps {
 }
 
 function NavBar({
-  budgetNameList: initialBudgetNameList,
-  id: initialId,
-  selected: initialSelectedName,
   onClone,
   onExport,
   onGoBack,
@@ -68,7 +63,9 @@ function NavBar({
 
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
+
   const { currency, handleCurrency } = useConfig();
+  const { budget, budgetNameList } = useBudget();
 
   useHotkeys("pageup", () => handleGoForward(), { preventDefault: true });
   useHotkeys("pagedown", () => handleGoBack(), { preventDefault: true });
@@ -168,7 +165,7 @@ function NavBar({
       data-testid="header"
     >
       <Container fluid className="flex-row">
-        {initialBudgetNameList && initialBudgetNameList.length < 1 && (
+        {budgetNameList && budgetNameList.length < 1 && (
           <OverlayTrigger
             delay={250}
             placement="bottom"
@@ -192,9 +189,9 @@ function NavBar({
           </OverlayTrigger>
         )}
         <Nav className="flex-row flex-grow-1">
-          {initialSelectedName && (
+          {budget?.name && (
             <Nav className="flex-row">
-              {initialBudgetNameList && initialBudgetNameList.length > 1 && (
+              {budgetNameList && budgetNameList.length > 1 && (
                 <>
                   <NavBarItem
                     itemClassName={"me-1 my-2"}
@@ -231,9 +228,8 @@ function NavBar({
                 >
                   <Form.Control
                     aria-label={"budget name"}
-                    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-                    key={"budget-name-key-" + initialId}
-                    defaultValue={initialSelectedName}
+                    key={"budget-name-key-" + budget.id}
+                    defaultValue={budget.name}
                     ref={nameRef}
                     onChange={editName}
                     style={expanded ? {} : { minWidth: "12ch" }}
@@ -259,7 +255,7 @@ function NavBar({
         >
           <Offcanvas.Header>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-              {initialSelectedName ? initialSelectedName : "guitos"}
+              {budget?.name ? budget.name : "guitos"}
             </Offcanvas.Title>
             <Button
               aria-label="close navigation"
@@ -272,7 +268,7 @@ function NavBar({
           <Offcanvas.Body className="justify-content-end">
             <Nav>
               <Nav className="m-2">
-                {initialBudgetNameList && initialBudgetNameList.length > 1 && (
+                {budgetNameList && budgetNameList.length > 1 && (
                   <Typeahead
                     id="search-budget-list"
                     filterBy={["name"]}
@@ -283,7 +279,7 @@ function NavBar({
                       handleSelect(budget);
                     }}
                     className="w-100"
-                    options={initialBudgetNameList
+                    options={budgetNameList
                       .sort((a, b) => a.name.localeCompare(b.name))
                       .reverse()}
                     placeholder="Search list of budgets..."
@@ -304,7 +300,7 @@ function NavBar({
                 buttonVariant={"outline-success"}
                 buttonIcon={expanded ? "new" : <BsPlusLg />}
               />
-              {initialBudgetNameList && initialBudgetNameList.length > 0 && (
+              {budgetNameList && budgetNameList.length > 0 && (
                 <>
                   <NavBarItem
                     itemClassName={"m-2"}
@@ -318,8 +314,7 @@ function NavBar({
                   />
                   <NavBarDelete
                     deleteButtonRef={deleteButtonRef}
-                    handleRemove={() => handleRemove(initialId)}
-                    initialId={initialId}
+                    handleRemove={() => handleRemove(budget?.id)}
                     expanded={expanded}
                   />
                 </>
@@ -359,7 +354,7 @@ function NavBar({
                   </Form.Group>
                 </OverlayTrigger>
               </Nav>
-              {initialBudgetNameList && initialBudgetNameList.length > 0 && (
+              {budgetNameList && budgetNameList.length > 0 && (
                 <>
                   <NavBarExport
                     exportButtonRef={exportButtonRef}

@@ -2,9 +2,12 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import ItemFormGroup from "./ItemFormGroup";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { itemForm1, testSpanishContext } from "../../setupTests";
+import {
+  configContextSpy,
+  itemForm1,
+  testSpanishConfigContext,
+} from "../../setupTests";
 import React from "react";
-import * as AppContext from "../../context/ConfigContext";
 
 describe("ItemFormGroup", () => {
   const onRemove = vi.fn();
@@ -89,9 +92,7 @@ describe("ItemFormGroup", () => {
   it("transforms decimal separator based on locale", async () => {
     cleanup();
 
-    vi.spyOn(AppContext, "useConfig").mockImplementation(
-      () => testSpanishContext,
-    );
+    configContextSpy.mockReturnValue(testSpanishConfigContext);
 
     render(
       <ItemFormGroup

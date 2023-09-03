@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { testBudget } from "../../setupTests";
 import StatCard from "./StatCard";
 
 describe("StatCard", () => {
@@ -10,8 +9,6 @@ describe("StatCard", () => {
   const onShowGraphs = vi.fn();
   const comp = (
     <StatCard
-      stat={testBudget.stats}
-      revenuePercentage={10}
       onChange={onChange}
       onAutoGoal={onAutoGoal}
       onShowGraphs={onShowGraphs}

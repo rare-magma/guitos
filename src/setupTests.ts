@@ -9,8 +9,8 @@ import * as matchers from "@testing-library/jest-dom/matchers";
 import { randomUUID } from "node:crypto";
 import { ItemForm } from "./components/ItemForm/ItemForm";
 import { Budget } from "./components/Budget/Budget";
-import { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
-import * as AppContext from "./context/ConfigContext";
+import * as AppConfigContext from "./context/ConfigContext";
+import * as AppBudgetContext from "./context/BudgetContext";
 
 window.crypto.randomUUID = randomUUID;
 // global.URL.createObjectURL = vi.fn();
@@ -21,6 +21,14 @@ vi.mock("crypto", () => ({
 
 // extends Vitest's expect method with methods from react-testing-library
 expect.extend(matchers);
+
+export const configContextSpy = vi.spyOn(AppConfigContext, "useConfig");
+export const budgetContextSpy = vi.spyOn(AppBudgetContext, "useBudget");
+
+beforeEach(() => {
+  budgetContextSpy.mockReturnValue(testBudgetContext);
+  configContextSpy.mockReturnValue(testConfigContext);
+});
 
 // runs a cleanup after each test case (e.g. clearing jsdom)
 afterEach(() => {
@@ -200,26 +208,58 @@ export const testSpanishIntlConfig = { locale: "es-ES", currency: "EUR" };
 
 export const testBudgetList = [testBudget, testBudget2, testBigBudget];
 
-export const testContext = {
+export const testBudgetNameList = [
+  {
+    id: testBudget.id,
+    name: testBudget.name,
+  },
+  {
+    id: testBudget2.id,
+    name: testBudget2.name,
+  },
+];
+
+export const setIntlConfigMock = vi.fn();
+export const handleCurrencyMock = vi.fn();
+export const testConfigContext = {
   intlConfig: testIntlConfig || undefined,
-  setIntlConfig: (value: IntlConfig) => {
-    value;
-  },
+  setIntlConfig: setIntlConfigMock,
   currency: "USD",
-  handleCurrency: (value: string) => {
-    value;
-  },
+  handleCurrency: handleCurrencyMock,
 };
 
-export const testSpanishContext = {
+export const testSpanishConfigContext = {
   intlConfig: testSpanishIntlConfig,
-  setIntlConfig: (value: IntlConfig) => {
-    value;
-  },
+  setIntlConfig: setIntlConfigMock,
   currency: "EUR",
-  handleCurrency: (value: string) => {
-    value;
-  },
+  handleCurrency: handleCurrencyMock,
 };
 
-vi.spyOn(AppContext, "useConfig").mockImplementation(() => testContext);
+export const setBudgetMock = vi.fn();
+export const setBudgetListMock = vi.fn();
+export const setBudgetNameListMock = vi.fn();
+export const testEmptyBudgetContext = {
+  budget: undefined,
+  setBudget: setBudgetMock,
+
+  budgetList: [],
+  setBudgetList: setBudgetListMock,
+
+  budgetNameList: [],
+  setBudgetNameList: setBudgetNameListMock,
+
+  revenuePercentage: 0,
+};
+
+export const testBudgetContext = {
+  budget: testBudget,
+  setBudget: setBudgetMock,
+
+  budgetList: testBudgetList,
+  setBudgetList: setBudgetListMock,
+
+  budgetNameList: testBudgetNameList,
+  setBudgetNameList: setBudgetNameListMock,
+
+  revenuePercentage: 10,
+};
