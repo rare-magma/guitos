@@ -1,3 +1,10 @@
+## [0.24.3](https://github.com/rare-magma/guitos/compare/v0.24.2...v0.24.3) (2023-09-17)
+
+
+### Bug Fixes
+
+* increase background color contrast ([5b3110d](https://github.com/rare-magma/guitos/commit/5b3110dcd343f2dd47cfbd9d3c735e18ffd6b652))
+
 ## [0.24.2](https://github.com/rare-magma/guitos/compare/v0.24.1...v0.24.2) (2023-08-29)
 
 
