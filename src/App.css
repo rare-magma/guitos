@@ -1,7 +1,8 @@
 @media (prefers-color-scheme: dark) {
   * {
     --textcolor: #f8f8f2;
-    --bgcolor: #282a36;
+    --bgcolor: #21222c;
+    --lightbgcolor: #282a36;
     --highlight: #50fa7b;
     --red: #ff5555;
     --orange: #ffb86c;
@@ -16,7 +17,8 @@
 
 @media (prefers-color-scheme: light) {
   * {
-    --bgcolor: #f8f8f2;
+    --bgcolor: #eaebf9;
+    --lightbgcolor: #f8f8f2;
     --textcolor: #282a36;
     --highlight: #008504;
     --red: #d82f39;
@@ -68,7 +70,11 @@ a:hover {
 .dropdown,
 .dropdown-item,
 .dropdown-item:focus,
-.dropdown-item:hover,
+.dropdown-item:hover {
+  background: var(--lightbgcolor);
+  color: var(--textcolor);
+}
+
 .navbar,
 .offcanvas-body,
 .offcanvas-header {
@@ -83,7 +89,7 @@ a:hover {
 .accordion-item:focus,
 .dropdown-menu,
 .dropdown-menu.show {
-  background: var(--bgcolor);
+  background: var(--lightbgcolor);
   border: 0 solid var(--comment);
   border-radius: 0.375rem;
   color: var(--textcolor);
@@ -102,7 +108,7 @@ a:hover {
 input .input-group-text,
 input.form-control,
 input.text-end.form-control {
-  background: var(--bgcolor);
+  background: var(--lightbgcolor);
   border: 1px solid var(--comment);
   color: var(--textcolor);
 }
@@ -112,7 +118,7 @@ input.text-end.form-control {
 .dropdown-item:hover,
 .form-control:focus,
 input.text-end.form-control:focus {
-  background: var(--bgcolor);
+  background: var(--lightbgcolor);
   border: 1px solid var(--pink);
   box-shadow: 0 0 0;
   color: var(--textcolor);
@@ -136,13 +142,13 @@ input[type="number"] {
 .btn:focus-visible {
   background-color: var(--comment);
   box-shadow: none !important;
-  color: var(--bgcolor);
+  color: var(--lightbgcolor);
 }
 
 .btn.show,
 .btn:hover {
   background-color: var(--comment);
-  color: var(--bgcolor);
+  color: var(--lightbgcolor);
 }
 
 .btn-close,
@@ -150,7 +156,7 @@ input[type="number"] {
 .btn-delete,
 .btn-outline-secondary,
 .btn-text {
-  background-color: var(--bgcolor);
+  background-color: var(--lightbgcolor);
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
 }
@@ -164,7 +170,7 @@ input[type="number"] {
   background-color: var(--red);
   border: 1px solid var(--red);
   border-radius: 0.375rem;
-  color: var(--bgcolor);
+  color: var(--lightbgcolor);
 }
 
 .btn-Expenses-plus-button {
@@ -176,7 +182,7 @@ input[type="number"] {
 .btn-Expenses-plus-button:hover {
   background-color: var(--purple);
   border: 1px solid var(--purple);
-  color: var(--bgcolor);
+  color: var(--lightbgcolor);
 }
 
 .btn-Revenue-plus-button {
@@ -188,11 +194,12 @@ input[type="number"] {
 .btn-Revenue-plus-button:hover {
   background-color: var(--highlight);
   border: 1px solid var(--highlight);
-  color: var(--bgcolor);
+  color: var(--lightbgcolor);
 }
 
 .btn-delete-modal,
 .btn-outline-danger {
+  background-color: var(--lightbgcolor);
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
   color: var(--red);
@@ -205,10 +212,11 @@ input[type="number"] {
   background-color: var(--red);
   border: 1px solid var(--red);
   border-radius: 0.375rem;
-  color: var(--bgcolor);
+  color: var(--lightbgcolor);
 }
 
 .btn-outline-info {
+  background-color: var(--lightbgcolor);
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
   color: var(--cyan);
@@ -219,10 +227,11 @@ input[type="number"] {
   background-color: var(--cyan);
   border: 1px solid var(--cyan);
   border-radius: 0.375rem;
-  color: var(--bgcolor);
+  color: var(--lightbgcolor);
 }
 
 .btn-outline-primary {
+  background-color: var(--lightbgcolor);
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
   color: var(--purple);
@@ -233,10 +242,11 @@ input[type="number"] {
   background-color: var(--purple);
   border: 1px solid var(--purple);
   border-radius: 0.375rem;
-  color: var(--bgcolor);
+  color: var(--lightbgcolor);
 }
 
 .btn-outline-success {
+  background-color: var(--lightbgcolor);
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
   color: var(--highlight);
@@ -247,17 +257,30 @@ input[type="number"] {
   background-color: var(--highlight);
   border: 1px solid var(--highlight);
   border-radius: 0.375rem;
-  color: var(--bgcolor);
+  color: var(--lightbgcolor);
 }
 
 .btn-text:hover {
-  background-color: var(--bgcolor);
+  background-color: var(--lightbgcolor);
   color: var(--textcolor);
 }
 
 .btn-currency:hover {
   background-color: var(--highlight);
   color: var(--textcolor);
+}
+
+.btn-go-button {
+  background-color: var(--lightbgcolor);
+  border: 1px solid var(--comment);
+  color: var(--purple);
+}
+
+.btn-go-button:focus-visible,
+.btn-go-button:hover {
+  background-color: var(--purple);
+  border: 1px solid var(--purple);
+  color: var(--lightbgcolor);
 }
 
 .Expenses-card,
@@ -346,7 +369,7 @@ input[type="number"] {
 
 .popover,
 .popover-header {
-  background: var(--bgcolor);
+  background: var(--lightbgcolor);
   color: var(--textcolor);
 }
 
@@ -369,7 +392,7 @@ input[type="text"]::placeholder {
 
 .recharts-default-tooltip,
 .recharts-tooltip-wrapper {
-  background-color: var(--bgcolor);
+  background-color: var(--lightbgcolor);
   border: 1px solid var(--comment);
 }
 

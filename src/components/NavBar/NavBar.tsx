@@ -199,7 +199,7 @@ function NavBar({
                     tooltipID={"tooltip-go-to-older-budget"}
                     tooltipText={"go to older budget"}
                     buttonAriaLabel={"go to older budget"}
-                    buttonVariant={"Expenses-plus-button"}
+                    buttonVariant={"go-button"}
                     buttonIcon={<BsArrowLeft />}
                   />
                   <NavBarItem
@@ -208,7 +208,7 @@ function NavBar({
                     tooltipID={"tooltip-go-to-newer-budget"}
                     tooltipText={"go to newer budget"}
                     buttonAriaLabel={"go to newer budget"}
-                    buttonVariant={"Expenses-plus-button"}
+                    buttonVariant={"go-button"}
                     buttonIcon={<BsArrowRight />}
                   />
                 </>
