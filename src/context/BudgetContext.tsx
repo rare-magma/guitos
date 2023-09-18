@@ -37,10 +37,6 @@ const BudgetContext = createContext<BudgetContextInterface>({
 });
 
 function useBudget() {
-  if (BudgetContext === undefined) {
-    throw new Error("useBudget must be used within a Budget provider");
-  }
-
   const {
     budget,
     setBudget,

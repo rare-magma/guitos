@@ -23,10 +23,6 @@ const ConfigContext = createContext<ConfigContextInterface>({
 });
 
 function useConfig() {
-  if (ConfigContext === undefined) {
-    throw new Error("useConfig must be used within a Config provider");
-  }
-
   const { intlConfig, setIntlConfig } = useContext(ConfigContext);
   const { currency, setCurrency } = useContext(ConfigContext);
 

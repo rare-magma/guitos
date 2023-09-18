@@ -25,12 +25,10 @@ describe("ConfigProvider", () => {
     expect(getByLabelText("c").textContent).toEqual("USD");
   });
 
-  it.skip("throws error when not used within provider", () => {
+  it("throws error when not used within provider", () => {
     // configContextSpy.mockClear();
     configContextSpy.mockReset();
     cleanup();
-    expect(() => render(<TestComponent />)).toThrow(
-      "useConfig must be used within a Config provider",
-    );
+    expect(() => render(<TestComponent />)).toThrowError();
   });
 });
