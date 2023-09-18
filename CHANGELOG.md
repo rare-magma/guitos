@@ -1,3 +1,10 @@
+## [0.24.4](https://github.com/rare-magma/guitos/compare/v0.24.3...v0.24.4) (2023-09-18)
+
+
+### Bug Fixes
+
+* prevent spamming keyboard shortcuts ([aa1d081](https://github.com/rare-magma/guitos/commit/aa1d081fd9e254d4c6e3a8c2f2065deaf8064f44))
+
 ## [0.24.3](https://github.com/rare-magma/guitos/compare/v0.24.2...v0.24.3) (2023-09-17)
 
 
