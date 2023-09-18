@@ -48,15 +48,25 @@ function BudgetPage() {
 
   const { setIntlConfig, handleCurrency } = useConfig();
 
-  useHotkeys("s", () => handleExportJSON(), {
+  useHotkeys("s", (e) => !e.repeat && handleExportJSON(), {
     preventDefault: true,
   });
-  useHotkeys("d", () => handleExportCSV(), { preventDefault: true });
-  useHotkeys("a", () => !showGraphs && handleNew(), { preventDefault: true });
-  useHotkeys("c", () => !showGraphs && handleClone(), { preventDefault: true });
-  useHotkeys("i", () => !showGraphs && budget && setShowGraphs(true), {
+  useHotkeys("d", (e) => !e.repeat && handleExportCSV(), {
     preventDefault: true,
   });
+  useHotkeys("a", (e) => !e.repeat && !showGraphs && handleNew(), {
+    preventDefault: true,
+  });
+  useHotkeys("c", (e) => !e.repeat && !showGraphs && handleClone(), {
+    preventDefault: true,
+  });
+  useHotkeys(
+    "i",
+    (e) => !e.repeat && !showGraphs && budget && setShowGraphs(true),
+    {
+      preventDefault: true,
+    },
+  );
 
   function handleError(e: unknown) {
     if (e instanceof Error) setError(e.message);

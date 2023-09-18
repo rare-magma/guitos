@@ -19,7 +19,7 @@ interface GraphProps {
 function ChartsPage({ onShowGraphs }: GraphProps) {
   const { budgetList } = useBudget();
 
-  useHotkeys("i", () => onShowGraphs(), {
+  useHotkeys("i", (e) => !e.repeat && onShowGraphs(), {
     preventDefault: true,
   });
 

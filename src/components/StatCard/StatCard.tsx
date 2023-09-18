@@ -36,8 +36,12 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
   const reservesRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
 
-  useHotkeys("g", () => focusRef(goalRef), { preventDefault: true });
-  useHotkeys("e", () => focusRef(reservesRef), { preventDefault: true });
+  useHotkeys("g", (e) => !e.repeat && focusRef(goalRef), {
+    preventDefault: true,
+  });
+  useHotkeys("e", (e) => !e.repeat && focusRef(reservesRef), {
+    preventDefault: true,
+  });
 
   function handleInputChange(item: React.ChangeEvent<HTMLInputElement>) {
     let updatedStat: Stat;

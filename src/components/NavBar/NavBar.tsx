@@ -67,19 +67,34 @@ function NavBar({
   const { currency, handleCurrency } = useConfig();
   const { budget, budgetNameList } = useBudget();
 
-  useHotkeys("pageup", () => handleGoForward(), { preventDefault: true });
-  useHotkeys("pagedown", () => handleGoBack(), { preventDefault: true });
-  useHotkeys("Home", () => handleGoHome(), { preventDefault: true });
+  useHotkeys("pageup", (e) => !e.repeat && handleGoForward(), {
+    preventDefault: true,
+  });
+
+  useHotkeys("pagedown", (e) => !e.repeat && handleGoBack(), {
+    preventDefault: true,
+  });
+
+  useHotkeys("Home", (e) => !e.repeat && handleGoHome(), {
+    preventDefault: true,
+  });
+
   useHotkeys(
     ["/", "f"],
-    () =>
+    (e) =>
+      !e.repeat &&
       focusRef(typeRef as unknown as React.MutableRefObject<HTMLInputElement>),
     { preventDefault: true },
   );
-  useHotkeys("r", () => focusRef(nameRef), { preventDefault: true });
+
+  useHotkeys("r", (e) => !e.repeat && focusRef(nameRef), {
+    preventDefault: true,
+  });
+
   useHotkeys(
     "t",
-    () =>
+    (e) =>
+      !e.repeat &&
       focusRef(
         currencyRef as unknown as React.MutableRefObject<HTMLInputElement>,
       ),
