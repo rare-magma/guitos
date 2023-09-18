@@ -70,6 +70,8 @@ a:hover {
 .dropdown,
 .dropdown-item,
 .dropdown-item:focus,
+.dropdown-item.disabled,
+.dropdown-item:disabled,
 .dropdown-item:hover {
   background: var(--lightbgcolor);
   color: var(--textcolor);
