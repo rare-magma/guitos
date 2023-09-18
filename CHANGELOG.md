@@ -1,3 +1,10 @@
+## [0.24.5](https://github.com/rare-magma/guitos/compare/v0.24.4...v0.24.5) (2023-09-18)
+
+
+### Bug Fixes
+
+* no matches found dark style ([da58917](https://github.com/rare-magma/guitos/commit/da5891755c1f084aee9a47197558d26f0751df08))
+
 ## [0.24.4](https://github.com/rare-magma/guitos/compare/v0.24.3...v0.24.4) (2023-09-18)
 
 
