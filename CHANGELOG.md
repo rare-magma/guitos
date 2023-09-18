@@ -1,3 +1,10 @@
+# [0.25.0](https://github.com/rare-magma/guitos/compare/v0.24.5...v0.25.0) (2023-09-18)
+
+
+### Features
+
+* trigger notifications on budget creation, cloning and deletion ([acc9a8e](https://github.com/rare-magma/guitos/commit/acc9a8e0dcdcc89ca8cb85601b42ec2556714d01))
+
 ## [0.24.5](https://github.com/rare-magma/guitos/compare/v0.24.4...v0.24.5) (2023-09-18)
 
 
