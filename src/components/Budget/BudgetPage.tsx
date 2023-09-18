@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Budget } from "./Budget";
 import { useParams } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, ToastContainer } from "react-bootstrap";
 import {
   budgetToCsv,
   calcAutoGoal,
@@ -29,6 +29,7 @@ import ChartsPage from "../ChartsPage/ChartsPage";
 import { budgetsDB, optionsDB } from "../../context/db";
 import { useConfig } from "../../context/ConfigContext";
 import { useBudget } from "../../context/BudgetContext";
+import Notification from "../Notification/Notification";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 function BudgetPage() {
@@ -41,6 +42,14 @@ function BudgetPage() {
   const [jsonError, setJsonError] = useState<JsonError[]>([]);
   const [show, setShow] = useState(false);
 
+  const [notifications, setNotifications] = useState<
+    {
+      show: boolean;
+      id?: string;
+      body?: string;
+    }[]
+  >([]);
+
   const { budget, setBudget, budgetList, setBudgetList, setBudgetNameList } =
     useBudget();
   const params = useParams();
@@ -48,6 +57,9 @@ function BudgetPage() {
 
   const { setIntlConfig, handleCurrency } = useConfig();
 
+  useHotkeys("escape", (e) => !e.repeat && setNotifications([]), {
+    preventDefault: true,
+  });
   useHotkeys("s", (e) => !e.repeat && handleExportJSON(), {
     preventDefault: true,
   });
@@ -196,6 +208,15 @@ function BudgetPage() {
     setBudget(newBudget);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
+
+    setNotifications([
+      ...notifications,
+      {
+        show: true,
+        id: crypto.randomUUID(),
+        body: `created "${newBudget.name}" budget`,
+      },
+    ]);
   }
 
   function handleClone() {
@@ -213,6 +234,14 @@ function BudgetPage() {
         newBudgetList = newBudgetList.concat(newBudget);
       }
 
+      setNotifications([
+        ...notifications,
+        {
+          body: `cloned "${budget.name}" budget`,
+          id: crypto.randomUUID(),
+          show: true,
+        },
+      ]);
       setBudget(newBudget);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -233,6 +262,16 @@ function BudgetPage() {
           setBudgetNameList(
             createBudgetNameList(newBudgetList as unknown as Budget[]),
           );
+
+          setNotifications([
+            ...notifications,
+            {
+              body: `deleted "${budget?.name}" budget`,
+              id: crypto.randomUUID(),
+              show: true,
+            },
+          ]);
+
           if (newBudgetList.length >= 1) {
             setBudget(newBudgetList[0]);
           } else {
@@ -489,7 +528,28 @@ function BudgetPage() {
   }, [name, loading]);
 
   return (
-    <Container fluid>
+    <Container fluid style={{ zIndex: 1 }}>
+      <ToastContainer
+        className="p-2"
+        position={"bottom-end"}
+        style={{ zIndex: 100 }}
+      >
+        {notifications.map((notification) => {
+          return (
+            notification && (
+              <Notification
+                notification={notification}
+                onShow={() => {
+                  setNotifications(
+                    notifications.filter((n) => n.id !== notification.id),
+                  );
+                }}
+              />
+            )
+          );
+        })}
+      </ToastContainer>
+
       {!showGraphs && (
         <NavBar
           onRename={(e) => {

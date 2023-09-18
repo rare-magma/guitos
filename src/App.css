@@ -369,6 +369,12 @@ input[type="number"] {
   width: auto;
 }
 
+.toast-container > :not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
+.toast,
+.toast-header,
 .popover,
 .popover-header {
   background: var(--lightbgcolor);

@@ -162,6 +162,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
 | Focus reserves               | E        |
 | Change currency              | T        |
 | Toggle charts view           | I        |
+| Dismiss all notifications    | Escape   |
 
 ## Notes
 
