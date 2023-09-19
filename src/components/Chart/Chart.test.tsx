@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { testBudgetList } from "../../setupTests";
-import Chart from "./Chart";
-import { Budget } from "../Budget/Budget";
 import { vi } from "vitest";
+import { testBudgetList } from "../../setupTests";
+import { Budget } from "../Budget/Budget";
+import Chart from "./Chart";
 
 describe("Chart", () => {
   const comp = (

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import ErrorModal from "./ErrorModal";
 import { vi } from "vitest";
+import ErrorModal from "./ErrorModal";
 
 describe("ErrorModal", () => {
   const onError = vi.fn();

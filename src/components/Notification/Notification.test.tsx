@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import Notification from "./Notification";
-import { vi } from "vitest";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
+import Notification from "./Notification";
 
 describe("Notification", () => {
   const onShow = vi.fn();

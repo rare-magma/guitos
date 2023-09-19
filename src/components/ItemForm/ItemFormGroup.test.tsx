@@ -1,13 +1,13 @@
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import ItemFormGroup from "./ItemFormGroup";
 import userEvent from "@testing-library/user-event";
+import React from "react";
 import { vi } from "vitest";
 import {
   configContextSpy,
   itemForm1,
   testSpanishConfigContext,
 } from "../../setupTests";
-import React from "react";
+import ItemFormGroup from "./ItemFormGroup";
 
 describe("ItemFormGroup", () => {
   const onRemove = vi.fn();

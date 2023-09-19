@@ -1,4 +1,18 @@
+import Big from "big.js";
+import Papa from "papaparse";
 import { expect, test } from "vitest";
+import { chromeLocalesList } from "./lists/chromeLocalesList";
+import { currenciesMap } from "./lists/currenciesMap";
+import { firefoxLocalesList } from "./lists/firefoxLocalesList";
+import {
+  itemForm1,
+  itemForm2,
+  testBigBudget,
+  testBudget,
+  testBudget2,
+  testBudgetCsv,
+  testCsv,
+} from "./setupTests";
 import {
   budgetToCsv,
   calc,
@@ -17,20 +31,6 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
-import Papa from "papaparse";
-import {
-  itemForm1,
-  itemForm2,
-  testBigBudget,
-  testBudget,
-  testBudget2,
-  testBudgetCsv,
-  testCsv,
-} from "./setupTests";
-import Big from "big.js";
-import { currenciesMap } from "./lists/currenciesMap";
-import { chromeLocalesList } from "./lists/chromeLocalesList";
-import { firefoxLocalesList } from "./lists/firefoxLocalesList";
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);

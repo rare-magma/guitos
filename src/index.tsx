@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
 import { registerSW } from "virtual:pwa-register";
+import App from "./App";
+import "./index.css";
 
 const updateSW = registerSW({
   onNeedRefresh() {

@@ -1,7 +1,7 @@
 import Big from "big.js";
-import { Container, Row, Col } from "react-bootstrap";
-import { intlFormat, roundBig } from "../../utils";
+import { Col, Container, Row } from "react-bootstrap";
 import { useConfig } from "../../context/ConfigContext";
+import { intlFormat, roundBig } from "../../utils";
 
 interface ChartTooltipProps {
   active?: boolean;

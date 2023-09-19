@@ -1,12 +1,12 @@
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import BudgetPage from "./BudgetPage";
 import {
   setBudgetListMock,
   setBudgetMock,
   testBudget,
   testBudgetList,
 } from "../../setupTests";
+import BudgetPage from "./BudgetPage";
 
 describe("BudgetPage", () => {
   const comp = <BudgetPage />;

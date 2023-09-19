@@ -7,12 +7,12 @@ import {
   Popover,
   Tooltip,
 } from "react-bootstrap";
-import { BsXLg } from "react-icons/bs";
-import { ItemForm } from "./ItemForm";
 import CurrencyInput from "react-currency-input-field";
+import { BsXLg } from "react-icons/bs";
+import { useConfig } from "../../context/ConfigContext";
 import { calc, parseLocaleNumber } from "../../utils";
 import CalculateButton from "../CalculateButton/CalculateButton";
-import { useConfig } from "../../context/ConfigContext";
+import { ItemForm } from "./ItemForm";
 
 interface ItemFormProps {
   itemForm: ItemForm;

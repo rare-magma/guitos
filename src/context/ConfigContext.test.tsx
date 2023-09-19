@@ -1,6 +1,6 @@
 import { cleanup, render } from "@testing-library/react";
-import { ConfigProvider, useConfig } from "./ConfigContext";
 import { configContextSpy } from "../setupTests";
+import { ConfigProvider, useConfig } from "./ConfigContext";
 
 function TestComponent() {
   const { intlConfig, currency } = useConfig();

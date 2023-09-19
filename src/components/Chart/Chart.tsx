@@ -1,19 +1,19 @@
-import { Card, Row, Col, InputGroup, Form } from "react-bootstrap";
+import { Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import CurrencyInput from "react-currency-input-field";
+import { BsPercent } from "react-icons/bs";
 import {
+  Area,
+  AreaChart,
   ResponsiveContainer,
   Tooltip,
-  AreaChart,
   XAxis,
   YAxis,
-  Area,
 } from "recharts";
+import { useBudget } from "../../context/BudgetContext";
+import { useConfig } from "../../context/ConfigContext";
 import { intlFormat, median } from "../../utils";
 import ChartTooltip from "./ChartTooltip";
-import { BsPercent } from "react-icons/bs";
 import useDynamicYAxisWidth from "./DynamicYAxis";
-import { useConfig } from "../../context/ConfigContext";
-import { useBudget } from "../../context/BudgetContext";
 
 interface ChartProps {
   header: string;

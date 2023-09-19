@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
-import LandingPage from "./LandingPage";
-import { vi } from "vitest";
 import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 import {
   budgetContextSpy,
   testBudget,
   testEmptyBudgetContext,
 } from "../../setupTests";
+import LandingPage from "./LandingPage";
 
 describe("LandingPage", () => {
   const inputRefMock: { current: HTMLInputElement | null } = { current: null };

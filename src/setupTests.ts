@@ -3,14 +3,14 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
-import { expect, afterEach, vi } from "vitest";
-import { cleanup } from "@testing-library/react";
 import * as matchers from "@testing-library/jest-dom/matchers";
+import { cleanup } from "@testing-library/react";
 import { randomUUID } from "node:crypto";
-import { ItemForm } from "./components/ItemForm/ItemForm";
+import { afterEach, expect, vi } from "vitest";
 import { Budget } from "./components/Budget/Budget";
-import * as AppConfigContext from "./context/ConfigContext";
+import { ItemForm } from "./components/ItemForm/ItemForm";
 import * as AppBudgetContext from "./context/BudgetContext";
+import * as AppConfigContext from "./context/ConfigContext";
 
 window.crypto.randomUUID = randomUUID;
 // global.URL.createObjectURL = vi.fn();

@@ -1,4 +1,3 @@
-import { Budget } from "../Budget/Budget";
 import {
   Button,
   Col,
@@ -7,10 +6,11 @@ import {
   Row,
   Tooltip,
 } from "react-bootstrap";
-import { BsArrowLeft } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
-import Chart from "../Chart/Chart";
+import { BsArrowLeft } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
+import { Budget } from "../Budget/Budget";
+import Chart from "../Chart/Chart";
 
 interface GraphProps {
   onShowGraphs: () => void;

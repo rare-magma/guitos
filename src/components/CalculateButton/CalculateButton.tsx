@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import {
   Button,
   Dropdown,
@@ -6,11 +7,10 @@ import {
   Popover,
 } from "react-bootstrap";
 import CurrencyInput from "react-currency-input-field";
-import { BsDashLg, BsXLg, BsCheckLg, BsPlusSlashMinus } from "react-icons/bs";
-import { CgMathPlus, CgMathDivide } from "react-icons/cg";
-import { ItemForm } from "../ItemForm/ItemForm";
-import { useRef, useState } from "react";
+import { BsCheckLg, BsDashLg, BsPlusSlashMinus, BsXLg } from "react-icons/bs";
+import { CgMathDivide, CgMathPlus } from "react-icons/cg";
 import { useConfig } from "../../context/ConfigContext";
+import { ItemForm } from "../ItemForm/ItemForm";
 
 interface CalculateButtonProps {
   itemForm: ItemForm;

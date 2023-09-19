@@ -1,4 +1,4 @@
-import { Stat } from "./Stat";
+import { useRef, useState } from "react";
 import {
   Button,
   Card,
@@ -10,13 +10,13 @@ import {
   Row,
   Tooltip,
 } from "react-bootstrap";
-import { useRef, useState } from "react";
 import CurrencyInput from "react-currency-input-field";
-import { BsGear, BsGraphUp, BsPercent } from "react-icons/bs";
 import { useHotkeys } from "react-hotkeys-hook";
-import { focusRef, parseLocaleNumber } from "../../utils";
-import { useConfig } from "../../context/ConfigContext";
+import { BsGear, BsGraphUp, BsPercent } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
+import { useConfig } from "../../context/ConfigContext";
+import { focusRef, parseLocaleNumber } from "../../utils";
+import { Stat } from "./Stat";
 
 interface StatCardProps {
   onChange: (stat: Stat | undefined) => void;

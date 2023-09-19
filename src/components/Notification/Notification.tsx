@@ -1,4 +1,4 @@
-import { Button, Col, Row, Toast } from "react-bootstrap";
+import { Button, Toast } from "react-bootstrap";
 import { BsX } from "react-icons/bs";
 
 interface NotificationProps {

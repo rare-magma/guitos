@@ -1,30 +1,30 @@
 import { useEffect, useRef, useState } from "react";
 import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Typeahead } from "react-bootstrap-typeahead";
+import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
+import { Option } from "react-bootstrap-typeahead/types/types";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { useHotkeys } from "react-hotkeys-hook";
 import {
-  BsPlusLg,
-  BsXLg,
-  BsUpload,
   BsArrowLeft,
   BsArrowRight,
+  BsPlusLg,
   BsQuestionLg,
+  BsUpload,
+  BsXLg,
 } from "react-icons/bs";
 import { FaRegClone } from "react-icons/fa";
-import { Typeahead } from "react-bootstrap-typeahead";
-import { Option } from "react-bootstrap-typeahead/types/types";
-import { useHotkeys } from "react-hotkeys-hook";
-import { focusRef } from "../../utils";
+import { useBudget } from "../../context/BudgetContext";
+import { useConfig } from "../../context/ConfigContext";
 import { currenciesList } from "../../lists/currenciesList";
-import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
-import { NavBarItem } from "./NavBarItem";
+import { focusRef } from "../../utils";
 import { NavBarDelete } from "./NavBarDelete";
 import { NavBarExport } from "./NavBarExport";
-import { useConfig } from "../../context/ConfigContext";
-import { useBudget } from "../../context/BudgetContext";
+import { NavBarItem } from "./NavBarItem";
 
 interface NavBarProps {
   onClone: () => void;

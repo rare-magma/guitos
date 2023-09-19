@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
-import { useBudget, BudgetProvider } from "./BudgetContext";
 import { testBudget, testBudgetList } from "../setupTests";
+import { BudgetProvider, useBudget } from "./BudgetContext";
 
 function TestComponent() {
   const { budget, budgetList } = useBudget();
