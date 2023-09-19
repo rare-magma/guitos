@@ -531,7 +531,7 @@ function BudgetPage() {
     <Container fluid style={{ zIndex: 1 }}>
       <ToastContainer
         className="p-2"
-        position={"bottom-end"}
+        position={"bottom-center"}
         style={{ zIndex: 100 }}
       >
         {notifications.map((notification) => {

@@ -1,4 +1,4 @@
-import { Button, Toast } from "react-bootstrap";
+import { Button, Col, Row, Toast } from "react-bootstrap";
 import { BsX } from "react-icons/bs";
 
 interface NotificationProps {
@@ -15,10 +15,13 @@ function Notification({ notification, onShow }: NotificationProps) {
       autohide
       delay={3000}
     >
-      <Toast.Header key={`${notification.id}-toast-header`} closeButton={false}>
+      <Toast.Body
+        key={`${notification.id}-toast-body`}
+        className="p-2 d-flex justify-content-between align-items-center"
+      >
         <div
-          key={`${notification.id}-toast-body`}
-          className="me-auto text-truncate"
+          key={`${notification.id}-toast-body-div`}
+          className="me-2 text-truncate"
           style={{
             textOverflow: "ellipsis",
             overflow: "hidden",
@@ -28,6 +31,7 @@ function Notification({ notification, onShow }: NotificationProps) {
           {notification.body}
         </div>
         <Button
+          className="align-self-end"
           key={`${notification.id}-toast-button`}
           size="sm"
           aria-label="dismiss notification"
@@ -36,7 +40,7 @@ function Notification({ notification, onShow }: NotificationProps) {
         >
           {<BsX />}
         </Button>
-      </Toast.Header>
+      </Toast.Body>
     </Toast>
   );
 }
