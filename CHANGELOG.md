@@ -1,3 +1,10 @@
+## [0.25.1](https://github.com/rare-magma/guitos/compare/v0.25.0...v0.25.1) (2023-09-19)
+
+
+### Bug Fixes
+
+* notifications placement & styling ([8f4a5f5](https://github.com/rare-magma/guitos/commit/8f4a5f5b544ed39602068b8c93306e31a742628a))
+
 # [0.25.0](https://github.com/rare-magma/guitos/compare/v0.24.5...v0.25.0) (2023-09-18)
 
 
