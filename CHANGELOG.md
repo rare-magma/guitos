@@ -1,3 +1,10 @@
+## [0.25.2](https://github.com/rare-magma/guitos/compare/v0.25.1...v0.25.2) (2023-09-19)
+
+
+### Bug Fixes
+
+* notification border color ([2d867f3](https://github.com/rare-magma/guitos/commit/2d867f3367c76956f0c52bd53eb38d45d62a90ac))
+
 ## [0.25.1](https://github.com/rare-magma/guitos/compare/v0.25.0...v0.25.1) (2023-09-19)
 
 
