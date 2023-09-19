@@ -1,6 +1,7 @@
 import { RefObject } from "react";
-import { Button, Container, Form, Row, Spinner, Stack } from "react-bootstrap";
+import { Button, Container, Form, Row, Stack } from "react-bootstrap";
 import { useBudget } from "../../context/BudgetContext";
+import Loading from "../Loading/Loading";
 
 interface LandingPageProps {
   loading: boolean;
@@ -22,16 +23,7 @@ function LandingPage({ loading, inputRef, onNew, onImport }: LandingPageProps) {
 
   return (
     <>
-      {loading && (
-        <Container
-          fluid
-          className="position-absolute top-50 start-50 translate-middle"
-        >
-          <Row className="justify-content-center">
-            <Spinner animation="border" role="status" />
-          </Row>
-        </Container>
-      )}
+      {loading && <Loading />}
 
       {!loading && !budget && budgetList && budgetList.length < 1 && (
         <Container className="position-absolute top-50 start-50 translate-middle">

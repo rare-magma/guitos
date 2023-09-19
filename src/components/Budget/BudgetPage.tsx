@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Col, Container, Row, ToastContainer } from "react-bootstrap";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
@@ -19,9 +19,9 @@ import {
   roundBig,
   userLang,
 } from "../../utils";
-import ChartsPage from "../ChartsPage/ChartsPage";
 import ErrorModal, { CsvError, JsonError } from "../ErrorModal/ErrorModal";
 import LandingPage from "../LandingPage/LandingPage";
+import Loading from "../Loading/Loading";
 import NavBar from "../NavBar/NavBar";
 import Notification from "../Notification/Notification";
 import { Stat } from "../StatCard/Stat";
@@ -31,6 +31,8 @@ import { Income } from "../TableCard/Income";
 import TableCard from "../TableCard/TableCard";
 import { Budget } from "./Budget";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
+
+const ChartsPage = lazy(() => import("../ChartsPage/ChartsPage"));
 
 function BudgetPage() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -606,7 +608,11 @@ function BudgetPage() {
         }}
       />
 
-      {showGraphs && <ChartsPage onShowGraphs={() => setShowGraphs(false)} />}
+      {showGraphs && (
+        <Suspense fallback={<Loading />}>
+          <ChartsPage onShowGraphs={() => setShowGraphs(false)} />
+        </Suspense>
+      )}
 
       {!loading && !showGraphs && budget?.id && (
         <Container key={budget.id}>
