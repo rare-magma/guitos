@@ -1,3 +1,10 @@
+## [0.25.3](https://github.com/rare-magma/guitos/compare/v0.25.2...v0.25.3) (2023-09-19)
+
+
+### Performance Improvements
+
+* lazy load charts page ([d7c006d](https://github.com/rare-magma/guitos/commit/d7c006d737e0d62c18148ba71d17c231f045171e))
+
 ## [0.25.2](https://github.com/rare-magma/guitos/compare/v0.25.1...v0.25.2) (2023-09-19)
 
 
