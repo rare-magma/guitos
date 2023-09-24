@@ -3,6 +3,7 @@ import { MutableRefObject } from "react";
 import { Budget } from "./components/Budget/Budget";
 import { CsvItem } from "./components/Budget/CsvItem";
 import { ItemForm } from "./components/ItemForm/ItemForm";
+import { SearchOption } from "./components/NavBar/NavBar";
 import { currenciesMap } from "./lists/currenciesMap";
 
 export const userLang = navigator.language;
@@ -229,13 +230,11 @@ export function focusRef(ref: MutableRefObject<HTMLInputElement | undefined>) {
   }
 }
 
-export function createBudgetNameList(
-  list: Budget[],
-): { id: string; name: string }[] {
+export function createBudgetNameList(list: Budget[]): SearchOption[] {
   return list
-    .filter((b: Budget) => b?.id !== undefined && b.name !== undefined)
+    .filter((b: Budget) => b.id !== undefined && b.name !== undefined)
     .map((b: Budget) => {
-      return { id: b.id, name: b.name };
+      return { id: b.id, item: "", name: b.name };
     });
 }
 

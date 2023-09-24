@@ -1,5 +1,6 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 import { Budget } from "../components/Budget/Budget";
+import { SearchOption } from "../components/NavBar/NavBar";
 import { calcPercentage } from "../utils";
 
 interface BudgetContextInterface {
@@ -9,10 +10,8 @@ interface BudgetContextInterface {
   budgetList: Budget[] | undefined;
   setBudgetList: (value: Budget[] | undefined) => void;
 
-  budgetNameList: { id: string; name: string }[] | undefined;
-  setBudgetNameList: (
-    value: { id: string; name: string }[] | undefined,
-  ) => void;
+  budgetNameList: SearchOption[] | undefined;
+  setBudgetNameList: (value: SearchOption[] | undefined) => void;
 
   revenuePercentage: number;
 }
@@ -29,7 +28,7 @@ const BudgetContext = createContext<BudgetContextInterface>({
   },
 
   budgetNameList: [],
-  setBudgetNameList: (value: { id: string; name: string }[] | undefined) => {
+  setBudgetNameList: (value: SearchOption[] | undefined) => {
     value;
   },
 
@@ -71,7 +70,7 @@ function BudgetProvider({ children }: PropsWithChildren) {
   );
 
   const [budgetNameList, setBudgetNameList] = useState<
-    { id: string; name: string }[] | undefined
+    SearchOption[] | undefined
   >([]);
 
   return (

@@ -77,7 +77,7 @@ export const testBudget2 = new Budget({
     total: 50,
   },
   incomes: {
-    items: [{ id: 2, name: "name", value: 200 }],
+    items: [{ id: 2, name: "name2", value: 200 }],
     total: 200,
   },
   stats: {
@@ -90,7 +90,7 @@ export const testBudget2 = new Budget({
 });
 
 export const testBigBudget = new Budget({
-  id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+  id: "225c2de5-00a4-403c-8f0e-f81339be9a4e",
   name: "2023-03",
   expenses: {
     items: [
@@ -211,10 +211,12 @@ export const testBudgetList = [testBudget, testBudget2, testBigBudget];
 export const testBudgetNameList = [
   {
     id: testBudget.id,
+    item: "",
     name: testBudget.name,
   },
   {
     id: testBudget2.id,
+    item: "",
     name: testBudget2.name,
   },
 ];

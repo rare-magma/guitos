@@ -88,10 +88,12 @@ test("createBudgetNameList", () => {
   const expectedResult = [
     {
       id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+      item: "",
       name: "2023-03",
     },
     {
       id: "135b2ce4-00a4-403c-8f0e-f81339be9a4e",
+      item: "",
       name: "2023-04",
     },
   ];

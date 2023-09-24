@@ -157,7 +157,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
 | Go to current month's budget | Home     |
 | Go to newer budget           | PageUp   |
 | Rename current budget        | R        |
-| Search budget list           | F or /   |
+| Search                       | F or /   |
 | Focus savings goal           | G        |
 | Focus reserves               | E        |
 | Change currency              | T        |
@@ -173,6 +173,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
 - The currency is initially selected according to your browser's preferred languages.
   - Example: English (United States) browser language displays values in US Dollars. English (India) uses Indian Rupees.
   - It's possible to override it by selecting a different currency code based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+- Querying the search bar finds matching budget/expense/income names, opens the budget that contains the match and highlights it.
 
 ## Known issues
 

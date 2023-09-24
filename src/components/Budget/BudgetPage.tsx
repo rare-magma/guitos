@@ -1,7 +1,6 @@
 import Papa from "papaparse";
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Col, Container, Row, ToastContainer } from "react-bootstrap";
-import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useParams } from "react-router-dom";
 import { useBudget } from "../../context/BudgetContext";
@@ -22,7 +21,7 @@ import {
 import ErrorModal, { CsvError, JsonError } from "../ErrorModal/ErrorModal";
 import LandingPage from "../LandingPage/LandingPage";
 import Loading from "../Loading/Loading";
-import NavBar from "../NavBar/NavBar";
+import NavBar, { SearchOption } from "../NavBar/NavBar";
 import Notification from "../Notification/Notification";
 import { Stat } from "../StatCard/Stat";
 import StatCard from "../StatCard/StatCard";
@@ -43,6 +42,7 @@ function BudgetPage() {
   const [csvError, setCsvError] = useState<CsvError[]>([]);
   const [jsonError, setJsonError] = useState<JsonError[]>([]);
   const [show, setShow] = useState(false);
+  const [focus, setFocus] = useState("");
 
   const [notifications, setNotifications] = useState<
     {
@@ -285,22 +285,35 @@ function BudgetPage() {
         });
   }
 
-  function handleSelect(o: Option[] | undefined) {
-    if (o) {
-      const selectedBudget = o as unknown as Budget[];
-      const filteredList =
-        selectedBudget &&
-        budgetList?.filter((item: Budget) => item.id === selectedBudget[0].id);
+  function handleSelect(selectedBudget: SearchOption[] | undefined) {
+    if (selectedBudget && budgetList) {
+      const filteredList = budgetList.filter(
+        (item: Budget) => item.id === selectedBudget[0].id,
+      );
+
       filteredList && setBudget(filteredList[0]);
+
+      if (selectedBudget[0].item && selectedBudget[0].item.length > 0) {
+        setFocus(selectedBudget[0].item);
+      }
     }
   }
+
+  useEffect(() => {
+    const element = document.querySelector(`input[value="${focus}"]`);
+    if (element !== null) {
+      (element as HTMLElement).focus();
+    }
+  }, [focus]);
 
   function handleGo(step: number, limit: number) {
     const sortedList = budgetList?.sort((a, b) => a.name.localeCompare(b.name));
     if (budget) {
       const index = sortedList?.findIndex((b) => b.name.includes(budget.name));
       if (index !== limit && sortedList) {
-        handleSelect([sortedList[(index ?? 0) + step] as unknown as Option[]]);
+        handleSelect([
+          sortedList[(index ?? 0) + step] as unknown as SearchOption,
+        ]);
       }
     }
   }
@@ -312,7 +325,7 @@ function BudgetPage() {
         b.name.includes(name.slice(0, 7)),
       );
       if (index !== -1 && budgetList && index) {
-        handleSelect([budgetList[index] as unknown as Option[]]);
+        handleSelect([budgetList[index] as unknown as SearchOption]);
       }
     }
   }

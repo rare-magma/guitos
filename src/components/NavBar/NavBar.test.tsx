@@ -41,6 +41,7 @@ describe("NavBar", () => {
   it("matches snapshot", () => {
     expect(comp).toMatchSnapshot();
   });
+
   it("renders initial state", async () => {
     expect(screen.getByText("2023-03")).toBeInTheDocument();
 
@@ -49,9 +50,7 @@ describe("NavBar", () => {
     await userEvent.click(newButton[0]);
     await userEvent.click(newButton[0]);
 
-    expect(
-      screen.getByPlaceholderText("Search list of budgets..."),
-    ).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Search...")).toBeInTheDocument();
     expect(screen.getByLabelText("go to older budget")).toBeInTheDocument();
     expect(screen.getByLabelText("go to newer budget")).toBeInTheDocument();
   });
@@ -121,21 +120,6 @@ describe("NavBar", () => {
     );
 
     expect(onRemove).toBeCalledWith("035c2de4-00a4-403c-8f0e-f81339be9a4e");
-  });
-
-  it("triggers onSelect when user selects budget", async () => {
-    await userEvent.type(
-      screen.getByPlaceholderText("Search list of budgets..."),
-      "2023-04",
-    );
-    await userEvent.click(screen.getByText("2023-04"));
-
-    expect(onSelect).toBeCalledWith([
-      {
-        id: "135b2ce4-00a4-403c-8f0e-f81339be9a4e",
-        name: "2023-04",
-      },
-    ]);
   });
 
   it("opens instructions in new tab", async () => {

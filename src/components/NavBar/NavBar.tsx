@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Typeahead } from "react-bootstrap-typeahead";
+import { AsyncTypeahead, Typeahead } from "react-bootstrap-typeahead";
 import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import Button from "react-bootstrap/Button";
@@ -20,11 +20,19 @@ import {
 import { FaRegClone } from "react-icons/fa";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
+import { budgetsDB } from "../../context/db";
 import { currenciesList } from "../../lists/currenciesList";
 import { focusRef } from "../../utils";
+import { Budget } from "../Budget/Budget";
 import { NavBarDelete } from "./NavBarDelete";
 import { NavBarExport } from "./NavBarExport";
 import { NavBarItem } from "./NavBarItem";
+
+export interface SearchOption {
+  id: string;
+  item: string;
+  name: string;
+}
 
 interface NavBarProps {
   onClone: () => void;
@@ -36,7 +44,7 @@ interface NavBarProps {
   onNew: () => void;
   onRemove: (name: string) => void;
   onRename: (name?: string | null) => void;
-  onSelect: (budget: Option[]) => void;
+  onSelect: (option: SearchOption[]) => void;
 }
 
 function NavBar({
@@ -66,6 +74,8 @@ function NavBar({
 
   const { currency, handleCurrency } = useConfig();
   const { budget, budgetNameList } = useBudget();
+
+  const [options, setOptions] = useState<Option[]>([]);
 
   useHotkeys("pageup", (e) => !e.repeat && handleGoForward(), {
     preventDefault: true,
@@ -144,9 +154,9 @@ function NavBar({
     }
   }
 
-  function handleSelect(budget: Option[]) {
+  function handleSelect(option: Option[]) {
     setExpanded(false);
-    onSelect(budget);
+    onSelect(option as SearchOption[]);
     if (typeRef.current) {
       typeRef.current.clear();
     }
@@ -169,6 +179,46 @@ function NavBar({
     if (newName) {
       onRename(newName);
     }
+  }
+
+  function handleSearch() {
+    let options: SearchOption[] = [];
+
+    budgetsDB
+      .iterate((value) => {
+        options = options.concat(
+          (value as Budget).incomes.items.map((i) => {
+            return {
+              id: (value as Budget).id,
+              name: (value as Budget).name,
+              item: i.name,
+            };
+          }),
+          (value as Budget).expenses.items.map((i) => {
+            return {
+              id: (value as Budget).id,
+              name: (value as Budget).name,
+              item: i.name,
+            };
+          }),
+        );
+      })
+      .then(() => {
+        if (budgetNameList) {
+          options = options.concat(budgetNameList);
+        }
+        setOptions(
+          options.sort((a, b) => a.name.localeCompare(b.name)).reverse(),
+        );
+      })
+      .catch((e) => {
+        throw new Error(e as string);
+      });
+  }
+
+  function getLabelKey(option: unknown): string {
+    const label = option as SearchOption;
+    return label.item ? `${label.name} ${label.item}` : `${label.name}`;
   }
 
   return (
@@ -284,20 +334,20 @@ function NavBar({
             <Nav>
               <Nav className="m-2">
                 {budgetNameList && budgetNameList.length > 1 && (
-                  <Typeahead
+                  <AsyncTypeahead
                     id="search-budget-list"
-                    filterBy={["name"]}
-                    labelKey="name"
+                    filterBy={["name", "item"]}
+                    labelKey={getLabelKey}
                     ref={typeRef}
                     style={expanded ? {} : { minWidth: "10ch" }}
-                    onChange={(budget: Option[]) => {
-                      handleSelect(budget);
+                    onChange={(option: Option[]) => {
+                      handleSelect(option);
                     }}
                     className="w-100"
-                    options={budgetNameList
-                      .sort((a, b) => a.name.localeCompare(b.name))
-                      .reverse()}
-                    placeholder="Search list of budgets..."
+                    options={options}
+                    placeholder="Search..."
+                    isLoading={false}
+                    onSearch={handleSearch}
                   />
                 )}
               </Nav>
