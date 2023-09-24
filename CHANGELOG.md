@@ -1,3 +1,10 @@
+# [0.26.0](https://github.com/rare-magma/guitos/compare/v0.25.3...v0.26.0) (2023-09-24)
+
+
+### Features
+
+* improve search by matching item names ([7162974](https://github.com/rare-magma/guitos/commit/71629743d7ec642921d44f74fc6f1920b0947701))
+
 ## [0.25.3](https://github.com/rare-magma/guitos/compare/v0.25.2...v0.25.3) (2023-09-19)
 
 
