@@ -17,6 +17,7 @@ import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { focusRef, parseLocaleNumber } from "../../utils";
 import { Stat } from "./Stat";
+import "./StatCard.css";
 
 interface StatCardProps {
   onChange: (stat: Stat | undefined) => void;
@@ -96,7 +97,6 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
                 now={revenuePercentage}
                 label={`${revenuePercentage}%`}
                 visuallyHidden
-                style={{ height: "3px" }}
               />
             </Col>
           </OverlayTrigger>

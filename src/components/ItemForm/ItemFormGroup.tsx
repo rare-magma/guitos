@@ -13,6 +13,7 @@ import { useConfig } from "../../context/ConfigContext";
 import { calc, parseLocaleNumber } from "../../utils";
 import CalculateButton from "../CalculateButton/CalculateButton";
 import { ItemForm } from "./ItemForm";
+import "./ItemFormGroup.css";
 
 interface ItemFormProps {
   itemForm: ItemForm;

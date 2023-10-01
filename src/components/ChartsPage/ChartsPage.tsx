@@ -41,7 +41,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
         <Button
           className="me-1 mb-1 mt-3"
           aria-label={"go back to budgets"}
-          variant={"Expenses-plus-button"}
+          variant={"go-button"}
           onClick={handleShowGraphs}
         >
           <BsArrowLeft />

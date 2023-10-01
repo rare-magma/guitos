@@ -1,5 +1,6 @@
 import { Button, Toast } from "react-bootstrap";
 import { BsX } from "react-icons/bs";
+import "./Notification.css";
 
 interface NotificationProps {
   notification: { show: boolean; id?: string; body?: string };

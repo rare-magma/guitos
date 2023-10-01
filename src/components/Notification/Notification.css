@@ -1,0 +1,9 @@
+.toast-container > :not(:last-child) {
+  margin-bottom: 0.75rem;
+}
+
+.toast {
+  background: var(--lightbgcolor);
+  border: 1px solid var(--comment);
+  color: var(--textcolor);
+}

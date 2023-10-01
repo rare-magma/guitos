@@ -11,6 +11,7 @@ import { BsCheckLg, BsDashLg, BsPlusSlashMinus, BsXLg } from "react-icons/bs";
 import { CgMathDivide, CgMathPlus } from "react-icons/cg";
 import { useConfig } from "../../context/ConfigContext";
 import { ItemForm } from "../ItemForm/ItemForm";
+import "./CalculateButton.css";
 
 interface CalculateButtonProps {
   itemForm: ItemForm;

@@ -1,0 +1,31 @@
+.dropdown,
+.dropdown-item,
+.dropdown-item:focus,
+.dropdown-item.disabled,
+.dropdown-item:disabled,
+.dropdown-item:hover {
+  background: var(--lightbgcolor);
+  color: var(--textcolor);
+}
+
+.dropdown-item:focus,
+.dropdown-item:focus-visible,
+.dropdown-item:hover {
+  background: var(--lightbgcolor);
+  border: 1px solid var(--pink);
+  box-shadow: 0 0 0;
+  color: var(--textcolor);
+}
+
+.dropdown-menu {
+  min-width: inherit;
+  overflow-x: hidden !important;
+}
+
+.dropdown-menu,
+.dropdown-menu.show {
+  background: var(--lightbgcolor);
+  border: 0 solid var(--comment);
+  border-radius: 0.375rem;
+  color: var(--textcolor);
+}

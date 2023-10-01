@@ -1,0 +1,80 @@
+.brand {
+  color: var(--textcolor);
+}
+
+.btn-go-button {
+  background-color: var(--lightbgcolor);
+  border: 1px solid var(--comment);
+  color: var(--purple);
+}
+
+.btn-go-button:focus-visible,
+.btn-go-button:hover {
+  background-color: var(--purple);
+  border: 1px solid var(--purple);
+  color: var(--lightbgcolor);
+}
+
+.btn-outline-danger {
+  background-color: var(--lightbgcolor);
+  border: 1px solid var(--comment);
+  border-radius: 0.375rem;
+  color: var(--red);
+}
+
+.btn-outline-danger:focus-visible,
+.btn-outline-danger:hover {
+  background-color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 0.375rem;
+  color: var(--lightbgcolor);
+}
+
+.btn-outline-info {
+  background-color: var(--lightbgcolor);
+  border: 1px solid var(--comment);
+  border-radius: 0.375rem;
+  color: var(--cyan);
+}
+
+.btn-outline-info:focus-visible,
+.btn-outline-info:hover {
+  background-color: var(--cyan);
+  border: 1px solid var(--cyan);
+  border-radius: 0.375rem;
+  color: var(--lightbgcolor);
+}
+
+/* Search input placeholder */
+input[type="text"]::placeholder {
+  color: var(--comment);
+  opacity: 1;
+}
+
+.navbar,
+.offcanvas-body,
+.offcanvas-header {
+  background: var(--bgcolor);
+  color: var(--textcolor);
+}
+
+.navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>💸</text></svg>");
+}
+
+.navbar-toggler {
+  border: 1px solid var(--comment);
+  border-radius: 0.375rem;
+}
+
+.version {
+  color: var(--selection);
+  font-family:
+    ui-monospace,
+    SF Mono,
+    Menlo,
+    Monaco,
+    Andale Mono,
+    monospace;
+  font-size: 0.9em;
+}

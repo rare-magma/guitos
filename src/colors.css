@@ -1,0 +1,36 @@
+@media (prefers-color-scheme: dark) {
+  * {
+    --textcolor: #f8f8f2;
+    --bgcolor: #21222c;
+    --bs-body-color: #21222c;
+    --lightbgcolor: #282a36;
+    --highlight: #50fa7b;
+    --bs-success: #50fa7b;
+    --red: #ff5555;
+    --orange: #ffb86c;
+    --yellow: #f1fa8c;
+    --purple: #bd93f9;
+    --cyan: #8be9fd;
+    --pink: #ff79c6;
+    --selection: #44475a;
+    --comment: #6272a4;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  * {
+    --bgcolor: #eaebf9;
+    --lightbgcolor: #f8f8f2;
+    --textcolor: #282a36;
+    --highlight: #008504;
+    --bs-success: #008504;
+    --red: #d82f39;
+    --orange: #a0651b;
+    --yellow: #6c7908;
+    --purple: #855fbf;
+    --cyan: #007e90;
+    --pink: #c13f8e;
+    --selection: #c5c8de;
+    --comment: #7e8ec2;
+  }
+}

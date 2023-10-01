@@ -1,0 +1,67 @@
+.accordion-button:after,
+.accordion-button:not(.collapsed):after {
+  filter: invert(58%) sepia(93%) saturate(2284%) hue-rotate(322deg)
+    brightness(95%) contrast(112%);
+}
+
+.accordion-button,
+.accordion-button:after,
+.accordion-button:not(.collapsed):after,
+.accordion-flush,
+.accordion-item,
+.modal-item {
+  border-radius: 0.375rem;
+}
+
+.accordion-button:focus,
+.accordion-item:focus {
+  border-radius: 0.375rem;
+  box-shadow: 0 0 0 0.2rem rgba(189, 147, 249, 0.25);
+}
+
+.accordion,
+.accordion-button,
+.accordion-button:focus,
+.accordion-item,
+.accordion-item:focus {
+  background: var(--lightbgcolor);
+  border: 0 solid var(--comment);
+  border-radius: 0.375rem;
+  color: var(--textcolor);
+}
+
+.btn-delete-modal {
+  background-color: var(--lightbgcolor);
+  border: 1px solid var(--comment);
+  border-radius: 0.375rem;
+  color: var(--red);
+}
+
+.btn-delete-modal:focus-visible,
+.btn-delete-modal:hover {
+  background-color: var(--red);
+  border: 1px solid var(--red);
+  border-radius: 0.375rem;
+  color: var(--lightbgcolor);
+}
+
+.modal-90w {
+  max-width: none !important;
+  width: 90%;
+}
+
+.modal-body {
+  max-height: 65vh;
+  overflow: auto;
+}
+
+.modal-content,
+.modal-item {
+  background: var(--lightbgcolor);
+  border: 1px solid var(--comment);
+  color: var(--textcolor);
+}
+
+.modal-header {
+  border-bottom: 0;
+}

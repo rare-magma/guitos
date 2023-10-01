@@ -1,0 +1,5 @@
+.recharts-default-tooltip,
+.recharts-tooltip-wrapper {
+  background-color: var(--lightbgcolor);
+  border: 1px solid var(--comment);
+}

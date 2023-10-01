@@ -1,6 +1,7 @@
 import { ParseError } from "papaparse";
 import { Accordion, Button, Modal } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
+import "./ErrorModal.css";
 
 export interface CsvError {
   errors: ParseError[];
@@ -109,7 +110,7 @@ function ErrorModal({
                     {jsonError.file}
                   </Accordion.Header>
                   <Accordion.Body
-                    className="textarea code mx-1"
+                    className="textarea fixed-width-font mx-1"
                     key={`${jsonError.file}-body-${i}`}
                   >
                     <p className="code" key={`${jsonError.file}-error-${i}`}>
@@ -167,7 +168,7 @@ function ErrorModal({
                     {csvError.file}
                   </Accordion.Header>
                   <Accordion.Body
-                    className="textarea code mx-1"
+                    className="textarea fixed-width-font mx-1"
                     key={`${csvError.file}-body-${i}`}
                   >
                     <p className="code" key={`${csvError.file}-csverror-${i}`}>

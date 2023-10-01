@@ -12,6 +12,7 @@ import {
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { intlFormat, median } from "../../utils";
+import "./Chart.css";
 import ChartTooltip from "./ChartTooltip";
 import useDynamicYAxisWidth from "./DynamicYAxis";
 

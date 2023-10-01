@@ -16,6 +16,7 @@ import { ItemForm } from "../ItemForm/ItemForm";
 import ItemFormGroup from "../ItemForm/ItemFormGroup";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
+import "./TableCard.css";
 
 interface TableCardProps {
   items: Income | Expense;

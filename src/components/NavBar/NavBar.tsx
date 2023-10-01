@@ -24,6 +24,7 @@ import { budgetsDB } from "../../context/db";
 import { currenciesList } from "../../lists/currenciesList";
 import { focusRef } from "../../utils";
 import { Budget } from "../Budget/Budget";
+import "./NavBar.css";
 import { NavBarDelete } from "./NavBarDelete";
 import { NavBarExport } from "./NavBarExport";
 import { NavBarItem } from "./NavBarItem";

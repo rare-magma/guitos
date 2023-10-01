@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Button, Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
+import "./NavBar.css";
 
 interface NavItemProps {
   itemClassName: string;

@@ -1,0 +1,13 @@
+.auto-goal {
+  border: 1px solid var(--comment);
+  border-radius: 0.375rem;
+}
+
+.progress {
+  background-color: var(--comment);
+  height: 3px;
+}
+
+.progress-bar {
+  background-color: var(--pink);
+}

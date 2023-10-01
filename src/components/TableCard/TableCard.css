@@ -1,0 +1,33 @@
+.btn-Expenses-plus-button {
+  border: 1px solid var(--comment);
+  color: var(--purple);
+}
+
+.btn-Expenses-plus-button:focus-visible,
+.btn-Expenses-plus-button:hover {
+  background-color: var(--purple);
+  border: 1px solid var(--purple);
+  color: var(--lightbgcolor);
+}
+
+.btn-Revenue-plus-button {
+  border: 1px solid var(--comment);
+  color: var(--highlight);
+}
+
+.btn-Revenue-plus-button:focus-visible,
+.btn-Revenue-plus-button:hover {
+  background-color: var(--highlight);
+  border: 1px solid var(--highlight);
+  color: var(--lightbgcolor);
+}
+
+.Expenses-card,
+.Revenue-card {
+  border: 1px solid var(--comment);
+}
+
+.Expenses-card-header,
+.Revenue-card-header {
+  border-bottom: 1px solid var(--comment);
+}
