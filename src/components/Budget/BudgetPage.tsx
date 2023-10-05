@@ -57,6 +57,8 @@ function BudgetPage() {
   const params = useParams();
   const name = String(params.name);
 
+  const showCards = !loading && !showGraphs && budget?.id;
+
   const { setIntlConfig, handleCurrency } = useConfig();
 
   useHotkeys("escape", (e) => !e.repeat && setNotifications([]), {
@@ -324,7 +326,9 @@ function BudgetPage() {
       const index = budgetList?.findIndex((b) =>
         b.name.includes(name.slice(0, 7)),
       );
-      if (index !== -1 && budgetList && index) {
+      const isSelectable = index !== -1 && budgetList && index;
+
+      if (isSelectable) {
         handleSelect([budgetList[index] as unknown as SearchOption]);
       }
     }
@@ -344,7 +348,10 @@ function BudgetPage() {
       header: true,
       skipEmptyLines: "greedy",
     });
-    if (csvObject.errors.length > 0) {
+
+    const hasErrors = csvObject.errors.length > 0;
+
+    if (hasErrors) {
       csvError.push({
         errors: csvObject.errors,
         file: file.name,
@@ -355,6 +362,7 @@ function BudgetPage() {
 
       return;
     }
+
     const newBudget = convertCsvToBudget(
       csvObject.data as string[],
       file.name.slice(0, -4),
@@ -522,7 +530,10 @@ function BudgetPage() {
 
   useEffect(() => {
     try {
-      if (budgetList && budgetList.length >= 1 && Array.isArray(budgetList)) {
+      const shouldLoadBudgetsFromList =
+        budgetList && budgetList.length >= 1 && Array.isArray(budgetList);
+
+      if (shouldLoadBudgetsFromList) {
         if (name.trim() !== "undefined") {
           loadBudget(budgetList.filter((b: Budget) => b && b.name === name));
         } else {
@@ -627,7 +638,7 @@ function BudgetPage() {
         </Suspense>
       )}
 
-      {!loading && !showGraphs && budget?.id && (
+      {showCards && (
         <Container key={budget.id}>
           <Row className="mt-1">
             <Col md="6">

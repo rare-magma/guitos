@@ -32,6 +32,9 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
   const [stat, setStat] = useState(budget?.stats);
   const [autoGoal, setAutoGoal] = useState(false);
 
+  const shouldCalculateAvailablePerc =
+    revenuePercentage <= 100 && stat && stat.available > 0;
+
   const goalRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
   const reservesRef =
@@ -159,9 +162,7 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
             }
           >
             <InputGroup.Text>
-              {revenuePercentage <= 100 && stat && stat.available > 0
-                ? 100 - revenuePercentage
-                : 0}
+              {shouldCalculateAvailablePerc ? 100 - revenuePercentage : 0}
 
               <BsPercent />
             </InputGroup.Text>

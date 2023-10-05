@@ -78,6 +78,10 @@ function NavBar({
 
   const [options, setOptions] = useState<Option[]>([]);
 
+  const shouldShowBrand = budgetNameList && budgetNameList.length < 1;
+  const hasOneOrMoreBudgets = budgetNameList && budgetNameList.length > 0;
+  const hasMultipleBudgets = budgetNameList && budgetNameList.length > 1;
+
   useHotkeys("pageup", (e) => !e.repeat && handleGoForward(), {
     preventDefault: true,
   });
@@ -231,7 +235,7 @@ function NavBar({
       data-testid="header"
     >
       <Container fluid className="flex-row">
-        {budgetNameList && budgetNameList.length < 1 && (
+        {shouldShowBrand && (
           <OverlayTrigger
             delay={250}
             placement="bottom"
@@ -254,10 +258,11 @@ function NavBar({
             </Navbar.Brand>
           </OverlayTrigger>
         )}
+
         <Nav className="flex-row flex-grow-1">
           {budget?.name && (
             <Nav className="flex-row">
-              {budgetNameList && budgetNameList.length > 1 && (
+              {hasMultipleBudgets && (
                 <>
                   <NavBarItem
                     itemClassName={"me-1 my-2"}
@@ -313,6 +318,7 @@ function NavBar({
             />
           </Nav>
         </Nav>
+
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-md`}
           aria-labelledby={`offcanvasNavbarLabel-expand-md`}
@@ -334,7 +340,7 @@ function NavBar({
           <Offcanvas.Body className="justify-content-end">
             <Nav>
               <Nav className="m-2">
-                {budgetNameList && budgetNameList.length > 1 && (
+                {hasMultipleBudgets && (
                   <AsyncTypeahead
                     id="search-budget-list"
                     filterBy={["name", "item"]}
@@ -366,7 +372,7 @@ function NavBar({
                 buttonVariant={"outline-success"}
                 buttonIcon={expanded ? "new" : <BsPlusLg />}
               />
-              {budgetNameList && budgetNameList.length > 0 && (
+              {hasOneOrMoreBudgets && (
                 <>
                   <NavBarItem
                     itemClassName={"m-2"}
@@ -385,6 +391,7 @@ function NavBar({
                   />
                 </>
               )}
+
               <Nav className="m-2" as="li">
                 <OverlayTrigger
                   delay={250}
@@ -420,7 +427,8 @@ function NavBar({
                   </Form.Group>
                 </OverlayTrigger>
               </Nav>
-              {budgetNameList && budgetNameList.length > 0 && (
+
+              {hasOneOrMoreBudgets && (
                 <>
                   <NavBarExport
                     exportButtonRef={exportButtonRef}
@@ -458,6 +466,7 @@ function NavBar({
                   </Nav>
                 </>
               )}
+
               <NavBarItem
                 itemClassName={"m-2"}
                 onClick={() => {

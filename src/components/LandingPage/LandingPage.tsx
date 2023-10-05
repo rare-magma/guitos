@@ -12,6 +12,8 @@ interface LandingPageProps {
 
 function LandingPage({ loading, inputRef, onNew, onImport }: LandingPageProps) {
   const { budget, budgetList } = useBudget();
+  const showLandingPage =
+    !loading && !budget && budgetList && budgetList.length < 1;
 
   function handleNew() {
     onNew();
@@ -25,7 +27,7 @@ function LandingPage({ loading, inputRef, onNew, onImport }: LandingPageProps) {
     <>
       {loading && <Loading />}
 
-      {!loading && !budget && budgetList && budgetList.length < 1 && (
+      {showLandingPage && (
         <Container className="position-absolute top-50 start-50 translate-middle">
           <Row className="justify-content-center align-content-center">
             <Stack gap={3}>

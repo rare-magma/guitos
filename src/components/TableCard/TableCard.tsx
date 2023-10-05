@@ -34,22 +34,25 @@ function TableCard({
   const { budget, revenuePercentage } = useBudget();
   const inputRef = useRef<HTMLInputElement>(null);
   const { intlConfig } = useConfig();
+  const isRevenue = label === "Revenue";
+  const isExpense = label === "Expenses";
 
   function addTable(tableBeingEdited: Income | Expense) {
-    let newTable;
+    const tableHasItems = table && table.items.length !== 0;
+    const newItemForm = new ItemForm();
 
-    if (label === "Revenue") {
+    let newTable;
+    let maxId;
+
+    if (isRevenue) {
       newTable = new Income();
-    } else if (label === "Expenses") {
+    } else if (isExpense) {
       newTable = new Expense();
     } else {
       throw new Error("Messed up table type");
     }
 
-    const newItemForm = new ItemForm();
-
-    let maxId;
-    if (table && table.items.length !== 0) {
+    if (tableHasItems) {
       maxId = Math.max(
         ...table.items.map((i) => {
           return i.id;
@@ -73,16 +76,19 @@ function TableCard({
 
   function removeTable(toBeDeleted: ItemForm) {
     let newTable;
-    if (toBeDeleted.constructor.name === "Income") {
+    const isIncome = toBeDeleted.constructor.name === "Income";
+
+    if (isIncome) {
       newTable = new Income();
     } else {
       newTable = new Expense();
     }
+
     newTable.items = table.items.filter(
       (item: { id: number }) => item.id !== toBeDeleted.id,
     );
-    newTable.total = roundBig(calcTotal(newTable.items), 2);
 
+    newTable.total = roundBig(calcTotal(newTable.items), 2);
     setTable(newTable);
     setTotal(roundBig(calcTotal(newTable.items), 2));
     onChange(newTable);
@@ -90,11 +96,14 @@ function TableCard({
 
   function handleChange(item: ItemForm) {
     let newTable;
-    if (item.constructor.name === "Income") {
+    const isIncome = item.constructor.name === "Income";
+
+    if (isIncome) {
       newTable = new Income();
     } else {
       newTable = new Expense();
     }
+
     newTable.items = table.items.map((i) => {
       if (i.id === item.id) {
         return {
@@ -105,6 +114,7 @@ function TableCard({
       }
       return i;
     });
+
     newTable.total = roundBig(calcTotal(newTable.items), 2);
 
     setTable(newTable);
@@ -121,7 +131,7 @@ function TableCard({
         <OverlayTrigger
           placement="top"
           overlay={
-            label === "Expenses" ? (
+            isExpense ? (
               <Tooltip
                 id={`tooltip-value-${label}`}
                 style={{ position: "fixed" }}

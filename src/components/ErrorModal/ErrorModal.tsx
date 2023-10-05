@@ -30,6 +30,10 @@ function ErrorModal({
   onError,
   onShow,
 }: ErrorModalProps) {
+  const showModal = error && show;
+  const showJsonError = jsonError && jsonError.length > 0 && show;
+  const showCsvError = csvError && csvError.length > 0 && show;
+
   function handleShow(value: boolean) {
     onShow(value);
   }
@@ -40,7 +44,7 @@ function ErrorModal({
 
   return (
     <>
-      {error && show && (
+      {showModal && (
         <Modal
           data-testid="error-modal"
           dialogClassName="modal-90w mx-auto"
@@ -69,7 +73,7 @@ function ErrorModal({
         </Modal>
       )}
 
-      {jsonError && jsonError.length > 0 && show && (
+      {showJsonError && (
         <Modal
           key="json-error-modal"
           data-testid="json-error-modal"
@@ -127,7 +131,7 @@ function ErrorModal({
         </Modal>
       )}
 
-      {csvError && csvError.length > 0 && show && (
+      {showCsvError && (
         <Modal
           key="csv-error-modal"
           data-testid="csv-error-modal"

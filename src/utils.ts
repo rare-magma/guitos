@@ -15,7 +15,10 @@ export function getCountryCode(locale: string): string {
 }
 
 export function getCurrencyCode(country: string): string {
-  if (currenciesMap[country as keyof typeof currenciesMap] !== undefined) {
+  const countryIsInMap =
+    currenciesMap[country as keyof typeof currenciesMap] !== undefined;
+
+  if (countryIsInMap) {
     return currenciesMap[
       country as keyof typeof currenciesMap
     ] as unknown as string;
@@ -43,7 +46,9 @@ export function calcPercentage(
   itemValue: number,
   revenueTotal: number,
 ): number {
-  if (!isNaN(revenueTotal) && revenueTotal > 0 && !isNaN(itemValue)) {
+  const areRoundableNumbers =
+    !isNaN(revenueTotal) && revenueTotal > 0 && !isNaN(itemValue);
+  if (areRoundableNumbers) {
     const percentage = Big(itemValue).mul(100).div(revenueTotal);
 
     return roundBig(percentage, percentage.gte(1) ? 0 : 1);
@@ -57,7 +62,9 @@ export function calc(
   operation: string,
 ): number {
   let total = 0;
-  if (!isNaN(itemValue) && change > 0) {
+  const isActionableChange = !isNaN(itemValue) && change > 0;
+
+  if (isActionableChange) {
     let newValue = Big(itemValue);
     const changeValue = Big(change);
     switch (operation) {
@@ -96,7 +103,10 @@ export function calcAvailable(value: Budget | null): Big {
 }
 
 export function calcWithGoal(value: Budget): number {
-  if (value.stats.goal !== null && !isNaN(value.stats.goal)) {
+  const goalIsCalculable =
+    value.stats.goal !== null && !isNaN(value.stats.goal);
+
+  if (goalIsCalculable) {
     const available = calcAvailable(value);
     const availableWithGoal = Big(value.stats.goal)
       .mul(calcTotal(value.incomes.items))
@@ -107,7 +117,10 @@ export function calcWithGoal(value: Budget): number {
 }
 
 export function calcSaved(value: Budget): number {
-  if (value.stats.goal !== null && !isNaN(value.stats.goal)) {
+  const valueIsCalculable =
+    value.stats.saved !== null && !isNaN(value.stats.goal);
+
+  if (valueIsCalculable) {
     const available = calcTotal(value.incomes.items);
     const saved = Big(value.stats.goal).mul(available).div(100);
     return roundBig(saved, 2);
@@ -116,7 +129,10 @@ export function calcSaved(value: Budget): number {
 }
 
 export function calcAutoGoal(value: Budget): number {
-  if (value.stats.goal !== null && !isNaN(value.stats.goal)) {
+  const valueIsCalculable =
+    value.stats.goal !== null && !isNaN(value.stats.goal);
+
+  if (valueIsCalculable) {
     const incomeTotal = calcTotal(value.incomes.items);
     const available = calcAvailable(value);
 
@@ -279,6 +295,7 @@ export function budgetToCsv(budget: Budget) {
 
 export function median(arr: number[]): number {
   if (!arr.length) return 0;
+
   const s = [...arr].sort((a, b) => Big(a).minus(b).toNumber());
   const mid = Math.floor(s.length / 2);
   return s.length % 2 === 0
