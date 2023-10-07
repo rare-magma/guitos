@@ -4,7 +4,7 @@
 <summary>Table of Contents</summary>
 
 - [About](#about)
-- [Published On](#published)
+- [Published On](#published-on)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
