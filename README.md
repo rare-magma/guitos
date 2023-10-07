@@ -4,6 +4,7 @@
 <summary>Table of Contents</summary>
 
 - [About](#about)
+- [Published On](#published)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -52,6 +53,14 @@ It stores data in your browser's local storage ([IndexedDB](https://developer.mo
 guitos was initially created to replace a spreadsheet and as an opportunity to learn React.
 
 guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cash.
+
+## Published On
+
+- [Show HN](https://news.ycombinator.com/item?id=35778328#35786940)
+- [producthunt.com](https://www.producthunt.com/products/guitos)
+- [store.app](https://store.app/guitos-app)
+- [r/SideProject](https://www.reddit.com/r/SideProject/comments/15w7v3g/guitos_a_simple_budgeting_app_that_helps_you/)
+- [r/reactjs](https://www.reddit.com/r/reactjs/comments/12s9yph/guitos_a_simple_budgeting_app_that_helps_you/)
 
 ## Getting Started
 
