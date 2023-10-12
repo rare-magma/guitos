@@ -271,7 +271,7 @@ function NavBar({
                     tooltipText={"go to older budget"}
                     buttonAriaLabel={"go to older budget"}
                     buttonVariant={"go-button"}
-                    buttonIcon={<BsArrowLeft />}
+                    buttonIcon={<BsArrowLeft aria-hidden />}
                   />
                   <NavBarItem
                     itemClassName={"m-2"}
@@ -280,7 +280,7 @@ function NavBar({
                     tooltipText={"go to newer budget"}
                     buttonAriaLabel={"go to newer budget"}
                     buttonVariant={"go-button"}
-                    buttonIcon={<BsArrowRight />}
+                    buttonIcon={<BsArrowRight aria-hidden />}
                   />
                 </>
               )}
@@ -321,7 +321,6 @@ function NavBar({
 
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand-md`}
-          aria-labelledby={`offcanvasNavbarLabel-expand-md`}
           placement="end"
           show={expanded}
         >
@@ -334,7 +333,7 @@ function NavBar({
               variant="outline-secondary"
               onClick={() => setExpanded(false)}
             >
-              {<BsXLg />}
+              {<BsXLg aria-hidden />}
             </Button>
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end">
@@ -370,7 +369,7 @@ function NavBar({
                 buttonAriaLabel={"new budget"}
                 buttonClassName="w-100"
                 buttonVariant={"outline-success"}
-                buttonIcon={expanded ? "new" : <BsPlusLg />}
+                buttonIcon={expanded ? "new" : <BsPlusLg aria-hidden />}
               />
               {hasOneOrMoreBudgets && (
                 <>
@@ -382,7 +381,7 @@ function NavBar({
                     buttonAriaLabel={"clone budget"}
                     buttonClassName="w-100"
                     buttonVariant={"outline-success"}
-                    buttonIcon={expanded ? "clone" : <FaRegClone />}
+                    buttonIcon={expanded ? "clone" : <FaRegClone aria-hidden />}
                   />
                   <NavBarDelete
                     deleteButtonRef={deleteButtonRef}
@@ -392,7 +391,7 @@ function NavBar({
                 </>
               )}
 
-              <Nav className="m-2" as="li">
+              <Nav className="m-2">
                 <OverlayTrigger
                   delay={250}
                   placement="bottom"
@@ -414,7 +413,7 @@ function NavBar({
                         importRef.current?.click();
                       }}
                     >
-                      {expanded ? "import" : <BsUpload />}
+                      {expanded ? "import" : <BsUpload aria-hidden />}
                     </Button>
                     <Form.Control
                       data-testid="import-form-control"
@@ -436,10 +435,9 @@ function NavBar({
                     handleExport={handleExport}
                     expanded={expanded}
                   />
-                  <Nav className="m-2">
+                  <Nav className="m-2" aria-label="select currency">
                     <Typeahead
                       id="currency-option-list"
-                      aria-label="select currency option"
                       ref={currencyRef}
                       maxResults={currenciesList.length}
                       maxHeight="30vh"
@@ -478,7 +476,9 @@ function NavBar({
                 buttonClassName="w-100"
                 buttonVariant={"outline-info"}
                 buttonLink="https://github.com/rare-magma/guitos#getting-started"
-                buttonIcon={expanded ? "instructions" : <BsQuestionLg />}
+                buttonIcon={
+                  expanded ? "instructions" : <BsQuestionLg aria-hidden />
+                }
                 target="_blank"
               />
               <OverlayTrigger

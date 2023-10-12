@@ -137,7 +137,7 @@ function Chart({
                 disabled
               />
               <InputGroup.Text>
-                <BsPercent />
+                <BsPercent aria-hidden />
               </InputGroup.Text>
             </InputGroup>
           )}

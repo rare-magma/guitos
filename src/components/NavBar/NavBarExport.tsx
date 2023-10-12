@@ -90,7 +90,7 @@ export function NavBarExport({
             }, 0);
           }}
         >
-          {expanded ? "export" : <BsDownload />}
+          {expanded ? "export" : <BsDownload aria-hidden />}
         </Button>
       </OverlayTrigger>
     </Nav>

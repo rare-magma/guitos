@@ -39,7 +39,7 @@ function Notification({ notification, onShow }: NotificationProps) {
           variant="outline-secondary"
           onClick={() => onShow()}
         >
-          {<BsX />}
+          {<BsX aria-hidden />}
         </Button>
       </Toast.Body>
     </Toast>

@@ -48,7 +48,7 @@ export function NavBarDelete({
                     budget?.id && handleRemove(budget.id);
                   }}
                 >
-                  {expanded ? "delete budget" : <BsXLg />}
+                  {expanded ? "delete budget" : <BsXLg aria-hidden />}
                 </Button>
               </OverlayTrigger>
             </Popover.Body>
@@ -65,7 +65,7 @@ export function NavBarDelete({
             }, 0);
           }}
         >
-          {expanded ? "delete" : <BsXLg />}
+          {expanded ? "delete" : <BsXLg aria-hidden />}
         </Button>
       </OverlayTrigger>
     </Nav>

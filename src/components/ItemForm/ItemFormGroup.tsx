@@ -177,7 +177,7 @@ function ItemFormGroup({
                     handleRemove(itemForm);
                   }}
                 >
-                  <BsXLg />
+                  <BsXLg aria-hidden />
                 </Button>
               </OverlayTrigger>
             </Popover.Body>
@@ -196,7 +196,7 @@ function ItemFormGroup({
             }, 0);
           }}
         >
-          <BsXLg />
+          <BsXLg aria-hidden />
         </Button>
       </OverlayTrigger>
     </InputGroup>

@@ -64,7 +64,7 @@ function ErrorModal({
                 handleShow(false);
               }}
             >
-              <BsXLg />
+              <BsXLg aria-hidden />
             </Button>
           </Modal.Header>
           <Modal.Body className="textarea mx-1">
@@ -87,7 +87,7 @@ function ErrorModal({
             <Button
               data-testid="json-error-close"
               className="align-self-end"
-              aria-label="dismiss error message"
+              aria-label="close error dialog"
               key={"modal-dismiss-button"}
               variant="delete-modal"
               type="button"
@@ -96,7 +96,7 @@ function ErrorModal({
                 handleError();
               }}
             >
-              <BsXLg />
+              <BsXLg aria-hidden />
             </Button>
           </Modal.Header>
           <Modal.Body key="json-error-modal-body">
@@ -110,7 +110,10 @@ function ErrorModal({
                   key={`${jsonError.file}-item-${i}`}
                   eventKey={jsonError.file}
                 >
-                  <Accordion.Header key={`${jsonError.file}-header-${i}`}>
+                  <Accordion.Header
+                    aria-label="file"
+                    key={`${jsonError.file}-header-${i}`}
+                  >
                     {jsonError.file}
                   </Accordion.Header>
                   <Accordion.Body
@@ -146,7 +149,7 @@ function ErrorModal({
               data-testid="csv-error-close"
               className="align-self-end"
               key={"modal-dismiss-button"}
-              aria-label="dismiss error message"
+              aria-label="close error dialog"
               variant="delete-modal"
               type="button"
               onClick={() => {
@@ -154,7 +157,7 @@ function ErrorModal({
                 handleError();
               }}
             >
-              <BsXLg />
+              <BsXLg aria-hidden />
             </Button>
           </Modal.Header>
           <Modal.Body key="csv-error-modal-body">
@@ -168,7 +171,10 @@ function ErrorModal({
                   key={`${csvError.file}-item-${i}`}
                   eventKey={csvError.file}
                 >
-                  <Accordion.Header key={`${csvError.file}-header-${i}`}>
+                  <Accordion.Header
+                    aria-label="file"
+                    key={`${csvError.file}-header-${i}`}
+                  >
                     {csvError.file}
                   </Accordion.Header>
                   <Accordion.Body

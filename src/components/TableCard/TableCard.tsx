@@ -146,7 +146,7 @@ function TableCard({
           <Row>
             <Col>{label}</Col>
             <Col className="text-end fixed-width-font">
-              <div>
+              <div aria-label="total amount">
                 {intlConfig?.currency &&
                   intlFormat(roundBig(Big(total), 2), intlConfig?.currency)}
               </div>
@@ -197,7 +197,7 @@ function TableCard({
               name=""
               value=""
             >
-              <BsPlusLg />
+              <BsPlusLg aria-hidden />
             </Button>
           </OverlayTrigger>
         </div>

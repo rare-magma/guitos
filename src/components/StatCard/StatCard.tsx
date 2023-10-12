@@ -95,6 +95,9 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
             <Col className="align-self-center">
               Statistics
               <ProgressBar
+                role="progressbar"
+                aria-label="percentage of revenue spent"
+                aria-valuetext={`${revenuePercentage}%`}
                 min={0}
                 max={100}
                 now={revenuePercentage}
@@ -122,7 +125,7 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
                   handleShowGraphs();
                 }}
               >
-                <BsGraphUp />
+                <BsGraphUp aria-hidden />
               </Button>
             </OverlayTrigger>
           </Col>
@@ -161,16 +164,16 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
               </Tooltip>
             }
           >
-            <InputGroup.Text>
+            <InputGroup.Text aria-label="percentage of revenue available">
               {shouldCalculateAvailablePerc ? 100 - revenuePercentage : 0}
-
-              <BsPercent />
+              <BsPercent aria-hidden />
             </InputGroup.Text>
           </OverlayTrigger>
         </InputGroup>
         <InputGroup className="mb-1" key={"withGoal"}>
           <InputGroup.Text>
             <svg
+              aria-hidden
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"
@@ -233,7 +236,7 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
                 handleAutoGoal();
               }}
             >
-              <BsGear />
+              <BsGear aria-hidden />
             </Button>
           </OverlayTrigger>
           <Form.Control
@@ -253,12 +256,13 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
             }}
           />
           <InputGroup.Text>
-            <BsPercent />
+            <BsPercent aria-hidden />
           </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"saved"}>
           <InputGroup.Text>
             <svg
+              aria-hidden
               xmlns="http://www.w3.org/2000/svg"
               width="16"
               height="16"

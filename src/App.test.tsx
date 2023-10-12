@@ -17,7 +17,7 @@ describe("App", () => {
     render(comp);
     expect(screen.getAllByText("guitos")[0]).toBeInTheDocument();
     expect(screen.getByRole("status")).toBeInTheDocument();
-    expect(screen.getByText(/v[0-9.]/)).toBeInTheDocument();
+    expect(screen.getByLabelText("open guitos changelog")).toBeInTheDocument();
     expect(budgetsDB.config("name")).toBe("guitos");
     expect(budgetsDB.config("storeName")).toBe("budgets");
     expect(optionsDB.config("name")).toBe("guitos");

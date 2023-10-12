@@ -68,36 +68,36 @@ function CalculateButton({
                     variant="outline-secondary"
                     id="dropdown-operation"
                   >
-                    {operation === "add" && <CgMathPlus />}
-                    {operation === "sub" && <BsDashLg />}
-                    {operation === "mul" && <BsXLg />}
-                    {operation === "div" && <CgMathDivide />}
+                    {operation === "add" && <CgMathPlus aria-hidden />}
+                    {operation === "subtract" && <BsDashLg aria-hidden />}
+                    {operation === "multiply" && <BsXLg aria-hidden />}
+                    {operation === "divide" && <CgMathDivide aria-hidden />}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     <Dropdown.Item
-                      aria-label="add to item value"
+                      aria-label="addition"
                       onClick={() => setOperation("add")}
                     >
-                      <CgMathPlus />
+                      <CgMathPlus aria-hidden />
                     </Dropdown.Item>
                     <Dropdown.Item
-                      aria-label="subtract to item value"
-                      onClick={() => setOperation("sub")}
+                      aria-label="subtraction"
+                      onClick={() => setOperation("subtract")}
                     >
-                      <BsDashLg />
+                      <BsDashLg aria-hidden />
                     </Dropdown.Item>
                     <Dropdown.Item
-                      aria-label="multiply item value"
-                      onClick={() => setOperation("mul")}
+                      aria-label="multiplication"
+                      onClick={() => setOperation("multiply")}
                     >
-                      <BsXLg />
+                      <BsXLg aria-hidden />
                     </Dropdown.Item>
                     <Dropdown.Item
-                      aria-label="divide item value"
-                      onClick={() => setOperation("div")}
+                      aria-label="division"
+                      onClick={() => setOperation("divide")}
                     >
-                      <CgMathDivide />
+                      <CgMathDivide aria-hidden />
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -105,7 +105,7 @@ function CalculateButton({
                   id={`${label}-${itemForm.id}-operation-value`}
                   key={`item-${itemForm.id}-operation-value`}
                   className="text-end form-control straight-corners fixed-width-font"
-                  aria-label={"change item value amount"}
+                  aria-label={`${operation}`}
                   name="item-operate-value"
                   intlConfig={intlConfig}
                   defaultValue={0}
@@ -120,7 +120,7 @@ function CalculateButton({
                 <Button
                   id={`item-${itemForm.id}-trigger-operation-button`}
                   key={`${itemForm.id}-trigger-operation-button`}
-                  aria-label={"accept change item value amount"}
+                  aria-label={"apply change to item value"}
                   variant="outline-secondary"
                   type="button"
                   onClick={() => {
@@ -128,7 +128,7 @@ function CalculateButton({
                     opButtonRef?.current?.click();
                   }}
                 >
-                  <BsCheckLg />
+                  <BsCheckLg aria-hidden />
                 </Button>
               </InputGroup>
             </Popover.Body>
@@ -138,7 +138,7 @@ function CalculateButton({
         <Button
           id={`${label}-${itemForm.id}-operate-button`}
           key={`${itemForm.id}-operate-button`}
-          aria-label={"select operations to change item value amount"}
+          aria-label={"select operation type to item value"}
           aria-haspopup="dialog"
           variant="outline-secondary"
           type="button"
@@ -149,7 +149,7 @@ function CalculateButton({
             }, 0);
           }}
         >
-          <BsPlusSlashMinus />
+          <BsPlusSlashMinus aria-hidden />
         </Button>
       </OverlayTrigger>
     </>

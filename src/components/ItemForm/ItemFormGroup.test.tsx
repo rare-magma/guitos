@@ -80,7 +80,7 @@ describe("ItemFormGroup", () => {
   it("opens popover when clicking the button", async () => {
     await userEvent.click(
       screen.getByRole("button", {
-        name: "select operations to change item value amount",
+        name: "select operation type to item value",
       }),
     );
 
