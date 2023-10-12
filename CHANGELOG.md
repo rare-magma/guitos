@@ -1,3 +1,10 @@
+# [0.27.0](https://github.com/rare-magma/guitos/compare/v0.26.0...v0.27.0) (2023-10-12)
+
+
+### Features
+
+* improve screen reader a11y ([edc5bf5](https://github.com/rare-magma/guitos/commit/edc5bf57ee92978008a55aafd686b16223dc718a))
+
 # [0.26.0](https://github.com/rare-magma/guitos/compare/v0.25.3...v0.26.0) (2023-09-24)
 
 
