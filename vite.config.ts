@@ -1,9 +1,9 @@
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 import eslint from "vite-plugin-eslint";
 import { VitePWA } from "vite-plugin-pwa";
 
-export default defineConfig(() => {
+export default defineConfig((env) => {
   return {
     build: {
       outDir: "build",
@@ -13,7 +13,7 @@ export default defineConfig(() => {
     },
     plugins: [
       react(),
-      eslint(),
+      env.mode !== "test" && eslint(),
       VitePWA({
         manifest: {
           theme_color: "#282a36",
