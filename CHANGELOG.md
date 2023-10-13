@@ -1,3 +1,10 @@
+## [0.27.3](https://github.com/rare-magma/guitos/compare/v0.27.2...v0.27.3) (2023-10-13)
+
+
+### Bug Fixes
+
+* add workbox-window to dev deps ([ba0b30b](https://github.com/rare-magma/guitos/commit/ba0b30bc96e684b21c02ff9c4dc758a69aa5bfe1))
+
 ## [0.27.2](https://github.com/rare-magma/guitos/compare/v0.27.1...v0.27.2) (2023-10-13)
 
 
