@@ -15,11 +15,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          cache: "npm"
+          cache: "pnpm"
       - name: Install dependencies
-        run: npm clean-install
+        run: pnpm clean-install
       - name: Run tests
-        run: npm run test -- --run
+        run: pnpm test -- --run
   release:
     name: release
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14
-          cache: "npm"
+          cache: "pnpm"
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v3
         with:

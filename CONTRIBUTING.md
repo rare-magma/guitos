@@ -16,13 +16,13 @@ To set up a development environment, please follow these steps:
 2. Install dependencies
 
    ```sh
-   npm run install
+   pnpm install
    ```
 
 3. Start the local web server
 
    ```sh
-   npm run start
+   pnpm start
    ```
 
 4. Open http://localhost:5173 to view it in the browser.
@@ -33,7 +33,7 @@ You will also see any lint errors in the console.
 5. Run tests
 
    ```sh
-   npm run test
+   pnpm test
    ```
 
 Launches the test runner in the interactive watch mode.
