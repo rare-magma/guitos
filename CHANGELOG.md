@@ -1,3 +1,10 @@
+## [0.27.2](https://github.com/rare-magma/guitos/compare/v0.27.1...v0.27.2) (2023-10-13)
+
+
+### Bug Fixes
+
+* release process ([c2debaf](https://github.com/rare-magma/guitos/commit/c2debaf342971a084e39d437a6a68d636173799d))
+
 ## [0.27.1](https://github.com/rare-magma/guitos/compare/v0.27.0...v0.27.1) (2023-10-13)
 
 
