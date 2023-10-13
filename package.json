@@ -8,8 +8,8 @@
     "serve": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "npx eslint src --fix && npx prettier --write src",
-    "bundle": "npx vite-bundle-visualizer"
+    "lint": "pnpm dlx eslint src --fix && pnpm dlx prettier --write src",
+    "bundle": "pnpm dlx vite-bundle-visualizer"
   },
   "eslintConfig": {
     "extends": [
