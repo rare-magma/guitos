@@ -1,3 +1,10 @@
+## [0.27.1](https://github.com/rare-magma/guitos/compare/v0.27.0...v0.27.1) (2023-10-13)
+
+
+### Performance Improvements
+
+* enable experimentalVmThreads for faster tests ([fcb70df](https://github.com/rare-magma/guitos/commit/fcb70df61d35aa640812eb99499b97ca498807c8))
+
 # [0.27.0](https://github.com/rare-magma/guitos/compare/v0.26.0...v0.27.0) (2023-10-12)
 
 
