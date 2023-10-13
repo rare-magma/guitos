@@ -41,7 +41,6 @@ export default defineConfig((env) => {
       mockClear: true,
       environment: "jsdom",
       setupFiles: "./src/setupTests.ts",
-      experimentalVmThreads: true,
     },
   };
 });
