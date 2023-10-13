@@ -13,16 +13,16 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           cache: "pnpm"
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-
       - name: Install dependencies
-        run: pnpm clean-install
+        run: pnpm install
 
       - name: Run tests
         run: pnpm test -- --run
