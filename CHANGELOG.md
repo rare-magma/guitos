@@ -1,3 +1,10 @@
+# [0.28.0](https://github.com/rare-magma/guitos/compare/v0.27.3...v0.28.0) (2023-10-14)
+
+
+### Features
+
+* new chart based on filtering by item name ([8f8bcce](https://github.com/rare-magma/guitos/commit/8f8bccea8981156324e50e65041632e21c4480bf))
+
 ## [0.27.3](https://github.com/rare-magma/guitos/compare/v0.27.2...v0.27.3) (2023-10-13)
 
 
