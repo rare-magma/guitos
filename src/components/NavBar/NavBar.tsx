@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { AsyncTypeahead, Typeahead } from "react-bootstrap-typeahead";
+import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
+import "react-bootstrap-typeahead/css/Typeahead.css";
 import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import Button from "react-bootstrap/Button";
@@ -62,7 +64,7 @@ function NavBar({
 }: NavBarProps) {
   const importRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
-  const typeRef = useRef<TypeaheadRef>(null);
+  const searchRef = useRef<TypeaheadRef>(null);
   const currencyRef = useRef<TypeaheadRef>(null);
   const nameRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
@@ -72,11 +74,10 @@ function NavBar({
 
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
+  const [options, setOptions] = useState<Option[]>([]);
 
   const { currency, handleCurrency } = useConfig();
   const { budget, budgetNameList } = useBudget();
-
-  const [options, setOptions] = useState<Option[]>([]);
 
   const shouldShowBrand = budgetNameList && budgetNameList.length < 1;
   const hasOneOrMoreBudgets = budgetNameList && budgetNameList.length > 0;
@@ -98,7 +99,9 @@ function NavBar({
     ["/", "f"],
     (e) =>
       !e.repeat &&
-      focusRef(typeRef as unknown as React.MutableRefObject<HTMLInputElement>),
+      focusRef(
+        searchRef as unknown as React.MutableRefObject<HTMLInputElement>,
+      ),
     { preventDefault: true },
   );
 
@@ -162,8 +165,8 @@ function NavBar({
   function handleSelect(option: Option[]) {
     setExpanded(false);
     onSelect(option as SearchOption[]);
-    if (typeRef.current) {
-      typeRef.current.clear();
+    if (searchRef.current) {
+      searchRef.current.clear();
     }
   }
 
@@ -190,20 +193,20 @@ function NavBar({
     let options: SearchOption[] = [];
 
     budgetsDB
-      .iterate((value) => {
+      .iterate((budget: Budget) => {
         options = options.concat(
-          (value as Budget).incomes.items.map((i) => {
+          budget.incomes.items.map((i) => {
             return {
-              id: (value as Budget).id,
-              name: (value as Budget).name,
+              id: budget.id,
               item: i.name,
+              name: budget.name,
             };
           }),
-          (value as Budget).expenses.items.map((i) => {
+          budget.expenses.items.map((i) => {
             return {
-              id: (value as Budget).id,
-              name: (value as Budget).name,
+              id: budget.id,
               item: i.name,
+              name: budget.name,
             };
           }),
         );
@@ -344,8 +347,8 @@ function NavBar({
                     id="search-budget-list"
                     filterBy={["name", "item"]}
                     labelKey={getLabelKey}
-                    ref={typeRef}
-                    style={expanded ? {} : { minWidth: "10ch" }}
+                    ref={searchRef}
+                    style={expanded ? {} : { minWidth: "14ch" }}
                     onChange={(option: Option[]) => {
                       handleSelect(option);
                     }}

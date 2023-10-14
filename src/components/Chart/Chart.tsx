@@ -12,13 +12,14 @@ import {
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { intlFormat, median } from "../../utils";
+import { FilteredItem } from "../ChartsPage/ChartsPage";
 import "./Chart.css";
 import ChartTooltip from "./ChartTooltip";
 import useDynamicYAxisWidth from "./DynamicYAxis";
 
 interface ChartProps {
   header: string;
-  tooltipKey1: string;
+  tooltipKey1?: string;
   tooltipKey2?: string;
   areaDataKey1: string;
   areaDataKey2?: string;
@@ -31,7 +32,11 @@ interface ChartProps {
   legend2?: string;
   legendValues2?: number[];
   unit?: string;
+  filteredData?: FilteredItem[];
 }
+
+const horizonal = 3.4;
+const vertical = 1.6;
 
 function Chart({
   header,
@@ -48,13 +53,35 @@ function Chart({
   legendValues1,
   legendValues2,
   unit,
+  filteredData,
 }: ChartProps) {
   const { budgetList } = useBudget();
   const { intlConfig } = useConfig();
 
+  const showSecondArea = areaDataKey2 && areaStroke2 && areaFill2;
+  const isGoalChart = tooltipKey1 === "goal";
+  const isVerticalScreen = window.innerWidth < window.innerHeight;
+  const chartData =
+    filteredData ?? budgetList?.sort((a, b) => a.name.localeCompare(b.name));
+
   const { yAxisWidth, setChartRef } = useDynamicYAxisWidth({
     yAxisWidthModifier: (x) => x + 10,
   });
+
+  function medianLabelGroup(legend: string, values: number[]) {
+    return (
+      <InputGroup size="sm" className="mb-1">
+        <InputGroup.Text>{legend}</InputGroup.Text>
+        <CurrencyInput
+          disabled
+          className="text-end form-control fixed-width-font"
+          aria-label={legend}
+          intlConfig={intlConfig}
+          defaultValue={median(values)}
+        />
+      </InputGroup>
+    );
+  }
 
   function tickFormatter(value: number) {
     return (
@@ -63,15 +90,15 @@ function Chart({
   }
 
   return (
-    <Card className="stat-card mt-3">
+    <Card className="stat-card mt-3 d-flex flex-grow-1">
       <Card.Header className="stat-card-header">{header}</Card.Header>
       <Card.Body>
         <ResponsiveContainer
           width="100%"
-          aspect={window.innerWidth < window.innerHeight ? 1.6 : 3.4}
+          aspect={isVerticalScreen ? vertical : horizonal}
         >
           <AreaChart
-            data={budgetList?.sort((a, b) => a.name.localeCompare(b.name))}
+            data={chartData}
             ref={setChartRef}
             margin={{
               top: 10,
@@ -112,7 +139,7 @@ function Chart({
               fill={`var(--${areaFill1})`}
               isAnimationActive={false}
             />
-            {areaDataKey2 && areaStroke2 && areaFill2 && (
+            {showSecondArea && (
               <Area
                 type="monotone"
                 dataKey={areaDataKey2}
@@ -126,7 +153,7 @@ function Chart({
       </Card.Body>
       <Card.Footer className="stat-card-footer">
         <Row>
-          {tooltipKey1 === "goal" && (
+          {isGoalChart && (
             <InputGroup size="sm" className="mb-1">
               <InputGroup.Text>{legend1}</InputGroup.Text>
               <Form.Control
@@ -141,45 +168,14 @@ function Chart({
               </InputGroup.Text>
             </InputGroup>
           )}
-          {tooltipKey1 !== "goal" && !legendValues2 && (
-            <InputGroup size="sm" className="mb-1">
-              <InputGroup.Text>{legend1}</InputGroup.Text>
-              <CurrencyInput
-                disabled
-                className="text-end form-control fixed-width-font"
-                aria-label={legend1}
-                intlConfig={intlConfig}
-                defaultValue={legendValues1 && median(legendValues1)}
-              />
-            </InputGroup>
+          {!isGoalChart &&
+            !legendValues2 &&
+            medianLabelGroup(legend1, legendValues1)}
+          {!isGoalChart && legendValues2 && (
+            <Col lg={6}>{medianLabelGroup(legend1, legendValues1)}</Col>
           )}
-          {tooltipKey1 !== "goal" && legendValues2 && (
-            <Col lg={6}>
-              <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text>{legend1}</InputGroup.Text>
-                <CurrencyInput
-                  disabled
-                  className="text-end form-control fixed-width-font"
-                  aria-label={legend1}
-                  intlConfig={intlConfig}
-                  defaultValue={legendValues1 && median(legendValues1)}
-                />
-              </InputGroup>
-            </Col>
-          )}
-          {legendValues2 && (
-            <Col>
-              <InputGroup size="sm" className="mb-1">
-                <InputGroup.Text>{legend2}</InputGroup.Text>
-                <CurrencyInput
-                  disabled
-                  className="text-end form-control fixed-width-font"
-                  aria-label={legend2}
-                  intlConfig={intlConfig}
-                  defaultValue={median(legendValues2)}
-                />
-              </InputGroup>
-            </Col>
+          {legend2 && legendValues2 && (
+            <Col>{medianLabelGroup(legend2, legendValues2)}</Col>
           )}
         </Row>
       </Card.Footer>
