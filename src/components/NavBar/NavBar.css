@@ -78,3 +78,16 @@ input[type="text"]::placeholder {
     monospace;
   font-size: 0.9em;
 }
+
+.rbt-menu > .dropdown-item {
+  text-align: start;
+  overflow: visible;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background: var(--lightbgcolor);
+  border: 1px solid var(--pink);
+  box-shadow: 0 0 0;
+  color: var(--textcolor);
+}

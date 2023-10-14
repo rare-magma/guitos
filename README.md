@@ -82,9 +82,12 @@ However, if you'd like to use it offline, follow the instructions for your devic
 I receive a salary at the end of each month and around that time I create a new budget to plan the expenses/savings goals/etc.
 
 I frequently add a new expense before I purchase it so I can see the impact on the budget and prepare accordingly.
-If everything went according to plan, once I receive a new salary, I transfer the value in the `savings estimate` field to a savings account.
+If everything went according to plan, once I receive a new salary, I transfer the value in the `savings estimate` field to my bank savings account.
 
 Later, I can compare the budget with previous months to understand where the money is going by hovering the mouse/tapping on a single expense. A tooltip pops up and shows its value in percentage of revenue (see the tooltip screenshot above).
+The charts page is useful for these kinds of insighs.
+
+There I can see an overview of the evolution of several metrics such as `savings`, `revenue`, etc. If I want to narrow down the chart to a specific type of item I can search for it in the filter searchbox. If I toggle the `strict match` button then only items that are named exactly as the search value are shown in the resulting chart.
 
 ### Starting from scratch:
 

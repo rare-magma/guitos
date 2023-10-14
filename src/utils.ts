@@ -305,3 +305,21 @@ export function median(arr: number[]): number {
         .toNumber()
     : s[mid];
 }
+
+export function getNestedProperty<O, K extends keyof O, L extends keyof O[K]>(
+  object: O,
+  firstProp: K,
+  secondProp: L,
+): O[K][L] {
+  return object[firstProp][secondProp];
+}
+
+export function getNestedValues<T, K extends keyof T, L extends keyof T[K]>(
+  list: T[] | undefined,
+  prop1: K,
+  prop2: L,
+): T[K][L][] {
+  return list!.map((o: T) => {
+    return getNestedProperty(o, prop1, prop2);
+  });
+}

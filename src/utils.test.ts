@@ -11,6 +11,7 @@ import {
   testBudget,
   testBudget2,
   testBudgetCsv,
+  testBudgetList,
   testCsv,
 } from "./setupTests";
 import {
@@ -26,6 +27,8 @@ import {
   createBudgetNameList,
   getCountryCode,
   getCurrencyCode,
+  getNestedProperty,
+  getNestedValues,
   intlFormat,
   median,
   parseLocaleNumber,
@@ -167,4 +170,23 @@ test("median", () => {
   expect(median([0])).eq(0);
   expect(median([])).eq(0);
   expect(median([-1, -2])).eq(-1.5);
+});
+
+test("getNestedProperty", () => {
+  expect(getNestedProperty(testBudget, "expenses", "total")).eq(10);
+  expect(getNestedProperty(testBudget, "incomes", "items")).eq(
+    testBudget.incomes.items,
+  );
+});
+
+test("getNestedValues", () => {
+  const expected = testBudgetList.map((i) => i.expenses.total);
+  const expected2 = testBudgetList.map((i) => i.incomes.items);
+
+  expect(getNestedValues(testBudgetList, "expenses", "total")).toEqual(
+    expected,
+  );
+  expect(getNestedValues(testBudgetList, "incomes", "items")).toEqual(
+    expected2,
+  );
 });
