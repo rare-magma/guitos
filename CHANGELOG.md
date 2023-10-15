@@ -1,3 +1,10 @@
+## [0.28.2](https://github.com/rare-magma/guitos/compare/v0.28.1...v0.28.2) (2023-10-15)
+
+
+### Bug Fixes
+
+* tooltip overlap with static vertical position ([387504a](https://github.com/rare-magma/guitos/commit/387504a6d7d8ebcc273a379615cf5d7b8a1d03ea))
+
 ## [0.28.1](https://github.com/rare-magma/guitos/compare/v0.28.0...v0.28.1) (2023-10-15)
 
 
