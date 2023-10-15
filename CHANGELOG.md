@@ -1,3 +1,10 @@
+## [0.28.1](https://github.com/rare-magma/guitos/compare/v0.28.0...v0.28.1) (2023-10-15)
+
+
+### Performance Improvements
+
+* smaller bundle with updated recharts ([38276da](https://github.com/rare-magma/guitos/commit/38276da2ba9e49091c55aa4299aeffd7560dc892))
+
 # [0.28.0](https://github.com/rare-magma/guitos/compare/v0.27.3...v0.28.0) (2023-10-14)
 
 
