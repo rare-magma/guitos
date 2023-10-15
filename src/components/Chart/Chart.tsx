@@ -128,6 +128,8 @@ function Chart({
               />
             )}
             <Tooltip
+              allowEscapeViewBox={{ x: false, y: false }}
+              position={{ y: 0 }}
               content={<ChartTooltip key1={tooltipKey1} key2={tooltipKey2} />}
               contentStyle={{ backgroundColor: "var(--bgcolor)" }}
               itemStyle={{ color: "var(--textcolor)" }}
