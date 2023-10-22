@@ -13,7 +13,7 @@ import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { calcPercentage, calcTotal, intlFormat, roundBig } from "../../utils";
 import { ItemForm } from "../ItemForm/ItemForm";
-import ItemFormGroup from "../ItemForm/ItemFormGroup";
+import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
 import { Expense } from "./Expense";
 import { Income } from "./Income";
 import "./TableCard.css";
@@ -24,16 +24,19 @@ interface TableCardProps {
   onChange: (table: Income | Expense) => void;
 }
 
-function TableCard({
+export function TableCard({
   items: initialItems,
   header: label,
   onChange,
 }: TableCardProps) {
   const [table, setTable] = useState(initialItems);
   const [total, setTotal] = useState(roundBig(calcTotal(table?.items), 2));
+
   const { budget, revenuePercentage } = useBudget();
-  const inputRef = useRef<HTMLInputElement>(null);
   const { intlConfig } = useConfig();
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const isRevenue = label === "Revenue";
   const isExpense = label === "Expenses";
 
@@ -205,5 +208,3 @@ function TableCard({
     </Card>
   );
 }
-
-export default TableCard;

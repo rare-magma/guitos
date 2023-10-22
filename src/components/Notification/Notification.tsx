@@ -7,7 +7,7 @@ interface NotificationProps {
   onShow: () => void;
 }
 
-function Notification({ notification, onShow }: NotificationProps) {
+export function Notification({ notification, onShow }: NotificationProps) {
   return (
     <Toast
       key={`${notification.id}-toast`}
@@ -45,4 +45,3 @@ function Notification({ notification, onShow }: NotificationProps) {
     </Toast>
   );
 }
-export default Notification;

@@ -14,8 +14,8 @@ import { useConfig } from "../../context/ConfigContext";
 import { intlFormat, median } from "../../utils";
 import { FilteredItem } from "../ChartsPage/ChartsPage";
 import "./Chart.css";
-import ChartTooltip from "./ChartTooltip";
-import useDynamicYAxisWidth from "./DynamicYAxis";
+import { ChartTooltip } from "./ChartTooltip";
+import { useDynamicYAxisWidth } from "./DynamicYAxis";
 
 interface ChartProps {
   header: string;
@@ -38,7 +38,7 @@ interface ChartProps {
 const horizonal = 3.4;
 const vertical = 1.6;
 
-function Chart({
+export function Chart({
   header,
   tooltipKey1,
   tooltipKey2,
@@ -184,5 +184,3 @@ function Chart({
     </Card>
   );
 }
-
-export default Chart;

@@ -22,7 +22,7 @@ interface ChartTooltipProps {
   key2?: string | undefined;
 }
 
-function ChartTooltip({
+export function ChartTooltip({
   active,
   payload,
   label,
@@ -70,5 +70,3 @@ function ChartTooltip({
     </Container>
   ) : null;
 }
-
-export default ChartTooltip;

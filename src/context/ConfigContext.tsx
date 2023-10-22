@@ -1,6 +1,8 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
-import { CurrencyInputProps } from "react-currency-input-field";
-import { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
+import {
+  CurrencyInputProps,
+  IntlConfig,
+} from "react-currency-input-field/dist/components/CurrencyInputProps";
 import { initialCurrencyCode, userLang } from "../utils";
 import { optionsDB } from "./db";
 

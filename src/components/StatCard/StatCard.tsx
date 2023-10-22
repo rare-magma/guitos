@@ -25,7 +25,11 @@ interface StatCardProps {
   onShowGraphs: () => void;
 }
 
-function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
+export function StatCard({
+  onChange,
+  onAutoGoal,
+  onShowGraphs,
+}: StatCardProps) {
   const { intlConfig } = useConfig();
   const { revenuePercentage, budget } = useBudget();
 
@@ -329,5 +333,3 @@ function StatCard({ onChange, onAutoGoal, onShowGraphs }: StatCardProps) {
     </Card>
   );
 }
-
-export default StatCard;

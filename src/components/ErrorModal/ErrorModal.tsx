@@ -22,7 +22,7 @@ interface ErrorModalProps {
   onError: () => void;
 }
 
-function ErrorModal({
+export function ErrorModal({
   error,
   show,
   jsonError,
@@ -199,5 +199,3 @@ function ErrorModal({
     </>
   );
 }
-
-export default ErrorModal;

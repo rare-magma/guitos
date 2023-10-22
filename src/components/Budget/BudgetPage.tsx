@@ -18,22 +18,22 @@ import {
   roundBig,
   userLang,
 } from "../../utils";
-import ErrorModal, { CsvError, JsonError } from "../ErrorModal/ErrorModal";
-import LandingPage from "../LandingPage/LandingPage";
-import Loading from "../Loading/Loading";
-import NavBar, { SearchOption } from "../NavBar/NavBar";
-import Notification from "../Notification/Notification";
+import { CsvError, ErrorModal, JsonError } from "../ErrorModal/ErrorModal";
+import { LandingPage } from "../LandingPage/LandingPage";
+import { Loading } from "../Loading/Loading";
+import { NavBar, SearchOption } from "../NavBar/NavBar";
+import { Notification } from "../Notification/Notification";
 import { Stat } from "../StatCard/Stat";
-import StatCard from "../StatCard/StatCard";
+import { StatCard } from "../StatCard/StatCard";
 import { Expense } from "../TableCard/Expense";
 import { Income } from "../TableCard/Income";
-import TableCard from "../TableCard/TableCard";
+import { TableCard } from "../TableCard/TableCard";
 import { Budget } from "./Budget";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 const ChartsPage = lazy(() => import("../ChartsPage/ChartsPage"));
 
-function BudgetPage() {
+export function BudgetPage() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [loading, setLoading] = useState(true);
@@ -674,5 +674,3 @@ function BudgetPage() {
     </Container>
   );
 }
-
-export default BudgetPage;

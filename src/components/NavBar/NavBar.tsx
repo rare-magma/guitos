@@ -50,7 +50,7 @@ interface NavBarProps {
   onSelect: (option: SearchOption[]) => void;
 }
 
-function NavBar({
+export function NavBar({
   onClone,
   onExport,
   onGoBack,
@@ -514,5 +514,3 @@ function NavBar({
     </Navbar>
   );
 }
-
-export default NavBar;

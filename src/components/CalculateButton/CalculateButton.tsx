@@ -19,7 +19,7 @@ interface CalculateButtonProps {
   onCalculate: (changeValue: number, operation: string) => void;
 }
 
-function CalculateButton({
+export function CalculateButton({
   itemForm,
   label,
   onCalculate,
@@ -155,5 +155,3 @@ function CalculateButton({
     </>
   );
 }
-
-export default CalculateButton;

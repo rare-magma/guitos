@@ -1,7 +1,7 @@
 import { RefObject } from "react";
 import { Button, Container, Form, Row, Stack } from "react-bootstrap";
 import { useBudget } from "../../context/BudgetContext";
-import Loading from "../Loading/Loading";
+import { Loading } from "../Loading/Loading";
 
 interface LandingPageProps {
   loading: boolean;
@@ -10,7 +10,12 @@ interface LandingPageProps {
   onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function LandingPage({ loading, inputRef, onNew, onImport }: LandingPageProps) {
+export function LandingPage({
+  loading,
+  inputRef,
+  onNew,
+  onImport,
+}: LandingPageProps) {
   const { budget, budgetList } = useBudget();
   const showLandingPage =
     !loading && !budget && budgetList && budgetList.length < 1;
@@ -77,5 +82,3 @@ function LandingPage({ loading, inputRef, onNew, onImport }: LandingPageProps) {
     </>
   );
 }
-
-export default LandingPage;

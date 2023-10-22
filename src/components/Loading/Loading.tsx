@@ -1,6 +1,6 @@
 import { Container, Row, Spinner } from "react-bootstrap";
 
-function Loading() {
+export function Loading() {
   return (
     <Container
       fluid
@@ -12,5 +12,3 @@ function Loading() {
     </Container>
   );
 }
-
-export default Loading;

@@ -19,7 +19,7 @@ interface ReturnValues {
   setChartRef: (chartRef: any) => void;
 }
 
-function useDynamicYAxisWidth(props: void | Props): ReturnValues {
+export function useDynamicYAxisWidth(props: void | Props): ReturnValues {
   const { yAxisWidthModifier } = props || {};
   const [yAxisWidthState, setYAxisWidthState] = useState(undefined);
 
@@ -61,5 +61,3 @@ function useDynamicYAxisWidth(props: void | Props): ReturnValues {
     setChartRef,
   };
 }
-
-export default useDynamicYAxisWidth;

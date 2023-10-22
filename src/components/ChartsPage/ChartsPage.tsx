@@ -21,7 +21,7 @@ import { useBudget } from "../../context/BudgetContext";
 import { budgetsDB } from "../../context/db";
 import { focusRef, getNestedValues } from "../../utils";
 import { Budget } from "../Budget/Budget";
-import Chart from "../Chart/Chart";
+import { Chart } from "../Chart/Chart";
 import "./ChartsPage.css";
 
 interface GraphProps {

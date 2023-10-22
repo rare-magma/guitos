@@ -11,7 +11,7 @@ import CurrencyInput from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
 import { useConfig } from "../../context/ConfigContext";
 import { calc, parseLocaleNumber } from "../../utils";
-import CalculateButton from "../CalculateButton/CalculateButton";
+import { CalculateButton } from "../CalculateButton/CalculateButton";
 import { ItemForm } from "./ItemForm";
 import "./ItemFormGroup.css";
 
@@ -24,7 +24,7 @@ interface ItemFormProps {
   onRemove: (itemForm: ItemForm) => void;
 }
 
-function ItemFormGroup({
+export function ItemFormGroup({
   itemForm: initialItemForm,
   costPercentage,
   inputRef,
@@ -202,5 +202,3 @@ function ItemFormGroup({
     </InputGroup>
   );
 }
-
-export default ItemFormGroup;
