@@ -7,7 +7,6 @@ import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { budgetsDB, optionsDB } from "../../context/db";
 import {
-  budgetToCsv,
   calcAutoGoal,
   calcAvailable,
   calcSaved,
@@ -62,12 +61,6 @@ export function BudgetPage() {
   const { setIntlConfig, handleCurrency } = useConfig();
 
   useHotkeys("escape", (e) => !e.repeat && setNotifications([]), {
-    preventDefault: true,
-  });
-  useHotkeys("s", (e) => !e.repeat && handleExportJSON(), {
-    preventDefault: true,
-  });
-  useHotkeys("d", (e) => !e.repeat && handleExportCSV(), {
     preventDefault: true,
   });
   useHotkeys("a", (e) => !e.repeat && !showGraphs && handleNew(), {
@@ -411,39 +404,6 @@ export function BudgetPage() {
     }
   }
 
-  function handleExport(t: string) {
-    if (t === "csv") handleExportCSV();
-    if (t === "json") handleExportJSON();
-  }
-
-  function handleExportJSON() {
-    if (budget) {
-      let filename = new Date().toISOString();
-      filename = `guitos-${filename.slice(0, -5)}.json`;
-      const url = window.URL.createObjectURL(
-        new Blob([JSON.stringify(budgetList)]),
-      );
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-    }
-  }
-
-  function handleExportCSV() {
-    if (budget) {
-      const filename = `${budget.name}.csv`;
-
-      const url = window.URL.createObjectURL(new Blob([budgetToCsv(budget)]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-    }
-  }
-
   function save(budget: Budget) {
     let list: Budget[] = [];
     budgetsDB
@@ -578,36 +538,15 @@ export function BudgetPage() {
 
       {!showGraphs && (
         <NavBar
-          onRename={(e) => {
-            handleRename(e);
-          }}
-          onClone={() => {
-            handleClone();
-          }}
-          onExport={(t) => {
-            handleExport(t);
-          }}
-          onGoBack={() => {
-            handleGoBack();
-          }}
-          onGoHome={() => {
-            handleGoHome();
-          }}
-          onGoForward={() => {
-            handleGoForward();
-          }}
-          onNew={() => {
-            handleNew();
-          }}
-          onImport={(e) => {
-            handleImport(e);
-          }}
-          onRemove={(e) => {
-            handleRemove(e);
-          }}
-          onSelect={(e) => {
-            handleSelect(e);
-          }}
+          onRename={(e) => handleRename(e)}
+          onClone={handleClone}
+          onGoBack={handleGoBack}
+          onGoHome={handleGoHome}
+          onGoForward={handleGoForward}
+          onNew={handleNew}
+          onImport={(e) => handleImport(e)}
+          onRemove={(e) => handleRemove(e)}
+          onSelect={(e) => handleSelect(e)}
         />
       )}
 
@@ -615,9 +554,7 @@ export function BudgetPage() {
         loading={loading}
         inputRef={inputRef}
         onNew={handleNew}
-        onImport={(e) => {
-          handleImport(e);
-        }}
+        onImport={(e) => handleImport(e)}
       />
 
       <ErrorModal

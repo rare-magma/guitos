@@ -39,7 +39,6 @@ export interface SearchOption {
 
 interface NavBarProps {
   onClone: () => void;
-  onExport: (t: string) => void;
   onGoBack: () => void;
   onGoHome: () => void;
   onGoForward: () => void;
@@ -52,7 +51,6 @@ interface NavBarProps {
 
 export function NavBar({
   onClone,
-  onExport,
   onGoBack,
   onGoHome,
   onGoForward,
@@ -143,11 +141,6 @@ export function NavBar({
   function handleClone() {
     setExpanded(false);
     onClone();
-  }
-
-  function handleExport(t: string) {
-    setExpanded(false);
-    onExport(t);
   }
 
   function handleImport(event: React.ChangeEvent<HTMLInputElement>) {
@@ -463,9 +456,7 @@ export function NavBar({
               )}
               <NavBarItem
                 itemClassName={"m-2"}
-                onClick={() => {
-                  return undefined;
-                }}
+                onClick={() => undefined}
                 tooltipID={"tooltip-guitos-instructions"}
                 tooltipText={"open instructions in new tab"}
                 buttonAriaLabel={"open instructions in new tab"}
