@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { testBudget } from "../../setupTests";
-import TableCard from "./TableCard";
+import { TableCard } from "./TableCard";
 
 describe("TableCard", () => {
   const onChange = vi.fn();

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { itemForm1 } from "../../setupTests";
-import CalculateButton from "./CalculateButton";
+import { CalculateButton } from "./CalculateButton";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();

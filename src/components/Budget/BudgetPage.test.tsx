@@ -6,7 +6,7 @@ import {
   testBudget,
   testBudgetList,
 } from "../../setupTests";
-import BudgetPage from "./BudgetPage";
+import { BudgetPage } from "./BudgetPage";
 
 describe("BudgetPage", () => {
   const comp = <BudgetPage />;

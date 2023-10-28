@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { testBudgetList } from "../../setupTests";
 import { Budget } from "../Budget/Budget";
-import Chart from "./Chart";
+import { Chart } from "./Chart";
 
 describe("Chart", () => {
   const comp = (

@@ -7,7 +7,7 @@ import {
   itemForm1,
   testSpanishConfigContext,
 } from "../../setupTests";
-import ItemFormGroup from "./ItemFormGroup";
+import { ItemFormGroup } from "./ItemFormGroup";
 
 describe("ItemFormGroup", () => {
   const onRemove = vi.fn();

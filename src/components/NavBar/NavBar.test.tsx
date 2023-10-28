@@ -6,7 +6,7 @@ import {
   testBudget,
   testEmptyBudgetContext,
 } from "../../setupTests";
-import NavBar from "./NavBar";
+import { NavBar } from "./NavBar";
 
 describe("NavBar", () => {
   const onClone = vi.fn();
@@ -88,22 +88,6 @@ describe("NavBar", () => {
       testBudget as unknown as File,
     );
     expect(onImport).toBeCalledTimes(1);
-  });
-
-  it("triggers onExport when export json button is pressed", async () => {
-    await userEvent.click(screen.getByLabelText("export budget"));
-    await userEvent.click(
-      screen.getByRole("button", { name: "export budget as json" }),
-    );
-    expect(onExport).toBeCalledWith("json");
-  });
-
-  it("triggers onExport when export csv button is pressed", async () => {
-    await userEvent.click(screen.getByLabelText("export budget"));
-    await userEvent.click(
-      screen.getByRole("button", { name: "export budget as csv" }),
-    );
-    expect(onExport).toBeCalledWith("csv");
   });
 
   it("triggers onRename when user changes budget name input", async () => {

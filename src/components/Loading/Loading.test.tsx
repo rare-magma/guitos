@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Loading from "./Loading";
+import { Loading } from "./Loading";
 
 describe("Loading", () => {
   const comp = <Loading />;
