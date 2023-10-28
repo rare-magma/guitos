@@ -349,9 +349,7 @@ export function NavBar({
                     labelKey={getLabelKey}
                     ref={searchRef}
                     style={expanded ? {} : { minWidth: "14ch" }}
-                    onChange={(option: Option[]) => {
-                      handleSelect(option);
-                    }}
+                    onChange={(option: Option[]) => handleSelect(option)}
                     className="w-100"
                     options={options}
                     placeholder="Search..."
@@ -364,9 +362,7 @@ export function NavBar({
             <Nav>
               <NavBarItem
                 itemClassName={"m-2"}
-                onClick={() => {
-                  handleNew();
-                }}
+                onClick={handleNew}
                 tooltipID={"tooltip-new-budget"}
                 tooltipText={"new budget"}
                 buttonAriaLabel={"new budget"}
@@ -412,9 +408,7 @@ export function NavBar({
                       className="w-100"
                       aria-label="import budget"
                       variant="outline-primary"
-                      onClick={() => {
-                        importRef.current?.click();
-                      }}
+                      onClick={() => importRef.current?.click()}
                     >
                       {expanded ? "import" : <BsUpload aria-hidden />}
                     </Button>
@@ -467,7 +461,6 @@ export function NavBar({
                   </Nav>
                 </>
               )}
-
               <NavBarItem
                 itemClassName={"m-2"}
                 onClick={() => {

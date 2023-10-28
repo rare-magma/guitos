@@ -49,9 +49,7 @@ export function LandingPage({
                   className="w-100"
                   aria-label="import budget"
                   variant="outline-primary"
-                  onClick={() => {
-                    inputRef.current?.click();
-                  }}
+                  onClick={() => inputRef.current?.click()}
                 >
                   import
                 </Button>
@@ -60,9 +58,9 @@ export function LandingPage({
                   data-testid="import-form-control-landing-page"
                   multiple
                   ref={inputRef}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    handleImport(e);
-                  }}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleImport(e)
+                  }
                   style={{ display: "none" }}
                 />
               </Form.Group>

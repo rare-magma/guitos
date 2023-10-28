@@ -219,9 +219,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
                   filterBy={["name", "item", "type"]}
                   labelKey={getLabelKey}
                   ref={filterRef}
-                  onChange={(option: Option[]) => {
-                    handleSelect(option);
-                  }}
+                  onChange={(option: Option[]) => handleSelect(option)}
                   options={options}
                   placeholder="Filter..."
                   isLoading={false}

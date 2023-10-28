@@ -168,9 +168,7 @@ export function TableCard({
             }
             inputRef={inputRef}
             onChange={handleChange}
-            onRemove={() => {
-              removeTable(item);
-            }}
+            onRemove={() => removeTable(item)}
           />
         ))}
         <div className="mt-3" />

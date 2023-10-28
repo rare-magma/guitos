@@ -28,12 +28,7 @@ export function NavBarItem({
   target,
 }: NavItemProps) {
   return (
-    <Nav.Item
-      className={itemClassName}
-      onClick={() => {
-        onClick();
-      }}
-    >
+    <Nav.Item className={itemClassName} onClick={onClick}>
       <OverlayTrigger
         delay={250}
         placement="bottom"

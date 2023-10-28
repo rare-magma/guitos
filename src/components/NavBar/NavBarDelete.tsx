@@ -44,9 +44,7 @@ export function NavBarDelete({
                   variant="delete"
                   type="button"
                   ref={deleteButtonRef}
-                  onClick={() => {
-                    budget?.id && handleRemove(budget.id);
-                  }}
+                  onClick={() => budget?.id && handleRemove(budget.id)}
                 >
                   {expanded ? "delete budget" : <BsXLg aria-hidden />}
                 </Button>

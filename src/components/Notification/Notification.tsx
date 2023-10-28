@@ -11,7 +11,7 @@ export function Notification({ notification, onShow }: NotificationProps) {
   return (
     <Toast
       key={`${notification.id}-toast`}
-      onClose={() => onShow()}
+      onClose={onShow}
       show={notification.show}
       autohide
       delay={3000}
@@ -37,7 +37,7 @@ export function Notification({ notification, onShow }: NotificationProps) {
           size="sm"
           aria-label="dismiss notification"
           variant="outline-secondary"
-          onClick={() => onShow()}
+          onClick={onShow}
         >
           {<BsX aria-hidden />}
         </Button>

@@ -125,9 +125,7 @@ export function StatCard({
                 size="sm"
                 variant="outline-primary"
                 style={{ color: "var(--textcolor)" }}
-                onClick={() => {
-                  handleShowGraphs();
-                }}
+                onClick={handleShowGraphs}
               >
                 <BsGraphUp aria-hidden />
               </Button>
@@ -236,9 +234,7 @@ export function StatCard({
               variant="outline-primary"
               className="input-group-text auto-goal"
               style={{ color: "var(--textcolor)" }}
-              onClick={() => {
-                handleAutoGoal();
-              }}
+              onClick={handleAutoGoal}
             >
               <BsGear aria-hidden />
             </Button>

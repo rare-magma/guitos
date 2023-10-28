@@ -60,9 +60,7 @@ export function ErrorModal({
               key={"modal-dismiss-button"}
               variant="delete-modal"
               type="button"
-              onClick={() => {
-                handleShow(false);
-              }}
+              onClick={() => handleShow(false)}
             >
               <BsXLg aria-hidden />
             </Button>

@@ -132,9 +132,7 @@ export function ItemFormGroup({
           allowNegativeValue={false}
           maxLength={14}
           ref={valueRef}
-          onFocus={() => {
-            valueRef.current?.setSelectionRange(0, 25);
-          }}
+          onFocus={() => valueRef.current?.setSelectionRange(0, 25)}
           onValueChange={(value) => handleChange("value", value)}
         />
       </OverlayTrigger>
@@ -173,9 +171,7 @@ export function ItemFormGroup({
                   type="button"
                   size="sm"
                   ref={deleteButtonRef}
-                  onClick={() => {
-                    handleRemove(itemForm);
-                  }}
+                  onClick={() => handleRemove(itemForm)}
                 >
                   <BsXLg aria-hidden />
                 </Button>
