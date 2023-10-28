@@ -1,5 +1,5 @@
 export class CsvItem {
-  type!: string;
+  type!: "expense" | "income" | "goal" | "reserves";
   name!: string;
   value!: number;
 

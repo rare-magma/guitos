@@ -20,7 +20,7 @@ import "./TableCard.css";
 
 interface TableCardProps {
   items: Income | Expense;
-  header: string;
+  header: "Revenue" | "Expenses";
   onChange: (table: Income | Expense) => void;
 }
 
@@ -43,17 +43,8 @@ export function TableCard({
   function addTable(tableBeingEdited: Income | Expense) {
     const tableHasItems = table && table.items.length !== 0;
     const newItemForm = new ItemForm();
-
-    let newTable;
+    const newTable = isRevenue ? new Income() : new Expense();
     let maxId;
-
-    if (isRevenue) {
-      newTable = new Income();
-    } else if (isExpense) {
-      newTable = new Expense();
-    } else {
-      throw new Error("Messed up table type");
-    }
 
     if (tableHasItems) {
       maxId = Math.max(
@@ -78,14 +69,8 @@ export function TableCard({
   }
 
   function removeTable(toBeDeleted: ItemForm) {
-    let newTable;
     const isIncome = toBeDeleted.constructor.name === "Income";
-
-    if (isIncome) {
-      newTable = new Income();
-    } else {
-      newTable = new Expense();
-    }
+    const newTable = isIncome ? new Income() : new Expense();
 
     newTable.items = table.items.filter(
       (item: { id: number }) => item.id !== toBeDeleted.id,
@@ -98,14 +83,8 @@ export function TableCard({
   }
 
   function handleChange(item: ItemForm) {
-    let newTable;
     const isIncome = item.constructor.name === "Income";
-
-    if (isIncome) {
-      newTable = new Income();
-    } else {
-      newTable = new Expense();
-    }
+    const newTable = isIncome ? new Income() : new Expense();
 
     newTable.items = table.items.map((i) => {
       if (i.id === item.id) {
