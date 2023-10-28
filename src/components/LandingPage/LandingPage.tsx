@@ -1,7 +1,16 @@
 import { RefObject } from "react";
-import { Button, Container, Form, Row, Stack } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  Form,
+  OverlayTrigger,
+  Row,
+  Stack,
+  Tooltip,
+} from "react-bootstrap";
 import { useBudget } from "../../context/BudgetContext";
 import { Loading } from "../Loading/Loading";
+import "./LandingPage.css";
 
 interface LandingPageProps {
   loading: boolean;
@@ -73,6 +82,28 @@ export function LandingPage({
               >
                 help
               </Button>
+              <OverlayTrigger
+                delay={250}
+                placement="bottom"
+                overlay={
+                  <Tooltip
+                    id={`tooltip-guitos-version`}
+                    style={{ position: "fixed" }}
+                  >
+                    guitos version
+                  </Tooltip>
+                }
+              >
+                <a
+                  className="version align-self-center"
+                  aria-label="open guitos changelog"
+                  href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  v{APP_VERSION}
+                </a>
+              </OverlayTrigger>
             </Stack>
           </Row>
         </Container>

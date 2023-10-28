@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { AsyncTypeahead, Typeahead } from "react-bootstrap-typeahead";
+import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
@@ -21,15 +21,13 @@ import {
 } from "react-icons/bs";
 import { FaRegClone } from "react-icons/fa";
 import { useBudget } from "../../context/BudgetContext";
-import { useConfig } from "../../context/ConfigContext";
 import { budgetsDB } from "../../context/db";
-import { currenciesList } from "../../lists/currenciesList";
 import { focusRef } from "../../utils";
 import { Budget } from "../Budget/Budget";
 import "./NavBar.css";
 import { NavBarDelete } from "./NavBarDelete";
-import { NavBarExport } from "./NavBarExport";
 import { NavBarItem } from "./NavBarItem";
+import { NavBarSettings } from "./NavBarSettings";
 
 export interface SearchOption {
   id: string;
@@ -63,12 +61,9 @@ export function NavBar({
   const importRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
   const searchRef = useRef<TypeaheadRef>(null);
-  const currencyRef = useRef<TypeaheadRef>(null);
   const nameRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
-  const exportButtonRef = useRef<HTMLButtonElement>(null);
-  const exportJSONButtonRef = useRef<HTMLButtonElement>(null);
 
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
@@ -106,16 +101,6 @@ export function NavBar({
   useHotkeys("r", (e) => !e.repeat && focusRef(nameRef), {
     preventDefault: true,
   });
-
-  useHotkeys(
-    "t",
-    (e) =>
-      !e.repeat &&
-      focusRef(
-        currencyRef as unknown as React.MutableRefObject<HTMLInputElement>,
-      ),
-    { preventDefault: true },
-  );
 
   useEffect(() => {
     const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
@@ -417,43 +402,8 @@ export function NavBar({
                 </OverlayTrigger>
               </Nav>
 
-              {hasOneOrMoreBudgets && (
-                <>
-                  <NavBarExport
-                    exportButtonRef={exportButtonRef}
-                    exportJSONButtonRef={exportJSONButtonRef}
-                    handleExport={handleExport}
-                    expanded={expanded}
-                  />
-                  <Nav className="m-2" aria-label="select currency">
-                    <Typeahead
-                      id="currency-option-list"
-                      ref={currencyRef}
-                      maxResults={currenciesList.length}
-                      maxHeight="30vh"
-                      paginate={false}
-                      onChange={(c: Option[]) => {
-                        if (currenciesList.includes(c[0] as string)) {
-                          handleCurrency(c[0] as string);
-                        }
-                      }}
-                      className="w-100 fixed-width-font"
-                      style={
-                        expanded
-                          ? {}
-                          : {
-                              maxWidth: "6ch",
-                              minWidth: "6ch",
-                            }
-                      }
-                      options={currenciesList.sort((a, b) =>
-                        a.localeCompare(b),
-                      )}
-                      placeholder={currency}
-                    />
-                  </Nav>
-                </>
-              )}
+              {hasOneOrMoreBudgets && <NavBarSettings expanded={expanded} />}
+
               <NavBarItem
                 itemClassName={"m-2"}
                 onClick={() => undefined}
@@ -468,29 +418,6 @@ export function NavBar({
                 }
                 target="_blank"
               />
-              <OverlayTrigger
-                delay={250}
-                placement="bottom"
-                overlay={
-                  <Tooltip
-                    id={`tooltip-guitos-version`}
-                    style={{ position: "fixed" }}
-                  >
-                    guitos version
-                  </Tooltip>
-                }
-              >
-                <Navbar.Brand className="version justify-content-end align-self-end m-2">
-                  <a
-                    aria-label="open guitos changelog"
-                    href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    v{APP_VERSION}
-                  </a>
-                </Navbar.Brand>
-              </OverlayTrigger>
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
