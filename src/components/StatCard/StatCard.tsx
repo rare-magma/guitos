@@ -32,7 +32,6 @@ export function StatCard({
 }: StatCardProps) {
   const { intlConfig } = useConfig();
   const { revenuePercentage, budget } = useBudget();
-
   const [stat, setStat] = useState(budget?.stats);
   const [autoGoal, setAutoGoal] = useState(false);
 
@@ -75,10 +74,6 @@ export function StatCard({
   function handleAutoGoal() {
     onAutoGoal(stat);
     setAutoGoal(true);
-  }
-
-  function handleShowGraphs() {
-    onShowGraphs();
   }
 
   return (
@@ -125,7 +120,7 @@ export function StatCard({
                 size="sm"
                 variant="outline-primary"
                 style={{ color: "var(--textcolor)" }}
-                onClick={handleShowGraphs}
+                onClick={() => onShowGraphs()}
               >
                 <BsGraphUp aria-hidden />
               </Button>

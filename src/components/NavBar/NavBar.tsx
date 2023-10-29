@@ -43,7 +43,6 @@ interface NavBarProps {
   onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onNew: () => void;
   onRemove: (name: string) => void;
-  onRename: (name?: string | null) => void;
   onSelect: (option: SearchOption[]) => void;
 }
 
@@ -55,7 +54,6 @@ export function NavBar({
   onImport,
   onNew,
   onRemove,
-  onRename,
   onSelect,
 }: NavBarProps) {
   const importRef =
@@ -114,10 +112,6 @@ export function NavBar({
     );
   }, []);
 
-  function setToggle() {
-    setExpanded(!expanded);
-  }
-
   function handleNew() {
     setExpanded(false);
     onNew();
@@ -160,10 +154,15 @@ export function NavBar({
     onGoForward();
   }
 
-  function editName(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleRename(event: React.ChangeEvent<HTMLInputElement>) {
     const newName = event.target.value;
-    if (newName) {
-      onRename(newName);
+    let newBudget: Budget;
+    if (budget && newName) {
+      newBudget = {
+        ...budget,
+        name: newName,
+      };
+      setBudget(newBudget);
     }
   }
 
@@ -210,9 +209,8 @@ export function NavBar({
   return (
     <Navbar
       variant={theme}
-      key="md"
       expand="md"
-      onToggle={setToggle}
+      onToggle={() => setExpanded(!expanded)}
       data-testid="header"
     >
       <Container fluid className="flex-row">
@@ -283,7 +281,7 @@ export function NavBar({
                     key={"budget-name-key-" + budget.id}
                     defaultValue={budget.name}
                     ref={nameRef}
-                    onChange={editName}
+                    onChange={handleRename}
                     style={expanded ? {} : { minWidth: "12ch" }}
                     type="text"
                     maxLength={25}

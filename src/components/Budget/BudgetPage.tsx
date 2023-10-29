@@ -181,26 +181,13 @@ export function BudgetPage() {
     }
   }
 
-  function handleRename(newName?: string | null) {
-    let newBudget: Budget;
-    if (budget && newName) {
-      newBudget = {
-        ...budget,
-        name: newName,
-      };
-      setBudget(newBudget);
-    }
-  }
-
   function handleNew() {
     const newBudget = createNewBudget();
 
     let newBudgetList: Budget[] = [];
-    if (budgetList) {
-      newBudgetList = budgetList.concat(newBudget);
-    } else {
-      newBudgetList = newBudgetList.concat(newBudget);
-    }
+    newBudgetList = budgetList
+      ? budgetList.concat(newBudget)
+      : newBudgetList.concat(newBudget);
 
     setBudget(newBudget);
     setBudgetList(newBudgetList);
@@ -225,11 +212,9 @@ export function BudgetPage() {
       };
 
       let newBudgetList: Budget[] = [];
-      if (budgetList) {
-        newBudgetList = budgetList.concat(newBudget);
-      } else {
-        newBudgetList = newBudgetList.concat(newBudget);
-      }
+      newBudgetList = budgetList
+        ? budgetList.concat(newBudget)
+        : newBudgetList.concat(newBudget);
 
       setNotifications([
         ...notifications,
@@ -437,15 +422,16 @@ export function BudgetPage() {
         setBudgetList(list);
         setBudgetNameList(createBudgetNameList(list));
 
+        let newBudget: Budget;
         if (name.trim() !== "undefined") {
-          setBudget(list.filter((b: Budget) => b && b.name === name)[0]);
+          newBudget = list.filter((b: Budget) => b && b.name === name)[0];
+          setBudget(newBudget);
         } else {
-          setBudget(
-            list
-              .sort((a, b) => a.name.localeCompare(b.name))
-              .reverse()
-              .filter((b: Budget) => b && b.id === list[0].id)[0],
-          );
+          newBudget = list
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .reverse()
+            .filter((b: Budget) => b && b.id === list[0].id)[0];
+          setBudget(newBudget);
         }
 
         loadCurrencyOption();
@@ -525,11 +511,11 @@ export function BudgetPage() {
             notification && (
               <Notification
                 notification={notification}
-                onShow={() => {
+                onShow={() =>
                   setNotifications(
                     notifications.filter((n) => n.id !== notification.id),
-                  );
-                }}
+                  )
+                }
               />
             )
           );
@@ -538,7 +524,6 @@ export function BudgetPage() {
 
       {!showGraphs && (
         <NavBar
-          onRename={(e) => handleRename(e)}
           onClone={handleClone}
           onGoBack={handleGoBack}
           onGoHome={handleGoHome}
