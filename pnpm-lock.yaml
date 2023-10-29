@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@uidotdev/usehooks':
+    specifier: 2.4.0
+    version: 2.4.0(react-dom@18.2.0)(react@18.2.0)
   big.js:
     specifier: 6.2.1
     version: 6.2.1
@@ -14,6 +17,9 @@ dependencies:
   localforage:
     specifier: 1.10.0
     version: 1.10.0
+  lodash.isequal:
+    specifier: 4.5.0
+    version: 4.5.0
   papaparse:
     specifier: 5.4.1
     version: 5.4.1
@@ -44,6 +50,9 @@ dependencies:
   recharts:
     specifier: 2.9.0
     version: 2.9.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+  use-undoable:
+    specifier: ^4.0.0
+    version: 4.0.0(react@18.2.0)
 
 devDependencies:
   '@semantic-release/changelog':
@@ -70,6 +79,9 @@ devDependencies:
   '@types/jest':
     specifier: 29.5.5
     version: 29.5.5
+  '@types/lodash.isequal':
+    specifier: 4.5.6
+    version: 4.5.6
   '@types/node':
     specifier: 20.8.6
     version: 20.8.6
@@ -2605,6 +2617,16 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
+  /@types/lodash.isequal@4.5.6:
+    resolution: {integrity: sha512-Ww4UGSe3DmtvLLJm2F16hDwEQSv7U0Rr8SujLUA2wHI2D2dm8kPu6Et+/y303LfjTIwSBKXB/YTUcAKpem/XEg==}
+    dependencies:
+      '@types/lodash': 4.14.199
+    dev: true
+
+  /@types/lodash@4.14.199:
+    resolution: {integrity: sha512-Vrjz5N5Ia4SEzWWgIVwnHNEnb1UE1XMkvY5DGXrAeOGE9imk0hgTHh5GyDjLDJi9OTCn9oo9dXH1uToK1VRfrg==}
+    dev: true
+
   /@types/node@20.8.6:
     resolution: {integrity: sha512-eWO4K2Ji70QzKUqRy6oyJWUeB7+g2cRagT3T/nxYibYcT4y2BDL8lqolRXjTHmkZCdJfIPaY73KbJAZmcryxTQ==}
     dependencies:
@@ -2961,6 +2983,17 @@ packages:
       '@typescript-eslint/types': 6.7.5
       eslint-visitor-keys: 3.4.3
     dev: true
+
+  /@uidotdev/usehooks@2.4.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NrpTsZUGsawYxFbEXrd8+FPpfziC4M01GSQgYWOnGa84UiavqVCzCL5bSRe6rfQc4QsHS2rGAA0h63ya/j+p6A==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /@vitejs/plugin-react@4.1.0(vite@4.4.11):
     resolution: {integrity: sha512-rM0SqazU9iqPUraQ2JlIvReeaxOoRj6n+PzB1C0cBzIbd8qP336nC39/R9yPi3wVcah7E7j/kdU1uCUqMEU4OQ==}
@@ -5926,6 +5959,10 @@ packages:
     resolution: {integrity: sha512-TM9YBvyC84ZxE3rgfefxUWiQKLilstD6k7PTGt6wfbtXF8ixIJLOL3VYyV/z+ZiPLsVxAsKAFVwWlWeb2Y8Yyw==}
     dev: true
 
+  /lodash.isequal@4.5.0:
+    resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    dev: false
+
   /lodash.isplainobject@4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
     dev: true
@@ -8024,6 +8061,15 @@ packages:
       querystringify: 2.2.0
       requires-port: 1.0.0
     dev: true
+
+  /use-undoable@4.0.0(react@18.2.0):
+    resolution: {integrity: sha512-tWaUVCoskWmlsj+rws0u4HNSCkPrb2s43fF0Fz/8ijhQXgiq91Hb+ooGnXSqBujJkIXSf8SF1cU1+s82vCcb9Q==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: 17 || 18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
