@@ -42,7 +42,7 @@
     "react-hotkeys-hook": "4.4.1",
     "react-icons": "4.11.0",
     "react-router-dom": "6.16.0",
-    "recharts": "2.9.0",
+    "recharts": "2.9.1",
     "use-undoable": "4.0.0"
   },
   "devDependencies": {
