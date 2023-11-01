@@ -94,13 +94,7 @@ a:hover {
 
 .fixed-width-font,
 .textarea {
-  font-family:
-    ui-monospace,
-    SF Mono,
-    Menlo,
-    Monaco,
-    Andale Mono,
-    monospace;
+  font-family: ui-monospace, "SF Mono", Menlo, Monaco, "Andale Mono", monospace;
 }
 
 .form-control,
@@ -124,13 +118,13 @@ input.text-end.form-control:focus {
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
 
 /* Firefox */
 input[type="number"] {
-  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .input-group-sm > .form-control {
@@ -155,8 +149,8 @@ input[type="number"] {
   border-width: 0 0 1px;
 }
 
-.popover .popover-arrow:after,
-.popover .popover-arrow:before {
+.popover .popover-arrow::after,
+.popover .popover-arrow::before {
   border-bottom-color: var(--comment);
   border-top-color: var(--comment);
 }

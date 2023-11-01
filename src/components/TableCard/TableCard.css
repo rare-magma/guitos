@@ -1,33 +1,33 @@
-.btn-Expenses-plus-button {
+.btn-expenses-plus-button {
   border: 1px solid var(--comment);
   color: var(--purple);
 }
 
-.btn-Expenses-plus-button:focus-visible,
-.btn-Expenses-plus-button:hover {
+.btn-expenses-plus-button:focus-visible,
+.btn-expenses-plus-button:hover {
   background-color: var(--purple);
   border: 1px solid var(--purple);
   color: var(--lightbgcolor);
 }
 
-.btn-Revenue-plus-button {
+.btn-revenue-plus-button {
   border: 1px solid var(--comment);
   color: var(--highlight);
 }
 
-.btn-Revenue-plus-button:focus-visible,
-.btn-Revenue-plus-button:hover {
+.btn-revenue-plus-button:focus-visible,
+.btn-revenue-plus-button:hover {
   background-color: var(--highlight);
   border: 1px solid var(--highlight);
   color: var(--lightbgcolor);
 }
 
-.Expenses-card,
-.Revenue-card {
+.expenses-card,
+.revenue-card {
   border: 1px solid var(--comment);
 }
 
-.Expenses-card-header,
-.Revenue-card-header {
+.expenses-card-header,
+.revenue-card-header {
   border-bottom: 1px solid var(--comment);
 }

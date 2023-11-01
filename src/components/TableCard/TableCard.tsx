@@ -165,7 +165,7 @@ export function TableCard({
             }
           >
             <Button
-              variant={label + "-plus-button"}
+              variant={label.toLowerCase() + "-plus-button"}
               aria-label={`add item to ${label}`}
               size="sm"
               onClick={() => {

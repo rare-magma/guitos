@@ -2,9 +2,6 @@
   background-color: var(--lightbgcolor);
   border: 1px solid var(--comment);
   border-radius: 0.375rem;
-}
-
-.btn-delete {
   color: var(--red);
 }
 

@@ -68,14 +68,8 @@ input[type="text"]::placeholder {
 }
 
 .version {
-  color: var(--selection);
-  font-family:
-    ui-monospace,
-    SF Mono,
-    Menlo,
-    Monaco,
-    Andale Mono,
-    monospace;
+  color: var(--textcolor);
+  font-family: ui-monospace, "SF Mono", Menlo, Monaco, "Andale Mono", monospace;
   font-size: 0.9em;
 }
 
