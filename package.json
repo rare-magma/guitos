@@ -8,7 +8,7 @@
     "serve": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "pnpm dlx eslint src --fix && pnpm dlx prettier --write src",
+    "lint": "pnpm dlx eslint src --fix && pnpm dlx stylelint src/**/*.css --fix && pnpm dlx prettier --write src",
     "bundle": "pnpm dlx vite-bundle-visualizer"
   },
   "eslintConfig": {
@@ -18,11 +18,7 @@
     ]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": "defaults",
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -64,6 +60,7 @@
     "@vitejs/plugin-react": "4.1.0",
     "@vitest/coverage-v8": "0.34.6",
     "@vitest/ui": "0.34.6",
+    "autoprefixer": "10.4.16",
     "eslint": "8.51.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-config-react-app": "7.0.1",
@@ -79,6 +76,9 @@
     "prettier": "3.0.3",
     "prettier-plugin-organize-imports": "3.2.3",
     "semantic-release": "22.0.5",
+    "stylelint": "15.11.0",
+    "stylelint-config-standard": "34.0.0",
+    "stylelint-prettier": "4.0.2",
     "typescript": "5.2.2",
     "vite": "4.4.11",
     "vite-plugin-eslint": "1.8.1",
