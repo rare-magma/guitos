@@ -26,6 +26,7 @@
     "no-console": "warn",
     "no-undef": "off",
     "no-unused-vars": "off",
+    "no-constant-binary-expression": "error",
     "prettier/prettier": "error",
     "react/display-name": "off",
     "react/no-children-prop": "off",
