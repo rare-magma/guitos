@@ -12,6 +12,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useHotkeys } from "react-hotkeys-hook";
 import {
+  BsArrowClockwise,
+  BsArrowCounterclockwise,
   BsArrowLeft,
   BsArrowRight,
   BsPlusLg,
@@ -67,8 +69,9 @@ export function NavBar({
   const [theme, setTheme] = useState("light");
   const [options, setOptions] = useState<Option[]>([]);
 
-  const { currency, handleCurrency } = useConfig();
-  const { budget, budgetNameList } = useBudget();
+  const { budget, setBudget, budgetNameList, undo, canUndo, redo, canRedo } =
+    useBudget();
+  console.log("🚀 ~ file: NavBar.tsx:83 ~ budget:", budget);
 
   const shouldShowBrand = budgetNameList && budgetNameList.length < 1;
   const hasOneOrMoreBudgets = budgetNameList && budgetNameList.length > 0;
@@ -96,7 +99,7 @@ export function NavBar({
     { preventDefault: true },
   );
 
-  useHotkeys("r", (e) => !e.repeat && focusRef(nameRef), {
+  useHotkeys("n", (e) => !e.repeat && focusRef(nameRef), {
     preventDefault: true,
   });
 
@@ -305,7 +308,7 @@ export function NavBar({
         >
           <Offcanvas.Header>
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-              {budget?.name ? budget.name : "guitos"}
+              {budget?.name ?? "guitos"}
             </Offcanvas.Title>
             <Button
               aria-label="close navigation"
@@ -336,6 +339,41 @@ export function NavBar({
               </Nav>
             </Nav>
             <Nav>
+              {hasOneOrMoreBudgets && (
+                <>
+                  <NavBarItem
+                    disabled={!canUndo}
+                    itemClassName={"m-2"}
+                    onClick={undo}
+                    tooltipID={"tooltip-undo-history"}
+                    tooltipText={"undo"}
+                    buttonAriaLabel={"undo change"}
+                    buttonClassName="w-100"
+                    buttonVariant={"outline-info"}
+                    buttonIcon={
+                      expanded ? (
+                        "undo"
+                      ) : (
+                        <BsArrowCounterclockwise aria-hidden />
+                      )
+                    }
+                  />
+
+                  <NavBarItem
+                    disabled={!canRedo}
+                    itemClassName={"m-2"}
+                    onClick={redo}
+                    tooltipID={"tooltip-redo-history"}
+                    tooltipText={"redo"}
+                    buttonAriaLabel={"redo change"}
+                    buttonClassName="w-100"
+                    buttonVariant={"outline-info"}
+                    buttonIcon={
+                      expanded ? "redo" : <BsArrowClockwise aria-hidden />
+                    }
+                  />
+                </>
+              )}
               <NavBarItem
                 itemClassName={"m-2"}
                 onClick={handleNew}

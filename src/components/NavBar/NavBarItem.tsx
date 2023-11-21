@@ -13,6 +13,7 @@ interface NavItemProps {
   buttonLink?: string;
   buttonIcon: ReactNode;
   target?: string;
+  disabled?: boolean;
 }
 
 export function NavBarItem({
@@ -26,6 +27,7 @@ export function NavBarItem({
   buttonLink,
   buttonIcon,
   target,
+  disabled,
 }: NavItemProps) {
   return (
     <Nav.Item className={itemClassName} onClick={onClick}>
@@ -44,6 +46,7 @@ export function NavBarItem({
           variant={buttonVariant}
           href={buttonLink}
           target={target}
+          disabled={disabled}
         >
           {buttonIcon}
         </Button>
