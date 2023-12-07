@@ -76,6 +76,12 @@ export function BudgetPage() {
       preventDefault: true,
     },
   );
+  // useHotkeys("u", (e) => !e.repeat && undo(), {
+  //   preventDefault: true,
+  // });
+  // useHotkeys("r", (e) => !e.repeat && redo(), {
+  //   preventDefault: true,
+  // });
 
   function handleError(e: unknown) {
     if (e instanceof Error) setError(e.message);
@@ -105,6 +111,12 @@ export function BudgetPage() {
           saved: newBudget.stats.saved,
         },
       });
+      // save(budget);
+      console.log(
+        "🚀 ~ file: BudgetPage.tsx:147 ~ handleIncomeChange ~ newBudget:",
+        newBudget,
+      );
+      // setState(newBudget);
     }
   }
 
@@ -131,10 +143,15 @@ export function BudgetPage() {
           saved: newBudget.stats.saved,
         },
       });
+      // save(budget);
     }
   }
 
   function handleStatChange(item: Stat | undefined) {
+    console.log(
+      "🚀 ~ file: BudgetPage.tsx:200 ~ handleStatChange ~ item:",
+      item,
+    );
     let newBudget: Budget;
     if (budget && item) {
       newBudget = budget;
@@ -154,6 +171,11 @@ export function BudgetPage() {
           reserves: item.reserves,
         },
       });
+      // save(budget);
+      console.log(
+        "🚀 ~ file: BudgetPage.tsx:204 ~ handleStatChange ~ newBudget:",
+        newBudget,
+      );
     }
   }
 
@@ -178,6 +200,7 @@ export function BudgetPage() {
           reserves: newBudget.stats.reserves,
         },
       });
+      // save(budget);
     }
   }
 
@@ -190,6 +213,7 @@ export function BudgetPage() {
       : newBudgetList.concat(newBudget);
 
     setBudget(newBudget);
+    // reset(newBudget);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
 
@@ -225,6 +249,7 @@ export function BudgetPage() {
         },
       ]);
       setBudget(newBudget);
+      // reset(newBudget);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
     }
@@ -256,8 +281,10 @@ export function BudgetPage() {
 
           if (newBudgetList.length >= 1) {
             setBudget(newBudgetList[0]);
+            // reset(newBudgetList[0]);
           } else {
             setBudget(undefined);
+            // reset(undefined);
           }
         })
         .catch((e: unknown) => {
@@ -273,6 +300,7 @@ export function BudgetPage() {
 
       filteredList && setBudget(filteredList[0]);
 
+      // reset(filteredList[0]);
       if (selectedBudget[0].item && selectedBudget[0].item.length > 0) {
         setFocus(selectedBudget[0].item);
       }
@@ -347,6 +375,7 @@ export function BudgetPage() {
     );
     newBudgetList.push(newBudget);
     save(newBudget);
+    // reset(newBudget);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
   }
@@ -471,6 +500,7 @@ export function BudgetPage() {
 
   useEffect(() => {
     budget && save(budget);
+    console.log("🚀 ~ file: BudgetPage.tsx:503 ~ useEffect ~ budget:", budget);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [budget]);
 
@@ -496,6 +526,7 @@ export function BudgetPage() {
       handleError(e);
       setLoading(false);
     }
+    console.log("🚀 ~ file: BudgetPage.tsx:573 ~ BudgetPage ~ name:", name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, loading]);
 
