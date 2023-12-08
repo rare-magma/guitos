@@ -40,8 +40,7 @@
     "react-icons": "4.12.0",
     "react-router-dom": "6.19.0",
     "recharts": "2.10.3",
-    "zundo": "2.0.0",
-    "zustand": "4.4.7"
+    "use-undoable": "4.0.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "6.0.3",
@@ -82,7 +81,7 @@
     "stylelint-config-standard": "34.0.0",
     "stylelint-prettier": "4.0.2",
     "typescript": "5.2.2",
-    "vite": "5.0.5",
+    "vite": "5.0.6",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-pwa": "0.17.4",
     "vitest": "0.34.6",
