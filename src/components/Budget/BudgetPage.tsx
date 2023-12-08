@@ -49,6 +49,7 @@ export function BudgetPage() {
     budgetList,
     setBudgetList,
     setBudgetNameList,
+    needReload,
     past,
     future,
     undo,
@@ -261,7 +262,7 @@ export function BudgetPage() {
       file.name.slice(0, -4),
     );
     newBudgetList.push(newBudget);
-    save(newBudget);
+    // save(newBudget);
     // reset(newBudget);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -273,7 +274,7 @@ export function BudgetPage() {
       const list = JSON.parse(fileReader.result as string) as Budget[];
       list.forEach((b: Budget) => {
         newBudgetList.push(b);
-        save(b);
+        // save(b);
       });
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -303,28 +304,6 @@ export function BudgetPage() {
         }
       };
     }
-  }
-
-  function save(budget: Budget) {
-    let list: Budget[] = [];
-    budgetsDB
-      .setItem(budget.id, budget)
-      .then(() => {
-        budgetsDB
-          .iterate((value) => {
-            list = list.concat(value as Budget);
-          })
-          .then(() => {
-            setBudgetList(list);
-            setBudgetNameList(createBudgetNameList(list));
-          })
-          .catch((e: unknown) => {
-            handleError(e);
-          });
-      })
-      .catch((e: unknown) => {
-        handleError(e);
-      });
   }
 
   function loadFromDb() {
@@ -386,12 +365,6 @@ export function BudgetPage() {
   // useWhatChanged([budget, name]);
 
   useEffect(() => {
-    budget && save(budget);
-    console.log("file: BudgetPage.tsx:503 ~ useEffect ~ budget:", budget);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [budget]);
-
-  useEffect(() => {
     try {
       const shouldLoadBudgetsFromList =
         budgetList && budgetList.length >= 1 && Array.isArray(budgetList);
@@ -418,7 +391,7 @@ export function BudgetPage() {
   }, [name, loading]);
 
   return (
-    <Container fluid style={{ zIndex: 1 }}>
+    <Container fluid style={{ zIndex: 1 }} key={`${budget?.id}-${needReload}`}>
       <ToastContainer
         className="p-2"
         position={"bottom-center"}
