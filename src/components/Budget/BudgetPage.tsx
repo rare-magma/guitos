@@ -50,21 +50,17 @@ export function BudgetPage() {
     setBudgetList,
     setBudgetNameList,
     needReload,
-    past,
-    future,
+    setNeedReload,
     undo,
     redo,
     canRedo,
     canUndo,
   } = useBudget();
-  console.log("file: BudgetPage.tsx:57 ~ BudgetPage ~ budget:", budget);
   const params = useParams();
   const name = String(params.name);
 
   const showCards = !loading && !showGraphs && budget?.id;
 
-  console.log("file: BudgetPage.tsx:55 ~ BudgetPage ~ future:", future);
-  console.log("file: BudgetPage.tsx:55 ~ BudgetPage ~ past:", past);
   const { setIntlConfig, handleCurrency } = useConfig();
 
   useHotkeys("escape", (e) => !e.repeat && setNotifications([]), {
@@ -170,10 +166,8 @@ export function BudgetPage() {
 
           if (newBudgetList.length >= 1) {
             setBudget(newBudgetList[0]);
-            // reset(newBudgetList[0]);
           } else {
             setBudget(undefined);
-            // reset(undefined);
           }
         })
         .catch((e: unknown) => {
@@ -262,8 +256,9 @@ export function BudgetPage() {
       file.name.slice(0, -4),
     );
     newBudgetList.push(newBudget);
-    // save(newBudget);
-    // reset(newBudget);
+    budgetsDB.setItem(newBudget.id, newBudget).catch((e) => {
+      throw e;
+    });
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
   }
@@ -274,7 +269,9 @@ export function BudgetPage() {
       const list = JSON.parse(fileReader.result as string) as Budget[];
       list.forEach((b: Budget) => {
         newBudgetList.push(b);
-        // save(b);
+        budgetsDB.setItem(b.id, b).catch((e) => {
+          throw e;
+        });
       });
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -341,7 +338,9 @@ export function BudgetPage() {
     list.forEach((data: Budget) => {
       budgetsDB
         .getItem(data.id)
-        .then((b) => setBudget(b as Budget))
+        .then((b) => {
+          setBudget(b as Budget);
+        })
         .catch((e) => {
           handleError(e);
         });
@@ -386,9 +385,37 @@ export function BudgetPage() {
       handleError(e);
       setLoading(false);
     }
-    console.log("file: BudgetPage.tsx:573 ~ BudgetPage ~ name:", name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, loading]);
+
+  function save(budget: Budget | undefined) {
+    if (!budget) return;
+    let list: Budget[] = [];
+    budgetsDB
+      .setItem(budget.id, budget)
+      .then(() => {
+        budgetsDB
+          .iterate((value) => {
+            list = list.concat(value as Budget);
+          })
+          .then(() => {
+            setBudgetList(list);
+            setBudgetNameList(createBudgetNameList(list));
+            setNeedReload(true);
+          })
+          .catch((e: unknown) => {
+            throw e;
+          });
+      })
+      .catch((e: unknown) => {
+        throw e;
+      });
+  }
+
+  useEffect(() => {
+    save(budget);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [budget]);
 
   return (
     <Container fluid style={{ zIndex: 1 }} key={`${budget?.id}-${needReload}`}>
@@ -452,7 +479,7 @@ export function BudgetPage() {
       )}
 
       {showCards && (
-        <Container key={budget.id}>
+        <Container key={`${budget.id}-${needReload}`}>
           <Row className="mt-1">
             <Col md="6">
               <div className="card-columns">

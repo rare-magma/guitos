@@ -96,9 +96,9 @@ export function TableCard({ header: label }: TableCardProps) {
   function addTable(tableBeingEdited: Income | Expense | undefined) {
     if (!tableBeingEdited) return;
     const tableHasItems = table && table.items.length !== 0;
-    const newItemForm = new ItemForm();
-    const newTable = isRevenue ? new Income() : new Expense();
-    let maxId;
+    const newItemForm = {} as ItemForm;
+    const newTable = isRevenue ? ({} as Income) : ({} as Expense);
+    let maxId: number;
 
     if (tableHasItems) {
       maxId = Math.max(
@@ -123,7 +123,7 @@ export function TableCard({ header: label }: TableCardProps) {
   function removeTable(toBeDeleted: ItemForm) {
     if (!table?.items) return;
     const isIncome = toBeDeleted.constructor.name === "Income";
-    const newTable = isIncome ? new Income() : new Expense();
+    const newTable = isIncome ? ({} as Income) : ({} as Expense);
 
     newTable.items = table.items.filter(
       (item: { id: number }) => item.id !== toBeDeleted.id,
@@ -136,7 +136,7 @@ export function TableCard({ header: label }: TableCardProps) {
   function handleChange(item: ItemForm) {
     if (!table?.items) return;
     const isIncome = item.constructor.name === "Income";
-    const newTable = isIncome ? new Income() : new Expense();
+    const newTable = isIncome ? ({} as Income) : ({} as Expense);
 
     newTable.items = table.items.map((i) => {
       if (i.id === item.id) {

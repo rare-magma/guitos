@@ -1,15 +1,8 @@
-import {
-  PropsWithChildren,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import useUndoable from "use-undoable";
+import { PropsWithChildren, createContext, useContext, useState } from "react";
+import useUndo from "use-undo";
 import { Budget } from "../components/Budget/Budget";
 import { SearchOption } from "../components/NavBar/NavBar";
-import { calcPercentage, createBudgetNameList } from "../utils";
-import { budgetsDB } from "./db";
+import { calcPercentage } from "../utils";
 
 interface BudgetContextInterface {
   budget: Budget | undefined;
@@ -20,14 +13,13 @@ interface BudgetContextInterface {
   setBudgetNameList: (value: SearchOption[] | undefined) => void;
   revenuePercentage: number;
   needReload: boolean;
+  setNeedReload: (value: boolean) => void;
   past: (Budget | undefined)[];
   future: (Budget | undefined)[];
   undo: () => void;
   redo: () => void;
-  reset: () => void;
   canUndo: boolean;
   canRedo: boolean;
-  resetInitialState: (value: Budget) => void;
 }
 
 const BudgetContext = createContext<BudgetContextInterface>({
@@ -45,6 +37,9 @@ const BudgetContext = createContext<BudgetContextInterface>({
   },
   revenuePercentage: 0,
   needReload: true,
+  setNeedReload: (value: boolean) => {
+    value;
+  },
   past: [undefined],
   future: [undefined],
   undo: () => {
@@ -53,14 +48,8 @@ const BudgetContext = createContext<BudgetContextInterface>({
   redo: () => {
     // redo
   },
-  reset: () => {
-    // reset
-  },
   canUndo: false,
   canRedo: false,
-  resetInitialState: (value: Budget) => {
-    value;
-  },
 });
 
 function useBudget() {
@@ -73,14 +62,13 @@ function useBudget() {
     setBudgetNameList,
     revenuePercentage,
     needReload,
+    setNeedReload,
     past,
     future,
     undo,
     redo,
-    reset,
     canUndo,
     canRedo,
-    resetInitialState,
   } = useContext(BudgetContext);
 
   return {
@@ -92,14 +80,13 @@ function useBudget() {
     setBudgetNameList,
     revenuePercentage,
     needReload,
+    setNeedReload,
     past,
     future,
     undo,
     redo,
-    reset,
     canUndo,
     canRedo,
-    resetInitialState,
   };
 }
 
@@ -107,19 +94,16 @@ function BudgetProvider({ children }: PropsWithChildren) {
   const [budgetList, setBudgetList] = useState<Budget[] | undefined>([]);
   const [needReload, setNeedReload] = useState(true);
   const [
-    budget,
-    setBudget,
+    budgetState,
     {
-      past,
-      future,
+      set: setBudget,
       undo,
       redo,
-      reset,
-      resetInitialState,
       canUndo: undoPossible,
       canRedo: redoPossible,
     },
-  ] = useUndoable<Budget | undefined>(undefined);
+  ] = useUndo<Budget | undefined>(undefined);
+  const { present: budget, past, future } = budgetState;
 
   const revenuePercentage = calcPercentage(
     budget?.expenses.total ?? 0,
@@ -140,45 +124,21 @@ function BudgetProvider({ children }: PropsWithChildren) {
   const canReallyRedo =
     redoPossible && future[0] !== undefined && budget?.id === futureBudgetID;
 
-  function save(budget: Budget | undefined) {
-    if (!budget) return;
-    let list: Budget[] = [];
-    budgetsDB
-      .setItem(budget.id, budget)
-      .then(() => {
-        budgetsDB
-          .iterate((value) => {
-            list = list.concat(value as Budget);
-          })
-          .then(() => {
-            setBudgetList(list);
-            setBudgetNameList(createBudgetNameList(list));
-            setNeedReload(true);
-          })
-          .catch((e: unknown) => {
-            throw e;
-          });
-      })
-      .catch((e: unknown) => {
-        throw e;
-      });
-  }
-
   function handleUndo() {
-    setNeedReload(true);
-    undo();
-    setNeedReload(false);
+    if (canReallyUndo) {
+      setNeedReload(true);
+      undo();
+      setNeedReload(false);
+    }
   }
 
   function handleRedo() {
-    setNeedReload(true);
-    redo();
-    setNeedReload(false);
+    if (canReallyRedo) {
+      setNeedReload(true);
+      redo();
+      setNeedReload(false);
+    }
   }
-
-  useEffect(() => {
-    save(budget);
-  }, [budget]);
 
   return (
     <BudgetContext.Provider
@@ -193,12 +153,11 @@ function BudgetProvider({ children }: PropsWithChildren) {
         past,
         future,
         needReload,
+        setNeedReload,
         undo: handleUndo,
         redo: handleRedo,
-        reset,
         canUndo: canReallyUndo,
         canRedo: canReallyRedo,
-        resetInitialState,
       }}
     >
       {children}

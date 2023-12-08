@@ -44,9 +44,9 @@ dependencies:
   recharts:
     specifier: 2.10.3
     version: 2.10.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
-  use-undoable:
-    specifier: 4.0.0
-    version: 4.0.0(react@18.2.0)
+  use-undo:
+    specifier: 1.1.1
+    version: 1.1.1(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@semantic-release/changelog':
@@ -9728,13 +9728,14 @@ packages:
       requires-port: 1.0.0
     dev: true
 
-  /use-undoable@4.0.0(react@18.2.0):
-    resolution: {integrity: sha512-tWaUVCoskWmlsj+rws0u4HNSCkPrb2s43fF0Fz/8ijhQXgiq91Hb+ooGnXSqBujJkIXSf8SF1cU1+s82vCcb9Q==}
-    engines: {node: '>=10'}
+  /use-undo@1.1.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-2NNpJv7TDQpyETgRTG5I/CsABX5nhExpx8PEhWiDsnW9C5BA6Xnn8G9u/lPeg3+JsBrBtUx8/5bMbGmpnWz1Cw==}
     peerDependencies:
-      react: 17 || 18
+      react: '>=16.8.6'
+      react-dom: '>=16.8.6'
     dependencies:
       react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /util-deprecate@1.0.2:
