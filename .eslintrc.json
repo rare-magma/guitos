@@ -35,6 +35,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-key": ["error", { "warnOnDuplicates": true }],
     "react-refresh/only-export-components": "warn",
+    "testing-library/prefer-user-event": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "error",

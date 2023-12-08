@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { vi } from "vitest";
@@ -72,7 +72,7 @@ describe("ItemFormGroup", () => {
   });
 
   it("shows tooltip when user hovers over", async () => {
-    fireEvent.mouseOver(screen.getByDisplayValue("$123"));
+    await userEvent.hover(screen.getByDisplayValue("$123"));
 
     expect(await screen.findByText("1% of revenue")).toBeInTheDocument();
   });
