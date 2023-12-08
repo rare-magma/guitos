@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { TableCard } from "./TableCard";
 
@@ -37,6 +37,16 @@ describe("TableCard", () => {
     await userEvent.click(
       screen.getByRole("button", { name: "add item to Expenses" }),
     );
+    expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
+  });
+
+  it("triggers onChange when user adds new Revenue", async () => {
+    cleanup();
+    render(<TableCard header={"Revenue"} />);
+    await userEvent.click(
+      screen.getByRole("button", { name: "add item to Revenue" }),
+    );
+    expect(screen.getByDisplayValue("$100")).toBeInTheDocument();
   });
 
   it("triggers onChange when user deletes items", async () => {
