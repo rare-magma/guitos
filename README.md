@@ -20,6 +20,7 @@
 - [Security](#security)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
+
 </details>
 
 <details>
@@ -89,7 +90,7 @@ The charts page is useful for these kinds of insighs.
 
 There I can see an overview of the evolution of several metrics such as `savings`, `revenue`, etc. If I want to narrow down the chart to a specific type of item I can search for it in the filter searchbox. If I toggle the `strict match` button then only items that are named exactly as the search value are shown in the resulting chart.
 
-### Starting from scratch:
+### Starting from scratch
 
 1. Visit [guitos.app](https://guitos.app)
 2. Create a new budget and name it according to your preferred budget period
@@ -99,13 +100,13 @@ There I can see an overview of the evolution of several metrics such as `savings
 5. Change the savings goal to your preference
 6. Update the reserves field with the current value of your emergency fund / cash
 
-### In case you have a backup/would like to import data from another source:
+### In case you have a backup/would like to import data from another source
 
 1. Visit [guitos.app](https://guitos.app)
 2. Import data from single/multiple CSV files or a single JSON file.
    Make sure they follow the required structure:
 
-### CSV data model:
+### CSV data model
 
 ```csv
 type,name,value
@@ -121,7 +122,7 @@ reserves,reserves,0
 
   `2023-04.csv` results in a budget with the name of `2023-04`.
 
-### JSON data model:
+### JSON data model
 
 ```json
 [
@@ -155,12 +156,14 @@ reserves,reserves,0
 
 - Note that the ID of each budget inside the JSON file should be a [v4 UUID](<https://en.wikipedia.org/wiki/Universally_unique_identifier#Version_4_(random)>) as created by the `crypto.randomUUID()` [method](https://developer.mozilla.org/en-US/docs/Web/API/Crypto/randomUUID).
 
-### Keyboard shortcuts:
+### Keyboard shortcuts
 
 Keyboard shortcuts can be triggered when no input field is selected.
 
 | Action                       | Shortcut |
 | ---------------------------- | -------- |
+| Undo last change             | U        |
+| Redo last change             | R        |
 | Clone current budget         | C        |
 | Create new budget            | A        |
 | Export data as JSON          | S        |
@@ -168,11 +171,10 @@ Keyboard shortcuts can be triggered when no input field is selected.
 | Go to older budget           | PageDown |
 | Go to current month's budget | Home     |
 | Go to newer budget           | PageUp   |
-| Rename current budget        | R        |
+| Rename current budget        | N        |
 | Search                       | F or /   |
 | Focus savings goal           | G        |
 | Focus reserves               | E        |
-| Change currency              | T        |
 | Toggle charts view           | I        |
 | Dismiss all notifications    | Escape   |
 
