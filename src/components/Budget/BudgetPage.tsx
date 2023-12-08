@@ -605,21 +605,13 @@ export function BudgetPage() {
 
                 <div className="mt-3" />
 
-                <TableCard
-                  items={budget.incomes}
-                  header="Revenue"
-                  onChange={handleIncomeChange}
-                />
+                <TableCard header="Revenue" onChange={handleIncomeChange} />
                 <div className="mt-3" />
               </div>
             </Col>
 
             <Col md="6" className="mb-3">
-              <TableCard
-                items={budget.expenses}
-                header="Expenses"
-                onChange={handleExpenseChange}
-              />
+              <TableCard header="Expenses" onChange={handleExpenseChange} />
             </Col>
           </Row>
         </Container>
