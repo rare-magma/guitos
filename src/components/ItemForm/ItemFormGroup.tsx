@@ -72,14 +72,18 @@ export function ItemFormGroup({
   }
 
   return (
-    <InputGroup size="sm" className="mb-1" key={`${itemForm.id}-group`}>
+    <InputGroup
+      size="sm"
+      className="mb-1"
+      key={`${itemForm.id}-${label}-group`}
+    >
       <OverlayTrigger
         delay={250}
         placement="top"
         overlay={
           costPercentage > 0 ? (
             <Tooltip
-              id={`tooltip-value-${itemForm.id}`}
+              id={`tooltip-value-${label}-${itemForm.id}`}
               style={{ position: "fixed" }}
             >
               {costPercentage}% of revenue
@@ -92,7 +96,7 @@ export function ItemFormGroup({
         <Form.Control
           id={`${label}-${itemForm.id}-name`}
           aria-label={`item ${itemForm.id} name`}
-          key={`${itemForm.id}-name`}
+          key={`${itemForm.id}-${label}-name`}
           className="w-25"
           ref={inputRef}
           defaultValue={itemForm.name}
@@ -109,7 +113,7 @@ export function ItemFormGroup({
         overlay={
           costPercentage > 0 ? (
             <Tooltip
-              id={`tooltip-value-${itemForm.id}`}
+              id={`tooltip-costPercentage-${label}-${itemForm.id}`}
               style={{ position: "fixed" }}
             >
               {costPercentage}% of revenue
@@ -121,7 +125,7 @@ export function ItemFormGroup({
       >
         <CurrencyInput
           id={`${label}-${itemForm.id}-value`}
-          key={`${itemForm.id}"-value-${changed}`}
+          key={`${itemForm.id}-${label}-value-${changed}`}
           className="text-end form-control straight-corners fixed-width-font"
           aria-label={`item ${itemForm.id} value`}
           name="item-value"
@@ -143,7 +147,6 @@ export function ItemFormGroup({
       />
       <OverlayTrigger
         trigger="click"
-        key="top"
         placement="top"
         rootClose={true}
         overlay={
@@ -164,7 +167,7 @@ export function ItemFormGroup({
                 <Button
                   id={`item-${itemForm.id}-delete-confirmation-button`}
                   aria-label={`confirm item ${itemForm.id} deletion`}
-                  key={`${itemForm.id}-delete-confirmation-button`}
+                  key={`${itemForm.id}-${label}-delete-confirmation-button`}
                   variant="delete"
                   type="button"
                   size="sm"
@@ -181,7 +184,7 @@ export function ItemFormGroup({
         <Button
           id={`delete-${label}-${itemForm.id}-button`}
           aria-label={`delete item ${itemForm.id}`}
-          key={`${itemForm.id}-button`}
+          key={`${itemForm.id}-${label}-delete-button`}
           variant="delete"
           type="button"
           onClick={() => {

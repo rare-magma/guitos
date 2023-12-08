@@ -424,10 +424,11 @@ export function BudgetPage() {
         position={"bottom-center"}
         style={{ zIndex: 100 }}
       >
-        {notifications.map((notification) => {
+        {notifications.map((notification, i) => {
           return (
             notification && (
               <Notification
+                key={i}
                 notification={notification}
                 onShow={() =>
                   setNotifications(
@@ -479,12 +480,12 @@ export function BudgetPage() {
       )}
 
       {showCards && (
-        <Container key={`${budget.id}-${needReload}`}>
+        <Container key={`${budget.id}-${needReload}-cards-container`}>
           <Row className="mt-1">
             <Col md="6">
               <div className="card-columns">
                 <StatCard
-                  key={budget?.expenses.total + budget?.incomes.total}
+                  key={`${budget?.expenses.total} + ${budget?.incomes.total}-${budget.id}-stat-card`}
                   onShowGraphs={() => setShowGraphs(true)}
                 />
 

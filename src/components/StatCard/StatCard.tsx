@@ -279,6 +279,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             </Button>
           </OverlayTrigger>
           <Form.Control
+            id="goal-input"
             data-testid="goal-input"
             className="text-end fixed-width-font"
             aria-label={"goal"}
@@ -336,7 +337,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
           </OverlayTrigger>
           <CurrencyInput
             id="reserves"
-            key={"reserves"}
+            key={"reserves-input"}
             className="text-end form-control fixed-width-font"
             aria-label={"reserves"}
             name="reserves"

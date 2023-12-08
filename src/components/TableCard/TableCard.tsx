@@ -188,7 +188,7 @@ export function TableCard({ header: label }: TableCardProps) {
       <Card.Body>
         {table?.items?.map((item: ItemForm) => (
           <ItemFormGroup
-            key={`${label}-${item.id}`}
+            key={`${label}-${item.id}-item-form-group`}
             itemForm={item}
             label={label}
             costPercentage={

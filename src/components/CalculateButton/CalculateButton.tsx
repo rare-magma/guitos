@@ -50,7 +50,7 @@ export function CalculateButton({
     <>
       <OverlayTrigger
         trigger="click"
-        key="top"
+        key={`${itemForm.id}-${label}-calculate-button-overlay-trigger`}
         placement="top"
         rootClose={true}
         overlay={
@@ -59,7 +59,7 @@ export function CalculateButton({
               <InputGroup
                 size="sm"
                 className="mb-1"
-                key={`${itemForm.id}-operation-group`}
+                key={`${itemForm.id}-${label}-operation-group`}
               >
                 <Dropdown>
                   <Dropdown.Toggle
@@ -103,7 +103,7 @@ export function CalculateButton({
                 </Dropdown>
                 <CurrencyInput
                   id={`${label}-${itemForm.id}-operation-value`}
-                  key={`item-${itemForm.id}-operation-value`}
+                  key={`item-${itemForm.id}-${label}-operation-value`}
                   className="text-end form-control straight-corners fixed-width-font"
                   aria-label={`${operation}`}
                   name="item-operate-value"
@@ -119,7 +119,7 @@ export function CalculateButton({
                 />
                 <Button
                   id={`item-${itemForm.id}-trigger-operation-button`}
-                  key={`${itemForm.id}-trigger-operation-button`}
+                  key={`${itemForm.id}-${label}-trigger-operation-button`}
                   aria-label={"apply change to item value"}
                   variant="outline-secondary"
                   type="button"
@@ -137,7 +137,7 @@ export function CalculateButton({
       >
         <Button
           id={`${label}-${itemForm.id}-operate-button`}
-          key={`${itemForm.id}-operate-button`}
+          key={`${itemForm.id}-${label}-operate-button`}
           aria-label={"select operation type to item value"}
           aria-haspopup="dialog"
           variant="outline-secondary"

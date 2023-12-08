@@ -279,6 +279,7 @@ export function NavBar({
                   }
                 >
                   <Form.Control
+                    id="budget-name"
                     aria-label={"budget name"}
                     key={"budget-name-key-" + budget.id}
                     defaultValue={budget.name}
