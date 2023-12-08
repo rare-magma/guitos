@@ -91,7 +91,7 @@ describe("CalculateButton", () => {
     await userEvent.type(screen.getByLabelText("add"), "123");
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toBeCalledWith(123, "add");
+    expect(onCalculate).toHaveBeenCalledWith(123, "add");
   });
 
   it("calls onCalculate when change > 0 and enter is pressed", async () => {
@@ -102,7 +102,7 @@ describe("CalculateButton", () => {
     await userEvent.type(screen.getByLabelText("addition"), "123");
     await userEvent.type(screen.getByLabelText("addition"), "{enter}");
 
-    expect(onCalculate).toBeCalledWith(123, "add");
+    expect(onCalculate).toHaveBeenCalledWith(123, "add");
   });
 
   it("calls onCalculate with sub", async () => {
@@ -119,7 +119,7 @@ describe("CalculateButton", () => {
     await userEvent.click(screen.getByLabelText("subtraction"));
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toBeCalledWith(123, "subtract");
+    expect(onCalculate).toHaveBeenCalledWith(123, "subtract");
   });
 
   it("calls onCalculate with multiply", async () => {
@@ -136,7 +136,7 @@ describe("CalculateButton", () => {
     await userEvent.click(screen.getByLabelText("multiplication"));
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toBeCalledWith(123, "multiply");
+    expect(onCalculate).toHaveBeenCalledWith(123, "multiply");
   });
 
   it("calls onCalculate with div", async () => {
@@ -153,6 +153,6 @@ describe("CalculateButton", () => {
     await userEvent.click(screen.getByLabelText("division"));
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toBeCalledWith(123, "divide");
+    expect(onCalculate).toHaveBeenCalledWith(123, "divide");
   });
 });

@@ -39,7 +39,7 @@ describe("ItemFormGroup", () => {
   it("triggers onChange when user changes input", async () => {
     await userEvent.type(screen.getByDisplayValue("name1"), "change name");
 
-    expect(onChange).toBeCalledWith({
+    expect(onChange).toHaveBeenCalledWith({
       id: 1,
       name: "name1change name",
       value: 10,
@@ -48,7 +48,7 @@ describe("ItemFormGroup", () => {
 
     await userEvent.type(screen.getByDisplayValue("$10"), "123");
 
-    expect(onChange).toBeCalledWith({
+    expect(onChange).toHaveBeenCalledWith({
       id: 1,
       name: "name1change name",
       value: 123,
@@ -64,7 +64,7 @@ describe("ItemFormGroup", () => {
       screen.getByRole("button", { name: "confirm item 1 deletion" }),
     );
 
-    expect(onRemove).toBeCalledWith({
+    expect(onRemove).toHaveBeenCalledWith({
       id: 1,
       name: "name1change name",
       value: 123,
@@ -110,7 +110,7 @@ describe("ItemFormGroup", () => {
 
     expect(screen.getByDisplayValue("123,12 €")).toBeInTheDocument();
 
-    expect(onChange).toBeCalledWith({
+    expect(onChange).toHaveBeenCalledWith({
       id: 1,
       name: "name1change name",
       value: 123.12,

@@ -29,6 +29,6 @@ describe("ConfigProvider", () => {
     // configContextSpy.mockClear();
     configContextSpy.mockReset();
     cleanup();
-    expect(() => render(<TestComponent />)).toThrowError();
+    expect(() => render(<TestComponent />)).toThrow();
   });
 });

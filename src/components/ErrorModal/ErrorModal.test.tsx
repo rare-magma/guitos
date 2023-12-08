@@ -59,34 +59,34 @@ describe("ErrorModal", () => {
     expect(screen.getByTestId("error-modal")).toBeInTheDocument();
     await userEvent.click(screen.getByTestId("error-modal-dismiss"));
 
-    expect(onShow).toBeCalledWith(false);
+    expect(onShow).toHaveBeenCalledWith(false);
   });
 
   it("closes json error when clicking the button", async () => {
     expect(screen.getByTestId("json-error-close")).toBeInTheDocument();
     await userEvent.click(screen.getByTestId("json-error-close"));
 
-    expect(onShow).toBeCalledWith(false);
+    expect(onShow).toHaveBeenCalledWith(false);
   });
 
   it("closes json error modal when clicking the button", async () => {
     expect(screen.getByTestId("json-error-modal")).toBeInTheDocument();
     await userEvent.click(screen.getByTestId("json-error-modal"));
 
-    expect(onShow).toBeCalledWith(false);
+    expect(onShow).toHaveBeenCalledWith(false);
   });
 
   it("closes csv error when clicking the button", async () => {
     expect(screen.getByTestId("csv-error-close")).toBeInTheDocument();
     await userEvent.click(screen.getByTestId("csv-error-close"));
 
-    expect(onShow).toBeCalledWith(false);
+    expect(onShow).toHaveBeenCalledWith(false);
   });
 
   it("closes csv error modal when clicking the button", async () => {
     expect(screen.getByTestId("csv-error-modal")).toBeInTheDocument();
     await userEvent.click(screen.getByTestId("csv-error-modal"));
 
-    expect(onShow).toBeCalledWith(false);
+    expect(onShow).toHaveBeenCalledWith(false);
   });
 });

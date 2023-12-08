@@ -41,7 +41,7 @@ describe("LandingPage", () => {
   it("triggers onNew", async () => {
     const newButton = screen.getAllByRole("button", { name: "new budget" })[0];
     await userEvent.click(newButton);
-    expect(onNew).toBeCalledTimes(1);
+    expect(onNew).toHaveBeenCalledTimes(1);
   });
 
   it("triggers onImport", async () => {
@@ -49,7 +49,7 @@ describe("LandingPage", () => {
       screen.getByTestId("import-form-control-landing-page"),
       testBudget as unknown as File,
     );
-    expect(onImport).toBeCalledTimes(1);
+    expect(onImport).toHaveBeenCalledTimes(1);
   });
 
   it("opens instructions in new tab", async () => {

@@ -45,6 +45,6 @@ describe("StatCard", () => {
       screen.getByRole("button", { name: "open charts view" }),
     );
 
-    expect(onShowGraphs).toBeCalledTimes(1);
+    expect(onShowGraphs).toHaveBeenCalledTimes(1);
   });
 });

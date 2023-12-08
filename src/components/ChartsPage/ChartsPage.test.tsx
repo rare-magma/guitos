@@ -44,13 +44,13 @@ describe("ChartsPage", () => {
 
   it("triggers onShowGraphs when back button is pressed", async () => {
     await userEvent.click(screen.getByLabelText("go back to budgets"));
-    expect(onShowGraphs).toBeCalledTimes(1);
+    expect(onShowGraphs).toHaveBeenCalledTimes(1);
     onShowGraphs.mockClear();
   });
 
   it("triggers onShowGraphs when i shortcut is pressed", async () => {
     await userEvent.type(screen.getByText("Reserves"), "i");
-    expect(onShowGraphs).toBeCalledTimes(1);
+    expect(onShowGraphs).toHaveBeenCalledTimes(1);
     onShowGraphs.mockClear();
   });
 });

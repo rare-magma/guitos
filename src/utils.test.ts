@@ -158,7 +158,7 @@ test("calc", () => {
   expect(calc(0, 100, "sub")).eq(0);
   expect(calc(0, 100, "mul")).eq(0);
   expect(calc(0, 100, "div")).eq(0);
-  expect(() => calc(0, 100, "sqrt")).toThrowError();
+  expect(() => calc(0, 100, "sqrt")).toThrow();
 });
 
 test("median", () => {
