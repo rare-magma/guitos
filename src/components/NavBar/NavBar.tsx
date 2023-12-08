@@ -69,8 +69,17 @@ export function NavBar({
   const [theme, setTheme] = useState("light");
   const [options, setOptions] = useState<Option[]>([]);
 
-  const { budget, setBudget, budgetNameList } = useBudget();
-  console.log("🚀 ~ file: NavBar.tsx:83 ~ budget:", budget);
+  const {
+    budget,
+    setBudget,
+    past,
+    future,
+    undo,
+    redo,
+    canRedo,
+    canUndo,
+    budgetNameList,
+  } = useBudget();
 
   const shouldShowBrand = budgetNameList && budgetNameList.length < 1;
   const hasOneOrMoreBudgets = budgetNameList && budgetNameList.length > 0;
@@ -341,11 +350,12 @@ export function NavBar({
               {hasOneOrMoreBudgets && (
                 <>
                   <NavBarItem
-                    // disabled={!canUndo}
+                    disabled={!canUndo}
                     itemClassName={"m-2"}
-                    // onClick={undo}
                     onClick={() => {
-                      return;
+                      console.log("undo button");
+                      if (!past) return;
+                      undo(setBudget, past);
                     }}
                     tooltipID={"tooltip-undo-history"}
                     tooltipText={"undo"}
@@ -362,11 +372,11 @@ export function NavBar({
                   />
 
                   <NavBarItem
-                    // disabled={!canRedo}
+                    disabled={!canRedo}
                     itemClassName={"m-2"}
-                    // onClick={redo}
                     onClick={() => {
-                      return;
+                      console.log("redo button");
+                      redo(setBudget, future);
                     }}
                     tooltipID={"tooltip-redo-history"}
                     tooltipText={"redo"}

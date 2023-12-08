@@ -51,13 +51,27 @@ export function BudgetPage() {
     }[]
   >([]);
 
-  const { budget, setBudget, budgetList, setBudgetList, setBudgetNameList } =
-    useBudget();
+  const {
+    budget,
+    setBudget,
+    budgetList,
+    setBudgetList,
+    setBudgetNameList,
+    past,
+    future,
+    undo,
+    redo,
+    canRedo,
+    canUndo,
+  } = useBudget();
+  console.log("file: BudgetPage.tsx:57 ~ BudgetPage ~ budget:", budget);
   const params = useParams();
   const name = String(params.name);
 
   const showCards = !loading && !showGraphs && budget?.id;
 
+  console.log("file: BudgetPage.tsx:55 ~ BudgetPage ~ future:", future);
+  console.log("file: BudgetPage.tsx:55 ~ BudgetPage ~ past:", past);
   const { setIntlConfig, handleCurrency } = useConfig();
 
   useHotkeys("escape", (e) => !e.repeat && setNotifications([]), {
@@ -76,12 +90,12 @@ export function BudgetPage() {
       preventDefault: true,
     },
   );
-  // useHotkeys("u", (e) => !e.repeat && undo(), {
-  //   preventDefault: true,
-  // });
-  // useHotkeys("r", (e) => !e.repeat && redo(), {
-  //   preventDefault: true,
-  // });
+  useHotkeys("u", (e) => !e.repeat && canUndo && undo(), {
+    preventDefault: true,
+  });
+  useHotkeys("r", (e) => !e.repeat && canRedo && redo(), {
+    preventDefault: true,
+  });
 
   function handleError(e: unknown) {
     if (e instanceof Error) setError(e.message);
@@ -111,11 +125,11 @@ export function BudgetPage() {
           saved: newBudget.stats.saved,
         },
       });
-      // save(budget);
-      console.log(
-        "🚀 ~ file: BudgetPage.tsx:147 ~ handleIncomeChange ~ newBudget:",
-        newBudget,
-      );
+      save(budget);
+      // console.log(
+      //   "🚀 ~ file: BudgetPage.tsx:147 ~ handleIncomeChange ~ newBudget:",
+      //   newBudget,
+      // );
       // setState(newBudget);
     }
   }
@@ -143,15 +157,15 @@ export function BudgetPage() {
           saved: newBudget.stats.saved,
         },
       });
-      // save(budget);
+      save(budget);
     }
   }
 
   function handleStatChange(item: Stat | undefined) {
-    console.log(
-      "🚀 ~ file: BudgetPage.tsx:200 ~ handleStatChange ~ item:",
-      item,
-    );
+    // console.log(
+    //   "🚀 ~ file: BudgetPage.tsx:200 ~ handleStatChange ~ item:",
+    //   item,
+    // );
     let newBudget: Budget;
     if (budget && item) {
       newBudget = budget;
@@ -171,11 +185,11 @@ export function BudgetPage() {
           reserves: item.reserves,
         },
       });
-      // save(budget);
-      console.log(
-        "🚀 ~ file: BudgetPage.tsx:204 ~ handleStatChange ~ newBudget:",
-        newBudget,
-      );
+      save(budget);
+      // console.log(
+      //   "🚀 ~ file: BudgetPage.tsx:204 ~ handleStatChange ~ newBudget:",
+      //   newBudget,
+      // );
     }
   }
 
@@ -200,7 +214,7 @@ export function BudgetPage() {
           reserves: newBudget.stats.reserves,
         },
       });
-      // save(budget);
+      save(budget);
     }
   }
 
@@ -213,7 +227,6 @@ export function BudgetPage() {
       : newBudgetList.concat(newBudget);
 
     setBudget(newBudget);
-    // reset(newBudget);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
 
@@ -249,7 +262,6 @@ export function BudgetPage() {
         },
       ]);
       setBudget(newBudget);
-      // reset(newBudget);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
     }
@@ -300,7 +312,6 @@ export function BudgetPage() {
 
       filteredList && setBudget(filteredList[0]);
 
-      // reset(filteredList[0]);
       if (selectedBudget[0].item && selectedBudget[0].item.length > 0) {
         setFocus(selectedBudget[0].item);
       }
@@ -500,7 +511,7 @@ export function BudgetPage() {
 
   useEffect(() => {
     budget && save(budget);
-    console.log("🚀 ~ file: BudgetPage.tsx:503 ~ useEffect ~ budget:", budget);
+    console.log("file: BudgetPage.tsx:503 ~ useEffect ~ budget:", budget);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [budget]);
 
@@ -526,7 +537,7 @@ export function BudgetPage() {
       handleError(e);
       setLoading(false);
     }
-    console.log("🚀 ~ file: BudgetPage.tsx:573 ~ BudgetPage ~ name:", name);
+    console.log("file: BudgetPage.tsx:573 ~ BudgetPage ~ name:", name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, loading]);
 
