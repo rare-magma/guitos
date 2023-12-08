@@ -1,6 +1,7 @@
 import Big from "big.js";
 import Papa from "papaparse";
 import { expect, test } from "vitest";
+import { Budget } from "./components/Budget/Budget";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
 import { currenciesMap } from "./lists/currenciesMap";
 import { firefoxLocalesList } from "./lists/firefoxLocalesList";
@@ -25,6 +26,7 @@ import {
   calcWithGoal,
   convertCsvToBudget,
   createBudgetNameList,
+  createNewBudget,
   getCountryCode,
   getCurrencyCode,
   getNestedProperty,
@@ -67,14 +69,29 @@ test("calcAvailable", () => {
 
 test("calcWithGoal", () => {
   expect(calcWithGoal(testBudget)).eq(80);
+  expect(
+    calcWithGoal({
+      stats: { goal: "a" as unknown as number },
+    } as Budget),
+  ).eq(0);
 });
 
 test("calcSaved", () => {
   expect(calcSaved(testBudget)).eq(10);
+  expect(
+    calcSaved({
+      stats: { goal: "a" as unknown as number },
+    } as Budget),
+  ).eq(0);
 });
 
 test("calcAutoGoal", () => {
   expect(calcAutoGoal(testBigBudget)).eq(93.36298);
+  expect(
+    calcAutoGoal({
+      stats: { goal: "a" as unknown as number },
+    } as Budget),
+  ).eq(0);
 });
 
 test("convertCsvToBudget", () => {
@@ -104,6 +121,29 @@ test("createBudgetNameList", () => {
     expectedResult,
   );
   expect(createBudgetNameList([])).toEqual([]);
+});
+
+test("createNewBudget", () => {
+  const expectedResult = {
+    expenses: {
+      items: [{ id: 1, name: "", value: 0 }],
+      total: 0,
+    },
+    id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+    incomes: {
+      items: [{ id: 1, name: "", value: 0 }],
+      total: 0,
+    },
+    name: "2023-035c2de4",
+    stats: {
+      available: 0,
+      goal: 10,
+      reserves: 0,
+      saved: 0,
+      withGoal: 0,
+    },
+  };
+  expect(createNewBudget()).toEqual(expectedResult);
 });
 
 test("intlFormat", () => {
