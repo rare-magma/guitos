@@ -36,6 +36,7 @@ export default defineConfig((env) => {
     test: {
       coverage: {
         provider: "v8",
+        include: ["src/**"],
       },
       globals: true,
       mockClear: true,
