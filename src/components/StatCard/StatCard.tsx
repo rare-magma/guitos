@@ -12,7 +12,13 @@ import {
 } from "react-bootstrap";
 import CurrencyInput from "react-currency-input-field";
 import { useHotkeys } from "react-hotkeys-hook";
-import { BsGear, BsGraphUp, BsPercent } from "react-icons/bs";
+
+import {
+  BsArrowReturnRight,
+  BsGear,
+  BsGraphUp,
+  BsPercent,
+} from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { focusRef, parseLocaleNumber } from "../../utils";
@@ -32,7 +38,7 @@ export function StatCard({
 }: StatCardProps) {
   const { intlConfig } = useConfig();
   const { revenuePercentage, budget } = useBudget();
-  const [stat, setStat] = useState(budget?.stats);
+  const stat = budget?.stats;
   const [autoGoal, setAutoGoal] = useState(false);
 
   const shouldCalculateAvailablePerc =
@@ -55,7 +61,6 @@ export function StatCard({
     if (stat) {
       updatedStat = stat;
       updatedStat.goal = item.target.valueAsNumber;
-      setStat(updatedStat);
       setAutoGoal(false);
       onChange(updatedStat);
     }
@@ -66,7 +71,6 @@ export function StatCard({
     if (stat && value) {
       updatedStat = stat;
       updatedStat.reserves = parseLocaleNumber(value, intlConfig?.locale);
-      setStat(updatedStat);
       onChange(updatedStat);
     }
   }
@@ -77,7 +81,10 @@ export function StatCard({
   }
 
   return (
-    <Card className="stat-card" key={`stat-${intlConfig?.currency}`}>
+    <Card
+      className="stat-card"
+      key={`stat-${intlConfig?.currency}-${budget?.expenses.total} + ${budget?.incomes.total}}`}
+    >
       <Card.Header className="stat-card-header py-0">
         <Row className="mb-1">
           <OverlayTrigger

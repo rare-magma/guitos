@@ -1,5 +1,5 @@
 import Big from "big.js";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
   Button,
   Card,
@@ -19,28 +19,22 @@ import { Income } from "./Income";
 import "./TableCard.css";
 
 interface TableCardProps {
-  items: Income | Expense;
   header: "Revenue" | "Expenses";
   onChange: (table: Income | Expense) => void;
 }
 
-export function TableCard({
-  items: initialItems,
-  header: label,
-  onChange,
-}: TableCardProps) {
-  const [table, setTable] = useState(initialItems);
-  const [total, setTotal] = useState(roundBig(calcTotal(table?.items), 2));
-
+export function TableCard({ header: label, onChange }: TableCardProps) {
   const { budget, revenuePercentage } = useBudget();
   const { intlConfig } = useConfig();
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   const isRevenue = label === "Revenue";
   const isExpense = label === "Expenses";
+  const table = isExpense ? budget?.expenses : budget?.incomes;
+  const total = table?.total ?? 0;
 
-  function addTable(tableBeingEdited: Income | Expense) {
+  function addTable(tableBeingEdited: Income | Expense | undefined) {
+    if (!tableBeingEdited) return;
     const tableHasItems = table && table.items.length !== 0;
     const newItemForm = new ItemForm();
     const newTable = isRevenue ? new Income() : new Expense();
@@ -63,12 +57,11 @@ export function TableCard({
     newTable.items = tableBeingEdited.items.concat(newItemForm);
     newTable.total = roundBig(calcTotal(newTable.items), 2);
 
-    setTable(newTable);
-    setTotal(roundBig(calcTotal(newTable.items), 2));
     onChange(newTable);
   }
 
   function removeTable(toBeDeleted: ItemForm) {
+    if (!table?.items) return;
     const isIncome = toBeDeleted.constructor.name === "Income";
     const newTable = isIncome ? new Income() : new Expense();
 
@@ -77,12 +70,11 @@ export function TableCard({
     );
 
     newTable.total = roundBig(calcTotal(newTable.items), 2);
-    setTable(newTable);
-    setTotal(roundBig(calcTotal(newTable.items), 2));
     onChange(newTable);
   }
 
   function handleChange(item: ItemForm) {
+    if (!table?.items) return;
     const isIncome = item.constructor.name === "Income";
     const newTable = isIncome ? new Income() : new Expense();
 
@@ -98,15 +90,12 @@ export function TableCard({
     });
 
     newTable.total = roundBig(calcTotal(newTable.items), 2);
-
-    setTable(newTable);
-    setTotal(newTable.total);
     onChange(newTable);
   }
 
   return (
     <Card
-      key={`table-${label}-${intlConfig?.currency}`}
+      key={`table-${label}-${intlConfig?.currency}-${table?.items.length}`}
       className={label + "-card"}
     >
       <Card.Header className={label + "-card-header"}>

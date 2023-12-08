@@ -25,14 +25,13 @@ interface ItemFormProps {
 }
 
 export function ItemFormGroup({
-  itemForm: initialItemForm,
+  itemForm,
   costPercentage,
   inputRef,
   label,
   onRemove,
   onChange,
 }: ItemFormProps) {
-  const [itemForm, setItemForm] = useState(initialItemForm);
   const [changed, setChanged] = useState(false);
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
   const valueRef = useRef<HTMLInputElement>(null);
@@ -68,7 +67,6 @@ export function ItemFormGroup({
           setChanged(!changed);
           break;
       }
-      setItemForm(newItemForm);
       onChange(newItemForm);
     }
   }
