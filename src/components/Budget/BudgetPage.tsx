@@ -7,14 +7,9 @@ import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { budgetsDB, optionsDB } from "../../context/db";
 import {
-  calcAutoGoal,
-  calcAvailable,
-  calcSaved,
-  calcWithGoal,
   convertCsvToBudget,
   createBudgetNameList,
   createNewBudget,
-  roundBig,
   userLang,
 } from "../../utils";
 import { CsvError, ErrorModal, JsonError } from "../ErrorModal/ErrorModal";
@@ -22,10 +17,7 @@ import { LandingPage } from "../LandingPage/LandingPage";
 import { Loading } from "../Loading/Loading";
 import { NavBar, SearchOption } from "../NavBar/NavBar";
 import { Notification } from "../Notification/Notification";
-import { Stat } from "../StatCard/Stat";
 import { StatCard } from "../StatCard/StatCard";
-import { Expense } from "../TableCard/Expense";
-import { Income } from "../TableCard/Income";
 import { TableCard } from "../TableCard/TableCard";
 import { Budget } from "./Budget";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
@@ -100,122 +92,6 @@ export function BudgetPage() {
   function handleError(e: unknown) {
     if (e instanceof Error) setError(e.message);
     setShow(true);
-  }
-
-  function handleIncomeChange(item: Income) {
-    let newBudget: Budget | undefined;
-    if (budget) {
-      newBudget = budget;
-      newBudget.incomes = item;
-      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
-      newBudget.stats.withGoal = calcWithGoal(newBudget);
-      newBudget.stats.saved = calcSaved(newBudget);
-
-      setBudget({
-        ...budget,
-        incomes: {
-          ...budget.incomes,
-          items: item.items,
-          total: item.total,
-        },
-        stats: {
-          ...budget.stats,
-          available: newBudget.stats.available,
-          withGoal: newBudget.stats.withGoal,
-          saved: newBudget.stats.saved,
-        },
-      });
-      save(budget);
-      // console.log(
-      //   "🚀 ~ file: BudgetPage.tsx:147 ~ handleIncomeChange ~ newBudget:",
-      //   newBudget,
-      // );
-      // setState(newBudget);
-    }
-  }
-
-  function handleExpenseChange(item: Expense) {
-    let newBudget: Budget;
-    if (budget) {
-      newBudget = budget;
-      newBudget.expenses = item;
-      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
-      newBudget.stats.withGoal = calcWithGoal(newBudget);
-      newBudget.stats.saved = calcSaved(newBudget);
-
-      setBudget({
-        ...budget,
-        expenses: {
-          ...budget.expenses,
-          items: item.items,
-          total: item.total,
-        },
-        stats: {
-          ...budget.stats,
-          available: newBudget.stats.available,
-          withGoal: newBudget.stats.withGoal,
-          saved: newBudget.stats.saved,
-        },
-      });
-      save(budget);
-    }
-  }
-
-  function handleStatChange(item: Stat | undefined) {
-    // console.log(
-    //   "🚀 ~ file: BudgetPage.tsx:200 ~ handleStatChange ~ item:",
-    //   item,
-    // );
-    let newBudget: Budget;
-    if (budget && item) {
-      newBudget = budget;
-      newBudget.stats = item;
-      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
-      newBudget.stats.withGoal = calcWithGoal(newBudget);
-      newBudget.stats.saved = calcSaved(newBudget);
-
-      setBudget({
-        ...budget,
-        stats: {
-          ...budget.stats,
-          available: newBudget.stats.available,
-          withGoal: newBudget.stats.withGoal,
-          saved: newBudget.stats.saved,
-          goal: item.goal,
-          reserves: item.reserves,
-        },
-      });
-      save(budget);
-      // console.log(
-      //   "🚀 ~ file: BudgetPage.tsx:204 ~ handleStatChange ~ newBudget:",
-      //   newBudget,
-      // );
-    }
-  }
-
-  function handleAutoGoal(item: Stat | undefined) {
-    let newBudget: Budget;
-    if (budget && item) {
-      newBudget = budget;
-      newBudget.stats = item;
-      newBudget.stats.goal = calcAutoGoal(budget);
-      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
-      newBudget.stats.withGoal = calcWithGoal(newBudget);
-      newBudget.stats.saved = calcSaved(newBudget);
-
-      setBudget({
-        ...budget,
-        stats: {
-          ...budget.stats,
-          available: newBudget.stats.available,
-          withGoal: newBudget.stats.withGoal,
-          saved: newBudget.stats.saved,
-          goal: newBudget.stats.goal,
-          reserves: newBudget.stats.reserves,
-        },
-      });
-      save(budget);
-    }
   }
 
   function handleNew() {
@@ -609,20 +485,18 @@ export function BudgetPage() {
               <div className="card-columns">
                 <StatCard
                   key={budget?.expenses.total + budget?.incomes.total}
-                  onChange={handleStatChange}
-                  onAutoGoal={handleAutoGoal}
                   onShowGraphs={() => setShowGraphs(true)}
                 />
 
                 <div className="mt-3" />
 
-                <TableCard header="Revenue" onChange={handleIncomeChange} />
+                <TableCard header="Revenue" />
                 <div className="mt-3" />
               </div>
             </Col>
 
             <Col md="6" className="mb-3">
-              <TableCard header="Expenses" onChange={handleExpenseChange} />
+              <TableCard header="Expenses" />
             </Col>
           </Row>
         </Container>

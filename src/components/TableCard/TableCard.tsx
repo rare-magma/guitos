@@ -11,7 +11,16 @@ import {
 import { BsPlusLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
-import { calcPercentage, calcTotal, intlFormat, roundBig } from "../../utils";
+import {
+  calcAvailable,
+  calcPercentage,
+  calcSaved,
+  calcTotal,
+  calcWithGoal,
+  intlFormat,
+  roundBig,
+} from "../../utils";
+import { Budget } from "../Budget/Budget";
 import { ItemForm } from "../ItemForm/ItemForm";
 import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
 import { Expense } from "./Expense";
@@ -20,11 +29,10 @@ import "./TableCard.css";
 
 interface TableCardProps {
   header: "Revenue" | "Expenses";
-  onChange: (table: Income | Expense) => void;
 }
 
-export function TableCard({ header: label, onChange }: TableCardProps) {
-  const { budget, revenuePercentage } = useBudget();
+export function TableCard({ header: label }: TableCardProps) {
+  const { budget, setBudget, revenuePercentage } = useBudget();
   const { intlConfig } = useConfig();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -32,6 +40,58 @@ export function TableCard({ header: label, onChange }: TableCardProps) {
   const isExpense = label === "Expenses";
   const table = isExpense ? budget?.expenses : budget?.incomes;
   const total = table?.total ?? 0;
+
+  function handleIncomeChange(item: Income) {
+    let newBudget: Budget | undefined;
+    if (budget) {
+      newBudget = budget;
+      newBudget.incomes = item;
+      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
+      newBudget.stats.withGoal = calcWithGoal(newBudget);
+      newBudget.stats.saved = calcSaved(newBudget);
+
+      setBudget({
+        ...budget,
+        incomes: {
+          ...budget.incomes,
+          items: item.items,
+          total: item.total,
+        },
+        stats: {
+          ...budget.stats,
+          available: newBudget.stats.available,
+          withGoal: newBudget.stats.withGoal,
+          saved: newBudget.stats.saved,
+        },
+      });
+    }
+  }
+
+  function handleExpenseChange(item: Expense) {
+    let newBudget: Budget;
+    if (budget) {
+      newBudget = budget;
+      newBudget.expenses = item;
+      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
+      newBudget.stats.withGoal = calcWithGoal(newBudget);
+      newBudget.stats.saved = calcSaved(newBudget);
+
+      setBudget({
+        ...budget,
+        expenses: {
+          ...budget.expenses,
+          items: item.items,
+          total: item.total,
+        },
+        stats: {
+          ...budget.stats,
+          available: newBudget.stats.available,
+          withGoal: newBudget.stats.withGoal,
+          saved: newBudget.stats.saved,
+        },
+      });
+    }
+  }
 
   function addTable(tableBeingEdited: Income | Expense | undefined) {
     if (!tableBeingEdited) return;
@@ -57,7 +117,7 @@ export function TableCard({ header: label, onChange }: TableCardProps) {
     newTable.items = tableBeingEdited.items.concat(newItemForm);
     newTable.total = roundBig(calcTotal(newTable.items), 2);
 
-    onChange(newTable);
+    isExpense ? handleExpenseChange(newTable) : handleIncomeChange(newTable);
   }
 
   function removeTable(toBeDeleted: ItemForm) {
@@ -70,7 +130,7 @@ export function TableCard({ header: label, onChange }: TableCardProps) {
     );
 
     newTable.total = roundBig(calcTotal(newTable.items), 2);
-    onChange(newTable);
+    isExpense ? handleExpenseChange(newTable) : handleIncomeChange(newTable);
   }
 
   function handleChange(item: ItemForm) {
@@ -90,7 +150,7 @@ export function TableCard({ header: label, onChange }: TableCardProps) {
     });
 
     newTable.total = roundBig(calcTotal(newTable.items), 2);
-    onChange(newTable);
+    isExpense ? handleExpenseChange(newTable) : handleIncomeChange(newTable);
   }
 
   return (

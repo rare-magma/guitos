@@ -21,23 +21,26 @@ import {
 } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
-import { focusRef, parseLocaleNumber } from "../../utils";
+import {
+  calcAutoGoal,
+  calcAvailable,
+  calcSaved,
+  calcWithGoal,
+  focusRef,
+  parseLocaleNumber,
+  roundBig,
+} from "../../utils";
+import { Budget } from "../Budget/Budget";
 import { Stat } from "./Stat";
 import "./StatCard.css";
 
 interface StatCardProps {
-  onChange: (stat: Stat | undefined) => void;
-  onAutoGoal: (stat: Stat | undefined) => void;
   onShowGraphs: () => void;
 }
 
-export function StatCard({
-  onChange,
-  onAutoGoal,
-  onShowGraphs,
-}: StatCardProps) {
+export function StatCard({ onShowGraphs }: StatCardProps) {
   const { intlConfig } = useConfig();
-  const { revenuePercentage, budget } = useBudget();
+  const { revenuePercentage, budget, setBudget } = useBudget();
   const stat = budget?.stats;
   const [autoGoal, setAutoGoal] = useState(false);
 
@@ -56,13 +59,60 @@ export function StatCard({
     preventDefault: true,
   });
 
+  function handleStatChange(item: Stat | undefined) {
+    let newBudget: Budget;
+    if (budget && item) {
+      newBudget = budget;
+      newBudget.stats = item;
+      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
+      newBudget.stats.withGoal = calcWithGoal(newBudget);
+      newBudget.stats.saved = calcSaved(newBudget);
+
+      setBudget({
+        ...budget,
+        stats: {
+          ...budget.stats,
+          available: newBudget.stats.available,
+          withGoal: newBudget.stats.withGoal,
+          saved: newBudget.stats.saved,
+          goal: item.goal,
+          reserves: item.reserves,
+        },
+      });
+    }
+  }
+
+  function handleAutoGoalChange(item: Stat | undefined) {
+    let newBudget: Budget;
+    if (budget && item) {
+      newBudget = budget;
+      newBudget.stats = item;
+      newBudget.stats.goal = calcAutoGoal(budget);
+      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
+      newBudget.stats.withGoal = calcWithGoal(newBudget);
+      newBudget.stats.saved = calcSaved(newBudget);
+
+      setBudget({
+        ...budget,
+        stats: {
+          ...budget.stats,
+          available: newBudget.stats.available,
+          withGoal: newBudget.stats.withGoal,
+          saved: newBudget.stats.saved,
+          goal: newBudget.stats.goal,
+          reserves: newBudget.stats.reserves,
+        },
+      });
+    }
+  }
+
   function handleInputChange(item: React.ChangeEvent<HTMLInputElement>) {
     let updatedStat: Stat;
     if (stat) {
       updatedStat = stat;
       updatedStat.goal = item.target.valueAsNumber;
       setAutoGoal(false);
-      onChange(updatedStat);
+      handleStatChange(updatedStat);
     }
   }
 
@@ -71,12 +121,12 @@ export function StatCard({
     if (stat && value) {
       updatedStat = stat;
       updatedStat.reserves = parseLocaleNumber(value, intlConfig?.locale);
-      onChange(updatedStat);
+      handleStatChange(updatedStat);
     }
   }
 
   function handleAutoGoal() {
-    onAutoGoal(stat);
+    handleAutoGoalChange(stat);
     setAutoGoal(true);
   }
 
