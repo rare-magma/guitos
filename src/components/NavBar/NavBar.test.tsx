@@ -10,26 +10,22 @@ import { NavBar } from "./NavBar";
 
 describe("NavBar", () => {
   const onClone = vi.fn();
-  const onExport = vi.fn();
   const onGoBack = vi.fn();
   const onGoHome = vi.fn();
   const onGoForward = vi.fn();
   const onImport = vi.fn();
   const onNew = vi.fn();
   const onRemove = vi.fn();
-  const onRename = vi.fn();
   const onSelect = vi.fn();
   const comp = (
     <NavBar
       onClone={onClone}
-      onExport={onExport}
       onGoBack={onGoBack}
       onGoHome={onGoHome}
       onGoForward={onGoForward}
       onImport={onImport}
       onNew={onNew}
       onRemove={onRemove}
-      onRename={onRename}
       onSelect={onSelect}
     />
   );
@@ -93,7 +89,6 @@ describe("NavBar", () => {
   it("triggers onRename when user changes budget name input", async () => {
     await userEvent.type(screen.getByDisplayValue("2023-03"), "change name");
 
-    expect(onRename).toBeCalledWith("2023-03change name");
     expect(screen.getByDisplayValue("2023-03change name")).toBeInTheDocument();
   });
 

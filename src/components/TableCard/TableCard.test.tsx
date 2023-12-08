@@ -5,14 +5,7 @@ import { testBudget } from "../../setupTests";
 import { TableCard } from "./TableCard";
 
 describe("TableCard", () => {
-  const onChange = vi.fn();
-  const comp = (
-    <TableCard
-      items={testBudget.expenses}
-      header={"Expenses"}
-      onChange={onChange}
-    />
-  );
+  const comp = <TableCard header={"Expenses"} />;
 
   beforeEach(() => {
     render(comp);
@@ -27,13 +20,7 @@ describe("TableCard", () => {
   });
 
   it("renders initial Revenue state", () => {
-    render(
-      <TableCard
-        items={testBudget.incomes}
-        header={"Revenue"}
-        onChange={onChange}
-      />,
-    );
+    render(<TableCard header={"Revenue"} />);
     expect(screen.getByDisplayValue("income1")).toBeInTheDocument();
     expect(screen.getByDisplayValue("$100")).toBeInTheDocument();
   });

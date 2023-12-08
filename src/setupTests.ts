@@ -240,6 +240,9 @@ export const testSpanishConfigContext = {
 export const setBudgetMock = vi.fn();
 export const setBudgetListMock = vi.fn();
 export const setBudgetNameListMock = vi.fn();
+export const setNeedReloadMock = vi.fn();
+export const undoMock = vi.fn();
+export const redoMock = vi.fn();
 export const testEmptyBudgetContext = {
   budget: undefined,
   setBudget: setBudgetMock,
@@ -251,6 +254,14 @@ export const testEmptyBudgetContext = {
   setBudgetNameList: setBudgetNameListMock,
 
   revenuePercentage: 0,
+  past: [],
+  future: [],
+  needReload: true,
+  setNeedReload: setNeedReloadMock,
+  undo: undoMock,
+  redo: redoMock,
+  canUndo: false,
+  canRedo: false,
 };
 
 export const testBudgetContext = {
@@ -264,4 +275,12 @@ export const testBudgetContext = {
   setBudgetNameList: setBudgetNameListMock,
 
   revenuePercentage: 10,
+  past: [],
+  future: [],
+  needReload: true,
+  setNeedReload: setNeedReloadMock,
+  undo: undoMock,
+  redo: redoMock,
+  canUndo: false,
+  canRedo: false,
 };

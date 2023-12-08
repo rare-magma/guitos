@@ -3,18 +3,5 @@
 exports[`TableCard > matches snapshot 1`] = `
 <TableCard
   header="Expenses"
-  items={
-    {
-      "items": [
-        {
-          "id": 1,
-          "name": "expense1",
-          "value": 10,
-        },
-      ],
-      "total": 10,
-    }
-  }
-  onChange={[MockFunction spy]}
 />
 `;
