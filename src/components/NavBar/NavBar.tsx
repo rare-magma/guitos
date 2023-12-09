@@ -1,3 +1,4 @@
+import { produce } from "immer";
 import { useEffect, useRef, useState } from "react";
 import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
@@ -157,14 +158,11 @@ export function NavBar({
   }
 
   function handleRename(event: React.ChangeEvent<HTMLInputElement>) {
-    const newName = event.target.value;
-    let newBudget: Budget;
-    if (budget && newName) {
-      newBudget = {
-        ...budget,
-        name: newName,
-      };
-      setBudget(newBudget);
+    if (budget && event.target.value) {
+      const newState = produce((draft) => {
+        draft.name = event.target.value;
+      }, budget);
+      setBudget(newState(), false);
     }
   }
 

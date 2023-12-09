@@ -99,7 +99,7 @@ export function BudgetPage() {
       ? budgetList.concat(newBudget)
       : newBudgetList.concat(newBudget);
 
-    setBudget(newBudget);
+    setBudget(newBudget, true);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
 
@@ -134,7 +134,7 @@ export function BudgetPage() {
           show: true,
         },
       ]);
-      setBudget(newBudget);
+      setBudget(newBudget, true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
     }
@@ -165,9 +165,9 @@ export function BudgetPage() {
           ]);
 
           if (newBudgetList.length >= 1) {
-            setBudget(newBudgetList[0]);
+            setBudget(newBudgetList[0], true);
           } else {
-            setBudget(undefined);
+            setBudget(undefined, true);
           }
         })
         .catch((e: unknown) => {
@@ -181,7 +181,7 @@ export function BudgetPage() {
         (item: Budget) => item.id === selectedBudget[0].id,
       );
 
-      filteredList && setBudget(filteredList[0]);
+      filteredList && setBudget(filteredList[0], false);
 
       if (selectedBudget[0].item && selectedBudget[0].item.length > 0) {
         setFocus(selectedBudget[0].item);
@@ -317,13 +317,13 @@ export function BudgetPage() {
         let newBudget: Budget;
         if (name.trim() !== "undefined") {
           newBudget = list.filter((b: Budget) => b && b.name === name)[0];
-          setBudget(newBudget);
+          setBudget(newBudget, false);
         } else {
           newBudget = list
             .sort((a, b) => a.name.localeCompare(b.name))
             .reverse()
             .filter((b: Budget) => b && b.id === list[0].id)[0];
-          setBudget(newBudget);
+          setBudget(newBudget, false);
         }
 
         loadCurrencyOption();
@@ -339,7 +339,7 @@ export function BudgetPage() {
       budgetsDB
         .getItem(data.id)
         .then((b) => {
-          setBudget(b as Budget);
+          setBudget(b as Budget, false);
         })
         .catch((e) => {
           handleError(e);

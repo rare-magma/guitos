@@ -1,7 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
-import { vi } from "vitest";
 import {
   configContextSpy,
   itemForm1,
@@ -10,8 +9,6 @@ import {
 import { ItemFormGroup } from "./ItemFormGroup";
 
 describe("ItemFormGroup", () => {
-  const onRemove = vi.fn();
-  const onChange = vi.fn();
   const ref = React.createRef<HTMLInputElement>();
   const comp = (
     <ItemFormGroup
@@ -19,8 +16,6 @@ describe("ItemFormGroup", () => {
       label="Expenses"
       inputRef={ref}
       costPercentage={1}
-      onRemove={onRemove}
-      onChange={onChange}
     />
   );
 
@@ -36,43 +31,25 @@ describe("ItemFormGroup", () => {
     expect(screen.getByDisplayValue("$10")).toBeInTheDocument();
   });
 
-  it("triggers onChange when user changes input", async () => {
+  it("reacts to user changing input", async () => {
     await userEvent.type(screen.getByDisplayValue("name1"), "change name");
-
-    expect(onChange).toHaveBeenCalledWith({
-      id: 1,
-      name: "name1change name",
-      value: 10,
-    });
     expect(screen.getByDisplayValue("name1change name")).toBeInTheDocument();
 
     await userEvent.type(screen.getByDisplayValue("$10"), "123");
-
-    expect(onChange).toHaveBeenCalledWith({
-      id: 1,
-      name: "name1change name",
-      value: 123,
-    });
     expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
   });
 
-  it("triggers onRemove when user clicks delete confirmation button", async () => {
+  it("removes item when user clicks delete confirmation button", async () => {
     await userEvent.click(
       screen.getByRole("button", { name: "delete item 1" }),
     );
     await userEvent.click(
       screen.getByRole("button", { name: "confirm item 1 deletion" }),
     );
-
-    expect(onRemove).toHaveBeenCalledWith({
-      id: 1,
-      name: "name1change name",
-      value: 123,
-    });
   });
 
   it("shows tooltip when user hovers over", async () => {
-    await userEvent.hover(screen.getByDisplayValue("$123"));
+    await userEvent.hover(screen.getByDisplayValue("$10"));
 
     expect(await screen.findByText("1% of revenue")).toBeInTheDocument();
   });
@@ -100,20 +77,12 @@ describe("ItemFormGroup", () => {
         label="Expenses"
         inputRef={ref}
         costPercentage={1}
-        onRemove={onRemove}
-        onChange={onChange}
       />,
     );
 
-    await userEvent.clear(screen.getByDisplayValue("123 €"));
-    await userEvent.type(screen.getByLabelText("item 1 value"), "123,12");
+    await userEvent.clear(screen.getByDisplayValue("10 €"));
+    await userEvent.type(screen.getByLabelText("item 1 value"), ",12");
 
-    expect(screen.getByDisplayValue("123,12 €")).toBeInTheDocument();
-
-    expect(onChange).toHaveBeenCalledWith({
-      id: 1,
-      name: "name1change name",
-      value: 123.12,
-    });
+    expect(screen.getByDisplayValue("0,12 €")).toBeInTheDocument();
   });
 });

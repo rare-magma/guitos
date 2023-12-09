@@ -49,7 +49,7 @@ Object.defineProperty(window, "matchMedia", {
   })),
 });
 
-export const testBudget = new Budget({
+export const testBudget: Budget = {
   id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
   name: "2023-03",
   expenses: {
@@ -67,9 +67,9 @@ export const testBudget = new Budget({
     goal: 10,
     reserves: 200,
   },
-});
+};
 
-export const testBudget2 = new Budget({
+export const testBudget2: Budget = {
   id: "135b2ce4-00a4-403c-8f0e-f81339be9a4e",
   name: "2023-04",
   expenses: {
@@ -87,9 +87,9 @@ export const testBudget2 = new Budget({
     goal: 35,
     reserves: 30,
   },
-});
+};
 
-export const testBigBudget = new Budget({
+export const testBigBudget: Budget = {
   id: "225c2de5-00a4-403c-8f0e-f81339be9a4e",
   name: "2023-03",
   expenses: {
@@ -113,7 +113,7 @@ export const testBigBudget = new Budget({
     goal: 50,
     reserves: 200,
   },
-});
+};
 
 export const testJSONErrorBudget = `{
   id: "03123AAA5c2de4-00a4-403c-8f0e-f81339be9a4e",

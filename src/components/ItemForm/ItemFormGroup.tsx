@@ -1,3 +1,4 @@
+import { produce } from "immer";
 import { RefObject, useRef, useState } from "react";
 import {
   Button,
@@ -9,9 +10,20 @@ import {
 } from "react-bootstrap";
 import CurrencyInput from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
+import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
-import { calc, parseLocaleNumber } from "../../utils";
+import {
+  calc,
+  calcAvailable,
+  calcSaved,
+  calcTotal,
+  calcWithGoal,
+  parseLocaleNumber,
+  roundBig,
+} from "../../utils";
 import { CalculateButton } from "../CalculateButton/CalculateButton";
+import { Expense } from "../TableCard/Expense";
+import { Income } from "../TableCard/Income";
 import { ItemForm } from "./ItemForm";
 import "./ItemFormGroup.css";
 
@@ -20,8 +32,6 @@ interface ItemFormProps {
   costPercentage: number;
   label: string;
   inputRef: RefObject<HTMLInputElement>;
-  onChange: (itemForm: ItemForm) => void;
-  onRemove: (itemForm: ItemForm) => void;
 }
 
 export function ItemFormGroup({
@@ -29,17 +39,14 @@ export function ItemFormGroup({
   costPercentage,
   inputRef,
   label,
-  onRemove,
-  onChange,
 }: ItemFormProps) {
-  const [changed, setChanged] = useState(false);
+  const [needsRerender, setNeedsRerender] = useState(false);
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
   const valueRef = useRef<HTMLInputElement>(null);
+  const { budget, setBudget } = useBudget();
   const { intlConfig } = useConfig();
-
-  function handleRemove(item: ItemForm) {
-    onRemove(item);
-  }
+  const isExpense = label === "Expenses";
+  const table = isExpense ? budget?.expenses : budget?.incomes;
 
   function handleChange(
     operation: string,
@@ -47,9 +54,15 @@ export function ItemFormGroup({
     event?: React.ChangeEvent<HTMLInputElement>,
     changeValue?: number,
   ) {
-    let newItemForm: ItemForm;
-    if (itemForm !== null) {
-      newItemForm = itemForm;
+    if (!budget) return;
+    if (!itemForm) return;
+
+    let saveInHistory = false;
+    const newState = produce((draft) => {
+      const newItemForm = isExpense
+        ? draft.expenses.items.find((item) => item.id === itemForm.id)
+        : draft.incomes.items.find((item) => item.id === itemForm.id);
+      if (!newItemForm) return;
 
       switch (operation) {
         case "name":
@@ -63,12 +76,36 @@ export function ItemFormGroup({
         default:
           if (changeValue) {
             newItemForm.value = calc(itemForm.value, changeValue, operation);
+            saveInHistory = true;
           }
-          setChanged(!changed);
+          setNeedsRerender(!needsRerender);
           break;
       }
-      onChange(newItemForm);
-    }
+
+      isExpense
+        ? (draft.expenses.total = roundBig(calcTotal(draft.expenses.items), 2))
+        : (draft.incomes.total = roundBig(calcTotal(draft.incomes.items), 2));
+      draft.stats.available = roundBig(calcAvailable(draft), 2);
+      draft.stats.withGoal = calcWithGoal(draft);
+      draft.stats.saved = calcSaved(draft);
+    }, budget);
+    setBudget(newState(), saveInHistory);
+  }
+
+  function handleRemove(toBeDeleted: ItemForm) {
+    if (!table?.items) return;
+    if (!budget) return;
+
+    const newTable = isExpense ? ({} as Expense) : ({} as Income);
+    const newState = produce((draft) => {
+      isExpense ? (draft.expenses = newTable) : (draft.incomes = newTable);
+      newTable.items = table.items.filter((item) => item.id !== toBeDeleted.id);
+      newTable.total = roundBig(calcTotal(newTable.items), 2);
+      draft.stats.available = roundBig(calcAvailable(draft), 2);
+      draft.stats.withGoal = calcWithGoal(draft);
+      draft.stats.saved = calcSaved(draft);
+    }, budget);
+    setBudget(newState(), true);
   }
 
   return (
@@ -125,7 +162,7 @@ export function ItemFormGroup({
       >
         <CurrencyInput
           id={`${label}-${itemForm.id}-value`}
-          key={`${itemForm.id}-${label}-value-${changed}`}
+          key={`${itemForm.id}-${label}-value-${needsRerender}`}
           className="text-end form-control straight-corners fixed-width-font"
           aria-label={`item ${itemForm.id} value`}
           name="item-value"

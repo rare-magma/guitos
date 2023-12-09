@@ -1,4 +1,5 @@
 import Big from "big.js";
+import { produce } from "immer";
 import { useRef } from "react";
 import {
   Button,
@@ -20,7 +21,6 @@ import {
   intlFormat,
   roundBig,
 } from "../../utils";
-import { Budget } from "../Budget/Budget";
 import { ItemForm } from "../ItemForm/ItemForm";
 import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
 import { Expense } from "./Expense";
@@ -41,59 +41,18 @@ export function TableCard({ header: label }: TableCardProps) {
   const table = isExpense ? budget?.expenses : budget?.incomes;
   const total = table?.total ?? 0;
 
-  function handleIncomeChange(item: Income) {
-    let newBudget: Budget | undefined;
-    if (budget) {
-      newBudget = budget;
-      newBudget.incomes = item;
-      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
-      newBudget.stats.withGoal = calcWithGoal(newBudget);
-      newBudget.stats.saved = calcSaved(newBudget);
-
-      setBudget({
-        ...budget,
-        incomes: {
-          ...budget.incomes,
-          items: item.items,
-          total: item.total,
-        },
-        stats: {
-          ...budget.stats,
-          available: newBudget.stats.available,
-          withGoal: newBudget.stats.withGoal,
-          saved: newBudget.stats.saved,
-        },
-      });
-    }
+  function handleTableChange(item: Income) {
+    if (!budget) return;
+    const newState = produce((draft) => {
+      isExpense ? (draft.expenses = item) : (draft.incomes = item);
+      draft.stats.available = roundBig(calcAvailable(draft), 2);
+      draft.stats.withGoal = calcWithGoal(draft);
+      draft.stats.saved = calcSaved(draft);
+    }, budget);
+    setBudget(newState(), true);
   }
 
-  function handleExpenseChange(item: Expense) {
-    let newBudget: Budget;
-    if (budget) {
-      newBudget = budget;
-      newBudget.expenses = item;
-      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
-      newBudget.stats.withGoal = calcWithGoal(newBudget);
-      newBudget.stats.saved = calcSaved(newBudget);
-
-      setBudget({
-        ...budget,
-        expenses: {
-          ...budget.expenses,
-          items: item.items,
-          total: item.total,
-        },
-        stats: {
-          ...budget.stats,
-          available: newBudget.stats.available,
-          withGoal: newBudget.stats.withGoal,
-          saved: newBudget.stats.saved,
-        },
-      });
-    }
-  }
-
-  function addTable(tableBeingEdited: Income | Expense | undefined) {
+  function addItemToTable(tableBeingEdited: Income | Expense | undefined) {
     if (!tableBeingEdited) return;
     const tableHasItems = table && table.items.length !== 0;
     const newItemForm = {} as ItemForm;
@@ -117,40 +76,7 @@ export function TableCard({ header: label }: TableCardProps) {
     newTable.items = tableBeingEdited.items.concat(newItemForm);
     newTable.total = roundBig(calcTotal(newTable.items), 2);
 
-    isExpense ? handleExpenseChange(newTable) : handleIncomeChange(newTable);
-  }
-
-  function removeTable(toBeDeleted: ItemForm) {
-    if (!table?.items) return;
-    const isIncome = toBeDeleted.constructor.name === "Income";
-    const newTable = isIncome ? ({} as Income) : ({} as Expense);
-
-    newTable.items = table.items.filter(
-      (item: { id: number }) => item.id !== toBeDeleted.id,
-    );
-
-    newTable.total = roundBig(calcTotal(newTable.items), 2);
-    isExpense ? handleExpenseChange(newTable) : handleIncomeChange(newTable);
-  }
-
-  function handleChange(item: ItemForm) {
-    if (!table?.items) return;
-    const isIncome = item.constructor.name === "Income";
-    const newTable = isIncome ? ({} as Income) : ({} as Expense);
-
-    newTable.items = table.items.map((i) => {
-      if (i.id === item.id) {
-        return {
-          id: item.id,
-          name: item.name,
-          value: isNaN(item.value) ? 0 : Number(item.value),
-        };
-      }
-      return i;
-    });
-
-    newTable.total = roundBig(calcTotal(newTable.items), 2);
-    isExpense ? handleExpenseChange(newTable) : handleIncomeChange(newTable);
+    handleTableChange(newTable);
   }
 
   return (
@@ -195,8 +121,6 @@ export function TableCard({ header: label }: TableCardProps) {
               budget ? calcPercentage(item.value, budget.incomes.total) : 0
             }
             inputRef={inputRef}
-            onChange={handleChange}
-            onRemove={() => removeTable(item)}
           />
         ))}
         <div className="mt-3" />
@@ -218,7 +142,7 @@ export function TableCard({ header: label }: TableCardProps) {
               aria-label={`add item to ${label}`}
               size="sm"
               onClick={() => {
-                addTable(table);
+                addItemToTable(table);
                 setTimeout(() => {
                   inputRef.current?.focus();
                 }, 0);

@@ -23,7 +23,7 @@ describe("TableCard", () => {
     expect(screen.getByDisplayValue("$100")).toBeInTheDocument();
   });
 
-  it("triggers onChange when user changes input", async () => {
+  it("responds when user changes input", async () => {
     await userEvent.type(screen.getByDisplayValue("expense1"), "change name");
 
     expect(screen.getByDisplayValue("expense1change name")).toBeInTheDocument();
@@ -33,14 +33,14 @@ describe("TableCard", () => {
     expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
   });
 
-  it("triggers onChange when user adds new item", async () => {
+  it("adds new Expense when user clicks adds new item button", async () => {
     await userEvent.click(
       screen.getByRole("button", { name: "add item to Expenses" }),
     );
-    expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
+    expect(screen.getByDisplayValue("$10")).toBeInTheDocument();
   });
 
-  it("triggers onChange when user adds new Revenue", async () => {
+  it("adds new Revenue when user clicks adds new item button", async () => {
     cleanup();
     render(<TableCard header={"Revenue"} />);
     await userEvent.click(
@@ -49,7 +49,7 @@ describe("TableCard", () => {
     expect(screen.getByDisplayValue("$100")).toBeInTheDocument();
   });
 
-  it("triggers onChange when user deletes items", async () => {
+  it("removes item when user clicks delete item button", async () => {
     await userEvent.click(
       screen.getByRole("button", { name: "delete item 1" }),
     );

@@ -23,7 +23,5 @@ exports[`ItemFormGroup > matches snapshot 1`] = `
     }
   }
   label="Expenses"
-  onChange={[MockFunction spy]}
-  onRemove={[MockFunction spy]}
 />
 `;

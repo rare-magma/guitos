@@ -6,7 +6,7 @@ import { calcPercentage } from "../utils";
 
 interface BudgetContextInterface {
   budget: Budget | undefined;
-  setBudget: (value: Budget | undefined) => void;
+  setBudget: (value: Budget | undefined, saveInHistory: boolean) => void;
   budgetList: Budget[] | undefined;
   setBudgetList: (value: Budget[] | undefined) => void;
   budgetNameList: SearchOption[] | undefined;
@@ -24,8 +24,9 @@ interface BudgetContextInterface {
 
 const BudgetContext = createContext<BudgetContextInterface>({
   budget: undefined,
-  setBudget: (value: Budget | undefined) => {
+  setBudget: (value: Budget | undefined, saveInHistory: boolean) => {
     value;
+    saveInHistory;
   },
   budgetList: [],
   setBudgetList: (value: Budget[] | undefined) => {
@@ -93,6 +94,10 @@ function useBudget() {
 function BudgetProvider({ children }: PropsWithChildren) {
   const [budgetList, setBudgetList] = useState<Budget[] | undefined>([]);
   const [needReload, setNeedReload] = useState(true);
+  const [budgetNameList, setBudgetNameList] = useState<
+    SearchOption[] | undefined
+  >([]);
+
   const [
     budgetState,
     {
@@ -102,27 +107,19 @@ function BudgetProvider({ children }: PropsWithChildren) {
       canUndo: undoPossible,
       canRedo: redoPossible,
     },
-  ] = useUndo<Budget | undefined>(undefined);
-  const { present: budget, past, future } = budgetState;
+  ] = useUndo<Budget | undefined>(undefined, { useCheckpoints: true });
+
+  const { present: budget, past: pastState, future: futureState } = budgetState;
+  const past = pastState.filter((b) => b?.id === budget?.id);
+  const future = futureState.filter((b) => b?.id === budget?.id);
 
   const revenuePercentage = calcPercentage(
     budget?.expenses.total ?? 0,
     budget?.incomes.total ?? 0,
   );
 
-  const [budgetNameList, setBudgetNameList] = useState<
-    SearchOption[] | undefined
-  >([]);
-  const previousBudgetID = past[past.length - 1]?.id;
-  const futureBudgetID = future[0]?.id;
-
-  const canReallyUndo =
-    undoPossible &&
-    past[past.length - 1] !== undefined &&
-    budget?.id === previousBudgetID;
-
-  const canReallyRedo =
-    redoPossible && future[0] !== undefined && budget?.id === futureBudgetID;
+  const canReallyUndo = undoPossible && past[past.length - 1] !== undefined;
+  const canReallyRedo = redoPossible && future[0] !== undefined;
 
   function handleUndo() {
     if (canReallyUndo) {

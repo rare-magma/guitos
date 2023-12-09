@@ -13,6 +13,7 @@ import {
 import CurrencyInput from "react-currency-input-field";
 import { useHotkeys } from "react-hotkeys-hook";
 
+import { produce } from "immer";
 import {
   BsArrowReturnRight,
   BsGear,
@@ -30,8 +31,6 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "../../utils";
-import { Budget } from "../Budget/Budget";
-import { Stat } from "./Stat";
 import "./StatCard.css";
 
 interface StatCardProps {
@@ -59,74 +58,38 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
     preventDefault: true,
   });
 
-  function handleStatChange(item: Stat | undefined) {
-    let newBudget: Budget;
-    if (budget && item) {
-      newBudget = budget;
-      newBudget.stats = item;
-      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
-      newBudget.stats.withGoal = calcWithGoal(newBudget);
-      newBudget.stats.saved = calcSaved(newBudget);
-
-      setBudget({
-        ...budget,
-        stats: {
-          ...budget.stats,
-          available: newBudget.stats.available,
-          withGoal: newBudget.stats.withGoal,
-          saved: newBudget.stats.saved,
-          goal: item.goal,
-          reserves: item.reserves,
-        },
-      });
-    }
-  }
-
-  function handleAutoGoalChange(item: Stat | undefined) {
-    let newBudget: Budget;
-    if (budget && item) {
-      newBudget = budget;
-      newBudget.stats = item;
-      newBudget.stats.goal = calcAutoGoal(budget);
-      newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
-      newBudget.stats.withGoal = calcWithGoal(newBudget);
-      newBudget.stats.saved = calcSaved(newBudget);
-
-      setBudget({
-        ...budget,
-        stats: {
-          ...budget.stats,
-          available: newBudget.stats.available,
-          withGoal: newBudget.stats.withGoal,
-          saved: newBudget.stats.saved,
-          goal: newBudget.stats.goal,
-          reserves: newBudget.stats.reserves,
-        },
-      });
-    }
-  }
-
   function handleInputChange(item: React.ChangeEvent<HTMLInputElement>) {
-    let updatedStat: Stat;
-    if (stat) {
-      updatedStat = stat;
-      updatedStat.goal = item.target.valueAsNumber;
+    if (budget && item) {
       setAutoGoal(false);
-      handleStatChange(updatedStat);
+      const newState = produce((draft) => {
+        draft.stats.goal = item.target.valueAsNumber;
+        draft.stats.available = roundBig(calcAvailable(draft), 2);
+        draft.stats.withGoal = calcWithGoal(draft);
+        draft.stats.saved = calcSaved(draft);
+      }, budget);
+      setBudget(newState(), false);
     }
   }
 
   function handleReserveChange(value: string | undefined): void {
-    let updatedStat: Stat;
-    if (stat && value) {
-      updatedStat = stat;
-      updatedStat.reserves = parseLocaleNumber(value, intlConfig?.locale);
-      handleStatChange(updatedStat);
+    if (budget && value) {
+      const newState = produce((draft) => {
+        draft.stats.reserves = parseLocaleNumber(value, intlConfig?.locale);
+      }, budget);
+      setBudget(newState(), false);
     }
   }
 
   function handleAutoGoal() {
-    handleAutoGoalChange(stat);
+    if (budget && stat) {
+      const newState = produce((draft) => {
+        draft.stats.goal = calcAutoGoal(draft);
+        draft.stats.available = roundBig(calcAvailable(draft), 2);
+        draft.stats.withGoal = calcWithGoal(draft);
+        draft.stats.saved = calcSaved(draft);
+      }, budget);
+      setBudget(newState(), true);
+    }
     setAutoGoal(true);
   }
 
