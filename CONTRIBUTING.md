@@ -25,7 +25,7 @@ To set up a development environment, please follow these steps:
    pnpm start
    ```
 
-4. Open http://localhost:5173 to view it in the browser.
+4. Open <http://localhost:5173> to view it in the browser.
 
 The page will reload if you make edits.
 You will also see any lint errors in the console.
@@ -37,6 +37,12 @@ You will also see any lint errors in the console.
    ```
 
 Launches the test runner in the interactive watch mode.
+
+6. Update package-lock.json when installing a new lib:
+
+   ```sh
+   npm i --package-lock-only
+   ```
 
 ## Issues and feature requests
 
