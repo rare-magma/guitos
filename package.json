@@ -9,7 +9,7 @@
     "serve": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage --silent",
-    "coverage:ui": "vitest run --ui --open --coverage --silent",
+    "coverage:ui": "vitest --ui --open --coverage --silent",
     "lint": "pnpm dlx eslint src --fix && pnpm dlx stylelint src/**/*.css --fix && pnpm dlx prettier --write src",
     "bundle": "pnpm dlx vite-bundle-visualizer"
   },
