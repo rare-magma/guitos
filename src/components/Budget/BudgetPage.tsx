@@ -170,7 +170,6 @@ export function BudgetPage() {
       const filteredList = budgetList.filter(
         (item: Budget) => item.id === selectedBudget[0].id,
       );
-
       filteredList && setBudget(filteredList[0], false);
 
       if (selectedBudget[0].item && selectedBudget[0].item.length > 0) {
@@ -204,7 +203,7 @@ export function BudgetPage() {
       const index = budgetList?.findIndex((b) =>
         b.name.includes(name.slice(0, 7)),
       );
-      const isSelectable = index !== -1 && budgetList && index;
+      const isSelectable = index !== undefined && index !== -1 && budgetList;
 
       if (isSelectable) {
         handleSelect([budgetList[index] as unknown as SearchOption]);
