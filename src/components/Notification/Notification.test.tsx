@@ -1,20 +1,22 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
-import { Notification } from "./Notification";
+import { BudgetNotification, Notification } from "./Notification";
 
 describe("Notification", () => {
   const onShow = vi.fn();
 
-  const notification = {
+  const notification: BudgetNotification = {
     show: true,
     id: "a",
     body: "notification body",
+    showUndo: true,
   };
 
   const comp = <Notification notification={notification} onShow={onShow} />;
 
   beforeEach(() => {
+    onShow.mockClear();
     render(comp);
   });
 
@@ -27,7 +29,20 @@ describe("Notification", () => {
   });
 
   it("triggers onShow when closed", async () => {
-    await userEvent.click(screen.getByRole("button"));
-    expect(onShow).toHaveBeenCalledTimes(1);
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: "dismiss notification",
+      }),
+    );
+    expect(onShow).toHaveBeenCalled();
+  });
+
+  it("triggers onShow when undo button is clicked", async () => {
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: "undo budget deletion",
+      }),
+    );
+    expect(onShow).toHaveBeenCalled();
   });
 });

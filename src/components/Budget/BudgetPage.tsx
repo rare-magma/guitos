@@ -3,6 +3,7 @@ import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { Col, Container, Row, ToastContainer } from "react-bootstrap";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useParams } from "react-router-dom";
+import { useImmer } from "use-immer";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { budgetsDB, optionsDB } from "../../context/db";
@@ -16,7 +17,7 @@ import { CsvError, ErrorModal, JsonError } from "../ErrorModal/ErrorModal";
 import { LandingPage } from "../LandingPage/LandingPage";
 import { Loading } from "../Loading/Loading";
 import { NavBar, SearchOption } from "../NavBar/NavBar";
-import { Notification } from "../Notification/Notification";
+import { BudgetNotification, Notification } from "../Notification/Notification";
 import { StatCard } from "../StatCard/StatCard";
 import { TableCard } from "../TableCard/TableCard";
 import { Budget } from "./Budget";
@@ -34,14 +35,7 @@ export function BudgetPage() {
   const [jsonError, setJsonError] = useState<JsonError[]>([]);
   const [show, setShow] = useState(false);
   const [focus, setFocus] = useState("");
-
-  const [notifications, setNotifications] = useState<
-    {
-      show: boolean;
-      id?: string;
-      body?: string;
-    }[]
-  >([]);
+  const [notifications, setNotifications] = useImmer<BudgetNotification[]>([]);
 
   const {
     budget,
@@ -58,9 +52,7 @@ export function BudgetPage() {
   } = useBudget();
   const params = useParams();
   const name = String(params.name);
-
   const showCards = !loading && !showGraphs && budget?.id;
-
   const { setIntlConfig, handleCurrency } = useConfig();
 
   useHotkeys("escape", (e) => !e.repeat && setNotifications([]), {
@@ -103,14 +95,13 @@ export function BudgetPage() {
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
 
-    setNotifications([
-      ...notifications,
-      {
+    setNotifications((draft) => {
+      draft.push({
         show: true,
         id: crypto.randomUUID(),
         body: `created "${newBudget.name}" budget`,
-      },
-    ]);
+      });
+    });
   }
 
   function handleClone() {
@@ -126,14 +117,13 @@ export function BudgetPage() {
         ? budgetList.concat(newBudget)
         : newBudgetList.concat(newBudget);
 
-      setNotifications([
-        ...notifications,
-        {
+      setNotifications((draft) => {
+        draft.push({
           body: `cloned "${budget.name}" budget`,
           id: crypto.randomUUID(),
           show: true,
-        },
-      ]);
+        });
+      });
       setBudget(newBudget, true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -155,14 +145,14 @@ export function BudgetPage() {
             createBudgetNameList(newBudgetList as unknown as Budget[]),
           );
 
-          setNotifications([
-            ...notifications,
-            {
+          setNotifications((draft) => {
+            draft.push({
               body: `deleted "${budget?.name}" budget`,
               id: crypto.randomUUID(),
               show: true,
-            },
-          ]);
+              showUndo: true,
+            });
+          });
 
           if (newBudgetList.length >= 1) {
             setBudget(newBudgetList[0], true);
@@ -431,9 +421,12 @@ export function BudgetPage() {
                 key={i}
                 notification={notification}
                 onShow={() =>
-                  setNotifications(
-                    notifications.filter((n) => n.id !== notification.id),
-                  )
+                  setNotifications((draft) => {
+                    const index = draft.findIndex(
+                      (n) => n.id === notification.id,
+                    );
+                    if (index !== -1) draft.splice(index, 1);
+                  })
                 }
               />
             )
