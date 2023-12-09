@@ -27,7 +27,7 @@ jobs:
         run: pnpm install
 
       - name: Run tests
-        run: pnpm test -- --run --experimentalVmThreads
+        run: pnpm test -- --run
 
   release:
     name: release

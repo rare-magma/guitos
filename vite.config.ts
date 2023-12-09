@@ -38,6 +38,7 @@ export default defineConfig((env) => {
         provider: "v8",
         include: ["src/**"],
       },
+      pool: "vmThreads",
       globals: true,
       mockClear: true,
       environment: "jsdom",
