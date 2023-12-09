@@ -220,6 +220,8 @@ Keyboard shortcuts can be triggered when no input field is selected.
 - [Dracula](https://draculatheme.com/)
 - [Dracula.min Light](https://github.com/AshGrowem/Dracula.min#dracula.min-Light)
 - [use-undo](https://github.com/homerchen19/use-undo)
+- [immer](https://github.com/immerjs/immer)
+- [use-immer](https://github.com/immerjs/use-immer)
 
 ## Hosted On
 
@@ -268,6 +270,8 @@ See [LICENSE](LICENSE) for more information.
 - [Prettier](https://prettier.io/)
 - [Stylelint](https://stylelint.io/)
 - [semantic-release](https://semantic-release.gitbook.io/semantic-release/)
+- [testing-library](https://github.com/testing-library)
 - [vite-plugin-pwa](https://github.com/vite-pwa/vite-plugin-pwa)
+- [vitest](https://github.com/vitest-dev/vitest)
 - [Choose a license](https://choosealicense.com/)
 - [Hands on React](https://handsonreact.com)
