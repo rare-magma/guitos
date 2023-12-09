@@ -1,3 +1,21 @@
+# [0.29.0](https://github.com/rare-magma/guitos/compare/v0.28.2...v0.29.0) (2023-12-09)
+
+
+### Bug Fixes
+
+* home shortcut action ([50c96cf](https://github.com/rare-magma/guitos/commit/50c96cf2645b6a26e1cd7f058d7fbc5d1da70f6d))
+* set unique jsx keys ([bad4b5e](https://github.com/rare-magma/guitos/commit/bad4b5edc23455a706167803a711f2d63a5f6d3a))
+
+
+### Features
+
+* add undo redo nav buttons ([90992e0](https://github.com/rare-magma/guitos/commit/90992e0ba1d826355671e97d28697b5e8f349386))
+* add useUndoable to BudgetContext ([135d1f1](https://github.com/rare-magma/guitos/commit/135d1f1fbbe548237e3f5a0b05e75fb52ff1ec93))
+* add useundoable to context ([1e2daf0](https://github.com/rare-magma/guitos/commit/1e2daf0fb4d6981f6bd6ef467c75052d0e6c41ca))
+* consolidate export, currency and version into settings button ([42f06ac](https://github.com/rare-magma/guitos/commit/42f06ac3bc6223ca952456e6c4d76a8e02408c48))
+* save history only on specific actions ([903c859](https://github.com/rare-magma/guitos/commit/903c859c290d3e26e536ebd336c663d233c5c1d4))
+* undo budget deletion button in notification ([f3d413c](https://github.com/rare-magma/guitos/commit/f3d413ccd477a9cbabecabb544bad88eee77381b))
+
 ## [0.28.2](https://github.com/rare-magma/guitos/compare/v0.28.1...v0.28.2) (2023-10-15)
 
 
