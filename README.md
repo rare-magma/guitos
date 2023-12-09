@@ -39,9 +39,9 @@
 | :----------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
 | <img alt="guitos tooltip screenshot" src="docs/images/tooltip.png" title="Tooltip" width="100%"> | <img alt="guitos initial state screenshot" src="docs/images/initial-state-vertical.png" title="Initial state" width="100%"> |
 
-|                                                   Charts                                                    |                                                      Charts light theme                                                       |
-| :---------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: |
-| <img alt="guitos charts page screenshot" src="docs/images/vertical-charts.png" title="Charts" width="100%"> | <img guitos light theme charts page screenshot" src="docs/images/vertical-charts-light.png" title="Light theme" width="100%"> |
+|                                                   Charts                                                    |                                                         Charts light theme                                                         |
+| :---------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: |
+| <img alt="guitos charts page screenshot" src="docs/images/vertical-charts.png" title="Charts" width="100%"> | <img alt="guitos light theme charts page screenshot" src="docs/images/vertical-charts-light.png" title="Light theme" width="100%"> |
 
 </details>
 
