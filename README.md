@@ -27,21 +27,21 @@
 <summary>Screenshots</summary>
 <br>
 
-|                           Horizontal layout                            |                          Vertical layout                           |
-| :--------------------------------------------------------------------: | :----------------------------------------------------------------: |
-| <img src="docs/images/horizontal.png" title="Horizontal" width="100%"> | <img src="docs/images/vertical.png" title="Vertical" width="100%"> |
+|                                                Horizontal layout                                                 |                                              Vertical layout                                               |
+| :--------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: |
+| <img alt="guitos horizontal layout screenshot" src="docs/images/horizontal.png" title="Horizontal" width="100%"> | <img alt="guitos vertical layout screenshot" src="docs/images/vertical.png" title="Vertical" width="100%"> |
 
-|                                    Light theme                                     |                                  Light theme                                   |
-| :--------------------------------------------------------------------------------: | :----------------------------------------------------------------------------: |
-| <img src="docs/images/horizontal-light.png" title="Horizontal light" width="100%"> | <img src="docs/images/vertical-light.png" title="Vertical light" width="100%"> |
+|                                                               Light theme                                                                |                                                            Light theme                                                             |
+| :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: |
+| <img alt="guitos light theme horizontal layout screenshot" src="docs/images/horizontal-light.png" title="Horizontal light" width="100%"> | <img alt="guitos light theme vertical layout screenshot" src="docs/images/vertical-light.png" title="Vertical light" width="100%"> |
 
-|                             Tooltip                              |                                     Initial state                                     |
-| :--------------------------------------------------------------: | :-----------------------------------------------------------------------------------: |
-| <img src="docs/images/tooltip.png" title="Tooltip" width="100%"> | <img src="docs/images/initial-state-vertical.png" title="Initial state" width="100%"> |
+|                                             Tooltip                                              |                                                        Initial state                                                        |
+| :----------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
+| <img alt="guitos tooltip screenshot" src="docs/images/tooltip.png" title="Tooltip" width="100%"> | <img alt="guitos initial state screenshot" src="docs/images/initial-state-vertical.png" title="Initial state" width="100%"> |
 
-|                                 Charts                                  |                                 Charts light theme                                 |
-| :---------------------------------------------------------------------: | :--------------------------------------------------------------------------------: |
-| <img src="docs/images/vertical-charts.png" title="Charts" width="100%"> | <img src="docs/images/vertical-charts-light.png" title="Light theme" width="100%"> |
+|                                                   Charts                                                    |                                                      Charts light theme                                                       |
+| :---------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: |
+| <img alt="guitos charts page screenshot" src="docs/images/vertical-charts.png" title="Charts" width="100%"> | <img guitos light theme charts page screenshot" src="docs/images/vertical-charts-light.png" title="Light theme" width="100%"> |
 
 </details>
 
@@ -180,8 +180,9 @@ Keyboard shortcuts can be triggered when no input field is selected.
 
 ## Notes
 
-- There is no undo/redo functionality. Export frequently to avoid data loss!
-  - This is planned to be implemented on [#16](https://github.com/rare-magma/guitos/issues/16)
+- The undo/redo functionality cannot fix every single action. Export frequently to avoid data loss!
+- To undo the deletion of a budget click the undo button in the notification shown just after the action.
+  - As soon as the notification fades (after 60 seconds) the undo action is not possible anymore.
 - guitos tries to load an existing budget when visiting `guitos.app/budget-name`
 - The interface theme is set automatically by your browser and/or operating system's configuration.
 - The currency is initially selected according to your browser's preferred languages.
