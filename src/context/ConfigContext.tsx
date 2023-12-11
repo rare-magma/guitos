@@ -3,8 +3,8 @@ import {
   CurrencyInputProps,
   IntlConfig,
 } from "react-currency-input-field/dist/components/CurrencyInputProps";
+import { optionsDB } from "../db";
 import { initialCurrencyCode, userLang } from "../utils";
-import { optionsDB } from "./db";
 
 interface ConfigContextInterface {
   intlConfig: IntlConfig | undefined;

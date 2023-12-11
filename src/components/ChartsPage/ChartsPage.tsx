@@ -18,7 +18,7 @@ import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsArrowLeft } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
-import { budgetsDB } from "../../context/db";
+import { budgetsDB } from "../../db";
 import { focusRef, getNestedValues } from "../../utils";
 import { Budget } from "../Budget/Budget";
 import { Chart } from "../Chart/Chart";
