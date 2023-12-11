@@ -3,6 +3,7 @@ import useUndo from "use-undo";
 import { Budget } from "../components/Budget/Budget";
 import { SearchOption } from "../components/NavBar/NavBar";
 import { calcPercentage } from "../utils";
+import { useGeneralContext } from "./GeneralContext";
 
 interface BudgetContextInterface {
   budget: Budget | undefined;
@@ -12,8 +13,6 @@ interface BudgetContextInterface {
   budgetNameList: SearchOption[] | undefined;
   setBudgetNameList: (value: SearchOption[] | undefined) => void;
   revenuePercentage: number;
-  needReload: boolean;
-  setNeedReload: (value: boolean) => void;
   past: (Budget | undefined)[];
   future: (Budget | undefined)[];
   undo: () => void;
@@ -37,10 +36,6 @@ const BudgetContext = createContext<BudgetContextInterface>({
     value;
   },
   revenuePercentage: 0,
-  needReload: true,
-  setNeedReload: (value: boolean) => {
-    value;
-  },
   past: [undefined],
   future: [undefined],
   undo: () => {
@@ -62,8 +57,6 @@ function useBudget() {
     budgetNameList,
     setBudgetNameList,
     revenuePercentage,
-    needReload,
-    setNeedReload,
     past,
     future,
     undo,
@@ -80,8 +73,6 @@ function useBudget() {
     budgetNameList,
     setBudgetNameList,
     revenuePercentage,
-    needReload,
-    setNeedReload,
     past,
     future,
     undo,
@@ -93,10 +84,10 @@ function useBudget() {
 
 function BudgetProvider({ children }: PropsWithChildren) {
   const [budgetList, setBudgetList] = useState<Budget[] | undefined>([]);
-  const [needReload, setNeedReload] = useState(true);
   const [budgetNameList, setBudgetNameList] = useState<
     SearchOption[] | undefined
   >([]);
+  const { setNeedReload } = useGeneralContext();
 
   const [
     budgetState,
@@ -149,8 +140,6 @@ function BudgetProvider({ children }: PropsWithChildren) {
         revenuePercentage,
         past,
         future,
-        needReload,
-        setNeedReload,
         undo: handleUndo,
         redo: handleRedo,
         canUndo: canReallyUndo,

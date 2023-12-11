@@ -25,8 +25,8 @@ const ConfigContext = createContext<ConfigContextInterface>({
 });
 
 function useConfig() {
-  const { intlConfig, setIntlConfig } = useContext(ConfigContext);
-  const { currency, setCurrency } = useContext(ConfigContext);
+  const { currency, setCurrency, intlConfig, setIntlConfig } =
+    useContext(ConfigContext);
 
   function handleCurrency(c: string) {
     optionsDB.setItem("currencyCode", c).catch((e) => {

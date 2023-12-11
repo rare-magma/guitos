@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
-import { budgetsDB, optionsDB } from "./context/db";
+import { budgetsDB, optionsDB } from "./db";
 import { budgetContextSpy, testEmptyBudgetContext } from "./setupTests";
 
 describe("App", () => {

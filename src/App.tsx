@@ -5,18 +5,21 @@ import "./colors.css";
 import { BudgetPage } from "./components/Budget/BudgetPage";
 import { BudgetProvider } from "./context/BudgetContext";
 import { ConfigProvider } from "./context/ConfigContext";
+import { GeneralProvider } from "./context/GeneralContext";
 
 export default function App() {
   return (
-    <ConfigProvider>
-      <BudgetProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<BudgetPage />} />
-            <Route path="/:name" element={<BudgetPage />} />
-          </Routes>
-        </Router>
-      </BudgetProvider>
-    </ConfigProvider>
+    <GeneralProvider>
+      <ConfigProvider>
+        <BudgetProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<BudgetPage />} />
+              <Route path="/:name" element={<BudgetPage />} />
+            </Routes>
+          </Router>
+        </BudgetProvider>
+      </ConfigProvider>
+    </GeneralProvider>
   );
 }
