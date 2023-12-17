@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
 import { Budget } from "../components/Budget/Budget";
 import { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
 
 export function useMove() {
-  const [focus, setFocus] = useState("");
   const { budget, setBudget, budgetList } = useBudget();
 
   function select(selectedBudget: SearchOption[] | undefined) {
@@ -14,9 +12,16 @@ export function useMove() {
       );
       filteredList && setBudget(filteredList[0], false);
 
-      if (selectedBudget[0].item && selectedBudget[0].item.length > 0) {
-        setFocus(selectedBudget[0].item);
-      }
+      setTimeout(() => {
+        if (selectedBudget[0].item && selectedBudget[0].item.length > 0) {
+          const element = document.querySelector(
+            `input[value="${selectedBudget[0].item}"]:not([class="rbt-input-hint"]):not([role="combobox"])`,
+          );
+          if (element !== null) {
+            (element as HTMLElement).focus();
+          }
+        }
+      }, 100);
     }
   }
 
@@ -51,15 +56,6 @@ export function useMove() {
   function goForward() {
     budgetList && handleGo(1, budgetList.length - 1);
   }
-
-  useEffect(() => {
-    const element = document.querySelector(
-      `input[value="${focus}"]:not([class="rbt-input-hint"]):not([role="combobox"])`,
-    );
-    if (element !== null) {
-      (element as HTMLElement).focus();
-    }
-  }, [focus]);
 
   return {
     select,
