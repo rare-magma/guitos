@@ -1,46 +1,26 @@
-import { ParseError } from "papaparse";
 import { Accordion, Button, Modal } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
+import {
+  CsvError,
+  JsonError,
+  useGeneralContext,
+} from "../../context/GeneralContext";
 import "./ErrorModal.css";
 
-export interface CsvError {
-  errors: ParseError[];
-  file: string;
-}
+export function ErrorModal() {
+  const {
+    error,
+    csvErrors,
+    setCsvErrors,
+    jsonErrors,
+    setJsonErrors,
+    showError,
+    setShowError,
+  } = useGeneralContext();
 
-export interface JsonError {
-  errors: string;
-  file: string;
-}
-
-interface ErrorModalProps {
-  error: string | null;
-  show: boolean;
-  jsonError: JsonError[];
-  csvError: CsvError[];
-  onShow: (value: boolean) => void;
-  onError: () => void;
-}
-
-export function ErrorModal({
-  error,
-  show,
-  jsonError,
-  csvError,
-  onError,
-  onShow,
-}: ErrorModalProps) {
-  const showModal = error && show;
-  const showJsonError = jsonError && jsonError.length > 0 && show;
-  const showCsvError = csvError && csvError.length > 0 && show;
-
-  function handleShow(value: boolean) {
-    onShow(value);
-  }
-
-  function handleError() {
-    onError();
-  }
+  const showModal = error && showError;
+  const showJsonError = jsonErrors && jsonErrors.length > 0 && showError;
+  const showCsvError = csvErrors && csvErrors.length > 0 && showError;
 
   return (
     <>
@@ -48,8 +28,8 @@ export function ErrorModal({
         <Modal
           data-testid="error-modal"
           dialogClassName="modal-90w mx-auto"
-          show={show}
-          onHide={() => handleShow(false)}
+          show={showError}
+          onHide={() => setShowError(false)}
           centered
         >
           <Modal.Header>
@@ -60,7 +40,7 @@ export function ErrorModal({
               key={"modal-dismiss-button"}
               variant="delete-modal"
               type="button"
-              onClick={() => handleShow(false)}
+              onClick={() => setShowError(false)}
             >
               <BsXLg aria-hidden />
             </Button>
@@ -76,8 +56,8 @@ export function ErrorModal({
           key="json-error-modal"
           data-testid="json-error-modal"
           dialogClassName="modal-90w mx-auto"
-          show={show}
-          onHide={() => handleShow(false)}
+          show={showError}
+          onHide={() => setShowError(false)}
           centered
         >
           <Modal.Header key="json-error-modal-header">
@@ -90,8 +70,9 @@ export function ErrorModal({
               variant="delete-modal"
               type="button"
               onClick={() => {
-                handleShow(false);
-                handleError();
+                setShowError(false);
+                setCsvErrors([]);
+                setJsonErrors([]);
               }}
             >
               <BsXLg aria-hidden />
@@ -103,7 +84,7 @@ export function ErrorModal({
               key="json-error-modal-accordion"
               flush
             >
-              {jsonError.map((jsonError: JsonError, i: number) => (
+              {jsonErrors.map((jsonError: JsonError, i: number) => (
                 <Accordion.Item
                   key={`${jsonError.file}-item-${i}`}
                   eventKey={jsonError.file}
@@ -137,8 +118,8 @@ export function ErrorModal({
           key="csv-error-modal"
           data-testid="csv-error-modal"
           dialogClassName="modal-90w mx-auto"
-          show={show}
-          onHide={() => handleShow(false)}
+          show={showError}
+          onHide={() => setShowError(false)}
           centered
         >
           <Modal.Header key="csv-error-modal-header">
@@ -151,8 +132,9 @@ export function ErrorModal({
               variant="delete-modal"
               type="button"
               onClick={() => {
-                handleShow(false);
-                handleError();
+                setShowError(false);
+                setCsvErrors([]);
+                setJsonErrors([]);
               }}
             >
               <BsXLg aria-hidden />
@@ -164,7 +146,7 @@ export function ErrorModal({
               key="csv-error-modal-accordion"
               flush
             >
-              {csvError.map((csvError: CsvError, i: number) => (
+              {csvErrors.map((csvError: CsvError, i: number) => (
                 <Accordion.Item
                   key={`${csvError.file}-item-${i}`}
                   eventKey={csvError.file}

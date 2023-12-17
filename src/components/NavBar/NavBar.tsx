@@ -1,4 +1,3 @@
-import { produce } from "immer";
 import { useEffect, useRef, useState } from "react";
 import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
@@ -24,9 +23,9 @@ import {
 } from "react-icons/bs";
 import { FaRegClone } from "react-icons/fa";
 import { useBudget } from "../../context/BudgetContext";
-import { budgetsDB } from "../../context/db";
-import { focusRef } from "../../utils";
-import { Budget } from "../Budget/Budget";
+import { useDB } from "../../hooks/useDB";
+import { useMove } from "../../hooks/useMove";
+import { focusRef, getLabelKey } from "../../utils";
 import "./NavBar.css";
 import { NavBarDelete } from "./NavBarDelete";
 import { NavBarItem } from "./NavBarItem";
@@ -38,27 +37,7 @@ export interface SearchOption {
   name: string;
 }
 
-interface NavBarProps {
-  onClone: () => void;
-  onGoBack: () => void;
-  onGoHome: () => void;
-  onGoForward: () => void;
-  onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onNew: () => void;
-  onRemove: (name: string) => void;
-  onSelect: (option: SearchOption[]) => void;
-}
-
-export function NavBar({
-  onClone,
-  onGoBack,
-  onGoHome,
-  onGoForward,
-  onImport,
-  onNew,
-  onRemove,
-  onSelect,
-}: NavBarProps) {
+export function NavBar() {
   const importRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
   const searchRef = useRef<TypeaheadRef>(null);
@@ -68,24 +47,34 @@ export function NavBar({
 
   const [expanded, setExpanded] = useState(false);
   const [theme, setTheme] = useState("light");
-  const [options, setOptions] = useState<Option[]>([]);
+  const [invalidName, setInvalidName] = useState(false);
 
-  const { budget, setBudget, undo, redo, canRedo, canUndo, budgetNameList } =
-    useBudget();
+  const { select, goBack, goForward, goHome } = useMove();
+  const {
+    options,
+    createBudget,
+    cloneBudget,
+    deleteBudget,
+    renameBudget,
+    searchBudgets,
+    handleImport,
+  } = useDB();
+
+  const { budget, undo, redo, canRedo, canUndo, budgetNameList } = useBudget();
 
   const shouldShowBrand = budgetNameList && budgetNameList.length < 1;
   const hasOneOrMoreBudgets = budgetNameList && budgetNameList.length > 0;
   const hasMultipleBudgets = budgetNameList && budgetNameList.length > 1;
 
-  useHotkeys("pageup", (e) => !e.repeat && handleGoForward(), {
+  useHotkeys("pageup", (e) => !e.repeat && goForward(), {
     preventDefault: true,
   });
 
-  useHotkeys("pagedown", (e) => !e.repeat && handleGoBack(), {
+  useHotkeys("pagedown", (e) => !e.repeat && goBack(), {
     preventDefault: true,
   });
 
-  useHotkeys("Home", (e) => !e.repeat && handleGoHome(), {
+  useHotkeys("Home", (e) => !e.repeat && goHome(), {
     preventDefault: true,
   });
 
@@ -115,95 +104,32 @@ export function NavBar({
     );
   }, []);
 
-  function handleNew() {
-    setExpanded(false);
-    onNew();
+  function handleRename(name: React.ChangeEvent<HTMLInputElement>) {
+    if (checkIsUniqueName(name)) {
+      renameBudget(name);
+    }
+  }
+  function checkIsUniqueName(name: React.ChangeEvent<HTMLInputElement>) {
+    const isUnique = !budgetNameList?.some(
+      (b: SearchOption) => b.name === name.target.value,
+    );
+    setInvalidName(!isUnique);
+    return isUnique;
   }
 
-  function handleClone() {
-    setExpanded(false);
-    onClone();
-  }
-
-  function handleImport(event: React.ChangeEvent<HTMLInputElement>) {
-    setExpanded(false);
-    onImport(event);
-  }
-
-  function handleRemove(initialId?: string | null) {
+  function handleRemoveBudget(initialId?: string | null) {
     if (initialId) {
       setExpanded(false);
-      onRemove(initialId);
+      deleteBudget(initialId);
     }
   }
 
-  function handleSelect(option: Option[]) {
+  function handleSelectAction(option: Option[]) {
     setExpanded(false);
-    onSelect(option as SearchOption[]);
+    select(option as SearchOption[]);
     if (searchRef.current) {
       searchRef.current.clear();
     }
-  }
-
-  function handleGoBack() {
-    onGoBack();
-  }
-
-  function handleGoHome() {
-    onGoHome();
-  }
-
-  function handleGoForward() {
-    onGoForward();
-  }
-
-  function handleRename(event: React.ChangeEvent<HTMLInputElement>) {
-    if (budget && event.target.value) {
-      const newState = produce((draft) => {
-        draft.name = event.target.value;
-      }, budget);
-      setBudget(newState(), false);
-    }
-  }
-
-  function handleSearch() {
-    let options: SearchOption[] = [];
-
-    budgetsDB
-      .iterate((budget: Budget) => {
-        options = options.concat(
-          budget.incomes.items.map((i) => {
-            return {
-              id: budget.id,
-              item: i.name,
-              name: budget.name,
-            };
-          }),
-          budget.expenses.items.map((i) => {
-            return {
-              id: budget.id,
-              item: i.name,
-              name: budget.name,
-            };
-          }),
-        );
-      })
-      .then(() => {
-        if (budgetNameList) {
-          options = options.concat(budgetNameList);
-        }
-        setOptions(
-          options.sort((a, b) => a.name.localeCompare(b.name)).reverse(),
-        );
-      })
-      .catch((e) => {
-        throw new Error(e as string);
-      });
-  }
-
-  function getLabelKey(option: unknown): string {
-    const label = option as SearchOption;
-    return label.item ? `${label.name} ${label.item}` : `${label.name}`;
   }
 
   return (
@@ -245,7 +171,7 @@ export function NavBar({
                 <>
                   <NavBarItem
                     itemClassName={"me-1 my-2"}
-                    onClick={handleGoBack}
+                    onClick={goBack}
                     tooltipID={"tooltip-go-to-older-budget"}
                     tooltipText={"go to older budget"}
                     buttonAriaLabel={"go to older budget"}
@@ -254,7 +180,7 @@ export function NavBar({
                   />
                   <NavBarItem
                     itemClassName={"m-2"}
-                    onClick={handleGoForward}
+                    onClick={goForward}
                     tooltipID={"tooltip-go-to-newer-budget"}
                     tooltipText={"go to newer budget"}
                     buttonAriaLabel={"go to newer budget"}
@@ -276,17 +202,25 @@ export function NavBar({
                     </Tooltip>
                   }
                 >
-                  <Form.Control
-                    id="budget-name"
-                    aria-label={"budget name"}
-                    key={"budget-name-key-" + budget.id}
-                    defaultValue={budget.name}
-                    ref={nameRef}
-                    onChange={handleRename}
-                    style={expanded ? {} : { minWidth: "12ch" }}
-                    type="text"
-                    maxLength={25}
-                  />
+                  <>
+                    <Form.Control
+                      id="budget-name"
+                      aria-label={"budget name"}
+                      key={"budget-name-key-" + budget.id}
+                      defaultValue={budget.name}
+                      ref={nameRef}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        handleRename(e);
+                      }}
+                      style={expanded ? {} : { minWidth: "12ch" }}
+                      type="text"
+                      maxLength={25}
+                      isInvalid={invalidName}
+                    />
+                    <Form.Control.Feedback tooltip type="invalid">
+                      This name is already used by another budget.
+                    </Form.Control.Feedback>
+                  </>
                 </OverlayTrigger>
               </Nav.Item>
             </Nav>
@@ -326,12 +260,12 @@ export function NavBar({
                     labelKey={getLabelKey}
                     ref={searchRef}
                     style={expanded ? {} : { minWidth: "14ch" }}
-                    onChange={(option: Option[]) => handleSelect(option)}
+                    onChange={(option: Option[]) => handleSelectAction(option)}
                     className="w-100"
                     options={options}
                     placeholder="Search..."
                     isLoading={false}
-                    onSearch={handleSearch}
+                    onSearch={searchBudgets}
                   />
                 )}
               </Nav>
@@ -374,7 +308,10 @@ export function NavBar({
               )}
               <NavBarItem
                 itemClassName={"m-2"}
-                onClick={handleNew}
+                onClick={() => {
+                  setExpanded(false);
+                  createBudget();
+                }}
                 tooltipID={"tooltip-new-budget"}
                 tooltipText={"new budget"}
                 buttonAriaLabel={"new budget"}
@@ -386,7 +323,10 @@ export function NavBar({
                 <>
                   <NavBarItem
                     itemClassName={"m-2"}
-                    onClick={handleClone}
+                    onClick={() => {
+                      setExpanded(false);
+                      cloneBudget();
+                    }}
                     tooltipID={"tooltip-clone-budget"}
                     tooltipText={"clone budget"}
                     buttonAriaLabel={"clone budget"}
@@ -396,7 +336,7 @@ export function NavBar({
                   />
                   <NavBarDelete
                     deleteButtonRef={deleteButtonRef}
-                    handleRemove={() => handleRemove(budget?.id)}
+                    handleRemove={() => handleRemoveBudget(budget?.id)}
                     expanded={expanded}
                   />
                 </>
@@ -429,7 +369,12 @@ export function NavBar({
                       type="file"
                       multiple
                       ref={importRef}
-                      onChange={handleImport}
+                      onChange={(
+                        event: React.ChangeEvent<HTMLInputElement>,
+                      ) => {
+                        setExpanded(false);
+                        handleImport(event);
+                      }}
                       style={{ display: "none" }}
                     />
                   </Form.Group>

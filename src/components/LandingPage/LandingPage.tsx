@@ -1,4 +1,4 @@
-import { RefObject } from "react";
+import { useRef } from "react";
 import {
   Button,
   Container,
@@ -9,37 +9,23 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { useBudget } from "../../context/BudgetContext";
+import { useGeneralContext } from "../../context/GeneralContext";
+import { useDB } from "../../hooks/useDB";
 import { Loading } from "../Loading/Loading";
 import "./LandingPage.css";
 
-interface LandingPageProps {
-  loading: boolean;
-  inputRef: RefObject<HTMLInputElement>;
-  onNew: () => void;
-  onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-export function LandingPage({
-  loading,
-  inputRef,
-  onNew,
-  onImport,
-}: LandingPageProps) {
+export function LandingPage() {
+  const inputRef = useRef<HTMLInputElement>(null);
   const { budget, budgetList } = useBudget();
+  const { loadingFromDB } = useGeneralContext();
+  const { createBudget, handleImport } = useDB();
+
   const showLandingPage =
-    !loading && !budget && budgetList && budgetList.length < 1;
-
-  function handleNew() {
-    onNew();
-  }
-
-  function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
-    onImport(e);
-  }
+    !loadingFromDB && !budget && budgetList && budgetList.length < 1;
 
   return (
     <>
-      {loading && <Loading />}
+      {loadingFromDB && <Loading />}
 
       {showLandingPage && (
         <Container className="position-absolute top-50 start-50 translate-middle">
@@ -49,7 +35,7 @@ export function LandingPage({
                 className="w-25 align-self-center"
                 aria-label="new budget"
                 variant="outline-success"
-                onClick={handleNew}
+                onClick={createBudget}
               >
                 new
               </Button>

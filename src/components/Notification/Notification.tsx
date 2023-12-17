@@ -1,31 +1,34 @@
+import { produce } from "immer";
 import { Button, Toast } from "react-bootstrap";
 import { BsArrowCounterclockwise, BsX } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
+import {
+  BudgetNotification,
+  useGeneralContext,
+} from "../../context/GeneralContext";
 import "./Notification.css";
-
-export interface BudgetNotification {
-  show: boolean;
-  id?: string;
-  body?: string;
-  showUndo?: boolean;
-}
 
 interface NotificationProps {
   notification: BudgetNotification;
-  onShow: () => void;
 }
 
-export function Notification({ notification, onShow }: NotificationProps) {
+export function Notification({ notification }: NotificationProps) {
   const { undo } = useBudget();
-  function handleUndo() {
-    undo();
-    onShow();
+  const { notifications, setNotifications } = useGeneralContext();
+
+  function handleClose() {
+    setNotifications(
+      produce(notifications, (draft) => {
+        const index = draft.findIndex((n) => n.id === notification.id);
+        if (index !== -1) draft.splice(index, 1);
+      }),
+    );
   }
 
   return (
     <Toast
       key={`${notification.id}-toast`}
-      onClose={onShow}
+      onClose={handleClose}
       show={notification.show}
       autohide
       delay={notification.showUndo ? 60000 : 3000}
@@ -52,7 +55,10 @@ export function Notification({ notification, onShow }: NotificationProps) {
             size="sm"
             aria-label="undo budget deletion"
             variant="outline-info"
-            onClick={handleUndo}
+            onClick={() => {
+              undo();
+              handleClose();
+            }}
           >
             <BsArrowCounterclockwise aria-hidden />
           </Button>
@@ -63,7 +69,7 @@ export function Notification({ notification, onShow }: NotificationProps) {
           size="sm"
           aria-label="dismiss notification"
           variant="outline-secondary"
-          onClick={onShow}
+          onClick={handleClose}
         >
           {<BsX aria-hidden />}
         </Button>

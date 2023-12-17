@@ -323,3 +323,8 @@ export function getNestedValues<T, K extends keyof T, L extends keyof T[K]>(
     return getNestedProperty(o, prop1, prop2);
   });
 }
+
+export function getLabelKey(option: unknown): string {
+  const label = option as SearchOption;
+  return label.item ? `${label.name} ${label.item}` : `${label.name}`;
+}

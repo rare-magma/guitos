@@ -1,4 +1,3 @@
-import { Draft } from "immer";
 import { ParseError } from "papaparse";
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 import { useImmer } from "use-immer";
@@ -34,9 +33,7 @@ interface GeneralContextInterface {
   showError: boolean;
   setShowError: (value: boolean) => void;
   notifications: BudgetNotification[];
-  setNotifications: (
-    value: BudgetNotification[] | Draft<BudgetNotification[]>,
-  ) => void;
+  setNotifications: (value: BudgetNotification[]) => void;
 }
 
 const GeneralContext = createContext<GeneralContextInterface>({
@@ -65,9 +62,7 @@ const GeneralContext = createContext<GeneralContextInterface>({
     value;
   },
   notifications: [],
-  setNotifications: (
-    value: BudgetNotification[] | Draft<BudgetNotification[]>,
-  ) => {
+  setNotifications: (value: BudgetNotification[]) => {
     value;
   },
 });
