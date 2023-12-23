@@ -34,7 +34,7 @@
     "localforage": "1.10.0",
     "papaparse": "5.4.1",
     "react": "18.2.0",
-    "react-bootstrap": "2.9.1",
+    "react-bootstrap": "2.9.2",
     "react-bootstrap-typeahead": "6.3.2",
     "react-currency-input-field": "3.6.12",
     "react-dom": "18.2.0",
@@ -87,7 +87,7 @@
     "vite": "5.0.10",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-pwa": "0.17.4",
-    "vitest": "1.0.2",
+    "vitest": "1.1.0",
     "workbox-window": "7.0.0"
   }
 }
