@@ -16,7 +16,9 @@ describe("App", () => {
     budgetContextSpy.mockReturnValue(testEmptyBudgetContext);
     render(comp);
     expect(screen.getAllByText("guitos")[0]).toBeInTheDocument();
-    expect(screen.getByRole("status")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /open guitos changelog/i }),
+    ).toBeInTheDocument();
     expect(budgetsDB.config("name")).toBe("guitos");
     expect(budgetsDB.config("storeName")).toBe("budgets");
     expect(optionsDB.config("name")).toBe("guitos");

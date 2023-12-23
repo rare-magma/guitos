@@ -28,7 +28,6 @@ export function useDB() {
     setCsvErrors,
     setJsonErrors,
     setNeedReload,
-    loadingFromDB,
     setLoadingFromDB,
     notifications,
     setNotifications,
@@ -335,8 +334,6 @@ export function useDB() {
   }, [budget]);
 
   return {
-    loadingFromDB,
-    setLoadingFromDB,
     createBudget,
     cloneBudget,
     handleImport,
@@ -347,8 +344,6 @@ export function useDB() {
     loadCurrencyOption,
     loadBudget,
     loadFromDb,
-    notifications,
-    setNotifications,
     options,
   };
 }

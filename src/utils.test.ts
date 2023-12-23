@@ -29,6 +29,7 @@ import {
   createNewBudget,
   getCountryCode,
   getCurrencyCode,
+  getLabelKey,
   getNestedProperty,
   getNestedValues,
   intlFormat,
@@ -229,4 +230,19 @@ test("getNestedValues", () => {
   expect(getNestedValues(testBudgetList, "incomes", "items")).toEqual(
     expected2,
   );
+});
+
+test("getLabelKey", () => {
+  const optionWithoutItem = {
+    id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+    item: "",
+    name: "2023-03",
+  };
+  const option = {
+    id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+    item: "item name",
+    name: "2023-03",
+  };
+  expect(getLabelKey(optionWithoutItem)).toEqual("2023-03");
+  expect(getLabelKey(option)).toEqual("2023-03 item name");
 });

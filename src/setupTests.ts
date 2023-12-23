@@ -11,6 +11,7 @@ import { Budget } from "./components/Budget/Budget";
 import { ItemForm } from "./components/ItemForm/ItemForm";
 import * as AppBudgetContext from "./context/BudgetContext";
 import * as AppConfigContext from "./context/ConfigContext";
+import * as AppGeneralContext from "./context/GeneralContext";
 
 window.crypto.randomUUID = randomUUID;
 // global.URL.createObjectURL = vi.fn();
@@ -24,10 +25,15 @@ expect.extend(matchers);
 
 export const configContextSpy = vi.spyOn(AppConfigContext, "useConfig");
 export const budgetContextSpy = vi.spyOn(AppBudgetContext, "useBudget");
+export const generalContextSpy = vi.spyOn(
+  AppGeneralContext,
+  "useGeneralContext",
+);
 
 beforeEach(() => {
   budgetContextSpy.mockReturnValue(testBudgetContext);
   configContextSpy.mockReturnValue(testConfigContext);
+  generalContextSpy.mockReturnValue(testGeneralContext);
 });
 
 // runs a cleanup after each test case (e.g. clearing jsdom)
@@ -240,7 +246,6 @@ export const testSpanishConfigContext = {
 export const setBudgetMock = vi.fn();
 export const setBudgetListMock = vi.fn();
 export const setBudgetNameListMock = vi.fn();
-export const setNeedReloadMock = vi.fn();
 export const undoMock = vi.fn();
 export const redoMock = vi.fn();
 export const testEmptyBudgetContext = {
@@ -257,7 +262,6 @@ export const testEmptyBudgetContext = {
   past: [],
   future: [],
   needReload: true,
-  setNeedReload: setNeedReloadMock,
   undo: undoMock,
   redo: redoMock,
   canUndo: false,
@@ -277,10 +281,76 @@ export const testBudgetContext = {
   revenuePercentage: 10,
   past: [],
   future: [],
-  needReload: true,
-  setNeedReload: setNeedReloadMock,
   undo: undoMock,
   redo: redoMock,
   canUndo: false,
   canRedo: false,
+};
+
+export const setNeedReloadMock = vi.fn();
+export const setLoadingFromDBMock = vi.fn();
+export const setErrorMock = vi.fn();
+export const setCsvErrorsMock = vi.fn();
+export const setJsonErrorsMock = vi.fn();
+export const setShowErrorMock = vi.fn();
+export const setNotificationsMock = vi.fn();
+export const handleErrorMock = vi.fn();
+export const testGeneralContext = {
+  needReload: false,
+  setNeedReload: setNeedReloadMock,
+  loadingFromDB: false,
+  setLoadingFromDB: setLoadingFromDBMock,
+  error: "",
+  setError: setErrorMock,
+  csvErrors: [],
+  setCsvErrors: setCsvErrorsMock,
+  jsonErrors: [],
+  setJsonErrors: setJsonErrorsMock,
+  showError: false,
+  setShowError: setShowErrorMock,
+  notifications: [],
+  setNotifications: setNotificationsMock,
+  handleError: handleErrorMock,
+};
+
+const jsonErrors: AppGeneralContext.JsonError[] = [
+  {
+    errors:
+      "SyntaxError: Expected ',' or '}' after property value in JSON at position 209",
+    file: "123.json",
+  },
+];
+
+const csvErrors: AppGeneralContext.CsvError[] = [
+  {
+    errors: [
+      {
+        type: "FieldMismatch",
+        code: "TooFewFields",
+        message: "Line 0: Too few fields: expected 3 fields but parsed 2",
+        row: 0,
+      },
+    ],
+    file: "123.csv",
+  },
+];
+
+const error = "Thrown error";
+
+export const testErrorGeneralContext = {
+  ...testGeneralContext,
+  error: error,
+  showError: true,
+};
+
+export const testJsonErrorGeneralContext = {
+  ...testGeneralContext,
+  jsonErrors: jsonErrors,
+  showError: true,
+};
+
+export const testCsvErrorGeneralContext = {
+  ...testGeneralContext,
+  csvErrors: csvErrors,
+  showError: true,
 };

@@ -10,6 +10,5 @@ exports[`Notification > matches snapshot 1`] = `
       "showUndo": true,
     }
   }
-  onShow={[MockFunction spy]}
 />
 `;

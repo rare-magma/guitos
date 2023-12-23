@@ -1,21 +1,3 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`LandingPage > matches snapshot 1`] = `
-<LandingPage
-  inputRef={
-    {
-      "current": <input
-        class="form-control"
-        data-testid="import-form-control-landing-page"
-        id="import"
-        multiple=""
-        style="display: none;"
-        type="file"
-      />,
-    }
-  }
-  loading={false}
-  onImport={[MockFunction spy]}
-  onNew={[MockFunction spy]}
-/>
-`;
+exports[`LandingPage > matches snapshot 1`] = `<LandingPage />`;

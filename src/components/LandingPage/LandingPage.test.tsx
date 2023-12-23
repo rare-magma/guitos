@@ -1,25 +1,16 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { vi } from "vitest";
 import {
   budgetContextSpy,
+  generalContextSpy,
   testBudget,
   testEmptyBudgetContext,
+  testGeneralContext,
 } from "../../setupTests";
 import { LandingPage } from "./LandingPage";
 
 describe("LandingPage", () => {
-  const inputRefMock: { current: HTMLInputElement | null } = { current: null };
-  const onNew = vi.fn();
-  const onImport = vi.fn();
-  const comp = (
-    <LandingPage
-      loading={false}
-      inputRef={inputRefMock}
-      onNew={onNew}
-      onImport={onImport}
-    />
-  );
+  const comp = <LandingPage />;
 
   beforeEach(() => {
     budgetContextSpy.mockReturnValue(testEmptyBudgetContext);
@@ -38,18 +29,16 @@ describe("LandingPage", () => {
     ).toBeInTheDocument();
   });
 
-  it("triggers onNew", async () => {
+  it("triggers new budget", async () => {
     const newButton = screen.getAllByRole("button", { name: "new budget" })[0];
     await userEvent.click(newButton);
-    expect(onNew).toHaveBeenCalledTimes(1);
   });
 
-  it("triggers onImport", async () => {
+  it("triggers upload", async () => {
     await userEvent.upload(
       screen.getByTestId("import-form-control-landing-page"),
-      testBudget as unknown as File,
+      new File([testBudget as unknown as Blob], "test"),
     );
-    expect(onImport).toHaveBeenCalledTimes(1);
   });
 
   it("opens instructions in new tab", async () => {
@@ -64,14 +53,11 @@ describe("LandingPage", () => {
   });
 
   it("renders loading spinner", () => {
-    render(
-      <LandingPage
-        loading={true}
-        inputRef={inputRefMock}
-        onNew={onNew}
-        onImport={onImport}
-      />,
-    );
+    generalContextSpy.mockReturnValue({
+      ...testGeneralContext,
+      loadingFromDB: true,
+    });
+    render(<LandingPage />);
     expect(screen.getByRole("status")).toBeInTheDocument();
   });
 });
