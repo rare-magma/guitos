@@ -1,3 +1,10 @@
+## [0.29.1](https://github.com/rare-magma/guitos/compare/v0.29.0...v0.29.1) (2023-12-23)
+
+
+### Bug Fixes
+
+* focus element after searching for it ([b65832a](https://github.com/rare-magma/guitos/commit/b65832abb6e80dfee61907fbdb1b67cea76acf44))
+
 # [0.29.0](https://github.com/rare-magma/guitos/compare/v0.28.2...v0.29.0) (2023-12-09)
 
 
