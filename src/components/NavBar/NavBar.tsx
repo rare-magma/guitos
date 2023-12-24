@@ -49,7 +49,8 @@ export function NavBar() {
   const [theme, setTheme] = useState("light");
   const [invalidName, setInvalidName] = useState(false);
 
-  const { select, goBack, goForward, goHome } = useMove();
+  const { select, goBack, canGoBack, goForward, canGoForward, goHome } =
+    useMove();
   const {
     options,
     createBudget,
@@ -172,6 +173,7 @@ export function NavBar() {
                   <NavBarItem
                     itemClassName={"me-1 my-2"}
                     onClick={goBack}
+                    disabled={!canGoBack}
                     tooltipID={"tooltip-go-to-older-budget"}
                     tooltipText={"go to older budget"}
                     buttonAriaLabel={"go to older budget"}
@@ -181,6 +183,7 @@ export function NavBar() {
                   <NavBarItem
                     itemClassName={"m-2"}
                     onClick={goForward}
+                    disabled={!canGoForward}
                     tooltipID={"tooltip-go-to-newer-budget"}
                     tooltipText={"go to newer budget"}
                     buttonAriaLabel={"go to newer budget"}

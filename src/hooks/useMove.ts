@@ -57,10 +57,26 @@ export function useMove() {
     budgetList && handleGo(1, budgetList.length - 1);
   }
 
+  function checkCanGo(position: number): boolean {
+    const sortedList = budgetList?.sort((a, b) => a.name.localeCompare(b.name));
+    if (budget) {
+      const index = sortedList?.findIndex((b) => b.name.includes(budget.name));
+      if (index !== position) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const canGoBack = checkCanGo(0);
+  const canGoForward = budgetList && checkCanGo(budgetList?.length - 1);
+
   return {
     select,
     goBack,
     goForward,
+    canGoBack,
+    canGoForward,
     goHome,
   };
 }

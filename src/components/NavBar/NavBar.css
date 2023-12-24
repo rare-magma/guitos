@@ -15,6 +15,12 @@
   color: var(--lightbgcolor);
 }
 
+.btn-go-button:disabled {
+  background-color: var(--lightbgcolor);
+  border: 1px solid var(--comment);
+  color: var(--comment);
+}
+
 .btn-outline-danger {
   background-color: var(--lightbgcolor);
   border: 1px solid var(--comment);
