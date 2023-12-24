@@ -1,3 +1,10 @@
+## [0.30.1](https://github.com/rare-magma/guitos/compare/v0.30.0...v0.30.1) (2023-12-24)
+
+
+### Bug Fixes
+
+* disable go buttons when impossible to do so ([e7773f5](https://github.com/rare-magma/guitos/commit/e7773f5564677e176e794c54a7355ca01d414313))
+
 # [0.30.0](https://github.com/rare-magma/guitos/compare/v0.29.1...v0.30.0) (2023-12-24)
 
 
