@@ -1,3 +1,10 @@
+# [0.30.0](https://github.com/rare-magma/guitos/compare/v0.29.1...v0.30.0) (2023-12-24)
+
+
+### Features
+
+* add item operation history ([ea21598](https://github.com/rare-magma/guitos/commit/ea21598feacfdd695d6a56a0d8fe2c2db670976a))
+
 ## [0.29.1](https://github.com/rare-magma/guitos/compare/v0.29.0...v0.29.1) (2023-12-23)
 
 
