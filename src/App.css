@@ -115,6 +115,10 @@ input.text-end.form-control:focus {
   color: var(--textcolor);
 }
 
+.form-control:disabled {
+  background: var(--lightbgcolor);
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {

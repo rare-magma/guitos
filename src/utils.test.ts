@@ -2,6 +2,7 @@ import Big from "big.js";
 import Papa from "papaparse";
 import { expect, test } from "vitest";
 import { Budget } from "./components/Budget/Budget";
+import { ItemOperation } from "./components/CalculateButton/CalculateButton";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
 import { currenciesMap } from "./lists/currenciesMap";
 import { firefoxLocalesList } from "./lists/firefoxLocalesList";
@@ -193,13 +194,13 @@ reserves,reserves,200`);
 
 test("calc", () => {
   expect(calc(123.45, 100, "add")).eq(223.45);
-  expect(calc(123.45, 100, "sub")).eq(23.45);
-  expect(calc(123.45, 100, "mul")).eq(12345);
-  expect(calc(123.45, 100, "div")).eq(1.23);
-  expect(calc(0, 100, "sub")).eq(0);
-  expect(calc(0, 100, "mul")).eq(0);
-  expect(calc(0, 100, "div")).eq(0);
-  expect(() => calc(0, 100, "sqrt")).toThrow();
+  expect(calc(123.45, 100, "subtract")).eq(23.45);
+  expect(calc(123.45, 100, "multiply")).eq(12345);
+  expect(calc(123.45, 100, "divide")).eq(1.23);
+  expect(calc(0, 100, "subtract")).eq(0);
+  expect(calc(0, 100, "multiply")).eq(0);
+  expect(calc(0, 100, "divide")).eq(0);
+  expect(() => calc(0, 100, "sqrt" as ItemOperation)).toThrow();
 });
 
 test("median", () => {

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Button,
   Dropdown,
@@ -7,16 +7,39 @@ import {
   Popover,
 } from "react-bootstrap";
 import CurrencyInput from "react-currency-input-field";
-import { BsCheckLg, BsDashLg, BsPlusSlashMinus, BsXLg } from "react-icons/bs";
+import {
+  BsCheckLg,
+  BsClockHistory,
+  BsDashLg,
+  BsPlusSlashMinus,
+  BsXLg,
+} from "react-icons/bs";
 import { CgMathDivide, CgMathPlus } from "react-icons/cg";
+import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
+import { useDB } from "../../hooks/useDB";
 import { ItemForm } from "../ItemForm/ItemForm";
 import "./CalculateButton.css";
 
 interface CalculateButtonProps {
   itemForm: ItemForm;
   label: string;
-  onCalculate: (changeValue: number, operation: string) => void;
+  onCalculate: (changeValue: number, operation: ItemOperation) => void;
+}
+
+export type ItemOperation =
+  | "name"
+  | "value"
+  | "add"
+  | "subtract"
+  | "multiply"
+  | "divide";
+
+export interface CalculationHistoryItem {
+  id: string;
+  itemForm: ItemForm;
+  changeValue: number | undefined;
+  operation: ItemOperation;
 }
 
 export function CalculateButton({
@@ -24,11 +47,16 @@ export function CalculateButton({
   label,
   onCalculate,
 }: CalculateButtonProps) {
-  const [operation, setOperation] = useState("add");
+  const [operation, setOperation] = useState<ItemOperation>("add");
   const [changeValue, setChangeValue] = useState(0);
+  const [showHistory, setShowHistory] = useState(false);
+  const [history, setHistory] = useState<CalculationHistoryItem[]>([]);
   const opButtonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { intlConfig } = useConfig();
+  const { getCalcHist } = useDB();
+  const { budget } = useBudget();
+  const calcHistID = `${budget?.id}-${label}-${itemForm.id}`;
 
   function handleKeyPress(e: { key: string }) {
     if (e.key === "Enter") {
@@ -43,8 +71,28 @@ export function CalculateButton({
   function handleCalculate() {
     if (changeValue > 0) {
       onCalculate(changeValue, operation);
+      setShowHistory(false);
+      getHistory();
     }
   }
+
+  function handleHistory() {
+    getHistory();
+    setShowHistory(!showHistory);
+  }
+
+  function getHistory() {
+    getCalcHist(calcHistID)
+      .then((h) => setHistory(h))
+      .catch((e: unknown) => {
+        throw e;
+      });
+  }
+
+  useEffect(() => {
+    getHistory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showHistory]);
 
   return (
     <>
@@ -61,6 +109,17 @@ export function CalculateButton({
                 className="mb-1"
                 key={`${itemForm.id}-${label}-operation-group`}
               >
+                <Button
+                  id={`item-${itemForm.id}-operation-history-button`}
+                  key={`${itemForm.id}-${label}-operation-history-button`}
+                  aria-label={"open operation history"}
+                  variant="outline-secondary"
+                  disabled={history.length > 0 ? false : true}
+                  type="button"
+                  onClick={handleHistory}
+                >
+                  <BsClockHistory aria-hidden />
+                </Button>
                 <Dropdown>
                   <Dropdown.Toggle
                     aria-label={"select type of operation on item value"}
@@ -131,6 +190,55 @@ export function CalculateButton({
                   <BsCheckLg aria-hidden />
                 </Button>
               </InputGroup>
+              {showHistory && (
+                <div style={{ maxHeight: "30vh", overflow: "auto" }}>
+                  {history
+                    .filter((i) => i.operation !== "value")
+                    .map((item, index) => (
+                      <InputGroup
+                        size="sm"
+                        className="mb-1"
+                        key={`${item.id}-history-group-${index}`}
+                      >
+                        <CurrencyInput
+                          id={`${label}-${itemForm.id}-${index}-history-value`}
+                          key={`item-${itemForm.id}-${index}-${label}-history-value`}
+                          className="text-end form-control straight-corners fixed-width-font"
+                          aria-label={"item history value"}
+                          name="item-history-value"
+                          intlConfig={intlConfig}
+                          defaultValue={item.itemForm.value}
+                          disabled={true}
+                        />
+                        <InputGroup.Text>
+                          {item.operation === "add" && (
+                            <CgMathPlus aria-hidden />
+                          )}
+                          {item.operation === "subtract" && (
+                            <BsDashLg aria-hidden />
+                          )}
+                          {item.operation === "multiply" && (
+                            <BsXLg aria-hidden />
+                          )}
+                          {item.operation === "divide" && (
+                            <CgMathDivide aria-hidden />
+                          )}
+                        </InputGroup.Text>
+                        <CurrencyInput
+                          id={`${label}-${itemForm.id}-${index}-history-changeValue`}
+                          key={`item-${itemForm.id}-${index}-${label}-history-changeValue`}
+                          className="text-end form-control straight-corners fixed-width-font"
+                          aria-label={"item history change value"}
+                          name="item-history-change-value"
+                          intlConfig={intlConfig}
+                          defaultValue={item.changeValue}
+                          disabled={true}
+                        />
+                      </InputGroup>
+                    ))
+                    .reverse()}
+                </div>
+              )}
             </Popover.Body>
           </Popover>
         }

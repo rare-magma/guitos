@@ -1,7 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
-import { budgetsDB, optionsDB } from "./db";
+import { budgetsDB, calcHistDB, optionsDB } from "./db";
 import { budgetContextSpy, testEmptyBudgetContext } from "./setupTests";
 
 describe("App", () => {
@@ -23,6 +23,8 @@ describe("App", () => {
     expect(budgetsDB.config("storeName")).toBe("budgets");
     expect(optionsDB.config("name")).toBe("guitos");
     expect(optionsDB.config("storeName")).toBe("options");
+    expect(calcHistDB.config("name")).toBe("guitos");
+    expect(calcHistDB.config("storeName")).toBe("calcHistDB");
   });
 
   it("shows new budget when clicking new button", async () => {

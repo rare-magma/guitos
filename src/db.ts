@@ -9,3 +9,8 @@ export const optionsDB = localforage.createInstance({
   name: "guitos",
   storeName: "options",
 });
+
+export const calcHistDB = localforage.createInstance({
+  name: "guitos",
+  storeName: "calcHistDB",
+});

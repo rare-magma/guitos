@@ -12,6 +12,7 @@ import CurrencyInput from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
+import { useDB } from "../../hooks/useDB";
 import {
   calc,
   calcAvailable,
@@ -21,7 +22,10 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "../../utils";
-import { CalculateButton } from "../CalculateButton/CalculateButton";
+import {
+  CalculateButton,
+  ItemOperation,
+} from "../CalculateButton/CalculateButton";
 import { Expense } from "../TableCard/Expense";
 import { Income } from "../TableCard/Income";
 import { ItemForm } from "./ItemForm";
@@ -44,12 +48,33 @@ export function ItemFormGroup({
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
   const valueRef = useRef<HTMLInputElement>(null);
   const { budget, setBudget } = useBudget();
+  const { deleteCalcHist, saveCalcHist } = useDB();
   const { intlConfig } = useConfig();
   const isExpense = label === "Expenses";
   const table = isExpense ? budget?.expenses : budget?.incomes;
 
+  function handleCalcHist(
+    operation: ItemOperation,
+    changeValue: number | undefined,
+  ) {
+    if (!budget) return;
+    const newItemForm = isExpense
+      ? budget.expenses.items.find((item) => item.id === itemForm.id)
+      : budget.incomes.items.find((item) => item.id === itemForm.id);
+    if (!newItemForm) return;
+    const calcHistID = `${budget.id}-${label}-${newItemForm.id}`;
+    saveCalcHist(calcHistID, {
+      id: calcHistID,
+      itemForm: newItemForm,
+      changeValue,
+      operation,
+    }).catch((e: unknown) => {
+      throw e;
+    });
+  }
+
   function handleChange(
-    operation: string,
+    operation: ItemOperation,
     value?: string,
     event?: React.ChangeEvent<HTMLInputElement>,
     changeValue?: number,
@@ -79,6 +104,7 @@ export function ItemFormGroup({
             saveInHistory = true;
           }
           setNeedsRerender(!needsRerender);
+          handleCalcHist(operation, changeValue);
           break;
       }
 
@@ -89,6 +115,7 @@ export function ItemFormGroup({
       draft.stats.withGoal = calcWithGoal(draft);
       draft.stats.saved = calcSaved(draft);
     }, budget);
+
     setBudget(newState(), saveInHistory);
   }
 
@@ -106,6 +133,11 @@ export function ItemFormGroup({
       draft.stats.saved = calcSaved(draft);
     }, budget);
     setBudget(newState(), true);
+
+    const calcHistID = `${budget.id}-${label}-${toBeDeleted.id}`;
+    deleteCalcHist(calcHistID).catch((e: unknown) => {
+      throw e;
+    });
   }
 
   return (

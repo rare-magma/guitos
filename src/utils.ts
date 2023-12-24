@@ -2,6 +2,7 @@ import Big from "big.js";
 import { MutableRefObject } from "react";
 import { Budget } from "./components/Budget/Budget";
 import { CsvItem } from "./components/Budget/CsvItem";
+import { ItemOperation } from "./components/CalculateButton/CalculateButton";
 import { ItemForm } from "./components/ItemForm/ItemForm";
 import { SearchOption } from "./components/NavBar/NavBar";
 import { currenciesMap } from "./lists/currenciesMap";
@@ -59,7 +60,7 @@ export function calcPercentage(
 export function calc(
   itemValue: number,
   change: number,
-  operation: string,
+  operation: ItemOperation,
 ): number {
   let total = 0;
   const isActionableChange = !isNaN(itemValue) && change > 0;
@@ -71,13 +72,13 @@ export function calc(
       case "add":
         newValue = newValue.add(changeValue);
         break;
-      case "sub":
+      case "subtract":
         newValue = newValue.sub(changeValue);
         break;
-      case "mul":
+      case "multiply":
         newValue = newValue.mul(changeValue);
         break;
-      case "div":
+      case "divide":
         newValue = newValue.div(changeValue);
         break;
       default:

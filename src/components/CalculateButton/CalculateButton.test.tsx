@@ -155,4 +155,15 @@ describe("CalculateButton", () => {
 
     expect(onCalculate).toHaveBeenCalledWith(123, "divide");
   });
+
+  it("shows history when clicking button", async () => {
+    const button = screen.getByRole("button", {
+      name: "select operation type to item value",
+    });
+    await userEvent.click(button);
+    const historyButton = screen.getByRole("button", {
+      name: "open operation history",
+    });
+    await userEvent.click(historyButton);
+  });
 });

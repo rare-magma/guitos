@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useParams } from "react-router-dom";
 import { Budget } from "../components/Budget/Budget";
+import { CalculationHistoryItem } from "../components/CalculateButton/CalculateButton";
 import { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
 import { useConfig } from "../context/ConfigContext";
 import { useGeneralContext } from "../context/GeneralContext";
-import { budgetsDB, optionsDB } from "../db";
+import { budgetsDB, calcHistDB, optionsDB } from "../db";
 import {
   convertCsvToBudget,
   createBudgetNameList,
@@ -304,6 +305,33 @@ export function useDB() {
     }
   }
 
+  async function getCalcHist(id: string): Promise<CalculationHistoryItem[]> {
+    let item;
+    await calcHistDB
+      .getItem(id)
+      .then((i) => {
+        item = i;
+      })
+      .catch((e: unknown) => {
+        throw e;
+      });
+    return item ?? [];
+  }
+
+  async function saveCalcHist(id: string, item: CalculationHistoryItem) {
+    const calcHist = await getCalcHist(id);
+    const newCalcHist = [...calcHist, item];
+    calcHistDB.setItem(id, newCalcHist).catch((e: unknown) => {
+      throw e;
+    });
+  }
+
+  async function deleteCalcHist(id: string) {
+    await calcHistDB.removeItem(id).catch((e: unknown) => {
+      throw e;
+    });
+  }
+
   function saveBudget(budget: Budget | undefined) {
     if (!budget) return;
     let list: Budget[] = [];
@@ -345,5 +373,8 @@ export function useDB() {
     loadBudget,
     loadFromDb,
     options,
+    getCalcHist,
+    saveCalcHist,
+    deleteCalcHist,
   };
 }
