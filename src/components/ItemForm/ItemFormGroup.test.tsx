@@ -4,6 +4,8 @@ import React from "react";
 import {
   configContextSpy,
   itemForm1,
+  setBudgetMock,
+  testBudget,
   testSpanishConfigContext,
 } from "../../setupTests";
 import { ItemFormGroup } from "./ItemFormGroup";
@@ -26,25 +28,70 @@ describe("ItemFormGroup", () => {
   it("matches snapshot", () => {
     expect(comp).toMatchSnapshot();
   });
-  it("renders initial state", () => {
-    expect(screen.getByDisplayValue("name1")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("$10")).toBeInTheDocument();
+
+  it("renders initial state", async () => {
+    expect(await screen.findByDisplayValue("name1")).toBeInTheDocument();
+    expect(await screen.findByDisplayValue("$10")).toBeInTheDocument();
   });
 
   it("reacts to user changing input", async () => {
+    setBudgetMock.mockClear();
     await userEvent.type(screen.getByDisplayValue("name1"), "change name");
+
     expect(screen.getByDisplayValue("name1change name")).toBeInTheDocument();
+    expect(setBudgetMock).toHaveBeenCalledWith(
+      {
+        ...testBudget,
+        expenses: {
+          items: [{ id: 1, name: "name1change name", value: 10 }],
+          total: 10,
+        },
+      },
+      false,
+    );
+
+    setBudgetMock.mockClear();
 
     await userEvent.type(screen.getByDisplayValue("$10"), "123");
+
     expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
+    expect(setBudgetMock).toHaveBeenCalledWith(
+      {
+        ...testBudget,
+        expenses: {
+          items: [{ id: 1, name: "expense1", value: 123 }],
+          total: 123,
+        },
+        stats: {
+          ...testBudget.stats,
+          available: -23,
+          withGoal: -33,
+        },
+      },
+      false,
+    );
   });
 
   it("removes item when user clicks delete confirmation button", async () => {
+    setBudgetMock.mockClear();
     await userEvent.click(
       screen.getByRole("button", { name: "delete item 1" }),
     );
     await userEvent.click(
       screen.getByRole("button", { name: "confirm item 1 deletion" }),
+    );
+
+    expect(setBudgetMock).toHaveBeenCalledWith(
+      {
+        ...testBudget,
+        expenses: { items: [], total: 0 },
+        stats: {
+          ...testBudget.stats,
+          available: 100,
+          withGoal: 90,
+        },
+      },
+      true,
     );
   });
 

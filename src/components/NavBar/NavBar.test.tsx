@@ -2,7 +2,9 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {
   budgetContextSpy,
+  setBudgetMock,
   testBudget,
+  testBudgetClone,
   testEmptyBudgetContext,
 } from "../../setupTests";
 import { NavBar } from "./NavBar";
@@ -46,14 +48,18 @@ describe("NavBar", () => {
   });
 
   it("triggers event when clone button is pressed", async () => {
+    setBudgetMock.mockClear();
     await userEvent.click(screen.getByLabelText("clone budget"));
+    expect(setBudgetMock).toHaveBeenCalledWith(testBudgetClone, true);
   });
 
   it("triggers event when import button is pressed", async () => {
     await userEvent.click(screen.getByLabelText("import budget"));
     await userEvent.upload(
       screen.getByTestId("import-form-control"),
-      new File([testBudget as unknown as Blob], "budget"),
+      new File([JSON.stringify(testBudget)], "budget", {
+        type: "application/json",
+      }),
     );
   });
 
@@ -81,9 +87,14 @@ describe("NavBar", () => {
   });
 
   it("triggers event when user changes budget name input", async () => {
+    setBudgetMock.mockClear();
     await userEvent.type(screen.getByDisplayValue("2023-03"), "change name");
 
     expect(screen.getByDisplayValue("2023-03change name")).toBeInTheDocument();
+    expect(setBudgetMock).toHaveBeenCalledWith(
+      { ...testBudget, name: "2023-03change name" },
+      false,
+    );
   });
 
   it("triggers event when user clicks delete budget button", async () => {

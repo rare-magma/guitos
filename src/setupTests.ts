@@ -6,6 +6,7 @@ import "@testing-library/jest-dom";
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
 import { randomUUID } from "node:crypto";
+import { createElement } from "react";
 import { afterEach, expect, vi } from "vitest";
 import { Budget } from "./components/Budget/Budget";
 import { ItemForm } from "./components/ItemForm/ItemForm";
@@ -19,6 +20,18 @@ global.URL.createObjectURL = vi.fn();
 vi.mock("crypto", () => ({
   randomUUID: () => "035c2de4-00a4-403c-8f0e-f81339be9a4e",
 }));
+
+// silence recharts ResponsiveContainer error
+vi.mock("recharts", async (importOriginal) => {
+  const originalModule = await importOriginal();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    ...originalModule,
+    ResponsiveContainer: () => createElement("div"),
+  };
+});
 
 // extends Vitest's expect method with methods from react-testing-library
 expect.extend(matchers);

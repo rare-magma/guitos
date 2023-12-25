@@ -7,11 +7,6 @@ describe("ChartsPage", () => {
   const onShowGraphs = vi.fn();
   const comp = <ChartsPage onShowGraphs={onShowGraphs} />;
 
-  beforeAll(() => {
-    vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockReturnValue(800);
-    vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(800);
-  });
-
   beforeEach(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore

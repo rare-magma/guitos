@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { act, cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 import { budgetsDB, calcHistDB, optionsDB } from "./db";
@@ -44,7 +44,11 @@ describe("App", () => {
   });
 
   it("deletes budget when clicking delete button", async () => {
-    await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(testBudget);
+    await act(async () => {
+      await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(
+        testBudget,
+      );
+    });
     const newButton = screen.getAllByRole("button", { name: "new budget" });
     await userEvent.click(newButton[0]);
     await screen
@@ -57,6 +61,8 @@ describe("App", () => {
       screen.getByRole("button", { name: /confirm budget deletion/i }),
     );
 
-    await expect(budgetsDB.getItem(testBudget.id)).resolves.toBeNull();
+    await act(async () => {
+      await expect(budgetsDB.getItem(testBudget.id)).resolves.toBeNull();
+    });
   });
 });

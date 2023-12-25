@@ -22,9 +22,9 @@ describe("CalculateButton", () => {
     expect(comp).toMatchSnapshot();
   });
 
-  it("renders initial state", () => {
+  it("renders initial state", async () => {
     expect(
-      screen.getByLabelText("select operation type to item value"),
+      await screen.findByLabelText("select operation type to item value"),
     ).toBeInTheDocument();
   });
 

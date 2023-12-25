@@ -18,10 +18,6 @@ describe("Chart", () => {
       })}
     />
   );
-  beforeAll(() => {
-    vi.spyOn(HTMLElement.prototype, "clientHeight", "get").mockReturnValue(800);
-    vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(800);
-  });
 
   beforeEach(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -44,6 +40,7 @@ describe("Chart", () => {
   it("matches snapshot", () => {
     expect(comp).toMatchSnapshot();
   });
+
   it("renders initial state", () => {
     expect(screen.getByText("chart header")).toBeInTheDocument();
     expect(screen.getByText("median revenue")).toBeInTheDocument();
