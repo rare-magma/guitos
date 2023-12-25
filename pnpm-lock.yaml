@@ -142,9 +142,6 @@ devDependencies:
   eslint-plugin-testing-library:
     specifier: 6.1.2
     version: 6.1.2(eslint@8.55.0)(typescript@5.2.2)
-  fake-indexeddb:
-    specifier: 5.0.1
-    version: 5.0.1
   jsdom:
     specifier: 22.1.0
     version: 22.1.0
@@ -6010,11 +6007,6 @@ packages:
       jest-matcher-utils: 29.7.0
       jest-message-util: 29.7.0
       jest-util: 29.7.0
-    dev: true
-
-  /fake-indexeddb@5.0.1:
-    resolution: {integrity: sha512-vxybH29Owtc6khV/Usy47B1g+eKwyhFiX8nwpCC4td320jvwrKQDH6vNtcJZgUzVxmfsSIlHzLKQzT76JMCO7A==}
-    engines: {node: '>=18'}
     dev: true
 
   /fast-deep-equal@3.1.3:
