@@ -74,6 +74,10 @@ export const testBudget: Budget = {
     reserves: 200,
   },
 };
+export const testBudgetClone: Budget = {
+  ...testBudget,
+  name: "2023-03-clone",
+};
 
 export const testBudget2: Budget = {
   id: "135b2ce4-00a4-403c-8f0e-f81339be9a4e",

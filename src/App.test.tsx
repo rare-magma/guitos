@@ -2,7 +2,11 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 import { budgetsDB, calcHistDB, optionsDB } from "./db";
-import { budgetContextSpy, testEmptyBudgetContext } from "./setupTests";
+import {
+  budgetContextSpy,
+  testBudget,
+  testEmptyBudgetContext,
+} from "./setupTests";
 
 describe("App", () => {
   const comp = <App />;
@@ -11,7 +15,7 @@ describe("App", () => {
     render(comp);
   });
 
-  it("renders initial state", () => {
+  it("renders initial state", async () => {
     cleanup();
     budgetContextSpy.mockReturnValue(testEmptyBudgetContext);
     render(comp);
@@ -25,6 +29,7 @@ describe("App", () => {
     expect(optionsDB.config("storeName")).toBe("options");
     expect(calcHistDB.config("name")).toBe("guitos");
     expect(calcHistDB.config("storeName")).toBe("calcHistDB");
+    await expect(budgetsDB.getItem(testBudget.id)).resolves.toBeNull();
   });
 
   it("shows new budget when clicking new button", async () => {
@@ -35,9 +40,11 @@ describe("App", () => {
     expect(screen.getByText("Statistics")).toBeInTheDocument();
     expect(screen.getByText("Revenue")).toBeInTheDocument();
     expect(screen.getByText("Expenses")).toBeInTheDocument();
+    await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(testBudget);
   });
 
-  it.skip("deletes budget when clicking delete button", async () => {
+  it("deletes budget when clicking delete button", async () => {
+    await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(testBudget);
     const newButton = screen.getAllByRole("button", { name: "new budget" });
     await userEvent.click(newButton[0]);
     await screen
@@ -47,13 +54,9 @@ describe("App", () => {
       .then((e) => userEvent.click(e[0]));
 
     await userEvent.click(
-      screen.getByRole("button", { name: "confirm budget deletion" }),
+      screen.getByRole("button", { name: /confirm budget deletion/i }),
     );
 
-    expect(screen.queryByLabelText("delete budget")).not.toBeInTheDocument();
-    expect(screen.queryByLabelText("clone budget")).not.toBeInTheDocument();
-    expect(screen.queryByText("Statistics")).not.toBeInTheDocument();
-    expect(screen.queryByText("Revenue")).not.toBeInTheDocument();
-    expect(screen.queryByText("Expenses")).not.toBeInTheDocument();
+    await expect(budgetsDB.getItem(testBudget.id)).resolves.toBeNull();
   });
 });

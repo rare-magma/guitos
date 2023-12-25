@@ -33,6 +33,7 @@ describe("ChartsPage", () => {
   it("matches snapshot", () => {
     expect(comp).toMatchSnapshot();
   });
+
   it("renders initial state", () => {
     expect(screen.getByLabelText("go back to budgets")).toBeInTheDocument();
     expect(screen.getByText("Revenue vs expenses")).toBeInTheDocument();

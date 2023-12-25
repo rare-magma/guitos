@@ -1,9 +1,15 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { budgetsDB } from "../../db";
 import {
-  setBudgetListMock,
+  budgetContextSpy,
+  redoMock,
   setBudgetMock,
-  testBudgetList,
+  setNotificationsMock,
+  testBudget,
+  testBudgetClone,
+  testBudgetContext,
+  undoMock,
 } from "../../setupTests";
 import { BudgetPage } from "./BudgetPage";
 
@@ -29,7 +35,12 @@ describe("BudgetPage", () => {
     expect(setBudgetMock).toHaveBeenCalled();
   });
 
-  it.skip("removes budget when clicking on delete budget button", async () => {
+  it("removes budget when clicking on delete budget button", async () => {
+    await act(async () => {
+      await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(
+        testBudget,
+      );
+    });
     const deleteButton = screen.getAllByRole("button", {
       name: "delete budget",
     });
@@ -37,12 +48,10 @@ describe("BudgetPage", () => {
     await userEvent.click(
       screen.getByRole("button", { name: "confirm budget deletion" }),
     );
-    expect(
-      screen.queryByRole("button", { name: "delete budget" }),
-    ).not.toBeInTheDocument();
+    await expect(budgetsDB.getItem(testBudget.id)).resolves.toBeNull();
   });
 
-  it.skip("clones budget when clicking on clone budget button", async () => {
+  it("clones budget when clicking on clone budget button", async () => {
     const newButton = screen.getAllByRole("button", { name: "new budget" });
     await userEvent.click(newButton[0]);
 
@@ -50,55 +59,41 @@ describe("BudgetPage", () => {
       name: "clone budget",
     });
     await userEvent.click(cloneButton[0]);
-    expect(setBudgetListMock).toHaveBeenNthCalledWith(1, testBudgetList);
-    expect(screen.getByText("2023-035c2de4-clone")).toBeInTheDocument();
+    expect(setBudgetMock).toHaveBeenCalledWith(testBudgetClone, true);
   });
 
-  it.skip("responds to clone budget keyboard shortcut", async () => {
+  it("responds to clone budget keyboard shortcut", async () => {
     const newButton = screen.getAllByRole("button", { name: "new budget" });
     await userEvent.click(newButton[0]);
 
     await userEvent.type(screen.getByTestId("header"), "c");
-    expect(setBudgetListMock).toHaveBeenNthCalledWith(1, testBudgetList);
-    expect(screen.getByText("2023-035c2de4-clone")).toBeInTheDocument();
+    expect(setBudgetMock).toHaveBeenCalledWith(testBudgetClone, true);
   });
 
-  it.skip("responds to changes", async () => {
-    // revenue change
-    await userEvent.type(screen.getAllByDisplayValue("$10")[4], "200");
-    expect(screen.getAllByDisplayValue("$200")[1]).toBeInTheDocument();
+  it("responds to undo change keyboard shortcut", async () => {
+    cleanup();
+    budgetContextSpy.mockReturnValue({ ...testBudgetContext, canUndo: true });
+    render(comp);
+    await userEvent.type(screen.getByTestId("header"), "u");
+    expect(undoMock).toHaveBeenCalled();
+  });
 
-    // expense change
-    await act(async () => {
-      await userEvent.type(screen.getAllByDisplayValue("$0")[1], "13");
-    });
+  it("responds to redo change keyboard shortcut", async () => {
+    cleanup();
+    budgetContextSpy.mockReturnValue({ ...testBudgetContext, canRedo: true });
+    render(comp);
+    await userEvent.type(screen.getByTestId("header"), "r");
+    expect(redoMock).toHaveBeenCalled();
+  });
 
-    expect(screen.getByDisplayValue("$13")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("$187")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("$167")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("$20")).toBeInTheDocument();
+  it("responds to clear notifications keyboard shortcut", async () => {
+    setNotificationsMock.mockClear();
+    await userEvent.type(screen.getByTestId("header"), "{Escape}");
+    expect(setNotificationsMock).toHaveBeenCalledWith([]);
+  });
 
-    // stat change
-    await userEvent.type(screen.getByLabelText("reserves"), "2");
-    expect(screen.getByDisplayValue("$2")).toBeInTheDocument();
-
-    // auto goal change
-    await userEvent.click(
-      screen.getByRole("button", { name: "calculate savings goal" }),
-    );
-
-    expect(screen.getByDisplayValue("93.5")).toBeInTheDocument();
-    expect(screen.getAllByDisplayValue("$0")[0]).toBeInTheDocument();
-    expect(screen.getAllByDisplayValue("$187")[0]).toBeInTheDocument();
-
-    // rename change
-    await userEvent.type(screen.getByLabelText("budget name"), "change");
-    expect(screen.getByText("2023-035c2de4-clonechange")).toBeInTheDocument();
-
-    // currency change
-    await userEvent.type(screen.getByPlaceholderText("USD"), "CAD");
-    await userEvent.click(screen.getByText("CAD"));
-
-    expect(screen.getByDisplayValue("CA$200")).toBeInTheDocument();
+  it("responds to show graphs keyboard shortcut", async () => {
+    await userEvent.type(screen.getByTestId("header"), "i");
+    expect(screen.getByRole("status")).toBeInTheDocument();
   });
 });
