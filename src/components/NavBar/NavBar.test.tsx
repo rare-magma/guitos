@@ -57,6 +57,29 @@ describe("NavBar", () => {
     );
   });
 
+  it("triggers event when export shortcuts are pressed", async () => {
+    await userEvent.type(screen.getByTestId("header"), "t");
+    expect(
+      screen.getByRole("button", {
+        name: /export budget as csv/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", {
+        name: /export budget as json/i,
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", {
+        name: /open guitos changelog/i,
+      }),
+    ).toBeInTheDocument();
+
+    await userEvent.type(screen.getByTestId("header"), "s");
+
+    await userEvent.type(screen.getByTestId("header"), "d");
+  });
+
   it("triggers event when user changes budget name input", async () => {
     await userEvent.type(screen.getByDisplayValue("2023-03"), "change name");
 

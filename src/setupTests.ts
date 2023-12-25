@@ -14,7 +14,7 @@ import * as AppConfigContext from "./context/ConfigContext";
 import * as AppGeneralContext from "./context/GeneralContext";
 
 window.crypto.randomUUID = randomUUID;
-// global.URL.createObjectURL = vi.fn();
+global.URL.createObjectURL = vi.fn();
 
 vi.mock("crypto", () => ({
   randomUUID: () => "035c2de4-00a4-403c-8f0e-f81339be9a4e",
@@ -212,6 +212,25 @@ export const itemForm2 = new ItemForm({
   name: "name2",
   value: 100,
 });
+
+export const testCalcHist = [
+  {
+    id: `${testBudget.id}-Expenses-1`,
+    itemForm: itemForm1,
+    changeValue: 123,
+    operation: "add",
+  },
+  {
+    id: `${testBudget.id}-Expenses-1`,
+    itemForm: {
+      id: 1,
+      name: itemForm1.name,
+      value: 133,
+    },
+    changeValue: 3,
+    operation: "add",
+  },
+];
 
 export const testIntlConfig = { locale: "en-US", currency: "USD" };
 export const testSpanishIntlConfig = { locale: "es-ES", currency: "EUR" };
