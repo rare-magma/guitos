@@ -18,9 +18,12 @@ import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsArrowLeft } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
-import { budgetsDB } from "../../db";
-import { focusRef, getNestedValues } from "../../utils";
-import { Budget } from "../Budget/Budget";
+import { useDB } from "../../hooks/useDB";
+import {
+  focusRef,
+  getLabelKeyFilteredItem,
+  getNestedValues,
+} from "../../utils";
 import { Chart } from "../Chart/Chart";
 import "./ChartsPage.css";
 
@@ -28,7 +31,7 @@ interface GraphProps {
   onShowGraphs: () => void;
 }
 
-interface Filter {
+export interface Filter {
   value: string;
   type: string;
 }
@@ -43,10 +46,10 @@ export interface FilteredItem {
 
 function ChartsPage({ onShowGraphs }: GraphProps) {
   const { budgetList } = useBudget();
+  const { selectBudgetsWithFilter, searchBudgetsWithFilter, options } = useDB();
 
   const filterRef = useRef<TypeaheadRef>(null);
 
-  const [options, setOptions] = useState<Option[]>([]);
   const [filter, setFilter] = useState<Filter>({ value: "", type: "" });
   const [filteredData, setFilteredData] = useState<FilteredItem[]>([]);
   const [strictFilter, setStrictFilter] = useState(false);
@@ -78,64 +81,19 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
     { preventDefault: true },
   );
 
-  function handleShowGraphs() {
-    onShowGraphs();
-  }
-
-  function getLabelKey(option: unknown): string {
-    const label = option as FilteredItem;
-    return `${label.item} (${label.name} ${label.type.toLowerCase()})`;
-  }
-
   function handleSelect(option: Option[]) {
     const newFilter = option[0] as FilteredItem;
     setFilter({ value: filter.value, type: newFilter.type });
 
-    const filteredIncomes = budgetList
-      ?.map((b: Budget) => {
-        return b.incomes.items
-          .filter((i) =>
-            i.value && strictFilter
-              ? i.name === filter.value
-              : i.name.toLowerCase().includes(filter.value.toLowerCase()),
-          )
-          .map((i) => {
-            return {
-              id: b.id,
-              name: b.name,
-              item: i.name,
-              value: i.value,
-              type: "Income",
-            };
-          })
-          .filter((i) => i.type.includes(newFilter.type));
-      })
-      .flat();
+    const { filteredIncomes, filteredExpenses } = selectBudgetsWithFilter(
+      option,
+      filter,
+      strictFilter,
+    );
 
-    const filteredExpenses = budgetList
-      ?.map((b: Budget) => {
-        return b.expenses.items
-          .filter((i) =>
-            i.value && strictFilter
-              ? i.name === filter.value
-              : i.name.toLowerCase().includes(filter.value.toLowerCase()),
-          )
-          .map((i) => {
-            return {
-              id: b.id,
-              name: b.name,
-              item: i.name,
-              value: i.value,
-              type: "Expense",
-            };
-          })
-          .filter((i) => i.type.includes(newFilter.type));
-      })
-      .flat();
-
-    filteredIncomes &&
-      filteredExpenses &&
+    if (filteredIncomes && filteredExpenses) {
       setFilteredData([...filteredIncomes, ...filteredExpenses]);
+    }
 
     if (filterRef.current) {
       filterRef.current.clear();
@@ -144,43 +102,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
 
   function handleSearch(filter: Filter) {
     setFilter(filter);
-
-    let options: FilteredItem[] = [];
-    budgetsDB
-      .iterate((budget: Budget) => {
-        options = options.concat(
-          budget.incomes.items.map((i) => {
-            return {
-              id: budget.id,
-              name: budget.name,
-              item: i.name,
-              value: i.value,
-              type: "Income",
-            };
-          }),
-          budget.expenses.items.map((i) => {
-            return {
-              id: budget.id,
-              name: budget.name,
-              item: i.name,
-              value: i.value,
-              type: "Expense",
-            };
-          }),
-        );
-      })
-      .then(() => {
-        setOptions(
-          options
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .filter((v, i, a) => a.indexOf(v) === i)
-            .filter((i) => i.value)
-            .reverse(),
-        );
-      })
-      .catch((e) => {
-        throw new Error(e as string);
-      });
+    searchBudgetsWithFilter();
   }
 
   return (
@@ -204,7 +126,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
                 <Button
                   aria-label={"go back to budgets"}
                   variant={"go-button"}
-                  onClick={handleShowGraphs}
+                  onClick={onShowGraphs}
                 >
                   <BsArrowLeft aria-hidden />
                 </Button>
@@ -217,7 +139,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
                   id="search-budget-list"
                   className="filter-search"
                   filterBy={["name", "item", "type"]}
-                  labelKey={getLabelKey}
+                  labelKey={getLabelKeyFilteredItem}
                   ref={filterRef}
                   onChange={(option: Option[]) => handleSelect(option)}
                   options={options}

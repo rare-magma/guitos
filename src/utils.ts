@@ -3,6 +3,7 @@ import { MutableRefObject } from "react";
 import { Budget } from "./components/Budget/Budget";
 import { CsvItem } from "./components/Budget/CsvItem";
 import { ItemOperation } from "./components/CalculateButton/CalculateButton";
+import { FilteredItem } from "./components/ChartsPage/ChartsPage";
 import { ItemForm } from "./components/ItemForm/ItemForm";
 import { SearchOption } from "./components/NavBar/NavBar";
 import { currenciesMap } from "./lists/currenciesMap";
@@ -328,4 +329,9 @@ export function getNestedValues<T, K extends keyof T, L extends keyof T[K]>(
 export function getLabelKey(option: unknown): string {
   const label = option as SearchOption;
   return label.item ? `${label.name} ${label.item}` : `${label.name}`;
+}
+
+export function getLabelKeyFilteredItem(option: unknown): string {
+  const label = option as FilteredItem;
+  return `${label.item} (${label.name} ${label.type.toLowerCase()})`;
 }

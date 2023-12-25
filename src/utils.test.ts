@@ -3,6 +3,7 @@ import Papa from "papaparse";
 import { expect, test } from "vitest";
 import { Budget } from "./components/Budget/Budget";
 import { ItemOperation } from "./components/CalculateButton/CalculateButton";
+import { FilteredItem } from "./components/ChartsPage/ChartsPage";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
 import { currenciesMap } from "./lists/currenciesMap";
 import { firefoxLocalesList } from "./lists/firefoxLocalesList";
@@ -31,6 +32,7 @@ import {
   getCountryCode,
   getCurrencyCode,
   getLabelKey,
+  getLabelKeyFilteredItem,
   getNestedProperty,
   getNestedValues,
   intlFormat,
@@ -246,4 +248,17 @@ test("getLabelKey", () => {
   };
   expect(getLabelKey(optionWithoutItem)).toEqual("2023-03");
   expect(getLabelKey(option)).toEqual("2023-03 item name");
+});
+
+test("getLabelKeyFilteredItem", () => {
+  const optionWithoutItem: FilteredItem = {
+    id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+    name: "2023-03",
+    item: "abcd",
+    value: 1,
+    type: "efgh",
+  };
+  expect(getLabelKeyFilteredItem(optionWithoutItem)).toEqual(
+    "abcd (2023-03 efgh)",
+  );
 });

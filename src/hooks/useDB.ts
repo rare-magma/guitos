@@ -5,6 +5,7 @@ import { Option } from "react-bootstrap-typeahead/types/types";
 import { useParams } from "react-router-dom";
 import { Budget } from "../components/Budget/Budget";
 import { CalculationHistoryItem } from "../components/CalculateButton/CalculateButton";
+import { Filter, FilteredItem } from "../components/ChartsPage/ChartsPage";
 import { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
 import { useConfig } from "../context/ConfigContext";
@@ -296,6 +297,95 @@ export function useDB() {
       });
   }
 
+  function searchBudgetsWithFilter() {
+    let options: FilteredItem[] = [];
+    budgetsDB
+      .iterate((budget: Budget) => {
+        options = options.concat(
+          budget.incomes.items.map((i) => {
+            return {
+              id: budget.id,
+              name: budget.name,
+              item: i.name,
+              value: i.value,
+              type: "Income",
+            };
+          }),
+          budget.expenses.items.map((i) => {
+            return {
+              id: budget.id,
+              name: budget.name,
+              item: i.name,
+              value: i.value,
+              type: "Expense",
+            };
+          }),
+        );
+      })
+      .then(() => {
+        setOptions(
+          options
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .filter((v, i, a) => a.indexOf(v) === i)
+            .filter((i) => i.value)
+            .reverse(),
+        );
+      })
+      .catch((e) => {
+        throw new Error(e as string);
+      });
+  }
+
+  function selectBudgetsWithFilter(
+    option: Option[],
+    filter: Filter,
+    strictFilter: boolean,
+  ) {
+    const newFilter = option[0] as FilteredItem;
+    const filteredIncomes = budgetList
+      ?.map((b: Budget) => {
+        return b.incomes.items
+          .filter((i) =>
+            i.value && strictFilter
+              ? i.name === filter.value
+              : i.name.toLowerCase().includes(filter.value.toLowerCase()),
+          )
+          .map((i) => {
+            return {
+              id: b.id,
+              name: b.name,
+              item: i.name,
+              value: i.value,
+              type: "Income",
+            };
+          })
+          .filter((i) => i.type.includes(newFilter.type));
+      })
+      .flat();
+
+    const filteredExpenses = budgetList
+      ?.map((b: Budget) => {
+        return b.expenses.items
+          .filter((i) =>
+            i.value && strictFilter
+              ? i.name === filter.value
+              : i.name.toLowerCase().includes(filter.value.toLowerCase()),
+          )
+          .map((i) => {
+            return {
+              id: b.id,
+              name: b.name,
+              item: i.name,
+              value: i.value,
+              type: "Expense",
+            };
+          })
+          .filter((i) => i.type.includes(newFilter.type));
+      })
+      .flat();
+
+    return { filteredIncomes, filteredExpenses };
+  }
   function renameBudget(event: React.ChangeEvent<HTMLInputElement>) {
     if (budget && event.target.value) {
       const newState = produce((draft) => {
@@ -368,6 +458,8 @@ export function useDB() {
     deleteBudget,
     renameBudget,
     searchBudgets,
+    searchBudgetsWithFilter,
+    selectBudgetsWithFilter,
     saveBudget,
     loadCurrencyOption,
     loadBudget,
