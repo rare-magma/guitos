@@ -138,7 +138,7 @@ test("createNewBudget", () => {
       items: [{ id: 1, name: "", value: 0 }],
       total: 0,
     },
-    name: "2023-035c2de4",
+    name: "2024-035c2de4",
     stats: {
       available: 0,
       goal: 10,
