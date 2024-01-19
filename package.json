@@ -83,7 +83,7 @@
     "stylelint-config-standard": "34.0.0",
     "stylelint-prettier": "4.1.0",
     "typescript": "5.2.2",
-    "vite": "5.0.10",
+    "vite": "5.0.12",
     "vite-plugin-eslint": "1.8.1",
     "vite-plugin-pwa": "0.17.4",
     "vitest": "1.1.0",
