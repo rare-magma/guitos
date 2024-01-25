@@ -74,7 +74,7 @@ guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cas
 It's not necessary to install anything in order to use this app.
 
 However, if you'd like to use it offline, follow the instructions for your device on:
-[web.dev](https://web.dev/learn/pwa/progressive-web-apps/#desktop-and-laptops)
+[web.dev](https://web.dev/learn/pwa/installation#desktop_installation)
 
 ## Usage
 
