@@ -85,7 +85,7 @@
     "typescript": "5.2.2",
     "vite": "5.0.12",
     "vite-plugin-eslint": "1.8.1",
-    "vite-plugin-pwa": "0.17.4",
+    "vite-plugin-pwa": "0.17.5",
     "vitest": "1.1.0",
     "workbox-window": "7.0.0"
   }
