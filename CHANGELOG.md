@@ -1,3 +1,10 @@
+## [0.30.2](https://github.com/rare-magma/guitos/compare/v0.30.1...v0.30.2) (2024-02-06)
+
+
+### Bug Fixes
+
+* enable Subresource Integrity checks ([13ce613](https://github.com/rare-magma/guitos/commit/13ce613c68d3b8f9d6bdf2829a5178485009a74f))
+
 ## [0.30.1](https://github.com/rare-magma/guitos/compare/v0.30.0...v0.30.1) (2023-12-24)
 
 
