@@ -2,6 +2,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import eslint from "vite-plugin-eslint";
 import { VitePWA } from "vite-plugin-pwa";
+import { sri } from "vite-plugin-sri3";
 
 export default defineConfig((env) => {
   return {
@@ -32,6 +33,7 @@ export default defineConfig((env) => {
           ],
         },
       }),
+      sri(),
     ],
     test: {
       coverage: {
