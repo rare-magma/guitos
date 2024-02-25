@@ -46,6 +46,7 @@
     "use-undo": "1.1.1"
   },
   "devDependencies": {
+    "@playwright/test": "1.41.2",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@simbathesailor/use-what-changed": "2.0.0",
