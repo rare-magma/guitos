@@ -38,7 +38,7 @@ export default defineConfig((env) => {
     test: {
       coverage: {
         provider: "v8",
-        include: ["src/**", "e2e/**"],
+        include: ["src/**"],
       },
       pool: "vmThreads",
       globals: true,

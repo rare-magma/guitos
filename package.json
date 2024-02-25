@@ -7,7 +7,7 @@
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "vitest",
+    "test": "vitest --exclude 'e2e'",
     "e2e": "playwright test --reporter=list --project chromium",
     "e2e:ui": "playwright test --ui --project chromium",
     "e2e:mobile": "playwright test --reporter=list --project 'Mobile Chrome'",
