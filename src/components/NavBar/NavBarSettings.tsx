@@ -114,6 +114,9 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                       maxResults={currenciesList.length}
                       maxHeight="30vh"
                       paginate={false}
+                      inputProps={{
+                        "aria-label": "select display currency",
+                      }}
                       onChange={(c: Option[]) => {
                         if (currenciesList.includes(c[0] as string)) {
                           handleCurrency(c[0] as string);

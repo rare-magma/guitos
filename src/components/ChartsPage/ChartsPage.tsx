@@ -138,6 +138,9 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
                 <AsyncTypeahead
                   id="search-budget-list"
                   className="filter-search"
+                  inputProps={{
+                    "aria-label": "filter charts by",
+                  }}
                   filterBy={["name", "item", "type"]}
                   labelKey={getLabelKeyFilteredItem}
                   ref={filterRef}
@@ -149,6 +152,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
                 />
                 <ToggleButton
                   id="toggle-strict"
+                  aria-label="toggle strict match during search"
                   className="p-2 filter-search"
                   type="checkbox"
                   variant="outline-info"

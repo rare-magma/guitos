@@ -259,6 +259,9 @@ export function NavBar() {
                 {hasMultipleBudgets && (
                   <AsyncTypeahead
                     id="search-budget-list"
+                    inputProps={{
+                      "aria-label": "search in budgets",
+                    }}
                     filterBy={["name", "item"]}
                     labelKey={getLabelKey}
                     ref={searchRef}
