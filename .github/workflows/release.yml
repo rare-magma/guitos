@@ -36,17 +36,24 @@ jobs:
     needs:
       - test
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - uses: actions/setup-node@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "pnpm"
 
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install
+        run: pnpm install
 
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
