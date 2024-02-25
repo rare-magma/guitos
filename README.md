@@ -276,3 +276,4 @@ See [LICENSE](LICENSE) for more information.
 - [vitest](https://github.com/vitest-dev/vitest)
 - [Choose a license](https://choosealicense.com/)
 - [Hands on React](https://handsonreact.com)
+- [Playwright](https://playwright.dev/)
