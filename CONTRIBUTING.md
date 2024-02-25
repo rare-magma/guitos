@@ -38,7 +38,15 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.
 
-6. Update package-lock.json when installing a new lib:
+6. Run end to end tests
+
+   ```sh
+   pnpm e2e:ui
+   ```
+
+Launches the e2e test runner in the interactive mode.
+
+7. Update package-lock.json when installing a new lib:
 
    ```sh
    npm i --package-lock-only
