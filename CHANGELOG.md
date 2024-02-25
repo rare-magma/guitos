@@ -1,3 +1,10 @@
+# [0.31.0](https://github.com/rare-magma/guitos/compare/v0.30.2...v0.31.0) (2024-02-25)
+
+
+### Features
+
+* add missing aria labels ([cf30731](https://github.com/rare-magma/guitos/commit/cf30731ec62683dba69959864aaa5d1a5ae8ba81))
+
 ## [0.30.2](https://github.com/rare-magma/guitos/compare/v0.30.1...v0.30.2) (2024-02-06)
 
 
