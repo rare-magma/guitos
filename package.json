@@ -10,7 +10,7 @@
     "test": "vitest",
     "coverage": "vitest run --coverage --silent",
     "coverage:ui": "vitest --ui --open --coverage --silent",
-    "lint": "pnpm dlx eslint src --fix && pnpm dlx stylelint src/**/*.css --fix && pnpm dlx prettier --write src",
+    "lint": "pnpm dlx eslint src e2e --fix && pnpm dlx stylelint src/**/*.css --fix && pnpm dlx prettier --write src e2e",
     "bundle": "pnpm dlx vite-bundle-visualizer"
   },
   "eslintConfig": {
