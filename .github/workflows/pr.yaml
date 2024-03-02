@@ -1,0 +1,7 @@
+name: PR
+on:
+  pull_request:
+    types: [review_requested]
+jobs:
+  test:
+    uses: .github/workflows/test.yml
