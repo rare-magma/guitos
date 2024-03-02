@@ -86,8 +86,8 @@ devDependencies:
     specifier: 20.11.16
     version: 20.11.16
   '@types/papaparse':
-    specifier: 5.3.11
-    version: 5.3.11
+    specifier: 5.3.14
+    version: 5.3.14
   '@types/react':
     specifier: 18.2.61
     version: 18.2.61
@@ -3770,8 +3770,8 @@ packages:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
     dev: true
 
-  /@types/papaparse@5.3.11:
-    resolution: {integrity: sha512-ISil0lMkpRDrBTKRPnUgVb5IqxWwj19gWBrX/ROk3pbkkslBN3URa713r/BSfAUj+w9gTPg3S3f45aMToVfh1w==}
+  /@types/papaparse@5.3.14:
+    resolution: {integrity: sha512-LxJ4iEFcpqc6METwp9f6BV6VVc43m6MfH0VqFosHvrUgfXiFe6ww7R3itkOQ+TCK6Y+Iv/+RnnvtRZnkc5Kc9g==}
     dependencies:
       '@types/node': 20.11.16
     dev: true
