@@ -5,8 +5,8 @@ on:
       - main
 jobs:
   test:
-    uses: .github/workflows/test.yml@main
+    uses: ./.github/workflows/test.yml@main
   release:
     needs:
       - test
-    uses: .github/workflows/release.yml@main
+    uses: ./.github/workflows/release.yml@main
