@@ -4,4 +4,4 @@ on:
     types: [review_requested]
 jobs:
   test:
-    uses: .github/workflows/test.yml
+    uses: .github/workflows/test.yml@main
