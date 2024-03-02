@@ -27,6 +27,5 @@ jobs:
             @semantic-release/npm
             @semantic-release/github
             @semantic-release/git
-          branch: main
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
