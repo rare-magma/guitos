@@ -30,8 +30,8 @@ dependencies:
     specifier: 6.3.2
     version: 6.3.2(react-dom@18.2.0)(react@18.2.0)
   react-currency-input-field:
-    specifier: 3.7.0
-    version: 3.7.0(react@18.2.0)
+    specifier: 3.8.0
+    version: 3.8.0(react@18.2.0)
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
@@ -8379,8 +8379,8 @@ packages:
       warning: 4.0.3
     dev: false
 
-  /react-currency-input-field@3.7.0(react@18.2.0):
-    resolution: {integrity: sha512-FW/VHnwuzu6BgODDRdvm2kLaigsn3s/vLUQA1RbpxpTx8TrtcFTdp5NzX17t6Hh6SHqlMEKrhCYiOMXFDVI/QA==}
+  /react-currency-input-field@3.8.0(react@18.2.0):
+    resolution: {integrity: sha512-DKSIjacrvgUDOpuB16b+OVDvp5pbCt+s+RHJgpRZCHNhzg1yBpRUoy4fbnXpeOj0kdbwf5BaXCr2mAtxEujfhg==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -10217,6 +10217,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
