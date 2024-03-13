@@ -1,3 +1,7 @@
 .version {
   color: var(--comment);
 }
+
+.balanced {
+  text-wrap: pretty;
+}

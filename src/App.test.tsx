@@ -21,7 +21,9 @@ describe("App", () => {
     render(comp);
     expect(screen.getAllByText("guitos")[0]).toBeInTheDocument();
     expect(
-      screen.getByRole("link", { name: /open guitos changelog/i }),
+      screen.getByText(
+        "Figure out where your money went, plan ahead of time and analyze past expenditures.",
+      ),
     ).toBeInTheDocument();
     expect(budgetsDB.config("name")).toBe("guitos");
     expect(budgetsDB.config("storeName")).toBe("budgets");

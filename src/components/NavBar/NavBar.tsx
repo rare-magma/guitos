@@ -147,7 +147,7 @@ export function NavBar() {
             placement="bottom"
             overlay={
               <Tooltip id={`tooltip-guitos-repo`} style={{ position: "fixed" }}>
-                open repository in new tab
+                view source code in new tab
               </Tooltip>
             }
           >

@@ -1,16 +1,9 @@
 import { useRef } from "react";
-import {
-  Button,
-  Container,
-  Form,
-  OverlayTrigger,
-  Row,
-  Stack,
-  Tooltip,
-} from "react-bootstrap";
+import { Button, Container, Form, Row, Stack } from "react-bootstrap";
 import { useBudget } from "../../context/BudgetContext";
 import { useGeneralContext } from "../../context/GeneralContext";
 import { useDB } from "../../hooks/useDB";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { Loading } from "../Loading/Loading";
 import "./LandingPage.css";
 
@@ -19,7 +12,10 @@ export function LandingPage() {
   const { budget, budgetList } = useBudget();
   const { loadingFromDB } = useGeneralContext();
   const { createBudget, handleImport } = useDB();
-
+  const size = useWindowSize();
+  const verticalScreen = size.width < 1000;
+  const buttonWidth = verticalScreen ? "w-50" : "w-25";
+  const titleWidth = verticalScreen ? "w-75" : "w-50";
   const showLandingPage =
     !loadingFromDB && !budget && budgetList && budgetList.length < 1;
 
@@ -28,71 +24,64 @@ export function LandingPage() {
       {loadingFromDB && <Loading />}
 
       {showLandingPage && (
-        <Container className="position-absolute top-50 start-50 translate-middle">
-          <Row className="justify-content-center align-content-center">
-            <Stack gap={3}>
-              <Button
-                className="w-25 align-self-center"
-                aria-label="new budget"
-                variant="outline-success"
-                onClick={createBudget}
+        <>
+          <Container className="position-absolute top-50 start-50 translate-middle">
+            <Row className="justify-content-center align-content-center">
+              <h1
+                className={`${titleWidth} align-self-center justify-content-center text-center pb-4 balanced`}
               >
-                new
-              </Button>
-              <Form.Group className="w-25 align-self-center" controlId="import">
+                <p>
+                  Figure out where your money went, plan ahead of time and
+                  analyze past expenditures.
+                </p>
+              </h1>
+            </Row>
+            <Row className="justify-content-center align-content-center">
+              <Stack gap={3}>
                 <Button
-                  className="w-100"
-                  aria-label="import budget"
-                  variant="outline-primary"
-                  onClick={() => inputRef.current?.click()}
+                  className={`${buttonWidth} align-self-center text-nowrap`}
+                  aria-label="new budget"
+                  variant="outline-success"
+                  onClick={createBudget}
                 >
-                  import
+                  get started
                 </Button>
-                <Form.Control
-                  type="file"
-                  data-testid="import-form-control-landing-page"
-                  multiple
-                  ref={inputRef}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleImport(e)
-                  }
-                  style={{ display: "none" }}
-                />
-              </Form.Group>
-              <Button
-                className="w-25 align-self-center"
-                aria-label="open instructions in new tab"
-                variant="outline-info"
-                href="https://github.com/rare-magma/guitos#getting-started"
-                target="_blank"
-              >
-                help
-              </Button>
-              <OverlayTrigger
-                delay={250}
-                placement="bottom"
-                overlay={
-                  <Tooltip
-                    id={`tooltip-guitos-version`}
-                    style={{ position: "fixed" }}
-                  >
-                    guitos version
-                  </Tooltip>
-                }
-              >
-                <a
-                  className="version align-self-center"
-                  aria-label="open guitos changelog"
-                  href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md"
-                  target="_blank"
-                  rel="noreferrer"
+                <Form.Group
+                  className={`${buttonWidth} align-self-center text-nowrap`}
+                  controlId="import"
                 >
-                  v{APP_VERSION}
-                </a>
-              </OverlayTrigger>
-            </Stack>
-          </Row>
-        </Container>
+                  <Button
+                    className="w-100"
+                    aria-label="import budget"
+                    variant="outline-primary"
+                    onClick={() => inputRef.current?.click()}
+                  >
+                    import
+                  </Button>
+                  <Form.Control
+                    type="file"
+                    data-testid="import-form-control-landing-page"
+                    multiple
+                    ref={inputRef}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleImport(e)
+                    }
+                    style={{ display: "none" }}
+                  />
+                </Form.Group>
+                <Button
+                  className={`${buttonWidth} align-self-center text-nowrap`}
+                  aria-label="open instructions in new tab"
+                  variant="outline-info"
+                  href="https://github.com/rare-magma/guitos#getting-started"
+                  target="_blank"
+                >
+                  help
+                </Button>
+              </Stack>
+            </Row>
+          </Container>
+        </>
       )}
     </>
   );
