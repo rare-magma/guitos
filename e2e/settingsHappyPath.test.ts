@@ -66,7 +66,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   ).toBeGreaterThan(0);
 
   // should handle import
-  await page.locator("#import").setInputFiles("./guitos-sample.json");
+  await page.locator("#import").setInputFiles("./docs/guitos-sample.json");
 
   await expect(page.getByLabel("go to older budget")).toBeVisible();
   await page.getByLabel("go to older budget").click();
