@@ -39,7 +39,7 @@ export function Notification({ notification }: NotificationProps) {
       >
         <div
           key={`${notification.id}-toast-body-div`}
-          className="me-2 me-auto text-truncate"
+          className="me-2 me-auto text-truncate fw-medium"
           style={{
             textOverflow: "ellipsis",
             overflow: "hidden",
