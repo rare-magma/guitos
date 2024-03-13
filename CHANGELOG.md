@@ -1,3 +1,15 @@
+# [0.32.0](https://github.com/rare-magma/guitos/compare/v0.31.0...v0.32.0) (2024-03-13)
+
+
+### Bug Fixes
+
+* notification font style ([f910148](https://github.com/rare-magma/guitos/commit/f910148b5cc524d90d7627d98d4c609b4ada15a6))
+
+
+### Features
+
+* add title to landing page ([a4c9986](https://github.com/rare-magma/guitos/commit/a4c99867708e195c27b49e2ef329492012e52bc7))
+
 # [0.31.0](https://github.com/rare-magma/guitos/compare/v0.30.2...v0.31.0) (2024-02-25)
 
 
