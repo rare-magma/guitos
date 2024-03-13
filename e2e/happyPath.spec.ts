@@ -3,12 +3,12 @@ import { expect, test } from "@playwright/test";
 test("should complete the happy path", async ({ page, isMobile }) => {
   await page.goto("/");
 
-  // "should show landing page
-  await expect(page.getByText("new")).toBeVisible();
+  // should show landing page
+  await expect(page.getByText("get started")).toBeVisible();
   await expect(page.getByText("help")).toBeVisible();
 
   // should create new budget
-  await page.getByText("new").click();
+  await page.getByText("get started").click();
 
   await expect(page.getByText("Statistics")).toBeVisible();
   await expect(page.getByText("Revenue")).toBeVisible();

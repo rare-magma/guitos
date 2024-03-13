@@ -5,7 +5,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   await page.goto("/");
 
   // should show charts page
-  await page.getByText("new").click();
+  await page.getByText("get started").click();
   await page.locator("#Expenses-1-name").click();
   await page.locator("#Expenses-1-name").fill("rent");
   await page.locator("#Expenses-1-name").press("Tab");
