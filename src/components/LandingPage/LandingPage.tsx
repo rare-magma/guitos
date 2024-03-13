@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { Button, Container, Form, Row, Stack } from "react-bootstrap";
+import { useWindowSize } from "usehooks-ts";
 import { useBudget } from "../../context/BudgetContext";
 import { useGeneralContext } from "../../context/GeneralContext";
 import { useDB } from "../../hooks/useDB";
-import { useWindowSize } from "../../hooks/useWindowSize";
 import { Loading } from "../Loading/Loading";
 import "./LandingPage.css";
 

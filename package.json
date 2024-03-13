@@ -47,7 +47,8 @@
     "react-router-dom": "6.20.1",
     "recharts": "2.12.0",
     "use-immer": "0.9.0",
-    "use-undo": "1.1.1"
+    "use-undo": "1.1.1",
+    "usehooks-ts": "3.0.1"
   },
   "devDependencies": {
     "@playwright/test": "1.41.2",

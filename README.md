@@ -223,6 +223,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
 - [use-undo](https://github.com/homerchen19/use-undo)
 - [immer](https://github.com/immerjs/immer)
 - [use-immer](https://github.com/immerjs/use-immer)
+- [usehooks-ts](https://github.com/juliencrn/usehooks-ts)
 
 ## Hosted On
 
