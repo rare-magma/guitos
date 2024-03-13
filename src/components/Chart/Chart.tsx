@@ -35,8 +35,8 @@ interface ChartProps {
   filteredData?: FilteredItem[];
 }
 
-const horizonal = 3.4;
-const vertical = 1.6;
+const horizonalRatio = 3.4;
+const verticalRatio = 1.6;
 
 export function Chart({
   header,
@@ -95,7 +95,7 @@ export function Chart({
       <Card.Body>
         <ResponsiveContainer
           width="100%"
-          aspect={isVerticalScreen ? vertical : horizonal}
+          aspect={isVerticalScreen ? verticalRatio : horizonalRatio}
         >
           <AreaChart
             data={chartData}
