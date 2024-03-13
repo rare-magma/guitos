@@ -24,8 +24,8 @@ dependencies:
     specifier: 18.2.0
     version: 18.2.0
   react-bootstrap:
-    specifier: 2.9.2
-    version: 2.9.2(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 2.10.1
+    version: 2.10.1(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0)
   react-bootstrap-typeahead:
     specifier: 6.3.2
     version: 6.3.2(react-dom@18.2.0)(react@18.2.0)
@@ -8378,8 +8378,8 @@ packages:
       warning: 4.0.3
     dev: false
 
-  /react-bootstrap@2.9.2(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-a36B+EHsAI/aH+ZhXNILBFnqscE3zr10dWmjBmfhIb2QR7KSXJiGzYd6Faf/25G8G7/CP9TCL2B0WhUBOD2UBQ==}
+  /react-bootstrap@2.10.1(@types/react@18.2.61)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-J3OpRZIvCTQK+Tg/jOkRUvpYLHMdGeU9KqFUBQrV0d/Qr/3nsINpiOJyZMWnM5SJ3ctZdhPA6eCIKpEJR3Ellg==}
     peerDependencies:
       '@types/react': '>=16.14.8'
       react: '>=16.14.0'
@@ -10264,6 +10264,7 @@ packages:
 
   /workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
     dependencies:
       workbox-background-sync: 7.0.0
       workbox-core: 7.0.0
