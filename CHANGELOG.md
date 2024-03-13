@@ -1,3 +1,10 @@
+## [0.32.1](https://github.com/rare-magma/guitos/compare/v0.32.0...v0.32.1) (2024-03-13)
+
+
+### Bug Fixes
+
+* automated release publishing ([eaaa9f3](https://github.com/rare-magma/guitos/commit/eaaa9f3430e015e0f665f0a720a72d9ab901f53f))
+
 # [0.32.0](https://github.com/rare-magma/guitos/compare/v0.31.0...v0.32.0) (2024-03-13)
 
 
