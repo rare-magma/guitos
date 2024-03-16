@@ -28,7 +28,7 @@ export function LandingPage() {
           <Container className="position-absolute top-50 start-50 translate-middle">
             <Row className="justify-content-center align-content-center">
               <h1
-                className={`${titleWidth} align-self-center justify-content-center text-center pb-4 balanced`}
+                className={`${titleWidth} align-self-center justify-content-center text-center pb-5 balanced`}
               >
                 <p>
                   Figure out where your money went, plan ahead of time and
