@@ -43,7 +43,9 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   await page.getByLabel("EUR").click();
 
   await expect(page.getByText("€0.00")).toBeVisible();
-  await expect(page.getByText("CSV")).toBeVisible();
+
+  await page.getByLabel("import or export budget").click();
+  await expect(page.getByText("csv")).toBeVisible();
 
   // should handle downloads
   const csvDownloadPromise = page.waitForEvent("download");
@@ -54,8 +56,8 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     (await fs.promises.stat(await csvDownload.path())).size,
   ).toBeGreaterThan(0);
 
-  await page.getByLabel("budget settings").click();
-  await expect(page.getByText("JSON")).toBeVisible();
+  await page.getByLabel("import or export budget").click();
+  await expect(page.getByText("json")).toBeVisible();
 
   const jsonDownloadPromise = page.waitForEvent("download");
   await page.getByLabel("export budget as json").click();
@@ -66,7 +68,11 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   ).toBeGreaterThan(0);
 
   // should handle import
-  await page.locator("#import").setInputFiles("./docs/guitos-sample.json");
+  await expect(page.getByLabel("import or export budget")).toBeVisible();
+  await page.getByLabel("import or export budget").click();
+  await page
+    .getByTestId("import-form-control")
+    .setInputFiles("./docs/guitos-sample.json");
 
   await expect(page.getByLabel("go to older budget")).toBeVisible();
   await page.getByLabel("go to older budget").click();

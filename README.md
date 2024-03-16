@@ -166,8 +166,10 @@ Keyboard shortcuts can be triggered when no input field is selected.
 | Redo last change             | R        |
 | Clone current budget         | C        |
 | Create new budget            | A        |
+| Open import/export panel     | O        |
 | Export data as JSON          | S        |
 | Export current budget as CSV | D        |
+| Open settings panel          | T        |
 | Go to older budget           | PageDown |
 | Go to current month's budget | Home     |
 | Go to newer budget           | PageUp   |

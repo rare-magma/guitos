@@ -18,7 +18,6 @@ import {
   BsArrowRight,
   BsPlusLg,
   BsQuestionLg,
-  BsUpload,
   BsXLg,
 } from "react-icons/bs";
 import { FaRegClone } from "react-icons/fa";
@@ -28,6 +27,7 @@ import { useMove } from "../../hooks/useMove";
 import { focusRef, getLabelKey } from "../../utils";
 import "./NavBar.css";
 import { NavBarDelete } from "./NavBarDelete";
+import { NavBarImpExp } from "./NavBarImpExp";
 import { NavBarItem } from "./NavBarItem";
 import { NavBarSettings } from "./NavBarSettings";
 
@@ -38,8 +38,6 @@ export interface SearchOption {
 }
 
 export function NavBar() {
-  const importRef =
-    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
   const searchRef = useRef<TypeaheadRef>(null);
   const nameRef =
     useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
@@ -58,7 +56,6 @@ export function NavBar() {
     deleteBudget,
     renameBudget,
     searchBudgets,
-    handleImport,
   } = useDB();
 
   const { budget, undo, redo, canRedo, canUndo, budgetNameList } = useBudget();
@@ -348,44 +345,7 @@ export function NavBar() {
                 </>
               )}
 
-              <Nav className="m-2">
-                <OverlayTrigger
-                  delay={250}
-                  placement="bottom"
-                  overlay={
-                    <Tooltip
-                      id={`tooltip-import-budget`}
-                      style={{ position: "fixed" }}
-                    >
-                      import budget
-                    </Tooltip>
-                  }
-                >
-                  <Form.Group controlId="import">
-                    <Button
-                      className="w-100"
-                      aria-label="import budget"
-                      variant="outline-primary"
-                      onClick={() => importRef.current?.click()}
-                    >
-                      {expanded ? "import" : <BsUpload aria-hidden />}
-                    </Button>
-                    <Form.Control
-                      data-testid="import-form-control"
-                      type="file"
-                      multiple
-                      ref={importRef}
-                      onChange={(
-                        event: React.ChangeEvent<HTMLInputElement>,
-                      ) => {
-                        setExpanded(false);
-                        handleImport(event);
-                      }}
-                      style={{ display: "none" }}
-                    />
-                  </Form.Group>
-                </OverlayTrigger>
-              </Nav>
+              <NavBarImpExp expanded={expanded} setExpanded={setExpanded} />
 
               {hasOneOrMoreBudgets && <NavBarSettings expanded={expanded} />}
 

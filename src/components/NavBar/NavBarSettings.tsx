@@ -12,10 +12,8 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsGear } from "react-icons/bs";
-import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { currenciesList } from "../../lists/currenciesList";
-import { budgetToCsv } from "../../utils";
 
 interface NavBarSettingsProps {
   expanded: boolean;
@@ -23,47 +21,12 @@ interface NavBarSettingsProps {
 
 export function NavBarSettings({ expanded }: NavBarSettingsProps) {
   const { currency, handleCurrency } = useConfig();
-  const { budget, budgetList } = useBudget();
-  const exportCSVButtonRef = useRef<HTMLButtonElement>(null);
   const settingsButtonRef = useRef<HTMLButtonElement>(null);
-
-  useHotkeys("s", (e) => !e.repeat && handleExportJSON(), {
-    preventDefault: true,
-  });
-  useHotkeys("d", (e) => !e.repeat && handleExportCSV(), {
-    preventDefault: true,
-  });
+  const versionRef = useRef<HTMLAnchorElement>(null);
 
   useHotkeys("t", (e) => !e.repeat && settingsButtonRef.current?.click(), {
     preventDefault: true,
   });
-
-  function handleExportJSON() {
-    if (budget) {
-      const date = new Date().toISOString();
-      const filename = `guitos-${date.slice(0, -5)}.json`;
-      const url = window.URL.createObjectURL(
-        new Blob([JSON.stringify(budgetList)]),
-      );
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-    }
-  }
-
-  function handleExportCSV() {
-    if (budget) {
-      const filename = `${budget.name}.csv`;
-      const url = window.URL.createObjectURL(new Blob([budgetToCsv(budget)]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-    }
-  }
 
   return (
     <Nav className="m-2">
@@ -82,33 +45,6 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                     className="mb-1"
                     key={`export-button-group`}
                   >
-                    <Button
-                      id={"budget-export-csv-button"}
-                      aria-label="export budget as csv"
-                      key={"budget-export-csv-button"}
-                      variant="outline-info"
-                      type="button"
-                      ref={exportCSVButtonRef}
-                      style={{
-                        minWidth: "7ch",
-                      }}
-                      onClick={handleExportCSV}
-                    >
-                      CSV
-                    </Button>
-                    <Button
-                      id={"budget-export-json-button"}
-                      aria-label="export budget as json"
-                      key={"budget-export-json-button"}
-                      variant="outline-info"
-                      type="button"
-                      style={{
-                        minWidth: "7ch",
-                      }}
-                      onClick={handleExportJSON}
-                    >
-                      JSON
-                    </Button>
                     <Typeahead
                       id="currency-option-list"
                       maxResults={currenciesList.length}
@@ -158,6 +94,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                     aria-label="open guitos changelog"
                     href="https://github.com/rare-magma/guitos/blob/main/CHANGELOG.md"
                     target="_blank"
+                    ref={versionRef}
                     rel="noreferrer"
                   >
                     v{APP_VERSION}
@@ -175,7 +112,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
           ref={settingsButtonRef}
           onClick={() => {
             setTimeout(() => {
-              exportCSVButtonRef.current?.focus();
+              versionRef.current?.focus();
             }, 0);
           }}
         >
