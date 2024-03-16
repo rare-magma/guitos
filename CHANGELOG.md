@@ -1,3 +1,15 @@
+# [0.33.0](https://github.com/rare-magma/guitos/compare/v0.32.1...v0.33.0) (2024-03-16)
+
+
+### Bug Fixes
+
+* increase bottom padding on landing page title ([ad6dba1](https://github.com/rare-magma/guitos/commit/ad6dba1f10873af9850cdb4a1af7e7f7d2bbe5da))
+
+
+### Features
+
+* combine import/export buttons ([90e5508](https://github.com/rare-magma/guitos/commit/90e5508df2b75e8e95ef11c80f39d105c89a857f))
+
 ## [0.32.1](https://github.com/rare-magma/guitos/compare/v0.32.0...v0.32.1) (2024-03-13)
 
 
