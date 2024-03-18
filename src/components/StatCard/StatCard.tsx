@@ -319,3 +319,5 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
     </Card>
   );
 }
+
+export default StatCard;

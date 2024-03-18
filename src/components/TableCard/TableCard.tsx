@@ -182,3 +182,5 @@ export function TableCard({ header: label }: TableCardProps) {
     </Card>
   );
 }
+
+export default TableCard;

@@ -12,11 +12,11 @@ import { Loading } from "../Loading/Loading";
 import { NavBar } from "../NavBar/NavBar";
 import { Notification } from "../Notification/Notification";
 import { StatCard } from "../StatCard/StatCard";
-import { TableCard } from "../TableCard/TableCard";
 import { Budget } from "./Budget";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 const ChartsPage = lazy(() => import("../ChartsPage/ChartsPage"));
+const TableCard = lazy(() => import("../TableCard/TableCard"));
 
 export function BudgetPage() {
   const [showGraphs, setShowGraphs] = useState(false);
@@ -128,23 +128,25 @@ export function BudgetPage() {
       {showCards && (
         <Container key={`${budget.id}-${needReload}-cards-container`}>
           <Row className="mt-1">
-            <Col md="6">
-              <div className="card-columns">
-                <StatCard
-                  key={`${budget?.expenses.total} + ${budget?.incomes.total}-${budget.id}-stat-card`}
-                  onShowGraphs={() => setShowGraphs(true)}
-                />
+            <Suspense fallback={<Loading />}>
+              <Col md="6">
+                <div className="card-columns">
+                  <StatCard
+                    key={`${budget?.expenses.total} + ${budget?.incomes.total}-${budget.id}-stat-card`}
+                    onShowGraphs={() => setShowGraphs(true)}
+                  />
 
-                <div className="mt-3" />
+                  <div className="mt-3" />
 
-                <TableCard header="Revenue" />
-                <div className="mt-3" />
-              </div>
-            </Col>
+                  <TableCard header="Revenue" />
+                  <div className="mt-3" />
+                </div>
+              </Col>
 
-            <Col md="6" className="mb-3">
-              <TableCard header="Expenses" />
-            </Col>
+              <Col md="6" className="mb-3">
+                <TableCard header="Expenses" />
+              </Col>
+            </Suspense>
           </Row>
         </Container>
       )}
