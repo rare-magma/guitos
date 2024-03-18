@@ -1,3 +1,15 @@
+# [0.34.0](https://github.com/rare-magma/guitos/compare/v0.33.0...v0.34.0) (2024-03-18)
+
+
+### Features
+
+* reorderable list of items ([4c8565f](https://github.com/rare-magma/guitos/commit/4c8565f8aec3f16e5ad092d85063cec2cdd8baa4)), closes [#89](https://github.com/rare-magma/guitos/issues/89)
+
+
+### Performance Improvements
+
+* lazy load tables ([60b909b](https://github.com/rare-magma/guitos/commit/60b909b5f8d46f45cec39780ad79a67ee1acea7f))
+
 # [0.33.0](https://github.com/rare-magma/guitos/compare/v0.32.1...v0.33.0) (2024-03-16)
 
 
