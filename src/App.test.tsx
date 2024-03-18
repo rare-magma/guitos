@@ -39,9 +39,9 @@ describe("App", () => {
     await userEvent.click(newButton[0]);
     expect(screen.getByLabelText("delete budget")).toBeInTheDocument();
     expect(screen.getByLabelText("clone budget")).toBeInTheDocument();
-    expect(screen.getByText("Statistics")).toBeInTheDocument();
-    expect(screen.getByText("Revenue")).toBeInTheDocument();
-    expect(screen.getByText("Expenses")).toBeInTheDocument();
+    expect(await screen.findByText("Statistics")).toBeInTheDocument();
+    expect(await screen.findByText("Revenue")).toBeInTheDocument();
+    expect(await screen.findByText("Expenses")).toBeInTheDocument();
     await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(testBudget);
   });
 

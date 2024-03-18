@@ -191,6 +191,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
   - Example: English (United States) browser language displays values in US Dollars. English (India) uses Indian Rupees.
   - It's possible to override it by selecting a different currency code based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
 - Querying the search bar finds matching budget/expense/income names, opens the budget that contains the match and highlights it.
+- The list of Revenue/Expenses can be reordered by dragging each item.
 
 ## Known issues
 

@@ -1,4 +1,5 @@
 import Big from "big.js";
+import { Reorder } from "framer-motion";
 import { produce } from "immer";
 import { useRef } from "react";
 import {
@@ -41,7 +42,17 @@ export function TableCard({ header: label }: TableCardProps) {
   const table = isExpense ? budget?.expenses : budget?.incomes;
   const total = table?.total ?? 0;
 
-  function handleTableChange(item: Income) {
+  function reorderTable(newOrder: ItemForm[]) {
+    if (!budget) return;
+    const newState = produce((draft) => {
+      isExpense
+        ? (draft.expenses.items = newOrder)
+        : (draft.incomes.items = newOrder);
+    }, budget);
+    setBudget(newState(), true);
+  }
+
+  function handleTableChange(item: Income | Expense) {
     if (!budget) return;
     const newState = produce((draft) => {
       isExpense ? (draft.expenses = item) : (draft.incomes = item);
@@ -112,17 +123,30 @@ export function TableCard({ header: label }: TableCardProps) {
         </OverlayTrigger>
       </Card.Header>
       <Card.Body>
-        {table?.items?.map((item: ItemForm) => (
-          <ItemFormGroup
-            key={`${label}-${item.id}-item-form-group`}
-            itemForm={item}
-            label={label}
-            costPercentage={
-              budget ? calcPercentage(item.value, budget.incomes.total) : 0
-            }
-            inputRef={inputRef}
-          />
-        ))}
+        {table?.items && (
+          <Reorder.Group
+            axis="y"
+            values={table.items}
+            onReorder={reorderTable}
+            as="div"
+          >
+            {table.items?.map((item: ItemForm) => (
+              <Reorder.Item key={item.id} value={item} as="div">
+                <ItemFormGroup
+                  key={`${label}-${item.id}-item-form-group`}
+                  itemForm={item}
+                  label={label}
+                  costPercentage={
+                    budget
+                      ? calcPercentage(item.value, budget.incomes.total)
+                      : 0
+                  }
+                  inputRef={inputRef}
+                />
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
+        )}
         <div className="mt-3" />
         <div className="d-grid gap-2">
           <OverlayTrigger
