@@ -1,16 +1,17 @@
 import Big from "big.js";
 import { Reorder } from "framer-motion";
 import { produce } from "immer";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   Button,
   Card,
   Col,
   OverlayTrigger,
   Row,
+  ToggleButton,
   Tooltip,
 } from "react-bootstrap";
-import { BsPlusLg } from "react-icons/bs";
+import { BsArrowsVertical, BsPlusLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import {
@@ -36,6 +37,7 @@ export function TableCard({ header: label }: TableCardProps) {
   const { budget, setBudget, revenuePercentage } = useBudget();
   const { intlConfig } = useConfig();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isDraggable, setIsDraggable] = useState(false);
 
   const isRevenue = label === "Revenue";
   const isExpense = label === "Expenses";
@@ -131,7 +133,12 @@ export function TableCard({ header: label }: TableCardProps) {
             as="div"
           >
             {table.items?.map((item: ItemForm) => (
-              <Reorder.Item key={item.id} value={item} as="div">
+              <Reorder.Item
+                key={item.id}
+                value={item}
+                as="div"
+                dragListener={isDraggable}
+              >
                 <ItemFormGroup
                   key={`${label}-${item.id}-item-form-group`}
                   itemForm={item}
@@ -148,7 +155,7 @@ export function TableCard({ header: label }: TableCardProps) {
           </Reorder.Group>
         )}
         <div className="mt-3" />
-        <div className="d-grid gap-2">
+        <div className="d-flex gap-2">
           <OverlayTrigger
             delay={250}
             placement="top"
@@ -165,6 +172,7 @@ export function TableCard({ header: label }: TableCardProps) {
               variant={label.toLowerCase() + "-plus-button"}
               aria-label={`add item to ${label}`}
               size="sm"
+              className="flex-grow-1"
               onClick={() => {
                 addItemToTable(table);
                 setTimeout(() => {
@@ -176,6 +184,31 @@ export function TableCard({ header: label }: TableCardProps) {
             >
               <BsPlusLg aria-hidden />
             </Button>
+          </OverlayTrigger>
+          <OverlayTrigger
+            delay={250}
+            placement="top"
+            overlay={
+              <Tooltip
+                id={`tooltip-reorder-itemformgroup`}
+                style={{ position: "fixed" }}
+              >
+                toggle reordering of items
+              </Tooltip>
+            }
+          >
+            <ToggleButton
+              id={`toggle-reorder-${label}`}
+              aria-label={`reorder items in ${label}`}
+              type="checkbox"
+              variant="outline-info"
+              value={1}
+              size="sm"
+              onClick={() => setIsDraggable(!isDraggable)}
+              checked={isDraggable}
+            >
+              <BsArrowsVertical aria-hidden />
+            </ToggleButton>
           </OverlayTrigger>
         </div>
       </Card.Body>
