@@ -42,6 +42,7 @@ a:hover {
 
 .btn-outline-info:focus-visible,
 .btn-outline-info:hover {
+  box-shadow: none !important;
   background-color: var(--cyan);
   border: 1px solid var(--cyan);
   border-radius: 0.375rem;
