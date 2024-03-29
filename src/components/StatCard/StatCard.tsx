@@ -189,7 +189,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
         </InputGroup>
         <InputGroup className="mb-1" key={"withGoal"}>
           <InputGroup.Text>
-            <BsArrowReturnRight />
+            <BsArrowReturnRight aria-hidden />
             <OverlayTrigger
               placement="top"
               overlay={
@@ -264,7 +264,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
         </InputGroup>
         <InputGroup className="mb-1" key={"saved"}>
           <InputGroup.Text>
-            <BsArrowReturnRight />
+            <BsArrowReturnRight aria-hidden />
             <OverlayTrigger
               placement="top"
               overlay={
