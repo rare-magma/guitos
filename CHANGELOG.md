@@ -1,3 +1,16 @@
+# [0.35.0](https://github.com/rare-magma/guitos/compare/v0.34.0...v0.35.0) (2024-03-29)
+
+
+### Bug Fixes
+
+* remove box shadow on button ([4dc3c90](https://github.com/rare-magma/guitos/commit/4dc3c90e155f8cf1eb8015898081faadc2e3e3ca))
+* set aria-hidden on icons ([41d5453](https://github.com/rare-magma/guitos/commit/41d545390fab38346d176d31f8e74a5718d0f8ec))
+
+
+### Features
+
+* add toggle button for item reordering ([4921bb9](https://github.com/rare-magma/guitos/commit/4921bb96d94d0abf3ec43891a49081a8bde875e2))
+
 # [0.34.0](https://github.com/rare-magma/guitos/compare/v0.33.0...v0.34.0) (2024-03-18)
 
 
