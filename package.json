@@ -12,8 +12,8 @@
     "e2e:ui": "playwright test --ui --project chromium",
     "e2e:mobile": "playwright test --reporter=list --project 'Mobile Chrome'",
     "e2e:mobile:ui": "playwright test --ui --project 'Mobile Chrome'",
-    "coverage": "vitest run --coverage --silent",
-    "coverage:ui": "vitest --ui --open --coverage --silent",
+    "coverage": "vitest run --coverage --silent --exclude 'e2e'",
+    "coverage:ui": "vitest --ui --open --coverage --silent --exclude 'e2e'",
     "lint": "pnpm dlx eslint src e2e --fix && pnpm dlx stylelint src/**/*.css --fix && pnpm dlx prettier --write src e2e",
     "bundle": "pnpm dlx vite-bundle-visualizer"
   },
