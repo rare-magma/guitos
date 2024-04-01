@@ -56,7 +56,7 @@
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@simbathesailor/use-what-changed": "2.0.0",
-    "@testing-library/jest-dom": "6.1.4",
+    "@testing-library/jest-dom": "6.4.2",
     "@testing-library/react": "14.2.1",
     "@testing-library/user-event": "14.5.2",
     "@types/big.js": "6.2.2",
