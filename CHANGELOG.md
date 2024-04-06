@@ -1,3 +1,10 @@
+## [0.35.1](https://github.com/rare-magma/guitos/compare/v0.35.0...v0.35.1) (2024-04-06)
+
+
+### Bug Fixes
+
+* add missing open graph tags ([715145e](https://github.com/rare-magma/guitos/commit/715145e196646308630aa9a7161fc109bc682692))
+
 # [0.35.0](https://github.com/rare-magma/guitos/compare/v0.34.0...v0.35.0) (2024-03-29)
 
 
