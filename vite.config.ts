@@ -45,6 +45,10 @@ export default defineConfig((env) => {
       mockClear: true,
       environment: "jsdom",
       setupFiles: "./src/setupTests.ts",
+      include: [
+        "src/**/*.{test,spec}.?(c|m)[jt]s?(x)",
+        "src/*.{test,spec}.?(c|m)[jt]s?(x)",
+      ],
     },
   };
 });
