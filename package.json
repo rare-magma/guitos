@@ -82,6 +82,7 @@
     "eslint-plugin-react": "7.34.1",
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-react-refresh": "0.4.5",
+    "eslint-plugin-regexp": "2.5.0",
     "eslint-plugin-testing-library": "6.1.2",
     "eslint-plugin-vitest": "0.5.4",
     "jsdom": "22.1.0",
