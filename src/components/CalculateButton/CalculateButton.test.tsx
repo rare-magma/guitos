@@ -99,8 +99,8 @@ describe("CalculateButton", () => {
       name: "select operation type to item value",
     });
     await userEvent.click(button);
-    await userEvent.type(screen.getByLabelText("addition"), "123");
-    await userEvent.type(screen.getByLabelText("addition"), "{enter}");
+    await userEvent.type(screen.getByLabelText("add"), "123");
+    await userEvent.type(screen.getByLabelText("add"), "{enter}");
 
     expect(onCalculate).toHaveBeenCalledWith(123, "add");
   });
