@@ -4,24 +4,18 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "vite",
     "build": "vite build",
-    "serve": "vite preview",
-    "test": "vitest --exclude 'e2e'",
-    "e2e": "playwright test --reporter=list --project chromium",
-    "e2e:ui": "playwright test --ui --project chromium",
-    "e2e:mobile": "playwright test --reporter=list --project 'Mobile Chrome'",
-    "e2e:mobile:ui": "playwright test --ui --project 'Mobile Chrome'",
+    "bundle": "pnpm dlx vite-bundle-visualizer",
     "coverage": "vitest run --coverage --silent --exclude 'e2e'",
     "coverage:ui": "vitest --ui --open --coverage --silent --exclude 'e2e'",
-    "lint": "pnpm dlx eslint src e2e --fix && pnpm dlx stylelint src/**/*.css --fix && pnpm dlx prettier --write src e2e",
-    "bundle": "pnpm dlx vite-bundle-visualizer"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "e2e": "playwright test --reporter=list --project chromium",
+    "e2e:mobile": "playwright test --reporter=list --project 'Mobile Chrome'",
+    "e2e:mobile:ui": "playwright test --ui --project 'Mobile Chrome'",
+    "e2e:ui": "playwright test --ui --project chromium",
+    "lint": "pnpm eslint --fix && pnpm stylelint src/**/*.css --fix && pnpm prettier --write src e2e",
+    "serve": "vite preview",
+    "start": "vite",
+    "test": "vitest --exclude 'e2e'"
   },
   "browserslist": {
     "production": "defaults",
@@ -29,6 +23,12 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
     ]
   },
   "dependencies": {
