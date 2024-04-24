@@ -24,17 +24,15 @@ interface BudgetContextInterface {
 const BudgetContext = createContext<BudgetContextInterface>({
   budget: undefined,
   setBudget: (value: Budget | undefined, saveInHistory: boolean) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     value;
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     saveInHistory;
   },
   budgetList: [],
-  setBudgetList: (value: Budget[] | undefined) => {
-    value;
-  },
+  setBudgetList: (value: Budget[] | undefined) => value,
   budgetNameList: [],
-  setBudgetNameList: (value: SearchOption[] | undefined) => {
-    value;
-  },
+  setBudgetNameList: (value: SearchOption[] | undefined) => value,
   revenuePercentage: 0,
   past: [undefined],
   future: [undefined],
@@ -151,5 +149,4 @@ function BudgetProvider({ children }: PropsWithChildren) {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { BudgetProvider, useBudget };

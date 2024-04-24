@@ -15,13 +15,9 @@ interface ConfigContextInterface {
 
 const ConfigContext = createContext<ConfigContextInterface>({
   intlConfig: { locale: userLang, currency: initialCurrencyCode },
-  setIntlConfig: (value: IntlConfig) => {
-    value;
-  },
+  setIntlConfig: (value: IntlConfig) => value,
   currency: initialCurrencyCode,
-  setCurrency: (value: string) => {
-    value;
-  },
+  setCurrency: (value: string) => value,
 });
 
 function useConfig() {
@@ -57,5 +53,4 @@ function ConfigProvider({ children }: PropsWithChildren) {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { ConfigProvider, useConfig };

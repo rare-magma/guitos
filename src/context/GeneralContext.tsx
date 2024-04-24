@@ -38,33 +38,19 @@ interface GeneralContextInterface {
 
 const GeneralContext = createContext<GeneralContextInterface>({
   needReload: true,
-  setNeedReload: (value: boolean) => {
-    value;
-  },
+  setNeedReload: (value: boolean) => value,
   loadingFromDB: true,
-  setLoadingFromDB: (value: boolean) => {
-    value;
-  },
+  setLoadingFromDB: (value: boolean) => value,
   error: "",
-  setError: (value: string) => {
-    value;
-  },
+  setError: (value: string) => value,
   csvErrors: [],
-  setCsvErrors: (value: CsvError[]) => {
-    value;
-  },
+  setCsvErrors: (value: CsvError[]) => value,
   jsonErrors: [],
-  setJsonErrors: (value: JsonError[]) => {
-    value;
-  },
+  setJsonErrors: (value: JsonError[]) => value,
   showError: false,
-  setShowError: (value: boolean) => {
-    value;
-  },
+  setShowError: (value: boolean) => value,
   notifications: [],
-  setNotifications: (value: BudgetNotification[]) => {
-    value;
-  },
+  setNotifications: (value: BudgetNotification[]) => value,
 });
 
 function useGeneralContext() {
@@ -144,5 +130,4 @@ function GeneralProvider({ children }: PropsWithChildren) {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { GeneralProvider, useGeneralContext };
