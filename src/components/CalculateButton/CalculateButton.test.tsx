@@ -14,21 +14,20 @@ describe("CalculateButton", () => {
     />
   );
 
-  beforeEach(() => {
-    render(comp);
-  });
-
   it("matches snapshot", () => {
+    render(comp);
     expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", async () => {
+    render(comp);
     expect(
       await screen.findByLabelText("select operation type to item value"),
     ).toBeInTheDocument();
   });
 
   it("opens popover when clicking the button", async () => {
+    render(comp);
     const button = screen.getByRole("button", {
       name: "select operation type to item value",
     });
@@ -50,6 +49,7 @@ describe("CalculateButton", () => {
   });
 
   it("closes when clicking the button", async () => {
+    render(comp);
     const button = screen.getByRole("button", {
       name: "select operation type to item value",
     });
@@ -65,6 +65,7 @@ describe("CalculateButton", () => {
   });
 
   it("closes when pressing Escape key", async () => {
+    render(comp);
     const button = screen.getByRole("button", {
       name: "select operation type to item value",
     });
@@ -80,6 +81,7 @@ describe("CalculateButton", () => {
   });
 
   it("calls onCalculate when accepting change > 0", async () => {
+    render(comp);
     const button = screen.getByRole("button", {
       name: "select operation type to item value",
     });
@@ -95,6 +97,7 @@ describe("CalculateButton", () => {
   });
 
   it("calls onCalculate when change > 0 and enter is pressed", async () => {
+    render(comp);
     const button = screen.getByRole("button", {
       name: "select operation type to item value",
     });
@@ -106,6 +109,7 @@ describe("CalculateButton", () => {
   });
 
   it("calls onCalculate with sub", async () => {
+    render(comp);
     const button = screen.getByRole("button", {
       name: "select operation type to item value",
     });
@@ -123,6 +127,7 @@ describe("CalculateButton", () => {
   });
 
   it("calls onCalculate with multiply", async () => {
+    render(comp);
     const button = screen.getByRole("button", {
       name: "select operation type to item value",
     });
@@ -140,6 +145,7 @@ describe("CalculateButton", () => {
   });
 
   it("calls onCalculate with div", async () => {
+    render(comp);
     const button = screen.getByRole("button", {
       name: "select operation type to item value",
     });
@@ -157,6 +163,7 @@ describe("CalculateButton", () => {
   });
 
   it("shows history when clicking button", async () => {
+    render(comp);
     const button = screen.getByRole("button", {
       name: "select operation type to item value",
     });
