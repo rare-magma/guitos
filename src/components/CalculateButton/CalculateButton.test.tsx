@@ -55,11 +55,11 @@ describe("CalculateButton", () => {
     });
     await userEvent.click(button);
 
-    const button2 = screen.getByRole("button", {
+    await userEvent.click(button);
+
+    const button2 = await screen.findByRole("button", {
       name: "select type of operation on item value",
     });
-
-    await userEvent.click(button);
 
     expect(button2).not.toBeInTheDocument();
   });
@@ -70,11 +70,11 @@ describe("CalculateButton", () => {
     });
     await userEvent.click(button);
 
-    const button2 = screen.getByRole("button", {
+    await userEvent.type(screen.getByLabelText("add"), "{Escape}");
+
+    const button2 = await screen.findByRole("button", {
       name: "select type of operation on item value",
     });
-
-    await userEvent.type(screen.getByLabelText("addition"), "{Escape}");
 
     expect(button2).not.toBeInTheDocument();
   });
