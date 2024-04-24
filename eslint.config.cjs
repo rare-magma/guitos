@@ -1,5 +1,5 @@
-{
-  "extends": [
+module.exports = {
+  extends: [
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
@@ -8,9 +8,9 @@
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:@typescript-eslint/stylistic-type-checked",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
   ],
-  "plugins": [
+  plugins: [
     "jest-dom",
     "prettier",
     "react",
@@ -18,10 +18,10 @@
     "react-refresh",
     "@typescript-eslint",
     "testing-library",
-    "jsx-a11y"
+    "jsx-a11y",
   ],
-  "rules": {
-    "eqeqeq": "error",
+  rules: {
+    eqeqeq: "error",
     "func-style": ["error", "declaration"],
     "no-console": "warn",
     "no-undef": "off",
@@ -33,34 +33,45 @@
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-key": ["error", { "warnOnDuplicates": true }],
+    "react/jsx-key": ["error", { warnOnDuplicates: true }],
     "react-refresh/only-export-components": "warn",
     "testing-library/prefer-user-event": "error",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-unused-vars": "warn"
+    "@typescript-eslint/no-unused-vars": "warn",
   },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "project": ["./tsconfig.json"],
-    "tsconfigRootDir": ".",
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 6,
+    project: ["./tsconfig.json"],
+    tsconfigRootDir: ".",
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-  "env": {
-    "browser": true,
-    "node": true,
-    "es6": true,
-    "jest": true
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+    jest: true,
   },
-  "ignorePatterns": ["node_modules", "build", "dist", "public"],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
-}
+  ignorePatterns: ["node_modules", "build", "dist", "public"],
+  overrides: [
+    {
+      extends: ["plugin:package-json/recommended"],
+      files: ["package.json"],
+      parser: "jsonc-eslint-parser",
+      plugins: ["package-json"],
+      rules: {
+        "package-json/valid-package-def": "error",
+      },
+    },
+  ],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
+};
