@@ -167,7 +167,8 @@ test("intlFormat", () => {
     expect(intlFormat(1, currencyCode)).toBeTruthy();
   }
 });
-test("intlFormat", () => {
+
+test("intlFormat browser locale list", () => {
   [firefoxLocalesList, chromeLocalesList].forEach((list) => {
     list.forEach((locale) => {
       const countryCode = getCountryCode(locale);
