@@ -36,6 +36,7 @@ export default defineConfig((env) => {
       sri(),
     ],
     test: {
+      clearMocks: true,
       coverage: {
         provider: "v8",
         include: ["src/**"],
