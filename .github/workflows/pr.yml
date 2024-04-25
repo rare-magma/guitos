@@ -32,6 +32,8 @@ jobs:
     name: e2e
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.42.1-jammy
     needs:
       - test
     steps:
@@ -54,11 +56,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
-
       - name: Run Playwright tests
         run: pnpm exec playwright test
+        env:
+          HOME: /root
 
       - uses: actions/upload-artifact@v4
         if: always()
