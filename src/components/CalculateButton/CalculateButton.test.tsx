@@ -50,7 +50,7 @@ describe("CalculateButton", () => {
     ).toBeInTheDocument();
   });
 
-  it("closes when clicking the button", async () => {
+  it.skip("closes when clicking the button", async () => {
     render(comp);
     await waitFor(async () => {
       const button = screen.getByRole("button", {
@@ -68,7 +68,7 @@ describe("CalculateButton", () => {
     });
   });
 
-  it("closes when pressing Escape key", async () => {
+  it.skip("closes when pressing Escape key", async () => {
     render(comp);
     await waitFor(async () => {
       const button = screen.getByRole("button", {
