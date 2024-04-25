@@ -124,7 +124,7 @@ importers:
         specifier: 10.4.18
         version: 10.4.18(postcss@8.4.38)
       console-fail-test:
-        specifier: ^0.2.3
+        specifier: 0.2.3
         version: 0.2.3
       eslint:
         specifier: 8.57.0
