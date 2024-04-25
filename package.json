@@ -13,6 +13,7 @@
     "e2e:mobile:ui": "playwright test --ui --project 'Mobile Chrome'",
     "e2e:ui": "playwright test --ui --project chromium",
     "lint": "pnpm eslint --fix && pnpm stylelint src/**/*.css --fix && pnpm prettier --write src e2e",
+    "lint:packages": "pnpm dedupe",
     "serve": "vite preview",
     "start": "vite",
     "test": "vitest --exclude 'e2e'"
