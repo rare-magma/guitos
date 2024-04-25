@@ -45,7 +45,7 @@ export default defineConfig((env) => {
       globals: true,
       mockClear: true,
       environment: "jsdom",
-      setupFiles: "./src/setupTests.ts",
+      setupFiles: ["./src/setupTests.ts", "console-fail-test/setup"],
       include: [
         "src/**/*.{test,spec}.?(c|m)[jt]s?(x)",
         "src/*.{test,spec}.?(c|m)[jt]s?(x)",

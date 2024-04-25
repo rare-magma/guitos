@@ -123,6 +123,9 @@ importers:
       autoprefixer:
         specifier: 10.4.18
         version: 10.4.18(postcss@8.4.38)
+      console-fail-test:
+        specifier: ^0.2.3
+        version: 0.2.3
       eslint:
         specifier: 8.57.0
         version: 8.57.0
@@ -133,8 +136,8 @@ importers:
         specifier: 7.0.1
         version: 7.0.1(@babel/plugin-syntax-flow@7.22.5(@babel/core@7.23.2))(@babel/plugin-transform-react-jsx@7.22.15(@babel/core@7.23.2))(eslint@8.57.0)(typescript@5.4.2)
       eslint-plugin-jest-dom:
-        specifier: 5.1.0
-        version: 5.1.0(@testing-library/dom@10.0.0)(eslint@8.57.0)
+        specifier: 5.4.0
+        version: 5.4.0(@testing-library/dom@10.0.0)(eslint@8.57.0)
       eslint-plugin-jsx-a11y:
         specifier: 6.8.0
         version: 6.8.0(eslint@8.57.0)
@@ -2303,6 +2306,9 @@ packages:
   confusing-browser-globals@1.0.11:
     resolution: {integrity: sha512-JsPKdmh8ZkmnHxDk55FZ1TqVLvEQTvoByJZRN9jzI0UjxK/QgAmsphz7PGtqgPieQZ/CQcHWXCR7ATDNhGe+YA==}
 
+  console-fail-test@0.2.3:
+    resolution: {integrity: sha512-p1xfi9ubVM2X3NpjPH1Gm8Gxc7vXyTwcOIquU8rpUDA+ISSitAOiBDnT/Bti1We5YzZKRxgI0JU+fFvOmOXtvA==}
+
   conventional-changelog-angular@7.0.0:
     resolution: {integrity: sha512-ROjNchA9LgfNMTTFSIWPzebCwOGFdgkEq45EnvvrmSLvCtAw0HSmrCs7/ty+wAeYUZyNay0YMUNYFTRL72PkBQ==}
     engines: {node: '>=16'}
@@ -2730,12 +2736,12 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
-  eslint-plugin-jest-dom@5.1.0:
-    resolution: {integrity: sha512-JIXZp+E/h/aGlP/rQc4tuOejiHlZXg65qw8JAJMIJA5VsdjOkss/SYcRSqBrQuEOytEM8JvngUjcz31d1RrCrA==}
+  eslint-plugin-jest-dom@5.4.0:
+    resolution: {integrity: sha512-yBqvFsnpS5Sybjoq61cJiUsenRkC9K32hYQBFS9doBR7nbQZZ5FyO+X7MlmfM1C48Ejx/qTuOCgukDUNyzKZ7A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0, npm: '>=6', yarn: '>=1'}
     peerDependencies:
-      '@testing-library/dom': ^8.0.0 || ^9.0.0
-      eslint: ^6.8.0 || ^7.0.0 || ^8.0.0
+      '@testing-library/dom': ^8.0.0 || ^9.0.0 || ^10.0.0
+      eslint: ^6.8.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
     peerDependenciesMeta:
       '@testing-library/dom':
         optional: true
@@ -8491,6 +8497,8 @@ snapshots:
 
   confusing-browser-globals@1.0.11: {}
 
+  console-fail-test@0.2.3: {}
+
   conventional-changelog-angular@7.0.0:
     dependencies:
       compare-func: 2.0.0
@@ -9066,7 +9074,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-jest-dom@5.1.0(@testing-library/dom@10.0.0)(eslint@8.57.0):
+  eslint-plugin-jest-dom@5.4.0(@testing-library/dom@10.0.0)(eslint@8.57.0):
     dependencies:
       '@babel/runtime': 7.23.2
       eslint: 8.57.0
