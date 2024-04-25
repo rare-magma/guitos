@@ -16,8 +16,6 @@ describe("ChartsPage", () => {
       unobserve: vi.fn(),
       disconnect: vi.fn(),
     }));
-
-    render(comp);
   });
 
   afterEach(() => {
@@ -26,10 +24,12 @@ describe("ChartsPage", () => {
   });
 
   it("matches snapshot", () => {
+    render(comp);
     expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", () => {
+    render(comp);
     expect(screen.getByLabelText("go back to budgets")).toBeInTheDocument();
     expect(screen.getByText("Revenue vs expenses")).toBeInTheDocument();
     expect(screen.getByText("Savings")).toBeInTheDocument();
@@ -39,12 +39,14 @@ describe("ChartsPage", () => {
   });
 
   it("triggers onShowGraphs when back button is pressed", async () => {
+    render(comp);
     await userEvent.click(screen.getByLabelText("go back to budgets"));
     expect(onShowGraphs).toHaveBeenCalledTimes(1);
     onShowGraphs.mockClear();
   });
 
   it("triggers onShowGraphs when i shortcut is pressed", async () => {
+    render(comp);
     await userEvent.type(screen.getByText("Reserves"), "i");
     expect(onShowGraphs).toHaveBeenCalledTimes(1);
     onShowGraphs.mockClear();

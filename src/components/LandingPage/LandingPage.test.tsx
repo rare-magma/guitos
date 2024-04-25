@@ -16,14 +16,15 @@ describe("LandingPage", () => {
 
   beforeEach(() => {
     budgetContextSpy.mockReturnValue(testEmptyBudgetContext);
-    render(comp);
   });
 
   it("matches snapshot", () => {
+    render(comp);
     expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", () => {
+    render(comp);
     expect(screen.getByLabelText("new budget")).toBeInTheDocument();
     expect(screen.getByLabelText("import budget")).toBeInTheDocument();
     expect(
@@ -32,6 +33,7 @@ describe("LandingPage", () => {
   });
 
   it("triggers new budget", async () => {
+    render(comp);
     setBudgetMock.mockClear();
     const newButton = screen.getAllByRole("button", { name: "new budget" })[0];
     await userEvent.click(newButton);
@@ -39,6 +41,7 @@ describe("LandingPage", () => {
   });
 
   it("triggers upload", async () => {
+    render(comp);
     await userEvent.upload(
       screen.getByTestId("import-form-control-landing-page"),
       new File([JSON.stringify(testBudget)], "test"),
@@ -46,6 +49,7 @@ describe("LandingPage", () => {
   });
 
   it("opens instructions in new tab", async () => {
+    render(comp);
     const instructionsButton = screen.getByLabelText(
       "open instructions in new tab",
     );

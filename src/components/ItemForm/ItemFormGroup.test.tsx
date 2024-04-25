@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import {
@@ -21,22 +21,23 @@ describe("ItemFormGroup", () => {
     />
   );
 
-  beforeEach(() => {
-    render(comp);
-  });
-
   it("matches snapshot", () => {
+    render(comp);
     expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", async () => {
+    render(comp);
     expect(await screen.findByDisplayValue("name1")).toBeInTheDocument();
     expect(await screen.findByDisplayValue("$10")).toBeInTheDocument();
   });
 
   it("reacts to user changing input", async () => {
+    render(comp);
     setBudgetMock.mockClear();
-    await userEvent.type(screen.getByDisplayValue("name1"), "change name");
+    await waitFor(async () => {
+      await userEvent.type(screen.getByDisplayValue("name1"), "change name");
+    });
 
     expect(screen.getByDisplayValue("name1change name")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
@@ -52,7 +53,9 @@ describe("ItemFormGroup", () => {
 
     setBudgetMock.mockClear();
 
-    await userEvent.type(screen.getByDisplayValue("$10"), "123");
+    await waitFor(async () => {
+      await userEvent.type(screen.getByDisplayValue("$10"), "123");
+    });
 
     expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
@@ -73,13 +76,16 @@ describe("ItemFormGroup", () => {
   });
 
   it("removes item when user clicks delete confirmation button", async () => {
+    render(comp);
     setBudgetMock.mockClear();
-    await userEvent.click(
-      screen.getByRole("button", { name: "delete item 1" }),
-    );
-    await userEvent.click(
-      screen.getByRole("button", { name: "confirm item 1 deletion" }),
-    );
+    await waitFor(async () => {
+      await userEvent.click(
+        screen.getByRole("button", { name: "delete item 1" }),
+      );
+      await userEvent.click(
+        screen.getByRole("button", { name: "confirm item 1 deletion" }),
+      );
+    });
 
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
@@ -96,18 +102,23 @@ describe("ItemFormGroup", () => {
   });
 
   it("shows tooltip when user hovers over", async () => {
-    await userEvent.hover(screen.getByDisplayValue("$10"));
+    render(comp);
+    await waitFor(async () => {
+      await userEvent.hover(screen.getByDisplayValue("$10"));
+    });
 
     expect(await screen.findByText("1% of revenue")).toBeInTheDocument();
   });
 
   it("opens popover when clicking the button", async () => {
-    await userEvent.click(
-      screen.getByRole("button", {
-        name: "select operation type to item value",
-      }),
-    );
-
+    render(comp);
+    await waitFor(async () => {
+      await userEvent.click(
+        screen.getByRole("button", {
+          name: "select operation type to item value",
+        }),
+      );
+    });
     expect(
       screen.getByLabelText("select type of operation on item value"),
     ).toBeInTheDocument();
@@ -127,8 +138,10 @@ describe("ItemFormGroup", () => {
       />,
     );
 
-    await userEvent.clear(screen.getByDisplayValue("10 €"));
-    await userEvent.type(screen.getByLabelText("item 1 value"), ",12");
+    await waitFor(async () => {
+      await userEvent.clear(screen.getByDisplayValue("10 €"));
+      await userEvent.type(screen.getByLabelText("item 1 value"), ",12");
+    });
 
     expect(screen.getByDisplayValue("0,12 €")).toBeInTheDocument();
   });

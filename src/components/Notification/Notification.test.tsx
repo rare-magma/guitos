@@ -14,19 +14,18 @@ describe("Notification", () => {
 
   const comp = <Notification notification={notification} />;
 
-  beforeEach(() => {
-    render(comp);
-  });
-
   it("matches snapshot", () => {
+    render(comp);
     expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", () => {
+    render(comp);
     expect(screen.getByText("notification body")).toBeInTheDocument();
   });
 
   it("closes when close button is clicked", async () => {
+    render(comp);
     setNotificationsMock.mockClear();
     await userEvent.click(
       screen.getByRole("button", {
@@ -37,6 +36,7 @@ describe("Notification", () => {
   });
 
   it("closes when undo button is clicked", async () => {
+    render(comp);
     undoMock.mockClear();
     await userEvent.click(
       screen.getByRole("button", {

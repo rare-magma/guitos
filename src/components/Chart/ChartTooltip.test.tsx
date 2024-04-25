@@ -9,18 +9,20 @@ describe("ChartTooltip", () => {
       payload={[{ name: "name", value: 123, unit: "$" }]}
     />
   );
-  beforeEach(() => {
-    render(comp);
-  });
 
   it("matches snapshot", () => {
+    render(comp);
     expect(comp).toMatchSnapshot();
   });
+
   it("renders initial state", () => {
+    render(comp);
     expect(screen.getByText("label")).toBeInTheDocument();
     expect(screen.getByText("$123.00")).toBeInTheDocument();
   });
+
   it("renders goal with %", () => {
+    render(comp);
     render(
       <ChartTooltip
         active={true}
@@ -33,6 +35,7 @@ describe("ChartTooltip", () => {
   });
 
   it("renders 2 legends", () => {
+    render(comp);
     render(
       <ChartTooltip
         active={true}

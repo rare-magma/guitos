@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { ConfigProvider, useConfig } from "./ConfigContext";
 
 function TestComponent() {
@@ -14,13 +14,13 @@ function TestComponent() {
 
 describe("ConfigProvider", () => {
   it("provides expected ConfigContext obj to child elements", () => {
-    const { getByLabelText } = render(
+    render(
       <ConfigProvider>
         <TestComponent />
       </ConfigProvider>,
     );
-    expect(getByLabelText("currency").textContent).toEqual("USD");
-    expect(getByLabelText("locale").textContent).toEqual("en-US");
-    expect(getByLabelText("c").textContent).toEqual("USD");
+    expect(screen.getByLabelText("currency").textContent).toEqual("USD");
+    expect(screen.getByLabelText("locale").textContent).toEqual("en-US");
+    expect(screen.getByLabelText("c").textContent).toEqual("USD");
   });
 });

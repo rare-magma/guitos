@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { generalContextSpy, testErrorGeneralContext } from "../setupTests";
 import { GeneralProvider, useGeneralContext } from "./GeneralContext";
 
@@ -19,14 +19,14 @@ describe("GeneralProvider", () => {
     generalContextSpy.mockReturnValue(testErrorGeneralContext);
   });
   it("provides expected GeneralContext obj to child elements", () => {
-    const { getByLabelText } = render(
+    render(
       <GeneralProvider>
         <TestComponent />
       </GeneralProvider>,
     );
-    expect(getByLabelText("error").textContent).toEqual("Thrown error");
-    expect(getByLabelText("csv").textContent).toEqual("");
-    expect(getByLabelText("json").textContent).toEqual("");
-    expect(getByLabelText("showError").textContent).toEqual("true");
+    expect(screen.getByLabelText("error").textContent).toEqual("Thrown error");
+    expect(screen.getByLabelText("csv").textContent).toEqual("");
+    expect(screen.getByLabelText("json").textContent).toEqual("");
+    expect(screen.getByLabelText("showError").textContent).toEqual("true");
   });
 });

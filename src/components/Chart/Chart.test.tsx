@@ -28,8 +28,6 @@ describe("Chart", () => {
       unobserve: vi.fn(),
       disconnect: vi.fn(),
     }));
-
-    render(comp);
   });
 
   afterEach(() => {
@@ -38,10 +36,12 @@ describe("Chart", () => {
   });
 
   it("matches snapshot", () => {
+    render(comp);
     expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", () => {
+    render(comp);
     expect(screen.getByText("chart header")).toBeInTheDocument();
     expect(screen.getByText("median revenue")).toBeInTheDocument();
     expect(screen.getByDisplayValue("$200")).toBeInTheDocument();

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import {
   budgetContextSpy,
@@ -12,15 +12,13 @@ import { NavBar } from "./NavBar";
 describe("NavBar", () => {
   const comp = <NavBar />;
 
-  beforeEach(() => {
-    render(comp);
-  });
-
   it("matches snapshot", () => {
+    render(comp);
     expect(comp).toMatchSnapshot();
   });
 
   it("renders initial state", async () => {
+    render(comp);
     expect(screen.getByText("2023-03")).toBeInTheDocument();
 
     const newButton = screen.getAllByRole("button", { name: "new budget" });
@@ -34,12 +32,14 @@ describe("NavBar", () => {
   });
 
   it("triggers event when back/fwd buttons are pressed", async () => {
+    render(comp);
     await userEvent.click(screen.getByLabelText("go to older budget"));
 
     await userEvent.click(screen.getByLabelText("go to newer budget"));
   });
 
   it("triggers event when back/fwd shortcuts are pressed", async () => {
+    render(comp);
     await userEvent.type(screen.getByTestId("header"), "{pagedown}");
 
     await userEvent.type(screen.getByTestId("header"), "{home}");
@@ -48,23 +48,30 @@ describe("NavBar", () => {
   });
 
   it("triggers event when clone button is pressed", async () => {
+    render(comp);
     setBudgetMock.mockClear();
     await userEvent.click(screen.getByLabelText("clone budget"));
     expect(setBudgetMock).toHaveBeenCalledWith(testBudgetClone, true);
   });
 
   it("triggers event when import button is pressed", async () => {
-    await userEvent.click(screen.getByLabelText("import or export budget"));
-    await userEvent.upload(
-      screen.getByTestId("import-form-control"),
-      new File([JSON.stringify(testBudget)], "budget", {
-        type: "application/json",
-      }),
-    );
+    render(comp);
+    await waitFor(async () => {
+      await userEvent.click(screen.getByLabelText("import or export budget"));
+      await userEvent.upload(
+        screen.getByTestId("import-form-control"),
+        new File([JSON.stringify(testBudget)], "budget", {
+          type: "application/json",
+        }),
+      );
+    });
   });
 
   it("triggers event when export shortcuts are pressed", async () => {
-    await userEvent.type(screen.getByTestId("header"), "o");
+    render(comp);
+    await waitFor(async () => {
+      await userEvent.type(screen.getByTestId("header"), "o");
+    });
     expect(
       screen.getByRole("button", {
         name: /import budget/i,
@@ -81,13 +88,18 @@ describe("NavBar", () => {
       }),
     ).toBeInTheDocument();
 
-    await userEvent.type(screen.getByTestId("header"), "s");
+    await waitFor(async () => {
+      await userEvent.type(screen.getByTestId("header"), "s");
 
-    await userEvent.type(screen.getByTestId("header"), "d");
+      await userEvent.type(screen.getByTestId("header"), "d");
+    });
   });
 
   it("triggers event when settings shortcuts are pressed", async () => {
-    await userEvent.type(screen.getByTestId("header"), "t");
+    render(comp);
+    await waitFor(async () => {
+      await userEvent.type(screen.getByTestId("header"), "t");
+    });
     expect(
       screen.getByRole("link", {
         name: /open guitos changelog/i,
@@ -96,6 +108,7 @@ describe("NavBar", () => {
   });
 
   it("triggers event when user changes budget name input", async () => {
+    render(comp);
     setBudgetMock.mockClear();
     await userEvent.type(screen.getByDisplayValue("2023-03"), "change name");
 
@@ -107,13 +120,18 @@ describe("NavBar", () => {
   });
 
   it("triggers event when user clicks delete budget button", async () => {
-    await userEvent.click(screen.getByLabelText("delete budget"));
-    await userEvent.click(
-      screen.getByRole("button", { name: "confirm budget deletion" }),
-    );
+    render(comp);
+
+    await waitFor(async () => {
+      await userEvent.click(screen.getByLabelText("delete budget"));
+      await userEvent.click(
+        screen.getByRole("button", { name: "confirm budget deletion" }),
+      );
+    });
   });
 
   it("opens instructions in new tab", async () => {
+    render(comp);
     const instructionsButton = screen.getByLabelText(
       "open instructions in new tab",
     );
