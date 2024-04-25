@@ -86,6 +86,7 @@
     "eslint-plugin-regexp": "2.5.0",
     "eslint-plugin-testing-library": "6.2.2",
     "eslint-plugin-vitest": "0.5.4",
+    "eslint-plugin-yml": "1.14.0",
     "jsdom": "22.1.0",
     "jsonc-eslint-parser": "2.4.0",
     "prettier": "3.2.5",

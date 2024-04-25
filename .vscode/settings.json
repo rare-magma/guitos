@@ -4,7 +4,9 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "yaml",
+    "github-actions-workflow" // for GitHub Actions workflow files
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"

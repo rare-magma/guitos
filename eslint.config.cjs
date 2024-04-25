@@ -10,6 +10,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:jsx-a11y/recommended",
+    "plugin:yml/standard",
   ],
   plugins: [
     "jest-dom",
