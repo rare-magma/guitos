@@ -42,10 +42,12 @@ describe("LandingPage", () => {
 
   it("triggers upload", async () => {
     render(comp);
+    const uploadEl = screen.getByTestId("import-form-control-landing-page");
     await userEvent.upload(
-      screen.getByTestId("import-form-control-landing-page"),
+      uploadEl,
       new File([JSON.stringify(testBudget)], "test"),
     );
+    expect((uploadEl as HTMLInputElement).files).toHaveLength(1);
   });
 
   it("opens instructions in new tab", async () => {

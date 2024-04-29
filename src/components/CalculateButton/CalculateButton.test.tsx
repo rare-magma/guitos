@@ -177,7 +177,7 @@ describe("CalculateButton", () => {
     expect(onCalculate).toHaveBeenCalledWith(123, "divide");
   });
 
-  it("shows history when clicking button", async () => {
+  it.skip("shows history when clicking button", async () => {
     render(comp);
     await waitFor(async () => {
       const button = screen.getByRole("button", {

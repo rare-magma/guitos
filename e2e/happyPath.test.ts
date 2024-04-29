@@ -106,7 +106,6 @@ test("should complete the happy path", async ({ page, isMobile }) => {
   // should undo changes
   if (isMobile) {
     await page.getByLabel("Toggle navigation").click();
-    // eslint-disable-next-line jest/no-conditional-expect
     await expect(page.locator("#offcanvasNavbarLabel-expand-md")).toBeVisible();
   }
 
