@@ -272,8 +272,7 @@ See [LICENSE](LICENSE) for more information.
 ## Acknowledgements
 
 - [r/personalfinance](https://www.reddit.com/r/personalfinance/wiki/budgeting/)
-- [Eslint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
+- [Biome](https://biomejs.dev/)
 - [Stylelint](https://stylelint.io/)
 - [semantic-release](https://semantic-release.gitbook.io/semantic-release/)
 - [testing-library](https://github.com/testing-library)

@@ -1,10 +1,10 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import eslint from "vite-plugin-eslint";
+import biomePlugin from "vite-plugin-biome";
 import { VitePWA } from "vite-plugin-pwa";
 import { sri } from "vite-plugin-sri3";
 
-export default defineConfig((env) => {
+export default defineConfig((_) => {
   return {
     build: {
       outDir: "build",
@@ -13,8 +13,8 @@ export default defineConfig((env) => {
       APP_VERSION: JSON.stringify(process.env.npm_package_version),
     },
     plugins: [
+      biomePlugin(),
       react(),
-      env.mode !== "test" && eslint(),
       VitePWA({
         manifest: {
           theme_color: "#282a36",

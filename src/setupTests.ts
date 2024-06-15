@@ -3,11 +3,11 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
+import { randomUUID } from "node:crypto";
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
-import { randomUUID } from "node:crypto";
 import { createElement } from "react";
-import { afterEach, expect, vi } from "vitest";
+import { afterEach, beforeEach, expect, vi } from "vitest";
 import { Budget } from "./components/Budget/Budget";
 import { ItemForm } from "./components/ItemForm/ItemForm";
 import * as AppBudgetContext from "./context/BudgetContext";
@@ -24,9 +24,7 @@ vi.mock("crypto", () => ({
 // silence recharts ResponsiveContainer error
 vi.mock("recharts", async (importOriginal) => {
   const originalModule = await importOriginal();
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     ...originalModule,
     ResponsiveContainer: () => createElement("div"),

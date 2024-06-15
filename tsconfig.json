@@ -18,7 +18,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
-    "types": ["vite-plugin-pwa/client"],
+    "types": ["vite-plugin-pwa/client"]
   },
-  "include": ["src", "e2e", "vite.config.ts"],
+  "include": ["src", "e2e", "vite.config.ts"]
 }

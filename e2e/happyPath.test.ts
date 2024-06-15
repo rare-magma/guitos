@@ -1,4 +1,3 @@
-/* eslint-disable testing-library/prefer-screen-queries */
 import { expect, test } from "@playwright/test";
 
 test("should complete the happy path", async ({ page, isMobile }) => {

@@ -1,17 +1,8 @@
 {
-  "eslint.rules.customizations": [{ "rule": "*", "severity": "warn" }],
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "yaml",
-    "github-actions-workflow" // for GitHub Actions workflow files
-  ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
   "typescript.tsdk": "node_modules/typescript/lib"
 }

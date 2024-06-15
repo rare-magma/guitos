@@ -1,6 +1,5 @@
-/* eslint-disable testing-library/prefer-screen-queries */
-import { expect, test } from "@playwright/test";
 import fs from "fs";
+import { expect, test } from "@playwright/test";
 
 test("should complete the settings happy path", async ({ page, isMobile }) => {
   await page.goto("/");
