@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { testBudgetList } from "../../setupTests";
 import { Budget } from "../Budget/Budget";
 import { Chart } from "./Chart";
@@ -20,7 +21,6 @@ describe("Chart", () => {
   );
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     delete window.ResizeObserver;
     window.ResizeObserver = vi.fn().mockImplementation(() => ({

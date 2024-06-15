@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { Stat } from "./Stat";
 
 describe("Stat", () => {

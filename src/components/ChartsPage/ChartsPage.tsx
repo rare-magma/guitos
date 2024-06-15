@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import {
   Button,
   Col,
@@ -75,9 +75,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
     ["/", "f"],
     (e) =>
       !e.repeat &&
-      focusRef(
-        filterRef as unknown as React.MutableRefObject<HTMLInputElement>,
-      ),
+      focusRef(filterRef as unknown as MutableRefObject<HTMLInputElement>),
     { preventDefault: true },
   );
 

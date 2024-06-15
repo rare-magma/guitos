@@ -89,9 +89,9 @@ export function CalculateButton({
       });
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     getHistory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showHistory]);
 
   return (

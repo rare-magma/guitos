@@ -1,4 +1,5 @@
 import { produce } from "immer";
+import React from "react";
 import { RefObject, useRef, useState } from "react";
 import {
   Button,
@@ -108,9 +109,11 @@ export function ItemFormGroup({
           break;
       }
 
-      isExpense
-        ? (draft.expenses.total = roundBig(calcTotal(draft.expenses.items), 2))
-        : (draft.incomes.total = roundBig(calcTotal(draft.incomes.items), 2));
+      if (isExpense) {
+        draft.expenses.total = roundBig(calcTotal(draft.expenses.items), 2);
+      } else {
+        draft.incomes.total = roundBig(calcTotal(draft.incomes.items), 2);
+      }
       draft.stats.available = roundBig(calcAvailable(draft), 2);
       draft.stats.withGoal = calcWithGoal(draft);
       draft.stats.saved = calcSaved(draft);
@@ -125,7 +128,11 @@ export function ItemFormGroup({
 
     const newTable = isExpense ? ({} as Expense) : ({} as Income);
     const newState = produce((draft) => {
-      isExpense ? (draft.expenses = newTable) : (draft.incomes = newTable);
+      if (isExpense) {
+        draft.expenses = newTable;
+      } else {
+        draft.incomes = newTable;
+      }
       newTable.items = table.items.filter((item) => item.id !== toBeDeleted.id);
       newTable.total = roundBig(calcTotal(newTable.items), 2);
       draft.stats.available = roundBig(calcAvailable(draft), 2);

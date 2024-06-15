@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { itemForm1, itemForm2 } from "../../setupTests";
 import { Expense } from "./Expense";
 

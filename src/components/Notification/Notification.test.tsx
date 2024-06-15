@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { describe, expect, it } from "vitest";
 import { BudgetNotification } from "../../context/GeneralContext";
 import { setNotificationsMock, undoMock } from "../../setupTests";
 import { Notification } from "./Notification";

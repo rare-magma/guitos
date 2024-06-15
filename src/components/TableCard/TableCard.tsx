@@ -47,9 +47,11 @@ export function TableCard({ header: label }: TableCardProps) {
   function reorderTable(newOrder: ItemForm[]) {
     if (!budget) return;
     const newState = produce((draft) => {
-      isExpense
-        ? (draft.expenses.items = newOrder)
-        : (draft.incomes.items = newOrder);
+      if (isExpense) {
+        draft.expenses.items = newOrder;
+      } else {
+        draft.incomes.items = newOrder;
+      }
     }, budget);
     setBudget(newState(), true);
   }
@@ -57,7 +59,11 @@ export function TableCard({ header: label }: TableCardProps) {
   function handleTableChange(item: Income | Expense) {
     if (!budget) return;
     const newState = produce((draft) => {
-      isExpense ? (draft.expenses = item) : (draft.incomes = item);
+      if (isExpense) {
+        draft.expenses = item;
+      } else {
+        draft.incomes = item;
+      }
       draft.stats.available = roundBig(calcAvailable(draft), 2);
       draft.stats.withGoal = calcWithGoal(draft);
       draft.stats.saved = calcSaved(draft);

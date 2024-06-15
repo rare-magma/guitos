@@ -76,6 +76,7 @@ export function BudgetPage() {
 
   // useWhatChanged([budget, name]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     try {
       const shouldLoadBudgetsFromList =
@@ -98,7 +99,6 @@ export function BudgetPage() {
       handleError(e);
       setLoadingFromDB(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, loadingFromDB]);
 
   return (

@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import Papa from "papaparse";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useParams } from "react-router-dom";
 import { Budget } from "../components/Budget/Budget";
@@ -446,9 +446,9 @@ export function useDB() {
       });
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     saveBudget(budget);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [budget]);
 
   return {

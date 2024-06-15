@@ -1,6 +1,7 @@
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import React from "react";
+import { createRef } from "react";
+import { describe, expect, it } from "vitest";
 import {
   configContextSpy,
   itemForm1,
@@ -11,7 +12,7 @@ import {
 import { ItemFormGroup } from "./ItemFormGroup";
 
 describe("ItemFormGroup", () => {
-  const ref = React.createRef<HTMLInputElement>();
+  const ref = createRef<HTMLInputElement>();
   const comp = (
     <ItemFormGroup
       itemForm={itemForm1}

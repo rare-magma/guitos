@@ -1,9 +1,10 @@
+import { RefObject } from "react";
 import { Button, Nav, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 
 interface NavBarDeleteProps {
-  deleteButtonRef: React.RefObject<HTMLButtonElement>;
+  deleteButtonRef: RefObject<HTMLButtonElement>;
   handleRemove: (i: string) => void;
   expanded: boolean;
 }

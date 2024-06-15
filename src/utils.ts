@@ -40,7 +40,9 @@ export function calcTotal(values: ItemForm[]): Big {
   values &&
     values
       .filter((x) => !isNaN(x.value))
-      .forEach((i) => (total = total.add(Big(i.value))));
+      .forEach((i) => {
+        total = total.add(Big(i.value));
+      });
   return total;
 }
 

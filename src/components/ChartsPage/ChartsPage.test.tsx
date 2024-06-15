@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import ChartsPage from "./ChartsPage";
 
 describe("ChartsPage", () => {
@@ -8,7 +9,6 @@ describe("ChartsPage", () => {
   const comp = <ChartsPage onShowGraphs={onShowGraphs} />;
 
   beforeEach(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     delete window.ResizeObserver;
     window.ResizeObserver = vi.fn().mockImplementation(() => ({
