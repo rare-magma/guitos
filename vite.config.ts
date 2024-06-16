@@ -1,4 +1,4 @@
-import react from "@vitejs/plugin-react";
+import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
 import biomePlugin from "vite-plugin-biome";
 import { VitePWA } from "vite-plugin-pwa";
@@ -12,9 +12,12 @@ export default defineConfig((_) => {
     define: {
       APP_VERSION: JSON.stringify(process.env.npm_package_version),
     },
+    resolve: {
+      extensions: [".js", ".ts", ".tsx"],
+    },
     plugins: [
       biomePlugin(),
-      react(),
+      react({ devTarget: "es2022" }),
       VitePWA({
         manifest: {
           theme_color: "#282a36",

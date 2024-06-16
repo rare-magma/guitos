@@ -62,7 +62,7 @@
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
     "@types/react-table": "7.7.20",
-    "@vitejs/plugin-react": "4.2.1",
+    "@vitejs/plugin-react-swc": "3.7.0",
     "@vitest/coverage-v8": "1.5.2",
     "@vitest/ui": "1.5.2",
     "autoprefixer": "10.4.19",
