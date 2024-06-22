@@ -85,29 +85,10 @@ jobs:
           persist-credentials: false
           check-latest-tag-only: true
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+
+      - uses: go-semantic-release/action@v1
+        id: semrel
         with:
-          version: 9.4.0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
-
-      - name: Configure git for github-actions[bot]
-        run: |
-          git remote set-url origin "https://${GITHUB_TOKEN}:x-oauth-basic@github.com/${GITHUB_REPOSITORY}.git"
-          git config --local user.email "${GITHUB_EMAIL}"
-          git config --local user.name "${GITHUB_USER}"
-        env:
-          GITHUB_USER: github-actions[bot]
-          GITHUB_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update changelog, bump version & publish if needed
-        run: pnpx @favware/cliff-jumper --name "guitos" --package-path "." --push-tag --github-release --github-repo "${GITHUB_REPO}" --github-token "${GITHUB_TOKEN}"
-        env:
-          GITHUB_REPO: ${{ github.repository }}
-          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+          github-token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
+          update-file: package.json
+          prepend: true

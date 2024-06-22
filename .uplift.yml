@@ -1,5 +1,0 @@
-bumps:
-  - file: package.json
-    json:
-      - path: "version"
-        semver: true
