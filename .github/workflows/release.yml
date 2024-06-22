@@ -93,3 +93,8 @@ jobs:
           update-file: package.json
           changelog-file: CHANGELOG.md
           prepend: true
+          hooks: exec
+          custom-arguments: "--hooks-opt exec_on_success=git config user.name '${GITHUB_USER}' && git config user.email '${GITHUB_EMAIL}' && git add CHANGELOG.md package.json && git commit -m 'chore(release): {{.NewRelease.Version}}' && git push"
+        env:
+          GITHUB_USER: github-actions[bot]
+          GITHUB_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
