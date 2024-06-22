@@ -78,5 +78,6 @@
     "vite-plugin-sri3": "1.0.5",
     "vitest": "1.5.2",
     "workbox-window": "7.1.0"
-  }
+  },
+  "packageManager": "pnpm@9.4.0"
 }
