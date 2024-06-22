@@ -47,6 +47,7 @@
     "usehooks-ts": "3.1.0"
   },
   "devDependencies": {
+    "@anolilab/semantic-release-pnpm": "1.1.3",
     "@biomejs/biome": "1.8.1",
     "@playwright/test": "1.42.1",
     "@semantic-release/changelog": "6.0.3",

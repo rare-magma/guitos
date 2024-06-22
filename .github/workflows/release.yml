@@ -84,11 +84,16 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.4.0
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
@@ -97,7 +102,7 @@ jobs:
             @semantic-release/commit-analyzer
             @semantic-release/release-notes-generator
             @semantic-release/changelog
-            @semantic-release/npm
+            @anolilab/semantic-release-pnpm
             @semantic-release/github
             @semantic-release/git
         env:
