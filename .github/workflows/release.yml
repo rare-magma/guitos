@@ -108,6 +108,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update changelog, bump version & publish if needed
-        run: pnpx @favware/cliff-jumper --name "guitos" --package-path "." --push-tag --github-release --github-repo "${GITHUB_REPO}" --github-token "${SEMANTIC_RELEASE_TOKEN}"
+        run: pnpx @favware/cliff-jumper --name "guitos" --package-path "." --push-tag --github-release --github-repo "${GITHUB_REPO}" --github-token "${GITHUB_TOKEN}"
         env:
+          GITHUB_REPO: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
