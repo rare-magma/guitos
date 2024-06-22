@@ -91,4 +91,5 @@ jobs:
         with:
           github-token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
           update-file: package.json
+          changelog-file: CHANGELOG.md
           prepend: true
