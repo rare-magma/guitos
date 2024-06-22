@@ -274,7 +274,7 @@ See [LICENSE](LICENSE) for more information.
 - [r/personalfinance](https://www.reddit.com/r/personalfinance/wiki/budgeting/)
 - [Biome](https://biomejs.dev/)
 - [Stylelint](https://stylelint.io/)
-- [semantic-release](https://semantic-release.gitbook.io/semantic-release/)
+- [git-cliff](https://git-cliff.org/)
 - [testing-library](https://github.com/testing-library)
 - [vite-plugin-pwa](https://github.com/vite-pwa/vite-plugin-pwa)
 - [vitest](https://github.com/vitest-dev/vitest)
