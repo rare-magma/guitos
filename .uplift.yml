@@ -3,10 +3,3 @@ bumps:
     json:
       - path: "version"
         semver: true
-changelog:
-  exclude:
-    - '^chore\(deps\)'
-    - ^docs
-    - ^ci
-    - ^test
-    - ^style
