@@ -4,5 +4,12 @@
   },
   "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "search.exclude": {
+    "pnpm-lock.yaml": true
+  },
+  "npm.packageManager": "pnpm",
+  "explorer.fileNesting.patterns": {
+    "package.json": "pnpm-lock.yaml"
+  }
 }
