@@ -97,9 +97,9 @@ jobs:
 
       - name: Update changelog & bump package.json
         if: steps.semrel.outputs.version != ''
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: '["CHANGELOG.md", "package.json"]'
-          author_name: github-actions[bot]
-          author_email: 41898282+github-actions[bot]@users.noreply.github.com
-          message: 'chore(release): ${{ steps.semrel.outputs.version }}'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CHANGELOG.md package.json
+          git commit -m "chore(release): ${{ steps.semrel.outputs.version }}"
+          git push https://${{ secrets.SEMANTIC_RELEASE_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git main
