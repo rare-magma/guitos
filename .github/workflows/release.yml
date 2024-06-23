@@ -87,14 +87,19 @@ jobs:
           fetch-depth: 0
 
       - name: Semantic Release
+        id: semrel
         uses: go-semantic-release/action@v1
         with:
           github-token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
           update-file: package.json
           changelog-file: CHANGELOG.md
           prepend: true
-          hooks: exec
-          custom-arguments: "--hooks-opt exec_on_success=./semantic-release.sh"
-        env:
-          GITHUB_USER: github-actions[bot]
-          GITHUB_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Update changelog & bump package.json
+        if: steps.semrel.outputs.version != ''
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: '["CHANGELOG.md", "package.json"]'
+          author_name: github-actions[bot]
+          author_email: 41898282+github-actions[bot]@users.noreply.github.com
+          message: 'chore(release): ${{ steps.semrel.outputs.version }}'
