@@ -74,7 +74,7 @@ importers:
         version: 2.0.0(react@18.2.0)
       '@testing-library/jest-dom':
         specifier: 6.4.2
-        version: 6.4.2(@types/jest@29.5.12)(vitest@1.5.2(@types/node@20.12.7)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0))
+        version: 6.4.2(@types/jest@29.5.12)(vitest@1.5.2(@types/node@20.14.8)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0))
       '@testing-library/react':
         specifier: 14.2.1
         version: 14.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -88,8 +88,8 @@ importers:
         specifier: 29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: 20.12.7
-        version: 20.12.7
+        specifier: 20.14.8
+        version: 20.14.8
       '@types/papaparse':
         specifier: 5.3.14
         version: 5.3.14
@@ -104,10 +104,10 @@ importers:
         version: 7.7.20
       '@vitejs/plugin-react-swc':
         specifier: 3.7.0
-        version: 3.7.0(@swc/helpers@0.5.3)(vite@5.2.10(@types/node@20.12.7)(terser@5.21.0))
+        version: 3.7.0(@swc/helpers@0.5.3)(vite@5.2.10(@types/node@20.14.8)(terser@5.21.0))
       '@vitest/coverage-v8':
         specifier: 1.5.2
-        version: 1.5.2(vitest@1.5.2(@types/node@20.12.7)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0))
+        version: 1.5.2(vitest@1.5.2(@types/node@20.14.8)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0))
       '@vitest/ui':
         specifier: 1.5.2
         version: 1.5.2(vitest@1.5.2)
@@ -131,19 +131,19 @@ importers:
         version: 5.4.5
       vite:
         specifier: 5.2.10
-        version: 5.2.10(@types/node@20.12.7)(terser@5.21.0)
+        version: 5.2.10(@types/node@20.14.8)(terser@5.21.0)
       vite-plugin-biome:
         specifier: 1.0.10
         version: 1.0.10(@biomejs/biome@1.8.1)
       vite-plugin-pwa:
         specifier: 0.19.8
-        version: 0.19.8(vite@5.2.10(@types/node@20.12.7)(terser@5.21.0))(workbox-build@7.0.0(@types/babel__core@7.20.5))(workbox-window@7.1.0)
+        version: 0.19.8(vite@5.2.10(@types/node@20.14.8)(terser@5.21.0))(workbox-build@7.0.0(@types/babel__core@7.20.5))(workbox-window@7.1.0)
       vite-plugin-sri3:
         specifier: 1.0.5
-        version: 1.0.5(vite@5.2.10(@types/node@20.12.7)(terser@5.21.0))
+        version: 1.0.5(vite@5.2.10(@types/node@20.14.8)(terser@5.21.0))
       vitest:
         specifier: 1.5.2
-        version: 1.5.2(@types/node@20.12.7)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0)
+        version: 1.5.2(@types/node@20.14.8)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0)
       workbox-window:
         specifier: 7.1.0
         version: 7.1.0
@@ -1333,6 +1333,9 @@ packages:
   '@types/node@20.12.7':
     resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
 
+  '@types/node@20.14.8':
+    resolution: {integrity: sha512-DO+2/jZinXfROG7j7WKFn/3C6nFwxy2lLpgLjEXJz+0XKphZlTLJ14mo8Vfg8X5BWN6XjyESXq+LcYdT7tR3bA==}
+
   '@types/papaparse@5.3.14':
     resolution: {integrity: sha512-LxJ4iEFcpqc6METwp9f6BV6VVc43m6MfH0VqFosHvrUgfXiFe6ww7R3itkOQ+TCK6Y+Iv/+RnnvtRZnkc5Kc9g==}
 
@@ -1990,6 +1993,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   global-modules@2.0.0:
     resolution: {integrity: sha512-NGbfmJBp9x8IxyJSd1P+otYK8vonoJactOogrVfFRIAEY1ukil8RSKDz2Yo7wh1oihl51l/r6W4epkeKJHqL8A==}
@@ -2108,6 +2112,7 @@ packages:
 
   inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
 
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
@@ -3356,6 +3361,7 @@ packages:
 
   workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
 
   workbox-navigation-preload@7.0.0:
     resolution: {integrity: sha512-juWCSrxo/fiMz3RsvDspeSLGmbgC0U9tKqcUPZBCf35s64wlaLXyn2KdHHXVQrb2cqF7I0Hc9siQalainmnXJA==}
@@ -4273,7 +4279,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.4
       '@types/istanbul-reports': 3.0.2
-      '@types/node': 20.12.7
+      '@types/node': 20.14.8
       '@types/yargs': 17.0.28
       chalk: 4.1.2
 
@@ -4517,7 +4523,7 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/jest-dom@6.4.2(@types/jest@29.5.12)(vitest@1.5.2(@types/node@20.12.7)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0))':
+  '@testing-library/jest-dom@6.4.2(@types/jest@29.5.12)(vitest@1.5.2(@types/node@20.14.8)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0))':
     dependencies:
       '@adobe/css-tools': 4.3.2
       '@babel/runtime': 7.23.2
@@ -4529,7 +4535,7 @@ snapshots:
       redent: 3.0.0
     optionalDependencies:
       '@types/jest': 29.5.12
-      vitest: 1.5.2(@types/node@20.12.7)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0)
+      vitest: 1.5.2(@types/node@20.14.8)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0)
 
   '@testing-library/react@14.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
@@ -4619,9 +4625,13 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
+  '@types/node@20.14.8':
+    dependencies:
+      undici-types: 5.26.5
+
   '@types/papaparse@5.3.14':
     dependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.14.8
 
   '@types/prop-types@15.7.8': {}
 
@@ -4658,14 +4668,14 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.1
 
-  '@vitejs/plugin-react-swc@3.7.0(@swc/helpers@0.5.3)(vite@5.2.10(@types/node@20.12.7)(terser@5.21.0))':
+  '@vitejs/plugin-react-swc@3.7.0(@swc/helpers@0.5.3)(vite@5.2.10(@types/node@20.14.8)(terser@5.21.0))':
     dependencies:
       '@swc/core': 1.6.1(@swc/helpers@0.5.3)
-      vite: 5.2.10(@types/node@20.12.7)(terser@5.21.0)
+      vite: 5.2.10(@types/node@20.14.8)(terser@5.21.0)
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@vitest/coverage-v8@1.5.2(vitest@1.5.2(@types/node@20.12.7)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0))':
+  '@vitest/coverage-v8@1.5.2(vitest@1.5.2(@types/node@20.14.8)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0))':
     dependencies:
       '@ampproject/remapping': 2.2.1
       '@bcoe/v8-coverage': 0.2.3
@@ -4680,7 +4690,7 @@ snapshots:
       std-env: 3.6.0
       strip-literal: 2.1.0
       test-exclude: 6.0.0
-      vitest: 1.5.2(@types/node@20.12.7)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0)
+      vitest: 1.5.2(@types/node@20.14.8)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -4715,7 +4725,7 @@ snapshots:
       pathe: 1.1.1
       picocolors: 1.0.0
       sirv: 2.0.4
-      vitest: 1.5.2(@types/node@20.12.7)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0)
+      vitest: 1.5.2(@types/node@20.14.8)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0)
 
   '@vitest/utils@1.5.2':
     dependencies:
@@ -5679,7 +5689,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 20.12.7
+      '@types/node': 20.14.8
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -6688,13 +6698,13 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vite-node@1.5.2(@types/node@20.12.7)(terser@5.21.0):
+  vite-node@1.5.2(@types/node@20.14.8)(terser@5.21.0):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 5.2.10(@types/node@20.12.7)(terser@5.21.0)
+      vite: 5.2.10(@types/node@20.14.8)(terser@5.21.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -6709,32 +6719,32 @@ snapshots:
     dependencies:
       '@biomejs/biome': 1.8.1
 
-  vite-plugin-pwa@0.19.8(vite@5.2.10(@types/node@20.12.7)(terser@5.21.0))(workbox-build@7.0.0(@types/babel__core@7.20.5))(workbox-window@7.1.0):
+  vite-plugin-pwa@0.19.8(vite@5.2.10(@types/node@20.14.8)(terser@5.21.0))(workbox-build@7.0.0(@types/babel__core@7.20.5))(workbox-window@7.1.0):
     dependencies:
       debug: 4.3.4
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
-      vite: 5.2.10(@types/node@20.12.7)(terser@5.21.0)
+      vite: 5.2.10(@types/node@20.14.8)(terser@5.21.0)
       workbox-build: 7.0.0(@types/babel__core@7.20.5)
       workbox-window: 7.1.0
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-sri3@1.0.5(vite@5.2.10(@types/node@20.12.7)(terser@5.21.0)):
+  vite-plugin-sri3@1.0.5(vite@5.2.10(@types/node@20.14.8)(terser@5.21.0)):
     dependencies:
-      vite: 5.2.10(@types/node@20.12.7)(terser@5.21.0)
+      vite: 5.2.10(@types/node@20.14.8)(terser@5.21.0)
 
-  vite@5.2.10(@types/node@20.12.7)(terser@5.21.0):
+  vite@5.2.10(@types/node@20.14.8)(terser@5.21.0):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.16.4
     optionalDependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.14.8
       fsevents: 2.3.3
       terser: 5.21.0
 
-  vitest@1.5.2(@types/node@20.12.7)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0):
+  vitest@1.5.2(@types/node@20.14.8)(@vitest/ui@1.5.2)(jsdom@24.0.0)(terser@5.21.0):
     dependencies:
       '@vitest/expect': 1.5.2
       '@vitest/runner': 1.5.2
@@ -6753,11 +6763,11 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.5.1
       tinypool: 0.8.4
-      vite: 5.2.10(@types/node@20.12.7)(terser@5.21.0)
-      vite-node: 1.5.2(@types/node@20.12.7)(terser@5.21.0)
+      vite: 5.2.10(@types/node@20.14.8)(terser@5.21.0)
+      vite-node: 1.5.2(@types/node@20.14.8)(terser@5.21.0)
       why-is-node-running: 2.2.2
     optionalDependencies:
-      '@types/node': 20.12.7
+      '@types/node': 20.14.8
       '@vitest/ui': 1.5.2(vitest@1.5.2)
       jsdom: 24.0.0
     transitivePeerDependencies:
