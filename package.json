@@ -46,7 +46,7 @@
     "@vitest/ui": "1.5.2",
     "autoprefixer": "10.4.19",
     "console-fail-test": "0.2.3",
-    "jsdom": "24.0.0",
+    "jsdom": "24.1.0",
     "stylelint": "16.4.0",
     "stylelint-config-standard": "36.0.0",
     "typescript": "5.4.5",
