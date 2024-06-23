@@ -94,7 +94,7 @@ jobs:
           changelog-file: CHANGELOG.md
           prepend: true
           hooks: exec
-          custom-arguments: "--hooks-opt exec_on_success=semantic-release.sh {{.NewRelease.Version}}"
+          custom-arguments: "--hooks-opt exec_on_success=./semantic-release.sh {{.NewRelease.Version}}"
         env:
           GITHUB_USER: github-actions[bot]
           GITHUB_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
