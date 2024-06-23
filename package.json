@@ -1,23 +1,4 @@
 {
-  "name": "guitos",
-  "version": "0.35.1",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "vite build",
-    "bundle": "pnpm dlx vite-bundle-visualizer",
-    "coverage": "vitest run --coverage --silent --exclude 'e2e'",
-    "coverage:ui": "vitest --ui --open --coverage --silent --exclude 'e2e'",
-    "e2e": "playwright test --reporter=list --project chromium",
-    "e2e:mobile": "playwright test --reporter=list --project 'Mobile Chrome'",
-    "e2e:mobile:ui": "playwright test --ui --project 'Mobile Chrome'",
-    "e2e:ui": "playwright test --ui --project chromium",
-    "lint": "pnpm biome check --fix && pnpm stylelint src/**/*.css --fix",
-    "lint:packages": "pnpm dedupe",
-    "serve": "vite preview",
-    "start": "vite",
-    "test": "vitest --exclude 'e2e'"
-  },
   "browserslist": {
     "production": "defaults",
     "development": [
@@ -76,5 +57,24 @@
     "vitest": "1.5.2",
     "workbox-window": "7.1.0"
   },
-  "packageManager": "pnpm@9.4.0"
+  "name": "guitos",
+  "packageManager": "pnpm@9.4.0",
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "bundle": "pnpm dlx vite-bundle-visualizer",
+    "coverage": "vitest run --coverage --silent --exclude 'e2e'",
+    "coverage:ui": "vitest --ui --open --coverage --silent --exclude 'e2e'",
+    "e2e": "playwright test --reporter=list --project chromium",
+    "e2e:mobile": "playwright test --reporter=list --project 'Mobile Chrome'",
+    "e2e:mobile:ui": "playwright test --ui --project 'Mobile Chrome'",
+    "e2e:ui": "playwright test --ui --project chromium",
+    "lint": "pnpm biome check --fix \u0026\u0026 pnpm stylelint src/**/*.css --fix",
+    "lint:packages": "pnpm dedupe",
+    "serve": "vite preview",
+    "start": "vite",
+    "test": "vitest --exclude 'e2e'"
+  },
+  "type": "module",
+  "version": "1.0.0"
 }
