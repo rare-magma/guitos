@@ -95,13 +95,39 @@ jobs:
           changelog-file: CHANGELOG.md
           prepend: true
 
-      - name: Update changelog & bump package.json
+      - name: Commit changelog & package.json updates
         if: steps.semrel.outputs.version != ''
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add CHANGELOG.md package.json
           git commit -m "chore(release): ${{ steps.semrel.outputs.version }}"
-          git push --delete https://${{ secrets.SEMANTIC_RELEASE_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git v${{ steps.semrel.outputs.version }}
-          git tag v${{ steps.semrel.outputs.version }}
-          git push --tags https://${{ secrets.SEMANTIC_RELEASE_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git main
+          git push https://${{ secrets.SEMANTIC_RELEASE_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git main
+
+      - name: Install pnpm
+        if: steps.semrel.outputs.version != ''
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.4.0
+
+      - name: Setup Node
+        if: steps.semrel.outputs.version != ''
+        uses: actions/setup-node@v4
+        with:
+          cache: "pnpm"
+
+      - name: Install dependencies
+        if: steps.semrel.outputs.version != ''
+        run: pnpm install
+
+      - name: Build
+        if: steps.semrel.outputs.version != ''
+        run: pnpm build
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.semrel.outputs.version != ''
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy build --project-name=guitos
