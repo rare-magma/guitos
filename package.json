@@ -56,7 +56,6 @@
     "workbox-window": "7.1.0"
   },
   "name": "guitos",
-  "packageManager": "pnpm@9.4.0",
   "private": true,
   "scripts": {
     "build": "vite build",
