@@ -127,8 +127,8 @@ importers:
         specifier: 5.2.10
         version: 5.2.10(@types/node@20.14.8)(terser@5.21.0)
       vite-plugin-biome:
-        specifier: 1.0.10
-        version: 1.0.10(@biomejs/biome@1.8.1)
+        specifier: 1.0.11
+        version: 1.0.11(@biomejs/biome@1.8.1)
       vite-plugin-pwa:
         specifier: 0.19.8
         version: 0.19.8(vite@5.2.10(@types/node@20.14.8)(terser@5.21.0))(workbox-build@7.0.0(@types/babel__core@7.20.5))(workbox-window@7.1.0)
@@ -2938,10 +2938,10 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
-  vite-plugin-biome@1.0.10:
-    resolution: {integrity: sha512-jUmAr0hmls8g6PQc7Jy7GKGhHA2dxWcZ3p4+hXi9RPKV3lIrYfJi1W+F36N5gUu3no8QlEkUOEgUdbiNVnDvUw==}
+  vite-plugin-biome@1.0.11:
+    resolution: {integrity: sha512-5mQlQzvjOP1Odp6NSE6BRicmTByuycbzbWeulme/t4Bad/rMG5nex9V9k+qqqMMCDo6CyU6cmchS4gb6kYF8/w==}
     peerDependencies:
-      '@biomejs/biome': ^1.4.1
+      '@biomejs/biome': ^1.8.0
 
   vite-plugin-pwa@0.19.8:
     resolution: {integrity: sha512-e1oK0dfhzhDhY3VBuML6c0h8Xfx6EkOVYqolj7g+u8eRfdauZe5RLteCIA/c5gH0CBQ0CNFAuv/AFTx4Z7IXTw==}
@@ -3087,6 +3087,7 @@ packages:
 
   workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
 
   workbox-navigation-preload@7.0.0:
     resolution: {integrity: sha512-juWCSrxo/fiMz3RsvDspeSLGmbgC0U9tKqcUPZBCf35s64wlaLXyn2KdHHXVQrb2cqF7I0Hc9siQalainmnXJA==}
@@ -6175,7 +6176,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-biome@1.0.10(@biomejs/biome@1.8.1):
+  vite-plugin-biome@1.0.11(@biomejs/biome@1.8.1):
     dependencies:
       '@biomejs/biome': 1.8.1
 
