@@ -1,6 +1,5 @@
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
-import biomePlugin from "vite-plugin-biome";
 import { VitePWA } from "vite-plugin-pwa";
 import { sri } from "vite-plugin-sri3";
 
@@ -16,7 +15,6 @@ export default defineConfig((_) => {
       extensions: [".js", ".ts", ".tsx"],
     },
     plugins: [
-      biomePlugin(),
       react({ devTarget: "es2022" }),
       VitePWA({
         manifest: {
