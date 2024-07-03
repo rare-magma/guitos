@@ -28,7 +28,7 @@
     "usehooks-ts": "3.1.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.1",
+    "@biomejs/biome": "1.8.3",
     "@playwright/test": "1.42.1",
     "@simbathesailor/use-what-changed": "2.0.0",
     "@testing-library/jest-dom": "6.4.2",
