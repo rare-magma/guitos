@@ -59,9 +59,17 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   await page.getByLabel("import or export budget").click();
   await expect(page.getByText("json")).toBeVisible();
 
-  const jsonDownloadPromise = page.waitForEvent("download");
-  await page.getByLabel("export budget as json").click();
-  const jsonDownload = await jsonDownloadPromise;
+  const [jsonDownload] = await Promise.all([
+    page.waitForEvent("download"),
+    page.getByLabel("export budget as json").click(),
+  ]);
+
+  let downloadError = await jsonDownload.failure();
+  if (downloadError !== null) {
+    console.log("Error on download:", downloadError);
+    throw new Error(downloadError);
+  }
+
   expect(jsonDownload.suggestedFilename()).toMatch(/.json/);
   expect(
     (await fs.promises.stat(await jsonDownload.path())).size,
