@@ -1,3 +1,37 @@
+## 1.0.1 (2024-07-25)
+
+#### Bug Fixes
+
+* menu header spacing (9e5d1a59)
+
+#### Tests
+
+* fix flaky download assertion (43f63a25)
+
+#### Chores
+
+* **release:** 1.0.0 (0029af80)
+
+#### Build
+
+* **deps:** bump react-router-dom from 6.23.0 to 6.24.0 (#129) (9dcc5cd4)
+* **deps-dev:** bump @playwright/test from 1.42.1 to 1.45.1 (#131) (5a2f41cd)
+* **deps-dev:** bump vite from 5.2.10 to 5.3.3 (#130) (7a5596bc)
+* **deps-dev:** bump @biomejs/biome from 1.8.1 to 1.8.3 (#126) (8559b2ab)
+* **deps-dev:** bump jsdom from 24.0.0 to 24.1.0 (#117) (8752cc23)
+* **deps:** bump immer from 10.0.4 to 10.1.1 (#118) (e8c1867f)
+* **deps-dev:** bump @types/node from 20.12.7 to 20.14.8 (#124) (129e959a)
+
+#### CI
+
+* set node version (935c53fc)
+* lower playwright timeout to 11 seconds (0a567fe8)
+* remove redundant vite-plugin-biome (55a16255)
+* remove packagemanager field (52590a22)
+* replace stylelint with biome (2a10c7d1)
+* delete unused script (bc64a66e)
+
+
 ## 1.0.0 (2024-06-23)
 
 #### Bug Fixes
