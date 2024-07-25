@@ -39,8 +39,9 @@ export interface SearchOption {
 
 export function NavBar() {
   const searchRef = useRef<TypeaheadRef>(null);
-  const nameRef =
-    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
+  const nameRef = useRef<HTMLInputElement>() as React.MutableRefObject<
+    HTMLInputElement
+  >;
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
 
   const [expanded, setExpanded] = useState(false);
@@ -97,8 +98,9 @@ export function NavBar() {
       setTheme("dark");
     }
 
-    mediaQueryList.addEventListener("change", (event) =>
-      setTheme(event.matches ? "dark" : "light"),
+    mediaQueryList.addEventListener(
+      "change",
+      (event) => setTheme(event.matches ? "dark" : "light"),
     );
   }, []);
 
@@ -238,7 +240,9 @@ export function NavBar() {
           placement="end"
           show={expanded}
         >
-          <Offcanvas.Header>
+          <Offcanvas.Header
+            style={{ justifyContent: "space-between" }}
+          >
             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
               {budget?.name ?? "guitos"}
             </Offcanvas.Title>
@@ -285,13 +289,11 @@ export function NavBar() {
                     buttonAriaLabel={"undo change"}
                     buttonClassName="w-100"
                     buttonVariant={"outline-info"}
-                    buttonIcon={
-                      expanded ? (
+                    buttonIcon={expanded
+                      ? (
                         "undo"
-                      ) : (
-                        <BsArrowCounterclockwise aria-hidden />
                       )
-                    }
+                      : <BsArrowCounterclockwise aria-hidden />}
                   />
 
                   <NavBarItem
@@ -303,9 +305,9 @@ export function NavBar() {
                     buttonAriaLabel={"redo change"}
                     buttonClassName="w-100"
                     buttonVariant={"outline-info"}
-                    buttonIcon={
-                      expanded ? "redo" : <BsArrowClockwise aria-hidden />
-                    }
+                    buttonIcon={expanded
+                      ? "redo"
+                      : <BsArrowClockwise aria-hidden />}
                   />
                 </>
               )}
@@ -358,9 +360,9 @@ export function NavBar() {
                 buttonClassName="w-100"
                 buttonVariant={"outline-info"}
                 buttonLink="https://github.com/rare-magma/guitos#getting-started"
-                buttonIcon={
-                  expanded ? "instructions" : <BsQuestionLg aria-hidden />
-                }
+                buttonIcon={expanded
+                  ? "instructions"
+                  : <BsQuestionLg aria-hidden />}
                 target="_blank"
               />
             </Nav>
