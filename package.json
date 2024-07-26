@@ -73,5 +73,5 @@
     "test": "vitest --exclude 'e2e'"
   },
   "type": "module",
-  "version": "1.0.1"
+  "version": "1.0.2"
 }

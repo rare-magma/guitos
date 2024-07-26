@@ -1,3 +1,18 @@
+## 1.0.2 (2024-07-26)
+
+#### Bug Fixes
+
+* missing accessibility labels and tests (b4c7642b)
+
+#### Chores
+
+* **release:** 1.0.1 (e87d4f51)
+
+#### Build
+
+* add axe-core/playwright (a27bccf9)
+
+
 ## 1.0.1 (2024-07-25)
 
 #### Bug Fixes
