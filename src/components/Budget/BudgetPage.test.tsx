@@ -1,5 +1,6 @@
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { act } from "react-dom/test-utils";
 import { describe, expect, it } from "vitest";
 import { budgetsDB } from "../../db";
 import {
@@ -25,7 +26,9 @@ describe("BudgetPage", () => {
   it("renders initial state", async () => {
     render(comp);
     const newButton = screen.getAllByRole("button", { name: "new budget" });
-    await userEvent.click(newButton[0]);
+    await act(async () => {
+      await userEvent.click(newButton[0]);
+    });
     expect(screen.getByLabelText("delete budget")).toBeInTheDocument();
   });
 
