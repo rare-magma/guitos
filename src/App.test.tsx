@@ -34,7 +34,9 @@ describe("App", () => {
   it("shows new budget when clicking new button", async () => {
     render(comp);
     const newButton = screen.getAllByRole("button", { name: "new budget" });
-    await userEvent.click(newButton[0]);
+    await act(async () => {
+      await userEvent.click(newButton[0]);
+    });
     expect(screen.getByLabelText("delete budget")).toBeInTheDocument();
     expect(screen.getByLabelText("clone budget")).toBeInTheDocument();
     expect(await screen.findByText("Statistics")).toBeInTheDocument();
