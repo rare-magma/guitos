@@ -28,6 +28,7 @@
     "usehooks-ts": "3.1.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.9.1",
     "@biomejs/biome": "1.8.3",
     "@playwright/test": "1.45.1",
     "@simbathesailor/use-what-changed": "2.0.0",

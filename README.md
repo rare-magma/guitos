@@ -280,3 +280,4 @@ See [LICENSE](LICENSE) for more information.
 - [Choose a license](https://choosealicense.com/)
 - [Hands on React](https://handsonreact.com)
 - [Playwright](https://playwright.dev/)
+- [@axe-core/playwright](https://github.com/dequelabs/axe-core-npm/blob/develop/packages/playwright/README.md)
