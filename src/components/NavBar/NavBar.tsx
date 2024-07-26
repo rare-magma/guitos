@@ -139,7 +139,7 @@ export function NavBar() {
       onToggle={() => setExpanded(!expanded)}
       data-testid="header"
     >
-      <Container fluid className="flex-row">
+      <Container fluid className="flex-row" role="heading" aria-level={1}>
         {shouldShowBrand && (
           <OverlayTrigger
             delay={250}

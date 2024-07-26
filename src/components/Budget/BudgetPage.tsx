@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Col, Container, Row, ToastContainer } from "react-bootstrap";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useParams } from "react-router-dom";
@@ -79,8 +79,8 @@ export function BudgetPage() {
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     try {
-      const shouldLoadBudgetsFromList =
-        budgetList && budgetList.length >= 1 && Array.isArray(budgetList);
+      const shouldLoadBudgetsFromList = budgetList && budgetList.length >= 1 &&
+        Array.isArray(budgetList);
 
       if (shouldLoadBudgetsFromList) {
         if (name.trim() !== "undefined") {
@@ -102,7 +102,12 @@ export function BudgetPage() {
   }, [name, loadingFromDB]);
 
   return (
-    <Container fluid style={{ zIndex: 1 }} key={`${budget?.id}-${needReload}`}>
+    <Container
+      fluid
+      style={{ zIndex: 1 }}
+      key={`${budget?.id}-${needReload}`}
+      role="main"
+    >
       <ToastContainer
         className="p-2"
         position={"bottom-center"}
@@ -133,7 +138,8 @@ export function BudgetPage() {
                 <div className="card-columns">
                   <StatCard
                     key={`${budget?.expenses.total} + ${budget?.incomes.total}-${budget.id}-stat-card`}
-                    onShowGraphs={() => setShowGraphs(true)}
+                    onShowGraphs={() =>
+                      setShowGraphs(true)}
                   />
 
                   <div className="mt-3" />
