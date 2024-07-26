@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "name": {
+        "type": "string"
+      },
+      "expenses": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
+              },
+              "required": ["id", "name", "value"]
+            }
+          },
+          "total": {
+            "type": "number"
+          }
+        }
+      },
+      "incomes": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "number"
+                }
+              },
+              "required": ["id", "name", "value"]
+            }
+          },
+          "total": {
+            "type": "number"
+          }
+        }
+      },
+      "stats": {
+        "type": "object",
+        "properties": {
+          "available": {
+            "type": "number"
+          },
+          "withGoal": {
+            "type": "number"
+          },
+          "saved": {
+            "type": "number"
+          },
+          "goal": {
+            "type": "number"
+          },
+          "reserves": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "required": ["id", "name", "expenses", "incomes", "stats"]
+  }
+}

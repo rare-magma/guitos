@@ -68,6 +68,7 @@
     "e2e:ui": "playwright test --ui --project chromium",
     "lint": "biome check --fix",
     "lint:packages": "pnpm dedupe",
+    "schema": "pnpm dlx generate-schema ./docs/guitos-sample.json",
     "serve": "vite preview",
     "start": "vite",
     "test": "vitest --exclude 'e2e'"
