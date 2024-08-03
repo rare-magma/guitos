@@ -1,0 +1,18 @@
+services:
+  guitos:
+    image: ghcr.io/rare-magma/guitos:latest
+    container_name: guitos
+    read_only: true
+    init: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 64m
+          pids: 10
+    ports:
+      - "3000:3000"

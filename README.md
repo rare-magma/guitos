@@ -74,7 +74,7 @@ guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cas
 It's not necessary to install anything in order to use this app.
 
 However, if you'd like to use it offline, follow the instructions for your device on:
-[web.dev](https://web.dev/learn/pwa/installation#desktop_installation)
+[web.dev](https://web.dev/learn/pwa/installation#desktop_installation) or use the [container image](#container)
 
 ## Usage
 
@@ -200,6 +200,31 @@ Keyboard shortcuts can be triggered when no input field is selected.
   - `react-currency-input-field` formats these values according to the current browser/phone's locale (language setting). If the locale uses `.` as the official decimal separator, then only this separator is allowed to be input.
     - See the following Wikipedia article for a reference: [Decimal separator](https://en.wikipedia.org/wiki/Decimal_separator)
   - Changing the browser/phone's locale to one that uses the preferred decimal separator should mitigate the problem.
+
+## Container
+
+A container image is available for offline use / self-hosting on [ghcr.io](https://github.com/rare-magma/guitos/pkgs/container/guitos).
+
+Instructions:
+
+1. Run the container with docker:
+
+```bash
+docker run --name guitos --read-only --init --cap-drop ALL --security-opt no-new-privileges:true --cpus 1 -m 64m --pids-limit 10 -p 3000:3000 ghcr.io/rare-magma/guitos:latest
+```
+
+2. Open the following link in the browser: <http://localhost:3000>
+
+## Docker compose
+
+Instructions:
+
+1. Download the [docker-compose.yaml file](https://raw.githubusercontent.com/rare-magma/guitos/main/docker/docker-compose.yaml)
+2. Run docker compose:
+
+```bash
+docker compose -f docker/docker-compose.yaml up --detach
+```
 
 ## Related Projects
 
