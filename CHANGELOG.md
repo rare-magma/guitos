@@ -1,3 +1,42 @@
+## 1.1.0 (2024-08-03)
+
+#### Feature
+
+* add container image option (a2ae58c7)
+
+#### Documentation
+
+* fix typo (10f67f7f)
+* add json schema (ae282202)
+
+#### Tests
+
+* add missing act() (be6c29dc)
+* add missing act() (fd5b8c6a)
+
+#### Styles
+
+* fix formatting (f4fd54e6)
+
+#### Chores
+
+* **release:** 1.0.2 (8e258c6d)
+
+#### Build
+
+* enable strictNullChecks (1041bca2)
+* bump deps (008d5da7)
+* **deps-dev:** bump @testing-library/react from 14.2.1 to 16.0.0 (#135) (397d0f8a)
+* **deps-dev:** bump @playwright/test from 1.45.1 to 1.45.3 (#134) (f560cf2d)
+* **deps:** bump use-immer from 0.9.0 to 0.10.0 (#133) (f1bc08a2)
+* **deps:** bump react-icons from 5.1.0 to 5.2.1 (#132) (0ad1993a)
+* **deps-dev:** bump @testing-library/jest-dom from 6.4.2 to 6.4.8 (#136) (75e3308b)
+
+#### CI
+
+* set timeouts, harden permissions, cancel builds (5f960ccb)
+
+
 ## 1.0.2 (2024-07-26)
 
 #### Bug Fixes
