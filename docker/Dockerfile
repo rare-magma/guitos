@@ -1,6 +1,7 @@
 FROM docker.io/library/node:lts-alpine as build
 RUN npm install -g pnpm
 WORKDIR /app
+RUN chown -R node:node /app
 USER node
 COPY --chown=node:node package.json pnpm-lock.yaml ./
 RUN pnpm install
