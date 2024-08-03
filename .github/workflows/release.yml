@@ -1,4 +1,7 @@
 name: Release
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 on:
   push:
     branches:
@@ -6,6 +9,9 @@ on:
 jobs:
   test:
     name: test
+    timeout-minutes: 5
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,7 +41,9 @@ jobs:
 
   e2e:
     name: e2e
-    timeout-minutes: 10
+    timeout-minutes: 5
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.45.3-jammy
@@ -75,6 +83,9 @@ jobs:
 
   release:
     name: release
+    timeout-minutes: 5
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     needs:
       - test
@@ -124,6 +135,8 @@ jobs:
 
       - name: Build
         if: steps.semrel.outputs.version != ''
+        env:
+          NODE_ENV: "production"
         run: pnpm build
 
       - name: Deploy to Cloudflare Pages

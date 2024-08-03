@@ -1,10 +1,16 @@
 name: PR
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 on:
   pull_request:
     types: [opened, reopened]
 jobs:
   test:
     name: test
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,7 +40,7 @@ jobs:
 
   e2e:
     name: e2e
-    timeout-minutes: 10
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.45.3-jammy
