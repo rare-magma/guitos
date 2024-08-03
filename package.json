@@ -23,7 +23,7 @@
     "react-icons": "5.2.1",
     "react-router-dom": "6.24.0",
     "recharts": "2.12.6",
-    "use-immer": "0.9.0",
+    "use-immer": "0.10.0",
     "use-undo": "1.1.1",
     "usehooks-ts": "3.1.0"
   },
