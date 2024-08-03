@@ -16,6 +16,7 @@
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "strictNullChecks": true,
     "strict": true,
     "target": "ES2022",
     "types": ["vite-plugin-pwa/client"]
