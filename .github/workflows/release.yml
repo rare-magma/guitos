@@ -146,3 +146,11 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy build --project-name=guitos
+
+      - name: Upload bundle to GH release
+        uses: actions/upload-artifact@v4
+        if: steps.semrel.outputs.version != ''
+        with:
+          name: guitos
+          path: build
+          compression-level: 9
