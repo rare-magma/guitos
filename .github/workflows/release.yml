@@ -147,10 +147,12 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy build --project-name=guitos
 
+      - name: Compress bundle
+        if: steps.semrel.outputs.version != ''
+        run: zip -r guitos.zip build/*
+
       - name: Upload bundle to GH release
-        uses: actions/upload-artifact@v4
+        uses: softprops/action-gh-release@v2
         if: steps.semrel.outputs.version != ''
         with:
-          name: guitos
-          path: build
-          compression-level: 9
+          files: guitos.zip
