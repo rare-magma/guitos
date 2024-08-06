@@ -1,3 +1,14 @@
+## 1.1.2 (2024-08-06)
+
+#### Bug Fixes
+
+* bundle upload on github (7d432e3f)
+
+#### Chores
+
+* **release:** 1.1.1 (fff72134)
+
+
 ## 1.1.1 (2024-08-06)
 
 #### Bug Fixes
