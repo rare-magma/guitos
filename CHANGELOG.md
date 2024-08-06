@@ -1,3 +1,29 @@
+## 1.1.1 (2024-08-06)
+
+#### Bug Fixes
+
+* useffect dependencies  on saveBudget() (94e9f797)
+* history button disabled after history change (04354a1a)
+
+#### Tests
+
+* disable flaky test (c75bf3e9)
+
+#### Chores
+
+* **release:** 1.1.0 (b74c2388)
+
+#### CI
+
+* merge docker and release actions (d7c728e9)
+* use correct action (df3901a0)
+* upload release bundle to gh release (9b0923b1)
+* fix package name (9cc09730)
+* remove context field (dabeec34)
+* add qemu (3258cb3b)
+* fix perms, use buildx (7f3bc64d)
+
+
 ## 1.1.0 (2024-08-03)
 
 #### Feature
