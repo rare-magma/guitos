@@ -1,7 +1,7 @@
 name: Release
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
+  cancel-in-progress: true
 on:
   push:
     branches:
@@ -193,4 +193,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
+          tag_name: ${{ steps.semrel.outputs.version }}
           files: guitos.zip
