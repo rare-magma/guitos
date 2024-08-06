@@ -1,3 +1,15 @@
+## 1.1.5 (2024-08-06)
+
+#### Bug Fixes
+
+* bundle upload condition (ccd2194e)
+* bundle upload condition (90db83f6)
+
+#### Chores
+
+* **release:** 1.1.4 (33282620)
+
+
 ## 1.1.4 (2024-08-06)
 
 #### Bug Fixes
