@@ -186,7 +186,7 @@ jobs:
 
       - name: Compress bundle
         if: steps.semrel.outputs.version != ''
-        run: zip -r guitos.zip build/*
+        run: mv build guitos && zip -r guitos.zip guitos/*
 
       - name: Upload bundle to GH release
         if: steps.semrel.outputs.version != ''
