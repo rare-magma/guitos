@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   Button,
   Dropdown,
@@ -81,18 +81,15 @@ export function CalculateButton({
     setShowHistory(!showHistory);
   }
 
-  function getHistory() {
+  const getHistory = useCallback(() => {
     getCalcHist(calcHistID)
       .then((h) => setHistory(h))
       .catch((e: unknown) => {
         throw e;
       });
-  }
+  }, [calcHistID, getCalcHist]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    getHistory();
-  }, [showHistory]);
+  useEffect(() => void getHistory(), [getHistory]);
 
   return (
     <>
@@ -173,8 +170,7 @@ export function CalculateButton({
                   onKeyUp={handleKeyPress}
                   ref={inputRef}
                   onValueChange={(value) =>
-                    setChangeValue(isNaN(Number(value)) ? 0 : Number(value))
-                  }
+                    setChangeValue(isNaN(Number(value)) ? 0 : Number(value))}
                 />
                 <Button
                   id={`item-${itemForm.id}-trigger-operation-button`}
@@ -193,7 +189,9 @@ export function CalculateButton({
               {showHistory && (
                 <div style={{ maxHeight: "30vh", overflow: "auto" }}>
                   {history
-                    .filter((i) => i.operation !== "value")
+                    .filter((i) =>
+                      i.operation !== "value"
+                    )
                     .map((item, index) => (
                       <InputGroup
                         size="sm"
