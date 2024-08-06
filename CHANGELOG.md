@@ -1,3 +1,14 @@
+## 1.1.6 (2024-08-06)
+
+#### Bug Fixes
+
+* bundle release name (74b898af)
+
+#### Chores
+
+* **release:** 1.1.5 (cb51841f)
+
+
 ## 1.1.5 (2024-08-06)
 
 #### Bug Fixes
