@@ -1,3 +1,14 @@
+## 1.1.4 (2024-08-06)
+
+#### Bug Fixes
+
+* push release commit as last step (d1012037)
+
+#### Chores
+
+* **release:** 1.1.3 (4e2a1be3)
+
+
 ## 1.1.3 (2024-08-06)
 
 #### Bug Fixes
