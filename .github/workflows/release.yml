@@ -190,10 +190,10 @@ jobs:
 
       - name: Upload bundle to GH release
         if: steps.semrel.outputs.version != ''
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ steps.semrel.outputs.version }}
-          files: guitos.zip
+        run: |
+          gh release upload v${{ steps.semrel.outputs.version }} guitos.zip#guitos-v${{ steps.semrel.outputs.version }}.zip
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push changelog & package.json updates
         if: steps.semrel.outputs.version != ''
