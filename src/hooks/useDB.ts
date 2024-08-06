@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import Papa from "papaparse";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useParams } from "react-router-dom";
 import { Budget } from "../components/Budget/Budget";
@@ -422,34 +422,34 @@ export function useDB() {
     });
   }
 
-  function saveBudget(budget: Budget | undefined) {
-    if (!budget) return;
-    let list: Budget[] = [];
-    budgetsDB
-      .setItem(budget.id, budget)
-      .then(() => {
-        budgetsDB
-          .iterate((value) => {
-            list = list.concat(value as Budget);
-          })
-          .then(() => {
-            setBudgetList(list);
-            setBudgetNameList(createBudgetNameList(list));
-            setNeedReload(true);
-          })
-          .catch((e: unknown) => {
-            throw e;
-          });
-      })
-      .catch((e: unknown) => {
-        throw e;
-      });
-  }
+  const saveBudget = useCallback(
+    (budget: Budget | undefined) => {
+      if (!budget) return;
+      let list: Budget[] = [];
+      budgetsDB
+        .setItem(budget.id, budget)
+        .then(() => {
+          budgetsDB
+            .iterate((value) => {
+              list = list.concat(value as Budget);
+            })
+            .then(() => {
+              setBudgetList(list);
+              setBudgetNameList(createBudgetNameList(list));
+              setNeedReload(true);
+            })
+            .catch((e: unknown) => {
+              throw e;
+            });
+        })
+        .catch((e: unknown) => {
+          throw e;
+        });
+    },
+    [setBudgetList, setBudgetNameList, setNeedReload],
+  );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  useEffect(() => {
-    saveBudget(budget);
-  }, [budget]);
+  useEffect(() => void saveBudget(budget), [budget, saveBudget]);
 
   return {
     createBudget,
