@@ -1,3 +1,14 @@
+## 1.1.3 (2024-08-06)
+
+#### Bug Fixes
+
+* concurrency setup and bundle task (3a757bba)
+
+#### Chores
+
+* **release:** 1.1.2 (7d878877)
+
+
 ## 1.1.2 (2024-08-06)
 
 #### Bug Fixes
