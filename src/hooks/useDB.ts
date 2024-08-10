@@ -386,6 +386,7 @@ export function useDB() {
 
     return { filteredIncomes, filteredExpenses };
   }
+
   function renameBudget(event: React.ChangeEvent<HTMLInputElement>) {
     if (budget && event.target.value) {
       const newState = produce((draft) => {
@@ -395,18 +396,21 @@ export function useDB() {
     }
   }
 
-  async function getCalcHist(id: string): Promise<CalculationHistoryItem[]> {
-    let item;
-    await calcHistDB
-      .getItem(id)
-      .then((i) => {
-        item = i;
-      })
-      .catch((e: unknown) => {
-        throw e;
-      });
-    return item ?? [];
-  }
+  const getCalcHist = useCallback(
+    async (id: string): Promise<CalculationHistoryItem[]> => {
+      let item;
+      await calcHistDB
+        .getItem(id)
+        .then((i) => {
+          item = i;
+        })
+        .catch((e: unknown) => {
+          throw e;
+        });
+      return item ?? [];
+    },
+    [],
+  );
 
   async function saveCalcHist(id: string, item: CalculationHistoryItem) {
     const calcHist = await getCalcHist(id);

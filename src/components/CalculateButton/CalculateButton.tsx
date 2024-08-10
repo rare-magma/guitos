@@ -253,6 +253,7 @@ export function CalculateButton({
             setTimeout(() => {
               inputRef.current?.focus();
             }, 0);
+            getHistory();
           }}
         >
           <BsPlusSlashMinus aria-hidden />
