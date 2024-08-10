@@ -22,8 +22,11 @@ jobs:
           persist-credentials: false
 
       - uses: ./.github/actions/deps
+        name: Install
       - uses: ./.github/actions/test
+        name: Test
       - uses: ./.github/actions/playwright
+        name: Test e2e
 
   release:
     name: release
@@ -60,6 +63,7 @@ jobs:
 
       - uses: ./.github/actions/deps
         if: steps.semrel.outputs.version != ''
+        name: Install
 
       - name: Build
         if: steps.semrel.outputs.version != ''
@@ -77,6 +81,7 @@ jobs:
 
       - uses: ./.github/actions/docker
         if: steps.semrel.outputs.version != ''
+        name: Build docker image
 
       - name: Compress bundle
         if: steps.semrel.outputs.version != ''

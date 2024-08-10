@@ -23,5 +23,8 @@ jobs:
           persist-credentials: false
 
       - uses: ./.github/actions/deps
+        name: Install
       - uses: ./.github/actions/test
+        name: Test
       - uses: ./.github/actions/playwright
+        name: Test e2e
