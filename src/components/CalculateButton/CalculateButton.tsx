@@ -170,7 +170,8 @@ export function CalculateButton({
                   onKeyUp={handleKeyPress}
                   ref={inputRef}
                   onValueChange={(value) =>
-                    setChangeValue(isNaN(Number(value)) ? 0 : Number(value))}
+                    setChangeValue(isNaN(Number(value)) ? 0 : Number(value))
+                  }
                 />
                 <Button
                   id={`item-${itemForm.id}-trigger-operation-button`}
@@ -189,9 +190,7 @@ export function CalculateButton({
               {showHistory && (
                 <div style={{ maxHeight: "30vh", overflow: "auto" }}>
                   {history
-                    .filter((i) =>
-                      i.operation !== "value"
-                    )
+                    .filter((i) => i.operation !== "value")
                     .map((item, index) => (
                       <InputGroup
                         size="sm"
