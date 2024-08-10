@@ -21,9 +21,9 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/deps@main
-      - uses: ./.github/actions/test@main
-      - uses: ./.github/actions/playwright@main
+      - uses: ./.github/actions/deps
+      - uses: ./.github/actions/test
+      - uses: ./.github/actions/playwright
 
   release:
     name: release
@@ -35,8 +35,7 @@ jobs:
     needs:
       - test
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
           ref: main
@@ -59,7 +58,7 @@ jobs:
           git add CHANGELOG.md package.json
           git commit -m "chore(release): ${{ steps.semrel.outputs.version }}"
 
-      - uses: ./.github/actions/deps@main
+      - uses: ./.github/actions/deps
         if: steps.semrel.outputs.version != ''
 
       - name: Build
@@ -76,7 +75,7 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy build --project-name=guitos
 
-      - uses: ./.github/actions/docker@main
+      - uses: ./.github/actions/docker
         if: steps.semrel.outputs.version != ''
 
       - name: Compress bundle

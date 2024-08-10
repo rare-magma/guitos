@@ -12,6 +12,8 @@ jobs:
   test:
     name: test
     timeout-minutes: 5
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.45.3-jammy
@@ -20,6 +22,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/deps@main
-      - uses: ./.github/actions/test@main
-      - uses: ./.github/actions/playwright@main
+      - uses: ./.github/actions/deps
+      - uses: ./.github/actions/test
+      - uses: ./.github/actions/playwright
