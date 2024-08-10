@@ -21,9 +21,9 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: rare-magma/guitos/.github/composites/deps@main
-      - uses: rare-magma/guitos/.github/composites/test@main
-      - uses: rare-magma/guitos/.github/composites/playwright@main
+      - uses: ./.github/actions/deps@main
+      - uses: ./.github/actions/test@main
+      - uses: ./.github/actions/playwright@main
 
   release:
     name: release
@@ -59,7 +59,7 @@ jobs:
           git add CHANGELOG.md package.json
           git commit -m "chore(release): ${{ steps.semrel.outputs.version }}"
 
-      - uses: rare-magma/guitos/.github/composites/deps@main
+      - uses: ./.github/actions/deps@main
         if: steps.semrel.outputs.version != ''
 
       - name: Build
@@ -76,7 +76,7 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy build --project-name=guitos
 
-      - uses: rare-magma/guitos/.github/composites/docker@main
+      - uses: ./.github/actions/docker@main
         if: steps.semrel.outputs.version != ''
 
       - name: Compress bundle

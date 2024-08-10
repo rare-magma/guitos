@@ -20,6 +20,6 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: rare-magma/guitos/.github/composites/deps@main
-      - uses: rare-magma/guitos/.github/composites/test@main
-      - uses: rare-magma/guitos/.github/composites/playwright@main
+      - uses: ./.github/actions/deps@main
+      - uses: ./.github/actions/test@main
+      - uses: ./.github/actions/playwright@main
