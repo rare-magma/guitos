@@ -1,0 +1,17 @@
+name: Run e2e tests
+description: Runs playwright tests
+runs:
+  using: "composite"
+  steps:
+      - name: Run Playwright tests
+        shell: bash
+        run: pnpm exec playwright test
+        env:
+          HOME: /root
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

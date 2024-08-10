@@ -1,7 +1,4 @@
 name: Release
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 on:
   push:
     branches:
@@ -17,73 +14,16 @@ jobs:
     permissions:
       contents: read
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.4.0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Lint
-        run: pnpm lint
-
-      - name: Run tests
-        run: pnpm test -- --run
-
-  e2e:
-    name: e2e
-    timeout-minutes: 5
-    permissions:
-      contents: read
-    runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.45.3-jammy
-    needs:
-      - test
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.4.0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Run Playwright tests
-        run: pnpm exec playwright test
-        env:
-          HOME: /root
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+      - uses: rare-magma/guitos/.github/composites/deps@main
+      - uses: rare-magma/guitos/.github/composites/test@main
+      - uses: rare-magma/guitos/.github/composites/playwright@main
 
   release:
     name: release
@@ -94,7 +34,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - test
-      - e2e
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -120,22 +59,8 @@ jobs:
           git add CHANGELOG.md package.json
           git commit -m "chore(release): ${{ steps.semrel.outputs.version }}"
 
-      - name: Install pnpm
+      - uses: rare-magma/guitos/.github/composites/deps@main
         if: steps.semrel.outputs.version != ''
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.4.0
-
-      - name: Setup Node
-        if: steps.semrel.outputs.version != ''
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "pnpm"
-
-      - name: Install dependencies
-        if: steps.semrel.outputs.version != ''
-        run: pnpm install
 
       - name: Build
         if: steps.semrel.outputs.version != ''
@@ -151,38 +76,8 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy build --project-name=guitos
 
-      - name: Set up QEMU
+      - uses: rare-magma/guitos/.github/composites/docker@main
         if: steps.semrel.outputs.version != ''
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        if: steps.semrel.outputs.version != ''
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to the container registry
-        if: steps.semrel.outputs.version != ''
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata for Docker
-        if: steps.semrel.outputs.version != ''
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-      - name: Build and push Docker image
-        if: steps.semrel.outputs.version != ''
-        uses: docker/build-push-action@v6
-        with:
-          file: docker/Dockerfile
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          labels: ${{ steps.meta.outputs.labels }}
 
       - name: Compress bundle
         if: steps.semrel.outputs.version != ''

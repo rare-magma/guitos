@@ -1,0 +1,19 @@
+name: Install dependencies
+description: Installs dependencies
+runs:
+  using: "composite"
+  steps:
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.4.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        shell: bash
+        run: pnpm install

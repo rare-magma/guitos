@@ -1,0 +1,12 @@
+name: Run tests
+description: Runs checks and tests
+runs:
+  using: "composite"
+  steps:
+      - name: Lint
+        shell: bash
+        run: pnpm lint
+
+      - name: Run tests
+        shell: bash
+        run: pnpm test -- --run
