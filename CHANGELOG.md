@@ -1,3 +1,18 @@
+## 1.1.7 (2024-08-10)
+
+#### Bug Fixes
+
+* infinite loop in calculate button (6a2455b5)
+
+#### Chores
+
+* **release:** 1.1.6 (06d23e9e)
+
+#### CI
+
+* rename bundle folder (dd5544bb)
+
+
 ## 1.1.6 (2024-08-06)
 
 #### Bug Fixes
