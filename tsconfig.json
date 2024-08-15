@@ -12,13 +12,14 @@
     "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strictNullChecks": true,
     "strict": true,
-    "target": "ES2022",
+    "target": "ES2023",
     "types": ["vite-plugin-pwa/client"]
   },
   "include": ["src", "e2e", "vite.config.ts"]
