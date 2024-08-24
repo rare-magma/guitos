@@ -29,12 +29,10 @@ describe("CalculateButton", () => {
 
   it("opens popover when clicking the button", async () => {
     render(comp);
-    await waitFor(async () => {
-      const button = screen.getByRole("button", {
-        name: "select operation type to item value",
-      });
-      await userEvent.click(button);
+    const button = screen.getByRole("button", {
+      name: "select operation type to item value",
     });
+    await userEvent.click(button);
 
     expect(
       screen.getByRole("button", {
@@ -88,92 +86,82 @@ describe("CalculateButton", () => {
 
   it("calls onCalculate when accepting change > 0", async () => {
     render(comp);
-    await waitFor(async () => {
-      const button = screen.getByRole("button", {
-        name: "select operation type to item value",
-      });
-      await userEvent.click(button);
-      const acceptButton = screen.getByRole("button", {
-        name: "apply change to item value",
-      });
-
-      await userEvent.type(screen.getByLabelText("add"), "123");
-      await userEvent.click(acceptButton);
+    const button = screen.getByRole("button", {
+      name: "select operation type to item value",
     });
+    await userEvent.click(button);
+    const acceptButton = screen.getByRole("button", {
+      name: "apply change to item value",
+    });
+
+    await userEvent.type(screen.getByLabelText("add"), "123");
+    await userEvent.click(acceptButton);
 
     expect(onCalculate).toHaveBeenCalledWith(123, "add");
   });
 
   it("calls onCalculate when change > 0 and enter is pressed", async () => {
     render(comp);
-    await waitFor(async () => {
-      const button = screen.getByRole("button", {
-        name: "select operation type to item value",
-      });
-      await userEvent.click(button);
-      await userEvent.type(screen.getByLabelText("add"), "123");
-      await userEvent.type(screen.getByLabelText("add"), "{enter}");
+    const button = screen.getByRole("button", {
+      name: "select operation type to item value",
     });
+    await userEvent.click(button);
+    await userEvent.type(screen.getByLabelText("add"), "123");
+    await userEvent.type(screen.getByLabelText("add"), "{enter}");
 
     expect(onCalculate).toHaveBeenCalledWith(123, "add");
   });
 
   it("calls onCalculate with sub", async () => {
     render(comp);
-    await waitFor(async () => {
-      const button = screen.getByRole("button", {
-        name: "select operation type to item value",
-      });
-      await userEvent.click(button);
-      const acceptButton = screen.getByRole("button", {
-        name: "apply change to item value",
-      });
-
-      await userEvent.type(screen.getByLabelText("add"), "123");
-
-      await userEvent.click(screen.getByLabelText("subtraction"));
-      await userEvent.click(acceptButton);
+    const button = screen.getByRole("button", {
+      name: "select operation type to item value",
     });
+    await userEvent.click(button);
+    const acceptButton = screen.getByRole("button", {
+      name: "apply change to item value",
+    });
+
+    await userEvent.type(screen.getByLabelText("add"), "123");
+
+    await userEvent.click(screen.getByLabelText("subtraction"));
+    await userEvent.click(acceptButton);
 
     expect(onCalculate).toHaveBeenCalledWith(123, "subtract");
   });
 
   it("calls onCalculate with multiply", async () => {
     render(comp);
-    await waitFor(async () => {
-      const button = screen.getByRole("button", {
-        name: "select operation type to item value",
-      });
-      await userEvent.click(button);
-      const acceptButton = screen.getByRole("button", {
-        name: "apply change to item value",
-      });
-
-      await userEvent.type(screen.getByLabelText("add"), "123");
-
-      await userEvent.click(screen.getByLabelText("multiplication"));
-      await userEvent.click(acceptButton);
+    const button = screen.getByRole("button", {
+      name: "select operation type to item value",
     });
+    await userEvent.click(button);
+    const acceptButton = screen.getByRole("button", {
+      name: "apply change to item value",
+    });
+
+    await userEvent.type(screen.getByLabelText("add"), "123");
+
+    await userEvent.click(screen.getByLabelText("multiplication"));
+    await userEvent.click(acceptButton);
 
     expect(onCalculate).toHaveBeenCalledWith(123, "multiply");
   });
 
   it("calls onCalculate with div", async () => {
     render(comp);
-    await waitFor(async () => {
-      const button = screen.getByRole("button", {
-        name: "select operation type to item value",
-      });
-      await userEvent.click(button);
-      const acceptButton = screen.getByRole("button", {
-        name: "apply change to item value",
-      });
-
-      await userEvent.type(screen.getByLabelText("add"), "123");
-
-      await userEvent.click(screen.getByLabelText("division"));
-      await userEvent.click(acceptButton);
+    const button = screen.getByRole("button", {
+      name: "select operation type to item value",
     });
+    await userEvent.click(button);
+    const acceptButton = screen.getByRole("button", {
+      name: "apply change to item value",
+    });
+
+    await userEvent.type(screen.getByLabelText("add"), "123");
+
+    await userEvent.click(screen.getByLabelText("division"));
+    await userEvent.click(acceptButton);
 
     expect(onCalculate).toHaveBeenCalledWith(123, "divide");
   });

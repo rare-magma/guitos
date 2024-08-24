@@ -1,4 +1,4 @@
-import { cleanup, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { setBudgetMock, testBudget } from "../../setupTests";
@@ -25,9 +25,7 @@ describe("TableCard", () => {
 
   it("responds when user changes input", async () => {
     render(comp);
-    await waitFor(async () => {
-      await userEvent.type(screen.getByDisplayValue("expense1"), "change name");
-    });
+    await userEvent.type(screen.getByDisplayValue("expense1"), "change name");
     expect(screen.getByDisplayValue("expense1change name")).toBeInTheDocument();
 
     expect(setBudgetMock).toHaveBeenCalledWith(
@@ -42,9 +40,7 @@ describe("TableCard", () => {
     );
     setBudgetMock.mockClear();
 
-    await waitFor(async () => {
-      await userEvent.type(screen.getByDisplayValue("$10"), "123");
-    });
+    await userEvent.type(screen.getByDisplayValue("$10"), "123");
 
     expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
@@ -66,11 +62,9 @@ describe("TableCard", () => {
 
   it("adds new Expense when user clicks adds new item button", async () => {
     render(comp);
-    await waitFor(async () => {
-      await userEvent.click(
-        screen.getByRole("button", { name: "add item to Expenses" }),
-      );
-    });
+    await userEvent.click(
+      screen.getByRole("button", { name: "add item to Expenses" }),
+    );
     expect(screen.getByDisplayValue("$10")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
@@ -87,11 +81,9 @@ describe("TableCard", () => {
   it("adds new Revenue when user clicks adds new item button", async () => {
     cleanup();
     render(<TableCard header={"Revenue"} />);
-    await waitFor(async () => {
-      await userEvent.click(
-        screen.getByRole("button", { name: "add item to Revenue" }),
-      );
-    });
+    await userEvent.click(
+      screen.getByRole("button", { name: "add item to Revenue" }),
+    );
     expect(screen.getByDisplayValue("$100")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
@@ -107,14 +99,12 @@ describe("TableCard", () => {
 
   it("removes item when user clicks delete item button", async () => {
     render(comp);
-    await waitFor(async () => {
-      await userEvent.click(
-        screen.getByRole("button", { name: "delete item 1" }),
-      );
-      await userEvent.click(
-        screen.getByRole("button", { name: "confirm item 1 deletion" }),
-      );
-    });
+    await userEvent.click(
+      screen.getByRole("button", { name: "delete item 1" }),
+    );
+    await userEvent.click(
+      screen.getByRole("button", { name: "confirm item 1 deletion" }),
+    );
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
         ...testBudget,

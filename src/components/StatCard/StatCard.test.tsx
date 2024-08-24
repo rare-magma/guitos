@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { describe, expect, it } from "vitest";
@@ -26,9 +26,7 @@ describe("StatCard", () => {
   it("triggers onChange when user changes input", async () => {
     render(comp);
     setBudgetMock.mockClear();
-    await waitFor(async () => {
-      await userEvent.type(screen.getByLabelText("reserves"), "2");
-    });
+    await userEvent.type(screen.getByLabelText("reserves"), "2");
 
     expect(setBudgetMock).toHaveBeenCalledWith(
       { ...testBudget, stats: { ...testBudget.stats, reserves: 2 } },
@@ -36,10 +34,8 @@ describe("StatCard", () => {
     );
     expect(screen.getByDisplayValue("$2")).toBeInTheDocument();
 
-    await waitFor(async () => {
-      await userEvent.clear(screen.getByTestId("goal-input"));
-      await userEvent.type(screen.getByTestId("goal-input"), "95");
-    });
+    await userEvent.clear(screen.getByTestId("goal-input"));
+    await userEvent.type(screen.getByTestId("goal-input"), "95");
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
         ...testBudget,
@@ -54,11 +50,9 @@ describe("StatCard", () => {
   it("triggers onAutoGoal when user clicks button", async () => {
     render(comp);
     setBudgetMock.mockClear();
-    await waitFor(async () => {
-      await userEvent.click(
-        screen.getByRole("button", { name: "calculate savings goal" }),
-      );
-    });
+    await userEvent.click(
+      screen.getByRole("button", { name: "calculate savings goal" }),
+    );
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
         ...testBudget,
@@ -71,11 +65,9 @@ describe("StatCard", () => {
   it("triggers onShowGraphs when user clicks button", async () => {
     render(comp);
 
-    await waitFor(async () => {
-      await userEvent.click(
-        screen.getByRole("button", { name: "open charts view" }),
-      );
-    });
+    await userEvent.click(
+      screen.getByRole("button", { name: "open charts view" }),
+    );
 
     expect(onShowGraphs).toHaveBeenCalledTimes(1);
   });

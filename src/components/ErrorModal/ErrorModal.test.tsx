@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
 import {
@@ -38,25 +38,19 @@ describe("ErrorModal", () => {
     generalContextSpy.mockReturnValue(testErrorGeneralContext);
     render(comp);
     expect(screen.getByTestId("error-modal")).toBeInTheDocument();
-    await waitFor(async () => {
-      await userEvent.click(screen.getByTestId("error-modal-dismiss"));
-    });
+    await userEvent.click(screen.getByTestId("error-modal-dismiss"));
   });
 
   it("closes json error when clicking the button", async () => {
     render(comp);
     expect(screen.getByTestId("json-error-close")).toBeInTheDocument();
-    await waitFor(async () => {
-      await userEvent.click(screen.getByTestId("json-error-close"));
-    });
+    await userEvent.click(screen.getByTestId("json-error-close"));
   });
 
   it("closes json error modal when clicking the button", async () => {
     render(comp);
     expect(screen.getByTestId("json-error-modal")).toBeInTheDocument();
-    await waitFor(async () => {
-      await userEvent.click(screen.getByTestId("json-error-modal"));
-    });
+    await userEvent.click(screen.getByTestId("json-error-modal"));
   });
 
   it("closes csv error when clicking the button", async () => {
@@ -64,9 +58,7 @@ describe("ErrorModal", () => {
     render(comp);
 
     expect(screen.getByTestId("csv-error-close")).toBeInTheDocument();
-    await waitFor(async () => {
-      await userEvent.click(screen.getByTestId("csv-error-close"));
-    });
+    await userEvent.click(screen.getByTestId("csv-error-close"));
   });
 
   it("closes csv error modal when clicking the button", async () => {
@@ -74,8 +66,6 @@ describe("ErrorModal", () => {
     render(comp);
 
     expect(screen.getByTestId("csv-error-modal")).toBeInTheDocument();
-    await waitFor(async () => {
-      await userEvent.click(screen.getByTestId("csv-error-modal"));
-    });
+    await userEvent.click(screen.getByTestId("csv-error-modal"));
   });
 });

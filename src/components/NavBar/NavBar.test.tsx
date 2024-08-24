@@ -57,24 +57,20 @@ describe("NavBar", () => {
 
   it("triggers event when import button is pressed", async () => {
     render(comp);
-    await waitFor(async () => {
-      await userEvent.click(screen.getByLabelText("import or export budget"));
-      const uploadEl = screen.getByTestId("import-form-control");
-      await userEvent.upload(
-        uploadEl,
-        new File([JSON.stringify(testBudget)], "budget", {
-          type: "application/json",
-        }),
-      );
-      expect((uploadEl as HTMLInputElement).files).toHaveLength(1);
-    });
+    await userEvent.click(screen.getByLabelText("import or export budget"));
+    const uploadEl = screen.getByTestId("import-form-control");
+    await userEvent.upload(
+      uploadEl,
+      new File([JSON.stringify(testBudget)], "budget", {
+        type: "application/json",
+      }),
+    );
+    expect((uploadEl as HTMLInputElement).files).toHaveLength(1);
   });
 
   it("triggers event when export shortcuts are pressed", async () => {
     render(comp);
-    await waitFor(async () => {
-      await userEvent.type(screen.getByTestId("header"), "o");
-    });
+    await userEvent.type(screen.getByTestId("header"), "o");
     expect(
       screen.getByRole("button", {
         name: /import budget/i,
@@ -91,18 +87,14 @@ describe("NavBar", () => {
       }),
     ).toBeInTheDocument();
 
-    await waitFor(async () => {
-      await userEvent.type(screen.getByTestId("header"), "s");
+    await userEvent.type(screen.getByTestId("header"), "s");
 
-      await userEvent.type(screen.getByTestId("header"), "d");
-    });
+    await userEvent.type(screen.getByTestId("header"), "d");
   });
 
   it("triggers event when settings shortcuts are pressed", async () => {
     render(comp);
-    await waitFor(async () => {
-      await userEvent.type(screen.getByTestId("header"), "t");
-    });
+    await userEvent.type(screen.getByTestId("header"), "t");
     expect(
       screen.getByRole("link", {
         name: /open guitos changelog/i,

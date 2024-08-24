@@ -1,4 +1,4 @@
-import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
+import { act, cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import App from "./App";
@@ -45,7 +45,7 @@ describe("App", () => {
     await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(testBudget);
   });
 
-  it.skip("deletes budget when clicking delete button", async () => {
+  it("deletes budget when clicking delete button", async () => {
     render(comp);
     await act(async () => {
       await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(
@@ -53,19 +53,19 @@ describe("App", () => {
       );
     });
 
-    await waitFor(async () => {
-      const newButton = screen.getAllByRole("button", { name: "new budget" });
-      await userEvent.click(newButton[0]);
-      await screen
-        .findAllByRole("button", {
-          name: "delete budget",
-        })
-        .then((e) => userEvent.click(e[0]));
-
-      await userEvent.click(
-        screen.getByRole("button", { name: /confirm budget deletion/i }),
-      );
+    const newButton = await screen.findAllByRole("button", {
+      name: "new budget",
     });
+    await userEvent.click(newButton[0]);
+    await screen
+      .findAllByRole("button", {
+        name: "delete budget",
+      })
+      .then((e) => userEvent.click(e[0]));
+
+    await userEvent.click(
+      await screen.findByRole("button", { name: /confirm budget deletion/i }),
+    );
 
     await act(async () => {
       await expect(budgetsDB.getItem(testBudget.id)).resolves.toBeNull();
