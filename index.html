@@ -29,9 +29,11 @@
   <link rel="apple-touch-icon" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <script>
-    const lastOpenedBudget = localStorage.getItem("guitos_lastOpenedBudget");
-    if (lastOpenedBudget) {
-      window.location.href = lastOpenedBudget
+    if (window.location.pathname === "/") {
+      const lastOpenedBudget = localStorage.getItem("guitos_lastOpenedBudget");
+      if (lastOpenedBudget) {
+        window.location.pathname = `/${lastOpenedBudget}`
+      }
     }
   </script>
 
