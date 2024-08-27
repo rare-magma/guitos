@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
-import Uuid from "./uuid";
 import BudgetItem from "./budgetItem";
 import Stats from "./stats";
+import Uuid from "./uuid";
 
 export default class ObjectMother {
   static uuid(): Uuid {

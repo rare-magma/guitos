@@ -14,6 +14,8 @@ import {
 import { BsArrowsVertical, BsPlusLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
+import Expenses from "../../guitos/domain/expenses";
+import Incomes from "../../guitos/domain/incomes";
 import {
   calcAvailable,
   calcPercentage,
@@ -25,8 +27,6 @@ import {
 } from "../../utils";
 import { ItemForm } from "../ItemForm/ItemForm";
 import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
-import Expenses from "../../guitos/domain/expenses";
-import Incomes from "../../guitos/domain/incomes";
 import "./TableCard.css";
 
 interface TableCardProps {

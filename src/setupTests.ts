@@ -6,6 +6,7 @@ import "@testing-library/jest-dom";
 import { randomUUID } from "node:crypto";
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
+import { immerable } from "immer";
 import { createElement } from "react";
 import { afterEach, beforeEach, expect, vi } from "vitest";
 import { ItemForm } from "./components/ItemForm/ItemForm";
@@ -14,7 +15,6 @@ import * as AppConfigContext from "./context/ConfigContext";
 import * as AppGeneralContext from "./context/GeneralContext";
 import Budget from "./guitos/domain/budget";
 import Uuid from "./guitos/domain/uuid";
-import { immerable } from "immer";
 
 window.crypto.randomUUID = randomUUID;
 global.URL.createObjectURL = vi.fn();

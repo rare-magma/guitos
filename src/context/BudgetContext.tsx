@@ -1,9 +1,9 @@
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 import useUndo from "use-undo";
 import { SearchOption } from "../components/NavBar/NavBar";
+import Budget from "../guitos/domain/budget";
 import { calcPercentage } from "../utils";
 import { useGeneralContext } from "./GeneralContext";
-import Budget from "../guitos/domain/budget";
 
 interface BudgetContextInterface {
   budget: Budget | undefined;

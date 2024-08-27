@@ -1,6 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
+import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { budgetsDB } from "../../db";
 import {
@@ -14,7 +15,6 @@ import {
   undoMock,
 } from "../../setupTests";
 import { BudgetPage } from "./BudgetPage";
-import { BrowserRouter } from "react-router-dom";
 
 describe("BudgetPage", () => {
   const comp = (

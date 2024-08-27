@@ -1,8 +1,9 @@
 import Big from "big.js";
 import Papa from "papaparse";
 import { expect, test } from "vitest";
-import { ItemOperation } from "./components/CalculateButton/CalculateButton";
 import { FilteredItem } from "./components/ChartsPage/ChartsPage";
+import Budget from "./guitos/domain/budget";
+import Uuid from "./guitos/domain/uuid";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
 import { currenciesMap } from "./lists/currenciesMap";
 import { firefoxLocalesList } from "./lists/firefoxLocalesList";
@@ -39,8 +40,7 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
-import Budget from "./guitos/domain/budget";
-import Uuid from "./guitos/domain/uuid";
+import { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);

@@ -8,13 +8,13 @@ import { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
 import { useConfig } from "../context/ConfigContext";
 import { useGeneralContext } from "../context/GeneralContext";
-import { convertCsvToBudget, createBudgetNameList, userLang } from "../utils";
 import Budget from "../guitos/domain/budget";
-import { localForageCalcHistRepository } from "../guitos/infrastructure/localForageCalcHistRepository";
-import Uuid from "../guitos/domain/uuid";
-import { localForageOptionsRepository } from "../guitos/infrastructure/localForageOptionsRepository";
 import CalculationHistoryItem from "../guitos/domain/calculationHistoryItem";
+import Uuid from "../guitos/domain/uuid";
 import { localForageBudgetRepository } from "../guitos/infrastructure/localForageBudgetRepository";
+import { localForageCalcHistRepository } from "../guitos/infrastructure/localForageCalcHistRepository";
+import { localForageOptionsRepository } from "../guitos/infrastructure/localForageOptionsRepository";
+import { convertCsvToBudget, createBudgetNameList, userLang } from "../utils";
 
 const budgetRepository = new localForageBudgetRepository();
 const optionsRepository = new localForageOptionsRepository();
@@ -403,7 +403,7 @@ export function useDB() {
 
   const getCalcHist = useCallback(
     async (id: string): Promise<CalculationHistoryItem[] | null> => {
-      return calcHistRepository.get(id);
+      return await calcHistRepository.get(id);
     },
     [],
   );

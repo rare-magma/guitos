@@ -1,5 +1,5 @@
-import BudgetItem from "./budgetItem";
 import { immerable } from "immer";
+import BudgetItem from "./budgetItem";
 import Uuid from "./uuid";
 
 export type ItemOperation =

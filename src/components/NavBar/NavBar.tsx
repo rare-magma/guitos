@@ -26,11 +26,11 @@ import { useDB } from "../../hooks/useDB";
 import { useMove } from "../../hooks/useMove";
 import { focusRef, getLabelKey } from "../../utils";
 import "./NavBar.css";
+import Uuid from "../../guitos/domain/uuid";
 import { NavBarDelete } from "./NavBarDelete";
 import { NavBarImpExp } from "./NavBarImpExp";
 import { NavBarItem } from "./NavBarItem";
 import { NavBarSettings } from "./NavBarSettings";
-import Uuid from "../../guitos/domain/uuid";
 
 export interface SearchOption {
   id: Uuid;

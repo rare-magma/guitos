@@ -1,6 +1,6 @@
-import { calcHistDB } from "./localForageDb";
 import { CalcHistRepository } from "../domain/calcHistRepository";
 import CalculationHistoryItem from "../domain/calculationHistoryItem";
+import { calcHistDB } from "./localForageDb";
 
 export class localForageCalcHistRepository implements CalcHistRepository {
   async get(id: string): Promise<CalculationHistoryItem[] | null> {

@@ -13,6 +13,8 @@ import CurrencyInput from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
+import Expenses from "../../guitos/domain/expenses";
+import Incomes from "../../guitos/domain/incomes";
 import { useDB } from "../../hooks/useDB";
 import {
   calc,
@@ -25,8 +27,6 @@ import {
 } from "../../utils";
 import { CalculateButton } from "../CalculateButton/CalculateButton";
 import { ItemForm } from "./ItemForm";
-import Incomes from "../../guitos/domain/incomes";
-import Expenses from "../../guitos/domain/expenses";
 import "./ItemFormGroup.css";
 import { ItemOperation } from "../../guitos/domain/calculationHistoryItem";
 

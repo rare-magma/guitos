@@ -1,8 +1,8 @@
+import { immerable } from "immer";
 import Expenses from "./expenses";
 import Incomes from "./incomes";
 import Stats from "./stats";
 import Uuid from "./uuid";
-import { immerable } from "immer";
 
 export default class Budget {
   id: Uuid;
@@ -51,5 +51,12 @@ export default class Budget {
     );
 
     return newBudget;
+  }
+
+  static toSafeFormat(budget: Budget) {
+    return {
+      ...budget,
+      id: budget.id.toString(),
+    };
   }
 }

@@ -1,6 +1,6 @@
-import { optionsDB } from "./localForageDb";
 import { CURRENCY_CODE, LOCALE } from "../domain/options";
 import { OptionsRepository } from "../domain/optionsRepository";
+import { optionsDB } from "./localForageDb";
 
 export class localForageOptionsRepository implements OptionsRepository {
   async getCurrencyCode(): Promise<string> {
