@@ -1,3 +1,23 @@
+## 1.2.2 (2024-08-27)
+
+#### Bug Fixes
+
+* only try to open last visited budget if none is specified (524bf13d)
+* typo (86592b0c)
+
+#### Documentation
+
+* add note about last visited behaviour (0a1e8b34)
+
+#### Tests
+
+* disable flaky test (7d4a16ae)
+
+#### Chores
+
+* **release:** 1.2.1 (44eb52d7)
+
+
 ## 1.2.1 (2024-08-27)
 
 #### Bug Fixes
