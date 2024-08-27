@@ -1,6 +1,6 @@
-import { Budget } from "../components/Budget/Budget";
 import { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
+import Budget from "../guitos/domain/budget";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();
@@ -9,6 +9,10 @@ export function useMove() {
     if (selectedBudget && budgetList) {
       const filteredList = budgetList.filter(
         (item: Budget) => item.id === selectedBudget[0].id,
+      );
+      console.log(
+        "file: useMove.ts:13 ~ select ~ filteredList:",
+        filteredList[0],
       );
       filteredList && setBudget(filteredList[0], false);
 

@@ -26,6 +26,7 @@ import {
 } from "../../utils";
 import { Chart } from "../Chart/Chart";
 import "./ChartsPage.css";
+import Uuid from "../../guitos/domain/uuid";
 
 interface GraphProps {
   onShowGraphs: () => void;
@@ -37,7 +38,7 @@ export interface Filter {
 }
 
 export interface FilteredItem {
-  id: string;
+  id: Uuid;
   name: string;
   item: string;
   value: number;

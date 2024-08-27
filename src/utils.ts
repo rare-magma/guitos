@@ -1,12 +1,14 @@
 import Big from "big.js";
 import { MutableRefObject } from "react";
-import { Budget } from "./components/Budget/Budget";
-import { CsvItem } from "./components/Budget/CsvItem";
-import { ItemOperation } from "./components/CalculateButton/CalculateButton";
 import { FilteredItem } from "./components/ChartsPage/ChartsPage";
 import { ItemForm } from "./components/ItemForm/ItemForm";
 import { SearchOption } from "./components/NavBar/NavBar";
 import { currenciesMap } from "./lists/currenciesMap";
+import Budget from "./guitos/domain/budget";
+import CsvItem from "./guitos/domain/csvItem";
+import { immerable } from "immer";
+import Uuid from "./guitos/domain/uuid";
+import { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 
 export const userLang = navigator.language;
 
@@ -151,8 +153,9 @@ export function calcAutoGoal(value: Budget): number {
 export function convertCsvToBudget(csv: string[], date: string): Budget {
   const emptyExpenses: ItemForm[] = [];
   const emptyIncomes: ItemForm[] = [];
-  const newBudget = {
-    id: crypto.randomUUID(),
+  const newBudget: Budget = {
+    [immerable]: true,
+    id: Uuid.random(),
     name: date,
     expenses: {
       items: emptyExpenses,
@@ -211,11 +214,12 @@ export function convertCsvToBudget(csv: string[], date: string): Budget {
 }
 
 export function createNewBudget(): Budget {
-  const newId = crypto.randomUUID();
+  const newId = Uuid.random();
   const year = new Date().getFullYear();
-  const newBudget = {
+  const newBudget: Budget = {
+    [immerable]: true,
     id: newId,
-    name: `${year}-${newId.slice(0, 8)}`,
+    name: `${year}-${newId.toString().slice(0, 8)}`,
     expenses: {
       items: [{ id: 1, name: "", value: 0 }],
       total: 0,
@@ -287,12 +291,8 @@ export function budgetToCsv(budget: Budget) {
     return ["income", income.name, income.value].join(",");
   });
 
-  const stats = ["goal", "goal", budget.stats.goal.toString()].join(",");
-  const reserves = [
-    "reserves",
-    "reserves",
-    budget.stats.reserves.toString(),
-  ].join(",");
+  const stats = ["goal", "goal", budget.stats.goal].join(",");
+  const reserves = ["reserves", "reserves", budget.stats.reserves].join(",");
 
   return [header, ...expenses, ...incomes, stats, reserves].join("\n");
 }

@@ -1,7 +1,6 @@
 import Big from "big.js";
 import Papa from "papaparse";
 import { expect, test } from "vitest";
-import { Budget } from "./components/Budget/Budget";
 import { ItemOperation } from "./components/CalculateButton/CalculateButton";
 import { FilteredItem } from "./components/ChartsPage/ChartsPage";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
@@ -40,6 +39,8 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
+import Budget from "./guitos/domain/budget";
+import Uuid from "./guitos/domain/uuid";
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
@@ -133,7 +134,7 @@ test("createNewBudget", () => {
       items: [{ id: 1, name: "", value: 0 }],
       total: 0,
     },
-    id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+    id: Uuid.random(),
     incomes: {
       items: [{ id: 1, name: "", value: 0 }],
       total: 0,
@@ -253,7 +254,7 @@ test("getLabelKey", () => {
 
 test("getLabelKeyFilteredItem", () => {
   const optionWithoutItem: FilteredItem = {
-    id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+    id: Uuid.random(),
     name: "2023-03",
     item: "abcd",
     value: 1,

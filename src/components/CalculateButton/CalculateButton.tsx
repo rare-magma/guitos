@@ -20,26 +20,14 @@ import { useConfig } from "../../context/ConfigContext";
 import { useDB } from "../../hooks/useDB";
 import { ItemForm } from "../ItemForm/ItemForm";
 import "./CalculateButton.css";
+import CalculationHistoryItem, {
+  ItemOperation,
+} from "../../guitos/domain/calculationHistoryItem";
 
 interface CalculateButtonProps {
   itemForm: ItemForm;
   label: string;
   onCalculate: (changeValue: number, operation: ItemOperation) => void;
-}
-
-export type ItemOperation =
-  | "name"
-  | "value"
-  | "add"
-  | "subtract"
-  | "multiply"
-  | "divide";
-
-export interface CalculationHistoryItem {
-  id: string;
-  itemForm: ItemForm;
-  changeValue: number | undefined;
-  operation: ItemOperation;
 }
 
 export function CalculateButton({
@@ -83,7 +71,7 @@ export function CalculateButton({
 
   const getHistory = useCallback(() => {
     getCalcHist(calcHistID)
-      .then((h) => setHistory(h))
+      .then((h) => h && setHistory(h))
       .catch((e: unknown) => {
         throw e;
       });

@@ -25,8 +25,8 @@ import {
 } from "../../utils";
 import { ItemForm } from "../ItemForm/ItemForm";
 import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
-import { Expense } from "./Expense";
-import { Income } from "./Income";
+import Expenses from "../../guitos/domain/expenses";
+import Incomes from "../../guitos/domain/incomes";
 import "./TableCard.css";
 
 interface TableCardProps {
@@ -56,7 +56,7 @@ export function TableCard({ header: label }: TableCardProps) {
     setBudget(newState(), true);
   }
 
-  function handleTableChange(item: Income | Expense) {
+  function handleTableChange(item: Incomes | Expenses) {
     if (!budget) return;
     const newState = produce((draft) => {
       if (isExpense) {
@@ -71,11 +71,11 @@ export function TableCard({ header: label }: TableCardProps) {
     setBudget(newState(), true);
   }
 
-  function addItemToTable(tableBeingEdited: Income | Expense | undefined) {
+  function addItemToTable(tableBeingEdited: Incomes | Expenses | undefined) {
     if (!tableBeingEdited) return;
     const tableHasItems = table && table.items.length !== 0;
     const newItemForm = {} as ItemForm;
-    const newTable = isRevenue ? ({} as Income) : ({} as Expense);
+    const newTable = isRevenue ? ({} as Incomes) : ({} as Expenses);
     let maxId: number;
 
     if (tableHasItems) {

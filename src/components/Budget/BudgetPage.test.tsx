@@ -40,7 +40,9 @@ describe("BudgetPage", () => {
 
   it("removes budget when clicking on delete budget button", async () => {
     render(comp);
-    await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(testBudget);
+    await expect(budgetsDB.getItem(testBudget.id.toString())).resolves.toEqual(
+      testBudget,
+    );
     const deleteButton = await screen.findAllByRole("button", {
       name: "delete budget",
     });
@@ -48,7 +50,9 @@ describe("BudgetPage", () => {
     await userEvent.click(
       await screen.findByRole("button", { name: "confirm budget deletion" }),
     );
-    await expect(budgetsDB.getItem(testBudget.id)).resolves.toBeNull();
+    await expect(
+      budgetsDB.getItem(testBudget.id.toString()),
+    ).resolves.toBeNull();
   });
 
   it("clones budget when clicking on clone budget button", async () => {

@@ -3,26 +3,29 @@ import Papa from "papaparse";
 import React, { useCallback, useEffect, useState } from "react";
 import { Option } from "react-bootstrap-typeahead/types/types";
 import { useParams } from "react-router-dom";
-import { Budget } from "../components/Budget/Budget";
-import { CalculationHistoryItem } from "../components/CalculateButton/CalculateButton";
 import { Filter, FilteredItem } from "../components/ChartsPage/ChartsPage";
 import { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
 import { useConfig } from "../context/ConfigContext";
 import { useGeneralContext } from "../context/GeneralContext";
-import { budgetsDB, calcHistDB, optionsDB } from "../db";
-import {
-  convertCsvToBudget,
-  createBudgetNameList,
-  createNewBudget,
-  userLang,
-} from "../utils";
+import { convertCsvToBudget, createBudgetNameList, userLang } from "../utils";
+import Budget from "../guitos/domain/budget";
+import { localForageCalcHistRepository } from "../guitos/infrastructure/localForageCalcHistRepository";
+import Uuid from "../guitos/domain/uuid";
+import { localForageOptionsRepository } from "../guitos/infrastructure/localForageOptionsRepository";
+import CalculationHistoryItem from "../guitos/domain/calculationHistoryItem";
+import { localForageBudgetRepository } from "../guitos/infrastructure/localForageBudgetRepository";
+
+const budgetRepository = new localForageBudgetRepository();
+const optionsRepository = new localForageOptionsRepository();
+const calcHistRepository = new localForageCalcHistRepository();
 
 export function useDB() {
   const [options, setOptions] = useState<Option[]>([]);
   const { setIntlConfig, handleCurrency } = useConfig();
   const params = useParams();
   const name = String(params.name);
+
   const {
     setShowError,
     handleError,
@@ -45,13 +48,14 @@ export function useDB() {
   } = useBudget();
 
   function createBudget() {
-    const newBudget = createNewBudget();
+    const newBudget = Budget.create();
 
     let newBudgetList: Budget[] = [];
     newBudgetList = budgetList
       ? budgetList.concat(newBudget)
       : newBudgetList.concat(newBudget);
 
+    budgetRepository.update(newBudget.id, newBudget);
     setBudget(newBudget, true);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -71,7 +75,7 @@ export function useDB() {
     if (budget) {
       const newBudget = {
         ...budget,
-        id: crypto.randomUUID(),
+        id: Uuid.random(),
         name: budget.name + "-clone",
       };
 
@@ -89,16 +93,17 @@ export function useDB() {
           });
         }),
       );
+      budgetRepository.update(newBudget.id, newBudget);
       setBudget(newBudget, true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
     }
   }
 
-  function deleteBudget(toBeDeleted: string) {
+  function deleteBudget(toBeDeleted: Uuid) {
     budgetList &&
-      budgetsDB
-        .removeItem(toBeDeleted)
+      budgetRepository
+        .delete(toBeDeleted)
         .then(() => {
           const newBudgetList = budgetList
             .filter((item: Budget) => item.id !== toBeDeleted)
@@ -157,25 +162,20 @@ export function useDB() {
       file.name.slice(0, -4),
     );
     newBudgetList.push(newBudget);
-    budgetsDB.setItem(newBudget.id, newBudget).catch((e) => {
-      throw e;
-    });
+    budgetRepository.update(newBudget.id, newBudget);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
   }
 
   function importJSON(fileReader: FileReader, file: File) {
-    const newBudgetList: Budget[] = [];
     try {
       const list = JSON.parse(fileReader.result as string) as Budget[];
       list.forEach((b: Budget) => {
-        newBudgetList.push(b);
-        budgetsDB.setItem(b.id, b).catch((e) => {
-          throw e;
-        });
+        budgetRepository.update(b.id, b);
       });
-      setBudgetList(newBudgetList);
-      setBudgetNameList(createBudgetNameList(newBudgetList));
+      setBudgetList(list);
+      setBudgetNameList(createBudgetNameList(list));
+      setBudget(list[0], false);
     } catch (e) {
       setJsonErrors([{ errors: (e as string).toString(), file: file.name }]);
       setShowError(true);
@@ -205,13 +205,9 @@ export function useDB() {
   }
 
   function loadFromDb() {
-    let list: Budget[] = [];
-
-    budgetsDB
-      .iterate((value) => {
-        list = list.concat(value as Budget);
-      })
-      .then(() => {
+    budgetRepository
+      .getAll()
+      .then((list) => {
         setBudgetList(list);
         setBudgetNameList(createBudgetNameList(list));
 
@@ -237,10 +233,10 @@ export function useDB() {
 
   function loadBudget(list: Budget[]) {
     list.forEach((data: Budget) => {
-      budgetsDB
-        .getItem(data.id)
-        .then((b) => {
-          setBudget(b as Budget, false);
+      budgetRepository
+        .get(data.id)
+        .then((b: Budget) => {
+          setBudget(b, false);
         })
         .catch((e) => {
           handleError(e);
@@ -249,8 +245,8 @@ export function useDB() {
   }
 
   function loadCurrencyOption() {
-    optionsDB
-      .getItem("currencyCode")
+    optionsRepository
+      .getCurrencyCode()
       .then((c) => {
         if (c) {
           handleCurrency(c as string);
@@ -265,25 +261,28 @@ export function useDB() {
   function searchBudgets() {
     let options: SearchOption[] = [];
 
-    budgetsDB
-      .iterate((budget: Budget) => {
-        options = options.concat(
-          budget.incomes.items.map((i) => {
-            return {
-              id: budget.id,
-              item: i.name,
-              name: budget.name,
-            };
-          }),
-          budget.expenses.items.map((i) => {
-            return {
-              id: budget.id,
-              item: i.name,
-              name: budget.name,
-            };
-          }),
-        );
-      })
+    budgetRepository
+      .getAll()
+      .then((list) =>
+        list.forEach((budget) => {
+          options = options.concat(
+            budget.incomes.items.map((i) => {
+              return {
+                id: budget.id,
+                item: i.name,
+                name: budget.name,
+              };
+            }),
+            budget.expenses.items.map((i) => {
+              return {
+                id: budget.id,
+                item: i.name,
+                name: budget.name,
+              };
+            }),
+          );
+        }),
+      )
       .then(() => {
         if (budgetNameList) {
           options = options.concat(budgetNameList);
@@ -299,29 +298,32 @@ export function useDB() {
 
   function searchBudgetsWithFilter() {
     let options: FilteredItem[] = [];
-    budgetsDB
-      .iterate((budget: Budget) => {
-        options = options.concat(
-          budget.incomes.items.map((i) => {
-            return {
-              id: budget.id,
-              name: budget.name,
-              item: i.name,
-              value: i.value,
-              type: "Income",
-            };
-          }),
-          budget.expenses.items.map((i) => {
-            return {
-              id: budget.id,
-              name: budget.name,
-              item: i.name,
-              value: i.value,
-              type: "Expense",
-            };
-          }),
-        );
-      })
+    budgetRepository
+      .getAll()
+      .then((list) =>
+        list.forEach((budget) => {
+          options = options.concat(
+            budget.incomes.items.map((i) => {
+              return {
+                id: budget.id,
+                name: budget.name,
+                item: i.name,
+                value: i.value,
+                type: "Incomes",
+              };
+            }),
+            budget.expenses.items.map((i) => {
+              return {
+                id: budget.id,
+                name: budget.name,
+                item: i.name,
+                value: i.value,
+                type: "Expenses",
+              };
+            }),
+          );
+        }),
+      )
       .then(() => {
         setOptions(
           options
@@ -356,7 +358,7 @@ export function useDB() {
               name: b.name,
               item: i.name,
               value: i.value,
-              type: "Income",
+              type: "Incomes",
             };
           })
           .filter((i) => i.type.includes(newFilter.type));
@@ -377,7 +379,7 @@ export function useDB() {
               name: b.name,
               item: i.name,
               value: i.value,
-              type: "Expense",
+              type: "Expenses",
             };
           })
           .filter((i) => i.type.includes(newFilter.type));
@@ -392,63 +394,42 @@ export function useDB() {
       const newState = produce((draft) => {
         draft.name = event.target.value;
       }, budget);
+
+      // budgetRepository.update(budget.id, budget).then(() => {
       setBudget(newState(), false);
+      // });
     }
   }
 
   const getCalcHist = useCallback(
-    async (id: string): Promise<CalculationHistoryItem[]> => {
-      let item;
-      await calcHistDB
-        .getItem(id)
-        .then((i) => {
-          item = i;
-        })
-        .catch((e: unknown) => {
-          throw e;
-        });
-      return item ?? [];
+    async (id: string): Promise<CalculationHistoryItem[] | null> => {
+      return calcHistRepository.get(id);
     },
     [],
   );
 
   async function saveCalcHist(id: string, item: CalculationHistoryItem) {
     const calcHist = await getCalcHist(id);
-    const newCalcHist = [...calcHist, item];
-    calcHistDB.setItem(id, newCalcHist).catch((e: unknown) => {
+    const newCalcHist = calcHist ? [...calcHist, item] : [item];
+    calcHistRepository.update(id, newCalcHist).catch((e: unknown) => {
       throw e;
     });
   }
 
   async function deleteCalcHist(id: string) {
-    await calcHistDB.removeItem(id).catch((e: unknown) => {
-      throw e;
-    });
+    return await calcHistRepository.delete(id);
   }
 
   const saveBudget = useCallback(
     (budget: Budget | undefined) => {
       if (!budget) return;
-      let list: Budget[] = [];
-      budgetsDB
-        .setItem(budget.id, budget)
-        .then(() => {
-          budgetsDB
-            .iterate((value) => {
-              list = list.concat(value as Budget);
-            })
-            .then(() => {
-              setBudgetList(list);
-              setBudgetNameList(createBudgetNameList(list));
-              setNeedReload(true);
-            })
-            .catch((e: unknown) => {
-              throw e;
-            });
-        })
-        .catch((e: unknown) => {
-          throw e;
+      budgetRepository.update(budget.id, budget).then(() => {
+        budgetRepository.getAll().then((list) => {
+          setBudgetList(list);
+          setBudgetNameList(createBudgetNameList(list));
+          setNeedReload(true);
         });
+      });
     },
     [setBudgetList, setBudgetNameList, setNeedReload],
   );

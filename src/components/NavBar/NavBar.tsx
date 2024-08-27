@@ -30,9 +30,10 @@ import { NavBarDelete } from "./NavBarDelete";
 import { NavBarImpExp } from "./NavBarImpExp";
 import { NavBarItem } from "./NavBarItem";
 import { NavBarSettings } from "./NavBarSettings";
+import Uuid from "../../guitos/domain/uuid";
 
 export interface SearchOption {
-  id: string;
+  id: Uuid;
   item: string;
   name: string;
 }
@@ -115,7 +116,7 @@ export function NavBar() {
     return isUnique;
   }
 
-  function handleRemoveBudget(initialId?: string | null) {
+  function handleRemoveBudget(initialId?: Uuid | null) {
     if (initialId) {
       setExpanded(false);
       deleteBudget(initialId);

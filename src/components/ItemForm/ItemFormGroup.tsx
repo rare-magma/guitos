@@ -1,4 +1,4 @@
-import { produce } from "immer";
+import { immerable, produce } from "immer";
 import React from "react";
 import { RefObject, useRef, useState } from "react";
 import {
@@ -23,14 +23,12 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "../../utils";
-import {
-  CalculateButton,
-  ItemOperation,
-} from "../CalculateButton/CalculateButton";
-import { Expense } from "../TableCard/Expense";
-import { Income } from "../TableCard/Income";
+import { CalculateButton } from "../CalculateButton/CalculateButton";
 import { ItemForm } from "./ItemForm";
+import Incomes from "../../guitos/domain/incomes";
+import Expenses from "../../guitos/domain/expenses";
 import "./ItemFormGroup.css";
+import { ItemOperation } from "../../guitos/domain/calculationHistoryItem";
 
 interface ItemFormProps {
   itemForm: ItemForm;
@@ -54,10 +52,7 @@ export function ItemFormGroup({
   const isExpense = label === "Expenses";
   const table = isExpense ? budget?.expenses : budget?.incomes;
 
-  function handleCalcHist(
-    operation: ItemOperation,
-    changeValue: number | undefined,
-  ) {
+  function handleCalcHist(operation: ItemOperation, changeValue: number) {
     if (!budget) return;
     const newItemForm = isExpense
       ? budget.expenses.items.find((item) => item.id === itemForm.id)
@@ -65,6 +60,7 @@ export function ItemFormGroup({
     if (!newItemForm) return;
     const calcHistID = `${budget.id}-${label}-${newItemForm.id}`;
     saveCalcHist(calcHistID, {
+      [immerable]: true,
       id: calcHistID,
       itemForm: newItemForm,
       changeValue,
@@ -103,9 +99,9 @@ export function ItemFormGroup({
           if (changeValue) {
             newItemForm.value = calc(itemForm.value, changeValue, operation);
             saveInHistory = true;
+            setNeedsRerender(!needsRerender);
+            handleCalcHist(operation, changeValue);
           }
-          setNeedsRerender(!needsRerender);
-          handleCalcHist(operation, changeValue);
           break;
       }
 
@@ -126,7 +122,7 @@ export function ItemFormGroup({
     if (!table?.items) return;
     if (!budget) return;
 
-    const newTable = isExpense ? ({} as Expense) : ({} as Income);
+    const newTable = isExpense ? ({} as Expenses) : ({} as Incomes);
     const newState = produce((draft) => {
       if (isExpense) {
         draft.expenses = newTable;
