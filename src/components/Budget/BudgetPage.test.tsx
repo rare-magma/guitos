@@ -14,9 +14,14 @@ import {
   undoMock,
 } from "../../setupTests";
 import { BudgetPage } from "./BudgetPage";
+import { BrowserRouter } from "react-router-dom";
 
 describe("BudgetPage", () => {
-  const comp = <BudgetPage />;
+  const comp = (
+    <BrowserRouter>
+      <BudgetPage />
+    </BrowserRouter>
+  );
 
   it("matches snapshot", () => {
     render(comp);

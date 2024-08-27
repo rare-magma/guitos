@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
 import Budget from "../guitos/domain/budget";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();
+  const navigate = useNavigate();
 
   function select(selectedBudget: SearchOption[] | undefined) {
     if (selectedBudget && budgetList) {
@@ -26,6 +28,8 @@ export function useMove() {
           }
         }
       }, 100);
+      navigate(`/${selectedBudget[0].name}`);
+      localStorage.setItem("guitos_lastOpenedBudget", selectedBudget[0].name);
     }
   }
 

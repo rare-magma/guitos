@@ -186,6 +186,7 @@ Keyboard shortcuts can be triggered when no input field is selected.
 - To undo the deletion of a budget click the undo button in the notification shown just after the action.
   - As soon as the notification fades (after 60 seconds) the undo action is not possible anymore.
 - guitos tries to load an existing budget when visiting `guitos.app/budget-name`
+  - it will also try to load the budget that was last visited if none is specified in the URL
 - The interface theme is set automatically by your browser and/or operating system's configuration.
 - The currency is initially selected according to your browser's preferred languages.
   - Example: English (United States) browser language displays values in US Dollars. English (India) uses Indian Rupees.
