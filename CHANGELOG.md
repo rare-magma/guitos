@@ -1,3 +1,14 @@
+## 1.2.3 (2024-08-27)
+
+#### Bug Fixes
+
+* add missing script hash (89151785)
+
+#### Chores
+
+* **release:** 1.2.2 (9f8cab18)
+
+
 ## 1.2.2 (2024-08-27)
 
 #### Bug Fixes
