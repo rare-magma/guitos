@@ -1,7 +1,7 @@
-import { budgetsDB } from "./localForageDb";
 import Budget from "../domain/budget";
 import { BudgetRepository } from "../domain/budgetRepository";
 import Uuid from "../domain/uuid";
+import { budgetsDB } from "./localForageDb";
 
 export class localForageBudgetRepository implements BudgetRepository {
   async get(id: Uuid): Promise<Budget> {
@@ -32,13 +32,8 @@ export class localForageBudgetRepository implements BudgetRepository {
   }
 
   async update(id: Uuid, newBudget: Budget): Promise<boolean> {
-    console.log(
-      "file: localForageBudgetRepository.ts:35 ~ update ~ newBudget:",
-      newBudget,
-    );
-    console.log("file: localForageBudgetRepository.ts:35 ~ update ~ id:", id);
     try {
-      await budgetsDB.setItem(id.value, newBudget);
+      await budgetsDB.setItem(id.toString(), Budget.toSafeFormat(newBudget));
       return true;
     } catch {
       return false;
