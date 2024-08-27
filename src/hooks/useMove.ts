@@ -25,6 +25,7 @@ export function useMove() {
         }
       }, 100);
       navigate(`/${selectedBudget[0].name}`);
+      localStorage.setItem("guitos_lastOpenedBudget", selectedBudget[0].name);
     }
   }
 
