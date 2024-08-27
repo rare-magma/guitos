@@ -82,6 +82,8 @@ jobs:
       - uses: ./.github/actions/docker
         if: steps.semrel.outputs.version != ''
         name: Build docker image
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Compress bundle
         if: steps.semrel.outputs.version != ''

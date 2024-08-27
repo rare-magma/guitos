@@ -14,7 +14,7 @@ runs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ env.GH_TOKEN }}
 
       - name: Extract metadata for Docker
         id: meta
