@@ -1,3 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`NavBar > matches snapshot 1`] = `<NavBar />`;
+exports[`NavBar > matches snapshot 1`] = `
+<BrowserRouter>
+  <NavBar />
+</BrowserRouter>
+`;

@@ -1,9 +1,11 @@
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Budget } from "../components/Budget/Budget";
 import { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();
+  const navigate = useNavigate();
 
   function select(selectedBudget: SearchOption[] | undefined) {
     if (selectedBudget && budgetList) {
@@ -22,6 +24,7 @@ export function useMove() {
           }
         }
       }, 100);
+      navigate(`/${selectedBudget[0].name}`);
     }
   }
 

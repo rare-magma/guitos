@@ -9,9 +9,14 @@ import {
   testEmptyBudgetContext,
 } from "../../setupTests";
 import { NavBar } from "./NavBar";
+import { BrowserRouter } from "react-router-dom";
 
 describe("NavBar", () => {
-  const comp = <NavBar />;
+  const comp = (
+    <BrowserRouter>
+      <NavBar />
+    </BrowserRouter>
+  );
 
   it("matches snapshot", () => {
     render(comp);
