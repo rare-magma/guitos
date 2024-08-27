@@ -1,3 +1,14 @@
+## 1.2.1 (2024-08-27)
+
+#### Bug Fixes
+
+* open last visited budget during startup (300db9c8)
+
+#### CI
+
+* pass secret to composite (6d75ac95)
+
+
 ## 1.1.7 (2024-08-10)
 
 #### Bug Fixes
