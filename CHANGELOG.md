@@ -1,3 +1,32 @@
+## 1.2.5 (2024-08-28)
+
+#### Bug Fixes
+
+* infinite loop (42e8a55c)
+
+#### Tests
+
+* disable e2e (1c384da7)
+* fix assertion (54e16706)
+* remove unnecessary assertion (edab4180)
+
+#### Code Refactoring
+
+* remove unused code (8da614de)
+
+#### Styles
+
+* imports order (c413690f)
+
+#### Chores
+
+* **release:** 1.2.4 (382492d0)
+
+#### Build
+
+* bump axe-core (276b3631)
+
+
 ## 1.2.4 (2024-08-28)
 
 #### Bug Fixes
