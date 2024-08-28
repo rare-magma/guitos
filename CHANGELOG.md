@@ -1,3 +1,31 @@
+## 1.2.4 (2024-08-28)
+
+#### Bug Fixes
+
+* import and type (20d33621)
+* serialization to db (b41111eb)
+
+#### Tests
+
+* disable flaky (f809a0e5)
+* adjust e2e (0ef48332)
+* fix and disable some (3c0a8a69)
+* fix (c2b77264)
+
+#### Styles
+
+* apply recommended biome fixes (f5c7f461)
+* fix (4ac5eb43)
+
+#### Chores
+
+* **release:** 1.2.3 (cd0ee2a3)
+
+#### CI
+
+* biome enable recommended (e2abe172)
+
+
 ## 1.2.3 (2024-08-27)
 
 #### Bug Fixes
