@@ -172,7 +172,7 @@ export default function ChartsPage({ onShowGraphs }: GraphProps) {
       {showFilterChart && (
         <Chart
           key={filter.value}
-          header={`${filter.type}s filtered by: ${filter.value}`}
+          header={`${filter.type} filtered by: ${filter.value}`}
           filteredData={filteredData}
           legendValues1={filteredData.map((i) => i.value)}
           areaDataKey1={"value"}

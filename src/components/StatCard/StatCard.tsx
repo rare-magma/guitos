@@ -121,7 +121,8 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
                 min={0}
                 max={100}
                 now={revenuePercentage}
-                visuallyHidden={true}
+                // biome-ignore lint/style/noImplicitBoolean: <explanation>
+                visuallyHidden
               />
             </Col>
           </OverlayTrigger>

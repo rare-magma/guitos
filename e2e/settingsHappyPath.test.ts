@@ -82,8 +82,8 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     .getByTestId("import-form-control")
     .setInputFiles("./docs/guitos-sample.json");
 
-  await expect(page.getByLabel("go to older budget")).toBeVisible();
-  await page.getByLabel("go to older budget").click();
+  await expect(page.getByLabel("go to newer budget")).toBeVisible();
+  await page.getByLabel("go to newer budget").click();
 
   if (isMobile) {
     await page.getByLabel("Toggle navigation").click();
@@ -93,7 +93,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     page.getByRole("combobox", { name: "search in budgets" }),
   ).toBeVisible();
 
-  await expect(page.getByLabel("budget name")).toHaveValue("2023-08");
+  await expect(page.getByLabel("budget name")).toHaveValue("2023-07");
 
   await page.close();
 });
