@@ -1,7 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`ChartsPage > matches snapshot 1`] = `
-<ChartsPage
-  onShowGraphs={[MockFunction spy]}
-/>
+<BrowserRouter>
+  <ChartsPage
+    onShowGraphs={[MockFunction spy]}
+  />
+</BrowserRouter>
 `;

@@ -7,7 +7,7 @@ import { BudgetProvider } from "./context/BudgetContext";
 import { ConfigProvider } from "./context/ConfigContext";
 import { GeneralProvider } from "./context/GeneralContext";
 
-export default function App() {
+export function App() {
   return (
     <GeneralProvider>
       <ConfigProvider>

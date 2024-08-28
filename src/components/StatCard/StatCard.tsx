@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import type React from "react";
+import { useRef, useState } from "react";
 import {
   Button,
   Card,
@@ -104,7 +105,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             placement="top"
             overlay={
               <Tooltip
-                id={`tooltip-value-statistics-bar`}
+                id={"tooltip-value-statistics-bar"}
                 style={{ position: "fixed" }}
               >
                 {revenuePercentage}% of revenue spent
@@ -120,6 +121,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
                 min={0}
                 max={100}
                 now={revenuePercentage}
+                // biome-ignore lint/style/noImplicitBoolean: <explanation>
                 visuallyHidden
               />
             </Col>
@@ -128,7 +130,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             <OverlayTrigger
               placement="top"
               overlay={
-                <Tooltip id={`tooltip-graphs`} style={{ position: "fixed" }}>
+                <Tooltip id={"tooltip-graphs"} style={{ position: "fixed" }}>
                   open charts view
                 </Tooltip>
               }
@@ -141,7 +143,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
                 style={{ color: "var(--textcolor)" }}
                 onClick={() => onShowGraphs()}
               >
-                <BsGraphUp aria-hidden />
+                <BsGraphUp aria-hidden={true} />
               </Button>
             </OverlayTrigger>
           </Col>
@@ -152,7 +154,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
           <OverlayTrigger
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
+              <Tooltip id={"tooltip-available"} style={{ position: "fixed" }}>
                 = revenue - expenses
               </Tooltip>
             }
@@ -173,7 +175,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             placement="top"
             overlay={
               <Tooltip
-                id={`tooltip-value-available-perc`}
+                id={"tooltip-value-available-perc"}
                 style={{ position: "fixed" }}
               >
                 % of revenue available
@@ -182,17 +184,17 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
           >
             <InputGroup.Text aria-label="percentage of revenue available">
               {shouldCalculateAvailablePerc ? 100 - revenuePercentage : 0}
-              <BsPercent aria-hidden />
+              <BsPercent aria-hidden={true} />
             </InputGroup.Text>
           </OverlayTrigger>
         </InputGroup>
         <InputGroup className="mb-1" key={"withGoal"}>
           <InputGroup.Text>
-            <BsArrowReturnRight aria-hidden />
+            <BsArrowReturnRight aria-hidden={true} />
             <OverlayTrigger
               placement="top"
               overlay={
-                <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
+                <Tooltip id={"tooltip-available"} style={{ position: "fixed" }}>
                   available with goal = available - savings estimate
                 </Tooltip>
               }
@@ -215,7 +217,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
           <OverlayTrigger
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
+              <Tooltip id={"tooltip-available"} style={{ position: "fixed" }}>
                 % of revenue that should go into savings
               </Tooltip>
             }
@@ -225,7 +227,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
           <OverlayTrigger
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-auto-goal`} style={{ position: "fixed" }}>
+              <Tooltip id={"tooltip-auto-goal"} style={{ position: "fixed" }}>
                 estimate savings goal
               </Tooltip>
             }
@@ -237,7 +239,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
               style={{ color: "var(--textcolor)" }}
               onClick={handleAutoGoal}
             >
-              <BsGear aria-hidden />
+              <BsGear aria-hidden={true} />
             </Button>
           </OverlayTrigger>
           <Form.Control
@@ -258,16 +260,16 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             }}
           />
           <InputGroup.Text>
-            <BsPercent aria-hidden />
+            <BsPercent aria-hidden={true} />
           </InputGroup.Text>
         </InputGroup>
         <InputGroup className="mb-1" key={"saved"}>
           <InputGroup.Text>
-            <BsArrowReturnRight aria-hidden />
+            <BsArrowReturnRight aria-hidden={true} />
             <OverlayTrigger
               placement="top"
               overlay={
-                <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
+                <Tooltip id={"tooltip-available"} style={{ position: "fixed" }}>
                   savings estimate = savings goal * available / 100
                 </Tooltip>
               }
@@ -290,7 +292,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
           <OverlayTrigger
             placement="top"
             overlay={
-              <Tooltip id={`tooltip-available`} style={{ position: "fixed" }}>
+              <Tooltip id={"tooltip-available"} style={{ position: "fixed" }}>
                 emergency fund/cash
               </Tooltip>
             }
@@ -318,5 +320,3 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
     </Card>
   );
 }
-
-export default StatCard;

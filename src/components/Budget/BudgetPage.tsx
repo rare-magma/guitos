@@ -4,6 +4,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { useParams } from "react-router-dom";
 import { useBudget } from "../../context/BudgetContext";
 import { useGeneralContext } from "../../context/GeneralContext";
+import type { Budget } from "../../guitos/domain/budget";
 import { useDB } from "../../hooks/useDB";
 import { createBudgetNameList } from "../../utils";
 import { ErrorModal } from "../ErrorModal/ErrorModal";
@@ -12,7 +13,6 @@ import { Loading } from "../Loading/Loading";
 import { NavBar } from "../NavBar/NavBar";
 import { Notification } from "../Notification/Notification";
 import { StatCard } from "../StatCard/StatCard";
-import { Budget } from "./Budget";
 // import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 const ChartsPage = lazy(() => import("../ChartsPage/ChartsPage"));
@@ -103,7 +103,7 @@ export function BudgetPage() {
 
   return (
     <Container
-      fluid
+      fluid={true}
       style={{ zIndex: 1 }}
       key={`${budget?.id}-${needReload}`}
       role="main"
@@ -113,9 +113,11 @@ export function BudgetPage() {
         position={"bottom-center"}
         style={{ zIndex: 100 }}
       >
-        {notifications.map((notification, i) => {
+        {notifications.map((notification) => {
           return (
-            notification && <Notification key={i} notification={notification} />
+            notification && (
+              <Notification key={notification.id} notification={notification} />
+            )
           );
         })}
       </ToastContainer>

@@ -9,6 +9,8 @@ import { defineConfig, devices } from "@playwright/test";
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default defineConfig({
   timeout: 11 * 1000, // 11 seconds
   testDir: "./e2e",

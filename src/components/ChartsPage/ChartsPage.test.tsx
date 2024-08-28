@@ -3,14 +3,19 @@ import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import ChartsPage from "./ChartsPage";
+import { BrowserRouter } from "react-router-dom";
 
 describe("ChartsPage", () => {
   const onShowGraphs = vi.fn();
-  const comp = <ChartsPage onShowGraphs={onShowGraphs} />;
+  const comp = (
+    <BrowserRouter>
+      <ChartsPage onShowGraphs={onShowGraphs} />
+    </BrowserRouter>
+  );
 
   beforeEach(() => {
     //@ts-ignore
-    delete window.ResizeObserver;
+    window.ResizeObserver = undefined;
     window.ResizeObserver = vi.fn().mockImplementation(() => ({
       observe: vi.fn(),
       unobserve: vi.fn(),

@@ -1,11 +1,12 @@
-import { RefObject } from "react";
+import type { RefObject } from "react";
 import { Button, Nav, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
+import type { Uuid } from "../../guitos/domain/uuid";
 
 interface NavBarDeleteProps {
   deleteButtonRef: RefObject<HTMLButtonElement>;
-  handleRemove: (i: string) => void;
+  handleRemove: (i: Uuid) => void;
   expanded: boolean;
 }
 
@@ -24,14 +25,14 @@ export function NavBarDelete({
         placement="bottom"
         rootClose={true}
         overlay={
-          <Popover id={`nav-popover-delete-button`}>
+          <Popover id={"nav-popover-delete-button"}>
             <Popover.Body>
               <OverlayTrigger
                 delay={250}
                 placement="bottom"
                 overlay={
                   <Tooltip
-                    id={`nav-tooltip-delete-budget`}
+                    id={"nav-tooltip-delete-budget"}
                     style={{ position: "fixed" }}
                   >
                     delete budget
@@ -47,7 +48,7 @@ export function NavBarDelete({
                   ref={deleteButtonRef}
                   onClick={() => budget?.id && handleRemove(budget.id)}
                 >
-                  {expanded ? "delete budget" : <BsXLg aria-hidden />}
+                  {expanded ? "delete budget" : <BsXLg aria-hidden={true} />}
                 </Button>
               </OverlayTrigger>
             </Popover.Body>
@@ -64,7 +65,7 @@ export function NavBarDelete({
             }, 0);
           }}
         >
-          {expanded ? "delete" : <BsXLg aria-hidden />}
+          {expanded ? "delete" : <BsXLg aria-hidden={true} />}
         </Button>
       </OverlayTrigger>
     </Nav>

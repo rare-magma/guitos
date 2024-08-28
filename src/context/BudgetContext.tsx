@@ -1,7 +1,12 @@
-import { PropsWithChildren, createContext, useContext, useState } from "react";
+import {
+  type PropsWithChildren,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 import useUndo from "use-undo";
-import { Budget } from "../components/Budget/Budget";
-import { SearchOption } from "../components/NavBar/NavBar";
+import type { SearchOption } from "../components/NavBar/NavBar";
+import type { Budget } from "../guitos/domain/budget";
 import { calcPercentage } from "../utils";
 import { useGeneralContext } from "./GeneralContext";
 

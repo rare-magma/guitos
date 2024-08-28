@@ -1,28 +1,39 @@
 import { produce } from "immer";
 import Papa from "papaparse";
-import React, { useCallback, useEffect, useState } from "react";
-import { Option } from "react-bootstrap-typeahead/types/types";
-import { useParams } from "react-router-dom";
-import { Budget } from "../components/Budget/Budget";
-import { CalculationHistoryItem } from "../components/CalculateButton/CalculateButton";
-import { Filter, FilteredItem } from "../components/ChartsPage/ChartsPage";
-import { SearchOption } from "../components/NavBar/NavBar";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { Option } from "react-bootstrap-typeahead/types/types";
+import { useNavigate, useParams } from "react-router-dom";
+import type { Filter, FilteredItem } from "../components/ChartsPage/ChartsPage";
+import type { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
 import { useConfig } from "../context/ConfigContext";
 import { useGeneralContext } from "../context/GeneralContext";
-import { budgetsDB, calcHistDB, optionsDB } from "../db";
+import { Budget } from "../guitos/domain/budget";
+import type { BudgetItem } from "../guitos/domain/budgetItem";
+import type { CalculationHistoryItem } from "../guitos/domain/calculationHistoryItem";
+import { Uuid } from "../guitos/domain/uuid";
+import { localForageBudgetRepository } from "../guitos/infrastructure/localForageBudgetRepository";
+import { localForageCalcHistRepository } from "../guitos/infrastructure/localForageCalcHistRepository";
+import { localForageOptionsRepository } from "../guitos/infrastructure/localForageOptionsRepository";
 import {
   convertCsvToBudget,
   createBudgetNameList,
-  createNewBudget,
+  saveLastOpenedBudget,
   userLang,
 } from "../utils";
+
+const budgetRepository = new localForageBudgetRepository();
+const optionsRepository = new localForageOptionsRepository();
+const calcHistRepository = new localForageCalcHistRepository();
 
 export function useDB() {
   const [options, setOptions] = useState<Option[]>([]);
   const { setIntlConfig, handleCurrency } = useConfig();
   const params = useParams();
   const name = String(params.name);
+  const navigate = useNavigate();
+
   const {
     setShowError,
     handleError,
@@ -44,14 +55,17 @@ export function useDB() {
     setBudgetNameList,
   } = useBudget();
 
+  const previousBudget = useRef<string | undefined>(budget?.name);
+
   function createBudget() {
-    const newBudget = createNewBudget();
+    const newBudget = Budget.create();
 
     let newBudgetList: Budget[] = [];
     newBudgetList = budgetList
       ? budgetList.concat(newBudget)
       : newBudgetList.concat(newBudget);
 
+    budgetRepository.update(newBudget.id, newBudget);
     setBudget(newBudget, true);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -71,8 +85,8 @@ export function useDB() {
     if (budget) {
       const newBudget = {
         ...budget,
-        id: crypto.randomUUID(),
-        name: budget.name + "-clone",
+        id: Uuid.random(),
+        name: `${budget.name}-clone`,
       };
 
       let newBudgetList: Budget[] = [];
@@ -89,16 +103,17 @@ export function useDB() {
           });
         }),
       );
+      budgetRepository.update(newBudget.id, newBudget);
       setBudget(newBudget, true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
     }
   }
 
-  function deleteBudget(toBeDeleted: string) {
+  function deleteBudget(toBeDeleted: Uuid) {
     budgetList &&
-      budgetsDB
-        .removeItem(toBeDeleted)
+      budgetRepository
+        .delete(toBeDeleted)
         .then(() => {
           const newBudgetList = budgetList
             .filter((item: Budget) => item.id !== toBeDeleted)
@@ -157,25 +172,20 @@ export function useDB() {
       file.name.slice(0, -4),
     );
     newBudgetList.push(newBudget);
-    budgetsDB.setItem(newBudget.id, newBudget).catch((e) => {
-      throw e;
-    });
+    budgetRepository.update(newBudget.id, newBudget);
     setBudgetList(newBudgetList);
     setBudgetNameList(createBudgetNameList(newBudgetList));
   }
 
   function importJSON(fileReader: FileReader, file: File) {
-    const newBudgetList: Budget[] = [];
     try {
       const list = JSON.parse(fileReader.result as string) as Budget[];
-      list.forEach((b: Budget) => {
-        newBudgetList.push(b);
-        budgetsDB.setItem(b.id, b).catch((e) => {
-          throw e;
-        });
-      });
-      setBudgetList(newBudgetList);
-      setBudgetNameList(createBudgetNameList(newBudgetList));
+      for (const b of list) {
+        budgetRepository.update(b.id, b);
+      }
+      setBudgetList(list);
+      setBudgetNameList(createBudgetNameList(list));
+      setBudget(list[0], false);
     } catch (e) {
       setJsonErrors([{ errors: (e as string).toString(), file: file.name }]);
       setShowError(true);
@@ -205,13 +215,9 @@ export function useDB() {
   }
 
   function loadFromDb() {
-    let list: Budget[] = [];
-
-    budgetsDB
-      .iterate((value) => {
-        list = list.concat(value as Budget);
-      })
-      .then(() => {
+    budgetRepository
+      .getAll()
+      .then((list) => {
         setBudgetList(list);
         setBudgetNameList(createBudgetNameList(list));
 
@@ -236,21 +242,21 @@ export function useDB() {
   }
 
   function loadBudget(list: Budget[]) {
-    list.forEach((data: Budget) => {
-      budgetsDB
-        .getItem(data.id)
-        .then((b) => {
-          setBudget(b as Budget, false);
+    for (const data of list) {
+      budgetRepository
+        .get(data.id)
+        .then((b: Budget) => {
+          setBudget(b, false);
         })
         .catch((e) => {
           handleError(e);
         });
-    });
+    }
   }
 
   function loadCurrencyOption() {
-    optionsDB
-      .getItem("currencyCode")
+    optionsRepository
+      .getCurrencyCode()
       .then((c) => {
         if (c) {
           handleCurrency(c as string);
@@ -265,24 +271,27 @@ export function useDB() {
   function searchBudgets() {
     let options: SearchOption[] = [];
 
-    budgetsDB
-      .iterate((budget: Budget) => {
-        options = options.concat(
-          budget.incomes.items.map((i) => {
-            return {
-              id: budget.id,
-              item: i.name,
-              name: budget.name,
-            };
-          }),
-          budget.expenses.items.map((i) => {
-            return {
-              id: budget.id,
-              item: i.name,
-              name: budget.name,
-            };
-          }),
-        );
+    budgetRepository
+      .getAll()
+      .then((list) => {
+        for (const budget of list) {
+          options = options.concat(
+            budget.incomes.items.map((i: BudgetItem) => {
+              return {
+                id: budget.id,
+                item: i.name,
+                name: budget.name,
+              };
+            }),
+            budget.expenses.items.map((i: BudgetItem) => {
+              return {
+                id: budget.id,
+                item: i.name,
+                name: budget.name,
+              };
+            }),
+          );
+        }
       })
       .then(() => {
         if (budgetNameList) {
@@ -299,28 +308,31 @@ export function useDB() {
 
   function searchBudgetsWithFilter() {
     let options: FilteredItem[] = [];
-    budgetsDB
-      .iterate((budget: Budget) => {
-        options = options.concat(
-          budget.incomes.items.map((i) => {
-            return {
-              id: budget.id,
-              name: budget.name,
-              item: i.name,
-              value: i.value,
-              type: "Income",
-            };
-          }),
-          budget.expenses.items.map((i) => {
-            return {
-              id: budget.id,
-              name: budget.name,
-              item: i.name,
-              value: i.value,
-              type: "Expense",
-            };
-          }),
-        );
+    budgetRepository
+      .getAll()
+      .then((list) => {
+        for (const budget of list) {
+          options = options.concat(
+            budget.incomes.items.map((i: BudgetItem) => {
+              return {
+                id: budget.id,
+                name: budget.name,
+                item: i.name,
+                value: i.value,
+                type: "Incomes",
+              };
+            }),
+            budget.expenses.items.map((i: BudgetItem) => {
+              return {
+                id: budget.id,
+                name: budget.name,
+                item: i.name,
+                value: i.value,
+                type: "Expenses",
+              };
+            }),
+          );
+        }
       })
       .then(() => {
         setOptions(
@@ -342,47 +354,43 @@ export function useDB() {
     strictFilter: boolean,
   ) {
     const newFilter = option[0] as FilteredItem;
-    const filteredIncomes = budgetList
-      ?.map((b: Budget) => {
-        return b.incomes.items
-          .filter((i) =>
-            i.value && strictFilter
-              ? i.name === filter.value
-              : i.name.toLowerCase().includes(filter.value.toLowerCase()),
-          )
-          .map((i) => {
-            return {
-              id: b.id,
-              name: b.name,
-              item: i.name,
-              value: i.value,
-              type: "Income",
-            };
-          })
-          .filter((i) => i.type.includes(newFilter.type));
-      })
-      .flat();
+    const filteredIncomes = budgetList?.flatMap((b: Budget) => {
+      return b.incomes.items
+        .filter((i: BudgetItem) =>
+          i.value && strictFilter
+            ? i.name === filter.value
+            : i.name.toLowerCase().includes(filter.value.toLowerCase()),
+        )
+        .map((i: BudgetItem) => {
+          return {
+            id: b.id,
+            name: b.name,
+            item: i.name,
+            value: i.value,
+            type: "Incomes",
+          };
+        })
+        .filter((i: FilteredItem) => i.type.includes(newFilter.type));
+    });
 
-    const filteredExpenses = budgetList
-      ?.map((b: Budget) => {
-        return b.expenses.items
-          .filter((i) =>
-            i.value && strictFilter
-              ? i.name === filter.value
-              : i.name.toLowerCase().includes(filter.value.toLowerCase()),
-          )
-          .map((i) => {
-            return {
-              id: b.id,
-              name: b.name,
-              item: i.name,
-              value: i.value,
-              type: "Expense",
-            };
-          })
-          .filter((i) => i.type.includes(newFilter.type));
-      })
-      .flat();
+    const filteredExpenses = budgetList?.flatMap((b: Budget) => {
+      return b.expenses.items
+        .filter((i: BudgetItem) =>
+          i.value && strictFilter
+            ? i.name === filter.value
+            : i.name.toLowerCase().includes(filter.value.toLowerCase()),
+        )
+        .map((i: BudgetItem) => {
+          return {
+            id: b.id,
+            name: b.name,
+            item: i.name,
+            value: i.value,
+            type: "Expenses",
+          };
+        })
+        .filter((i: FilteredItem) => i.type.includes(newFilter.type));
+    });
 
     return { filteredIncomes, filteredExpenses };
   }
@@ -392,68 +400,55 @@ export function useDB() {
       const newState = produce((draft) => {
         draft.name = event.target.value;
       }, budget);
+
+      // budgetRepository.update(budget.id, budget).then(() => {
       setBudget(newState(), false);
+      // });
     }
   }
 
   const getCalcHist = useCallback(
-    async (id: string): Promise<CalculationHistoryItem[]> => {
-      let item;
-      await calcHistDB
-        .getItem(id)
-        .then((i) => {
-          item = i;
-        })
-        .catch((e: unknown) => {
-          throw e;
-        });
-      return item ?? [];
+    async (id: string): Promise<CalculationHistoryItem[] | null> => {
+      return await calcHistRepository.get(id);
     },
     [],
   );
 
   async function saveCalcHist(id: string, item: CalculationHistoryItem) {
     const calcHist = await getCalcHist(id);
-    const newCalcHist = [...calcHist, item];
-    calcHistDB.setItem(id, newCalcHist).catch((e: unknown) => {
+    const newCalcHist = calcHist ? [...calcHist, item] : [item];
+    calcHistRepository.update(id, newCalcHist).catch((e: unknown) => {
       throw e;
     });
   }
 
   async function deleteCalcHist(id: string) {
-    await calcHistDB.removeItem(id).catch((e: unknown) => {
-      throw e;
-    });
+    return await calcHistRepository.delete(id);
   }
 
   const saveBudget = useCallback(
     (budget: Budget | undefined) => {
       if (!budget) return;
-      let list: Budget[] = [];
-      budgetsDB
-        .setItem(budget.id, budget)
-        .then(() => {
-          budgetsDB
-            .iterate((value) => {
-              list = list.concat(value as Budget);
-            })
-            .then(() => {
-              setBudgetList(list);
-              setBudgetNameList(createBudgetNameList(list));
-              setNeedReload(true);
-            })
-            .catch((e: unknown) => {
-              throw e;
-            });
-        })
-        .catch((e: unknown) => {
-          throw e;
+      budgetRepository.update(budget.id, budget).then(() => {
+        budgetRepository.getAll().then((list) => {
+          setBudgetList(list);
+          setBudgetNameList(createBudgetNameList(list));
+          setNeedReload(true);
         });
+      });
     },
     [setBudgetList, setBudgetNameList, setNeedReload],
   );
 
-  useEffect(() => void saveBudget(budget), [budget, saveBudget]);
+  useEffect(() => {
+    if (budget) {
+      saveBudget(budget);
+      if (budget.name !== previousBudget.current) {
+        saveLastOpenedBudget(budget.name, navigate);
+        previousBudget.current = budget.name;
+      }
+    }
+  }, [budget, saveBudget, navigate]);
 
   return {
     createBudget,

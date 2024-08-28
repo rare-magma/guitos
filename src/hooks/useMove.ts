@@ -1,7 +1,8 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { Budget } from "../components/Budget/Budget";
-import { SearchOption } from "../components/NavBar/NavBar";
+import { useNavigate } from "react-router-dom";
+import type { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
+import type { Budget } from "../guitos/domain/budget";
+import { saveLastOpenedBudget } from "../utils";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();
@@ -24,8 +25,7 @@ export function useMove() {
           }
         }
       }, 100);
-      navigate(`/${selectedBudget[0].name}`);
-      localStorage.setItem("guitos_lastOpenedBudget", selectedBudget[0].name);
+      saveLastOpenedBudget(selectedBudget[0].name, navigate);
     }
   }
 

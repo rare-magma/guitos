@@ -1,5 +1,10 @@
-import { PropsWithChildren, createContext, useContext, useState } from "react";
 import {
+  type PropsWithChildren,
+  createContext,
+  useContext,
+  useState,
+} from "react";
+import type {
   CurrencyInputProps,
   IntlConfig,
 } from "react-currency-input-field/dist/components/CurrencyInputProps";

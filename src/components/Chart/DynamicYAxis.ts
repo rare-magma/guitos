@@ -9,13 +9,16 @@ interface Props {
 
 interface ReturnValues {
   yAxisWidth: undefined | number;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   setChartRef: (chartRef: any) => void;
 }
 
+// biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
 export function useDynamicYAxisWidth(props: void | Props): ReturnValues {
   const { yAxisWidthModifier } = props || {};
   const [yAxisWidthState, setYAxisWidthState] = useState(undefined);
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const setChartRef = useCallback((chartRef: any) => {
     if (chartRef?.container != null) {
       const tickValueElements = chartRef.container.querySelectorAll(

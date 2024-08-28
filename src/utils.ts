@@ -1,11 +1,14 @@
 import Big from "big.js";
-import { MutableRefObject } from "react";
-import { Budget } from "./components/Budget/Budget";
-import { CsvItem } from "./components/Budget/CsvItem";
-import { ItemOperation } from "./components/CalculateButton/CalculateButton";
-import { FilteredItem } from "./components/ChartsPage/ChartsPage";
+import { immerable } from "immer";
+import type { MutableRefObject } from "react";
+import type { NavigateFunction } from "react-router-dom";
+import type { FilteredItem } from "./components/ChartsPage/ChartsPage";
 import { ItemForm } from "./components/ItemForm/ItemForm";
-import { SearchOption } from "./components/NavBar/NavBar";
+import type { SearchOption } from "./components/NavBar/NavBar";
+import type { Budget } from "./guitos/domain/budget";
+import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
+import type { CsvItem } from "./guitos/domain/csvItem";
+import { Uuid } from "./guitos/domain/uuid";
 import { currenciesMap } from "./lists/currenciesMap";
 
 export const userLang = navigator.language;
@@ -37,12 +40,16 @@ export function roundBig(number: Big, precision: number): number {
 
 export function calcTotal(values: ItemForm[]): Big {
   let total = Big(0);
-  values &&
-    values
-      .filter((x) => !isNaN(x.value))
-      .forEach((i) => {
-        total = total.add(Big(i.value));
-      });
+  if (!values) {
+    return total;
+  }
+
+  for (const value of values) {
+    if (!Number.isNaN(value.value)) {
+      total = total.add(Big(value.value));
+    }
+  }
+
   return total;
 }
 
@@ -51,7 +58,7 @@ export function calcPercentage(
   revenueTotal: number,
 ): number {
   const areRoundableNumbers =
-    !isNaN(revenueTotal) && revenueTotal > 0 && !isNaN(itemValue);
+    !Number.isNaN(revenueTotal) && revenueTotal > 0 && !Number.isNaN(itemValue);
   if (areRoundableNumbers) {
     const percentage = Big(itemValue).mul(100).div(revenueTotal);
 
@@ -66,7 +73,7 @@ export function calc(
   operation: ItemOperation,
 ): number {
   let total = 0;
-  const isActionableChange = !isNaN(itemValue) && change > 0;
+  const isActionableChange = !Number.isNaN(itemValue) && change > 0;
 
   if (isActionableChange) {
     let newValue = Big(itemValue);
@@ -92,9 +99,8 @@ export function calc(
 
   if (total >= 0) {
     return total;
-  } else {
-    return 0;
   }
+  return 0;
 }
 
 export function calcAvailable(value: Budget | null): Big {
@@ -108,7 +114,7 @@ export function calcAvailable(value: Budget | null): Big {
 
 export function calcWithGoal(value: Budget): number {
   const goalIsCalculable =
-    value.stats.goal !== null && !isNaN(value.stats.goal);
+    value.stats.goal !== null && !Number.isNaN(value.stats.goal);
 
   if (goalIsCalculable) {
     const available = calcAvailable(value);
@@ -122,7 +128,7 @@ export function calcWithGoal(value: Budget): number {
 
 export function calcSaved(value: Budget): number {
   const valueIsCalculable =
-    value.stats.saved !== null && !isNaN(value.stats.goal);
+    value.stats.saved !== null && !Number.isNaN(value.stats.goal);
 
   if (valueIsCalculable) {
     const available = calcTotal(value.incomes.items);
@@ -134,7 +140,7 @@ export function calcSaved(value: Budget): number {
 
 export function calcAutoGoal(value: Budget): number {
   const valueIsCalculable =
-    value.stats.goal !== null && !isNaN(value.stats.goal);
+    value.stats.goal !== null && !Number.isNaN(value.stats.goal);
 
   if (valueIsCalculable) {
     const incomeTotal = calcTotal(value.incomes.items);
@@ -151,8 +157,9 @@ export function calcAutoGoal(value: Budget): number {
 export function convertCsvToBudget(csv: string[], date: string): Budget {
   const emptyExpenses: ItemForm[] = [];
   const emptyIncomes: ItemForm[] = [];
-  const newBudget = {
-    id: crypto.randomUUID(),
+  const newBudget: Budget = {
+    [immerable]: true,
+    id: Uuid.random(),
     name: date,
     expenses: {
       items: emptyExpenses,
@@ -211,11 +218,12 @@ export function convertCsvToBudget(csv: string[], date: string): Budget {
 }
 
 export function createNewBudget(): Budget {
-  const newId = crypto.randomUUID();
+  const newId = Uuid.random();
   const year = new Date().getFullYear();
-  const newBudget = {
+  const newBudget: Budget = {
+    [immerable]: true,
     id: newId,
-    name: `${year}-${newId.slice(0, 8)}`,
+    name: `${year}-${newId.toString().slice(0, 8)}`,
     expenses: {
       items: [{ id: 1, name: "", value: 0 }],
       total: 0,
@@ -269,10 +277,10 @@ export function parseLocaleNumber(
     .format(1.1)
     .replace(/\p{Number}/gu, "");
 
-  return parseFloat(
+  return Number.parseFloat(
     stringNumber
-      .replace(new RegExp("\\" + thousandSeparator, "g"), "")
-      .replace(new RegExp("\\" + decimalSeparator), "."),
+      .replace(new RegExp(`\\${thousandSeparator}`, "g"), "")
+      .replace(new RegExp(`\\${decimalSeparator}`), "."),
   );
 }
 
@@ -287,12 +295,8 @@ export function budgetToCsv(budget: Budget) {
     return ["income", income.name, income.value].join(",");
   });
 
-  const stats = ["goal", "goal", budget.stats.goal.toString()].join(",");
-  const reserves = [
-    "reserves",
-    "reserves",
-    budget.stats.reserves.toString(),
-  ].join(",");
+  const stats = ["goal", "goal", budget.stats.goal].join(",");
+  const reserves = ["reserves", "reserves", budget.stats.reserves].join(",");
 
   return [header, ...expenses, ...incomes, stats, reserves].join("\n");
 }
@@ -323,6 +327,7 @@ export function getNestedValues<T, K extends keyof T, L extends keyof T[K]>(
   prop1: K,
   prop2: L,
 ): T[K][L][] {
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   return list!.map((o: T) => {
     return getNestedProperty(o, prop1, prop2);
   });
@@ -336,4 +341,12 @@ export function getLabelKey(option: unknown): string {
 export function getLabelKeyFilteredItem(option: unknown): string {
   const label = option as FilteredItem;
   return `${label.item} (${label.name} ${label.type.toLowerCase()})`;
+}
+
+export function saveLastOpenedBudget(
+  name: string,
+  navigateFn: NavigateFunction,
+) {
+  navigateFn(`/${name}`);
+  localStorage.setItem("guitos_lastOpenedBudget", name);
 }

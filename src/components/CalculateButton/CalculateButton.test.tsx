@@ -4,15 +4,18 @@ import { vi } from "vitest";
 import { describe, expect, it } from "vitest";
 import { itemForm1 } from "../../setupTests";
 import { CalculateButton } from "./CalculateButton";
+import { BrowserRouter } from "react-router-dom";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
   const comp = (
-    <CalculateButton
-      itemForm={itemForm1}
-      label="Expense"
-      onCalculate={onCalculate}
-    />
+    <BrowserRouter>
+      <CalculateButton
+        itemForm={itemForm1}
+        label="Expense"
+        onCalculate={onCalculate}
+      />
+    </BrowserRouter>
   );
 
   it("matches snapshot", () => {

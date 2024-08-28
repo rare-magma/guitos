@@ -3,7 +3,7 @@ import { Button, Toast } from "react-bootstrap";
 import { BsArrowCounterclockwise, BsX } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import {
-  BudgetNotification,
+  type BudgetNotification,
   useGeneralContext,
 } from "../../context/GeneralContext";
 import "./Notification.css";
@@ -30,7 +30,7 @@ export function Notification({ notification }: NotificationProps) {
       key={`${notification.id}-toast`}
       onClose={handleClose}
       show={notification.show}
-      autohide
+      autohide={true}
       delay={notification.showUndo ? 60000 : 3000}
     >
       <Toast.Body
@@ -60,7 +60,7 @@ export function Notification({ notification }: NotificationProps) {
               handleClose();
             }}
           >
-            <BsArrowCounterclockwise aria-hidden />
+            <BsArrowCounterclockwise aria-hidden={true} />
           </Button>
         )}
         <Button
@@ -71,7 +71,7 @@ export function Notification({ notification }: NotificationProps) {
           variant="outline-secondary"
           onClick={handleClose}
         >
-          {<BsX aria-hidden />}
+          {<BsX aria-hidden={true} />}
         </Button>
       </Toast.Body>
     </Toast>

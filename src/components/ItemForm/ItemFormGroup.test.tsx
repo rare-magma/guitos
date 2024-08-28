@@ -10,16 +10,19 @@ import {
   testSpanishConfigContext,
 } from "../../setupTests";
 import { ItemFormGroup } from "./ItemFormGroup";
+import { BrowserRouter } from "react-router-dom";
 
 describe("ItemFormGroup", () => {
   const ref = createRef<HTMLInputElement>();
   const comp = (
-    <ItemFormGroup
-      itemForm={itemForm1}
-      label="Expenses"
-      inputRef={ref}
-      costPercentage={1}
-    />
+    <BrowserRouter>
+      <ItemFormGroup
+        itemForm={itemForm1}
+        label="Expenses"
+        inputRef={ref}
+        costPercentage={1}
+      />
+    </BrowserRouter>
   );
 
   it("matches snapshot", () => {
@@ -121,12 +124,15 @@ describe("ItemFormGroup", () => {
     configContextSpy.mockReturnValue(testSpanishConfigContext);
 
     render(
-      <ItemFormGroup
-        itemForm={itemForm1}
-        label="Expenses"
-        inputRef={ref}
-        costPercentage={1}
-      />,
+      <BrowserRouter>
+        <ItemFormGroup
+          itemForm={itemForm1}
+          label="Expenses"
+          inputRef={ref}
+          costPercentage={1}
+        />
+        ,
+      </BrowserRouter>,
     );
 
     await userEvent.clear(screen.getByDisplayValue("10 €"));

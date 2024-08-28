@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { expect, test } from "@playwright/test";
 
 test("should complete the settings happy path", async ({ page, isMobile }) => {
@@ -64,7 +64,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     page.getByLabel("export budget as json").click(),
   ]);
 
-  let downloadError = await jsonDownload.failure();
+  const downloadError = await jsonDownload.failure();
   if (downloadError !== null) {
     console.log("Error on download:", downloadError);
     throw new Error(downloadError);
@@ -82,8 +82,8 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     .getByTestId("import-form-control")
     .setInputFiles("./docs/guitos-sample.json");
 
-  await expect(page.getByLabel("go to older budget")).toBeVisible();
-  await page.getByLabel("go to older budget").click();
+  await expect(page.getByLabel("go to newer budget")).toBeVisible();
+  await page.getByLabel("go to newer budget").click();
 
   if (isMobile) {
     await page.getByLabel("Toggle navigation").click();
@@ -93,7 +93,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     page.getByRole("combobox", { name: "search in budgets" }),
   ).toBeVisible();
 
-  await expect(page.getByLabel("budget name")).toHaveValue("2023-08");
+  await expect(page.getByLabel("budget name")).toHaveValue("2023-07");
 
   await page.close();
 });

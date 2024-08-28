@@ -1,6 +1,6 @@
-import { produce } from "immer";
-import React from "react";
-import { RefObject, useRef, useState } from "react";
+import { immerable, produce } from "immer";
+import type React from "react";
+import { type RefObject, useRef, useState } from "react";
 import {
   Button,
   Form,
@@ -13,6 +13,8 @@ import CurrencyInput from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
+import type { Expenses } from "../../guitos/domain/expenses";
+import type { Incomes } from "../../guitos/domain/incomes";
 import { useDB } from "../../hooks/useDB";
 import {
   calc,
@@ -23,14 +25,11 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "../../utils";
-import {
-  CalculateButton,
-  ItemOperation,
-} from "../CalculateButton/CalculateButton";
-import { Expense } from "../TableCard/Expense";
-import { Income } from "../TableCard/Income";
-import { ItemForm } from "./ItemForm";
+import { CalculateButton } from "../CalculateButton/CalculateButton";
+import type { ItemForm } from "./ItemForm";
 import "./ItemFormGroup.css";
+import type { ItemOperation } from "../../guitos/domain/calculationHistoryItem";
+import type { BudgetItem } from "../../guitos/domain/budgetItem";
 
 interface ItemFormProps {
   itemForm: ItemForm;
@@ -54,17 +53,19 @@ export function ItemFormGroup({
   const isExpense = label === "Expenses";
   const table = isExpense ? budget?.expenses : budget?.incomes;
 
-  function handleCalcHist(
-    operation: ItemOperation,
-    changeValue: number | undefined,
-  ) {
+  function handleCalcHist(operation: ItemOperation, changeValue: number) {
     if (!budget) return;
     const newItemForm = isExpense
-      ? budget.expenses.items.find((item) => item.id === itemForm.id)
-      : budget.incomes.items.find((item) => item.id === itemForm.id);
+      ? budget.expenses.items.find(
+          (item: BudgetItem) => item.id === itemForm.id,
+        )
+      : budget.incomes.items.find(
+          (item: BudgetItem) => item.id === itemForm.id,
+        );
     if (!newItemForm) return;
     const calcHistID = `${budget.id}-${label}-${newItemForm.id}`;
     saveCalcHist(calcHistID, {
+      [immerable]: true,
       id: calcHistID,
       itemForm: newItemForm,
       changeValue,
@@ -84,10 +85,15 @@ export function ItemFormGroup({
     if (!itemForm) return;
 
     let saveInHistory = false;
+    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
     const newState = produce((draft) => {
       const newItemForm = isExpense
-        ? draft.expenses.items.find((item) => item.id === itemForm.id)
-        : draft.incomes.items.find((item) => item.id === itemForm.id);
+        ? draft.expenses.items.find(
+            (item: BudgetItem) => item.id === itemForm.id,
+          )
+        : draft.incomes.items.find(
+            (item: BudgetItem) => item.id === itemForm.id,
+          );
       if (!newItemForm) return;
 
       switch (operation) {
@@ -103,9 +109,9 @@ export function ItemFormGroup({
           if (changeValue) {
             newItemForm.value = calc(itemForm.value, changeValue, operation);
             saveInHistory = true;
+            setNeedsRerender(!needsRerender);
+            handleCalcHist(operation, changeValue);
           }
-          setNeedsRerender(!needsRerender);
-          handleCalcHist(operation, changeValue);
           break;
       }
 
@@ -126,14 +132,16 @@ export function ItemFormGroup({
     if (!table?.items) return;
     if (!budget) return;
 
-    const newTable = isExpense ? ({} as Expense) : ({} as Income);
+    const newTable = isExpense ? ({} as Expenses) : ({} as Incomes);
     const newState = produce((draft) => {
       if (isExpense) {
         draft.expenses = newTable;
       } else {
         draft.incomes = newTable;
       }
-      newTable.items = table.items.filter((item) => item.id !== toBeDeleted.id);
+      newTable.items = table.items.filter(
+        (item: BudgetItem) => item.id !== toBeDeleted.id,
+      );
       newTable.total = roundBig(calcTotal(newTable.items), 2);
       draft.stats.available = roundBig(calcAvailable(draft), 2);
       draft.stats.withGoal = calcWithGoal(draft);
@@ -226,14 +234,14 @@ export function ItemFormGroup({
         placement="top"
         rootClose={true}
         overlay={
-          <Popover id={`popover-delete-button`}>
+          <Popover id={"popover-delete-button"}>
             <Popover.Body>
               <OverlayTrigger
                 delay={250}
                 placement="top"
                 overlay={
                   <Tooltip
-                    id={`tooltip-delete-itemformgroup`}
+                    id={"tooltip-delete-itemformgroup"}
                     style={{ position: "fixed" }}
                   >
                     delete item
@@ -250,7 +258,7 @@ export function ItemFormGroup({
                   ref={deleteButtonRef}
                   onClick={() => handleRemove(itemForm)}
                 >
-                  <BsXLg aria-hidden />
+                  <BsXLg aria-hidden={true} />
                 </Button>
               </OverlayTrigger>
             </Popover.Body>
@@ -269,7 +277,7 @@ export function ItemFormGroup({
             }, 0);
           }}
         >
-          <BsXLg aria-hidden />
+          <BsXLg aria-hidden={true} />
         </Button>
       </OverlayTrigger>
     </InputGroup>

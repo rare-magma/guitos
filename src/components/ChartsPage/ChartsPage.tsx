@@ -1,4 +1,4 @@
-import { MutableRefObject, useRef, useState } from "react";
+import { type MutableRefObject, useRef, useState } from "react";
 import {
   Button,
   Col,
@@ -11,10 +11,10 @@ import {
   ToggleButton,
   Tooltip,
 } from "react-bootstrap";
-import { AsyncTypeahead, TypeaheadRef } from "react-bootstrap-typeahead";
+import { AsyncTypeahead, type TypeaheadRef } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
-import { Option } from "react-bootstrap-typeahead/types/types";
+import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsArrowLeft } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
@@ -26,6 +26,7 @@ import {
 } from "../../utils";
 import { Chart } from "../Chart/Chart";
 import "./ChartsPage.css";
+import type { Uuid } from "../../guitos/domain/uuid";
 
 interface GraphProps {
   onShowGraphs: () => void;
@@ -37,14 +38,15 @@ export interface Filter {
 }
 
 export interface FilteredItem {
-  id: string;
+  id: Uuid;
   name: string;
   item: string;
   value: number;
   type: string;
 }
 
-function ChartsPage({ onShowGraphs }: GraphProps) {
+// biome-ignore lint/style/noDefaultExport: <explanation>
+export default function ChartsPage({ onShowGraphs }: GraphProps) {
   const { budgetList } = useBudget();
   const { selectBudgetsWithFilter, searchBudgetsWithFilter, options } = useDB();
 
@@ -106,7 +108,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
   return (
     <Container className="mb-3">
       <Navbar className="pb-0" data-testid="charts-header">
-        <Container fluid className="flex-row p-0">
+        <Container fluid={true} className="flex-row p-0">
           <Nav className="flex-row flex-grow-1 justify-content-between">
             <Nav className="me-2 my-2">
               <OverlayTrigger
@@ -126,7 +128,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
                   variant={"go-button"}
                   onClick={onShowGraphs}
                 >
-                  <BsArrowLeft aria-hidden />
+                  <BsArrowLeft aria-hidden={true} />
                 </Button>
               </OverlayTrigger>
             </Nav>
@@ -170,7 +172,7 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
       {showFilterChart && (
         <Chart
           key={filter.value}
-          header={`${filter.type}s filtered by: ${filter.value}`}
+          header={`${filter.type} filtered by: ${filter.value}`}
           filteredData={filteredData}
           legendValues1={filteredData.map((i) => i.value)}
           areaDataKey1={"value"}
@@ -255,4 +257,3 @@ function ChartsPage({ onShowGraphs }: GraphProps) {
     </Container>
   );
 }
-export default ChartsPage;

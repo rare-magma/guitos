@@ -1,7 +1,7 @@
 import { act, cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
-import App from "./App";
+import { App } from "./App";
 import { budgetsDB, calcHistDB, optionsDB } from "./db";
 import {
   budgetContextSpy,
@@ -28,7 +28,9 @@ describe("App", () => {
     expect(optionsDB.config("storeName")).toBe("options");
     expect(calcHistDB.config("name")).toBe("guitos");
     expect(calcHistDB.config("storeName")).toBe("calcHistDB");
-    await expect(budgetsDB.getItem(testBudget.id)).resolves.toBeNull();
+    await expect(
+      budgetsDB.getItem(testBudget.id.toString()),
+    ).resolves.toBeNull();
   });
 
   it("shows new budget when clicking new button", async () => {
@@ -42,15 +44,17 @@ describe("App", () => {
     expect(await screen.findByText("Statistics")).toBeInTheDocument();
     expect(await screen.findByText("Revenue")).toBeInTheDocument();
     expect(await screen.findByText("Expenses")).toBeInTheDocument();
-    await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(testBudget);
+    await expect(budgetsDB.getItem(testBudget.id.toString())).resolves.toEqual(
+      testBudget,
+    );
   });
 
   it.skip("deletes budget when clicking delete button", async () => {
     render(comp);
     await act(async () => {
-      await expect(budgetsDB.getItem(testBudget.id)).resolves.toEqual(
-        testBudget,
-      );
+      await expect(
+        budgetsDB.getItem(testBudget.id.toString()),
+      ).resolves.toEqual(testBudget);
     });
 
     const newButton = await screen.findAllByRole("button", {
@@ -68,7 +72,9 @@ describe("App", () => {
     );
 
     await act(async () => {
-      await expect(budgetsDB.getItem(testBudget.id)).resolves.toBeNull();
+      await expect(
+        budgetsDB.getItem(testBudget.id.toString()),
+      ).resolves.toBeNull();
     });
   });
 });
