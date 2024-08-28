@@ -1,5 +1,5 @@
-import { CalcHistRepository } from "../domain/calcHistRepository";
-import CalculationHistoryItem from "../domain/calculationHistoryItem";
+import type { CalcHistRepository } from "../domain/calcHistRepository";
+import type { CalculationHistoryItem } from "../domain/calculationHistoryItem";
 import { calcHistDB } from "./localForageDb";
 
 export class localForageCalcHistRepository implements CalcHistRepository {
@@ -13,7 +13,7 @@ export class localForageCalcHistRepository implements CalcHistRepository {
 
   async getAll(): Promise<CalculationHistoryItem[][] | null> {
     try {
-      let list: CalculationHistoryItem[][] = [];
+      const list: CalculationHistoryItem[][] = [];
       for (const item of await calcHistDB.keys()) {
         if (item) {
           const calcHist =
@@ -36,7 +36,7 @@ export class localForageCalcHistRepository implements CalcHistRepository {
     try {
       await calcHistDB.setItem(
         id,
-        newCalcHist.map((item) => CalculationHistoryItem.toSafeFormat(item)),
+        newCalcHist.map((item) => item),
       );
       return true;
     } catch {

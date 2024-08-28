@@ -1,5 +1,5 @@
-import Budget from "./budget";
-import Uuid from "./uuid";
+import type { Budget } from "./budget";
+import type { Uuid } from "./uuid";
 
 export interface BudgetRepository {
   get(id: Uuid): Promise<Budget>;

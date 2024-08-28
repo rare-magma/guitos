@@ -1,5 +1,5 @@
 import { CURRENCY_CODE, LOCALE } from "../domain/options";
-import { OptionsRepository } from "../domain/optionsRepository";
+import type { OptionsRepository } from "../domain/optionsRepository";
 import { optionsDB } from "./localForageDb";
 
 export class localForageOptionsRepository implements OptionsRepository {
@@ -8,8 +8,8 @@ export class localForageOptionsRepository implements OptionsRepository {
       const code = await optionsDB.getItem<string>(CURRENCY_CODE);
       if (!code) throw new Error();
       return code;
-    } catch (e: any) {
-      throw new Error(e.message);
+    } catch (e) {
+      throw new Error((e as Error).message);
     }
   }
 
@@ -27,8 +27,8 @@ export class localForageOptionsRepository implements OptionsRepository {
       const locale = await optionsDB.getItem<string>(LOCALE);
       if (!locale) throw new Error();
       return locale;
-    } catch (e: any) {
-      throw new Error(e.message);
+    } catch (e) {
+      throw new Error((e as Error).message);
     }
   }
 

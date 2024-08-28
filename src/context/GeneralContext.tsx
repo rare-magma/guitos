@@ -1,5 +1,10 @@
-import { ParseError } from "papaparse";
-import { PropsWithChildren, createContext, useContext, useState } from "react";
+import type { ParseError } from "papaparse";
+import {
+  type PropsWithChildren,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 import { useImmer } from "use-immer";
 
 export interface CsvError {

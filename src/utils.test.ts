@@ -1,9 +1,8 @@
 import Big from "big.js";
 import Papa from "papaparse";
 import { expect, test } from "vitest";
-import { FilteredItem } from "./components/ChartsPage/ChartsPage";
-import Budget from "./guitos/domain/budget";
-import Uuid from "./guitos/domain/uuid";
+import type { FilteredItem } from "./components/ChartsPage/ChartsPage";
+import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
 import { currenciesMap } from "./lists/currenciesMap";
 import { firefoxLocalesList } from "./lists/firefoxLocalesList";
@@ -40,7 +39,8 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
-import { ItemOperation } from "./guitos/domain/calculationHistoryItem";
+import type { Budget } from "./guitos/domain/budget";
+import { Uuid } from "./guitos/domain/uuid";
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
@@ -170,13 +170,13 @@ test("intlFormat", () => {
 });
 
 test("intlFormat browser locale list", () => {
-  [firefoxLocalesList, chromeLocalesList].forEach((list) => {
-    list.forEach((locale) => {
+  for (const list of [firefoxLocalesList, chromeLocalesList]) {
+    for (const locale of list) {
       const countryCode = getCountryCode(locale);
       const currencyCode = getCurrencyCode(countryCode);
       expect(intlFormat(1, currencyCode)).toBeTruthy();
-    });
-  });
+    }
+  }
 });
 
 test("parseLocaleNumber", () => {

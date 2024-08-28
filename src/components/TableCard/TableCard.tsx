@@ -14,8 +14,6 @@ import {
 import { BsArrowsVertical, BsPlusLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
-import Expenses from "../../guitos/domain/expenses";
-import Incomes from "../../guitos/domain/incomes";
 import {
   calcAvailable,
   calcPercentage,
@@ -25,15 +23,19 @@ import {
   intlFormat,
   roundBig,
 } from "../../utils";
-import { ItemForm } from "../ItemForm/ItemForm";
+import type { ItemForm } from "../ItemForm/ItemForm";
 import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
 import "./TableCard.css";
+import type { BudgetItem } from "../../guitos/domain/budgetItem";
+import type { Expenses } from "../../guitos/domain/expenses";
+import type { Incomes } from "../../guitos/domain/incomes";
 
 interface TableCardProps {
   header: "Revenue" | "Expenses";
 }
 
-export function TableCard({ header: label }: TableCardProps) {
+// biome-ignore lint/style/noDefaultExport: <explanation>
+export default function TableCard({ header: label }: TableCardProps) {
   const { budget, setBudget, revenuePercentage } = useBudget();
   const { intlConfig } = useConfig();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -80,7 +82,7 @@ export function TableCard({ header: label }: TableCardProps) {
 
     if (tableHasItems) {
       maxId = Math.max(
-        ...table.items.map((i) => {
+        ...table.items.map((i: BudgetItem) => {
           return i.id;
         }),
       );
@@ -88,7 +90,7 @@ export function TableCard({ header: label }: TableCardProps) {
       maxId = 0;
     }
 
-    newItemForm.id = isNaN(maxId) ? 0 : maxId + 1;
+    newItemForm.id = Number.isNaN(maxId) ? 0 : maxId + 1;
     newItemForm.name = "";
     newItemForm.value = 0;
 
@@ -101,9 +103,9 @@ export function TableCard({ header: label }: TableCardProps) {
   return (
     <Card
       key={`table-${label}-${intlConfig?.currency}-${table?.items.length}`}
-      className={label + "-card"}
+      className={`${label}-card`}
     >
-      <Card.Header className={label + "-card-header"}>
+      <Card.Header className={`${label}-card-header`}>
         <OverlayTrigger
           placement="top"
           overlay={
@@ -167,7 +169,7 @@ export function TableCard({ header: label }: TableCardProps) {
             placement="top"
             overlay={
               <Tooltip
-                id={`tooltip-new-itemformgroup`}
+                id={"tooltip-new-itemformgroup"}
                 style={{ position: "fixed" }}
               >
                 add new item
@@ -175,7 +177,7 @@ export function TableCard({ header: label }: TableCardProps) {
             }
           >
             <Button
-              variant={label.toLowerCase() + "-plus-button"}
+              variant={`${label.toLowerCase()}-plus-button`}
               aria-label={`add item to ${label}`}
               size="sm"
               className="flex-grow-1"
@@ -188,7 +190,7 @@ export function TableCard({ header: label }: TableCardProps) {
               name=""
               value=""
             >
-              <BsPlusLg aria-hidden />
+              <BsPlusLg aria-hidden={true} />
             </Button>
           </OverlayTrigger>
           <OverlayTrigger
@@ -196,7 +198,7 @@ export function TableCard({ header: label }: TableCardProps) {
             placement="top"
             overlay={
               <Tooltip
-                id={`tooltip-reorder-itemformgroup`}
+                id={"tooltip-reorder-itemformgroup"}
                 style={{ position: "fixed" }}
               >
                 toggle reordering of items
@@ -213,7 +215,7 @@ export function TableCard({ header: label }: TableCardProps) {
               onClick={() => setIsDraggable(!isDraggable)}
               checked={isDraggable}
             >
-              <BsArrowsVertical aria-hidden />
+              <BsArrowsVertical aria-hidden={true} />
             </ToggleButton>
           </OverlayTrigger>
         </div>
@@ -221,5 +223,3 @@ export function TableCard({ header: label }: TableCardProps) {
     </Card>
   );
 }
-
-export default TableCard;

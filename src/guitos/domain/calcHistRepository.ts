@@ -1,4 +1,4 @@
-import CalculationHistoryItem from "./calculationHistoryItem";
+import type { CalculationHistoryItem } from "./calculationHistoryItem";
 
 export interface CalcHistRepository {
   get(id: string): Promise<CalculationHistoryItem[] | null>;

@@ -13,8 +13,8 @@ import { ItemForm } from "./components/ItemForm/ItemForm";
 import * as AppBudgetContext from "./context/BudgetContext";
 import * as AppConfigContext from "./context/ConfigContext";
 import * as AppGeneralContext from "./context/GeneralContext";
-import Budget from "./guitos/domain/budget";
-import Uuid from "./guitos/domain/uuid";
+import type { Budget } from "./guitos/domain/budget";
+import { Uuid } from "./guitos/domain/uuid";
 
 window.crypto.randomUUID = randomUUID;
 global.URL.createObjectURL = vi.fn();

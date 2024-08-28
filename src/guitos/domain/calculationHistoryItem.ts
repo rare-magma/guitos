@@ -1,6 +1,6 @@
 import { immerable } from "immer";
-import BudgetItem from "./budgetItem";
-import Uuid from "./uuid";
+import type { BudgetItem } from "./budgetItem";
+import { Uuid } from "./uuid";
 
 export type ItemOperation =
   | "name"
@@ -10,7 +10,7 @@ export type ItemOperation =
   | "multiply"
   | "divide";
 
-export default class CalculationHistoryItem {
+export class CalculationHistoryItem {
   id: string;
   itemForm: BudgetItem;
   changeValue: number;

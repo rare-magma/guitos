@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import Budget from "../../guitos/domain/budget";
+import type { Budget } from "../../guitos/domain/budget";
 import { testBudgetList } from "../../setupTests";
 import { Chart } from "./Chart";
 
@@ -22,7 +22,7 @@ describe("Chart", () => {
 
   beforeEach(() => {
     //@ts-ignore
-    delete window.ResizeObserver;
+    window.ResizeObserver = undefined;
     window.ResizeObserver = vi.fn().mockImplementation(() => ({
       observe: vi.fn(),
       unobserve: vi.fn(),

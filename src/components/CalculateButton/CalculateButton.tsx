@@ -18,9 +18,10 @@ import { CgMathDivide, CgMathPlus } from "react-icons/cg";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { useDB } from "../../hooks/useDB";
-import { ItemForm } from "../ItemForm/ItemForm";
+import type { ItemForm } from "../ItemForm/ItemForm";
 import "./CalculateButton.css";
-import CalculationHistoryItem, {
+import type {
+  CalculationHistoryItem,
   ItemOperation,
 } from "../../guitos/domain/calculationHistoryItem";
 
@@ -87,7 +88,7 @@ export function CalculateButton({
         placement="top"
         rootClose={true}
         overlay={
-          <Popover id={`popover-calculate-button`}>
+          <Popover id={"popover-calculate-button"}>
             <Popover.Body>
               <InputGroup
                 size="sm"
@@ -99,11 +100,11 @@ export function CalculateButton({
                   key={`${itemForm.id}-${label}-operation-history-button`}
                   aria-label={"open operation history"}
                   variant="outline-secondary"
-                  disabled={history.length > 0 ? false : true}
+                  disabled={!(history.length > 0)}
                   type="button"
                   onClick={handleHistory}
                 >
-                  <BsClockHistory aria-hidden />
+                  <BsClockHistory aria-hidden={true} />
                 </Button>
                 <Dropdown>
                   <Dropdown.Toggle
@@ -112,10 +113,14 @@ export function CalculateButton({
                     variant="outline-secondary"
                     id="dropdown-operation"
                   >
-                    {operation === "add" && <CgMathPlus aria-hidden />}
-                    {operation === "subtract" && <BsDashLg aria-hidden />}
-                    {operation === "multiply" && <BsXLg aria-hidden />}
-                    {operation === "divide" && <CgMathDivide aria-hidden />}
+                    {operation === "add" && <CgMathPlus aria-hidden={true} />}
+                    {operation === "subtract" && (
+                      <BsDashLg aria-hidden={true} />
+                    )}
+                    {operation === "multiply" && <BsXLg aria-hidden={true} />}
+                    {operation === "divide" && (
+                      <CgMathDivide aria-hidden={true} />
+                    )}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
@@ -123,25 +128,25 @@ export function CalculateButton({
                       aria-label="addition"
                       onClick={() => setOperation("add")}
                     >
-                      <CgMathPlus aria-hidden />
+                      <CgMathPlus aria-hidden={true} />
                     </Dropdown.Item>
                     <Dropdown.Item
                       aria-label="subtraction"
                       onClick={() => setOperation("subtract")}
                     >
-                      <BsDashLg aria-hidden />
+                      <BsDashLg aria-hidden={true} />
                     </Dropdown.Item>
                     <Dropdown.Item
                       aria-label="multiplication"
                       onClick={() => setOperation("multiply")}
                     >
-                      <BsXLg aria-hidden />
+                      <BsXLg aria-hidden={true} />
                     </Dropdown.Item>
                     <Dropdown.Item
                       aria-label="division"
                       onClick={() => setOperation("divide")}
                     >
-                      <CgMathDivide aria-hidden />
+                      <CgMathDivide aria-hidden={true} />
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -158,7 +163,9 @@ export function CalculateButton({
                   onKeyUp={handleKeyPress}
                   ref={inputRef}
                   onValueChange={(value) =>
-                    setChangeValue(isNaN(Number(value)) ? 0 : Number(value))
+                    setChangeValue(
+                      Number.isNaN(Number(value)) ? 0 : Number(value),
+                    )
                   }
                 />
                 <Button
@@ -172,7 +179,7 @@ export function CalculateButton({
                     opButtonRef?.current?.click();
                   }}
                 >
-                  <BsCheckLg aria-hidden />
+                  <BsCheckLg aria-hidden={true} />
                 </Button>
               </InputGroup>
               {showHistory && (
@@ -197,16 +204,16 @@ export function CalculateButton({
                         />
                         <InputGroup.Text>
                           {item.operation === "add" && (
-                            <CgMathPlus aria-hidden />
+                            <CgMathPlus aria-hidden={true} />
                           )}
                           {item.operation === "subtract" && (
-                            <BsDashLg aria-hidden />
+                            <BsDashLg aria-hidden={true} />
                           )}
                           {item.operation === "multiply" && (
-                            <BsXLg aria-hidden />
+                            <BsXLg aria-hidden={true} />
                           )}
                           {item.operation === "divide" && (
-                            <CgMathDivide aria-hidden />
+                            <CgMathDivide aria-hidden={true} />
                           )}
                         </InputGroup.Text>
                         <CurrencyInput
@@ -243,7 +250,7 @@ export function CalculateButton({
             getHistory();
           }}
         >
-          <BsPlusSlashMinus aria-hidden />
+          <BsPlusSlashMinus aria-hidden={true} />
         </Button>
       </OverlayTrigger>
     </>

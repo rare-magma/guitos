@@ -1,4 +1,4 @@
-export default class Stats {
+export class Stats {
   available: number;
   withGoal: number;
   saved: number;

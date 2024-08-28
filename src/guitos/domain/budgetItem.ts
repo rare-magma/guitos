@@ -1,4 +1,4 @@
-export default class BudgetItem {
+export class BudgetItem {
   id: number;
   name: string;
   value: number;

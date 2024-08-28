@@ -1,6 +1,6 @@
-import Budget from "../domain/budget";
-import { BudgetRepository } from "../domain/budgetRepository";
-import Uuid from "../domain/uuid";
+import { Budget } from "../domain/budget";
+import type { BudgetRepository } from "../domain/budgetRepository";
+import type { Uuid } from "../domain/uuid";
 import { budgetsDB } from "./localForageDb";
 
 export class localForageBudgetRepository implements BudgetRepository {
@@ -9,14 +9,14 @@ export class localForageBudgetRepository implements BudgetRepository {
       const budget = await budgetsDB.getItem<Budget>(id.toString());
       if (!budget) throw new Error();
       return budget;
-    } catch (e: any) {
-      throw new Error(e.message);
+    } catch (e) {
+      throw new Error((e as Error).message);
     }
   }
 
   async getAll(): Promise<Budget[]> {
     try {
-      let list: Budget[] = [];
+      const list: Budget[] = [];
       for (const item of await budgetsDB.keys()) {
         if (item) {
           const budget = await budgetsDB.getItem<Budget>(item);
@@ -26,8 +26,8 @@ export class localForageBudgetRepository implements BudgetRepository {
         }
       }
       return list;
-    } catch (e: any) {
-      throw new Error(e.message);
+    } catch (e) {
+      throw new Error((e as Error).message);
     }
   }
 

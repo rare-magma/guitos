@@ -1,9 +1,10 @@
 import { faker } from "@faker-js/faker";
-import BudgetItem from "./budgetItem";
-import Stats from "./stats";
-import Uuid from "./uuid";
+import { BudgetItem } from "./budgetItem";
+import { Uuid } from "./uuid";
+import { Stats } from "./stats";
 
-export default class ObjectMother {
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
+export class ObjectMother {
   static uuid(): Uuid {
     return new Uuid(faker.string.uuid());
   }

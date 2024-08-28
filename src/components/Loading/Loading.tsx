@@ -3,7 +3,7 @@ import { Container, Row, Spinner } from "react-bootstrap";
 export function Loading() {
   return (
     <Container
-      fluid
+      fluid={true}
       className="position-absolute top-50 start-50 translate-middle"
     >
       <Row className="justify-content-center">

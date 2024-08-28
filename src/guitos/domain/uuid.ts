@@ -1,4 +1,4 @@
-export default class Uuid {
+export class Uuid {
   readonly value: string;
 
   constructor(value: string) {

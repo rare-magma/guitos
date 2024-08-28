@@ -12,7 +12,7 @@ import {
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { intlFormat, median } from "../../utils";
-import { FilteredItem } from "../ChartsPage/ChartsPage";
+import type { FilteredItem } from "../ChartsPage/ChartsPage";
 import "./Chart.css";
 import { ChartTooltip } from "./ChartTooltip";
 import { useDynamicYAxisWidth } from "./DynamicYAxis";
@@ -35,7 +35,7 @@ interface ChartProps {
   filteredData?: FilteredItem[];
 }
 
-const horizonalRatio = 3.4;
+const horizontalRatio = 3.4;
 const verticalRatio = 1.6;
 
 export function Chart({
@@ -73,7 +73,7 @@ export function Chart({
       <InputGroup size="sm" className="mb-1">
         <InputGroup.Text>{legend}</InputGroup.Text>
         <CurrencyInput
-          disabled
+          disabled={true}
           className="text-end form-control fixed-width-font"
           aria-label={legend}
           intlConfig={intlConfig}
@@ -95,7 +95,7 @@ export function Chart({
       <Card.Body>
         <ResponsiveContainer
           width="100%"
-          aspect={isVerticalScreen ? verticalRatio : horizonalRatio}
+          aspect={isVerticalScreen ? verticalRatio : horizontalRatio}
         >
           <AreaChart
             data={chartData}
@@ -163,10 +163,10 @@ export function Chart({
                 aria-label={"median"}
                 defaultValue={legendValues1 && median(legendValues1)}
                 type="number"
-                disabled
+                disabled={true}
               />
               <InputGroup.Text>
-                <BsPercent aria-hidden />
+                <BsPercent aria-hidden={true} />
               </InputGroup.Text>
             </InputGroup>
           )}

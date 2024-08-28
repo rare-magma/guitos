@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { SearchOption } from "../components/NavBar/NavBar";
+import type { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
-import Budget from "../guitos/domain/budget";
+import type { Budget } from "../guitos/domain/budget";
+import { saveLastOpenedBudget } from "../utils";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();
@@ -11,10 +12,6 @@ export function useMove() {
     if (selectedBudget && budgetList) {
       const filteredList = budgetList.filter(
         (item: Budget) => item.id === selectedBudget[0].id,
-      );
-      console.log(
-        "file: useMove.ts:13 ~ select ~ filteredList:",
-        filteredList[0],
       );
       filteredList && setBudget(filteredList[0], false);
 
@@ -28,8 +25,7 @@ export function useMove() {
           }
         }
       }, 100);
-      navigate(`/${selectedBudget[0].name}`);
-      localStorage.setItem("guitos_lastOpenedBudget", selectedBudget[0].name);
+      saveLastOpenedBudget(selectedBudget[0].name, navigate);
     }
   }
 

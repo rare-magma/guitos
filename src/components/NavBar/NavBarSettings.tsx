@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { Typeahead } from "react-bootstrap-typeahead";
-import { Option } from "react-bootstrap-typeahead/types/types";
+import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsGear } from "react-icons/bs";
 import { useConfig } from "../../context/ConfigContext";
@@ -36,14 +36,14 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
         placement="bottom"
         rootClose={true}
         overlay={
-          <Popover id={`nav-popover-settings-button`}>
+          <Popover id={"nav-popover-settings-button"}>
             <Popover.Body>
               <Stack gap={3}>
                 <Stack className="align-self-center" direction="horizontal">
                   <InputGroup
                     size="sm"
                     className="mb-1"
-                    key={`export-button-group`}
+                    key={"export-button-group"}
                   >
                     <Typeahead
                       id="currency-option-list"
@@ -82,7 +82,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                   placement="bottom"
                   overlay={
                     <Tooltip
-                      id={`tooltip-guitos-version`}
+                      id={"tooltip-guitos-version"}
                       style={{ position: "fixed" }}
                     >
                       guitos version
@@ -117,7 +117,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
             }, 0);
           }}
         >
-          {expanded ? "settings" : <BsGear aria-hidden />}
+          {expanded ? "settings" : <BsGear aria-hidden={true} />}
         </Button>
       </OverlayTrigger>
     </Nav>

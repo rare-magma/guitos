@@ -1,20 +1,27 @@
 import { produce } from "immer";
 import Papa from "papaparse";
-import React, { useCallback, useEffect, useState } from "react";
-import { Option } from "react-bootstrap-typeahead/types/types";
-import { useParams } from "react-router-dom";
-import { Filter, FilteredItem } from "../components/ChartsPage/ChartsPage";
-import { SearchOption } from "../components/NavBar/NavBar";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { Option } from "react-bootstrap-typeahead/types/types";
+import { useNavigate, useParams } from "react-router-dom";
+import type { Filter, FilteredItem } from "../components/ChartsPage/ChartsPage";
+import type { SearchOption } from "../components/NavBar/NavBar";
 import { useBudget } from "../context/BudgetContext";
 import { useConfig } from "../context/ConfigContext";
 import { useGeneralContext } from "../context/GeneralContext";
-import Budget from "../guitos/domain/budget";
-import CalculationHistoryItem from "../guitos/domain/calculationHistoryItem";
-import Uuid from "../guitos/domain/uuid";
+import { Budget } from "../guitos/domain/budget";
+import type { BudgetItem } from "../guitos/domain/budgetItem";
+import type { CalculationHistoryItem } from "../guitos/domain/calculationHistoryItem";
+import { Uuid } from "../guitos/domain/uuid";
 import { localForageBudgetRepository } from "../guitos/infrastructure/localForageBudgetRepository";
 import { localForageCalcHistRepository } from "../guitos/infrastructure/localForageCalcHistRepository";
 import { localForageOptionsRepository } from "../guitos/infrastructure/localForageOptionsRepository";
-import { convertCsvToBudget, createBudgetNameList, userLang } from "../utils";
+import {
+  convertCsvToBudget,
+  createBudgetNameList,
+  saveLastOpenedBudget,
+  userLang,
+} from "../utils";
 
 const budgetRepository = new localForageBudgetRepository();
 const optionsRepository = new localForageOptionsRepository();
@@ -25,6 +32,7 @@ export function useDB() {
   const { setIntlConfig, handleCurrency } = useConfig();
   const params = useParams();
   const name = String(params.name);
+  const navigate = useNavigate();
 
   const {
     setShowError,
@@ -46,6 +54,8 @@ export function useDB() {
     budgetNameList,
     setBudgetNameList,
   } = useBudget();
+
+  const previousBudget = useRef<string | undefined>(budget?.name);
 
   function createBudget() {
     const newBudget = Budget.create();
@@ -76,7 +86,7 @@ export function useDB() {
       const newBudget = {
         ...budget,
         id: Uuid.random(),
-        name: budget.name + "-clone",
+        name: `${budget.name}-clone`,
       };
 
       let newBudgetList: Budget[] = [];
@@ -170,9 +180,9 @@ export function useDB() {
   function importJSON(fileReader: FileReader, file: File) {
     try {
       const list = JSON.parse(fileReader.result as string) as Budget[];
-      list.forEach((b: Budget) => {
+      for (const b of list) {
         budgetRepository.update(b.id, b);
-      });
+      }
       setBudgetList(list);
       setBudgetNameList(createBudgetNameList(list));
       setBudget(list[0], false);
@@ -232,7 +242,7 @@ export function useDB() {
   }
 
   function loadBudget(list: Budget[]) {
-    list.forEach((data: Budget) => {
+    for (const data of list) {
       budgetRepository
         .get(data.id)
         .then((b: Budget) => {
@@ -241,7 +251,7 @@ export function useDB() {
         .catch((e) => {
           handleError(e);
         });
-    });
+    }
   }
 
   function loadCurrencyOption() {
@@ -263,17 +273,17 @@ export function useDB() {
 
     budgetRepository
       .getAll()
-      .then((list) =>
-        list.forEach((budget) => {
+      .then((list) => {
+        for (const budget of list) {
           options = options.concat(
-            budget.incomes.items.map((i) => {
+            budget.incomes.items.map((i: BudgetItem) => {
               return {
                 id: budget.id,
                 item: i.name,
                 name: budget.name,
               };
             }),
-            budget.expenses.items.map((i) => {
+            budget.expenses.items.map((i: BudgetItem) => {
               return {
                 id: budget.id,
                 item: i.name,
@@ -281,8 +291,8 @@ export function useDB() {
               };
             }),
           );
-        }),
-      )
+        }
+      })
       .then(() => {
         if (budgetNameList) {
           options = options.concat(budgetNameList);
@@ -300,10 +310,10 @@ export function useDB() {
     let options: FilteredItem[] = [];
     budgetRepository
       .getAll()
-      .then((list) =>
-        list.forEach((budget) => {
+      .then((list) => {
+        for (const budget of list) {
           options = options.concat(
-            budget.incomes.items.map((i) => {
+            budget.incomes.items.map((i: BudgetItem) => {
               return {
                 id: budget.id,
                 name: budget.name,
@@ -312,7 +322,7 @@ export function useDB() {
                 type: "Incomes",
               };
             }),
-            budget.expenses.items.map((i) => {
+            budget.expenses.items.map((i: BudgetItem) => {
               return {
                 id: budget.id,
                 name: budget.name,
@@ -322,8 +332,8 @@ export function useDB() {
               };
             }),
           );
-        }),
-      )
+        }
+      })
       .then(() => {
         setOptions(
           options
@@ -344,47 +354,43 @@ export function useDB() {
     strictFilter: boolean,
   ) {
     const newFilter = option[0] as FilteredItem;
-    const filteredIncomes = budgetList
-      ?.map((b: Budget) => {
-        return b.incomes.items
-          .filter((i) =>
-            i.value && strictFilter
-              ? i.name === filter.value
-              : i.name.toLowerCase().includes(filter.value.toLowerCase()),
-          )
-          .map((i) => {
-            return {
-              id: b.id,
-              name: b.name,
-              item: i.name,
-              value: i.value,
-              type: "Incomes",
-            };
-          })
-          .filter((i) => i.type.includes(newFilter.type));
-      })
-      .flat();
+    const filteredIncomes = budgetList?.flatMap((b: Budget) => {
+      return b.incomes.items
+        .filter((i: BudgetItem) =>
+          i.value && strictFilter
+            ? i.name === filter.value
+            : i.name.toLowerCase().includes(filter.value.toLowerCase()),
+        )
+        .map((i: BudgetItem) => {
+          return {
+            id: b.id,
+            name: b.name,
+            item: i.name,
+            value: i.value,
+            type: "Incomes",
+          };
+        })
+        .filter((i: FilteredItem) => i.type.includes(newFilter.type));
+    });
 
-    const filteredExpenses = budgetList
-      ?.map((b: Budget) => {
-        return b.expenses.items
-          .filter((i) =>
-            i.value && strictFilter
-              ? i.name === filter.value
-              : i.name.toLowerCase().includes(filter.value.toLowerCase()),
-          )
-          .map((i) => {
-            return {
-              id: b.id,
-              name: b.name,
-              item: i.name,
-              value: i.value,
-              type: "Expenses",
-            };
-          })
-          .filter((i) => i.type.includes(newFilter.type));
-      })
-      .flat();
+    const filteredExpenses = budgetList?.flatMap((b: Budget) => {
+      return b.expenses.items
+        .filter((i: BudgetItem) =>
+          i.value && strictFilter
+            ? i.name === filter.value
+            : i.name.toLowerCase().includes(filter.value.toLowerCase()),
+        )
+        .map((i: BudgetItem) => {
+          return {
+            id: b.id,
+            name: b.name,
+            item: i.name,
+            value: i.value,
+            type: "Expenses",
+          };
+        })
+        .filter((i: FilteredItem) => i.type.includes(newFilter.type));
+    });
 
     return { filteredIncomes, filteredExpenses };
   }
@@ -434,7 +440,15 @@ export function useDB() {
     [setBudgetList, setBudgetNameList, setNeedReload],
   );
 
-  useEffect(() => void saveBudget(budget), [budget, saveBudget]);
+  useEffect(() => {
+    if (budget) {
+      saveBudget(budget);
+      if (budget.name !== previousBudget.current) {
+        saveLastOpenedBudget(budget.name, navigate);
+        previousBudget.current = budget.name;
+      }
+    }
+  }, [budget, saveBudget, navigate]);
 
   return {
     createBudget,

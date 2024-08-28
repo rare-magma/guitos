@@ -10,7 +10,7 @@ describe("ChartsPage", () => {
 
   beforeEach(() => {
     //@ts-ignore
-    delete window.ResizeObserver;
+    window.ResizeObserver = undefined;
     window.ResizeObserver = vi.fn().mockImplementation(() => ({
       observe: vi.fn(),
       unobserve: vi.fn(),

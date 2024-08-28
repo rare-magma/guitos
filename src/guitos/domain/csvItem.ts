@@ -1,8 +1,8 @@
-import Big from "big.js";
+import type Big from "big.js";
 
 export type CsvType = "expense" | "income" | "goal" | "reserves";
 
-export default class CsvItem {
+export class CsvItem {
   type: CsvType;
   name: string;
   value: Big;

@@ -2,7 +2,7 @@ import { currenciesList } from "../../lists/currenciesList";
 
 export const CURRENCY_CODE = "currencyCode";
 export const LOCALE = "locale";
-export default class Options {
+export class Options {
   currencyCode: string;
   locale: NavigatorLanguage;
 

@@ -1,6 +1,6 @@
-import BudgetItem from "./budgetItem";
+import type { BudgetItem } from "./budgetItem";
 
-export default class Expenses {
+export class Expenses {
   items: BudgetItem[];
   total: number;
 

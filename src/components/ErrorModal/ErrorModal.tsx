@@ -1,8 +1,8 @@
 import { Accordion, Button, Modal } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 import {
-  CsvError,
-  JsonError,
+  type CsvError,
+  type JsonError,
   useGeneralContext,
 } from "../../context/GeneralContext";
 import "./ErrorModal.css";
@@ -30,7 +30,7 @@ export function ErrorModal() {
           dialogClassName="modal-90w mx-auto"
           show={showError}
           onHide={() => setShowError(false)}
-          centered
+          centered={true}
         >
           <Modal.Header>
             Error:
@@ -42,7 +42,7 @@ export function ErrorModal() {
               type="button"
               onClick={() => setShowError(false)}
             >
-              <BsXLg aria-hidden />
+              <BsXLg aria-hidden={true} />
             </Button>
           </Modal.Header>
           <Modal.Body className="textarea mx-1">
@@ -58,7 +58,7 @@ export function ErrorModal() {
           dialogClassName="modal-90w mx-auto"
           show={showError}
           onHide={() => setShowError(false)}
-          centered
+          centered={true}
         >
           <Modal.Header key="json-error-modal-header">
             Errors found while importing:
@@ -75,14 +75,14 @@ export function ErrorModal() {
                 setJsonErrors([]);
               }}
             >
-              <BsXLg aria-hidden />
+              <BsXLg aria-hidden={true} />
             </Button>
           </Modal.Header>
           <Modal.Body key="json-error-modal-body">
             <Accordion
               aria-label="error list"
               key="json-error-modal-accordion"
-              flush
+              flush={true}
             >
               {jsonErrors.map((jsonError: JsonError, i: number) => (
                 <Accordion.Item
@@ -120,7 +120,7 @@ export function ErrorModal() {
           dialogClassName="modal-90w mx-auto"
           show={showError}
           onHide={() => setShowError(false)}
-          centered
+          centered={true}
         >
           <Modal.Header key="csv-error-modal-header">
             Errors found while importing:
@@ -137,14 +137,14 @@ export function ErrorModal() {
                 setJsonErrors([]);
               }}
             >
-              <BsXLg aria-hidden />
+              <BsXLg aria-hidden={true} />
             </Button>
           </Modal.Header>
           <Modal.Body key="csv-error-modal-body">
             <Accordion
               aria-label="error list"
               key="csv-error-modal-accordion"
-              flush
+              flush={true}
             >
               {csvErrors.map((csvError: CsvError, i: number) => (
                 <Accordion.Item

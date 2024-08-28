@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction, useRef } from "react";
+import type React from "react";
+import { type Dispatch, type SetStateAction, useRef } from "react";
 import {
   Button,
   Form,
@@ -77,14 +78,14 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
         placement="bottom"
         rootClose={true}
         overlay={
-          <Popover id={`nav-popover-imp-exp-button`}>
+          <Popover id={"nav-popover-imp-exp-button"}>
             <Popover.Body>
               <Stack gap={3}>
                 <Stack className="align-self-center" direction="horizontal">
                   <InputGroup
                     size="sm"
                     className="mb-1"
-                    key={`export-button-group`}
+                    key={"export-button-group"}
                   >
                     <Button
                       aria-label="import budget"
@@ -99,7 +100,7 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
                       data-testid="import-form-control"
                       className="straight-corners"
                       type="file"
-                      multiple
+                      multiple={true}
                       ref={importRef}
                       onChange={(
                         event: React.ChangeEvent<HTMLInputElement>,
@@ -154,7 +155,7 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
             }, 0);
           }}
         >
-          {expanded ? "import/export" : <BsArrowDownUp aria-hidden />}
+          {expanded ? "import/export" : <BsArrowDownUp aria-hidden={true} />}
         </Button>
       </OverlayTrigger>
     </Nav>
@@ -164,7 +165,7 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
         delay={250}
         placement="bottom"
         overlay={
-          <Tooltip id={`tooltip-import-budget`} style={{ position: "fixed" }}>
+          <Tooltip id={"tooltip-import-budget"} style={{ position: "fixed" }}>
             import budget
           </Tooltip>
         }
@@ -176,12 +177,12 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
             variant="outline-primary"
             onClick={() => importRef.current?.click()}
           >
-            {expanded ? "import" : <BsUpload aria-hidden />}
+            {expanded ? "import" : <BsUpload aria-hidden={true} />}
           </Button>
           <Form.Control
             data-testid="import-form-control"
             type="file"
-            multiple
+            multiple={true}
             ref={importRef}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setExpanded(false);

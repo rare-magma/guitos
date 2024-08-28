@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import { expect, test } from "@playwright/test";
 
 test("should complete the settings happy path", async ({ page, isMobile }) => {
@@ -64,7 +64,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     page.getByLabel("export budget as json").click(),
   ]);
 
-  let downloadError = await jsonDownload.failure();
+  const downloadError = await jsonDownload.failure();
   if (downloadError !== null) {
     console.log("Error on download:", downloadError);
     throw new Error(downloadError);

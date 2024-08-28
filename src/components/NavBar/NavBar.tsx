@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
-import TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
-import { Option } from "react-bootstrap-typeahead/types/types";
+import type TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
+import type { Option } from "react-bootstrap-typeahead/types/types";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -26,7 +27,7 @@ import { useDB } from "../../hooks/useDB";
 import { useMove } from "../../hooks/useMove";
 import { focusRef, getLabelKey } from "../../utils";
 import "./NavBar.css";
-import Uuid from "../../guitos/domain/uuid";
+import type { Uuid } from "../../guitos/domain/uuid";
 import { NavBarDelete } from "./NavBarDelete";
 import { NavBarImpExp } from "./NavBarImpExp";
 import { NavBarItem } from "./NavBarItem";
@@ -38,6 +39,7 @@ export interface SearchOption {
   name: string;
 }
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
 export function NavBar() {
   const searchRef = useRef<TypeaheadRef>(null);
   const nameRef =
@@ -138,13 +140,18 @@ export function NavBar() {
       onToggle={() => setExpanded(!expanded)}
       data-testid="header"
     >
-      <Container fluid className="flex-row" role="heading" aria-level={1}>
+      <Container
+        fluid={true}
+        className="flex-row"
+        role="heading"
+        aria-level={1}
+      >
         {shouldShowBrand && (
           <OverlayTrigger
             delay={250}
             placement="bottom"
             overlay={
-              <Tooltip id={`tooltip-guitos-repo`} style={{ position: "fixed" }}>
+              <Tooltip id={"tooltip-guitos-repo"} style={{ position: "fixed" }}>
                 view source code in new tab
               </Tooltip>
             }
@@ -176,7 +183,7 @@ export function NavBar() {
                     tooltipText={"go to older budget"}
                     buttonAriaLabel={"go to older budget"}
                     buttonVariant={"go-button"}
-                    buttonIcon={<BsArrowLeft aria-hidden />}
+                    buttonIcon={<BsArrowLeft aria-hidden={true} />}
                   />
                   <NavBarItem
                     itemClassName={"m-2"}
@@ -186,7 +193,7 @@ export function NavBar() {
                     tooltipText={"go to newer budget"}
                     buttonAriaLabel={"go to newer budget"}
                     buttonVariant={"go-button"}
-                    buttonIcon={<BsArrowRight aria-hidden />}
+                    buttonIcon={<BsArrowRight aria-hidden={true} />}
                   />
                 </>
               )}
@@ -196,7 +203,7 @@ export function NavBar() {
                   placement="bottom"
                   overlay={
                     <Tooltip
-                      id={`tooltip-budget-name`}
+                      id={"tooltip-budget-name"}
                       style={{ position: "fixed" }}
                     >
                       budget name
@@ -207,7 +214,7 @@ export function NavBar() {
                     <Form.Control
                       id="budget-name"
                       aria-label={"budget name"}
-                      key={"budget-name-key-" + budget.id}
+                      key={`budget-name-key-${budget.id}`}
                       defaultValue={budget.name}
                       ref={nameRef}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -218,7 +225,7 @@ export function NavBar() {
                       maxLength={25}
                       isInvalid={invalidName}
                     />
-                    <Form.Control.Feedback tooltip type="invalid">
+                    <Form.Control.Feedback tooltip={true} type="invalid">
                       This name is already used by another budget.
                     </Form.Control.Feedback>
                   </>
@@ -229,18 +236,18 @@ export function NavBar() {
           <Nav className="flex-grow-1">
             <Navbar.Toggle
               className="ms-auto ms-2 my-2"
-              aria-controls={`offcanvasNavbar-expand-md`}
+              aria-controls={"offcanvasNavbar-expand-md"}
             />
           </Nav>
         </Nav>
 
         <Navbar.Offcanvas
-          id={`offcanvasNavbar-expand-md`}
+          id={"offcanvasNavbar-expand-md"}
           placement="end"
           show={expanded}
         >
           <Offcanvas.Header style={{ justifyContent: "space-between" }}>
-            <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
+            <Offcanvas.Title id={"offcanvasNavbarLabel-expand-md"}>
               {budget?.name ?? "guitos"}
             </Offcanvas.Title>
             <Button
@@ -248,7 +255,7 @@ export function NavBar() {
               variant="outline-secondary"
               onClick={() => setExpanded(false)}
             >
-              {<BsXLg aria-hidden />}
+              {<BsXLg aria-hidden={true} />}
             </Button>
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end">
@@ -290,7 +297,7 @@ export function NavBar() {
                       expanded ? (
                         "undo"
                       ) : (
-                        <BsArrowCounterclockwise aria-hidden />
+                        <BsArrowCounterclockwise aria-hidden={true} />
                       )
                     }
                   />
@@ -305,7 +312,11 @@ export function NavBar() {
                     buttonClassName="w-100"
                     buttonVariant={"outline-info"}
                     buttonIcon={
-                      expanded ? "redo" : <BsArrowClockwise aria-hidden />
+                      expanded ? (
+                        "redo"
+                      ) : (
+                        <BsArrowClockwise aria-hidden={true} />
+                      )
                     }
                   />
                 </>
@@ -321,7 +332,7 @@ export function NavBar() {
                 buttonAriaLabel={"new budget"}
                 buttonClassName="w-100"
                 buttonVariant={"outline-success"}
-                buttonIcon={expanded ? "new" : <BsPlusLg aria-hidden />}
+                buttonIcon={expanded ? "new" : <BsPlusLg aria-hidden={true} />}
               />
               {hasOneOrMoreBudgets && (
                 <>
@@ -336,7 +347,9 @@ export function NavBar() {
                     buttonAriaLabel={"clone budget"}
                     buttonClassName="w-100"
                     buttonVariant={"outline-success"}
-                    buttonIcon={expanded ? "clone" : <FaRegClone aria-hidden />}
+                    buttonIcon={
+                      expanded ? "clone" : <FaRegClone aria-hidden={true} />
+                    }
                   />
                   <NavBarDelete
                     deleteButtonRef={deleteButtonRef}
@@ -360,7 +373,11 @@ export function NavBar() {
                 buttonVariant={"outline-info"}
                 buttonLink="https://github.com/rare-magma/guitos#getting-started"
                 buttonIcon={
-                  expanded ? "instructions" : <BsQuestionLg aria-hidden />
+                  expanded ? (
+                    "instructions"
+                  ) : (
+                    <BsQuestionLg aria-hidden={true} />
+                  )
                 }
                 target="_blank"
               />

@@ -1,10 +1,10 @@
 import { immerable } from "immer";
-import Expenses from "./expenses";
-import Incomes from "./incomes";
-import Stats from "./stats";
-import Uuid from "./uuid";
+import type { Expenses } from "./expenses";
+import type { Incomes } from "./incomes";
+import type { Stats } from "./stats";
+import { Uuid } from "./uuid";
 
-export default class Budget {
+export class Budget {
   id: Uuid;
   name: string;
   expenses: Expenses;

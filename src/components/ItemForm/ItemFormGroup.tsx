@@ -1,6 +1,6 @@
 import { immerable, produce } from "immer";
-import React from "react";
-import { RefObject, useRef, useState } from "react";
+import type React from "react";
+import { type RefObject, useRef, useState } from "react";
 import {
   Button,
   Form,
@@ -13,8 +13,8 @@ import CurrencyInput from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
-import Expenses from "../../guitos/domain/expenses";
-import Incomes from "../../guitos/domain/incomes";
+import type { Expenses } from "../../guitos/domain/expenses";
+import type { Incomes } from "../../guitos/domain/incomes";
 import { useDB } from "../../hooks/useDB";
 import {
   calc,
@@ -26,9 +26,10 @@ import {
   roundBig,
 } from "../../utils";
 import { CalculateButton } from "../CalculateButton/CalculateButton";
-import { ItemForm } from "./ItemForm";
+import type { ItemForm } from "./ItemForm";
 import "./ItemFormGroup.css";
-import { ItemOperation } from "../../guitos/domain/calculationHistoryItem";
+import type { ItemOperation } from "../../guitos/domain/calculationHistoryItem";
+import type { BudgetItem } from "../../guitos/domain/budgetItem";
 
 interface ItemFormProps {
   itemForm: ItemForm;
@@ -55,8 +56,12 @@ export function ItemFormGroup({
   function handleCalcHist(operation: ItemOperation, changeValue: number) {
     if (!budget) return;
     const newItemForm = isExpense
-      ? budget.expenses.items.find((item) => item.id === itemForm.id)
-      : budget.incomes.items.find((item) => item.id === itemForm.id);
+      ? budget.expenses.items.find(
+          (item: BudgetItem) => item.id === itemForm.id,
+        )
+      : budget.incomes.items.find(
+          (item: BudgetItem) => item.id === itemForm.id,
+        );
     if (!newItemForm) return;
     const calcHistID = `${budget.id}-${label}-${newItemForm.id}`;
     saveCalcHist(calcHistID, {
@@ -80,10 +85,15 @@ export function ItemFormGroup({
     if (!itemForm) return;
 
     let saveInHistory = false;
+    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
     const newState = produce((draft) => {
       const newItemForm = isExpense
-        ? draft.expenses.items.find((item) => item.id === itemForm.id)
-        : draft.incomes.items.find((item) => item.id === itemForm.id);
+        ? draft.expenses.items.find(
+            (item: BudgetItem) => item.id === itemForm.id,
+          )
+        : draft.incomes.items.find(
+            (item: BudgetItem) => item.id === itemForm.id,
+          );
       if (!newItemForm) return;
 
       switch (operation) {
@@ -129,7 +139,9 @@ export function ItemFormGroup({
       } else {
         draft.incomes = newTable;
       }
-      newTable.items = table.items.filter((item) => item.id !== toBeDeleted.id);
+      newTable.items = table.items.filter(
+        (item: BudgetItem) => item.id !== toBeDeleted.id,
+      );
       newTable.total = roundBig(calcTotal(newTable.items), 2);
       draft.stats.available = roundBig(calcAvailable(draft), 2);
       draft.stats.withGoal = calcWithGoal(draft);
@@ -222,14 +234,14 @@ export function ItemFormGroup({
         placement="top"
         rootClose={true}
         overlay={
-          <Popover id={`popover-delete-button`}>
+          <Popover id={"popover-delete-button"}>
             <Popover.Body>
               <OverlayTrigger
                 delay={250}
                 placement="top"
                 overlay={
                   <Tooltip
-                    id={`tooltip-delete-itemformgroup`}
+                    id={"tooltip-delete-itemformgroup"}
                     style={{ position: "fixed" }}
                   >
                     delete item
@@ -246,7 +258,7 @@ export function ItemFormGroup({
                   ref={deleteButtonRef}
                   onClick={() => handleRemove(itemForm)}
                 >
-                  <BsXLg aria-hidden />
+                  <BsXLg aria-hidden={true} />
                 </Button>
               </OverlayTrigger>
             </Popover.Body>
@@ -265,7 +277,7 @@ export function ItemFormGroup({
             }, 0);
           }}
         >
-          <BsXLg aria-hidden />
+          <BsXLg aria-hidden={true} />
         </Button>
       </OverlayTrigger>
     </InputGroup>

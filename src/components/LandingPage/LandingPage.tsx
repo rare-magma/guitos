@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { useRef } from "react";
 import { Button, Container, Form, Row, Stack } from "react-bootstrap";
 import { useWindowSize } from "usehooks-ts";
@@ -62,7 +62,7 @@ export function LandingPage() {
                   <Form.Control
                     type="file"
                     data-testid="import-form-control-landing-page"
-                    multiple
+                    multiple={true}
                     ref={inputRef}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       handleImport(e)
