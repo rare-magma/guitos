@@ -92,7 +92,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     page.getByRole("combobox", { name: "search in budgets" }),
   ).toBeVisible();
 
-  await expect(page.getByLabel("budget name")).toHaveValue("2023-07");
+  await expect(page.getByLabel("budget name")).toHaveValue("2023-06");
 
   await page.close();
 });
