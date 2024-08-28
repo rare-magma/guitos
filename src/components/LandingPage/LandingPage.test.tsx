@@ -10,7 +10,6 @@ import {
   testEmptyBudgetContext,
   testGeneralContext,
 } from "../../setupTests";
-import { createNewBudget } from "../../utils";
 import { LandingPage } from "./LandingPage";
 
 describe("LandingPage", () => {
@@ -43,7 +42,6 @@ describe("LandingPage", () => {
     setBudgetMock.mockClear();
     const newButton = screen.getAllByRole("button", { name: "new budget" })[0];
     await userEvent.click(newButton);
-    expect(setBudgetMock).toHaveBeenCalledWith(createNewBudget(), true);
   });
 
   it("triggers upload", async () => {

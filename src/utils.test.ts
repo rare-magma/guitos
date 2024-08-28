@@ -30,7 +30,6 @@ import {
   calcWithGoal,
   convertCsvToBudget,
   createBudgetNameList,
-  createNewBudget,
   getCountryCode,
   getCurrencyCode,
   getLabelKey,
@@ -112,30 +111,6 @@ test("createBudgetNameList", () => {
     expectedResult,
   );
   expect(createBudgetNameList([])).toEqual([]);
-});
-
-test("createNewBudget", () => {
-  const expectedResult: Budget = {
-    [immerable]: true,
-    expenses: {
-      items: [{ id: 1, name: "", value: 0 }],
-      total: 0,
-    },
-    id: Uuid.random(),
-    incomes: {
-      items: [{ id: 1, name: "", value: 0 }],
-      total: 0,
-    },
-    name: "2024-035c2de4",
-    stats: {
-      available: 0,
-      goal: 10,
-      reserves: 0,
-      saved: 0,
-      withGoal: 0,
-    },
-  };
-  expect(createNewBudget()).toEqual(expectedResult);
 });
 
 test("intlFormat", () => {

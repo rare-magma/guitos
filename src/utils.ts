@@ -217,33 +217,6 @@ export function convertCsvToBudget(csv: string[], date: string): Budget {
   return newBudget as unknown as Budget;
 }
 
-export function createNewBudget(): Budget {
-  const newId = Uuid.random();
-  const year = new Date().getFullYear();
-  const newBudget: Budget = {
-    [immerable]: true,
-    id: newId,
-    name: `${year}-${newId.toString().slice(0, 8)}`,
-    expenses: {
-      items: [{ id: 1, name: "", value: 0 }],
-      total: 0,
-    },
-    incomes: {
-      items: [{ id: 1, name: "", value: 0 }],
-      total: 0,
-    },
-    stats: {
-      available: 0,
-      withGoal: 0,
-      saved: 0,
-      goal: 10,
-      reserves: 0,
-    },
-  };
-
-  return newBudget;
-}
-
 export function intlFormat(amount: number, currencyCode: string) {
   return new Intl.NumberFormat(userLang, {
     style: "currency",
