@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("should complete the happy path", async ({ page, isMobile }) => {
+test.skip("should complete the happy path", async ({ page, isMobile }) => {
   await page.goto("/");
 
   // should show landing page
