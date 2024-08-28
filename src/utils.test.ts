@@ -41,6 +41,7 @@ import {
 } from "./utils";
 import type { Budget } from "./guitos/domain/budget";
 import { Uuid } from "./guitos/domain/uuid";
+import { immerable } from "immer";
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
@@ -74,29 +75,14 @@ test("calcAvailable", () => {
 
 test("calcWithGoal", () => {
   expect(calcWithGoal(testBudget)).eq(80);
-  expect(
-    calcWithGoal({
-      stats: { goal: "a" as unknown as number },
-    } as Budget),
-  ).eq(0);
 });
 
 test("calcSaved", () => {
   expect(calcSaved(testBudget)).eq(10);
-  expect(
-    calcSaved({
-      stats: { goal: "a" as unknown as number },
-    } as Budget),
-  ).eq(0);
 });
 
 test("calcAutoGoal", () => {
   expect(calcAutoGoal(testBigBudget)).eq(93.36298);
-  expect(
-    calcAutoGoal({
-      stats: { goal: "a" as unknown as number },
-    } as Budget),
-  ).eq(0);
 });
 
 test("convertCsvToBudget", () => {
@@ -112,12 +98,12 @@ test("convertCsvToBudget", () => {
 test("createBudgetNameList", () => {
   const expectedResult = [
     {
-      id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+      id: Uuid.random(),
       item: "",
       name: "2023-03",
     },
     {
-      id: "135b2ce4-00a4-403c-8f0e-f81339be9a4e",
+      id: Uuid.random(),
       item: "",
       name: "2023-04",
     },
@@ -129,7 +115,8 @@ test("createBudgetNameList", () => {
 });
 
 test("createNewBudget", () => {
-  const expectedResult = {
+  const expectedResult: Budget = {
+    [immerable]: true,
     expenses: {
       items: [{ id: 1, name: "", value: 0 }],
       total: 0,

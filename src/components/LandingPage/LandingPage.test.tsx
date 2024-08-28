@@ -11,9 +11,14 @@ import {
 } from "../../setupTests";
 import { createNewBudget } from "../../utils";
 import { LandingPage } from "./LandingPage";
+import { BrowserRouter } from "react-router-dom";
 
 describe("LandingPage", () => {
-  const comp = <LandingPage />;
+  const comp = (
+    <BrowserRouter>
+      <LandingPage />
+    </BrowserRouter>
+  );
 
   beforeEach(() => {
     budgetContextSpy.mockReturnValue(testEmptyBudgetContext);
@@ -68,7 +73,11 @@ describe("LandingPage", () => {
       ...testGeneralContext,
       loadingFromDB: true,
     });
-    render(<LandingPage />);
+    render(
+      <BrowserRouter>
+        <LandingPage />
+      </BrowserRouter>,
+    );
     expect(screen.getByRole("status")).toBeInTheDocument();
   });
 });

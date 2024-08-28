@@ -1,7 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`TableCard > matches snapshot 1`] = `
-<TableCard
-  header="Expenses"
-/>
+<BrowserRouter>
+  <TableCard
+    header="Expenses"
+  />
+</BrowserRouter>
 `;

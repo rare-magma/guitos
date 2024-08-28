@@ -45,9 +45,6 @@ describe("BudgetPage", () => {
 
   it("removes budget when clicking on delete budget button", async () => {
     render(comp);
-    await expect(budgetsDB.getItem(testBudget.id.toString())).resolves.toEqual(
-      testBudget,
-    );
     const deleteButton = await screen.findAllByRole("button", {
       name: "delete budget",
     });

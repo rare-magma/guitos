@@ -2,10 +2,15 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { setBudgetMock, testBudget } from "../../setupTests";
-import { TableCard } from "./TableCard";
+import TableCard from "./TableCard";
+import { BrowserRouter } from "react-router-dom";
 
 describe("TableCard", () => {
-  const comp = <TableCard header={"Expenses"} />;
+  const comp = (
+    <BrowserRouter>
+      <TableCard header={"Expenses"} />
+    </BrowserRouter>
+  );
 
   it("matches snapshot", () => {
     render(comp);
@@ -18,7 +23,11 @@ describe("TableCard", () => {
   });
 
   it("renders initial Revenue state", async () => {
-    render(<TableCard header={"Revenue"} />);
+    render(
+      <BrowserRouter>
+        <TableCard header={"Revenue"} />
+      </BrowserRouter>,
+    );
     expect(await screen.findByDisplayValue("income1")).toBeInTheDocument();
     expect(await screen.findByDisplayValue("$100")).toBeInTheDocument();
   });
@@ -80,7 +89,11 @@ describe("TableCard", () => {
 
   it("adds new Revenue when user clicks adds new item button", async () => {
     cleanup();
-    render(<TableCard header={"Revenue"} />);
+    render(
+      <BrowserRouter>
+        <TableCard header={"Revenue"} />
+      </BrowserRouter>,
+    );
     await userEvent.click(
       screen.getByRole("button", { name: "add item to Revenue" }),
     );

@@ -176,8 +176,9 @@ goal,,goal,,,
 reservaes,reserves,0
 `;
 
-export const testBudgetCsv = {
-  id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
+export const testBudgetCsv: Budget = {
+  [immerable]: true,
+  id: Uuid.random(),
   name: "2023-03",
   expenses: {
     items: [
