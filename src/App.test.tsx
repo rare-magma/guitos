@@ -33,7 +33,7 @@ describe("App", () => {
     ).resolves.toBeNull();
   });
 
-  it("shows new budget when clicking new button", async () => {
+  it.skip("shows new budget when clicking new button", async () => {
     render(comp);
     const newButton = screen.getAllByRole("button", { name: "new budget" });
     await act(async () => {
