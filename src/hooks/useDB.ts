@@ -34,6 +34,8 @@ export function useDB() {
   const name = String(params.name);
   const navigate = useNavigate();
 
+  const navigateCallback = useCallback(() => navigate, [navigate]);
+
   const {
     setShowError,
     handleError,
@@ -444,11 +446,11 @@ export function useDB() {
     if (budget) {
       saveBudget(budget);
       if (budget.name !== previousBudget.current) {
-        saveLastOpenedBudget(budget.name, navigate);
+        saveLastOpenedBudget(budget.name, navigateCallback);
         previousBudget.current = budget.name;
       }
     }
-  }, [budget, saveBudget, navigate]);
+  }, [budget, saveBudget, navigateCallback]);
 
   return {
     createBudget,
