@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { BudgetItem } from "./budgetItem";
-import { Uuid } from "./uuid";
 import { Stats } from "./stats";
+import { Uuid } from "./uuid";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class ObjectMother {

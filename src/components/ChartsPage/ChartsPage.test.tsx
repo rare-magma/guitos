@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
 import { vi } from "vitest";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import ChartsPage from "./ChartsPage";
-import { BrowserRouter } from "react-router-dom";
 
 describe("ChartsPage", () => {
   const onShowGraphs = vi.fn();

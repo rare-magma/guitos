@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it } from "vitest";
 import {
   budgetContextSpy,
@@ -11,7 +12,6 @@ import {
 } from "../../setupTests";
 import { createNewBudget } from "../../utils";
 import { LandingPage } from "./LandingPage";
-import { BrowserRouter } from "react-router-dom";
 
 describe("LandingPage", () => {
   const comp = (

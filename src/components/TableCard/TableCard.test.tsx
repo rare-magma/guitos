@@ -1,9 +1,9 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { setBudgetMock, testBudget } from "../../setupTests";
 import TableCard from "./TableCard";
-import { BrowserRouter } from "react-router-dom";
 
 describe("TableCard", () => {
   const comp = (

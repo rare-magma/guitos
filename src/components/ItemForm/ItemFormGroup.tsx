@@ -28,8 +28,8 @@ import {
 import { CalculateButton } from "../CalculateButton/CalculateButton";
 import type { ItemForm } from "./ItemForm";
 import "./ItemFormGroup.css";
-import type { ItemOperation } from "../../guitos/domain/calculationHistoryItem";
 import type { BudgetItem } from "../../guitos/domain/budgetItem";
+import type { ItemOperation } from "../../guitos/domain/calculationHistoryItem";
 
 interface ItemFormProps {
   itemForm: ItemForm;

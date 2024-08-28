@@ -1,6 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
+import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import {
   configContextSpy,
@@ -10,7 +11,6 @@ import {
   testSpanishConfigContext,
 } from "../../setupTests";
 import { ItemFormGroup } from "./ItemFormGroup";
-import { BrowserRouter } from "react-router-dom";
 
 describe("ItemFormGroup", () => {
   const ref = createRef<HTMLInputElement>();

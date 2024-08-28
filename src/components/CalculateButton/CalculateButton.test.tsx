@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
 import { vi } from "vitest";
 import { describe, expect, it } from "vitest";
 import { itemForm1 } from "../../setupTests";
 import { CalculateButton } from "./CalculateButton";
-import { BrowserRouter } from "react-router-dom";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
