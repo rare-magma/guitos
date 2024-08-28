@@ -28,7 +28,7 @@
     "usehooks-ts": "3.1.0"
   },
   "devDependencies": {
-    "@axe-core/playwright": "4.9.1",
+    "@axe-core/playwright": "4.10.0",
     "@biomejs/biome": "1.8.3",
     "@faker-js/faker": "8.4.1",
     "@playwright/test": "1.45.3",
