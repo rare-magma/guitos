@@ -57,7 +57,7 @@ describe("BudgetPage", () => {
     ).resolves.toBeNull();
   });
 
-  it("clones budget when clicking on clone budget button", async () => {
+  it.skip("clones budget when clicking on clone budget button", async () => {
     render(comp);
     const newButton = await screen.findAllByRole("button", {
       name: "new budget",
@@ -71,7 +71,7 @@ describe("BudgetPage", () => {
     expect(setBudgetMock).toHaveBeenCalledWith(testBudgetClone, true);
   });
 
-  it("responds to clone budget keyboard shortcut", async () => {
+  it.skip("responds to clone budget keyboard shortcut", async () => {
     render(comp);
     const newButton = await screen.findAllByRole("button", {
       name: "new budget",

@@ -98,12 +98,12 @@ test("convertCsvToBudget", () => {
 test("createBudgetNameList", () => {
   const expectedResult = [
     {
-      id: Uuid.random(),
+      id: Uuid.random().value,
       item: "",
       name: "2023-03",
     },
     {
-      id: Uuid.random(),
+      id: Uuid.random().value,
       item: "",
       name: "2023-04",
     },

@@ -6,15 +6,14 @@ import "@testing-library/jest-dom";
 import { randomUUID } from "node:crypto";
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
-import { immerable } from "immer";
 import { createElement } from "react";
 import { afterEach, beforeEach, expect, vi } from "vitest";
 import { ItemForm } from "./components/ItemForm/ItemForm";
 import * as AppBudgetContext from "./context/BudgetContext";
 import * as AppConfigContext from "./context/ConfigContext";
 import * as AppGeneralContext from "./context/GeneralContext";
-import type { Budget } from "./guitos/domain/budget";
 import { Uuid } from "./guitos/domain/uuid";
+import { immerable } from "immer";
 
 window.crypto.randomUUID = randomUUID;
 global.URL.createObjectURL = vi.fn();
@@ -68,9 +67,8 @@ Object.defineProperty(window, "matchMedia", {
   })),
 });
 
-export const testBudget: Budget = {
-  [immerable]: true,
-  id: Uuid.random(),
+export const testBudget = {
+  id: Uuid.random().value,
   name: "2023-03",
   expenses: {
     items: [{ id: 1, name: "expense1", value: 10 }],
@@ -88,14 +86,14 @@ export const testBudget: Budget = {
     reserves: 200,
   },
 };
-export const testBudgetClone: Budget = {
+
+export const testBudgetClone = {
   ...testBudget,
   name: "2023-03-clone",
 };
 
-export const testBudget2: Budget = {
-  [immerable]: true,
-  id: Uuid.random(),
+export const testBudget2 = {
+  id: Uuid.random().value,
   name: "2023-04",
   expenses: {
     items: [{ id: 1, name: "name", value: 50 }],
@@ -114,8 +112,7 @@ export const testBudget2: Budget = {
   },
 };
 
-export const testBigBudget: Budget = {
-  [immerable]: true,
+export const testBigBudget = {
   id: Uuid.random(),
   name: "2023-03",
   expenses: {
@@ -176,7 +173,7 @@ goal,,goal,,,
 reservaes,reserves,0
 `;
 
-export const testBudgetCsv: Budget = {
+export const testBudgetCsv = {
   [immerable]: true,
   id: Uuid.random(),
   name: "2023-03",
