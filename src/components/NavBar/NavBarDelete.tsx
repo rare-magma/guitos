@@ -2,10 +2,11 @@ import type { RefObject } from "react";
 import { Button, Nav, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
+import type { Uuid } from "../../guitos/domain/uuid";
 
 interface NavBarDeleteProps {
   deleteButtonRef: RefObject<HTMLButtonElement>;
-  handleRemove: (i: string) => void;
+  handleRemove: (i: Uuid) => void;
   expanded: boolean;
 }
 
