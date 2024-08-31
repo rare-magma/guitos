@@ -1,7 +1,7 @@
 /*
   Referrer-Policy: no-referrer
   Permissions-Policy: accelerometer=(), autoplay=(self), camera=(), display-capture=(self), fullscreen=(self), geolocation=(self), gyroscope=(self), magnetometer=(self), microphone=(), payment=(), picture-in-picture=(self), sync-xhr=(), usb=()
-  Content-Security-Policy: default-src 'self'; img-src https://guitos.app https://www.w3.org data:; frame-ancestors 'none'; script-src 'sha256-rx9EtEVmqxUIzMXrtl4DeG1J3qw+cWA3RniGteNFzho=';
+  Content-Security-Policy: default-src 'self'; img-src https://guitos.app https://www.w3.org data:; frame-ancestors 'none';
 
 https://guitos.pages.dev/*
   X-Robots-Tag: noindex
