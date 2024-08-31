@@ -1,3 +1,18 @@
+## 1.2.8 (2024-08-31)
+
+#### Bug Fixes
+
+* content-security-policy typo (e32ad859)
+
+#### Chores
+
+* **release:** 1.2.7 (3739ed99)
+
+#### CI
+
+* remove redundant config (1253b908)
+
+
 ## 1.2.7 (2024-08-31)
 
 #### Bug Fixes
