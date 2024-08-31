@@ -1,3 +1,14 @@
+## 1.2.9 (2024-08-31)
+
+#### Bug Fixes
+
+* open last visited budget script (b063cd5f)
+
+#### Chores
+
+* **release:** 1.2.8 (b708963e)
+
+
 ## 1.2.8 (2024-08-31)
 
 #### Bug Fixes
