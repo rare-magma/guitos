@@ -6,7 +6,6 @@ import { App } from "./App";
 
 const updateSW = registerSW({
   onNeedRefresh() {
-    // biome-ignore lint/style/noRestrictedGlobals: <explanation>
     if (confirm("A new version of guitos is available. Update?")) {
       updateSW(true);
     }
