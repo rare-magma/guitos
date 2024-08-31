@@ -40,7 +40,8 @@
       },
       "style": {
         "noDefaultExport": "error",
-        "noImplicitBoolean": "error"
+        "noImplicitBoolean": "error",
+        "noNegationElse": "error"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error",
