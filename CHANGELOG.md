@@ -1,3 +1,10 @@
+## 1.2.7 (2024-08-31)
+
+#### Bug Fixes
+
+* content-security-policy (404ef7d2)
+
+
 ## 1.2.5 (2024-08-28)
 
 #### Bug Fixes
