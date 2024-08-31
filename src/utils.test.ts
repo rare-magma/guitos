@@ -3,6 +3,7 @@ import Papa from "papaparse";
 import { expect, test } from "vitest";
 import type { FilteredItem } from "./components/ChartsPage/ChartsPage";
 import { Budget } from "./guitos/domain/budget";
+import { BudgetItem } from "./guitos/domain/budgetItem";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import { Uuid } from "./guitos/domain/uuid";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
@@ -32,7 +33,6 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
-import { BudgetItem } from "./guitos/domain/budgetItem";
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);

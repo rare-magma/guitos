@@ -1,12 +1,12 @@
+import Big from "big.js";
+import { immerable } from "immer";
+import { roundBig } from "../../utils";
+import { BudgetItem } from "./budgetItem";
+import type { CsvItem } from "./csvItem";
 import type { Expenses } from "./expenses";
 import type { Incomes } from "./incomes";
 import type { Stats } from "./stats";
 import { Uuid } from "./uuid";
-import { BudgetItem } from "./budgetItem";
-import type { CsvItem } from "./csvItem";
-import { roundBig } from "../../utils";
-import Big from "big.js";
-import { immerable } from "immer";
 
 export class Budget {
   id: Uuid;

@@ -13,8 +13,8 @@ import {
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsArrowDownUp, BsUpload } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
-import { useDB } from "../../hooks/useDB";
 import { Budget } from "../../guitos/domain/budget";
+import { useDB } from "../../hooks/useDB";
 
 interface NavBarImpExpProps {
   expanded: boolean;

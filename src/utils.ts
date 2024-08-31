@@ -3,9 +3,9 @@ import type { MutableRefObject } from "react";
 import type { NavigateFunction } from "react-router-dom";
 import type { FilteredItem } from "./components/ChartsPage/ChartsPage";
 import type { SearchOption } from "./components/NavBar/NavBar";
+import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import { currenciesMap } from "./lists/currenciesMap";
-import type { Budget } from "./guitos/domain/budget";
 
 export const userLang = navigator.language;
 

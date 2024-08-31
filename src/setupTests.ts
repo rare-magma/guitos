@@ -11,9 +11,9 @@ import { afterEach, beforeEach, expect, vi } from "vitest";
 import * as AppBudgetContext from "./context/BudgetContext";
 import * as AppConfigContext from "./context/ConfigContext";
 import * as AppGeneralContext from "./context/GeneralContext";
-import { Uuid } from "./guitos/domain/uuid";
 import { Budget } from "./guitos/domain/budget";
 import { BudgetItem } from "./guitos/domain/budgetItem";
+import { Uuid } from "./guitos/domain/uuid";
 
 window.crypto.randomUUID = randomUUID;
 global.URL.createObjectURL = vi.fn();

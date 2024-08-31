@@ -19,11 +19,11 @@ import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { useDB } from "../../hooks/useDB";
 import "./CalculateButton.css";
+import type { BudgetItem } from "../../guitos/domain/budgetItem";
 import type {
   CalculationHistoryItem,
   ItemOperation,
 } from "../../guitos/domain/calculationHistoryItem";
-import type { BudgetItem } from "../../guitos/domain/budgetItem";
 
 interface CalculateButtonProps {
   itemForm: BudgetItem;

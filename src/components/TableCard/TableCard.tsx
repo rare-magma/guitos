@@ -17,10 +17,10 @@ import { useConfig } from "../../context/ConfigContext";
 import { intlFormat, roundBig } from "../../utils";
 import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
 import "./TableCard.css";
+import { Budget } from "../../guitos/domain/budget";
 import { BudgetItem } from "../../guitos/domain/budgetItem";
 import type { Expenses } from "../../guitos/domain/expenses";
 import type { Incomes } from "../../guitos/domain/incomes";
-import { Budget } from "../../guitos/domain/budget";
 
 interface TableCardProps {
   header: "Revenue" | "Expenses";

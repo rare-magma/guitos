@@ -19,9 +19,9 @@ import { useDB } from "../../hooks/useDB";
 import { calc, parseLocaleNumber, roundBig } from "../../utils";
 import { CalculateButton } from "../CalculateButton/CalculateButton";
 import "./ItemFormGroup.css";
+import { Budget } from "../../guitos/domain/budget";
 import type { BudgetItem } from "../../guitos/domain/budgetItem";
 import type { ItemOperation } from "../../guitos/domain/calculationHistoryItem";
-import { Budget } from "../../guitos/domain/budget";
 
 interface ItemFormProps {
   itemForm: BudgetItem;
