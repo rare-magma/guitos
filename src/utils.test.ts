@@ -1,24 +1,12 @@
 import Big from "big.js";
-import Papa from "papaparse";
 import { expect, test } from "vitest";
 import type { FilteredItem } from "./components/ChartsPage/ChartsPage";
-import { Budget } from "./guitos/domain/budget";
-import { BudgetItem } from "./guitos/domain/budgetItem";
+import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import { Uuid } from "./guitos/domain/uuid";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
 import { currenciesMap } from "./lists/currenciesMap";
 import { firefoxLocalesList } from "./lists/firefoxLocalesList";
-import {
-  itemForm1,
-  itemForm2,
-  testBigBudget,
-  testBudget,
-  testBudget2,
-  testBudgetCsv,
-  testBudgetList,
-  testCsv,
-} from "./setupTests";
 import {
   calc,
   createBudgetNameList,
@@ -33,6 +21,7 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
+import { BudgetMother } from "./guitos/domain/budget.mother";
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
@@ -42,56 +31,6 @@ test("round", () => {
   expect(roundBig(Big(123.125), 2)).eq(123.13);
   expect(roundBig(Big(123.125), 1)).eq(123.1);
   expect(roundBig(Big(123.126), 0)).eq(123);
-});
-
-test("calcTotal", () => {
-  expect(Budget.itemsTotal([itemForm1, itemForm2])).toEqual(Big(110));
-  expect(Budget.itemsTotal([])).toEqual(Big(0));
-});
-
-test("BudgetItem.percentage", () => {
-  expect(BudgetItem.percentage(itemForm1.value, testBudget.incomes.total)).eq(
-    10,
-  );
-  expect(BudgetItem.percentage(itemForm2.value, testBudget.incomes.total)).eq(
-    100,
-  );
-  expect(BudgetItem.percentage(itemForm1.value, testBudget.expenses.total)).eq(
-    100,
-  );
-  expect(BudgetItem.percentage(itemForm2.value, testBudget.expenses.total)).eq(
-    1000,
-  );
-  expect(BudgetItem.percentage(0, 0)).eq(0);
-  expect(BudgetItem.percentage(0, testBudget.incomes.total)).eq(0);
-  expect(BudgetItem.percentage(0, testBudget.expenses.total)).eq(0);
-});
-
-test("Budget.available", () => {
-  expect(Budget.available(testBudget)).toEqual(Big(90));
-  expect(Budget.available(undefined)).toEqual(Big(0));
-});
-
-test("Budget.availableWithGoal", () => {
-  expect(Budget.availableWithGoal(testBudget)).eq(80);
-});
-
-test("Budget.saved", () => {
-  expect(Budget.saved(testBudget)).eq(10);
-});
-
-test("Budget.automaticGoal", () => {
-  expect(Budget.automaticGoal(testBigBudget)).eq(93.36298);
-});
-
-test("Budget.fromCsv", () => {
-  const csvObject = Papa.parse(testCsv as string, {
-    header: true,
-    skipEmptyLines: "greedy",
-  });
-  expect(Budget.fromCsv(csvObject.data as string[], "2023-03")).toEqual(
-    testBudgetCsv,
-  );
 });
 
 test("createBudgetNameList", () => {
@@ -107,9 +46,12 @@ test("createBudgetNameList", () => {
       name: "2023-04",
     },
   ];
-  expect(createBudgetNameList([testBudget, testBudget2])).toEqual(
-    expectedResult,
-  );
+  expect(
+    createBudgetNameList([
+      BudgetMother.testBudget() as Budget,
+      BudgetMother.testBudget2() as Budget,
+    ]),
+  ).toEqual(expectedResult);
   expect(createBudgetNameList([])).toEqual([]);
 });
 
@@ -148,16 +90,6 @@ test("parseLocaleNumber", () => {
   expect(parseLocaleNumber("1,20,54,100.55", "en-IN")).eq(12054100.55);
 });
 
-test("Budget.toCsv", () => {
-  expect(Budget.toCsv(testBigBudget)).eq(`type,name,value
-expense,name,11378.64
-expense,name2,11378.64
-income,name,100.03
-income,name2,342783.83
-goal,goal,50
-reserves,reserves,200`);
-});
-
 test("calc", () => {
   expect(calc(123.45, 100, "add")).eq(223.45);
   expect(calc(123.45, 100, "subtract")).eq(23.45);
@@ -181,22 +113,24 @@ test("median", () => {
 });
 
 test("getNestedProperty", () => {
-  expect(getNestedProperty(testBudget, "expenses", "total")).eq(10);
-  expect(getNestedProperty(testBudget, "incomes", "items")).eq(
-    testBudget.incomes.items,
+  expect(getNestedProperty(BudgetMother.testBudget(), "expenses", "total")).eq(
+    10,
   );
+  expect(
+    getNestedProperty(BudgetMother.testBudget(), "incomes", "items"),
+  ).toEqual(BudgetMother.testBudget().incomes.items);
 });
 
 test("getNestedValues", () => {
-  const expected = testBudgetList.map((i) => i.expenses.total);
-  const expected2 = testBudgetList.map((i) => i.incomes.items);
+  const expected = BudgetMother.testBudgetList().map((i) => i.expenses.total);
+  const expected2 = BudgetMother.testBudgetList().map((i) => i.incomes.items);
 
-  expect(getNestedValues(testBudgetList, "expenses", "total")).toEqual(
-    expected,
-  );
-  expect(getNestedValues(testBudgetList, "incomes", "items")).toEqual(
-    expected2,
-  );
+  expect(
+    getNestedValues(BudgetMother.testBudgetList(), "expenses", "total"),
+  ).toEqual(expected);
+  expect(
+    getNestedValues(BudgetMother.testBudgetList(), "incomes", "items"),
+  ).toEqual(expected2);
 });
 
 test("getLabelKey", () => {

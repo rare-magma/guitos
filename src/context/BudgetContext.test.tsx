@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { testBudget, testBudgetList } from "../setupTests";
 import { BudgetProvider, useBudget } from "./BudgetContext";
+import { BudgetMother } from "../guitos/domain/budget.mother";
 
 function TestComponent() {
   const { budget, budgetList } = useBudget();
@@ -21,10 +21,10 @@ describe("BudgetProvider", () => {
       </BudgetProvider>,
     );
     expect(screen.getByLabelText("budget").textContent).toEqual(
-      JSON.stringify(testBudget),
+      JSON.stringify(BudgetMother.testBudget()),
     );
     expect(screen.getByLabelText("budgetList").textContent).toEqual(
-      JSON.stringify(testBudgetList),
+      JSON.stringify(BudgetMother.testBudgetList()),
     );
   });
 });

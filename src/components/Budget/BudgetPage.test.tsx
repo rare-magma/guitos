@@ -9,12 +9,11 @@ import {
   redoMock,
   setBudgetMock,
   setNotificationsMock,
-  testBudget,
-  testBudgetClone,
   testBudgetContext,
   undoMock,
 } from "../../setupTests";
 import { BudgetPage } from "./BudgetPage";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("BudgetPage", () => {
   const comp = (
@@ -53,7 +52,7 @@ describe("BudgetPage", () => {
       await screen.findByRole("button", { name: "confirm budget deletion" }),
     );
     await expect(
-      budgetsDB.getItem(testBudget.id.toString()),
+      budgetsDB.getItem(BudgetMother.testBudget().id.toString()),
     ).resolves.toBeNull();
   });
 
@@ -68,7 +67,10 @@ describe("BudgetPage", () => {
       name: "clone budget",
     });
     await userEvent.click(cloneButton[0]);
-    expect(setBudgetMock).toHaveBeenCalledWith(testBudgetClone, true);
+    expect(setBudgetMock).toHaveBeenCalledWith(
+      BudgetMother.testBudgetClone(),
+      true,
+    );
   });
 
   it.skip("responds to clone budget keyboard shortcut", async () => {
@@ -79,7 +81,10 @@ describe("BudgetPage", () => {
     await userEvent.click(newButton[0]);
 
     await userEvent.type(await screen.findByTestId("header"), "c");
-    expect(setBudgetMock).toHaveBeenCalledWith(testBudgetClone, true);
+    expect(setBudgetMock).toHaveBeenCalledWith(
+      BudgetMother.testBudgetClone(),
+      true,
+    );
   });
 
   it("responds to undo change keyboard shortcut", async () => {

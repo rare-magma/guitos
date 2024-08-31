@@ -11,9 +11,7 @@ import { afterEach, beforeEach, expect, vi } from "vitest";
 import * as AppBudgetContext from "./context/BudgetContext";
 import * as AppConfigContext from "./context/ConfigContext";
 import * as AppGeneralContext from "./context/GeneralContext";
-import { Budget } from "./guitos/domain/budget";
-import { BudgetItem } from "./guitos/domain/budgetItem";
-import { Uuid } from "./guitos/domain/uuid";
+import { BudgetMother } from "./guitos/domain/budget.mother";
 
 window.crypto.randomUUID = randomUUID;
 global.URL.createObjectURL = vi.fn();
@@ -66,190 +64,8 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: vi.fn(),
   })),
 });
-
-export const testBudget = {
-  ...Budget.create(),
-  id: Uuid.random().value as unknown as Uuid,
-  name: "2023-03",
-  expenses: {
-    items: [{ id: 1, name: "expense1", value: 10 }],
-    total: 10,
-  },
-  incomes: {
-    items: [{ id: 2, name: "income1", value: 100 }],
-    total: 100,
-  },
-  stats: {
-    available: 90,
-    withGoal: 80,
-    saved: 10,
-    goal: 10,
-    reserves: 200,
-  },
-};
-
-export const testBudgetClone = {
-  ...testBudget,
-  name: "2023-03-clone",
-};
-
-export const testBudget2: Budget = {
-  ...Budget.create(),
-  id: Uuid.random().value as unknown as Uuid,
-  name: "2023-04",
-  expenses: {
-    items: [{ id: 1, name: "name", value: 50 }],
-    total: 50,
-  },
-  incomes: {
-    items: [{ id: 2, name: "name2", value: 200 }],
-    total: 200,
-  },
-  stats: {
-    available: 150,
-    withGoal: 130,
-    saved: 20,
-    goal: 35,
-    reserves: 30,
-  },
-};
-
-export const testBigBudget: Budget = {
-  ...Budget.create(),
-  name: "2023-03",
-  expenses: {
-    items: [
-      { id: 1, name: "name", value: 11378.64 },
-      { id: 4, name: "name2", value: 11378.64 },
-    ],
-    total: 22757.28,
-  },
-  incomes: {
-    items: [
-      { id: 2, name: "name", value: 100.03 },
-      { id: 3, name: "name2", value: 342783.83 },
-    ],
-    total: 342883.86,
-  },
-  stats: {
-    available: 320126.58,
-    withGoal: 148684.65,
-    saved: 171441.93,
-    goal: 50,
-    reserves: 200,
-  },
-};
-
-export const testJSONErrorBudget = `{
-  id: "03123AAA5c2de4-00a4-403c-8f0e-f81339be9a4e",
-  na2me: "2023-03",
-  expens3es: {
-    items: [{ id: "infinity", name: -1, value: "r" }],
-    total: 10,
-  },
-  stats: {
-    available: 0,
-    withGoal: 0,
-    saved: 0,
-    goal: 10,
-    reserves: 0,
-  },
-}`;
-
-export const testCsv = `type,name,value
-expense,rent,1000.00
-expense,food,200.00
-income,salary,2000.00
-income,sale,100
-goal,goal,10
-reserves,reserves,0
-`;
-
-export const testCsvError = `type,name,value
-expe2nse,rent,1000.00
-expense,food,200.00,123,4
-incomae,salary,2000.00
-income,sale,100
-goal,123,goal
-goal,,goal,,,
-reservaes,reserves,0
-`;
-
-export const testBudgetCsv: Budget = {
-  ...Budget.create(),
-  name: "2023-03",
-  expenses: {
-    items: [new BudgetItem(0, "rent", 1000), new BudgetItem(1, "food", 200)],
-    total: 1200,
-  },
-  incomes: {
-    items: [new BudgetItem(2, "salary", 2000), new BudgetItem(3, "sale", 100)],
-    total: 2100,
-  },
-  stats: {
-    available: 900,
-    withGoal: 690,
-    saved: 210,
-    goal: 10,
-    reserves: 0,
-  },
-};
-
-export const budgetNameList = [
-  {
-    id: "035c2de4-01a4-403c-8f0e-f81340be9a4e",
-    name: "2023-03",
-  },
-  {
-    id: "035c2de4-00a4-403c-8f0e-f81339be9a4e",
-    name: "2023-04",
-  },
-  {
-    id: "036c2de4-00a4-402c-8f0e-f81339be9a4e",
-    name: "2023-05",
-  },
-];
-
-export const itemForm1 = new BudgetItem(1, "name1", 10);
-
-export const itemForm2 = new BudgetItem(2, "name2", 100);
-
-export const testCalcHist = [
-  {
-    id: `${testBudget.id}-Expenses-1`,
-    itemForm: itemForm1,
-    changeValue: 123,
-    operation: "add",
-  },
-  {
-    id: `${testBudget.id}-Expenses-1`,
-    itemForm: {
-      id: 1,
-      name: itemForm1.name,
-      value: 133,
-    },
-    changeValue: 3,
-    operation: "add",
-  },
-];
-
 export const testIntlConfig = { locale: "en-US", currency: "USD" };
 export const testSpanishIntlConfig = { locale: "es-ES", currency: "EUR" };
-
-export const testBudgetList = [testBudget, testBudget2, testBigBudget];
-
-export const testBudgetNameList = [
-  {
-    id: testBudget.id,
-    item: "",
-    name: testBudget.name,
-  },
-  {
-    id: testBudget2.id,
-    item: "",
-    name: testBudget2.name,
-  },
-];
 
 export const setIntlConfigMock = vi.fn();
 export const handleCurrencyMock = vi.fn();
@@ -293,13 +109,13 @@ export const testEmptyBudgetContext = {
 };
 
 export const testBudgetContext = {
-  budget: testBudget,
+  budget: BudgetMother.testBudget(),
   setBudget: setBudgetMock,
 
-  budgetList: testBudgetList,
+  budgetList: BudgetMother.testBudgetList(),
   setBudgetList: setBudgetListMock,
 
-  budgetNameList: testBudgetNameList,
+  budgetNameList: BudgetMother.testBudgetNameList(),
   setBudgetNameList: setBudgetNameListMock,
 
   revenuePercentage: 10,

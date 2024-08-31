@@ -6,11 +6,11 @@ import {
   budgetContextSpy,
   generalContextSpy,
   setBudgetMock,
-  testBudget,
   testEmptyBudgetContext,
   testGeneralContext,
 } from "../../setupTests";
 import { LandingPage } from "./LandingPage";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("LandingPage", () => {
   const comp = (
@@ -49,7 +49,7 @@ describe("LandingPage", () => {
     const uploadEl = screen.getByTestId("import-form-control-landing-page");
     await userEvent.upload(
       uploadEl,
-      new File([JSON.stringify(testBudget)], "test"),
+      new File([JSON.stringify(BudgetMother.testBudget())], "test"),
     );
     expect((uploadEl as HTMLInputElement).files).toHaveLength(1);
   });

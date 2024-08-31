@@ -1,9 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import type { Budget } from "../../guitos/domain/budget";
-import { testBudgetList } from "../../setupTests";
 import { Chart } from "./Chart";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("Chart", () => {
   const comp = (
@@ -14,7 +13,7 @@ describe("Chart", () => {
       areaStroke1={"highlight"}
       areaFill1={"highlight"}
       legend1={"median revenue"}
-      legendValues1={testBudgetList.map((b: Budget) => {
+      legendValues1={BudgetMother.testBudgetList().map((b) => {
         return b.incomes.total;
       })}
     />

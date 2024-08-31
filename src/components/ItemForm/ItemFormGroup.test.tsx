@@ -5,19 +5,19 @@ import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import {
   configContextSpy,
-  itemForm1,
   setBudgetMock,
-  testBudget,
   testSpanishConfigContext,
 } from "../../setupTests";
 import { ItemFormGroup } from "./ItemFormGroup";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
+import { BudgetItemsMother } from "../../guitos/domain/budgetItem.mother";
 
 describe("ItemFormGroup", () => {
   const ref = createRef<HTMLInputElement>();
   const comp = (
     <BrowserRouter>
       <ItemFormGroup
-        itemForm={itemForm1}
+        itemForm={BudgetItemsMother.itemForm1()}
         label="Expenses"
         inputRef={ref}
         costPercentage={1}
@@ -44,7 +44,7 @@ describe("ItemFormGroup", () => {
     expect(screen.getByDisplayValue("name1change name")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
+        ...BudgetMother.testBudget(),
         expenses: {
           items: [{ id: 1, name: "name1change name", value: 10 }],
           total: 10,
@@ -60,13 +60,13 @@ describe("ItemFormGroup", () => {
     expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
+        ...BudgetMother.testBudget(),
         expenses: {
           items: [{ id: 1, name: "expense1", value: 123 }],
           total: 123,
         },
         stats: {
-          ...testBudget.stats,
+          ...BudgetMother.testBudget().stats,
           available: -23,
           withGoal: -33,
         },
@@ -87,10 +87,10 @@ describe("ItemFormGroup", () => {
 
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
+        ...BudgetMother.testBudget(),
         expenses: { items: [], total: 0 },
         stats: {
-          ...testBudget.stats,
+          ...BudgetMother.testBudget().stats,
           available: 100,
           withGoal: 90,
         },
@@ -126,7 +126,7 @@ describe("ItemFormGroup", () => {
     render(
       <BrowserRouter>
         <ItemFormGroup
-          itemForm={itemForm1}
+          itemForm={BudgetItemsMother.itemForm1()}
           label="Expenses"
           inputRef={ref}
           costPercentage={1}

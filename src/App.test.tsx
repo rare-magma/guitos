@@ -3,11 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { App } from "./App";
 import { budgetsDB, calcHistDB, optionsDB } from "./db";
-import {
-  budgetContextSpy,
-  testBudget,
-  testEmptyBudgetContext,
-} from "./setupTests";
+import { budgetContextSpy, testEmptyBudgetContext } from "./setupTests";
+import { BudgetMother } from "./guitos/domain/budget.mother";
 
 describe("App", () => {
   const comp = <App />;
@@ -29,11 +26,11 @@ describe("App", () => {
     expect(calcHistDB.config("name")).toBe("guitos");
     expect(calcHistDB.config("storeName")).toBe("calcHistDB");
     await expect(
-      budgetsDB.getItem(testBudget.id.toString()),
+      budgetsDB.getItem(BudgetMother.testBudget().id.toString()),
     ).resolves.toBeNull();
   });
 
-  it.skip("shows new budget when clicking new button", async () => {
+  it("shows new budget when clicking new button", async () => {
     render(comp);
     const newButton = screen.getAllByRole("button", { name: "new budget" });
     await act(async () => {
@@ -44,17 +41,17 @@ describe("App", () => {
     expect(await screen.findByText("Statistics")).toBeInTheDocument();
     expect(await screen.findByText("Revenue")).toBeInTheDocument();
     expect(await screen.findByText("Expenses")).toBeInTheDocument();
-    await expect(budgetsDB.getItem(testBudget.id.toString())).resolves.toEqual(
-      testBudget,
-    );
+    await expect(
+      budgetsDB.getItem(BudgetMother.testBudget().id.toString()),
+    ).resolves.toEqual(BudgetMother.testBudget());
   });
 
-  it.skip("deletes budget when clicking delete button", async () => {
+  it("deletes budget when clicking delete button", async () => {
     render(comp);
     await act(async () => {
       await expect(
-        budgetsDB.getItem(testBudget.id.toString()),
-      ).resolves.toEqual(testBudget);
+        budgetsDB.getItem(BudgetMother.testBudget().id.toString()),
+      ).resolves.toEqual(BudgetMother.testBudget());
     });
 
     const newButton = await screen.findAllByRole("button", {
@@ -73,7 +70,7 @@ describe("App", () => {
 
     await act(async () => {
       await expect(
-        budgetsDB.getItem(testBudget.id.toString()),
+        budgetsDB.getItem(BudgetMother.testBudget().id.toString()),
       ).resolves.toBeNull();
     });
   });

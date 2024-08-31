@@ -2,8 +2,9 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { describe, expect, it } from "vitest";
-import { setBudgetMock, testBudget } from "../../setupTests";
+import { setBudgetMock } from "../../setupTests";
 import { StatCard } from "./StatCard";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("StatCard", () => {
   const onShowGraphs = vi.fn();
@@ -29,7 +30,10 @@ describe("StatCard", () => {
     await userEvent.type(screen.getByLabelText("reserves"), "2");
 
     expect(setBudgetMock).toHaveBeenCalledWith(
-      { ...testBudget, stats: { ...testBudget.stats, reserves: 2 } },
+      {
+        ...BudgetMother.testBudget(),
+        stats: { ...BudgetMother.testBudget().stats, reserves: 2 },
+      },
       false,
     );
     expect(screen.getByDisplayValue("$2")).toBeInTheDocument();
@@ -38,8 +42,13 @@ describe("StatCard", () => {
     await userEvent.type(screen.getByTestId("goal-input"), "95");
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
-        stats: { ...testBudget.stats, goal: 95, saved: 95, withGoal: -5 },
+        ...BudgetMother.testBudget(),
+        stats: {
+          ...BudgetMother.testBudget().stats,
+          goal: 95,
+          saved: 95,
+          withGoal: -5,
+        },
       },
       false,
     );
@@ -55,8 +64,13 @@ describe("StatCard", () => {
     );
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
-        stats: { ...testBudget.stats, goal: 90, saved: 90, withGoal: 0 },
+        ...BudgetMother.testBudget(),
+        stats: {
+          ...BudgetMother.testBudget().stats,
+          goal: 90,
+          saved: 90,
+          withGoal: 0,
+        },
       },
       true,
     );

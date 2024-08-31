@@ -25,4 +25,12 @@ export class BudgetItemsMother {
 
     return faker.helpers.arrayElements(list);
   }
+
+  static itemForm1() {
+    return new BudgetItem(1, "name1", 10);
+  }
+
+  static itemForm2() {
+    return new BudgetItem(2, "name2", 100);
+  }
 }

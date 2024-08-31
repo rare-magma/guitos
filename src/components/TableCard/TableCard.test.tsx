@@ -2,8 +2,9 @@ import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import { setBudgetMock, testBudget } from "../../setupTests";
+import { setBudgetMock } from "../../setupTests";
 import TableCard from "./TableCard";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("TableCard", () => {
   const comp = (
@@ -39,7 +40,7 @@ describe("TableCard", () => {
 
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
+        ...BudgetMother.testBudget(),
         expenses: {
           items: [{ id: 1, name: "expense1change name", value: 10 }],
           total: 10,
@@ -54,13 +55,13 @@ describe("TableCard", () => {
     expect(screen.getByDisplayValue("$123")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
+        ...BudgetMother.testBudget(),
         expenses: {
           items: [{ id: 1, name: "expense1", value: 123 }],
           total: 123,
         },
         stats: {
-          ...testBudget.stats,
+          ...BudgetMother.testBudget().stats,
           available: -23,
           withGoal: -33,
         },
@@ -77,9 +78,12 @@ describe("TableCard", () => {
     expect(screen.getByDisplayValue("$10")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
+        ...BudgetMother.testBudget(),
         expenses: {
-          items: [...testBudget.expenses.items, { id: 2, name: "", value: 0 }],
+          items: [
+            ...BudgetMother.testBudget().expenses.items,
+            { id: 2, name: "", value: 0 },
+          ],
           total: 10,
         },
       },
@@ -100,9 +104,12 @@ describe("TableCard", () => {
     expect(screen.getByDisplayValue("$100")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
+        ...BudgetMother.testBudget(),
         incomes: {
-          items: [...testBudget.incomes.items, { id: 3, name: "", value: 0 }],
+          items: [
+            ...BudgetMother.testBudget().incomes.items,
+            { id: 3, name: "", value: 0 },
+          ],
           total: 100,
         },
       },
@@ -120,13 +127,13 @@ describe("TableCard", () => {
     );
     expect(setBudgetMock).toHaveBeenCalledWith(
       {
-        ...testBudget,
+        ...BudgetMother.testBudget(),
         expenses: {
           items: [],
           total: 0,
         },
         stats: {
-          ...testBudget.stats,
+          ...BudgetMother.testBudget().stats,
           available: 100,
           withGoal: 90,
         },

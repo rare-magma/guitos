@@ -5,11 +5,10 @@ import { describe, expect, it } from "vitest";
 import {
   budgetContextSpy,
   setBudgetMock,
-  testBudget,
-  testBudgetClone,
   testEmptyBudgetContext,
 } from "../../setupTests";
 import { NavBar } from "./NavBar";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("NavBar", () => {
   const comp = (
@@ -57,7 +56,10 @@ describe("NavBar", () => {
     render(comp);
     setBudgetMock.mockClear();
     await userEvent.click(screen.getByLabelText("clone budget"));
-    expect(setBudgetMock).toHaveBeenCalledWith(testBudgetClone, true);
+    expect(setBudgetMock).toHaveBeenCalledWith(
+      BudgetMother.testBudgetClone(),
+      true,
+    );
   });
 
   it("triggers event when import button is pressed", async () => {
@@ -66,7 +68,7 @@ describe("NavBar", () => {
     const uploadEl = screen.getByTestId("import-form-control");
     await userEvent.upload(
       uploadEl,
-      new File([JSON.stringify(testBudget)], "budget", {
+      new File([JSON.stringify(BudgetMother.testBudget())], "budget", {
         type: "application/json",
       }),
     );
@@ -114,7 +116,7 @@ describe("NavBar", () => {
 
     expect(screen.getByDisplayValue("2023-03change name")).toBeInTheDocument();
     expect(setBudgetMock).toHaveBeenCalledWith(
-      { ...testBudget, name: "2023-03change name" },
+      { ...BudgetMother.testBudget(), name: "2023-03change name" },
       false,
     );
   });

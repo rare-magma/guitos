@@ -3,15 +3,15 @@ import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import { vi } from "vitest";
 import { describe, expect, it } from "vitest";
-import { itemForm1 } from "../../setupTests";
 import { CalculateButton } from "./CalculateButton";
+import { BudgetItemsMother } from "../../guitos/domain/budgetItem.mother";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
   const comp = (
     <BrowserRouter>
       <CalculateButton
-        itemForm={itemForm1}
+        itemForm={BudgetItemsMother.itemForm1()}
         label="Expense"
         onCalculate={onCalculate}
       />
