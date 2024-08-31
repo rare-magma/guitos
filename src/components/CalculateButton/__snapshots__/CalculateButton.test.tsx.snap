@@ -4,7 +4,7 @@ exports[`CalculateButton > matches snapshot 1`] = `
 <BrowserRouter>
   <CalculateButton
     itemForm={
-      ItemForm {
+      BudgetItem {
         "id": 1,
         "name": "name1",
         "value": 10,

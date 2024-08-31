@@ -14,7 +14,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { BsArrowDownUp, BsUpload } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useDB } from "../../hooks/useDB";
-import { budgetToCsv } from "../../utils";
+import { Budget } from "../../guitos/domain/budget";
 
 interface NavBarImpExpProps {
   expanded: boolean;
@@ -61,7 +61,7 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
   function handleExportCSV() {
     if (budget) {
       const filename = `${budget.name}.csv`;
-      const url = window.URL.createObjectURL(new Blob([budgetToCsv(budget)]));
+      const url = window.URL.createObjectURL(new Blob([Budget.toCsv(budget)]));
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", filename);

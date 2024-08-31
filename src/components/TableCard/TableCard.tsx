@@ -14,21 +14,13 @@ import {
 import { BsArrowsVertical, BsPlusLg } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
-import {
-  calcAvailable,
-  calcPercentage,
-  calcSaved,
-  calcTotal,
-  calcWithGoal,
-  intlFormat,
-  roundBig,
-} from "../../utils";
-import type { ItemForm } from "../ItemForm/ItemForm";
+import { intlFormat, roundBig } from "../../utils";
 import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
 import "./TableCard.css";
-import type { BudgetItem } from "../../guitos/domain/budgetItem";
+import { BudgetItem } from "../../guitos/domain/budgetItem";
 import type { Expenses } from "../../guitos/domain/expenses";
 import type { Incomes } from "../../guitos/domain/incomes";
+import { Budget } from "../../guitos/domain/budget";
 
 interface TableCardProps {
   header: "Revenue" | "Expenses";
@@ -46,7 +38,7 @@ export default function TableCard({ header: label }: TableCardProps) {
   const table = isExpense ? budget?.expenses : budget?.incomes;
   const total = table?.total ?? 0;
 
-  function reorderTable(newOrder: ItemForm[]) {
+  function reorderTable(newOrder: BudgetItem[]) {
     if (!budget) return;
     const newState = produce((draft) => {
       if (isExpense) {
@@ -66,9 +58,9 @@ export default function TableCard({ header: label }: TableCardProps) {
       } else {
         draft.incomes = item;
       }
-      draft.stats.available = roundBig(calcAvailable(draft), 2);
-      draft.stats.withGoal = calcWithGoal(draft);
-      draft.stats.saved = calcSaved(draft);
+      draft.stats.available = roundBig(Budget.available(draft as Budget), 2);
+      draft.stats.withGoal = Budget.availableWithGoal(draft as Budget);
+      draft.stats.saved = Budget.saved(draft as Budget);
     }, budget);
     setBudget(newState(), true);
   }
@@ -76,7 +68,7 @@ export default function TableCard({ header: label }: TableCardProps) {
   function addItemToTable(tableBeingEdited: Incomes | Expenses | undefined) {
     if (!tableBeingEdited) return;
     const tableHasItems = table && table.items.length !== 0;
-    const newItemForm = {} as ItemForm;
+    const newItemForm = BudgetItem.create();
     const newTable = isRevenue ? ({} as Incomes) : ({} as Expenses);
     let maxId: number;
 
@@ -95,7 +87,7 @@ export default function TableCard({ header: label }: TableCardProps) {
     newItemForm.value = 0;
 
     newTable.items = tableBeingEdited.items.concat(newItemForm);
-    newTable.total = roundBig(calcTotal(newTable.items), 2);
+    newTable.total = roundBig(Budget.itemsTotal(newTable.items), 2);
 
     handleTableChange(newTable);
   }
@@ -140,7 +132,7 @@ export default function TableCard({ header: label }: TableCardProps) {
             onReorder={reorderTable}
             as="div"
           >
-            {table.items?.map((item: ItemForm) => (
+            {table.items?.map((item: BudgetItem) => (
               <Reorder.Item
                 key={item.id}
                 value={item}
@@ -153,7 +145,7 @@ export default function TableCard({ header: label }: TableCardProps) {
                   label={label}
                   costPercentage={
                     budget
-                      ? calcPercentage(item.value, budget.incomes.total)
+                      ? BudgetItem.percentage(item.value, budget.incomes.total)
                       : 0
                   }
                   inputRef={inputRef}

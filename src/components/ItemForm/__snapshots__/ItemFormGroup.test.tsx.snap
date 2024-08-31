@@ -17,7 +17,7 @@ exports[`ItemFormGroup > matches snapshot 1`] = `
       }
     }
     itemForm={
-      ItemForm {
+      BudgetItem {
         "id": 1,
         "name": "name1",
         "value": 10,

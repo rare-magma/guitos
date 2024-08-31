@@ -16,23 +16,15 @@ import { useConfig } from "../../context/ConfigContext";
 import type { Expenses } from "../../guitos/domain/expenses";
 import type { Incomes } from "../../guitos/domain/incomes";
 import { useDB } from "../../hooks/useDB";
-import {
-  calc,
-  calcAvailable,
-  calcSaved,
-  calcTotal,
-  calcWithGoal,
-  parseLocaleNumber,
-  roundBig,
-} from "../../utils";
+import { calc, parseLocaleNumber, roundBig } from "../../utils";
 import { CalculateButton } from "../CalculateButton/CalculateButton";
-import type { ItemForm } from "./ItemForm";
 import "./ItemFormGroup.css";
 import type { BudgetItem } from "../../guitos/domain/budgetItem";
 import type { ItemOperation } from "../../guitos/domain/calculationHistoryItem";
+import { Budget } from "../../guitos/domain/budget";
 
 interface ItemFormProps {
-  itemForm: ItemForm;
+  itemForm: BudgetItem;
   costPercentage: number;
   label: string;
   inputRef: RefObject<HTMLInputElement>;
@@ -116,19 +108,25 @@ export function ItemFormGroup({
       }
 
       if (isExpense) {
-        draft.expenses.total = roundBig(calcTotal(draft.expenses.items), 2);
+        draft.expenses.total = roundBig(
+          Budget.itemsTotal(draft.expenses.items),
+          2,
+        );
       } else {
-        draft.incomes.total = roundBig(calcTotal(draft.incomes.items), 2);
+        draft.incomes.total = roundBig(
+          Budget.itemsTotal(draft.incomes.items),
+          2,
+        );
       }
-      draft.stats.available = roundBig(calcAvailable(draft), 2);
-      draft.stats.withGoal = calcWithGoal(draft);
-      draft.stats.saved = calcSaved(draft);
+      draft.stats.available = roundBig(Budget.available(draft as Budget), 2);
+      draft.stats.withGoal = Budget.availableWithGoal(draft as Budget);
+      draft.stats.saved = Budget.saved(draft as Budget);
     }, budget);
 
     setBudget(newState(), saveInHistory);
   }
 
-  function handleRemove(toBeDeleted: ItemForm) {
+  function handleRemove(toBeDeleted: BudgetItem) {
     if (!table?.items) return;
     if (!budget) return;
 
@@ -142,10 +140,10 @@ export function ItemFormGroup({
       newTable.items = table.items.filter(
         (item: BudgetItem) => item.id !== toBeDeleted.id,
       );
-      newTable.total = roundBig(calcTotal(newTable.items), 2);
-      draft.stats.available = roundBig(calcAvailable(draft), 2);
-      draft.stats.withGoal = calcWithGoal(draft);
-      draft.stats.saved = calcSaved(draft);
+      newTable.total = roundBig(Budget.itemsTotal(newTable.items), 2);
+      draft.stats.available = roundBig(Budget.available(draft as Budget), 2);
+      draft.stats.withGoal = Budget.availableWithGoal(draft as Budget);
+      draft.stats.saved = Budget.saved(draft as Budget);
     }, budget);
     setBudget(newState(), true);
 

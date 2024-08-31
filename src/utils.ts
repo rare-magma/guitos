@@ -1,15 +1,11 @@
 import Big from "big.js";
-import { immerable } from "immer";
 import type { MutableRefObject } from "react";
 import type { NavigateFunction } from "react-router-dom";
 import type { FilteredItem } from "./components/ChartsPage/ChartsPage";
-import { ItemForm } from "./components/ItemForm/ItemForm";
 import type { SearchOption } from "./components/NavBar/NavBar";
-import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
-import type { CsvItem } from "./guitos/domain/csvItem";
-import { Uuid } from "./guitos/domain/uuid";
 import { currenciesMap } from "./lists/currenciesMap";
+import type { Budget } from "./guitos/domain/budget";
 
 export const userLang = navigator.language;
 
@@ -36,35 +32,6 @@ export const initialCurrencyCode = getCurrencyCode(countryCode);
 
 export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();
-}
-
-export function calcTotal(values: ItemForm[]): Big {
-  let total = Big(0);
-  if (!values) {
-    return total;
-  }
-
-  for (const value of values) {
-    if (!Number.isNaN(value.value)) {
-      total = total.add(Big(value.value));
-    }
-  }
-
-  return total;
-}
-
-export function calcPercentage(
-  itemValue: number,
-  revenueTotal: number,
-): number {
-  const areRoundableNumbers =
-    !Number.isNaN(revenueTotal) && revenueTotal > 0 && !Number.isNaN(itemValue);
-  if (areRoundableNumbers) {
-    const percentage = Big(itemValue).mul(100).div(revenueTotal);
-
-    return roundBig(percentage, percentage.gte(1) ? 0 : 1);
-  }
-  return 0;
 }
 
 export function calc(
@@ -101,120 +68,6 @@ export function calc(
     return total;
   }
   return 0;
-}
-
-export function calcAvailable(value: Budget | null): Big {
-  if (value !== null) {
-    const expenseTotal = calcTotal(value.expenses.items);
-    const incomeTotal = calcTotal(value.incomes.items);
-    return incomeTotal.sub(expenseTotal);
-  }
-  return Big(0);
-}
-
-export function calcWithGoal(value: Budget): number {
-  const goalIsCalculable =
-    value.stats.goal !== null && !Number.isNaN(value.stats.goal);
-
-  if (goalIsCalculable) {
-    const available = calcAvailable(value);
-    const availableWithGoal = Big(value.stats.goal)
-      .mul(calcTotal(value.incomes.items))
-      .div(100);
-    return roundBig(available.sub(availableWithGoal), 2);
-  }
-  return 0;
-}
-
-export function calcSaved(value: Budget): number {
-  const valueIsCalculable =
-    value.stats.saved !== null && !Number.isNaN(value.stats.goal);
-
-  if (valueIsCalculable) {
-    const available = calcTotal(value.incomes.items);
-    const saved = Big(value.stats.goal).mul(available).div(100);
-    return roundBig(saved, 2);
-  }
-  return 0;
-}
-
-export function calcAutoGoal(value: Budget): number {
-  const valueIsCalculable =
-    value.stats.goal !== null && !Number.isNaN(value.stats.goal);
-
-  if (valueIsCalculable) {
-    const incomeTotal = calcTotal(value.incomes.items);
-    const available = calcAvailable(value);
-
-    if (incomeTotal.gt(0) && available.gt(0)) {
-      const autoGoal = available.mul(100).div(incomeTotal);
-      return roundBig(autoGoal, 5);
-    }
-  }
-  return 0;
-}
-
-export function convertCsvToBudget(csv: string[], date: string): Budget {
-  const emptyExpenses: ItemForm[] = [];
-  const emptyIncomes: ItemForm[] = [];
-  const newBudget: Budget = {
-    [immerable]: true,
-    id: Uuid.random(),
-    name: date,
-    expenses: {
-      items: emptyExpenses,
-      total: 0,
-    },
-    incomes: {
-      items: emptyIncomes,
-      total: 0,
-    },
-    stats: {
-      available: 0,
-      withGoal: 0,
-      saved: 0,
-      goal: 0,
-      reserves: 0,
-    },
-  };
-
-  csv.forEach((value: string, key: number) => {
-    const item = value as unknown as CsvItem;
-    const newItemForm = new ItemForm({
-      id: key,
-      name: item.name,
-      value: Number(item.value),
-    });
-
-    switch (item.type) {
-      case "expense":
-        newBudget.expenses.items.push(newItemForm);
-        newBudget.expenses.total = roundBig(
-          calcTotal(newBudget.expenses.items),
-          2,
-        );
-        break;
-      case "income":
-        newBudget.incomes.items.push(newItemForm);
-        newBudget.incomes.total = roundBig(
-          calcTotal(newBudget.incomes.items),
-          2,
-        );
-        break;
-      case "goal":
-        newBudget.stats.goal = Number(item.value);
-        break;
-      case "reserves":
-        newBudget.stats.reserves = Number(item.value);
-        break;
-    }
-  });
-
-  newBudget.stats.available = roundBig(calcAvailable(newBudget), 2);
-  newBudget.stats.withGoal = calcWithGoal(newBudget);
-  newBudget.stats.saved = calcSaved(newBudget);
-
-  return newBudget as unknown as Budget;
 }
 
 export function intlFormat(amount: number, currencyCode: string) {
@@ -255,23 +108,6 @@ export function parseLocaleNumber(
       .replace(new RegExp(`\\${thousandSeparator}`, "g"), "")
       .replace(new RegExp(`\\${decimalSeparator}`), "."),
   );
-}
-
-export function budgetToCsv(budget: Budget) {
-  const header = ["type", "name", "value"];
-
-  const expenses = budget.expenses.items.map((expense) => {
-    return ["expense", expense.name, expense.value].join(",");
-  });
-
-  const incomes = budget.incomes.items.map((income) => {
-    return ["income", income.name, income.value].join(",");
-  });
-
-  const stats = ["goal", "goal", budget.stats.goal].join(",");
-  const reserves = ["reserves", "reserves", budget.stats.reserves].join(",");
-
-  return [header, ...expenses, ...incomes, stats, reserves].join("\n");
 }
 
 export function median(arr: number[]): number {

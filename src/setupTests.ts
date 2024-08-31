@@ -6,14 +6,14 @@ import "@testing-library/jest-dom";
 import { randomUUID } from "node:crypto";
 import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
-import { immerable } from "immer";
 import { createElement } from "react";
 import { afterEach, beforeEach, expect, vi } from "vitest";
-import { ItemForm } from "./components/ItemForm/ItemForm";
 import * as AppBudgetContext from "./context/BudgetContext";
 import * as AppConfigContext from "./context/ConfigContext";
 import * as AppGeneralContext from "./context/GeneralContext";
 import { Uuid } from "./guitos/domain/uuid";
+import { Budget } from "./guitos/domain/budget";
+import { BudgetItem } from "./guitos/domain/budgetItem";
 
 window.crypto.randomUUID = randomUUID;
 global.URL.createObjectURL = vi.fn();
@@ -68,7 +68,8 @@ Object.defineProperty(window, "matchMedia", {
 });
 
 export const testBudget = {
-  id: Uuid.random().value,
+  ...Budget.create(),
+  id: Uuid.random().value as unknown as Uuid,
   name: "2023-03",
   expenses: {
     items: [{ id: 1, name: "expense1", value: 10 }],
@@ -92,8 +93,9 @@ export const testBudgetClone = {
   name: "2023-03-clone",
 };
 
-export const testBudget2 = {
-  id: Uuid.random().value,
+export const testBudget2: Budget = {
+  ...Budget.create(),
+  id: Uuid.random().value as unknown as Uuid,
   name: "2023-04",
   expenses: {
     items: [{ id: 1, name: "name", value: 50 }],
@@ -112,8 +114,8 @@ export const testBudget2 = {
   },
 };
 
-export const testBigBudget = {
-  id: Uuid.random(),
+export const testBigBudget: Budget = {
+  ...Budget.create(),
   name: "2023-03",
   expenses: {
     items: [
@@ -173,22 +175,15 @@ goal,,goal,,,
 reservaes,reserves,0
 `;
 
-export const testBudgetCsv = {
-  [immerable]: true,
-  id: Uuid.random(),
+export const testBudgetCsv: Budget = {
+  ...Budget.create(),
   name: "2023-03",
   expenses: {
-    items: [
-      new ItemForm({ id: 0, name: "rent", value: 1000 }),
-      new ItemForm({ id: 1, name: "food", value: 200 }),
-    ],
+    items: [new BudgetItem(0, "rent", 1000), new BudgetItem(1, "food", 200)],
     total: 1200,
   },
   incomes: {
-    items: [
-      new ItemForm({ id: 2, name: "salary", value: 2000 }),
-      new ItemForm({ id: 3, name: "sale", value: 100 }),
-    ],
+    items: [new BudgetItem(2, "salary", 2000), new BudgetItem(3, "sale", 100)],
     total: 2100,
   },
   stats: {
@@ -215,17 +210,9 @@ export const budgetNameList = [
   },
 ];
 
-export const itemForm1 = new ItemForm({
-  id: 1,
-  name: "name1",
-  value: 10,
-});
+export const itemForm1 = new BudgetItem(1, "name1", 10);
 
-export const itemForm2 = new ItemForm({
-  id: 2,
-  name: "name2",
-  value: 100,
-});
+export const itemForm2 = new BudgetItem(2, "name2", 100);
 
 export const testCalcHist = [
   {

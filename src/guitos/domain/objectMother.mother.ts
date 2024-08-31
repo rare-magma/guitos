@@ -1,6 +1,4 @@
 import { faker } from "@faker-js/faker";
-import { BudgetItem } from "./budgetItem";
-import { Stats } from "./stats";
 import { Uuid } from "./uuid";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
@@ -43,37 +41,5 @@ export class ObjectMother {
 
   static recentDate(): Date {
     return faker.date.recent();
-  }
-
-  static budgetItems(): BudgetItem[] {
-    const list = [
-      new BudgetItem(
-        ObjectMother.positiveNumber(),
-        faker.lorem.word(),
-        faker.number.int(),
-      ),
-      new BudgetItem(
-        ObjectMother.positiveNumber(),
-        faker.lorem.word(),
-        faker.number.int(),
-      ),
-      new BudgetItem(
-        ObjectMother.positiveNumber(),
-        faker.lorem.word(),
-        faker.number.int(),
-      ),
-    ];
-
-    return faker.helpers.arrayElements(list);
-  }
-
-  static budgetStats(): Stats {
-    return new Stats(
-      ObjectMother.randomNumber(),
-      ObjectMother.randomNumber(),
-      ObjectMother.randomNumber(),
-      ObjectMother.randomNumber(),
-      ObjectMother.randomNumber(),
-    );
   }
 }

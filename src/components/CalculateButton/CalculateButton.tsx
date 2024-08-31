@@ -18,15 +18,15 @@ import { CgMathDivide, CgMathPlus } from "react-icons/cg";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { useDB } from "../../hooks/useDB";
-import type { ItemForm } from "../ItemForm/ItemForm";
 import "./CalculateButton.css";
 import type {
   CalculationHistoryItem,
   ItemOperation,
 } from "../../guitos/domain/calculationHistoryItem";
+import type { BudgetItem } from "../../guitos/domain/budgetItem";
 
 interface CalculateButtonProps {
-  itemForm: ItemForm;
+  itemForm: BudgetItem;
   label: string;
   onCalculate: (changeValue: number, operation: ItemOperation) => void;
 }

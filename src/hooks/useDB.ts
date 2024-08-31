@@ -16,12 +16,7 @@ import { Uuid } from "../guitos/domain/uuid";
 import { localForageBudgetRepository } from "../guitos/infrastructure/localForageBudgetRepository";
 import { localForageCalcHistRepository } from "../guitos/infrastructure/localForageCalcHistRepository";
 import { localForageOptionsRepository } from "../guitos/infrastructure/localForageOptionsRepository";
-import {
-  convertCsvToBudget,
-  createBudgetNameList,
-  saveLastOpenedBudget,
-  userLang,
-} from "../utils";
+import { createBudgetNameList, saveLastOpenedBudget, userLang } from "../utils";
 
 const budgetRepository = new localForageBudgetRepository();
 const optionsRepository = new localForageOptionsRepository();
@@ -67,29 +62,26 @@ export function useDB() {
       ? budgetList.concat(newBudget)
       : newBudgetList.concat(newBudget);
 
-    budgetRepository.update(newBudget.id, newBudget);
-    setBudget(newBudget, true);
-    setBudgetList(newBudgetList);
-    setBudgetNameList(createBudgetNameList(newBudgetList));
+    budgetRepository.update(newBudget.id, newBudget).then(() => {
+      setBudget(newBudget, true);
+      setBudgetList(newBudgetList);
+      setBudgetNameList(createBudgetNameList(newBudgetList));
 
-    setNotifications(
-      produce(notifications, (draft) => {
-        draft.push({
-          show: true,
-          id: crypto.randomUUID(),
-          body: `created "${newBudget.name}" budget`,
-        });
-      }),
-    );
+      setNotifications(
+        produce(notifications, (draft) => {
+          draft.push({
+            show: true,
+            id: Uuid.random().toString(),
+            body: `created "${newBudget.name}" budget`,
+          });
+        }),
+      );
+    });
   }
 
   function cloneBudget() {
     if (budget) {
-      const newBudget = {
-        ...budget,
-        id: Uuid.random(),
-        name: `${budget.name}-clone`,
-      };
+      const newBudget = Budget.clone(budget);
 
       let newBudgetList: Budget[] = [];
       newBudgetList = budgetList
@@ -100,52 +92,56 @@ export function useDB() {
         produce(notifications, (draft) => {
           draft.push({
             show: true,
-            id: crypto.randomUUID(),
+            id: Uuid.random().toString(),
             body: `cloned "${newBudget.name}" budget`,
           });
         }),
       );
-      budgetRepository.update(newBudget.id, newBudget);
-      setBudget(newBudget, true);
-      setBudgetList(newBudgetList);
-      setBudgetNameList(createBudgetNameList(newBudgetList));
+      budgetRepository.update(newBudget.id, newBudget).then(() => {
+        setBudget(newBudget, true);
+        setBudgetList(newBudgetList);
+        setBudgetNameList(createBudgetNameList(newBudgetList));
+      });
     }
   }
 
   function deleteBudget(toBeDeleted: Uuid) {
-    budgetList &&
-      budgetRepository
-        .delete(toBeDeleted)
-        .then(() => {
-          const newBudgetList = budgetList
-            .filter((item: Budget) => item.id !== toBeDeleted)
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .reverse();
+    if (!budgetList) return;
+    budgetRepository
+      .delete(toBeDeleted)
+      .then(() => {
+        const newBudgetList = budgetList
+          .filter(
+            (item: Budget) => item.id.toString() !== toBeDeleted.toString(),
+          )
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .reverse();
 
-          setBudgetList(newBudgetList);
-          setBudgetNameList(
-            createBudgetNameList(newBudgetList as unknown as Budget[]),
-          );
+        setBudgetList(newBudgetList);
+        setBudgetNameList(
+          createBudgetNameList(newBudgetList as unknown as Budget[]),
+        );
 
-          setNotifications(
-            produce(notifications, (draft) => {
-              draft.push({
-                show: true,
-                showUndo: true,
-                id: crypto.randomUUID(),
-                body: `deleted "${budget?.name}" budget`,
-              });
-            }),
-          );
-          if (newBudgetList.length >= 1) {
-            setBudget(newBudgetList[0], true);
-          } else {
-            setBudget(undefined, true);
-          }
-        })
-        .catch((e: unknown) => {
-          handleError(e);
-        });
+        setNotifications(
+          produce(notifications, (draft) => {
+            draft.push({
+              show: true,
+              showUndo: true,
+              id: Uuid.random().value,
+              body: `deleted "${budget?.name}" budget`,
+            });
+          }),
+        );
+        if (newBudgetList.length >= 1) {
+          setBudget(newBudgetList[0], true);
+        } else {
+          setBudget(undefined, true);
+          localStorage.setItem("guitos_lastOpenedBudget", "");
+        }
+      })
+      .catch((e: unknown) => {
+        handleError(e);
+      });
   }
 
   function importCSV(fileReader: FileReader, file: File) {
@@ -169,14 +165,15 @@ export function useDB() {
       return;
     }
 
-    const newBudget = convertCsvToBudget(
+    const newBudget = Budget.fromCsv(
       csvObject.data as string[],
       file.name.slice(0, -4),
     );
     newBudgetList.push(newBudget);
-    budgetRepository.update(newBudget.id, newBudget);
-    setBudgetList(newBudgetList);
-    setBudgetNameList(createBudgetNameList(newBudgetList));
+    budgetRepository.update(newBudget.id, newBudget).then(() => {
+      setBudgetList(newBudgetList);
+      setBudgetNameList(createBudgetNameList(newBudgetList));
+    });
   }
 
   function importJSON(fileReader: FileReader, file: File) {
@@ -403,9 +400,9 @@ export function useDB() {
         draft.name = event.target.value;
       }, budget);
 
-      // budgetRepository.update(budget.id, budget).then(() => {
-      setBudget(newState(), false);
-      // });
+      budgetRepository.update(budget.id, budget).then(() => {
+        setBudget(newState(), false);
+      });
     }
   }
 
@@ -419,9 +416,7 @@ export function useDB() {
   async function saveCalcHist(id: string, item: CalculationHistoryItem) {
     const calcHist = await getCalcHist(id);
     const newCalcHist = calcHist ? [...calcHist, item] : [item];
-    calcHistRepository.update(id, newCalcHist).catch((e: unknown) => {
-      throw e;
-    });
+    calcHistRepository.update(id, newCalcHist);
   }
 
   async function deleteCalcHist(id: string) {

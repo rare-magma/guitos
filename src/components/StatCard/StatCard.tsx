@@ -23,16 +23,9 @@ import {
 } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
-import {
-  calcAutoGoal,
-  calcAvailable,
-  calcSaved,
-  calcWithGoal,
-  focusRef,
-  parseLocaleNumber,
-  roundBig,
-} from "../../utils";
+import { focusRef, parseLocaleNumber, roundBig } from "../../utils";
 import "./StatCard.css";
+import { Budget } from "../../guitos/domain/budget";
 
 interface StatCardProps {
   onShowGraphs: () => void;
@@ -64,9 +57,9 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
       setAutoGoal(false);
       const newState = produce((draft) => {
         draft.stats.goal = item.target.valueAsNumber;
-        draft.stats.available = roundBig(calcAvailable(draft), 2);
-        draft.stats.withGoal = calcWithGoal(draft);
-        draft.stats.saved = calcSaved(draft);
+        draft.stats.available = roundBig(Budget.available(draft as Budget), 2);
+        draft.stats.withGoal = Budget.availableWithGoal(draft as Budget);
+        draft.stats.saved = Budget.saved(draft as Budget);
       }, budget);
       setBudget(newState(), false);
     }
@@ -84,10 +77,10 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
   function handleAutoGoal() {
     if (budget && stat) {
       const newState = produce((draft) => {
-        draft.stats.goal = calcAutoGoal(draft);
-        draft.stats.available = roundBig(calcAvailable(draft), 2);
-        draft.stats.withGoal = calcWithGoal(draft);
-        draft.stats.saved = calcSaved(draft);
+        draft.stats.goal = Budget.automaticGoal(draft as Budget);
+        draft.stats.available = roundBig(Budget.available(draft as Budget), 2);
+        draft.stats.withGoal = Budget.availableWithGoal(draft as Budget);
+        draft.stats.saved = Budget.saved(draft as Budget);
       }, budget);
       setBudget(newState(), true);
     }

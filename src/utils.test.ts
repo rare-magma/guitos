@@ -1,9 +1,8 @@
 import Big from "big.js";
-import { immerable } from "immer";
 import Papa from "papaparse";
 import { expect, test } from "vitest";
 import type { FilteredItem } from "./components/ChartsPage/ChartsPage";
-import type { Budget } from "./guitos/domain/budget";
+import { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import { Uuid } from "./guitos/domain/uuid";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
@@ -20,15 +19,7 @@ import {
   testCsv,
 } from "./setupTests";
 import {
-  budgetToCsv,
   calc,
-  calcAutoGoal,
-  calcAvailable,
-  calcPercentage,
-  calcSaved,
-  calcTotal,
-  calcWithGoal,
-  convertCsvToBudget,
   createBudgetNameList,
   getCountryCode,
   getCurrencyCode,
@@ -41,6 +32,7 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
+import { BudgetItem } from "./guitos/domain/budgetItem";
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
@@ -53,43 +45,51 @@ test("round", () => {
 });
 
 test("calcTotal", () => {
-  expect(calcTotal([itemForm1, itemForm2])).toEqual(Big(110));
-  expect(calcTotal([])).toEqual(Big(0));
+  expect(Budget.itemsTotal([itemForm1, itemForm2])).toEqual(Big(110));
+  expect(Budget.itemsTotal([])).toEqual(Big(0));
 });
 
-test("calcPercentage", () => {
-  expect(calcPercentage(itemForm1.value, testBudget.incomes.total)).eq(10);
-  expect(calcPercentage(itemForm2.value, testBudget.incomes.total)).eq(100);
-  expect(calcPercentage(itemForm1.value, testBudget.expenses.total)).eq(100);
-  expect(calcPercentage(itemForm2.value, testBudget.expenses.total)).eq(1000);
-  expect(calcPercentage(0, 0)).eq(0);
-  expect(calcPercentage(0, testBudget.incomes.total)).eq(0);
-  expect(calcPercentage(0, testBudget.expenses.total)).eq(0);
+test("BudgetItem.percentage", () => {
+  expect(BudgetItem.percentage(itemForm1.value, testBudget.incomes.total)).eq(
+    10,
+  );
+  expect(BudgetItem.percentage(itemForm2.value, testBudget.incomes.total)).eq(
+    100,
+  );
+  expect(BudgetItem.percentage(itemForm1.value, testBudget.expenses.total)).eq(
+    100,
+  );
+  expect(BudgetItem.percentage(itemForm2.value, testBudget.expenses.total)).eq(
+    1000,
+  );
+  expect(BudgetItem.percentage(0, 0)).eq(0);
+  expect(BudgetItem.percentage(0, testBudget.incomes.total)).eq(0);
+  expect(BudgetItem.percentage(0, testBudget.expenses.total)).eq(0);
 });
 
-test("calcAvailable", () => {
-  expect(calcAvailable(testBudget)).toEqual(Big(90));
-  expect(calcAvailable(null)).toEqual(Big(0));
+test("Budget.available", () => {
+  expect(Budget.available(testBudget)).toEqual(Big(90));
+  expect(Budget.available(undefined)).toEqual(Big(0));
 });
 
-test("calcWithGoal", () => {
-  expect(calcWithGoal(testBudget)).eq(80);
+test("Budget.availableWithGoal", () => {
+  expect(Budget.availableWithGoal(testBudget)).eq(80);
 });
 
-test("calcSaved", () => {
-  expect(calcSaved(testBudget)).eq(10);
+test("Budget.saved", () => {
+  expect(Budget.saved(testBudget)).eq(10);
 });
 
-test("calcAutoGoal", () => {
-  expect(calcAutoGoal(testBigBudget)).eq(93.36298);
+test("Budget.automaticGoal", () => {
+  expect(Budget.automaticGoal(testBigBudget)).eq(93.36298);
 });
 
-test("convertCsvToBudget", () => {
+test("Budget.fromCsv", () => {
   const csvObject = Papa.parse(testCsv as string, {
     header: true,
     skipEmptyLines: "greedy",
   });
-  expect(convertCsvToBudget(csvObject.data as string[], "2023-03")).toEqual(
+  expect(Budget.fromCsv(csvObject.data as string[], "2023-03")).toEqual(
     testBudgetCsv,
   );
 });
@@ -148,8 +148,8 @@ test("parseLocaleNumber", () => {
   expect(parseLocaleNumber("1,20,54,100.55", "en-IN")).eq(12054100.55);
 });
 
-test("budgetToCsv", () => {
-  expect(budgetToCsv(testBigBudget)).eq(`type,name,value
+test("Budget.toCsv", () => {
+  expect(Budget.toCsv(testBigBudget)).eq(`type,name,value
 expense,name,11378.64
 expense,name2,11378.64
 income,name,100.03
@@ -220,9 +220,9 @@ test("getLabelKeyFilteredItem", () => {
     name: "2023-03",
     item: "abcd",
     value: 1,
-    type: "efgh",
+    type: "abcd",
   };
   expect(getLabelKeyFilteredItem(optionWithoutItem)).toEqual(
-    "abcd (2023-03 efgh)",
+    "abcd (2023-03 abcd)",
   );
 });
