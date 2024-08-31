@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import { beforeEach, describe, expect, it } from "vitest";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 import {
   budgetContextSpy,
   generalContextSpy,
@@ -10,7 +11,6 @@ import {
   testGeneralContext,
 } from "../../setupTests";
 import { LandingPage } from "./LandingPage";
-import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("LandingPage", () => {
   const comp = (

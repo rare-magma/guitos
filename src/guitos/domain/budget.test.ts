@@ -1,6 +1,6 @@
 import Big from "big.js";
 import Papa from "papaparse";
-import { expect, test, describe } from "vitest";
+import { describe, expect, test } from "vitest";
 import { Budget } from "./budget";
 import { BudgetMother } from "./budget.mother";
 import { BudgetItem } from "./budgetItem";

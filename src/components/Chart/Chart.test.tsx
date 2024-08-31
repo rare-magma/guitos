@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { Chart } from "./Chart";
 import { BudgetMother } from "../../guitos/domain/budget.mother";
+import { Chart } from "./Chart";
 
 describe("Chart", () => {
   const comp = (

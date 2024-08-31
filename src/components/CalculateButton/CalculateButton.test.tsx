@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import { vi } from "vitest";
 import { describe, expect, it } from "vitest";
-import { CalculateButton } from "./CalculateButton";
 import { BudgetItemsMother } from "../../guitos/domain/budgetItem.mother";
+import { CalculateButton } from "./CalculateButton";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();

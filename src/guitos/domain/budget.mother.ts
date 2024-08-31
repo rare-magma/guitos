@@ -1,6 +1,6 @@
+import { Budget } from "./budget";
 import { BudgetItem } from "./budgetItem";
 import { Uuid } from "./uuid";
-import { Budget } from "./budget";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class BudgetMother {

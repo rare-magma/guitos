@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { App } from "./App";
 import { budgetsDB, calcHistDB, optionsDB } from "./db";
-import { budgetContextSpy, testEmptyBudgetContext } from "./setupTests";
 import { BudgetMother } from "./guitos/domain/budget.mother";
+import { budgetContextSpy, testEmptyBudgetContext } from "./setupTests";
 
 describe("App", () => {
   const comp = <App />;

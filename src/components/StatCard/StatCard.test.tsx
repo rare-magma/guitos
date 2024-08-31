@@ -2,9 +2,9 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import { describe, expect, it } from "vitest";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 import { setBudgetMock } from "../../setupTests";
 import { StatCard } from "./StatCard";
-import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("StatCard", () => {
   const onShowGraphs = vi.fn();

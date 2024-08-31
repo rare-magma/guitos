@@ -2,13 +2,13 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 import {
   budgetContextSpy,
   setBudgetMock,
   testEmptyBudgetContext,
 } from "../../setupTests";
 import { NavBar } from "./NavBar";
-import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("NavBar", () => {
   const comp = (

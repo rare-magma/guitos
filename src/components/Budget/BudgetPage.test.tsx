@@ -4,6 +4,7 @@ import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { budgetsDB } from "../../db";
+import { BudgetMother } from "../../guitos/domain/budget.mother";
 import {
   budgetContextSpy,
   redoMock,
@@ -13,7 +14,6 @@ import {
   undoMock,
 } from "../../setupTests";
 import { BudgetPage } from "./BudgetPage";
-import { BudgetMother } from "../../guitos/domain/budget.mother";
 
 describe("BudgetPage", () => {
   const comp = (
