@@ -65,7 +65,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.45.3)
+        version: 4.10.0(playwright-core@1.46.1)
       '@biomejs/biome':
         specifier: 1.8.3
         version: 1.8.3
@@ -73,8 +73,8 @@ importers:
         specifier: 8.4.1
         version: 8.4.1
       '@playwright/test':
-        specifier: 1.45.3
-        version: 1.45.3
+        specifier: 1.46.1
+        version: 1.46.1
       '@simbathesailor/use-what-changed':
         specifier: 2.0.0
         version: 2.0.0(react@18.2.0)
@@ -994,8 +994,8 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@playwright/test@1.45.3':
-    resolution: {integrity: sha512-UKF4XsBfy+u3MFWEH44hva1Q8Da28G6RFtR2+5saw+jgAFQV5yYnB1fu68Mz7fO+5GJF3wgwAIs0UelU8TxFrA==}
+  '@playwright/test@1.46.1':
+    resolution: {integrity: sha512-Fq6SwLujA/DOIvNC2EL/SojJnkKf/rAwJ//APpJJHRyMi1PdKrY3Az+4XNQ51N4RTbItbIByQ0jgd1tayq1aeA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2421,13 +2421,13 @@ packages:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
 
-  playwright-core@1.45.3:
-    resolution: {integrity: sha512-+ym0jNbcjikaOwwSZycFbwkWgfruWvYlJfThKYAlImbxUgdWFO2oW70ojPm4OpE4t6TAo2FY/smM+hpVTtkhDA==}
+  playwright-core@1.46.1:
+    resolution: {integrity: sha512-h9LqIQaAv+CYvWzsZ+h3RsrqCStkBHlgo6/TJlFst3cOTlLghBQlJwPOZKQJTKNaD3QIB7aAVQ+gfWbN3NXB7A==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.45.3:
-    resolution: {integrity: sha512-QhVaS+lpluxCaioejDZ95l4Y4jSFCsBvl2UZkpeXlzxmqS+aABr5c82YmfMHrL6x27nvrvykJAFpkzT2eWdJww==}
+  playwright@1.46.1:
+    resolution: {integrity: sha512-oPcr1yqoXLCkgKtD5eNUPLiN40rYEM39odNpIb6VE6S7/15gJmA1NzVv6zJYusV0e7tzvkU/utBFNa/Kpxmwng==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3133,6 +3133,7 @@ packages:
 
   workbox-google-analytics@7.0.0:
     resolution: {integrity: sha512-MEYM1JTn/qiC3DbpvP2BVhyIH+dV/5BjHk756u9VbwuAhu0QHyKscTnisQuz21lfRpOwiS9z4XdqeVAKol0bzg==}
+    deprecated: It is not compatible with newer versions of GA starting with v4, as long as you are using GAv3 it should be ok, but the package is not longer being maintained
 
   workbox-navigation-preload@7.0.0:
     resolution: {integrity: sha512-juWCSrxo/fiMz3RsvDspeSLGmbgC0U9tKqcUPZBCf35s64wlaLXyn2KdHHXVQrb2cqF7I0Hc9siQalainmnXJA==}
@@ -3216,10 +3217,10 @@ snapshots:
       jsonpointer: 5.0.1
       leven: 3.1.0
 
-  '@axe-core/playwright@4.10.0(playwright-core@1.45.3)':
+  '@axe-core/playwright@4.10.0(playwright-core@1.46.1)':
     dependencies:
       axe-core: 4.10.0
-      playwright-core: 1.45.3
+      playwright-core: 1.46.1
 
   '@babel/code-frame@7.23.5':
     dependencies:
@@ -4096,9 +4097,9 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@playwright/test@1.45.3':
+  '@playwright/test@1.46.1':
     dependencies:
-      playwright: 1.45.3
+      playwright: 1.46.1
 
   '@polka/url@1.0.0-next.25': {}
 
@@ -5556,11 +5557,11 @@ snapshots:
 
   picomatch@4.0.2: {}
 
-  playwright-core@1.45.3: {}
+  playwright-core@1.46.1: {}
 
-  playwright@1.45.3:
+  playwright@1.46.1:
     dependencies:
-      playwright-core: 1.45.3
+      playwright-core: 1.46.1
     optionalDependencies:
       fsevents: 2.3.2
 
