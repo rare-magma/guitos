@@ -116,7 +116,7 @@ importers:
         version: 3.7.0(@swc/helpers@0.5.3)(vite@5.3.5(@types/node@20.14.8)(terser@5.21.0))
       '@vitest/coverage-v8':
         specifier: 2.0.5
-        version: 2.0.5(vitest@2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.21.0))
+        version: 2.0.5(vitest@2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.21.0))
       '@vitest/ui':
         specifier: 2.0.5
         version: 2.0.5(vitest@2.0.5)
@@ -127,8 +127,8 @@ importers:
         specifier: 0.4.4
         version: 0.4.4
       jsdom:
-        specifier: 24.1.1
-        version: 24.1.1
+        specifier: 25.0.0
+        version: 25.0.0
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -143,7 +143,7 @@ importers:
         version: 1.0.5(vite@5.3.5(@types/node@20.14.8)(terser@5.21.0))
       vitest:
         specifier: 2.0.5
-        version: 2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.21.0)
+        version: 2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.21.0)
       workbox-window:
         specifier: 7.1.0
         version: 7.1.0
@@ -2196,8 +2196,8 @@ packages:
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
-  jsdom@24.1.1:
-    resolution: {integrity: sha512-5O1wWV99Jhq4DV7rCLIoZ/UIhyQeDR7wHVyZAHAshbrvZsLs+Xzz7gtwnlJTJDjleiTKh54F4dXrX70vJQTyJQ==}
+  jsdom@25.0.0:
+    resolution: {integrity: sha512-OhoFVT59T7aEq75TVw9xxEfkXgacpqAhQaYgP9y/fDqWQCMB/b1H66RfmPm/MaeaAIU9nDwMOVTlPN51+ao6CQ==}
     engines: {node: '>=18'}
     peerDependencies:
       canvas: ^2.11.2
@@ -4439,7 +4439,7 @@ snapshots:
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@vitest/coverage-v8@2.0.5(vitest@2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.21.0))':
+  '@vitest/coverage-v8@2.0.5(vitest@2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.21.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 0.2.3
@@ -4453,7 +4453,7 @@ snapshots:
       std-env: 3.7.0
       test-exclude: 7.0.1
       tinyrainbow: 1.2.0
-      vitest: 2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.21.0)
+      vitest: 2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.21.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -4492,7 +4492,7 @@ snapshots:
       pathe: 1.1.2
       sirv: 2.0.4
       tinyrainbow: 1.2.0
-      vitest: 2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.21.0)
+      vitest: 2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.21.0)
 
   '@vitest/utils@2.0.5':
     dependencies:
@@ -4505,7 +4505,7 @@ snapshots:
 
   agent-base@7.1.0:
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.6
     transitivePeerDependencies:
       - supports-color
 
@@ -5148,14 +5148,14 @@ snapshots:
   http-proxy-agent@7.0.2:
     dependencies:
       agent-base: 7.1.0
-      debug: 4.3.4
+      debug: 4.3.6
     transitivePeerDependencies:
       - supports-color
 
   https-proxy-agent@7.0.5:
     dependencies:
       agent-base: 7.1.0
-      debug: 4.3.4
+      debug: 4.3.6
     transitivePeerDependencies:
       - supports-color
 
@@ -5356,7 +5356,7 @@ snapshots:
 
   js-tokens@4.0.0: {}
 
-  jsdom@24.1.1:
+  jsdom@25.0.0:
     dependencies:
       cssstyle: 4.0.1
       data-urls: 5.0.0
@@ -6249,7 +6249,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.21.0
 
-  vitest@2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@24.1.1)(terser@5.21.0):
+  vitest@2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@25.0.0)(terser@5.21.0):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@vitest/expect': 2.0.5
@@ -6273,7 +6273,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.14.8
       '@vitest/ui': 2.0.5(vitest@2.0.5)
-      jsdom: 24.1.1
+      jsdom: 25.0.0
     transitivePeerDependencies:
       - less
       - lightningcss
