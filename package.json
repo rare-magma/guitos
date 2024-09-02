@@ -10,7 +10,7 @@
   "dependencies": {
     "big.js": "6.2.1",
     "bootstrap": "5.3.3",
-    "framer-motion": "11.3.21",
+    "framer-motion": "11.3.31",
     "immer": "10.1.1",
     "localforage": "1.10.0",
     "papaparse": "5.4.1",
