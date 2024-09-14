@@ -1,3 +1,18 @@
+## 1.3.0 (2024-09-14)
+
+#### Feature
+
+* larger buttons in menu (f89a91aa)
+
+#### Bug Fixes
+
+* spacing on new menu (dfb201d4)
+
+#### Chores
+
+* **release:** 1.2.11 (2a3ee749)
+
+
 ## 1.2.11 (2024-09-14)
 
 #### Bug Fixes
