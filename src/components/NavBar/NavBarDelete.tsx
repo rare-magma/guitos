@@ -18,7 +18,7 @@ export function NavBarDelete({
   const { budget } = useBudget();
 
   return (
-    <Nav className="m-2">
+    <Nav className={expanded ? "p-4" : "m-2"}>
       <OverlayTrigger
         trigger="click"
         key="nav-deletion-overlay"
@@ -56,7 +56,7 @@ export function NavBarDelete({
         }
       >
         <Button
-          className="w-100"
+          className={expanded ? "w-100 h-100" : "w-100"}
           aria-label="delete budget"
           variant="outline-danger"
           onClick={() => {
@@ -65,7 +65,7 @@ export function NavBarDelete({
             }, 0);
           }}
         >
-          {expanded ? "delete" : <BsXLg aria-hidden={true} />}
+          {<BsXLg size={expanded ? 50 : 0} aria-hidden={true} />}
         </Button>
       </OverlayTrigger>
     </Nav>

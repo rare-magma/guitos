@@ -71,7 +71,7 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
   }
 
   return hasOneOrMoreBudgets ? (
-    <Nav className="m-2">
+    <Nav className={expanded ? "p-4" : "m-2"}>
       <OverlayTrigger
         trigger="click"
         key="nav-imp-exp-overlay"
@@ -145,7 +145,7 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
         }
       >
         <Button
-          className="w-100"
+          className={expanded ? "w-100 h-100" : "w-100"}
           aria-label="import or export budget"
           variant="outline-primary"
           ref={impExpButtonRef}
@@ -155,7 +155,7 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
             }, 0);
           }}
         >
-          {expanded ? "import/export" : <BsArrowDownUp aria-hidden={true} />}
+          {<BsArrowDownUp size={expanded ? 50 : 0} aria-hidden={true} />}
         </Button>
       </OverlayTrigger>
     </Nav>
@@ -177,7 +177,7 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
             variant="outline-primary"
             onClick={() => importRef.current?.click()}
           >
-            {expanded ? "import" : <BsUpload aria-hidden={true} />}
+            {<BsUpload aria-hidden={true} />}
           </Button>
           <Form.Control
             data-testid="import-form-control"

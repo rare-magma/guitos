@@ -29,7 +29,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
   });
 
   return (
-    <Nav className="m-2">
+    <Nav className={expanded ? "p-4" : "m-2"}>
       <OverlayTrigger
         trigger="click"
         key="nav-settings-overlay"
@@ -107,7 +107,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
         }
       >
         <Button
-          className="w-100"
+          className="w-100 h-100"
           aria-label="budget settings"
           variant="outline-info"
           ref={settingsButtonRef}
@@ -117,7 +117,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
             }, 0);
           }}
         >
-          {expanded ? "settings" : <BsGear aria-hidden={true} />}
+          {<BsGear size={expanded ? 50 : 0} aria-hidden={true} />}
         </Button>
       </OverlayTrigger>
     </Nav>

@@ -261,7 +261,7 @@ export function NavBar() {
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end">
             <Nav>
-              <Nav className="m-2">
+              <Nav className={expanded ? "p-2" : "m-2"}>
                 {hasMultipleBudgets && (
                   <AsyncTypeahead
                     id="search-budget-list"
@@ -273,7 +273,11 @@ export function NavBar() {
                     ref={searchRef}
                     style={expanded ? {} : { minWidth: "14ch" }}
                     onChange={(option: Option[]) => handleSelectAction(option)}
-                    className="w-100 budget-search"
+                    className={
+                      expanded
+                        ? "w-100 budget-search p-2"
+                        : "w-100 budget-search"
+                    }
                     options={options}
                     placeholder="Search..."
                     isLoading={false}
@@ -282,48 +286,52 @@ export function NavBar() {
                 )}
               </Nav>
             </Nav>
-            <Nav>
+            <Nav
+              className={
+                expanded
+                  ? "mt-4 flex-wrap flex-row row-cols-2 flex-grow-1 h-75"
+                  : ""
+              }
+            >
               {hasOneOrMoreBudgets && (
                 <>
                   <NavBarItem
                     disabled={!canUndo}
-                    itemClassName={"m-2"}
+                    itemClassName={expanded ? "p-4" : "m-2"}
                     onClick={undo}
                     tooltipID={"tooltip-undo-history"}
                     tooltipText={"undo"}
                     buttonAriaLabel={"undo change"}
-                    buttonClassName="w-100"
+                    buttonClassName={expanded ? "w-100 h-100" : "w-100"}
                     buttonVariant={"outline-info"}
                     buttonIcon={
-                      expanded ? (
-                        "undo"
-                      ) : (
-                        <BsArrowCounterclockwise aria-hidden={true} />
-                      )
+                      <BsArrowCounterclockwise
+                        size={expanded ? 50 : 0}
+                        aria-hidden={true}
+                      />
                     }
                   />
 
                   <NavBarItem
                     disabled={!canRedo}
-                    itemClassName={"m-2"}
+                    itemClassName={expanded ? "p-4" : "m-2"}
                     onClick={redo}
                     tooltipID={"tooltip-redo-history"}
                     tooltipText={"redo"}
                     buttonAriaLabel={"redo change"}
-                    buttonClassName="w-100"
+                    buttonClassName={expanded ? "w-100 h-100" : "w-100"}
                     buttonVariant={"outline-info"}
                     buttonIcon={
-                      expanded ? (
-                        "redo"
-                      ) : (
-                        <BsArrowClockwise aria-hidden={true} />
-                      )
+                      <BsArrowClockwise
+                        size={expanded ? 50 : 0}
+                        aria-hidden={true}
+                      />
                     }
                   />
                 </>
               )}
               <NavBarItem
-                itemClassName={"m-2"}
+                itemClassName={expanded ? "p-4" : "m-2"}
                 onClick={() => {
                   setExpanded(false);
                   createBudget();
@@ -331,14 +339,16 @@ export function NavBar() {
                 tooltipID={"tooltip-new-budget"}
                 tooltipText={"new budget"}
                 buttonAriaLabel={"new budget"}
-                buttonClassName="w-100"
+                buttonClassName={expanded ? "w-100 h-100" : "w-100"}
                 buttonVariant={"outline-success"}
-                buttonIcon={expanded ? "new" : <BsPlusLg aria-hidden={true} />}
+                buttonIcon={
+                  <BsPlusLg size={expanded ? 50 : 0} aria-hidden={true} />
+                }
               />
               {hasOneOrMoreBudgets && (
                 <>
                   <NavBarItem
-                    itemClassName={"m-2"}
+                    itemClassName={expanded ? "p-4" : "m-2"}
                     onClick={() => {
                       setExpanded(false);
                       cloneBudget();
@@ -346,10 +356,10 @@ export function NavBar() {
                     tooltipID={"tooltip-clone-budget"}
                     tooltipText={"clone budget"}
                     buttonAriaLabel={"clone budget"}
-                    buttonClassName="w-100"
+                    buttonClassName={expanded ? "w-100 h-100" : "w-100"}
                     buttonVariant={"outline-success"}
                     buttonIcon={
-                      expanded ? "clone" : <FaRegClone aria-hidden={true} />
+                      <FaRegClone size={expanded ? 50 : 0} aria-hidden={true} />
                     }
                   />
                   <NavBarDelete
@@ -365,22 +375,20 @@ export function NavBar() {
               {hasOneOrMoreBudgets && <NavBarSettings expanded={expanded} />}
 
               <NavBarItem
-                itemClassName={"m-2"}
-                onClick={() => undefined}
+                itemClassName={expanded ? "p-4" : "m-2"}
+                onClick={() =>
+                  window.open(
+                    "https://github.com/rare-magma/guitos#getting-started",
+                  )
+                }
                 tooltipID={"tooltip-guitos-instructions"}
                 tooltipText={"open instructions in new tab"}
                 buttonAriaLabel={"open instructions in new tab"}
-                buttonClassName="w-100"
+                buttonClassName={expanded ? "w-100 h-100" : "w-100"}
                 buttonVariant={"outline-info"}
-                buttonLink="https://github.com/rare-magma/guitos#getting-started"
                 buttonIcon={
-                  expanded ? (
-                    "instructions"
-                  ) : (
-                    <BsQuestionLg aria-hidden={true} />
-                  )
+                  <BsQuestionLg size={expanded ? 50 : 0} aria-hidden={true} />
                 }
-                target="_blank"
               />
             </Nav>
           </Offcanvas.Body>

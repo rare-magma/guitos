@@ -10,9 +10,7 @@ interface NavItemProps {
   buttonAriaLabel: string;
   buttonClassName?: string;
   buttonVariant: string;
-  buttonLink?: string;
   buttonIcon: ReactNode;
-  target?: string;
   disabled?: boolean;
 }
 
@@ -24,9 +22,7 @@ export function NavBarItem({
   buttonAriaLabel,
   buttonClassName,
   buttonVariant,
-  buttonLink,
   buttonIcon,
-  target,
   disabled,
 }: NavItemProps) {
   return (
@@ -44,8 +40,6 @@ export function NavBarItem({
           aria-label={buttonAriaLabel}
           className={buttonClassName}
           variant={buttonVariant}
-          href={buttonLink}
-          target={target}
           disabled={disabled}
         >
           {buttonIcon}
