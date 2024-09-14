@@ -201,7 +201,7 @@ export default function TableCard({ header: label }: TableCardProps) {
               id={`toggle-reorder-${label}`}
               aria-label={`reorder items in ${label}`}
               type="checkbox"
-              variant="outline-info"
+              variant="outline-info toggle"
               value={1}
               size="sm"
               onClick={() => setIsDraggable(!isDraggable)}

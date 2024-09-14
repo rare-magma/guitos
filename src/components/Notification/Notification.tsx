@@ -54,7 +54,7 @@ export function Notification({ notification }: NotificationProps) {
             key={`${notification.id}-undo-button`}
             size="sm"
             aria-label="undo budget deletion"
-            variant="outline-info"
+            variant="outline-info toggle"
             onClick={() => {
               undo();
               handleClose();

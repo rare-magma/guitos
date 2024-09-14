@@ -25,17 +25,23 @@ a:hover {
   color: var(--lightbgcolor);
 }
 
-.btn-close,
-.btn-currency,
+.btn-outline-secondary:disabled,
 .btn-outline-secondary {
+  background-color: var(--bgcolor);
+  border: 1px solid var(--lightbgcolor);
+  border-radius: 0.375rem;
+}
+
+.btn-outline-secondary.toggle:disabled,
+.btn-outline-secondary.toggle {
   background-color: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   border-radius: 0.375rem;
 }
 
 .btn-outline-info {
   background-color: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   border-radius: 0.375rem;
   color: var(--cyan);
 }
@@ -51,7 +57,7 @@ a:hover {
 
 .btn-outline-primary {
   background-color: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   border-radius: 0.375rem;
   color: var(--purple);
 }
@@ -66,7 +72,7 @@ a:hover {
 
 .btn-outline-success {
   background-color: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   border-radius: 0.375rem;
   color: var(--highlight);
 }
@@ -80,17 +86,19 @@ a:hover {
 }
 
 .card {
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   background: var(--lightbgcolor);
   color: var(--textcolor);
 }
 
 .card-header {
-  border-bottom: 1px solid var(--comment);
+  background: var(--lightbgcolor);
+  border-bottom: 1px solid var(--lightbgcolor);
 }
 
 .card-footer {
-  border-top: 1px solid var(--comment);
+  background: var(--lightbgcolor);
+  border-top: 1px solid var(--lightbgcolor);
 }
 
 .fixed-width-font,
@@ -103,21 +111,36 @@ a:hover {
 input .input-group-text,
 input.form-control,
 input.text-end.form-control {
-  background: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  background: var(--bgcolor);
+  border: 1px solid var(--lightbgcolor);
   color: var(--textcolor);
 }
 
-.form-control:focus,
-input.text-end.form-control:focus {
+input.form-control.budget-search,
+.form-control.budget-name {
+  background: var(--lightbgcolor);
+  border: 1px solid var(--lightbgcolor);
+  color: var(--textcolor);
+}
+
+input.form-control.budget-search:focus,
+.form-control.budget-name:focus {
   background: var(--lightbgcolor);
   border: 1px solid var(--pink);
   box-shadow: 0 0 0;
   color: var(--textcolor);
 }
 
+.form-control:focus,
+input.text-end.form-control:focus {
+  background: var(--bgcolor);
+  border: 1px solid var(--pink);
+  box-shadow: 0 0 0;
+  color: var(--textcolor);
+}
+
 .form-control:disabled {
-  background: var(--lightbgcolor);
+  background: var(--bgcolor);
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -137,14 +160,14 @@ input[type="number"] {
 }
 
 .popover {
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   border-radius: 0.375rem;
   width: auto;
 }
 
 .popover,
 .popover-header {
-  background: var(--lightbgcolor);
+  background: var(--comment);
   color: var(--textcolor);
 }
 

@@ -1,5 +1,6 @@
 .btn-expenses-plus-button {
-  border: 1px solid var(--comment);
+  background-color: var(--bgcolor);
+  border: 1px solid var(--lightbgcolor);
   color: var(--purple);
 }
 
@@ -11,7 +12,8 @@
 }
 
 .btn-revenue-plus-button {
-  border: 1px solid var(--comment);
+  background-color: var(--bgcolor);
+  border: 1px solid var(--lightbgcolor);
   color: var(--highlight);
 }
 
@@ -24,7 +26,7 @@
 
 .expenses-card,
 .revenue-card {
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
 }
 
 .expenses-card-header,
@@ -52,4 +54,26 @@
   box-shadow: none !important;
   color: var(--cyan);
   border: 1px solid var(--cyan);
+}
+
+.btn-outline-info.toggle {
+  background-color: var(--bgcolor);
+  border: 1px solid var(--lightbgcolor);
+  border-radius: 0.375rem;
+  color: var(--cyan);
+}
+
+.btn-outline-info.toggle:focus-visible,
+.btn-outline-info.toggle:hover {
+  background-color: var(--cyan);
+  border: 1px solid var(--cyan);
+  border-radius: 0.375rem;
+  color: var(--lightbgcolor);
+}
+
+.btn-outline-info.toggle:disabled {
+  background-color: var(--lightbgcolor);
+  border: 1px solid var(--lightbgcolor);
+  border-radius: 0.375rem;
+  color: var(--comment);
 }

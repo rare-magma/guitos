@@ -4,7 +4,7 @@
 
 .btn-go-button {
   background-color: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   color: var(--purple);
 }
 
@@ -17,13 +17,13 @@
 
 .btn-go-button:disabled {
   background-color: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   color: var(--comment);
 }
 
 .btn-outline-danger {
   background-color: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   border-radius: 0.375rem;
   color: var(--red);
 }
@@ -38,7 +38,7 @@
 
 .btn-outline-info {
   background-color: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   border-radius: 0.375rem;
   color: var(--cyan);
 }
@@ -53,7 +53,7 @@
 
 .btn-outline-info:disabled {
   background-color: var(--lightbgcolor);
-  border: 1px solid var(--comment);
+  border: 1px solid var(--lightbgcolor);
   border-radius: 0.375rem;
   color: var(--comment);
 }
@@ -76,7 +76,8 @@ input[type="text"]::placeholder {
 }
 
 .navbar-toggler {
-  border: 1px solid var(--comment);
+  background-color: var(--lightbgcolor);
+  border: 1px solid var(--lightbgcolor);
   border-radius: 0.375rem;
 }
 
@@ -97,4 +98,8 @@ input[type="text"]::placeholder {
   border: 1px solid var(--pink);
   box-shadow: 0 0 0;
   color: var(--textcolor);
+}
+
+.form-control.rbt-input-main {
+  background: var(--lightbgcolor);
 }

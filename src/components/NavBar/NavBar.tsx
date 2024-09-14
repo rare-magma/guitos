@@ -214,6 +214,7 @@ export function NavBar() {
                     <Form.Control
                       id="budget-name"
                       aria-label={"budget name"}
+                      className="budget-name"
                       key={`budget-name-key-${budget.id}`}
                       defaultValue={budget.name}
                       ref={nameRef}
@@ -252,7 +253,7 @@ export function NavBar() {
             </Offcanvas.Title>
             <Button
               aria-label="close navigation"
-              variant="outline-secondary"
+              variant="outline-secondary toggle"
               onClick={() => setExpanded(false)}
             >
               {<BsXLg aria-hidden={true} />}
@@ -272,7 +273,7 @@ export function NavBar() {
                     ref={searchRef}
                     style={expanded ? {} : { minWidth: "14ch" }}
                     onChange={(option: Option[]) => handleSelectAction(option)}
-                    className="w-100"
+                    className="w-100 budget-search"
                     options={options}
                     placeholder="Search..."
                     isLoading={false}

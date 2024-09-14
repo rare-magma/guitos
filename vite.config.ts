@@ -19,8 +19,8 @@ export default defineConfig((_) => {
       react({ devTarget: "es2022" }),
       VitePWA({
         manifest: {
-          theme_color: "#282a36",
-          background_color: "#282a36",
+          theme_color: "#343746",
+          background_color: "#343746",
           display: "standalone",
           scope: "/",
           start_url: "/",
