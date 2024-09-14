@@ -1,3 +1,39 @@
+## 1.2.10 (2024-09-14)
+
+#### Bug Fixes
+
+* cleaner look due to reduced number of borders (0a90dcc4)
+
+#### Documentation
+
+* update screenshots (e9286ca5)
+
+#### Tests
+
+* split into mothers (9fcdca1d)
+
+#### Styles
+
+* order imports (9991babe)
+
+#### Chores
+
+* **release:** 1.2.9 (e3299471)
+
+#### Build
+
+* fix html meta tags (21a10f8e)
+* **deps-dev:** bump @playwright/test from 1.45.3 to 1.46.1 (#139) (e1e74477)
+* **deps:** bump react-router-dom from 6.26.0 to 6.26.1 (#140) (8cc0c270)
+* **deps-dev:** bump jsdom from 24.1.1 to 25.0.0 (#138) (2c1eecfe)
+* **deps:** bump framer-motion from 11.3.21 to 11.3.31 (#137) (2a24caab)
+* **deps:** bump react-icons from 5.2.1 to 5.3.0 (#141) (f568a4c6)
+
+#### CI
+
+* enable no negation else rule (ad873cb3)
+
+
 ## 1.2.9 (2024-08-31)
 
 #### Bug Fixes
