@@ -35,9 +35,9 @@
 | :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: |
 | <img alt="guitos light theme horizontal layout screenshot" src="docs/images/horizontal-light.png" title="Horizontal light" width="100%"> | <img alt="guitos light theme vertical layout screenshot" src="docs/images/vertical-light.png" title="Vertical light" width="100%"> |
 
-|                                             Tooltip                                              |                                                        Initial state                                                        |
+|                                             History                                              |                                                        Initial state                                                        |
 | :----------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------: |
-| <img alt="guitos tooltip screenshot" src="docs/images/tooltip.png" title="Tooltip" width="100%"> | <img alt="guitos initial state screenshot" src="docs/images/initial-state-vertical.png" title="Initial state" width="100%"> |
+| <img alt="guitos history screenshot" src="docs/images/history.png" title="Tooltip" width="100%"> | <img alt="guitos initial state screenshot" src="docs/images/initial-state-vertical.png" title="Initial state" width="100%"> |
 
 |                                                   Charts                                                    |                                                         Charts light theme                                                         |
 | :---------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: |
