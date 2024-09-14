@@ -1,3 +1,14 @@
+## 1.2.11 (2024-09-14)
+
+#### Bug Fixes
+
+* charts page filter margin (03a7d145)
+
+#### Chores
+
+* **release:** 1.2.10 (f4e52d87)
+
+
 ## 1.2.10 (2024-09-14)
 
 #### Bug Fixes
