@@ -1,7 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import { BudgetMother } from "../../guitos/domain/budget.mother";
 import {
   budgetContextSpy,
@@ -11,6 +11,12 @@ import {
 import { NavBar } from "./NavBar";
 
 describe("NavBar", () => {
+  const windowSpy = vi.spyOn(window, "open");
+
+  beforeEach(() => {
+    windowSpy.mockClear();
+  });
+
   const comp = (
     <BrowserRouter>
       <NavBar />
@@ -138,10 +144,7 @@ describe("NavBar", () => {
       "open instructions in new tab",
     );
     await userEvent.click(instructionsButton);
-    expect(instructionsButton).toHaveAttribute(
-      "href",
-      "https://github.com/rare-magma/guitos#getting-started",
-    );
+    expect(windowSpy).toHaveBeenCalled();
   });
 
   it("opens guitos repo in new tab", async () => {

@@ -29,7 +29,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
   });
 
   return (
-    <Nav className={expanded ? "p-4" : "m-2"}>
+    <Nav className={expanded ? "m-4 flex-grow-1 h-25" : "m-2"}>
       <OverlayTrigger
         trigger="click"
         key="nav-settings-overlay"

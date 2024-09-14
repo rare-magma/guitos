@@ -259,7 +259,7 @@ export function NavBar() {
               {<BsXLg aria-hidden={true} />}
             </Button>
           </Offcanvas.Header>
-          <Offcanvas.Body className="justify-content-end">
+          <Offcanvas.Body className="justify-content-end flex">
             <Nav>
               <Nav className={expanded ? "p-2" : "m-2"}>
                 {hasMultipleBudgets && (
@@ -286,111 +286,145 @@ export function NavBar() {
                 )}
               </Nav>
             </Nav>
-            <Nav
-              className={
+            <div
+              style={
                 expanded
-                  ? "mt-4 flex-wrap flex-row row-cols-2 flex-grow-1 h-75"
-                  : ""
+                  ? {
+                      display: "flex",
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                    }
+                  : {}
               }
             >
-              {hasOneOrMoreBudgets && (
-                <>
-                  <NavBarItem
-                    disabled={!canUndo}
-                    itemClassName={expanded ? "p-4" : "m-2"}
-                    onClick={undo}
-                    tooltipID={"tooltip-undo-history"}
-                    tooltipText={"undo"}
-                    buttonAriaLabel={"undo change"}
-                    buttonClassName={expanded ? "w-100 h-100" : "w-100"}
-                    buttonVariant={"outline-info"}
-                    buttonIcon={
-                      <BsArrowCounterclockwise
-                        size={expanded ? 50 : 0}
-                        aria-hidden={true}
-                      />
-                    }
-                  />
-
-                  <NavBarItem
-                    disabled={!canRedo}
-                    itemClassName={expanded ? "p-4" : "m-2"}
-                    onClick={redo}
-                    tooltipID={"tooltip-redo-history"}
-                    tooltipText={"redo"}
-                    buttonAriaLabel={"redo change"}
-                    buttonClassName={expanded ? "w-100 h-100" : "w-100"}
-                    buttonVariant={"outline-info"}
-                    buttonIcon={
-                      <BsArrowClockwise
-                        size={expanded ? 50 : 0}
-                        aria-hidden={true}
-                      />
-                    }
-                  />
-                </>
-              )}
-              <NavBarItem
-                itemClassName={expanded ? "p-4" : "m-2"}
-                onClick={() => {
-                  setExpanded(false);
-                  createBudget();
-                }}
-                tooltipID={"tooltip-new-budget"}
-                tooltipText={"new budget"}
-                buttonAriaLabel={"new budget"}
-                buttonClassName={expanded ? "w-100 h-100" : "w-100"}
-                buttonVariant={"outline-success"}
-                buttonIcon={
-                  <BsPlusLg size={expanded ? 50 : 0} aria-hidden={true} />
+              <Nav
+                style={
+                  expanded
+                    ? {
+                        marginTop: "4",
+                        flexDirection: "row",
+                        flexWrap: "wrap",
+                      }
+                    : {}
                 }
-              />
-              {hasOneOrMoreBudgets && (
-                <>
-                  <NavBarItem
-                    itemClassName={expanded ? "p-4" : "m-2"}
-                    onClick={() => {
-                      setExpanded(false);
-                      cloneBudget();
-                    }}
-                    tooltipID={"tooltip-clone-budget"}
-                    tooltipText={"clone budget"}
-                    buttonAriaLabel={"clone budget"}
-                    buttonClassName={expanded ? "w-100 h-100" : "w-100"}
-                    buttonVariant={"outline-success"}
-                    buttonIcon={
-                      <FaRegClone size={expanded ? 50 : 0} aria-hidden={true} />
-                    }
-                  />
-                  <NavBarDelete
-                    deleteButtonRef={deleteButtonRef}
-                    handleRemove={() => handleRemoveBudget(budget?.id)}
-                    expanded={expanded}
-                  />
-                </>
-              )}
+              >
+                {hasOneOrMoreBudgets && (
+                  <>
+                    <NavBarItem
+                      disabled={!canUndo}
+                      itemClassName={expanded ? "m-4 flex-grow-1 h-25" : "m-2"}
+                      onClick={undo}
+                      tooltipID={"tooltip-undo-history"}
+                      tooltipText={"undo"}
+                      buttonAriaLabel={"undo change"}
+                      buttonClassName={expanded ? "w-100 h-100" : "w-100"}
+                      buttonVariant={"outline-info"}
+                      buttonIcon={
+                        <BsArrowCounterclockwise
+                          size={expanded ? 50 : 0}
+                          aria-hidden={true}
+                        />
+                      }
+                    />
 
-              <NavBarImpExp expanded={expanded} setExpanded={setExpanded} />
+                    <NavBarItem
+                      disabled={!canRedo}
+                      itemClassName={expanded ? "m-4 flex-grow-1 h-25" : "m-2"}
+                      onClick={redo}
+                      tooltipID={"tooltip-redo-history"}
+                      tooltipText={"redo"}
+                      buttonAriaLabel={"redo change"}
+                      buttonClassName={expanded ? "w-100 h-100" : "w-100"}
+                      buttonVariant={"outline-info"}
+                      buttonIcon={
+                        <BsArrowClockwise
+                          size={expanded ? 50 : 0}
+                          aria-hidden={true}
+                        />
+                      }
+                    />
+                  </>
+                )}
+                <NavBarItem
+                  itemClassName={
+                    expanded
+                      ? hasOneOrMoreBudgets
+                        ? "m-4 flex-grow-1 h-25"
+                        : "m-4 flex-grow-1 h-75"
+                      : "m-2"
+                  }
+                  onClick={() => {
+                    setExpanded(false);
+                    createBudget();
+                  }}
+                  tooltipID={"tooltip-new-budget"}
+                  tooltipText={"new budget"}
+                  buttonAriaLabel={"new budget"}
+                  buttonClassName={expanded ? "w-100 h-100" : "w-100"}
+                  buttonVariant={"outline-success"}
+                  buttonIcon={
+                    <BsPlusLg size={expanded ? 50 : 0} aria-hidden={true} />
+                  }
+                />
+                {hasOneOrMoreBudgets && (
+                  <>
+                    <NavBarItem
+                      itemClassName={expanded ? "m-4 flex-grow-1 h-25" : "m-2"}
+                      onClick={() => {
+                        setExpanded(false);
+                        cloneBudget();
+                      }}
+                      tooltipID={"tooltip-clone-budget"}
+                      tooltipText={"clone budget"}
+                      buttonAriaLabel={"clone budget"}
+                      buttonClassName={expanded ? "w-100 h-100" : "w-100"}
+                      buttonVariant={"outline-success"}
+                      buttonIcon={
+                        <FaRegClone
+                          size={expanded ? 50 : 0}
+                          aria-hidden={true}
+                        />
+                      }
+                    />
+                    <NavBarDelete
+                      deleteButtonRef={deleteButtonRef}
+                      handleRemove={() => handleRemoveBudget(budget?.id)}
+                      expanded={expanded}
+                    />
+                  </>
+                )}
 
-              {hasOneOrMoreBudgets && <NavBarSettings expanded={expanded} />}
+                <NavBarImpExp expanded={expanded} setExpanded={setExpanded} />
 
-              <NavBarItem
-                itemClassName={expanded ? "p-4" : "m-2"}
-                onClick={() =>
-                  window.open(
-                    "https://github.com/rare-magma/guitos#getting-started",
-                  )
-                }
-                tooltipID={"tooltip-guitos-instructions"}
-                tooltipText={"open instructions in new tab"}
-                buttonAriaLabel={"open instructions in new tab"}
-                buttonClassName={expanded ? "w-100 h-100" : "w-100"}
-                buttonVariant={"outline-info"}
-                buttonIcon={
-                  <BsQuestionLg size={expanded ? 50 : 0} aria-hidden={true} />
-                }
-              />
-            </Nav>
+                {hasOneOrMoreBudgets && <NavBarSettings expanded={expanded} />}
+
+                <NavBarItem
+                  itemClassName={
+                    expanded
+                      ? hasOneOrMoreBudgets
+                        ? "m-4 flex-grow-1 h-25"
+                        : "m-4 flex-grow-1 h-75"
+                      : "m-2"
+                  }
+                  onClick={() => {
+                    const newWindow = window.open(
+                      "https://github.com/rare-magma/guitos#getting-started",
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                    if (newWindow) newWindow.opener = null;
+                  }}
+                  tooltipID={"tooltip-guitos-instructions"}
+                  tooltipText={"open instructions in new tab"}
+                  buttonAriaLabel={"open instructions in new tab"}
+                  buttonClassName={expanded ? "w-100 h-100" : "w-100"}
+                  buttonVariant={"outline-info"}
+                  buttonIcon={
+                    <BsQuestionLg size={expanded ? 50 : 0} aria-hidden={true} />
+                  }
+                />
+              </Nav>
+            </div>
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>
