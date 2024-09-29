@@ -1,3 +1,43 @@
+## 1.3.1 (2024-09-29)
+
+#### Bug Fixes
+
+* add missing currency codes (c45af414)
+
+#### Tests
+
+* delete context test (cfe6782a)
+* missing budget methods (057417d3)
+
+#### Code Refactoring
+
+* pass userOptions to avoid mocking context (6ab9dd88)
+* new useroptions domain (5cd178d2)
+* rename options and refactor model (e4473b0f)
+* remove context mocks from tests, model errors domain (d1ba1dea)
+* intlFormat util (7455bf47)
+* move locale funcs to repo (9cebd959)
+* initialize localforage instances in respective repos (36fdb9c6)
+* move folders to guitos (f1abc8a4)
+
+#### Styles
+
+* order imports (9f71e6fa)
+
+#### Chores
+
+* **release:** 1.3.0 (70956840)
+
+#### Build
+
+* bump vite (1383ea1c)
+
+#### CI
+
+* exclude tests from coverage (088bdce7)
+* exclude test mothers from coverage (7af99e2f)
+
+
 ## 1.3.0 (2024-09-14)
 
 #### Feature
