@@ -118,7 +118,7 @@ export default function TableCard({ header: label }: TableCardProps) {
             <Col className="text-end fixed-width-font">
               <div aria-label="total amount">
                 {intlConfig?.currency &&
-                  intlFormat(roundBig(Big(total), 2), intlConfig?.currency)}
+                  intlFormat(roundBig(Big(total), 2), intlConfig)}
               </div>
             </Col>
           </Row>

@@ -36,10 +36,10 @@ export function ChartTooltip({
   const showMultipleLegends = showTooltip && payload.length > 1;
 
   const item1Value =
-    showTooltip && intlFormat(roundBig(Big(payload[0].value), 2), currency);
+    showTooltip && intlFormat(roundBig(Big(payload[0].value), 2), intlConfig);
   const item2Value =
     showMultipleLegends &&
-    intlFormat(roundBig(Big(payload[1].value), 2), currency);
+    intlFormat(roundBig(Big(payload[1].value), 2), intlConfig);
 
   return showTooltip ? (
     <Container className="m-2">

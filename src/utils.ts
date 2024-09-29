@@ -5,6 +5,7 @@ import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "./guitos/sections/NavBar/NavBar";
 import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
+import type { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
 
 export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();
@@ -46,10 +47,10 @@ export function calc(
   return 0;
 }
 
-export function intlFormat(amount: number, currencyCode: string) {
-  return new Intl.NumberFormat(navigator.language, {
+export function intlFormat(amount: number, intlConfig: IntlConfig): string {
+  return new Intl.NumberFormat(intlConfig.locale, {
     style: "currency",
-    currency: currencyCode,
+    currency: intlConfig.currency,
     currencyDisplay: "symbol",
   }).format(amount);
 }

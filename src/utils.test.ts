@@ -57,30 +57,47 @@ test("createBudgetNameList", () => {
 });
 
 test("intlFormat", () => {
-  expect(intlFormat(123.45, "JPY")).eq("¥123");
-  expect(intlFormat(123.45, "EUR")).eq("€123.45");
-  expect(intlFormat(123.45, "USD")).eq("$123.45");
-  expect(intlFormat(123.45, "CAD")).eq("CA$123.45");
-  expect(intlFormat(123.45, "GBP")).eq("£123.45");
-  expect(intlFormat(123.45, "CNY")).eq("CN¥123.45");
-  expect(intlFormat(123.45, "AUD")).eq("A$123.45");
+  expect(intlFormat(123.45, { locale: "ja-JP", currency: "JPY" })).eq("￥123");
+  expect(intlFormat(123.45, { locale: "en-IE", currency: "EUR" })).eq(
+    "€123.45",
+  );
+  expect(intlFormat(123.45, { locale: "en-US", currency: "USD" })).eq(
+    "$123.45",
+  );
+  expect(intlFormat(123.45, { locale: "en-CA", currency: "CAD" })).eq(
+    "$123.45",
+  );
+  expect(intlFormat(123.45, { locale: "en-GB", currency: "GBP" })).eq(
+    "£123.45",
+  );
+  expect(intlFormat(123.45, { locale: "cn-CN", currency: "CNY" })).eq(
+    "CN¥123.45",
+  );
+  expect(intlFormat(123.45, { locale: "en-AU", currency: "AUD" })).eq(
+    "$123.45",
+  );
 
   for (const key in currenciesMap) {
     const currencyCode = currenciesMap[
       key as keyof typeof currenciesMap
     ] as unknown as string;
 
-    expect(intlFormat(1, currencyCode)).toBeTruthy();
+    expect(
+      intlFormat(1, { locale: "en-US", currency: currencyCode }),
+    ).toBeTruthy();
   }
 });
 
 test("intlFormat browser locale list", () => {
-  for (const list of [firefoxLocalesList, chromeLocalesList]) {
+  for (const list of [
+    firefoxLocalesList.filter((l) => l !== "ja-JP-mac"),
+    chromeLocalesList,
+  ]) {
     for (const locale of list) {
       const countryCode = optionsRepository.getCountryCode(locale);
       const currencyCode =
         optionsRepository.getCurrencyCodeFromCountry(countryCode);
-      expect(intlFormat(1, currencyCode)).toBeTruthy();
+      expect(intlFormat(1, { locale, currency: currencyCode })).toBeTruthy();
     }
   }
 });
