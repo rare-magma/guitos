@@ -1,11 +1,19 @@
+import localforage from "localforage";
 import type { CalcHistRepository } from "../domain/calcHistRepository";
 import type { CalculationHistoryItem } from "../domain/calculationHistoryItem";
-import { calcHistDB } from "./localForageDb";
 
 export class localForageCalcHistRepository implements CalcHistRepository {
+  private readonly calcHistDB;
+
+  constructor() {
+    this.calcHistDB = localforage.createInstance({
+      name: "guitos",
+      storeName: "calcHistDB",
+    });
+  }
   async get(id: string): Promise<CalculationHistoryItem[] | null> {
     try {
-      return await calcHistDB.getItem<CalculationHistoryItem[]>(id);
+      return await this.calcHistDB.getItem<CalculationHistoryItem[]>(id);
     } catch {
       return null;
     }
@@ -14,10 +22,10 @@ export class localForageCalcHistRepository implements CalcHistRepository {
   async getAll(): Promise<CalculationHistoryItem[][] | null> {
     try {
       const list: CalculationHistoryItem[][] = [];
-      for (const item of await calcHistDB.keys()) {
+      for (const item of await this.calcHistDB.keys()) {
         if (item) {
           const calcHist =
-            await calcHistDB.getItem<CalculationHistoryItem[]>(item);
+            await this.calcHistDB.getItem<CalculationHistoryItem[]>(item);
           if (calcHist) {
             list.push(calcHist);
           }
@@ -34,7 +42,7 @@ export class localForageCalcHistRepository implements CalcHistRepository {
     newCalcHist: CalculationHistoryItem[],
   ): Promise<boolean> {
     try {
-      await calcHistDB.setItem(
+      await this.calcHistDB.setItem(
         id,
         newCalcHist.map((item) => item),
       );
@@ -46,7 +54,7 @@ export class localForageCalcHistRepository implements CalcHistRepository {
 
   async delete(id: string): Promise<boolean> {
     try {
-      await calcHistDB.removeItem(id);
+      await this.calcHistDB.removeItem(id);
       return true;
     } catch {
       return false;

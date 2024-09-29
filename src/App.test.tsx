@@ -2,9 +2,11 @@ import { act, cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { App } from "./App";
-import { budgetsDB, calcHistDB, optionsDB } from "./db";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 import { budgetContextSpy, testEmptyBudgetContext } from "./setupTests";
+import { localForageBudgetRepository } from "./guitos/infrastructure/localForageBudgetRepository";
+
+const budgetRepository = new localForageBudgetRepository();
 
 describe("App", () => {
   const comp = <App />;
@@ -19,15 +21,9 @@ describe("App", () => {
         "Figure out where your money went, plan ahead of time and analyze past expenditures.",
       ),
     ).toBeInTheDocument();
-    expect(budgetsDB.config("name")).toBe("guitos");
-    expect(budgetsDB.config("storeName")).toBe("budgets");
-    expect(optionsDB.config("name")).toBe("guitos");
-    expect(optionsDB.config("storeName")).toBe("options");
-    expect(calcHistDB.config("name")).toBe("guitos");
-    expect(calcHistDB.config("storeName")).toBe("calcHistDB");
     await expect(
-      budgetsDB.getItem(BudgetMother.testBudget().id.toString()),
-    ).resolves.toBeNull();
+      budgetRepository.get(BudgetMother.testBudget().id),
+    ).rejects.toThrow();
   });
 
   it("shows new budget when clicking new button", async () => {
@@ -42,7 +38,7 @@ describe("App", () => {
     expect(await screen.findByText("Revenue")).toBeInTheDocument();
     expect(await screen.findByText("Expenses")).toBeInTheDocument();
     await expect(
-      budgetsDB.getItem(BudgetMother.testBudget().id.toString()),
+      budgetRepository.get(BudgetMother.testBudget().id),
     ).resolves.toEqual(BudgetMother.testBudget());
   });
 
@@ -50,7 +46,7 @@ describe("App", () => {
     render(comp);
     await act(async () => {
       await expect(
-        budgetsDB.getItem(BudgetMother.testBudget().id.toString()),
+        budgetRepository.get(BudgetMother.testBudget().id),
       ).resolves.toEqual(BudgetMother.testBudget());
     });
 
@@ -70,8 +66,8 @@ describe("App", () => {
 
     await act(async () => {
       await expect(
-        budgetsDB.getItem(BudgetMother.testBudget().id.toString()),
-      ).resolves.toBeNull();
+        budgetRepository.get(BudgetMother.testBudget().id),
+      ).rejects.toThrow();
     });
   });
 });
