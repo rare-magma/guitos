@@ -8,9 +8,9 @@ import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
 import { createElement } from "react";
 import { afterEach, beforeEach, expect, vi } from "vitest";
-import * as AppBudgetContext from "./context/BudgetContext";
-import * as AppConfigContext from "./context/ConfigContext";
-import * as AppGeneralContext from "./context/GeneralContext";
+import * as AppBudgetContext from "./guitos/context/BudgetContext";
+import * as AppConfigContext from "./guitos/context/ConfigContext";
+import * as AppGeneralContext from "./guitos/context/GeneralContext";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 
 window.crypto.randomUUID = randomUUID;

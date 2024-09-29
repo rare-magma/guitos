@@ -1,8 +1,8 @@
 import Big from "big.js";
 import type { MutableRefObject } from "react";
 import type { NavigateFunction } from "react-router-dom";
-import type { FilteredItem } from "./components/ChartsPage/ChartsPage";
-import type { SearchOption } from "./components/NavBar/NavBar";
+import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
+import type { SearchOption } from "./guitos/sections/NavBar/NavBar";
 import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import { currenciesMap } from "./lists/currenciesMap";
