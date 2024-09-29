@@ -1,20 +1,35 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, it } from "vitest";
-import {
-  generalContextSpy,
-  testCsvErrorGeneralContext,
-  testErrorGeneralContext,
-  testJsonErrorGeneralContext,
-} from "../../../setupTests";
+import { describe, expect, it, vi } from "vitest";
 import { ErrorModal } from "./ErrorModal";
+import { CsvErrorMother } from "../../domain/csvError.mother";
+import type { CsvError } from "../../domain/csvError";
+import { JsonErrorMother } from "../../domain/jsonError.mother";
+import type { JsonError } from "../../domain/jsonError";
+
+const error = "Thrown error";
+const jsonErrors: JsonError[] = [JsonErrorMother.error()];
+
+const csvErrors: CsvError[] = [CsvErrorMother.error()];
+
+const setShowError = vi.fn();
+const setShowCsvErrors = vi.fn();
+const setShowJsonErrors = vi.fn();
+const handleDismiss = vi.fn();
 
 describe("ErrorModal", () => {
-  const comp = <ErrorModal />;
-
-  beforeEach(() => {
-    generalContextSpy.mockReturnValue(testJsonErrorGeneralContext);
-  });
+  const comp = (
+    <ErrorModal
+      error={error}
+      setShowError={setShowError}
+      showError={true}
+      jsonErrors={jsonErrors}
+      setJsonErrors={setShowJsonErrors}
+      csvErrors={csvErrors}
+      setCsvErrors={setShowCsvErrors}
+      handleDismiss={handleDismiss}
+    />
+  );
 
   it("matches snapshot", () => {
     render(comp);
@@ -34,8 +49,6 @@ describe("ErrorModal", () => {
   });
 
   it("closes error when clicking the button", async () => {
-    generalContextSpy.mockClear();
-    generalContextSpy.mockReturnValue(testErrorGeneralContext);
     render(comp);
     expect(screen.getByTestId("error-modal")).toBeInTheDocument();
     await userEvent.click(screen.getByTestId("error-modal-dismiss"));
@@ -54,7 +67,6 @@ describe("ErrorModal", () => {
   });
 
   it("closes csv error when clicking the button", async () => {
-    generalContextSpy.mockReturnValue(testCsvErrorGeneralContext);
     render(comp);
 
     expect(screen.getByTestId("csv-error-close")).toBeInTheDocument();
@@ -62,7 +74,6 @@ describe("ErrorModal", () => {
   });
 
   it("closes csv error modal when clicking the button", async () => {
-    generalContextSpy.mockReturnValue(testCsvErrorGeneralContext);
     render(comp);
 
     expect(screen.getByTestId("csv-error-modal")).toBeInTheDocument();

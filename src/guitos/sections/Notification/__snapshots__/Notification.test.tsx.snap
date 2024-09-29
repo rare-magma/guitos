@@ -2,6 +2,7 @@
 
 exports[`Notification > matches snapshot 1`] = `
 <Notification
+  handleClose={[MockFunction spy]}
   notification={
     {
       "body": "notification body",

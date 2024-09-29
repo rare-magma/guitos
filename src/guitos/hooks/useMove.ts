@@ -13,7 +13,7 @@ export function useMove() {
       const filteredList = budgetList.filter(
         (item: Budget) => item.id === selectedBudget[0].id,
       );
-      filteredList && setBudget(filteredList[0], false);
+      filteredList[0] && setBudget(filteredList[0], false);
 
       setTimeout(() => {
         if (selectedBudget[0].item && selectedBudget[0].item.length > 0) {

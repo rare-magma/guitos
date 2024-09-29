@@ -2,6 +2,9 @@
 
 exports[`LandingPage > matches snapshot 1`] = `
 <BrowserRouter>
-  <LandingPage />
+  <LandingPage
+    loadingFromDB={false}
+    showLandingPage={true}
+  />
 </BrowserRouter>
 `;

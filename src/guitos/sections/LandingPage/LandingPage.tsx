@@ -2,23 +2,25 @@ import type React from "react";
 import { useRef } from "react";
 import { Button, Container, Form, Row, Stack } from "react-bootstrap";
 import { useWindowSize } from "usehooks-ts";
-import { useBudget } from "../../context/BudgetContext";
-import { useGeneralContext } from "../../context/GeneralContext";
 import { useDB } from "../../hooks/useDB";
 import { Loading } from "../Loading/Loading";
 import "./LandingPage.css";
 
-export function LandingPage() {
+interface LandingPageProps {
+  loadingFromDB: boolean;
+  showLandingPage: boolean;
+}
+
+export function LandingPage({
+  loadingFromDB,
+  showLandingPage,
+}: LandingPageProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { budget, budgetList } = useBudget();
-  const { loadingFromDB } = useGeneralContext();
   const { createBudget, handleImport } = useDB();
   const size = useWindowSize();
   const verticalScreen = size.width < 1000;
   const buttonWidth = verticalScreen ? "w-50" : "w-25";
   const titleWidth = verticalScreen ? "w-75" : "w-50";
-  const showLandingPage =
-    !loadingFromDB && !budget && budgetList && budgetList.length < 1;
 
   return (
     <>

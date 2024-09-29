@@ -1,4 +1,3 @@
-import type { ParseError } from "papaparse";
 import {
   type PropsWithChildren,
   createContext,
@@ -6,16 +5,8 @@ import {
   useState,
 } from "react";
 import { useImmer } from "use-immer";
-
-export interface CsvError {
-  errors: ParseError[];
-  file: string;
-}
-
-export interface JsonError {
-  errors: string;
-  file: string;
-}
+import type { CsvError } from "../domain/csvError";
+import type { JsonError } from "../domain/jsonError";
 
 export interface BudgetNotification {
   show: boolean;

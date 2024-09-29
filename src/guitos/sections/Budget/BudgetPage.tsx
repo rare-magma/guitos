@@ -1,10 +1,14 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { produce } from "immer";
+import { Suspense, lazy, useCallback, useEffect, useState } from "react";
 import { Col, Container, Row, ToastContainer } from "react-bootstrap";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useParams } from "react-router-dom";
 import { createBudgetNameList } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
-import { useGeneralContext } from "../../context/GeneralContext";
+import {
+  useGeneralContext,
+  type BudgetNotification,
+} from "../../context/GeneralContext";
 import type { Budget } from "../../domain/budget";
 import { useDB } from "../../hooks/useDB";
 import { ErrorModal } from "../ErrorModal/ErrorModal";
@@ -20,7 +24,15 @@ const TableCard = lazy(() => import("../TableCard/TableCard"));
 
 export function BudgetPage() {
   const [showGraphs, setShowGraphs] = useState(false);
+
   const {
+    error,
+    csvErrors,
+    setCsvErrors,
+    jsonErrors,
+    setJsonErrors,
+    showError,
+    setShowError,
     handleError,
     needReload,
     loadingFromDB,
@@ -50,6 +62,27 @@ export function BudgetPage() {
   const params = useParams();
   const name = String(params.name);
   const showCards = !loadingFromDB && !showGraphs && budget?.id;
+  const showLandingPage = Boolean(
+    !loadingFromDB && !budget && budgetList && budgetList.length < 1,
+  );
+
+  const handleDismiss = useCallback(() => {
+    setShowError(false);
+    setCsvErrors([]);
+    setJsonErrors([]);
+  }, [setCsvErrors, setJsonErrors, setShowError]);
+
+  const handleCloseNotification = useCallback(
+    (notification: BudgetNotification) => {
+      setNotifications(
+        produce(notifications, (draft) => {
+          const index = draft.findIndex((n) => n.id === notification.id);
+          if (index !== -1) draft.splice(index, 1);
+        }),
+      );
+    },
+    [notifications, setNotifications],
+  );
 
   useHotkeys("escape", (e) => !e.repeat && setNotifications([]), {
     preventDefault: true,
@@ -116,15 +149,31 @@ export function BudgetPage() {
         {notifications.map((notification) => {
           return (
             notification && (
-              <Notification key={notification.id} notification={notification} />
+              <Notification
+                key={notification.id}
+                notification={notification}
+                handleClose={handleCloseNotification}
+              />
             )
           );
         })}
       </ToastContainer>
 
       {!showGraphs && <NavBar />}
-      <LandingPage />
-      <ErrorModal />
+      <LandingPage
+        loadingFromDB={loadingFromDB}
+        showLandingPage={showLandingPage}
+      />
+      <ErrorModal
+        error={error}
+        showError={showError}
+        setShowError={setShowError}
+        jsonErrors={jsonErrors}
+        setJsonErrors={setJsonErrors}
+        csvErrors={csvErrors}
+        setCsvErrors={setCsvErrors}
+        handleDismiss={handleDismiss}
+      />
 
       {showGraphs && (
         <Suspense fallback={<Loading />}>

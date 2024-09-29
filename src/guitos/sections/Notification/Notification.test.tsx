@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it } from "vitest";
-import type { BudgetNotification } from "../../../context/GeneralContext";
-import { setNotificationsMock, undoMock } from "../../../setupTests";
+import { describe, expect, it, vi } from "vitest";
+import { undoMock } from "../../../setupTests";
 import { Notification } from "./Notification";
+import type { BudgetNotification } from "../../context/GeneralContext";
 
 describe("Notification", () => {
   const notification: BudgetNotification = {
@@ -13,7 +13,10 @@ describe("Notification", () => {
     showUndo: true,
   };
 
-  const comp = <Notification notification={notification} />;
+  const handleClose = vi.fn();
+  const comp = (
+    <Notification notification={notification} handleClose={handleClose} />
+  );
 
   it("matches snapshot", () => {
     render(comp);
@@ -27,13 +30,12 @@ describe("Notification", () => {
 
   it("closes when close button is clicked", async () => {
     render(comp);
-    setNotificationsMock.mockClear();
     await userEvent.click(
       screen.getByRole("button", {
         name: "dismiss notification",
       }),
     );
-    expect(setNotificationsMock).toHaveBeenCalledWith([]);
+    expect(handleClose).toHaveBeenCalled();
   });
 
   it("closes when undo button is clicked", async () => {

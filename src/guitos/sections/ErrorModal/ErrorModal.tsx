@@ -1,23 +1,27 @@
 import { Accordion, Button, Modal } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
-import {
-  type CsvError,
-  type JsonError,
-  useGeneralContext,
-} from "../../context/GeneralContext";
 import "./ErrorModal.css";
+import type { CsvError } from "../../domain/csvError";
+import type { JsonError } from "../../domain/jsonError";
 
-export function ErrorModal() {
-  const {
-    error,
-    csvErrors,
-    setCsvErrors,
-    jsonErrors,
-    setJsonErrors,
-    showError,
-    setShowError,
-  } = useGeneralContext();
-
+interface ErrorModalProps {
+  error: string | null;
+  setShowError: (value: boolean) => void;
+  showError: boolean;
+  jsonErrors: JsonError[];
+  setJsonErrors: (value: JsonError[]) => void;
+  csvErrors: CsvError[];
+  setCsvErrors: (value: CsvError[]) => void;
+  handleDismiss: () => void;
+}
+export function ErrorModal({
+  error,
+  setShowError,
+  showError,
+  jsonErrors,
+  csvErrors,
+  handleDismiss,
+}: ErrorModalProps) {
   const showModal = error && showError;
   const showJsonError = jsonErrors && jsonErrors.length > 0 && showError;
   const showCsvError = csvErrors && csvErrors.length > 0 && showError;
@@ -69,11 +73,7 @@ export function ErrorModal() {
               key={"modal-dismiss-button"}
               variant="delete-modal"
               type="button"
-              onClick={() => {
-                setShowError(false);
-                setCsvErrors([]);
-                setJsonErrors([]);
-              }}
+              onClick={handleDismiss}
             >
               <BsXLg aria-hidden={true} />
             </Button>
@@ -131,11 +131,7 @@ export function ErrorModal() {
               aria-label="close error dialog"
               variant="delete-modal"
               type="button"
-              onClick={() => {
-                setShowError(false);
-                setCsvErrors([]);
-                setJsonErrors([]);
-              }}
+              onClick={handleDismiss}
             >
               <BsXLg aria-hidden={true} />
             </Button>

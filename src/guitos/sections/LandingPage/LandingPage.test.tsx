@@ -1,27 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router-dom";
-import { beforeEach, describe, expect, it } from "vitest";
-import {
-  budgetContextSpy,
-  generalContextSpy,
-  setBudgetMock,
-  testEmptyBudgetContext,
-  testGeneralContext,
-} from "../../../setupTests";
+import { describe, expect, it } from "vitest";
+import { setBudgetMock } from "../../../setupTests";
 import { BudgetMother } from "../../domain/budget.mother";
 import { LandingPage } from "./LandingPage";
 
 describe("LandingPage", () => {
   const comp = (
     <BrowserRouter>
-      <LandingPage />
+      <LandingPage loadingFromDB={false} showLandingPage={true} />
     </BrowserRouter>
   );
-
-  beforeEach(() => {
-    budgetContextSpy.mockReturnValue(testEmptyBudgetContext);
-  });
 
   it("matches snapshot", () => {
     render(comp);
@@ -67,13 +57,9 @@ describe("LandingPage", () => {
   });
 
   it("renders loading spinner", () => {
-    generalContextSpy.mockReturnValue({
-      ...testGeneralContext,
-      loadingFromDB: true,
-    });
     render(
       <BrowserRouter>
-        <LandingPage />
+        <LandingPage loadingFromDB={true} showLandingPage={true} />
       </BrowserRouter>,
     );
     expect(screen.getByRole("status")).toBeInTheDocument();

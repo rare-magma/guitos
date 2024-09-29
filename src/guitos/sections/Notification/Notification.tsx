@@ -1,34 +1,21 @@
-import { produce } from "immer";
 import { Button, Toast } from "react-bootstrap";
 import { BsArrowCounterclockwise, BsX } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
-import {
-  type BudgetNotification,
-  useGeneralContext,
-} from "../../context/GeneralContext";
+import type { BudgetNotification } from "../../context/GeneralContext";
 import "./Notification.css";
 
 interface NotificationProps {
   notification: BudgetNotification;
+  handleClose: (notification: BudgetNotification) => void;
 }
 
-export function Notification({ notification }: NotificationProps) {
+export function Notification({ notification, handleClose }: NotificationProps) {
   const { undo } = useBudget();
-  const { notifications, setNotifications } = useGeneralContext();
-
-  function handleClose() {
-    setNotifications(
-      produce(notifications, (draft) => {
-        const index = draft.findIndex((n) => n.id === notification.id);
-        if (index !== -1) draft.splice(index, 1);
-      }),
-    );
-  }
 
   return (
     <Toast
       key={`${notification.id}-toast`}
-      onClose={handleClose}
+      onClose={() => handleClose(notification)}
       show={notification.show}
       autohide={true}
       delay={notification.showUndo ? 60000 : 3000}
@@ -57,7 +44,7 @@ export function Notification({ notification }: NotificationProps) {
             variant="outline-info toggle"
             onClick={() => {
               undo();
-              handleClose();
+              handleClose(notification);
             }}
           >
             <BsArrowCounterclockwise aria-hidden={true} />
@@ -69,7 +56,7 @@ export function Notification({ notification }: NotificationProps) {
           size="sm"
           aria-label="dismiss notification"
           variant="outline-secondary"
-          onClick={handleClose}
+          onClick={() => handleClose(notification)}
         >
           {<BsX aria-hidden={true} />}
         </Button>

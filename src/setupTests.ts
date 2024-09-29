@@ -10,7 +10,6 @@ import { createElement } from "react";
 import { afterEach, beforeEach, expect, vi } from "vitest";
 import * as AppBudgetContext from "./guitos/context/BudgetContext";
 import * as AppConfigContext from "./guitos/context/ConfigContext";
-import * as AppGeneralContext from "./guitos/context/GeneralContext";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 
 window.crypto.randomUUID = randomUUID;
@@ -35,15 +34,9 @@ expect.extend(matchers);
 
 export const configContextSpy = vi.spyOn(AppConfigContext, "useConfig");
 export const budgetContextSpy = vi.spyOn(AppBudgetContext, "useBudget");
-export const generalContextSpy = vi.spyOn(
-  AppGeneralContext,
-  "useGeneralContext",
-);
-
 beforeEach(() => {
   budgetContextSpy.mockReturnValue(testBudgetContext);
   configContextSpy.mockReturnValue(testConfigContext);
-  generalContextSpy.mockReturnValue(testGeneralContext);
 });
 
 // runs a cleanup after each test case (e.g. clearing jsdom)
@@ -125,72 +118,4 @@ export const testBudgetContext = {
   redo: redoMock,
   canUndo: false,
   canRedo: false,
-};
-
-export const setNeedReloadMock = vi.fn();
-export const setLoadingFromDBMock = vi.fn();
-export const setErrorMock = vi.fn();
-export const setCsvErrorsMock = vi.fn();
-export const setJsonErrorsMock = vi.fn();
-export const setShowErrorMock = vi.fn();
-export const setNotificationsMock = vi.fn();
-export const handleErrorMock = vi.fn();
-export const testGeneralContext = {
-  needReload: false,
-  setNeedReload: setNeedReloadMock,
-  loadingFromDB: false,
-  setLoadingFromDB: setLoadingFromDBMock,
-  error: "",
-  setError: setErrorMock,
-  csvErrors: [],
-  setCsvErrors: setCsvErrorsMock,
-  jsonErrors: [],
-  setJsonErrors: setJsonErrorsMock,
-  showError: false,
-  setShowError: setShowErrorMock,
-  notifications: [],
-  setNotifications: setNotificationsMock,
-  handleError: handleErrorMock,
-};
-
-const jsonErrors: AppGeneralContext.JsonError[] = [
-  {
-    errors:
-      "SyntaxError: Expected ',' or '}' after property value in JSON at position 209",
-    file: "123.json",
-  },
-];
-
-const csvErrors: AppGeneralContext.CsvError[] = [
-  {
-    errors: [
-      {
-        type: "FieldMismatch",
-        code: "TooFewFields",
-        message: "Line 0: Too few fields: expected 3 fields but parsed 2",
-        row: 0,
-      },
-    ],
-    file: "123.csv",
-  },
-];
-
-const error = "Thrown error";
-
-export const testErrorGeneralContext = {
-  ...testGeneralContext,
-  error: error,
-  showError: true,
-};
-
-export const testJsonErrorGeneralContext = {
-  ...testGeneralContext,
-  jsonErrors: jsonErrors,
-  showError: true,
-};
-
-export const testCsvErrorGeneralContext = {
-  ...testGeneralContext,
-  csvErrors: csvErrors,
-  showError: true,
 };
