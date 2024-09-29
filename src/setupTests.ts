@@ -11,6 +11,8 @@ import { afterEach, beforeEach, expect, vi } from "vitest";
 import * as AppBudgetContext from "./guitos/context/BudgetContext";
 import * as AppConfigContext from "./guitos/context/ConfigContext";
 import { BudgetMother } from "./guitos/domain/budget.mother";
+import { UserOptionsMother } from "./guitos/domain/userOptions.mother";
+import { UserOptions } from "./guitos/domain/userOptions";
 
 window.crypto.randomUUID = randomUUID;
 global.URL.createObjectURL = vi.fn();
@@ -57,23 +59,18 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: vi.fn(),
   })),
 });
-export const testIntlConfig = { locale: "en-US", currency: "USD" };
-export const testSpanishIntlConfig = { locale: "es-ES", currency: "EUR" };
 
-export const setIntlConfigMock = vi.fn();
-export const handleCurrencyMock = vi.fn();
+export const setUserOptionsMock = vi.fn();
 export const testConfigContext = {
-  intlConfig: testIntlConfig || undefined,
-  setIntlConfig: setIntlConfigMock,
-  currency: "USD",
-  handleCurrency: handleCurrencyMock,
+  userOptions: UserOptionsMother.default(),
+  setUserOptions: setUserOptionsMock,
+  intlConfig: UserOptions.toIntlConfig(UserOptionsMother.default()),
 };
 
 export const testSpanishConfigContext = {
-  intlConfig: testSpanishIntlConfig,
-  setIntlConfig: setIntlConfigMock,
-  currency: "EUR",
-  handleCurrency: handleCurrencyMock,
+  userOptions: UserOptionsMother.spanish(),
+  setUserOptions: setUserOptionsMock,
+  intlConfig: UserOptions.toIntlConfig(UserOptionsMother.spanish()),
 };
 
 export const setBudgetMock = vi.fn();

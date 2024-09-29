@@ -21,6 +21,7 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
+import { UserOptions } from "./guitos/domain/userOptions";
 
 const optionsRepository = new localForageOptionsRepository();
 
@@ -57,34 +58,20 @@ test("createBudgetNameList", () => {
 });
 
 test("intlFormat", () => {
-  expect(intlFormat(123.45, { locale: "ja-JP", currency: "JPY" })).eq("￥123");
-  expect(intlFormat(123.45, { locale: "en-IE", currency: "EUR" })).eq(
-    "€123.45",
-  );
-  expect(intlFormat(123.45, { locale: "en-US", currency: "USD" })).eq(
-    "$123.45",
-  );
-  expect(intlFormat(123.45, { locale: "en-CA", currency: "CAD" })).eq(
-    "$123.45",
-  );
-  expect(intlFormat(123.45, { locale: "en-GB", currency: "GBP" })).eq(
-    "£123.45",
-  );
-  expect(intlFormat(123.45, { locale: "cn-CN", currency: "CNY" })).eq(
-    "CN¥123.45",
-  );
-  expect(intlFormat(123.45, { locale: "en-AU", currency: "AUD" })).eq(
-    "$123.45",
-  );
+  expect(intlFormat(123.45, new UserOptions("JPY", "ja-JP"))).eq("￥123");
+  expect(intlFormat(123.45, new UserOptions("EUR", "en-IE"))).eq("€123.45");
+  expect(intlFormat(123.45, new UserOptions("USD", "en-US"))).eq("$123.45");
+  expect(intlFormat(123.45, new UserOptions("CAD", "en-CA"))).eq("$123.45");
+  expect(intlFormat(123.45, new UserOptions("GBP", "en-GB"))).eq("£123.45");
+  expect(intlFormat(123.45, new UserOptions("CNY", "cn-CN"))).eq("CN¥123.45");
+  expect(intlFormat(123.45, new UserOptions("AUD", "en-AU"))).eq("$123.45");
 
   for (const key in currenciesMap) {
     const currencyCode = currenciesMap[
       key as keyof typeof currenciesMap
     ] as unknown as string;
 
-    expect(
-      intlFormat(1, { locale: "en-US", currency: currencyCode }),
-    ).toBeTruthy();
+    expect(intlFormat(1, new UserOptions(currencyCode, "en-US"))).toBeTruthy();
   }
 });
 
@@ -97,7 +84,7 @@ test("intlFormat browser locale list", () => {
       const countryCode = optionsRepository.getCountryCode(locale);
       const currencyCode =
         optionsRepository.getCurrencyCodeFromCountry(countryCode);
-      expect(intlFormat(1, { locale, currency: currencyCode })).toBeTruthy();
+      expect(intlFormat(1, new UserOptions(currencyCode, locale))).toBeTruthy();
     }
   }
 });

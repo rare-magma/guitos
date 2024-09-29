@@ -1,9 +1,10 @@
 import localforage from "localforage";
 import { currenciesMap } from "../../lists/currenciesMap";
-import { CURRENCY_CODE, LOCALE } from "../domain/options";
-import type { OptionsRepository } from "../domain/optionsRepository";
+import { CURRENCY_CODE, LOCALE } from "../domain/userOptions";
+import type { UserOptionsRepository } from "../domain/userOptionsRepository";
+import type { UserOptions } from "../domain/userOptions";
 
-export class localForageOptionsRepository implements OptionsRepository {
+export class localForageOptionsRepository implements UserOptionsRepository {
   private readonly optionsDB;
 
   constructor() {
@@ -25,9 +26,9 @@ export class localForageOptionsRepository implements OptionsRepository {
     }
   }
 
-  async saveCurrencyCode(newCode: string): Promise<boolean> {
+  async saveCurrencyCode(options: UserOptions): Promise<boolean> {
     try {
-      await this.optionsDB.setItem<string>(CURRENCY_CODE, newCode);
+      await this.optionsDB.setItem<string>(CURRENCY_CODE, options.currencyCode);
       return true;
     } catch {
       return false;
@@ -44,9 +45,9 @@ export class localForageOptionsRepository implements OptionsRepository {
     }
   }
 
-  async saveLocale(newLocale: string): Promise<boolean> {
+  async saveLocale(options: UserOptions): Promise<boolean> {
     try {
-      await this.optionsDB.setItem<string>(LOCALE, newLocale);
+      await this.optionsDB.setItem<string>(LOCALE, options.locale);
       return true;
     } catch {
       return false;

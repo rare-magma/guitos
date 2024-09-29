@@ -41,7 +41,7 @@ export function ItemFormGroup({
   const valueRef = useRef<HTMLInputElement>(null);
   const { budget, setBudget } = useBudget();
   const { deleteCalcHist, saveCalcHist } = useDB();
-  const { intlConfig } = useConfig();
+  const { userOptions, intlConfig } = useConfig();
   const isExpense = label === "Expenses";
   const table = isExpense ? budget?.expenses : budget?.incomes;
 
@@ -94,7 +94,7 @@ export function ItemFormGroup({
           break;
         case "value":
           if (value) {
-            newItemForm.value = parseLocaleNumber(value, intlConfig?.locale);
+            newItemForm.value = parseLocaleNumber(value, userOptions.locale);
           }
           break;
         default:

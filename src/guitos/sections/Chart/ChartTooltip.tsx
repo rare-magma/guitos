@@ -29,17 +29,16 @@ export function ChartTooltip({
   key1,
   key2,
 }: ChartTooltipProps) {
-  const { intlConfig } = useConfig();
-  const currency = intlConfig?.currency;
-  const showTooltip = active && payload?.length && currency;
+  const { userOptions } = useConfig();
+  const showTooltip = active && payload?.length;
   const filteredItemName = payload?.length && payload[0].payload?.item;
   const showMultipleLegends = showTooltip && payload.length > 1;
 
   const item1Value =
-    showTooltip && intlFormat(roundBig(Big(payload[0].value), 2), intlConfig);
+    showTooltip && intlFormat(roundBig(Big(payload[0].value), 2), userOptions);
   const item2Value =
     showMultipleLegends &&
-    intlFormat(roundBig(Big(payload[1].value), 2), intlConfig);
+    intlFormat(roundBig(Big(payload[1].value), 2), userOptions);
 
   return showTooltip ? (
     <Container className="m-2">

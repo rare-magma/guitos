@@ -29,7 +29,7 @@ interface TableCardProps {
 // biome-ignore lint/style/noDefaultExport: <explanation>
 export default function TableCard({ header: label }: TableCardProps) {
   const { budget, setBudget, revenuePercentage } = useBudget();
-  const { intlConfig } = useConfig();
+  const { userOptions } = useConfig();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDraggable, setIsDraggable] = useState(false);
 
@@ -94,7 +94,7 @@ export default function TableCard({ header: label }: TableCardProps) {
 
   return (
     <Card
-      key={`table-${label}-${intlConfig?.currency}-${table?.items.length}`}
+      key={`table-${label}-${userOptions.currencyCode}-${table?.items.length}`}
       className={`${label}-card`}
     >
       <Card.Header className={`${label}-card-header`}>
@@ -117,8 +117,7 @@ export default function TableCard({ header: label }: TableCardProps) {
             <Col>{label}</Col>
             <Col className="text-end fixed-width-font">
               <div aria-label="total amount">
-                {intlConfig?.currency &&
-                  intlFormat(roundBig(Big(total), 2), intlConfig)}
+                {intlFormat(roundBig(Big(total), 2), userOptions)}
               </div>
             </Col>
           </Row>

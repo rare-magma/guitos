@@ -17,6 +17,7 @@ import { localForageCalcHistRepository } from "../infrastructure/localForageCalc
 import { localForageOptionsRepository } from "../infrastructure/localForageOptionsRepository";
 import type { Filter, FilteredItem } from "../sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "../sections/NavBar/NavBar";
+import { UserOptions } from "../domain/userOptions";
 
 const budgetRepository = new localForageBudgetRepository();
 const optionsRepository = new localForageOptionsRepository();
@@ -24,7 +25,7 @@ const calcHistRepository = new localForageCalcHistRepository();
 
 export function useDB() {
   const [options, setOptions] = useState<Option[]>([]);
-  const { setIntlConfig, handleCurrency } = useConfig();
+  const { setUserOptions } = useConfig();
   const params = useParams();
   const name = String(params.name);
   const navigate = useNavigate();
@@ -258,11 +259,9 @@ export function useDB() {
       .getCurrencyCode()
       .then((c) => {
         if (c) {
-          handleCurrency(c as string);
-          setIntlConfig({
-            locale: optionsRepository.getUserLang(),
-            currency: c as string,
-          });
+          setUserOptions(
+            new UserOptions(c as string, optionsRepository.getUserLang()),
+          );
         }
       })
       .catch((e) => {
@@ -272,9 +271,13 @@ export function useDB() {
 
   const saveCurrencyOption = useCallback(
     (currencyCode: string) => {
-      optionsRepository.saveCurrencyCode(currencyCode).catch((e) => {
-        handleError(e);
-      });
+      optionsRepository
+        .saveCurrencyCode(
+          new UserOptions(currencyCode, optionsRepository.getUserLang()),
+        )
+        .catch((e) => {
+          handleError(e);
+        });
     },
     [handleError],
   );

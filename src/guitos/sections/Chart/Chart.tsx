@@ -56,7 +56,7 @@ export function Chart({
   filteredData,
 }: ChartProps) {
   const { budgetList } = useBudget();
-  const { intlConfig } = useConfig();
+  const { userOptions, intlConfig } = useConfig();
 
   const showSecondArea = areaDataKey2 && areaStroke2 && areaFill2;
   const isGoalChart = tooltipKey1 === "goal";
@@ -84,7 +84,7 @@ export function Chart({
   }
 
   function tickFormatter(value: number) {
-    return (intlConfig?.currency && intlFormat(value, intlConfig)) ?? "";
+    return intlFormat(value, userOptions) ?? "";
   }
 
   return (

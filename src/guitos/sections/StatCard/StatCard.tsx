@@ -32,7 +32,7 @@ interface StatCardProps {
 }
 
 export function StatCard({ onShowGraphs }: StatCardProps) {
-  const { intlConfig } = useConfig();
+  const { userOptions, intlConfig } = useConfig();
   const { revenuePercentage, budget, setBudget } = useBudget();
   const stat = budget?.stats;
   const [autoGoal, setAutoGoal] = useState(false);
@@ -68,7 +68,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
   function handleReserveChange(value: string | undefined): void {
     if (budget && value) {
       const newState = produce((draft) => {
-        draft.stats.reserves = parseLocaleNumber(value, intlConfig?.locale);
+        draft.stats.reserves = parseLocaleNumber(value, userOptions.locale);
       }, budget);
       setBudget(newState(), false);
     }
@@ -90,7 +90,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
   return (
     <Card
       className="stat-card"
-      key={`stat-${intlConfig?.currency}-${budget?.expenses.total} + ${budget?.incomes.total}}`}
+      key={`stat-${userOptions.currencyCode}-${budget?.expenses.total} + ${budget?.incomes.total}}`}
     >
       <Card.Header className="stat-card-header py-0">
         <Row className="mb-1">

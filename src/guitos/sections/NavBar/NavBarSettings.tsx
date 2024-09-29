@@ -15,13 +15,14 @@ import { BsGear } from "react-icons/bs";
 import { currenciesList } from "../../../lists/currenciesList";
 import { useConfig } from "../../context/ConfigContext";
 import { useDB } from "../../hooks/useDB";
+import { UserOptions } from "../../domain/userOptions";
 
 interface NavBarSettingsProps {
   expanded: boolean;
 }
 
 export function NavBarSettings({ expanded }: NavBarSettingsProps) {
-  const { currency, handleCurrency } = useConfig();
+  const { userOptions, setUserOptions } = useConfig();
   const { saveCurrencyOption } = useDB();
   const settingsButtonRef = useRef<HTMLButtonElement>(null);
   const versionRef = useRef<HTMLAnchorElement>(null);
@@ -57,7 +58,9 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                       }}
                       onChange={(c: Option[]) => {
                         if (currenciesList.includes(c[0] as string)) {
-                          handleCurrency(c[0] as string);
+                          setUserOptions(
+                            new UserOptions(c[0] as string, navigator.language),
+                          );
                           saveCurrencyOption(c[0] as string);
                         }
                       }}
@@ -76,7 +79,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                       options={currenciesList.sort((a, b) =>
                         a.localeCompare(b),
                       )}
-                      placeholder={currency}
+                      placeholder={userOptions.currencyCode}
                     />
                   </InputGroup>
                 </Stack>
