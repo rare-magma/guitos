@@ -17,13 +17,13 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsArrowLeft } from "react-icons/bs";
-import { useBudget } from "../../context/BudgetContext";
-import { useDB } from "../../hooks/useDB";
 import {
   focusRef,
   getLabelKeyFilteredItem,
   getNestedValues,
 } from "../../../utils";
+import { useBudget } from "../../context/BudgetContext";
+import { useDB } from "../../hooks/useDB";
 import { Chart } from "../Chart/Chart";
 import "./ChartsPage.css";
 import type { Uuid } from "../../domain/uuid";

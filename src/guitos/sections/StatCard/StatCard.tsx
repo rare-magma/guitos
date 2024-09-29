@@ -21,9 +21,9 @@ import {
   BsGraphUp,
   BsPercent,
 } from "react-icons/bs";
+import { focusRef, parseLocaleNumber, roundBig } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
-import { focusRef, parseLocaleNumber, roundBig } from "../../../utils";
 import "./StatCard.css";
 import { Budget } from "../../domain/budget";
 

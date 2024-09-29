@@ -9,9 +9,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { intlFormat, median } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
-import { intlFormat, median } from "../../../utils";
 import type { FilteredItem } from "../ChartsPage/ChartsPage";
 import "./Chart.css";
 import { ChartTooltip } from "./ChartTooltip";

@@ -12,8 +12,8 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsGear } from "react-icons/bs";
-import { useConfig } from "../../context/ConfigContext";
 import { currenciesList } from "../../../lists/currenciesList";
+import { useConfig } from "../../context/ConfigContext";
 import { useDB } from "../../hooks/useDB";
 
 interface NavBarSettingsProps {

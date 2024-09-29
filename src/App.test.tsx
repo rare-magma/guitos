@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { App } from "./App";
 import { BudgetMother } from "./guitos/domain/budget.mother";
-import { budgetContextSpy, testEmptyBudgetContext } from "./setupTests";
 import { localForageBudgetRepository } from "./guitos/infrastructure/localForageBudgetRepository";
+import { budgetContextSpy, testEmptyBudgetContext } from "./setupTests";
 
 const budgetRepository = new localForageBudgetRepository();
 

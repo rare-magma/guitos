@@ -1,10 +1,11 @@
 import Big from "big.js";
 import { expect, test } from "vitest";
-import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
 import type { Budget } from "./guitos/domain/budget";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import { Uuid } from "./guitos/domain/uuid";
+import { localForageOptionsRepository } from "./guitos/infrastructure/localForageOptionsRepository";
+import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
 import { currenciesMap } from "./lists/currenciesMap";
 import { firefoxLocalesList } from "./lists/firefoxLocalesList";
@@ -20,7 +21,6 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
-import { localForageOptionsRepository } from "./guitos/infrastructure/localForageOptionsRepository";
 
 const optionsRepository = new localForageOptionsRepository();
 

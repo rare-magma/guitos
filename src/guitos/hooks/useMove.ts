@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import type { SearchOption } from "../sections/NavBar/NavBar";
+import { saveLastOpenedBudget } from "../../utils";
 import { useBudget } from "../context/BudgetContext";
 import type { Budget } from "../domain/budget";
-import { saveLastOpenedBudget } from "../../utils";
+import type { SearchOption } from "../sections/NavBar/NavBar";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();

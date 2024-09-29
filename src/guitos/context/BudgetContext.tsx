@@ -5,8 +5,8 @@ import {
   useState,
 } from "react";
 import useUndo from "use-undo";
-import type { SearchOption } from "../sections/NavBar/NavBar";
 import { Budget } from "../domain/budget";
+import type { SearchOption } from "../sections/NavBar/NavBar";
 import { useGeneralContext } from "./GeneralContext";
 
 interface BudgetContextInterface {

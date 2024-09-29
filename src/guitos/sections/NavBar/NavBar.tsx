@@ -22,10 +22,10 @@ import {
   BsXLg,
 } from "react-icons/bs";
 import { FaRegClone } from "react-icons/fa";
+import { focusRef, getLabelKey } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
 import { useDB } from "../../hooks/useDB";
 import { useMove } from "../../hooks/useMove";
-import { focusRef, getLabelKey } from "../../../utils";
 import "./NavBar.css";
 import type { Uuid } from "../../domain/uuid";
 import { NavBarDelete } from "./NavBarDelete";

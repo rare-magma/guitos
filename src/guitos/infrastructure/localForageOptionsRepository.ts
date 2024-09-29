@@ -1,7 +1,7 @@
 import localforage from "localforage";
+import { currenciesMap } from "../../lists/currenciesMap";
 import { CURRENCY_CODE, LOCALE } from "../domain/options";
 import type { OptionsRepository } from "../domain/optionsRepository";
-import { currenciesMap } from "../../lists/currenciesMap";
 
 export class localForageOptionsRepository implements OptionsRepository {
   private readonly optionsDB;

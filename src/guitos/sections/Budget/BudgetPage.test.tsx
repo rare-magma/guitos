@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { act } from "react-dom/test-utils";
 import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import { BudgetMother } from "../../domain/budget.mother";
 import {
   budgetContextSpy,
   redoMock,
@@ -12,8 +11,9 @@ import {
   testBudgetContext,
   undoMock,
 } from "../../../setupTests";
-import { BudgetPage } from "./BudgetPage";
+import { BudgetMother } from "../../domain/budget.mother";
 import { localForageBudgetRepository } from "../../infrastructure/localForageBudgetRepository";
+import { BudgetPage } from "./BudgetPage";
 
 const budgetRepository = new localForageBudgetRepository();
 

@@ -1,11 +1,11 @@
 import Big from "big.js";
 import type { MutableRefObject } from "react";
+import type { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
 import type { NavigateFunction } from "react-router-dom";
-import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
-import type { SearchOption } from "./guitos/sections/NavBar/NavBar";
 import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
-import type { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
+import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
+import type { SearchOption } from "./guitos/sections/NavBar/NavBar";
 
 export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();

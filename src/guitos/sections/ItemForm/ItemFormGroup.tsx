@@ -11,12 +11,12 @@ import {
 } from "react-bootstrap";
 import CurrencyInput from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
+import { calc, parseLocaleNumber, roundBig } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import type { Expenses } from "../../domain/expenses";
 import type { Incomes } from "../../domain/incomes";
 import { useDB } from "../../hooks/useDB";
-import { calc, parseLocaleNumber, roundBig } from "../../../utils";
 import { CalculateButton } from "../CalculateButton/CalculateButton";
 import "./ItemFormGroup.css";
 import { Budget } from "../../domain/budget";
