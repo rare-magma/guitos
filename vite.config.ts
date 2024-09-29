@@ -42,6 +42,7 @@ export default defineConfig((_) => {
       coverage: {
         provider: "v8",
         include: ["src/**"],
+        exclude: ["**/*.mother.ts"],
       },
       pool: "vmThreads",
       globals: true,
