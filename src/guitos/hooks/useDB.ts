@@ -259,12 +259,25 @@ export function useDB() {
       .then((c) => {
         if (c) {
           handleCurrency(c as string);
+          setIntlConfig({
+            locale: optionsRepository.getUserLang(),
+            currency: c as string,
+          });
         }
       })
       .catch((e) => {
         handleError(e);
       });
   }
+
+  const saveCurrencyOption = useCallback(
+    (currencyCode: string) => {
+      optionsRepository.saveCurrencyCode(currencyCode).catch((e) => {
+        handleError(e);
+      });
+    },
+    [handleError],
+  );
 
   function searchBudgets() {
     let options: SearchOption[] = [];
@@ -457,6 +470,7 @@ export function useDB() {
     selectBudgetsWithFilter,
     saveBudget,
     loadCurrencyOption,
+    saveCurrencyOption,
     loadBudget,
     loadFromDb,
     options,

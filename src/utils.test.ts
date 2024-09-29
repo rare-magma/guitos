@@ -1,6 +1,6 @@
 import Big from "big.js";
 import { expect, test } from "vitest";
-import type { FilteredItem } from "./components/ChartsPage/ChartsPage";
+import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
 import type { Budget } from "./guitos/domain/budget";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
@@ -11,8 +11,6 @@ import { firefoxLocalesList } from "./lists/firefoxLocalesList";
 import {
   calc,
   createBudgetNameList,
-  getCountryCode,
-  getCurrencyCode,
   getLabelKey,
   getLabelKeyFilteredItem,
   getNestedProperty,
@@ -22,6 +20,9 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
+import { localForageOptionsRepository } from "./guitos/infrastructure/localForageOptionsRepository";
+
+const optionsRepository = new localForageOptionsRepository();
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
@@ -76,8 +77,9 @@ test("intlFormat", () => {
 test("intlFormat browser locale list", () => {
   for (const list of [firefoxLocalesList, chromeLocalesList]) {
     for (const locale of list) {
-      const countryCode = getCountryCode(locale);
-      const currencyCode = getCurrencyCode(countryCode);
+      const countryCode = optionsRepository.getCountryCode(locale);
+      const currencyCode =
+        optionsRepository.getCurrencyCodeFromCountry(countryCode);
       expect(intlFormat(1, currencyCode)).toBeTruthy();
     }
   }

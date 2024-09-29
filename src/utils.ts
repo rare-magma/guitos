@@ -5,30 +5,6 @@ import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "./guitos/sections/NavBar/NavBar";
 import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
-import { currenciesMap } from "./lists/currenciesMap";
-
-export const userLang = navigator.language;
-
-export function getCountryCode(locale: string): string {
-  return locale.split("-").length >= 2
-    ? locale.split("-")[1].toUpperCase()
-    : locale.toUpperCase();
-}
-
-export function getCurrencyCode(country: string): string {
-  const countryIsInMap =
-    currenciesMap[country as keyof typeof currenciesMap] !== undefined;
-
-  if (countryIsInMap) {
-    return currenciesMap[
-      country as keyof typeof currenciesMap
-    ] as unknown as string;
-  }
-  return "USD";
-}
-
-export const countryCode = getCountryCode(userLang);
-export const initialCurrencyCode = getCurrencyCode(countryCode);
 
 export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();
@@ -71,7 +47,7 @@ export function calc(
 }
 
 export function intlFormat(amount: number, currencyCode: string) {
-  return new Intl.NumberFormat(userLang, {
+  return new Intl.NumberFormat(navigator.language, {
     style: "currency",
     currency: currencyCode,
     currencyDisplay: "symbol",
