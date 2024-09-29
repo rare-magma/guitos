@@ -7,6 +7,13 @@ import { BudgetItem } from "./budgetItem";
 import { BudgetItemsMother } from "./budgetItem.mother";
 
 describe("Budget", () => {
+  test("clone", () => {
+    const budget = BudgetMother.testBudget();
+    const clonedBudget = BudgetMother.testBudgetClone();
+    expect(clonedBudget).not.toBe(budget);
+    expect(clonedBudget.name).toBe(`${budget.name}-clone`);
+  });
+
   test("itemsTotal", () => {
     expect(
       Budget.itemsTotal([
@@ -90,5 +97,11 @@ income,name,100.03
 income,name2,342783.83
 goal,goal,50
 reserves,reserves,200`);
+  });
+
+  test("revenuePercentage", () => {
+    expect(Budget.revenuePercentage(BudgetMother.testBudget() as Budget)).eq(
+      10,
+    );
   });
 });

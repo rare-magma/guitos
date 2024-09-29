@@ -27,10 +27,7 @@ export class BudgetMother {
   }
 
   static testBudgetClone() {
-    return {
-      ...BudgetMother.testBudget(),
-      name: "2023-03-clone",
-    };
+    return Budget.clone(BudgetMother.testBudget() as Budget);
   }
 
   static testBudget2() {
