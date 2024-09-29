@@ -1,16 +1,13 @@
-import { cleanup, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import {
-  configContextSpy,
-  setBudgetMock,
-  testSpanishConfigContext,
-} from "../../../setupTests";
+import { setBudgetMock } from "../../../setupTests";
 import { BudgetMother } from "../../domain/budget.mother";
 import { BudgetItemsMother } from "../../domain/budgetItem.mother";
 import { ItemFormGroup } from "./ItemFormGroup";
+import { UserOptionsMother } from "../../domain/userOptions.mother";
 
 describe("ItemFormGroup", () => {
   const ref = createRef<HTMLInputElement>();
@@ -21,6 +18,7 @@ describe("ItemFormGroup", () => {
         label="Expenses"
         inputRef={ref}
         costPercentage={1}
+        userOptions={UserOptionsMother.default()}
       />
     </BrowserRouter>
   );
@@ -119,10 +117,6 @@ describe("ItemFormGroup", () => {
   });
 
   it("transforms decimal separator based on locale", async () => {
-    cleanup();
-
-    configContextSpy.mockReturnValue(testSpanishConfigContext);
-
     render(
       <BrowserRouter>
         <ItemFormGroup
@@ -130,6 +124,7 @@ describe("ItemFormGroup", () => {
           label="Expenses"
           inputRef={ref}
           costPercentage={1}
+          userOptions={UserOptionsMother.spanish()}
         />
         ,
       </BrowserRouter>,

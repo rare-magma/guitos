@@ -13,7 +13,6 @@ import CurrencyInput from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
 import { calc, parseLocaleNumber, roundBig } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
-import { useConfig } from "../../context/ConfigContext";
 import type { Expenses } from "../../domain/expenses";
 import type { Incomes } from "../../domain/incomes";
 import { useDB } from "../../hooks/useDB";
@@ -22,12 +21,14 @@ import "./ItemFormGroup.css";
 import { Budget } from "../../domain/budget";
 import type { BudgetItem } from "../../domain/budgetItem";
 import type { ItemOperation } from "../../domain/calculationHistoryItem";
+import { UserOptions } from "../../domain/userOptions";
 
 interface ItemFormProps {
   itemForm: BudgetItem;
   costPercentage: number;
   label: string;
   inputRef: RefObject<HTMLInputElement>;
+  userOptions: UserOptions;
 }
 
 export function ItemFormGroup({
@@ -35,13 +36,13 @@ export function ItemFormGroup({
   costPercentage,
   inputRef,
   label,
+  userOptions,
 }: ItemFormProps) {
   const [needsRerender, setNeedsRerender] = useState(false);
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
   const valueRef = useRef<HTMLInputElement>(null);
   const { budget, setBudget } = useBudget();
   const { deleteCalcHist, saveCalcHist } = useDB();
-  const { userOptions, intlConfig } = useConfig();
   const isExpense = label === "Expenses";
   const table = isExpense ? budget?.expenses : budget?.incomes;
 
@@ -211,7 +212,7 @@ export function ItemFormGroup({
           className="text-end form-control straight-corners fixed-width-font"
           aria-label={`item ${itemForm.id} value`}
           name="item-value"
-          intlConfig={intlConfig}
+          intlConfig={UserOptions.toIntlConfig(userOptions)}
           defaultValue={itemForm.value}
           allowNegativeValue={false}
           maxLength={14}

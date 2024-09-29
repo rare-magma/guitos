@@ -24,6 +24,12 @@ exports[`ItemFormGroup > matches snapshot 1`] = `
       }
     }
     label="Expenses"
+    userOptions={
+      UserOptions {
+        "currencyCode": "USD",
+        "locale": "en-US",
+      }
+    }
   />
 </BrowserRouter>
 `;

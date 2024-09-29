@@ -148,6 +148,7 @@ export default function TableCard({ header: label }: TableCardProps) {
                       : 0
                   }
                   inputRef={inputRef}
+                  userOptions={userOptions}
                 />
               </Reorder.Item>
             ))}

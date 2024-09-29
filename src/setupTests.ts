@@ -9,10 +9,7 @@ import { cleanup } from "@testing-library/react";
 import { createElement } from "react";
 import { afterEach, beforeEach, expect, vi } from "vitest";
 import * as AppBudgetContext from "./guitos/context/BudgetContext";
-import * as AppConfigContext from "./guitos/context/ConfigContext";
 import { BudgetMother } from "./guitos/domain/budget.mother";
-import { UserOptionsMother } from "./guitos/domain/userOptions.mother";
-import { UserOptions } from "./guitos/domain/userOptions";
 
 window.crypto.randomUUID = randomUUID;
 global.URL.createObjectURL = vi.fn();
@@ -34,11 +31,9 @@ vi.mock("recharts", async (importOriginal) => {
 // extends Vitest's expect method with methods from react-testing-library
 expect.extend(matchers);
 
-export const configContextSpy = vi.spyOn(AppConfigContext, "useConfig");
 export const budgetContextSpy = vi.spyOn(AppBudgetContext, "useBudget");
 beforeEach(() => {
   budgetContextSpy.mockReturnValue(testBudgetContext);
-  configContextSpy.mockReturnValue(testConfigContext);
 });
 
 // runs a cleanup after each test case (e.g. clearing jsdom)
@@ -59,19 +54,6 @@ Object.defineProperty(window, "matchMedia", {
     dispatchEvent: vi.fn(),
   })),
 });
-
-export const setUserOptionsMock = vi.fn();
-export const testConfigContext = {
-  userOptions: UserOptionsMother.default(),
-  setUserOptions: setUserOptionsMock,
-  intlConfig: UserOptions.toIntlConfig(UserOptionsMother.default()),
-};
-
-export const testSpanishConfigContext = {
-  userOptions: UserOptionsMother.spanish(),
-  setUserOptions: setUserOptionsMock,
-  intlConfig: UserOptions.toIntlConfig(UserOptionsMother.spanish()),
-};
 
 export const setBudgetMock = vi.fn();
 export const setBudgetListMock = vi.fn();
