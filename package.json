@@ -44,7 +44,7 @@
     "@types/react": "18.2.79",
     "@types/react-dom": "18.2.25",
     "@types/react-table": "7.7.20",
-    "@vitejs/plugin-react-swc": "3.7.0",
+    "@vitejs/plugin-react-swc": "3.7.1",
     "@vitest/coverage-v8": "2.0.5",
     "@vitest/ui": "2.0.5",
     "autoprefixer": "10.4.20",
