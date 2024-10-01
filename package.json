@@ -8,7 +8,7 @@
     ]
   },
   "dependencies": {
-    "big.js": "6.2.1",
+    "big.js": "6.2.2",
     "bootstrap": "5.3.3",
     "framer-motion": "11.3.31",
     "immer": "10.1.1",
