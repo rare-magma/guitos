@@ -3,9 +3,9 @@ import type { MutableRefObject } from "react";
 import type { NavigateFunction } from "react-router-dom";
 import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
+import type { UserOptions } from "./guitos/domain/userOptions";
 import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "./guitos/sections/NavBar/NavBar";
-import type { UserOptions } from "./guitos/domain/userOptions";
 
 export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();

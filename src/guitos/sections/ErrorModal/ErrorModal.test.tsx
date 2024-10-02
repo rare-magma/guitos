@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { ErrorModal } from "./ErrorModal";
-import { CsvErrorMother } from "../../domain/csvError.mother";
 import type { CsvError } from "../../domain/csvError";
-import { JsonErrorMother } from "../../domain/jsonError.mother";
+import { CsvErrorMother } from "../../domain/csvError.mother";
 import type { JsonError } from "../../domain/jsonError";
+import { JsonErrorMother } from "../../domain/jsonError.mother";
+import { ErrorModal } from "./ErrorModal";
 
 const error = "Thrown error";
 const jsonErrors: JsonError[] = [JsonErrorMother.error()];

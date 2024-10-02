@@ -6,8 +6,8 @@ import { useParams } from "react-router-dom";
 import { createBudgetNameList } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
 import {
-  useGeneralContext,
   type BudgetNotification,
+  useGeneralContext,
 } from "../../context/GeneralContext";
 import type { Budget } from "../../domain/budget";
 import { useDB } from "../../hooks/useDB";
