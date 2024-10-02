@@ -49,7 +49,7 @@
     "@vitest/ui": "2.0.5",
     "autoprefixer": "10.4.20",
     "console-fail-test": "0.4.4",
-    "jsdom": "25.0.0",
+    "jsdom": "25.0.1",
     "typescript": "5.5.4",
     "vite": "5.4.7",
     "vite-plugin-pwa": "0.20.1",
