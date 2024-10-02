@@ -143,6 +143,7 @@ export function NavBar() {
       <Container
         fluid={true}
         className="flex-row"
+        // biome-ignore lint/a11y/useSemanticElements: bootstrap classes
         role="heading"
         aria-level={1}
       >
