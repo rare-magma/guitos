@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { undoMock } from "../../../setupTests";
-import { Notification } from "./Notification";
 import type { BudgetNotification } from "../../context/GeneralContext";
+import { Notification } from "./Notification";
 
 describe("Notification", () => {
   const notification: BudgetNotification = {

@@ -6,8 +6,8 @@ import { describe, expect, it } from "vitest";
 import { setBudgetMock } from "../../../setupTests";
 import { BudgetMother } from "../../domain/budget.mother";
 import { BudgetItemsMother } from "../../domain/budgetItem.mother";
-import { ItemFormGroup } from "./ItemFormGroup";
 import { UserOptionsMother } from "../../domain/userOptions.mother";
+import { ItemFormGroup } from "./ItemFormGroup";
 
 describe("ItemFormGroup", () => {
   const ref = createRef<HTMLInputElement>();

@@ -4,9 +4,9 @@ import {
   useContext,
   useState,
 } from "react";
-import { localForageOptionsRepository } from "../infrastructure/localForageOptionsRepository";
-import { UserOptions } from "../domain/userOptions";
 import type { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
+import { UserOptions } from "../domain/userOptions";
+import { localForageOptionsRepository } from "../infrastructure/localForageOptionsRepository";
 
 interface ConfigContextInterface {
   userOptions: UserOptions;

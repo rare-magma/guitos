@@ -3,6 +3,7 @@ import { expect, test } from "vitest";
 import type { Budget } from "./guitos/domain/budget";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
+import { UserOptions } from "./guitos/domain/userOptions";
 import { Uuid } from "./guitos/domain/uuid";
 import { localForageOptionsRepository } from "./guitos/infrastructure/localForageOptionsRepository";
 import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
@@ -21,7 +22,6 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
-import { UserOptions } from "./guitos/domain/userOptions";
 
 const optionsRepository = new localForageOptionsRepository();
 

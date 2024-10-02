@@ -11,13 +11,13 @@ import { useGeneralContext } from "../context/GeneralContext";
 import { Budget } from "../domain/budget";
 import type { BudgetItem } from "../domain/budgetItem";
 import type { CalculationHistoryItem } from "../domain/calculationHistoryItem";
+import { UserOptions } from "../domain/userOptions";
 import { Uuid } from "../domain/uuid";
 import { localForageBudgetRepository } from "../infrastructure/localForageBudgetRepository";
 import { localForageCalcHistRepository } from "../infrastructure/localForageCalcHistRepository";
 import { localForageOptionsRepository } from "../infrastructure/localForageOptionsRepository";
 import type { Filter, FilteredItem } from "../sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "../sections/NavBar/NavBar";
-import { UserOptions } from "../domain/userOptions";
 
 const budgetRepository = new localForageBudgetRepository();
 const optionsRepository = new localForageOptionsRepository();

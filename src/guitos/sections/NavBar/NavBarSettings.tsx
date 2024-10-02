@@ -14,8 +14,8 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { BsGear } from "react-icons/bs";
 import { currenciesList } from "../../../lists/currenciesList";
 import { useConfig } from "../../context/ConfigContext";
-import { useDB } from "../../hooks/useDB";
 import { UserOptions } from "../../domain/userOptions";
+import { useDB } from "../../hooks/useDB";
 
 interface NavBarSettingsProps {
   expanded: boolean;
