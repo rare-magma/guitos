@@ -139,6 +139,7 @@ export function BudgetPage() {
       fluid={true}
       style={{ zIndex: 1 }}
       key={`${budget?.id}-${needReload}`}
+      // biome-ignore lint/a11y/useSemanticElements: bootstrap is not semantic
       role="main"
     >
       <ToastContainer

@@ -1,6 +1,10 @@
 import fs from "node:fs";
 import { expect, test } from "@playwright/test";
 
+const rentRegex = /rent/;
+const csvRegex = /.csv/;
+const jsonRegex = /.json/;
+
 test("should complete the settings happy path", async ({ page, isMobile }) => {
   await page.goto("/");
 
@@ -24,7 +28,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
 
   await page.getByPlaceholder("Filter...").click();
   await page.getByPlaceholder("Filter...").fill("rent");
-  await page.getByLabel(/rent/).click();
+  await page.getByLabel(rentRegex).click();
 
   await page.getByText("strict match").click();
   await expect(page.getByText("Expenses filtered by: rent")).toBeVisible();
@@ -51,7 +55,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   const csvDownloadPromise = page.waitForEvent("download");
   await page.getByLabel("export budget as csv").click();
   const csvDownload = await csvDownloadPromise;
-  expect(csvDownload.suggestedFilename()).toMatch(/.csv/);
+  expect(csvDownload.suggestedFilename()).toMatch(csvRegex);
   expect(
     (await fs.promises.stat(await csvDownload.path())).size,
   ).toBeGreaterThan(0);
@@ -70,7 +74,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     throw new Error(downloadError);
   }
 
-  expect(jsonDownload.suggestedFilename()).toMatch(/.json/);
+  expect(jsonDownload.suggestedFilename()).toMatch(jsonRegex);
   expect(
     (await fs.promises.stat(await jsonDownload.path())).size,
   ).toBeGreaterThan(0);

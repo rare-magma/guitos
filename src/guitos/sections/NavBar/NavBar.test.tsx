@@ -10,6 +10,11 @@ import {
 import { BudgetMother } from "../../domain/budget.mother";
 import { NavBar } from "./NavBar";
 
+const changelogRegex = /open guitos changelog/i;
+const importRegex = /import budget/i;
+const exportCsvRegex = /export budget as csv/i;
+const exportJsonRegex = /export budget as json/i;
+
 describe("NavBar", () => {
   const windowSpy = vi.spyOn(window, "open");
 
@@ -86,17 +91,17 @@ describe("NavBar", () => {
     await userEvent.type(screen.getByTestId("header"), "o");
     expect(
       screen.getByRole("button", {
-        name: /import budget/i,
+        name: importRegex,
       }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("button", {
-        name: /export budget as csv/i,
+        name: exportCsvRegex,
       }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("button", {
-        name: /export budget as json/i,
+        name: exportJsonRegex,
       }),
     ).toBeInTheDocument();
 
@@ -110,7 +115,7 @@ describe("NavBar", () => {
     await userEvent.type(screen.getByTestId("header"), "t");
     expect(
       screen.getByRole("link", {
-        name: /open guitos changelog/i,
+        name: changelogRegex,
       }),
     ).toBeInTheDocument();
   });
