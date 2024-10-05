@@ -1,12 +1,11 @@
 import type { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
 import { currenciesList } from "../../lists/currenciesList";
 
-export const CURRENCY_CODE = "currencyCode";
-export const LOCALE = "locale";
-
 export class UserOptions {
   currencyCode: string;
   locale: string;
+  static CURRENCY_CODE = "currencyCode";
+  static LOCALE = "locale";
 
   constructor(currencyCode: string, locale: string) {
     this.currencyCode = currencyCode;

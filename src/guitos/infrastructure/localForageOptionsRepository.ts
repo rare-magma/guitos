@@ -1,7 +1,6 @@
 import localforage from "localforage";
 import { currenciesMap } from "../../lists/currenciesMap";
-import { CURRENCY_CODE, LOCALE } from "../domain/userOptions";
-import type { UserOptions } from "../domain/userOptions";
+import { UserOptions } from "../domain/userOptions";
 import type { UserOptionsRepository } from "../domain/userOptionsRepository";
 
 export class localForageOptionsRepository implements UserOptionsRepository {
@@ -16,7 +15,9 @@ export class localForageOptionsRepository implements UserOptionsRepository {
 
   async getCurrencyCode(): Promise<string> {
     try {
-      const code = await this.optionsDB.getItem<string>(CURRENCY_CODE);
+      const code = await this.optionsDB.getItem<string>(
+        UserOptions.CURRENCY_CODE,
+      );
       if (!code) {
         return this.getDefaultCurrencyCode();
       }
@@ -28,7 +29,10 @@ export class localForageOptionsRepository implements UserOptionsRepository {
 
   async saveCurrencyCode(options: UserOptions): Promise<boolean> {
     try {
-      await this.optionsDB.setItem<string>(CURRENCY_CODE, options.currencyCode);
+      await this.optionsDB.setItem<string>(
+        UserOptions.CURRENCY_CODE,
+        options.currencyCode,
+      );
       return true;
     } catch {
       return false;
@@ -37,7 +41,7 @@ export class localForageOptionsRepository implements UserOptionsRepository {
 
   async getLocale(): Promise<string> {
     try {
-      const locale = await this.optionsDB.getItem<string>(LOCALE);
+      const locale = await this.optionsDB.getItem<string>(UserOptions.LOCALE);
       if (!locale) throw new Error();
       return locale;
     } catch (e) {
@@ -47,7 +51,7 @@ export class localForageOptionsRepository implements UserOptionsRepository {
 
   async saveLocale(options: UserOptions): Promise<boolean> {
     try {
-      await this.optionsDB.setItem<string>(LOCALE, options.locale);
+      await this.optionsDB.setItem<string>(UserOptions.LOCALE, options.locale);
       return true;
     } catch {
       return false;
