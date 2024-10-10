@@ -1,3 +1,33 @@
+## 1.3.2 (2024-10-10)
+
+#### Bug Fixes
+
+* index html syntax (06d72fd4)
+
+#### Documentation
+
+* add more screenshots (b924f4b8)
+
+#### Code Refactoring
+
+* use static fields instead of exports (e33b2cb3)
+
+#### Styles
+
+* order imports (ca0df7e0)
+
+#### Chores
+
+* **release:** 1.3.1 (6e3b28d9)
+
+#### Build
+
+* **deps:** bump big.js from 6.2.1 to 6.2.2 (#146) (c27ce989)
+* **deps-dev:** bump jsdom from 25.0.0 to 25.0.1 (#147) (211dec6a)
+* **deps-dev:** bump @biomejs/biome from 1.8.3 to 1.9.3 (#143) (1ea0d349)
+* **deps-dev:** bump @vitejs/plugin-react-swc from 3.7.0 to 3.7.1 (#144) (ef84c9a3)
+
+
 ## 1.3.1 (2024-09-29)
 
 #### Bug Fixes
