@@ -1,4 +1,3 @@
-import { faker } from "@faker-js/faker";
 import { BudgetItem } from "./budgetItem";
 import { ObjectMother } from "./objectMother.mother";
 
@@ -8,22 +7,22 @@ export class BudgetItemsMother {
     const list = [
       new BudgetItem(
         ObjectMother.positiveNumber(),
-        faker.lorem.word(),
-        faker.number.int(),
+        ObjectMother.word(),
+        ObjectMother.zeroOrPositiveNumber(),
       ),
       new BudgetItem(
         ObjectMother.positiveNumber(),
-        faker.lorem.word(),
-        faker.number.int(),
+        ObjectMother.word(),
+        ObjectMother.zeroOrPositiveNumber(),
       ),
       new BudgetItem(
         ObjectMother.positiveNumber(),
-        faker.lorem.word(),
-        faker.number.int(),
+        ObjectMother.word(),
+        ObjectMother.zeroOrPositiveNumber(),
       ),
     ];
 
-    return faker.helpers.arrayElements(list);
+    return ObjectMother.randomElementsFromList(list);
   }
 
   static itemForm1() {

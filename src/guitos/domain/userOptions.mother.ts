@@ -1,5 +1,5 @@
-import { faker } from "@faker-js/faker";
 import { UserOptions } from "./userOptions";
+import { ObjectMother } from "./objectMother.mother";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class UserOptionsMother {
@@ -8,12 +8,12 @@ export class UserOptionsMother {
   }
 
   static random(): UserOptions {
-    const currencyCode = faker.finance.currencyCode();
+    const currencyCode = ObjectMother.currencyCode();
     return new UserOptions(currencyCode, navigator.language);
   }
 
   static invalid(): UserOptions {
-    const currencyCode = faker.string.alpha();
+    const currencyCode = ObjectMother.randomAlpha();
     return new UserOptions(currencyCode, navigator.language);
   }
 

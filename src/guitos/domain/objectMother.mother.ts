@@ -42,4 +42,16 @@ export class ObjectMother {
   static recentDate(): Date {
     return faker.date.recent();
   }
+
+  static randomElementsFromList<T>(list: T[]): T[] {
+    return faker.helpers.arrayElements(list);
+  }
+
+  static currencyCode(): string {
+    return faker.finance.currencyCode();
+  }
+
+  static randomAlpha(): string {
+    return faker.string.alpha();
+  }
 }
