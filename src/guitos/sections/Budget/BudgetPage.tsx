@@ -17,7 +17,6 @@ import { Loading } from "../Loading/Loading";
 import { NavBar } from "../NavBar/NavBar";
 import { Notification } from "../Notification/Notification";
 import { StatCard } from "../StatCard/StatCard";
-// import { useWhatChanged } from "@simbathesailor/use-what-changed";
 
 const ChartsPage = lazy(() => import("../ChartsPage/ChartsPage"));
 const TableCard = lazy(() => import("../TableCard/TableCard"));
@@ -106,8 +105,6 @@ export function BudgetPage() {
   useHotkeys("r", (e) => !e.repeat && canRedo && redo(), {
     preventDefault: true,
   });
-
-  // useWhatChanged([budget, name]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
