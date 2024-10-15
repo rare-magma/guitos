@@ -22,11 +22,10 @@ export class BudgetItem {
       !Number.isNaN(revenueTotal) &&
       revenueTotal > 0 &&
       !Number.isNaN(itemValue);
-    if (canRoundNumbers) {
-      const percentageOfTotal = Big(itemValue).mul(100).div(revenueTotal);
-
-      return roundBig(percentageOfTotal, percentageOfTotal.gte(1) ? 0 : 1);
+    if (!canRoundNumbers) {
+      return 0;
     }
-    return 0;
+    const percentageOfTotal = Big(itemValue).mul(100).div(revenueTotal);
+    return roundBig(percentageOfTotal, percentageOfTotal.gte(1) ? 0 : 1);
   }
 }

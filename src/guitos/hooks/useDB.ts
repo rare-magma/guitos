@@ -81,29 +81,30 @@ export function useDB() {
   }
 
   function cloneBudget() {
-    if (budget) {
-      const newBudget = Budget.clone(budget);
-
-      let newBudgetList: Budget[] = [];
-      newBudgetList = budgetList
-        ? budgetList.concat(newBudget)
-        : newBudgetList.concat(newBudget);
-
-      setNotifications(
-        produce(notifications, (draft) => {
-          draft.push({
-            show: true,
-            id: Uuid.random().toString(),
-            body: `cloned "${newBudget.name}" budget`,
-          });
-        }),
-      );
-      budgetRepository.update(newBudget.id, newBudget).then(() => {
-        setBudget(newBudget, true);
-        setBudgetList(newBudgetList);
-        setBudgetNameList(createBudgetNameList(newBudgetList));
-      });
+    if (!budget) {
+      return;
     }
+
+    const newBudget = Budget.clone(budget);
+    let newBudgetList: Budget[] = [];
+    newBudgetList = budgetList
+      ? budgetList.concat(newBudget)
+      : newBudgetList.concat(newBudget);
+
+    setNotifications(
+      produce(notifications, (draft) => {
+        draft.push({
+          show: true,
+          id: Uuid.random().toString(),
+          body: `cloned "${newBudget.name}" budget`,
+        });
+      }),
+    );
+    budgetRepository.update(newBudget.id, newBudget).then(() => {
+      setBudget(newBudget, true);
+      setBudgetList(newBudgetList);
+      setBudgetNameList(createBudgetNameList(newBudgetList));
+    });
   }
 
   function deleteBudget(toBeDeleted: Uuid) {
@@ -203,12 +204,13 @@ export function useDB() {
       const reader = new FileReader();
       reader.readAsText(file, "UTF-8");
       reader.onloadend = () => {
-        if (reader.result !== null) {
-          if (file.type === "text/csv") {
-            importCSV(reader, file);
-          } else {
-            importJSON(reader, file);
-          }
+        if (!reader.result) {
+          return;
+        }
+        if (file.type === "text/csv") {
+          importCSV(reader, file);
+        } else {
+          importJSON(reader, file);
         }
       };
     }

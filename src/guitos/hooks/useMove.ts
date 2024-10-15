@@ -63,11 +63,12 @@ export function useMove() {
 
   function checkCanGo(position: number): boolean {
     const sortedList = budgetList?.sort((a, b) => a.name.localeCompare(b.name));
-    if (budget) {
-      const index = sortedList?.findIndex((b) => b.name.includes(budget.name));
-      if (index !== position) {
-        return true;
-      }
+    if (!budget) {
+      return false;
+    }
+    const index = sortedList?.findIndex((b) => b.name.includes(budget.name));
+    if (index !== position) {
+      return true;
     }
     return false;
   }

@@ -166,40 +166,42 @@ export class Budget {
     const valueIsCalculable =
       budget.stats.saved !== null && !Number.isNaN(budget.stats.goal);
 
-    if (valueIsCalculable) {
-      const available = Budget.itemsTotal(budget.incomes.items);
-      const saved = Big(budget.stats.goal).mul(available).div(100);
-      return roundBig(saved, 2);
+    if (!valueIsCalculable) {
+      return 0;
     }
-    return 0;
+    const available = Budget.itemsTotal(budget.incomes.items);
+    const saved = Big(budget.stats.goal).mul(available).div(100);
+    return roundBig(saved, 2);
   }
 
   static availableWithGoal(value: Budget): number {
     const goalIsCalculable =
       value.stats.goal !== null && !Number.isNaN(value.stats.goal);
 
-    if (goalIsCalculable) {
-      const available = Budget.available(value);
-      const availableWithGoal = Big(value.stats.goal)
-        .mul(Budget.itemsTotal(value.incomes.items))
-        .div(100);
-      return roundBig(available.sub(availableWithGoal), 2);
+    if (!goalIsCalculable) {
+      return 0;
     }
-    return 0;
+    const available = Budget.available(value);
+    const availableWithGoal = Big(value.stats.goal)
+      .mul(Budget.itemsTotal(value.incomes.items))
+      .div(100);
+    return roundBig(available.sub(availableWithGoal), 2);
   }
 
   static automaticGoal(value: Budget): number {
     const valueIsCalculable =
       value.stats.goal !== null && !Number.isNaN(value.stats.goal);
 
-    if (valueIsCalculable) {
-      const incomeTotal = Budget.itemsTotal(value.incomes.items);
-      const available = Budget.available(value);
+    if (!valueIsCalculable) {
+      return 0;
+    }
 
-      if (incomeTotal.gt(0) && available.gt(0)) {
-        const autoGoal = available.mul(100).div(incomeTotal);
-        return roundBig(autoGoal, 5);
-      }
+    const incomeTotal = Budget.itemsTotal(value.incomes.items);
+    const available = Budget.available(value);
+
+    if (incomeTotal.gt(0) && available.gt(0)) {
+      const autoGoal = available.mul(100).div(incomeTotal);
+      return roundBig(autoGoal, 5);
     }
     return 0;
   }
@@ -212,14 +214,14 @@ export class Budget {
       !Number.isNaN(budget.incomes.total) &&
       budget.incomes.total > 0 &&
       !Number.isNaN(budget.expenses.total);
-    if (areRoundNumbers) {
-      const percentageOfTotal = Big(budget.expenses.total)
-        .mul(100)
-        .div(budget.incomes.total);
-
-      return roundBig(percentageOfTotal, percentageOfTotal.gte(1) ? 0 : 1);
+    if (!areRoundNumbers) {
+      return 0;
     }
-    return 0;
+    const percentageOfTotal = Big(budget.expenses.total)
+      .mul(100)
+      .div(budget.incomes.total);
+
+    return roundBig(percentageOfTotal, percentageOfTotal.gte(1) ? 0 : 1);
   }
 
   static toSafeFormat(budget: Budget) {

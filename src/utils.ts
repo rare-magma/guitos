@@ -19,27 +19,29 @@ export function calc(
   let total = 0;
   const isActionableChange = !Number.isNaN(itemValue) && change > 0;
 
-  if (isActionableChange) {
-    let newValue = Big(itemValue);
-    const changeValue = Big(change);
-    switch (operation) {
-      case "add":
-        newValue = newValue.add(changeValue);
-        break;
-      case "subtract":
-        newValue = newValue.sub(changeValue);
-        break;
-      case "multiply":
-        newValue = newValue.mul(changeValue);
-        break;
-      case "divide":
-        newValue = newValue.div(changeValue);
-        break;
-      default:
-        throw new Error("operation not implemented");
-    }
-    total = roundBig(newValue, 2);
+  if (!isActionableChange) {
+    return 0;
   }
+
+  let newValue = Big(itemValue);
+  const changeValue = Big(change);
+  switch (operation) {
+    case "add":
+      newValue = newValue.add(changeValue);
+      break;
+    case "subtract":
+      newValue = newValue.sub(changeValue);
+      break;
+    case "multiply":
+      newValue = newValue.mul(changeValue);
+      break;
+    case "divide":
+      newValue = newValue.div(changeValue);
+      break;
+    default:
+      throw new Error("operation not implemented");
+  }
+  total = roundBig(newValue, 2);
 
   if (total >= 0) {
     return total;
