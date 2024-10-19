@@ -23,5 +23,10 @@ export class Uuid {
         `<${this.constructor.name}> does not allow the value <${id}>`,
       );
     }
+    if (!window.isSecureContext) {
+      throw new Error(
+        `<${this.constructor.name}> is not available in a non-secure context`,
+      );
+    }
   }
 }

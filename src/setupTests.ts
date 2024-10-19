@@ -12,6 +12,7 @@ import * as AppBudgetContext from "./guitos/context/BudgetContext";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 
 window.crypto.randomUUID = randomUUID;
+window.isSecureContext = true;
 global.URL.createObjectURL = vi.fn();
 
 vi.mock("crypto", () => ({
