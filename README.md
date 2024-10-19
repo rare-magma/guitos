@@ -211,7 +211,7 @@ Instructions:
 1. Run the container with docker:
 
 ```bash
-docker run --name guitos --read-only --init --cap-drop ALL --security-opt no-new-privileges:true --cpus 1 -m 64m --pids-limit 10 -p 3000:3000 ghcr.io/rare-magma/guitos:latest
+docker run --name guitos --rm --read-only --init --cap-drop ALL --security-opt no-new-privileges:true --cpus 1 -m 64m --pids-limit 10 -p 3000:3000 ghcr.io/rare-magma/guitos:latest
 ```
 
 2. Open the following link in the browser: <http://localhost:3000>
