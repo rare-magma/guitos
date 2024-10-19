@@ -14,6 +14,11 @@ export class Uuid {
   }
 
   static random(): Uuid {
+    if (!window.isSecureContext) {
+      throw new Error(
+        "<crypto.randomUUID()> is not available in a non-secure context",
+      );
+    }
     return new Uuid(crypto.randomUUID());
   }
 
