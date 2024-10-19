@@ -1,3 +1,14 @@
+## 1.3.4 (2024-10-19)
+
+#### Bug Fixes
+
+* crypto.randomUUID validation for secure context (8892cfe0)
+
+#### Chores
+
+* **release:** 1.3.3 (e7cf367a)
+
+
 ## 1.3.3 (2024-10-19)
 
 #### Bug Fixes
