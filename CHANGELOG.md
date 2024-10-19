@@ -1,3 +1,32 @@
+## 1.3.3 (2024-10-19)
+
+#### Bug Fixes
+
+* docker container redirection (71e1fa76)
+
+#### Documentation
+
+* remove container after exec in docker example (ed264ebb)
+
+#### Code Refactoring
+
+* simplify by returning early (79938530)
+* use objectmother instead of faker directly (63125dfc)
+
+#### Styles
+
+* sort import (145a9fa4)
+
+#### Chores
+
+* **release:** 1.3.2 (f5f4787b)
+
+#### Build
+
+* remove unused dep (6138a753)
+* **deps:** bump the npm_and_yarn group with 4 updates (#148) (388795f1)
+
+
 ## 1.3.2 (2024-10-10)
 
 #### Bug Fixes
