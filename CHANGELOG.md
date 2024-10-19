@@ -1,3 +1,14 @@
+## 1.3.5 (2024-10-19)
+
+#### Bug Fixes
+
+* check secure context before generating randomUUID (0faed10c)
+
+#### Chores
+
+* **release:** 1.3.4 (d2baf6f6)
+
+
 ## 1.3.4 (2024-10-19)
 
 #### Bug Fixes
