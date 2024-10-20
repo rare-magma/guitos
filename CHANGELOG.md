@@ -1,3 +1,14 @@
+## 1.3.6 (2024-10-20)
+
+#### Bug Fixes
+
+* currency list position and width (e4333e46)
+
+#### Chores
+
+* **release:** 1.3.5 (59ff09ac)
+
+
 ## 1.3.5 (2024-10-19)
 
 #### Bug Fixes
