@@ -36,7 +36,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
       <OverlayTrigger
         trigger="click"
         key="nav-settings-overlay"
-        placement="bottom"
+        placement={"auto"}
         rootClose={true}
         overlay={
           <Popover id={"nav-popover-settings-button"}>
@@ -68,12 +68,12 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                       style={
                         expanded
                           ? {
-                              maxWidth: "10ch",
-                              minWidth: "10ch",
+                              maxWidth: "11ch",
+                              minWidth: "11ch",
                             }
                           : {
-                              maxWidth: "7ch",
-                              minWidth: "7ch",
+                              maxWidth: "8ch",
+                              minWidth: "8ch",
                             }
                       }
                       options={currenciesList.sort((a, b) =>
