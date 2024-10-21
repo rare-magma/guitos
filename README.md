@@ -62,6 +62,8 @@ guitos is [portuguese slang](https://en.wiktionary.org/wiki/guito) for money/cas
 - [store.app](https://store.app/guitos-app)
 - [r/SideProject](https://www.reddit.com/r/SideProject/comments/15w7v3g/guitos_a_simple_budgeting_app_that_helps_you/)
 - [r/reactjs](https://www.reddit.com/r/reactjs/comments/12s9yph/guitos_a_simple_budgeting_app_that_helps_you/)
+- [r/selfhosted](https://www.reddit.com/r/selfhosted/comments/1g20dl3/i_containerized_my_budgeting_react_app_guitosapp/)
+- [selfh.st](https://selfh.st/newsletter/2024-10-18/)
 
 ## Getting Started
 
