@@ -134,7 +134,7 @@ importers:
         version: 5.4.7(@types/node@20.14.8)(terser@5.34.1)
       vite-plugin-pwa:
         specifier: 0.20.1
-        version: 0.20.1(vite@5.4.7(@types/node@20.14.8)(terser@5.34.1))(workbox-build@7.0.0(@types/babel__core@7.20.5))(workbox-window@7.1.0)
+        version: 0.20.1(vite@5.4.7(@types/node@20.14.8)(terser@5.34.1))(workbox-build@7.0.0(@types/babel__core@7.20.5))(workbox-window@7.3.0)
       vite-plugin-sri3:
         specifier: 1.0.5
         version: 1.0.5(vite@5.4.7(@types/node@20.14.8)(terser@5.34.1))
@@ -142,8 +142,8 @@ importers:
         specifier: 2.0.5
         version: 2.0.5(@types/node@20.14.8)(@vitest/ui@2.0.5)(jsdom@25.0.1)(terser@5.34.1)
       workbox-window:
-        specifier: 7.1.0
-        version: 7.1.0
+        specifier: 7.3.0
+        version: 7.3.0
 
 packages:
 
@@ -1289,9 +1289,6 @@ packages:
 
   '@types/stack-utils@2.0.1':
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
-
-  '@types/trusted-types@2.0.4':
-    resolution: {integrity: sha512-IDaobHimLQhjwsQ/NMwRVfa/yL7L/wriQPMhw1ZJall0KX6E1oxk29XMDeilW5qTIg5aoiqf5Udy8U/51aNoQQ==}
 
   '@types/trusted-types@2.0.7':
     resolution: {integrity: sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==}
@@ -3109,8 +3106,8 @@ packages:
   workbox-core@7.0.0:
     resolution: {integrity: sha512-81JkAAZtfVP8darBpfRTovHg8DGAVrKFgHpOArZbdFd78VqHr5Iw65f2guwjE2NlCFbPFDoez3D3/6ZvhI/rwQ==}
 
-  workbox-core@7.1.0:
-    resolution: {integrity: sha512-5KB4KOY8rtL31nEF7BfvU7FMzKT4B5TkbYa2tzkS+Peqj0gayMT9SytSFtNzlrvMaWgv6y/yvP9C0IbpFjV30Q==}
+  workbox-core@7.3.0:
+    resolution: {integrity: sha512-Z+mYrErfh4t3zi7NVTvOuACB0A/jA3bgxUN3PwtAVHvfEsZxV9Iju580VEETug3zYJRc0Dmii/aixI/Uxj8fmw==}
 
   workbox-expiration@7.0.0:
     resolution: {integrity: sha512-MLK+fogW+pC3IWU9SFE+FRStvDVutwJMR5if1g7oBJx3qwmO69BNoJQVaMXq41R0gg3MzxVfwOGKx3i9P6sOLQ==}
@@ -3146,8 +3143,8 @@ packages:
   workbox-window@7.0.0:
     resolution: {integrity: sha512-j7P/bsAWE/a7sxqTzXo3P2ALb1reTfZdvVp6OJ/uLr/C2kZAMvjeWGm8V4htQhor7DOvYg0sSbFN2+flT5U0qA==}
 
-  workbox-window@7.1.0:
-    resolution: {integrity: sha512-ZHeROyqR+AS5UPzholQRDttLFqGMwP0Np8MKWAdyxsDETxq3qOAyXvqessc3GniohG6e0mAqSQyKOHmT8zPF7g==}
+  workbox-window@7.3.0:
+    resolution: {integrity: sha512-qW8PDy16OV1UBaUNGlTVcepzrlzyzNW/ZJvFQQs2j2TzGsg6IKjcpZC1RSquqQnTOafl5pCj5bGfAHlCjOOjdA==}
 
   wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
@@ -4393,8 +4390,6 @@ snapshots:
       '@types/node': 20.14.8
 
   '@types/stack-utils@2.0.1': {}
-
-  '@types/trusted-types@2.0.4': {}
 
   '@types/trusted-types@2.0.7': {}
 
@@ -6220,14 +6215,14 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-pwa@0.20.1(vite@5.4.7(@types/node@20.14.8)(terser@5.34.1))(workbox-build@7.0.0(@types/babel__core@7.20.5))(workbox-window@7.1.0):
+  vite-plugin-pwa@0.20.1(vite@5.4.7(@types/node@20.14.8)(terser@5.34.1))(workbox-build@7.0.0(@types/babel__core@7.20.5))(workbox-window@7.3.0):
     dependencies:
       debug: 4.3.4
       pretty-bytes: 6.1.1
       tinyglobby: 0.2.0
       vite: 5.4.7(@types/node@20.14.8)(terser@5.34.1)
       workbox-build: 7.0.0(@types/babel__core@7.20.5)
-      workbox-window: 7.1.0
+      workbox-window: 7.3.0
     transitivePeerDependencies:
       - supports-color
 
@@ -6392,7 +6387,7 @@ snapshots:
 
   workbox-core@7.0.0: {}
 
-  workbox-core@7.1.0: {}
+  workbox-core@7.3.0: {}
 
   workbox-expiration@7.0.0:
     dependencies:
@@ -6449,10 +6444,10 @@ snapshots:
       '@types/trusted-types': 2.0.7
       workbox-core: 7.0.0
 
-  workbox-window@7.1.0:
+  workbox-window@7.3.0:
     dependencies:
-      '@types/trusted-types': 2.0.4
-      workbox-core: 7.1.0
+      '@types/trusted-types': 2.0.7
+      workbox-core: 7.3.0
 
   wrap-ansi@7.0.0:
     dependencies:

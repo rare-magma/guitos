@@ -54,7 +54,7 @@
     "vite-plugin-pwa": "0.20.1",
     "vite-plugin-sri3": "1.0.5",
     "vitest": "2.0.5",
-    "workbox-window": "7.1.0"
+    "workbox-window": "7.3.0"
   },
   "name": "guitos",
   "private": true,
