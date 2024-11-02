@@ -65,7 +65,7 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.46.1)
+        version: 4.10.0(playwright-core@1.48.2)
       '@biomejs/biome':
         specifier: 1.9.3
         version: 1.9.3
@@ -73,8 +73,8 @@ importers:
         specifier: 9.1.0
         version: 9.1.0
       '@playwright/test':
-        specifier: 1.46.1
-        version: 1.46.1
+        specifier: 1.48.2
+        version: 1.48.2
       '@testing-library/dom':
         specifier: 10.4.0
         version: 10.4.0
@@ -943,8 +943,8 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@playwright/test@1.46.1':
-    resolution: {integrity: sha512-Fq6SwLujA/DOIvNC2EL/SojJnkKf/rAwJ//APpJJHRyMi1PdKrY3Az+4XNQ51N4RTbItbIByQ0jgd1tayq1aeA==}
+  '@playwright/test@1.48.2':
+    resolution: {integrity: sha512-54w1xCWfXuax7dz4W2M9uw0gDyh+ti/0K/MxcCUxChFh37kkdxPdfZDw5QBbuPUJHr1CiHJ1hXgSs+GgeQc5Zw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2392,13 +2392,13 @@ packages:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
 
-  playwright-core@1.46.1:
-    resolution: {integrity: sha512-h9LqIQaAv+CYvWzsZ+h3RsrqCStkBHlgo6/TJlFst3cOTlLghBQlJwPOZKQJTKNaD3QIB7aAVQ+gfWbN3NXB7A==}
+  playwright-core@1.48.2:
+    resolution: {integrity: sha512-sjjw+qrLFlriJo64du+EK0kJgZzoQPsabGF4lBvsid+3CNIZIYLgnMj9V6JY5VhM2Peh20DJWIVpVljLLnlawA==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.46.1:
-    resolution: {integrity: sha512-oPcr1yqoXLCkgKtD5eNUPLiN40rYEM39odNpIb6VE6S7/15gJmA1NzVv6zJYusV0e7tzvkU/utBFNa/Kpxmwng==}
+  playwright@1.48.2:
+    resolution: {integrity: sha512-NjYvYgp4BPmiwfe31j4gHLa3J7bD2WiBz8Lk2RoSsmX38SVIARZ18VYjxLjAcDsAhA+F4iSEXTSGgjua0rrlgQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3194,10 +3194,10 @@ snapshots:
       jsonpointer: 5.0.1
       leven: 3.1.0
 
-  '@axe-core/playwright@4.10.0(playwright-core@1.46.1)':
+  '@axe-core/playwright@4.10.0(playwright-core@1.48.2)':
     dependencies:
       axe-core: 4.10.0
-      playwright-core: 1.46.1
+      playwright-core: 1.48.2
 
   '@babel/code-frame@7.23.5':
     dependencies:
@@ -4060,9 +4060,9 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@playwright/test@1.46.1':
+  '@playwright/test@1.48.2':
     dependencies:
-      playwright: 1.46.1
+      playwright: 1.48.2
 
   '@polka/url@1.0.0-next.25': {}
 
@@ -5538,11 +5538,11 @@ snapshots:
 
   picomatch@4.0.2: {}
 
-  playwright-core@1.46.1: {}
+  playwright-core@1.48.2: {}
 
-  playwright@1.46.1:
+  playwright@1.48.2:
     dependencies:
-      playwright-core: 1.46.1
+      playwright-core: 1.48.2
     optionalDependencies:
       fsevents: 2.3.2
 
