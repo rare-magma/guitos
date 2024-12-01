@@ -49,7 +49,7 @@
     "autoprefixer": "10.4.20",
     "console-fail-test": "0.4.4",
     "jsdom": "25.0.1",
-    "typescript": "5.5.4",
+    "typescript": "5.7.2",
     "vite": "5.4.7",
     "vite-plugin-pwa": "0.20.1",
     "vite-plugin-sri3": "1.0.5",
