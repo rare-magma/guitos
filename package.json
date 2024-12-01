@@ -15,7 +15,7 @@
     "localforage": "1.10.0",
     "papaparse": "5.4.1",
     "react": "18.2.0",
-    "react-bootstrap": "2.10.5",
+    "react-bootstrap": "2.10.6",
     "react-bootstrap-typeahead": "6.3.2",
     "react-currency-input-field": "3.8.0",
     "react-dom": "18.2.0",
