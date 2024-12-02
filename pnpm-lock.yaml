@@ -30,8 +30,8 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
       react-bootstrap:
-        specifier: 2.10.5
-        version: 2.10.5(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 2.10.6
+        version: 2.10.6(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-bootstrap-typeahead:
         specifier: 6.3.2
         version: 6.3.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -975,8 +975,13 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
 
-  '@restart/ui@1.8.0':
-    resolution: {integrity: sha512-xJEOXUOTmT4FngTmhdjKFRrVVF0hwCLNPdatLCHkyS4dkiSK12cEu1Y0fjxktjJrdst9jJIc5J6ihMJCoWEN/g==}
+  '@restart/hooks@0.5.0':
+    resolution: {integrity: sha512-wS+h6IusJCPjTkmOOrRZxIPICD/mtFA3PRZviutoM23/b7akyDGfZF/WS+nIFk27u7JDhPE2+0GBdZxjSqHZkg==}
+    peerDependencies:
+      react: '>=16.8.0'
+
+  '@restart/ui@1.9.1':
+    resolution: {integrity: sha512-qghR21ynHiUrpcIkKCoKYB+3rJtezY5Y7ikrwradCL+7hZHdQ2Ozc5ffxtpmpahoAGgc31gyXaSx2sXXaThmqA==}
     peerDependencies:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
@@ -1297,6 +1302,9 @@ packages:
 
   '@types/warning@3.0.1':
     resolution: {integrity: sha512-ywJmriP+nvjBKNBEMaNZgj2irZHoxcKeYcyMLbqhYKbDVn8yCIULy2Ol/tvIb37O3IBeZj3RU4tXqQTtGwoAMg==}
+
+  '@types/warning@3.0.3':
+    resolution: {integrity: sha512-D1XC7WK8K+zZEveUPY+cf4+kgauk8N4eHr/XIHXGlGYkHLud6hK9lYfZk1ry1TNh798cZUCgb6MqGEG8DkJt6Q==}
 
   '@types/yargs-parser@21.0.1':
     resolution: {integrity: sha512-axdPBuLuEJt0c4yI5OZssC19K2Mq1uKdrfZBzuxLvaztgqUtFYZUNw7lETExPYJR9jdEoIg4mb7RQKRQzOkeGQ==}
@@ -2463,8 +2471,8 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
-  react-bootstrap@2.10.5:
-    resolution: {integrity: sha512-XueAOEn64RRkZ0s6yzUTdpFtdUXs5L5491QU//8ZcODKJNDLt/r01tNyriZccjgRImH1REynUc9pqjiRMpDLWQ==}
+  react-bootstrap@2.10.6:
+    resolution: {integrity: sha512-fNvKytSp0nHts1WRnRBJeBEt+I9/ZdrnhIjWOucEduRNvFRU1IXjZueDdWnBiqsTSJ7MckQJi9i/hxGolaRq+g==}
     peerDependencies:
       '@types/react': '>=16.14.8'
       react: '>=16.14.0'
@@ -4093,13 +4101,18 @@ snapshots:
       dequal: 2.0.3
       react: 18.2.0
 
-  '@restart/ui@1.8.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@restart/hooks@0.5.0(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.25.7
+      dequal: 2.0.3
+      react: 18.2.0
+
+  '@restart/ui@1.9.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@babel/runtime': 7.26.0
       '@popperjs/core': 2.11.8
       '@react-aria/ssr': 3.8.0(react@18.2.0)
-      '@restart/hooks': 0.4.11(react@18.2.0)
-      '@types/warning': 3.0.1
+      '@restart/hooks': 0.5.0(react@18.2.0)
+      '@types/warning': 3.0.3
       dequal: 2.0.3
       dom-helpers: 5.2.1
       react: 18.2.0
@@ -4399,6 +4412,8 @@ snapshots:
   '@types/trusted-types@2.0.7': {}
 
   '@types/warning@3.0.1': {}
+
+  '@types/warning@3.0.3': {}
 
   '@types/yargs-parser@21.0.1': {}
 
@@ -4812,7 +4827,7 @@ snapshots:
 
   dom-helpers@5.2.1:
     dependencies:
-      '@babel/runtime': 7.25.7
+      '@babel/runtime': 7.26.0
       csstype: 3.1.2
 
   eastasianwidth@0.2.0: {}
@@ -5624,11 +5639,11 @@ snapshots:
       scroll-into-view-if-needed: 3.1.0
       warning: 4.0.3
 
-  react-bootstrap@2.10.5(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-bootstrap@2.10.6(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@babel/runtime': 7.25.7
+      '@babel/runtime': 7.26.0
       '@restart/hooks': 0.4.11(react@18.2.0)
-      '@restart/ui': 1.8.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@restart/ui': 1.9.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/react-transition-group': 4.4.7
       classnames: 2.3.2
       dom-helpers: 5.2.1
@@ -5674,7 +5689,7 @@ snapshots:
 
   react-overlays@5.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@babel/runtime': 7.25.7
+      '@babel/runtime': 7.26.0
       '@popperjs/core': 2.11.8
       '@restart/hooks': 0.4.11(react@18.2.0)
       '@types/warning': 3.0.1
@@ -5715,7 +5730,7 @@ snapshots:
 
   react-transition-group@4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@babel/runtime': 7.25.7
+      '@babel/runtime': 7.26.0
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
@@ -6129,7 +6144,7 @@ snapshots:
 
   uncontrollable@7.2.1(react@18.2.0):
     dependencies:
-      '@babel/runtime': 7.25.7
+      '@babel/runtime': 7.26.0
       '@types/react': 18.2.79
       invariant: 2.2.4
       react: 18.2.0
