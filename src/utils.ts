@@ -1,6 +1,6 @@
 import Big from "big.js";
 import type { MutableRefObject } from "react";
-import type { NavigateFunction } from "react-router-dom";
+import type { NavigateFunction } from "react-router";
 import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import type { UserOptions } from "./guitos/domain/userOptions";

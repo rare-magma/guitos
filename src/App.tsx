@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router";
 import "./App.css";
 import "./colors.css";
 import { BudgetProvider } from "./guitos/context/BudgetContext";

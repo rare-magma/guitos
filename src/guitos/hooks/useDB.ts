@@ -3,7 +3,7 @@ import Papa from "papaparse";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Option } from "react-bootstrap-typeahead/types/types";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 import { createBudgetNameList, saveLastOpenedBudget } from "../../utils";
 import { useBudget } from "../context/BudgetContext";
 import { useConfig } from "../context/ConfigContext";

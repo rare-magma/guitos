@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { saveLastOpenedBudget } from "../../utils";
 import { useBudget } from "../context/BudgetContext";
 import type { Budget } from "../domain/budget";
