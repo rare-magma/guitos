@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "4.10.0",
-    "@biomejs/biome": "1.9.3",
+    "@biomejs/biome": "1.9.4",
     "@faker-js/faker": "9.1.0",
     "@playwright/test": "1.48.2",
     "@testing-library/dom": "10.4.0",
