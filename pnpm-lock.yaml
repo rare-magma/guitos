@@ -36,8 +36,8 @@ importers:
         specifier: 6.3.2
         version: 6.3.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-currency-input-field:
-        specifier: 3.8.0
-        version: 3.8.0(react@18.2.0)
+        specifier: 3.9.0
+        version: 3.9.0(react@18.2.0)
       react-dom:
         specifier: 18.2.0
         version: 18.2.0(react@18.2.0)
@@ -2535,8 +2535,8 @@ packages:
       '@types/react':
         optional: true
 
-  react-currency-input-field@3.8.0:
-    resolution: {integrity: sha512-DKSIjacrvgUDOpuB16b+OVDvp5pbCt+s+RHJgpRZCHNhzg1yBpRUoy4fbnXpeOj0kdbwf5BaXCr2mAtxEujfhg==}
+  react-currency-input-field@3.9.0:
+    resolution: {integrity: sha512-OmkO0rRSGiNGbcO4F1wzC+Szm2A7tLRGtDAKF6t0xNrFr07q99AHo3BAn/68RTEG4iwqc2m2jekKZi33/8SV+Q==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0
 
@@ -5787,7 +5787,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.2.79
 
-  react-currency-input-field@3.8.0(react@18.2.0):
+  react-currency-input-field@3.9.0(react@18.2.0):
     dependencies:
       react: 18.2.0
 
