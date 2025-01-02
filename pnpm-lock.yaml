@@ -97,8 +97,8 @@ importers:
         specifier: 20.14.8
         version: 20.14.8
       '@types/papaparse':
-        specifier: 5.3.14
-        version: 5.3.14
+        specifier: 5.3.15
+        version: 5.3.15
       '@types/react':
         specifier: 18.2.79
         version: 18.2.79
@@ -1268,8 +1268,8 @@ packages:
   '@types/node@20.14.8':
     resolution: {integrity: sha512-DO+2/jZinXfROG7j7WKFn/3C6nFwxy2lLpgLjEXJz+0XKphZlTLJ14mo8Vfg8X5BWN6XjyESXq+LcYdT7tR3bA==}
 
-  '@types/papaparse@5.3.14':
-    resolution: {integrity: sha512-LxJ4iEFcpqc6METwp9f6BV6VVc43m6MfH0VqFosHvrUgfXiFe6ww7R3itkOQ+TCK6Y+Iv/+RnnvtRZnkc5Kc9g==}
+  '@types/papaparse@5.3.15':
+    resolution: {integrity: sha512-JHe6vF6x/8Z85nCX4yFdDslN11d+1pr12E526X8WAfhadOeaOTx5AuIkvDKIBopfvlzpzkdMx4YyvSKCM9oqtw==}
 
   '@types/prop-types@15.7.8':
     resolution: {integrity: sha512-kMpQpfZKSCBqltAJwskgePRaYRFukDkm1oItcAbC3gNELR20XIBcN9VRgg4+m8DKsTfkWeA4m4Imp4DDuWy7FQ==}
@@ -4451,7 +4451,7 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/papaparse@5.3.14':
+  '@types/papaparse@5.3.15':
     dependencies:
       '@types/node': 20.14.8
 
