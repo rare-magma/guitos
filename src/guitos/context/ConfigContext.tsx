@@ -4,7 +4,7 @@ import {
   useContext,
   useState,
 } from "react";
-import type { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
+import type { IntlConfig } from "react-currency-input-field";
 import { UserOptions } from "../domain/userOptions";
 import { localForageOptionsRepository } from "../infrastructure/localForageOptionsRepository";
 
