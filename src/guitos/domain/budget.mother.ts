@@ -1,3 +1,4 @@
+import { immerable } from "immer";
 import { Budget } from "./budget";
 import { BudgetItem } from "./budgetItem";
 import { Uuid } from "./uuid";
@@ -6,6 +7,7 @@ import { Uuid } from "./uuid";
 export class BudgetMother {
   static testBudget() {
     return {
+      [immerable]: true,
       id: Uuid.random().value as unknown as Uuid,
       name: "2023-03",
       expenses: {

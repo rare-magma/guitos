@@ -458,7 +458,7 @@ export function useDB() {
     if (budget) {
       saveBudget(budget);
       if (budget.name !== previousBudget.current) {
-        saveLastOpenedBudget(budget.name, navigateCallback);
+        saveLastOpenedBudget(budget.name, navigateCallback());
         previousBudget.current = budget.name;
       }
     }

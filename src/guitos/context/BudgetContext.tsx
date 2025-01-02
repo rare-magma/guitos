@@ -9,7 +9,7 @@ import { Budget } from "../domain/budget";
 import type { SearchOption } from "../sections/NavBar/NavBar";
 import { useGeneralContext } from "./GeneralContext";
 
-interface BudgetContextInterface {
+export interface BudgetContextInterface {
   budget: Budget | undefined;
   setBudget: (value: Budget | undefined, saveInHistory: boolean) => void;
   budgetList: Budget[] | undefined;

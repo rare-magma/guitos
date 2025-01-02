@@ -9,6 +9,7 @@ import { cleanup } from "@testing-library/react";
 import { createElement } from "react";
 import { afterEach, beforeEach, expect, vi } from "vitest";
 import * as AppBudgetContext from "./guitos/context/BudgetContext";
+import type { BudgetContextInterface } from "./guitos/context/BudgetContext";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 
 window.crypto.randomUUID = randomUUID;
@@ -81,7 +82,7 @@ export const testEmptyBudgetContext = {
   canRedo: false,
 };
 
-export const testBudgetContext = {
+export const testBudgetContext: BudgetContextInterface = {
   budget: BudgetMother.testBudget(),
   setBudget: setBudgetMock,
 
