@@ -54,8 +54,8 @@ importers:
         specifier: 2.12.7
         version: 2.12.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       use-immer:
-        specifier: 0.10.0
-        version: 0.10.0(immer@10.1.1)(react@18.2.0)
+        specifier: 0.11.0
+        version: 0.11.0(immer@10.1.1)(react@18.2.0)
       use-undo:
         specifier: 1.1.1
         version: 1.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -3031,11 +3031,11 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
-  use-immer@0.10.0:
-    resolution: {integrity: sha512-/eVwNR4TG9Tm/dd+aHYLLaI0FLfYKlkTqKMkn78Ah/EYVzWd/zJIgpkdoFEKbhQJOGo8XN7/mWrTx0exp1c+Ug==}
+  use-immer@0.11.0:
+    resolution: {integrity: sha512-RNAqi3GqsWJ4bcCd4LMBgdzvPmTABam24DUaFiKfX9s3MSorNRz9RDZYJkllJoMHUxVLMDetwAuCDeyWNrp1yA==}
     peerDependencies:
       immer: '>=8.0.0'
-      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0 || ^19.0.0
 
   use-undo@1.1.1:
     resolution: {integrity: sha512-2NNpJv7TDQpyETgRTG5I/CsABX5nhExpx8PEhWiDsnW9C5BA6Xnn8G9u/lPeg3+JsBrBtUx8/5bMbGmpnWz1Cw==}
@@ -6356,7 +6356,7 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  use-immer@0.10.0(immer@10.1.1)(react@18.2.0):
+  use-immer@0.11.0(immer@10.1.1)(react@18.2.0):
     dependencies:
       immer: 10.1.1
       react: 18.2.0
