@@ -1,4 +1,4 @@
-import type { IntlConfig } from "react-currency-input-field/dist/components/CurrencyInputProps";
+import type { IntlConfig } from "react-currency-input-field";
 import { currenciesList } from "../../lists/currenciesList";
 
 export class UserOptions {
