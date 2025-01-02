@@ -1,3 +1,37 @@
+## 1.3.7 (2025-01-02)
+
+#### Bug Fixes
+
+* bump libs (fbfe97fc)
+
+#### Documentation
+
+* update published on (94851e02)
+
+#### Chores
+
+* **release:** 1.3.6 (5f8f504d)
+
+#### Build
+
+* **deps-dev:** bump console-fail-test from 0.4.4 to 0.5.0 (#163) (915de578)
+* **deps-dev:** bump @types/papaparse from 5.3.14 to 5.3.15 (#164) (529c2997)
+* **deps-dev:** bump @biomejs/biome from 1.9.3 to 1.9.4 (#166) (020aea01)
+* **deps:** bump react-currency-input-field from 3.8.0 to 3.9.0 (#167) (7b554e47)
+* **deps:** bump use-immer from 0.10.0 to 0.11.0 (#165) (38b06437)
+* **deps:** bump nanoid from 3.3.7 to 3.3.8 in the npm_and_yarn group (#162) (a3f53022)
+* **deps:** bump react-router-dom from 6.26.1 to 7.0.1 (#157) (06ca9598)
+* **deps-dev:** bump @types/jest from 29.5.12 to 29.5.14 (#159) (c7a63c5c)
+* **deps:** bump react-bootstrap from 2.10.5 to 2.10.6 (#160) (0d4ea148)
+* **deps-dev:** bump typescript from 5.5.4 to 5.7.2 (#161) (73b9c1f6)
+* **deps:** bump cross-spawn in the npm_and_yarn group (#156) (95f0c192)
+* **deps-dev:** bump @playwright/test from 1.46.1 to 1.48.2 (#152) (bf5fa0af)
+* **deps-dev:** bump @testing-library/react from 16.0.0 to 16.0.1 (#154) (c7751b08)
+* **deps:** bump react-bootstrap from 2.10.4 to 2.10.5 (#151) (9abc3fd0)
+* **deps-dev:** bump workbox-window from 7.1.0 to 7.3.0 (#153) (e44aebf9)
+* **deps-dev:** bump @faker-js/faker from 8.4.1 to 9.1.0 (#155) (bc326077)
+
+
 ## 1.3.6 (2024-10-20)
 
 #### Bug Fixes
