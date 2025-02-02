@@ -126,7 +126,7 @@ function BudgetProvider({ children }: PropsWithChildren) {
   }
 
   return (
-    <BudgetContext.Provider
+    <BudgetContext
       value={{
         budget,
         setBudget,
@@ -144,7 +144,7 @@ function BudgetProvider({ children }: PropsWithChildren) {
       }}
     >
       {children}
-    </BudgetContext.Provider>
+    </BudgetContext>
   );
 }
 

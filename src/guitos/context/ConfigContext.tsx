@@ -45,9 +45,9 @@ function ConfigProvider({ children }: PropsWithChildren) {
   );
   const intlConfig = UserOptions.toIntlConfig(userOptions);
   return (
-    <ConfigContext.Provider value={{ userOptions, setUserOptions, intlConfig }}>
+    <ConfigContext value={{ userOptions, setUserOptions, intlConfig }}>
       {children}
-    </ConfigContext.Provider>
+    </ConfigContext>
   );
 }
 

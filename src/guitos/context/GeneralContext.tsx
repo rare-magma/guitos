@@ -103,7 +103,7 @@ function GeneralProvider({ children }: PropsWithChildren) {
   const [notifications, setNotifications] = useImmer<BudgetNotification[]>([]);
 
   return (
-    <GeneralContext.Provider
+    <GeneralContext
       value={{
         needReload,
         setNeedReload,
@@ -122,7 +122,7 @@ function GeneralProvider({ children }: PropsWithChildren) {
       }}
     >
       {children}
-    </GeneralContext.Provider>
+    </GeneralContext>
   );
 }
 
