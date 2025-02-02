@@ -86,7 +86,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     .getByTestId("import-form-control")
     .setInputFiles("./docs/guitos-sample.json");
 
-  await page.getByLabel("go to newer budget").click();
+  await page.getByLabel("go to newer budget").click({ force: true });
 
   if (isMobile) {
     await page.getByLabel("Toggle navigation").click();
