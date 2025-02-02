@@ -1,5 +1,5 @@
 import Big from "big.js";
-import { Reorder } from "framer-motion";
+import { Reorder } from "motion/react";
 import { produce } from "immer";
 import { useRef, useState } from "react";
 import {
