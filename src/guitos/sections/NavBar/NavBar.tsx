@@ -42,8 +42,7 @@ export interface SearchOption {
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
 export function NavBar() {
   const searchRef = useRef<TypeaheadRef>(null);
-  const nameRef =
-    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
+  const nameRef = useRef<HTMLInputElement>(null);
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
 
   const [expanded, setExpanded] = useState(false);
@@ -79,15 +78,9 @@ export function NavBar() {
     preventDefault: true,
   });
 
-  useHotkeys(
-    ["/", "f"],
-    (e) =>
-      !e.repeat &&
-      focusRef(
-        searchRef as unknown as React.MutableRefObject<HTMLInputElement>,
-      ),
-    { preventDefault: true },
-  );
+  useHotkeys(["/", "f"], (e) => !e.repeat && focusRef(searchRef), {
+    preventDefault: true,
+  });
 
   useHotkeys("n", (e) => !e.repeat && focusRef(nameRef), {
     preventDefault: true,

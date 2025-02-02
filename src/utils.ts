@@ -1,5 +1,6 @@
 import Big from "big.js";
-import type { MutableRefObject } from "react";
+import type { RefObject } from "react";
+import type Typeahead from "react-bootstrap-typeahead/types/core/Typeahead";
 import type { NavigateFunction } from "react-router";
 import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
@@ -57,7 +58,7 @@ export function intlFormat(amount: number, userOptions: UserOptions): string {
   }).format(amount);
 }
 
-export function focusRef(ref: MutableRefObject<HTMLInputElement | undefined>) {
+export function focusRef(ref: RefObject<HTMLInputElement | Typeahead | null>) {
   if (ref.current) {
     ref.current.focus();
   }

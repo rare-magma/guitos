@@ -27,7 +27,7 @@ interface ItemFormProps {
   itemForm: BudgetItem;
   costPercentage: number;
   label: string;
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
   userOptions: UserOptions;
 }
 

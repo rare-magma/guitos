@@ -24,8 +24,7 @@ interface NavBarImpExpProps {
 export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
   const { budget, budgetList, budgetNameList } = useBudget();
   const { handleImport } = useDB();
-  const importRef =
-    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
+  const importRef = useRef<HTMLInputElement>(null);
   const importButtonRef = useRef<HTMLButtonElement>(null);
   const exportCSVButtonRef = useRef<HTMLButtonElement>(null);
   const impExpButtonRef = useRef<HTMLButtonElement>(null);

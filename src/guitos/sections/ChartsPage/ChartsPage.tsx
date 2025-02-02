@@ -1,4 +1,4 @@
-import { type MutableRefObject, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Button,
   Col,
@@ -73,13 +73,9 @@ export default function ChartsPage({ onShowGraphs }: GraphProps) {
     preventDefault: true,
   });
 
-  useHotkeys(
-    ["/", "f"],
-    (e) =>
-      !e.repeat &&
-      focusRef(filterRef as unknown as MutableRefObject<HTMLInputElement>),
-    { preventDefault: true },
-  );
+  useHotkeys(["/", "f"], (e) => !e.repeat && focusRef(filterRef), {
+    preventDefault: true,
+  });
 
   function handleSelect(option: Option[]) {
     const newFilter = option[0] as FilteredItem;

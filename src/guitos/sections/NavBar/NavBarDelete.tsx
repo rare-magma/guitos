@@ -5,7 +5,7 @@ import { useBudget } from "../../context/BudgetContext";
 import type { Uuid } from "../../domain/uuid";
 
 interface NavBarDeleteProps {
-  deleteButtonRef: RefObject<HTMLButtonElement>;
+  deleteButtonRef: RefObject<HTMLButtonElement | null>;
   handleRemove: (i: Uuid) => void;
   expanded: boolean;
 }

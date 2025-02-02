@@ -40,10 +40,8 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
   const shouldCalculateAvailablePerc =
     revenuePercentage <= 100 && stat && stat.available > 0;
 
-  const goalRef =
-    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
-  const reservesRef =
-    useRef<HTMLInputElement>() as React.MutableRefObject<HTMLInputElement>;
+  const goalRef = useRef<HTMLInputElement>(null);
+  const reservesRef = useRef<HTMLInputElement>(null);
 
   useHotkeys("g", (e) => !e.repeat && focusRef(goalRef), {
     preventDefault: true,
