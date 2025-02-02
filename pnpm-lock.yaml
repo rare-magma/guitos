@@ -36,8 +36,8 @@ importers:
         specifier: 2.10.7
         version: 2.10.7(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-bootstrap-typeahead:
-        specifier: 6.3.4
-        version: 6.3.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 6.4.0
+        version: 6.4.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-currency-input-field:
         specifier: 3.9.0
         version: 3.9.0(react@18.2.0)
@@ -892,6 +892,21 @@ packages:
     resolution: {integrity: sha512-r0tJ3ZOkMd9xsu3VRfqlFR6cz0V/jFYRswAIpC+m/DIfAUXq7g8N7wTAlhSANySXYGKzGryfDXwtwsY8TxEIDw==}
     engines: {node: '>=18.0.0', npm: '>=9.0.0'}
 
+  '@floating-ui/core@1.6.9':
+    resolution: {integrity: sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==}
+
+  '@floating-ui/dom@1.6.13':
+    resolution: {integrity: sha512-umqzocjDgNRGTuO7Q8CU32dkHkECqI8ZdMZ5Swb6QAM0t5rnlrN3lGo1hdpscRd3WS8T6DKYK4ephgIH9iRh3w==}
+
+  '@floating-ui/react-dom@2.1.2':
+    resolution: {integrity: sha512-06okr5cgPzMNBy+Ycse2A6udMi4bqwW/zgBF/rwjcNqWkyr82Mcg8b0vjX8OJpZFy/FKjJmw6wV7t44kK6kW7A==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+
+  '@floating-ui/utils@0.2.9':
+    resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
+
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
@@ -959,8 +974,13 @@ packages:
     peerDependencies:
       react: '>=16.8.0'
 
-  '@restart/hooks@0.5.0':
-    resolution: {integrity: sha512-wS+h6IusJCPjTkmOOrRZxIPICD/mtFA3PRZviutoM23/b7akyDGfZF/WS+nIFk27u7JDhPE2+0GBdZxjSqHZkg==}
+  '@restart/hooks@0.4.16':
+    resolution: {integrity: sha512-f7aCv7c+nU/3mF7NWLtVVr0Ra80RqsO89hO72r+Y/nvQr5+q0UFGkocElTH6MJApvReVh6JHUFYn2cw1WdHF3w==}
+    peerDependencies:
+      react: '>=16.8.0'
+
+  '@restart/hooks@0.5.1':
+    resolution: {integrity: sha512-EMoH04NHS1pbn07iLTjIjgttuqb7qu4+/EyhAx27MHpoENcB2ZdSsLTNxmKD+WEPnZigo62Qc8zjGnNxoSE/5Q==}
     peerDependencies:
       react: '>=16.8.0'
 
@@ -1558,6 +1578,9 @@ packages:
   classnames@2.3.2:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
 
+  classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
+
   clsx@2.0.0:
     resolution: {integrity: sha512-rQ1+kcj+ttHG0MKVGBUXwayCCF1oh39BF5COIpRzuCEv8Mwjv0XucrI2ExNTOn9IlLifGClWQcU9BrZORvtw6Q==}
     engines: {node: '>=6'}
@@ -1586,8 +1609,8 @@ packages:
     resolution: {integrity: sha512-gk/Z852D2Wtb//0I+kRFNKKE9dIIVirjoqPoA1wJU+XePVXZfGeBpk45+A1rKO4Q43prqWBNY/MiIeRLbPWUaA==}
     engines: {node: '>=4.0.0'}
 
-  compute-scroll-into-view@3.1.0:
-    resolution: {integrity: sha512-rj8l8pD4bJ1nx+dAkMhV1xB5RuZEyVysfxJqB1pRchh1KVvwOv9b7CGB8ZfjTImVv2oF+sYMUkMZq6Na5Ftmbg==}
+  compute-scroll-into-view@3.1.1:
+    resolution: {integrity: sha512-VRhuHOLoKYOy4UbilLbUzbYg93XLjv2PncJC50EuTWPA3gaja1UjBsUP/D/9/juV3vQFr6XBEzn9KCAHdUvOHw==}
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -2506,8 +2529,8 @@ packages:
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
-  react-bootstrap-typeahead@6.3.4:
-    resolution: {integrity: sha512-kPOd3y089sVTny6atfZyPoptaUO70G7fZnD9tir6VEPdL8oglNRNISO7yWLQdIHCDEmNkZZDKQuS5pjSXnrjTw==}
+  react-bootstrap-typeahead@6.4.0:
+    resolution: {integrity: sha512-utKkBhPt+/hRGqMJB1e55yzKk72smoP/ErRLvEMALlmAEEsxbu5ks8PlseIHgtWue2z4yzv9lazDncJFcJfKgQ==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: '>=16.8.0'
@@ -2532,9 +2555,6 @@ packages:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
       react: ^18.2.0
-
-  react-fast-compare@3.2.2:
-    resolution: {integrity: sha512-nsO+KSNgo1SbJqJEYRE9ERzo7YtYbou/OqjSQKxV7jcKox7+usiUVZOAC+XnDOABXggQTno0Y1CpVnuWEc1boQ==}
 
   react-hotkeys-hook@4.6.1:
     resolution: {integrity: sha512-XlZpbKUj9tkfgPgT9gA+1p7Ey6vFIZHttUjPqpTdyT5nqQ8mHL7elxvSbaC+dpSiHUSmr21Ya1mDxBZG3aje4Q==}
@@ -2561,19 +2581,6 @@ packages:
 
   react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
-
-  react-overlays@5.2.1:
-    resolution: {integrity: sha512-GLLSOLWr21CqtJn8geSwQfoJufdt3mfdsnIiQswouuQ2MMPns+ihZklxvsTDKD3cR2tF8ELbi5xUsvqVhR6WvA==}
-    peerDependencies:
-      react: '>=16.3.0'
-      react-dom: '>=16.3.0'
-
-  react-popper@2.3.0:
-    resolution: {integrity: sha512-e1hj8lL3uM+sgSR4Lxzn5h1GxBlpa4CQz0XLF8kx4MDrDRWY0Ena4c97PUeSX9i5W3UAfDP0z0FXCTQkoXUl3Q==}
-    peerDependencies:
-      '@popperjs/core': ^2.0.0
-      react: ^16.8.0 || ^17 || ^18
-      react-dom: ^16.8.0 || ^17 || ^18
 
   react-router@7.1.1:
     resolution: {integrity: sha512-39sXJkftkKWRZ2oJtHhCxmoCrBCULr/HAH4IT5DHlgu/Q0FCPV0S4Lx+abjDTx/74xoZzNYDYbOZWlJjruyuDQ==}
@@ -4066,6 +4073,23 @@ snapshots:
 
   '@faker-js/faker@9.3.0': {}
 
+  '@floating-ui/core@1.6.9':
+    dependencies:
+      '@floating-ui/utils': 0.2.9
+
+  '@floating-ui/dom@1.6.13':
+    dependencies:
+      '@floating-ui/core': 1.6.9
+      '@floating-ui/utils': 0.2.9
+
+  '@floating-ui/react-dom@2.1.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@floating-ui/dom': 1.6.13
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+
+  '@floating-ui/utils@0.2.9': {}
+
   '@isaacs/cliui@8.0.2':
     dependencies:
       string-width: 5.1.2
@@ -4137,17 +4161,22 @@ snapshots:
       dequal: 2.0.3
       react: 18.2.0
 
-  '@restart/hooks@0.5.0(react@18.2.0)':
+  '@restart/hooks@0.4.16(react@18.2.0)':
+    dependencies:
+      dequal: 2.0.3
+      react: 18.2.0
+
+  '@restart/hooks@0.5.1(react@18.2.0)':
     dependencies:
       dequal: 2.0.3
       react: 18.2.0
 
   '@restart/ui@1.9.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@babel/runtime': 7.26.7
+      '@babel/runtime': 7.26.0
       '@popperjs/core': 2.11.8
       '@react-aria/ssr': 3.8.0(react@18.2.0)
-      '@restart/hooks': 0.5.0(react@18.2.0)
+      '@restart/hooks': 0.5.1(react@18.2.0)
       '@types/warning': 3.0.3
       dequal: 2.0.3
       dom-helpers: 5.2.1
@@ -4745,6 +4774,8 @@ snapshots:
 
   classnames@2.3.2: {}
 
+  classnames@2.5.1: {}
+
   clsx@2.0.0: {}
 
   color-convert@1.9.3:
@@ -4767,7 +4798,7 @@ snapshots:
 
   common-tags@1.8.2: {}
 
-  compute-scroll-into-view@3.1.0: {}
+  compute-scroll-into-view@3.1.1: {}
 
   concat-map@0.0.1: {}
 
@@ -4898,7 +4929,7 @@ snapshots:
 
   dom-helpers@5.2.1:
     dependencies:
-      '@babel/runtime': 7.26.7
+      '@babel/runtime': 7.26.0
       csstype: 3.1.2
 
   dunder-proto@1.0.1:
@@ -5717,20 +5748,18 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  react-bootstrap-typeahead@6.3.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-bootstrap-typeahead@6.4.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@babel/runtime': 7.26.0
-      '@popperjs/core': 2.11.8
-      '@restart/hooks': 0.4.11(react@18.2.0)
-      classnames: 2.3.2
+      '@babel/runtime': 7.26.7
+      '@floating-ui/react-dom': 2.1.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@restart/hooks': 0.4.16(react@18.2.0)
+      classnames: 2.5.1
       fast-deep-equal: 3.1.3
       invariant: 2.2.4
       lodash.debounce: 4.0.8
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-overlays: 5.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
-      react-popper: 2.3.0(@popperjs/core@2.11.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       scroll-into-view-if-needed: 3.1.0
       warning: 4.0.3
 
@@ -5764,8 +5793,6 @@ snapshots:
       react: 18.2.0
       scheduler: 0.23.2
 
-  react-fast-compare@3.2.2: {}
-
   react-hotkeys-hook@4.6.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       react: 18.2.0
@@ -5784,27 +5811,6 @@ snapshots:
   react-is@18.3.1: {}
 
   react-lifecycles-compat@3.0.4: {}
-
-  react-overlays@5.2.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
-    dependencies:
-      '@babel/runtime': 7.26.7
-      '@popperjs/core': 2.11.8
-      '@restart/hooks': 0.4.11(react@18.2.0)
-      '@types/warning': 3.0.3
-      dom-helpers: 5.2.1
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      uncontrollable: 7.2.1(react@18.2.0)
-      warning: 4.0.3
-
-  react-popper@2.3.0(@popperjs/core@2.11.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
-    dependencies:
-      '@popperjs/core': 2.11.8
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-fast-compare: 3.2.2
-      warning: 4.0.3
 
   react-router@7.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
@@ -5826,7 +5832,7 @@ snapshots:
 
   react-transition-group@4.4.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@babel/runtime': 7.26.7
+      '@babel/runtime': 7.26.0
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
@@ -5980,7 +5986,7 @@ snapshots:
 
   scroll-into-view-if-needed@3.1.0:
     dependencies:
-      compute-scroll-into-view: 3.1.0
+      compute-scroll-into-view: 3.1.1
 
   semver@6.3.1: {}
 
@@ -6283,7 +6289,7 @@ snapshots:
 
   uncontrollable@7.2.1(react@18.2.0):
     dependencies:
-      '@babel/runtime': 7.26.7
+      '@babel/runtime': 7.26.0
       '@types/react': 18.2.79
       invariant: 2.2.4
       react: 18.2.0
