@@ -16,7 +16,7 @@
     "papaparse": "5.4.1",
     "react": "18.2.0",
     "react-bootstrap": "2.10.7",
-    "react-bootstrap-typeahead": "6.3.4",
+    "react-bootstrap-typeahead": "6.4.0",
     "react-currency-input-field": "3.9.0",
     "react-dom": "18.2.0",
     "react-hotkeys-hook": "4.6.1",
