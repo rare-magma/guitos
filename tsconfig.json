@@ -6,7 +6,7 @@
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "react/jsx-runtime",
     "lib": ["dom", "dom.iterable", "ES2023"],
     "module": "esnext",
     "moduleResolution": "node",
