@@ -1,10 +1,10 @@
 import type React from "react";
 import { useRef } from "react";
 import { Button, Container, Form, Row, Stack } from "react-bootstrap";
-import { useWindowSize } from "usehooks-ts";
 import { useDB } from "../../hooks/useDB";
 import { Loading } from "../Loading/Loading";
 import "./LandingPage.css";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 interface LandingPageProps {
   loadingFromDB: boolean;
