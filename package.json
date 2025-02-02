@@ -52,16 +52,11 @@
     "typescript": "5.7.2",
     "vite": "6.0.11",
     "vite-plugin-pwa": "0.21.1",
-    "vite-plugin-sri3": "1.0.5",
+    "vite-plugin-sri3": "1.0.6",
     "vitest": "2.1.8",
     "workbox-window": "7.3.0"
   },
   "name": "guitos",
-  "pnpm": {
-    "overrides": {
-      "vite@^5": "^6"
-    }
-  },
   "private": true,
   "scripts": {
     "build": "vite build",
