@@ -9,4 +9,4 @@ runs:
 
       - name: Run tests
         shell: bash
-        run: pnpm test -- --run
+        run: pnpm test:unit -- --run

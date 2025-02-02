@@ -27,30 +27,24 @@ To set up a development environment, please follow these steps:
 
 4. Open <http://localhost:5173> to view it in the browser.
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+   The page will reload if you make edits.
+   You will also see any lint errors in the console.
 
-5. Run tests
+5. Run all tests
 
    ```sh
    pnpm test
    ```
 
-Launches the test runner in the interactive watch mode.
+   Launches the test runner in the interactive watch mode.
 
 6. Run end to end tests
 
    ```sh
-   pnpm e2e:ui
+   pnpm test:e2e:ui
    ```
 
 Launches the e2e test runner in the interactive mode.
-
-7. Update package-lock.json when installing a new lib:
-
-   ```sh
-   npm i --package-lock-only
-   ```
 
 ## Issues and feature requests
 
