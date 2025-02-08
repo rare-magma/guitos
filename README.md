@@ -254,7 +254,6 @@ docker compose -f docker/docker-compose.yaml up --detach
 - [use-undo](https://github.com/homerchen19/use-undo)
 - [immer](https://github.com/immerjs/immer)
 - [use-immer](https://github.com/immerjs/use-immer)
-- [usehooks-ts](https://github.com/juliencrn/usehooks-ts)
 - [Framer Motion](https://github.com/framer/motion)
 
 ## Hosted On
