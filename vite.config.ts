@@ -47,7 +47,7 @@ export default defineConfig((_) => {
       pool: "vmThreads",
       globals: true,
       mockClear: true,
-      environment: "jsdom",
+      environment: "happy-dom",
       setupFiles: ["./src/setupTests.ts", "console-fail-test/setup"],
       include: [
         "src/**/*.{test,spec}.?(c|m)[jt]s?(x)",

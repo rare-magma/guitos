@@ -38,7 +38,7 @@ beforeEach(() => {
   budgetContextSpy.mockReturnValue(testBudgetContext);
 });
 
-// runs a cleanup after each test case (e.g. clearing jsdom)
+// runs a cleanup after each test case (e.g. clearing happy-dom)
 afterEach(() => {
   cleanup();
 });

@@ -15,9 +15,6 @@ const importRegex = /import budget/i;
 const exportCsvRegex = /export budget as csv/i;
 const exportJsonRegex = /export budget as json/i;
 
-// workaround for jsdom missing implementation https://stackoverflow.com/a/68038982
-HTMLAnchorElement.prototype.click = vi.fn();
-
 describe("NavBar", () => {
   const windowSpy = vi.spyOn(window, "open").mockImplementation(() => null);
 
