@@ -21,6 +21,9 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   await page.getByLabel("open charts view").click();
 
   await expect(page.getByText("Revenue vs expenses")).toBeVisible();
+  // ensure y chart labels are visible
+  await page.getByText("$600.00").hover();
+  await page.getByText("12%").hover();
   await expect(page.getByText("Savings", { exact: true })).toBeVisible();
   await expect(page.getByText("Reserves", { exact: true })).toBeVisible();
   await expect(page.getByText("Available vs with goal")).toBeVisible();

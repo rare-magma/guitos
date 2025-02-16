@@ -14,8 +14,8 @@ import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import type { FilteredItem } from "../ChartsPage/ChartsPage";
 import "./Chart.css";
+import { useState } from "react";
 import { ChartTooltip } from "./ChartTooltip";
-import { useDynamicYAxisWidth } from "./DynamicYAxis";
 
 interface ChartProps {
   header: string;
@@ -64,9 +64,12 @@ export function Chart({
   const chartData =
     filteredData ?? budgetList?.sort((a, b) => a.name.localeCompare(b.name));
 
-  const { yAxisWidth, setChartRef } = useDynamicYAxisWidth({
-    yAxisWidthModifier: (x) => x + 10,
-  });
+  const [longestTick, setLongestTick] = useState("");
+
+  const getYAxisTickWidth = (): number => {
+    const charWidth = 8;
+    return longestTick.length * charWidth + 30;
+  };
 
   function medianLabelGroup(legend: string, values: number[]) {
     return (
@@ -84,7 +87,11 @@ export function Chart({
   }
 
   function tickFormatter(value: number) {
-    return intlFormat(value, userOptions) ?? "";
+    const formattedTick = intlFormat(value, userOptions) ?? "";
+    if (longestTick.length < formattedTick.length) {
+      setLongestTick(formattedTick);
+    }
+    return formattedTick;
   }
 
   return (
@@ -97,7 +104,6 @@ export function Chart({
         >
           <AreaChart
             data={chartData}
-            ref={setChartRef}
             margin={{
               top: 10,
               right: 0,
@@ -114,14 +120,14 @@ export function Chart({
               <YAxis
                 stroke="var(--textcolor)"
                 style={{ fontFamily: "ui-monospace, monospace" }}
-                width={yAxisWidth}
+                width={getYAxisTickWidth() + 15}
                 unit={unit}
               />
             ) : (
               <YAxis
                 stroke="var(--textcolor)"
                 style={{ fontFamily: "ui-monospace, monospace" }}
-                width={yAxisWidth}
+                width={getYAxisTickWidth()}
                 tickFormatter={tickFormatter}
               />
             )}
