@@ -1,3 +1,29 @@
+## 1.3.9 (2025-02-16)
+
+#### Bug Fixes
+
+* y chart labels visibility (c16fe14c)
+
+#### Documentation
+
+* remove usehooks (718c1fb0)
+
+#### Tests
+
+* don't wait for button to be enabled (0a42e2e1)
+
+#### Code Refactoring
+
+* use Context directly (a540a97b)
+
+#### Build
+
+* replace jsdom with happy-dom (b40029a8)
+* remove unnecessary dep (c64273e6)
+* **deps-dev:** bump vitest in the npm_and_yarn group (#174) (04249155)
+* use new jsx namespace (4533d992)
+
+
 ## 1.3.7 (2025-01-02)
 
 #### Bug Fixes
