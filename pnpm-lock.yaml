@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  react-currency-input-field>react: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-
 importers:
 
   .:
@@ -39,8 +36,8 @@ importers:
         specifier: 6.4.0
         version: 6.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-currency-input-field:
-        specifier: 3.9.0
-        version: 3.9.0(react@19.0.0)
+        specifier: 3.10.0
+        version: 3.10.0(react@19.0.0)
       react-dom:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
@@ -121,8 +118,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0
       happy-dom:
-        specifier: 17.1.0
-        version: 17.1.0
+        specifier: 17.1.2
+        version: 17.1.2
       typescript:
         specifier: 5.7.3
         version: 5.7.3
@@ -137,7 +134,7 @@ importers:
         version: 1.0.6(vite@6.0.11(@types/node@22.13.0)(terser@5.37.0))
       vitest:
         specifier: 3.0.5
-        version: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.0)(jsdom@26.0.0)(terser@5.37.0)
+        version: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.2)(jsdom@26.0.0)(terser@5.37.0)
       workbox-window:
         specifier: 7.3.0
         version: 7.3.0
@@ -1997,8 +1994,8 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  happy-dom@17.1.0:
-    resolution: {integrity: sha512-9tUhXyePCjzUMycaHS/IzrIpF69xiq/laAT7golk4MtZ6t8ft5+Rv7U3lfrs2b4NMH0JTL3EhZzjfahrPmOnaQ==}
+  happy-dom@17.1.2:
+    resolution: {integrity: sha512-5E8yneWaJwliTPlN1gGVKrmwRRfAg54yiChOjR3vjdTr0+b8mdbZsqPh8MRRvZfQHqaBJmrJvjmoAXFcL4LXLQ==}
     engines: {node: '>=18.0.0'}
 
   has-bigints@1.1.0:
@@ -2552,8 +2549,8 @@ packages:
       '@types/react':
         optional: true
 
-  react-currency-input-field@3.9.0:
-    resolution: {integrity: sha512-OmkO0rRSGiNGbcO4F1wzC+Szm2A7tLRGtDAKF6t0xNrFr07q99AHo3BAn/68RTEG4iwqc2m2jekKZi33/8SV+Q==}
+  react-currency-input-field@3.10.0:
+    resolution: {integrity: sha512-GRmZogHh1e1LrmgXg/fKHSuRLYUnj/c/AumfvfuDMA0UX1mDR6u2NR0fzDemRdq4tNHNLucJeJ2OKCr3ehqyDA==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -4547,7 +4544,7 @@ snapshots:
       std-env: 3.8.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.0)(jsdom@26.0.0)(terser@5.37.0)
+      vitest: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.2)(jsdom@26.0.0)(terser@5.37.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -4594,7 +4591,7 @@ snapshots:
       sirv: 3.0.0
       tinyglobby: 0.2.10
       tinyrainbow: 2.0.0
-      vitest: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.0)(jsdom@26.0.0)(terser@5.37.0)
+      vitest: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.2)(jsdom@26.0.0)(terser@5.37.0)
 
   '@vitest/utils@3.0.5':
     dependencies:
@@ -5242,7 +5239,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  happy-dom@17.1.0:
+  happy-dom@17.1.2:
     dependencies:
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
@@ -5818,7 +5815,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.0.8
 
-  react-currency-input-field@3.9.0(react@19.0.0):
+  react-currency-input-field@3.10.0(react@19.0.0):
     dependencies:
       react: 19.0.0
 
@@ -6443,7 +6440,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.37.0
 
-  vitest@3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.0)(jsdom@26.0.0)(terser@5.37.0):
+  vitest@3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.2)(jsdom@26.0.0)(terser@5.37.0):
     dependencies:
       '@vitest/expect': 3.0.5
       '@vitest/mocker': 3.0.5(vite@6.0.11(@types/node@22.13.0)(terser@5.37.0))
@@ -6468,7 +6465,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.13.0
       '@vitest/ui': 3.0.5(vitest@3.0.5)
-      happy-dom: 17.1.0
+      happy-dom: 17.1.2
       jsdom: 26.0.0
     transitivePeerDependencies:
       - jiti

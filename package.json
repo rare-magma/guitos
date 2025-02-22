@@ -17,7 +17,7 @@
     "react": "19.0.0",
     "react-bootstrap": "2.10.9",
     "react-bootstrap-typeahead": "6.4.0",
-    "react-currency-input-field": "3.9.0",
+    "react-currency-input-field": "3.10.0",
     "react-dom": "19.0.0",
     "react-hotkeys-hook": "4.6.1",
     "react-icons": "5.4.0",
@@ -46,7 +46,7 @@
     "@vitest/ui": "3.0.5",
     "autoprefixer": "10.4.20",
     "console-fail-test": "0.5.0",
-    "happy-dom": "17.1.0",
+    "happy-dom": "17.1.2",
     "typescript": "5.7.3",
     "vite": "6.0.11",
     "vite-plugin-pwa": "0.21.1",
@@ -56,9 +56,6 @@
   },
   "name": "guitos",
   "pnpm": {
-    "overrides": {
-      "react-currency-input-field>react": "^16.9.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
-    },
     "onlyBuiltDependencies": ["@biomejs/biome", "@swc/core", "esbuild"]
   },
   "private": true,
