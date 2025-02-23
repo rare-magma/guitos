@@ -23,14 +23,13 @@
 
 </details>
 
-<img alt="guitos light theme horizontal layout screenshot" src="docs/images/horizontal-light.png" title="Horizontal light" width="100%">
-<details>
-<summary>Additional screenshots</summary>
-<br>
-
 |                                                Horizontal layout                                                 |                                              Vertical layout                                               |
 | :--------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------: |
 | <img alt="guitos horizontal layout screenshot" src="docs/images/horizontal.png" title="Horizontal" width="100%"> | <img alt="guitos vertical layout screenshot" src="docs/images/vertical.png" title="Vertical" width="100%"> |
+
+<details>
+<summary>Additional screenshots</summary>
+<br>
 
 |                                                               Light theme                                                                |                                                            Light theme                                                             |
 | :--------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: |
