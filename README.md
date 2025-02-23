@@ -23,8 +23,9 @@
 
 </details>
 
+<img alt="guitos light theme horizontal layout screenshot" src="docs/images/horizontal-light.png" title="Horizontal light" width="100%">
 <details>
-<summary>Screenshots</summary>
+<summary>Additional screenshots</summary>
 <br>
 
 |                                                Horizontal layout                                                 |                                              Vertical layout                                               |
