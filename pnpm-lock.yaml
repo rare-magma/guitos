@@ -118,8 +118,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0
       happy-dom:
-        specifier: 17.1.2
-        version: 17.1.2
+        specifier: 17.1.8
+        version: 17.1.8
       typescript:
         specifier: 5.7.3
         version: 5.7.3
@@ -134,7 +134,7 @@ importers:
         version: 1.0.6(vite@6.0.11(@types/node@22.13.0)(terser@5.39.0))
       vitest:
         specifier: 3.0.5
-        version: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.2)(jsdom@26.0.0)(terser@5.39.0)
+        version: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.8)(jsdom@26.0.0)(terser@5.39.0)
       workbox-window:
         specifier: 7.3.0
         version: 7.3.0
@@ -2007,8 +2007,8 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  happy-dom@17.1.2:
-    resolution: {integrity: sha512-5E8yneWaJwliTPlN1gGVKrmwRRfAg54yiChOjR3vjdTr0+b8mdbZsqPh8MRRvZfQHqaBJmrJvjmoAXFcL4LXLQ==}
+  happy-dom@17.1.8:
+    resolution: {integrity: sha512-Yxbq/FG79z1rhAf/iB6YM8wO2JB/JDQBy99RiLSs+2siEAi5J05x9eW1nnASHZJbpldjJE2KuFLsLZ+AzX/IxA==}
     engines: {node: '>=18.0.0'}
 
   has-bigints@1.1.0:
@@ -4570,7 +4570,7 @@ snapshots:
       std-env: 3.8.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.2)(jsdom@26.0.0)(terser@5.39.0)
+      vitest: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.8)(jsdom@26.0.0)(terser@5.39.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -4617,7 +4617,7 @@ snapshots:
       sirv: 3.0.0
       tinyglobby: 0.2.10
       tinyrainbow: 2.0.0
-      vitest: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.2)(jsdom@26.0.0)(terser@5.39.0)
+      vitest: 3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.8)(jsdom@26.0.0)(terser@5.39.0)
 
   '@vitest/utils@3.0.5':
     dependencies:
@@ -5266,7 +5266,7 @@ snapshots:
 
   graceful-fs@4.2.11: {}
 
-  happy-dom@17.1.2:
+  happy-dom@17.1.8:
     dependencies:
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
@@ -6467,7 +6467,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.39.0
 
-  vitest@3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.2)(jsdom@26.0.0)(terser@5.39.0):
+  vitest@3.0.5(@types/node@22.13.0)(@vitest/ui@3.0.5)(happy-dom@17.1.8)(jsdom@26.0.0)(terser@5.39.0):
     dependencies:
       '@vitest/expect': 3.0.5
       '@vitest/mocker': 3.0.5(vite@6.0.11(@types/node@22.13.0)(terser@5.39.0))
@@ -6492,7 +6492,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.13.0
       '@vitest/ui': 3.0.5(vitest@3.0.5)
-      happy-dom: 17.1.2
+      happy-dom: 17.1.8
       jsdom: 26.0.0
     transitivePeerDependencies:
       - jiti
