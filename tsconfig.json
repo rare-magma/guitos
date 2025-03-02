@@ -3,6 +3,7 @@
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
+    "erasableSyntaxOnly": true,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
