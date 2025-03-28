@@ -89,7 +89,7 @@ jobs:
 
       - name: Compress bundle
         if: steps.semrel.outputs.version != ''
-        run: mv build guitos && zip -r guitos.zip guitos/*
+        run: mv build guitos && zip -r guitos-v${{ steps.semrel.outputs.version }}.zip guitos/*
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
@@ -99,7 +99,7 @@ jobs:
       - name: Upload bundle to GH release
         if: steps.semrel.outputs.version != ''
         run: |
-          gh release upload v${{ steps.semrel.outputs.version }} guitos.zip#guitos-v${{ steps.semrel.outputs.version }}.zip
+          gh release upload v${{ steps.semrel.outputs.version }} guitos-v${{ steps.semrel.outputs.version }}.zip
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
