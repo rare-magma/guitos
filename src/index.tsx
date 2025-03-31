@@ -6,9 +6,7 @@ import { App } from "./App";
 
 const updateSW = registerSW({
   onNeedRefresh() {
-    if (confirm("A new version of guitos is available. Update?")) {
-      updateSW(true);
-    }
+    updateSW(true);
   },
 });
 
