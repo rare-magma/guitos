@@ -226,15 +226,22 @@ export function useDB() {
         let newBudget: Budget;
         if (name.trim() !== "undefined") {
           newBudget = list.filter((b: Budget) => b && b.name === name)[0];
-          setBudget(newBudget, false);
         } else {
           newBudget = list
             .sort((a, b) => a.name.localeCompare(b.name))
             .reverse()
             .filter((b: Budget) => b && b.id === list[0].id)[0];
-          setBudget(newBudget, false);
         }
 
+        // load latest if budget name is not found
+        if (newBudget === undefined) {
+          newBudget = list
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .reverse()
+            .filter((b: Budget) => b && b.id === list[0].id)[0];
+        }
+
+        setBudget(newBudget, false);
         loadCurrencyOption();
         setLoadingFromDB(false);
       })
