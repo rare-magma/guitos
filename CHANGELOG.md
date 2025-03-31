@@ -1,3 +1,22 @@
+## 1.4.2 (2025-03-31)
+
+#### Bug Fixes
+
+* load last budget if name is not found (0b28a03a)
+
+#### Chores
+
+* **release:** 1.4.1 (c67e0abf)
+
+#### Build
+
+* **deps-dev:** bump vite in the npm_and_yarn group (#180) (fd151efc)
+
+#### CI
+
+* generate attestation only on new builds (dc4af756)
+
+
 ## 1.4.1 (2025-03-28)
 
 #### Bug Fixes
