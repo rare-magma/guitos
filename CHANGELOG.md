@@ -1,3 +1,19 @@
+## 1.5.0 (2025-03-31)
+
+#### Feature
+
+* remove prompt for update (94affdba)
+
+#### Chores
+
+* **release:** 1.4.2 (cbef955e)
+
+#### Build
+
+* **deps-dev:** bump vite in the npm_and_yarn group (#182) (039753d3)
+* **deps:** bump @babel/runtime in the npm_and_yarn group (#181) (9c9cc2be)
+
+
 ## 1.4.2 (2025-03-31)
 
 #### Bug Fixes
