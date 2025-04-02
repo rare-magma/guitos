@@ -16,7 +16,7 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.50.1
+      image: mcr.microsoft.com/playwright:v1.51.1
     steps:
       - uses: actions/checkout@v4
         with:
