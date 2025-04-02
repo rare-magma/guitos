@@ -21,8 +21,8 @@ importers:
         specifier: 1.10.0
         version: 1.10.0
       motion:
-        specifier: 12.0.6
-        version: 12.0.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 12.6.3
+        version: 12.6.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       papaparse:
         specifier: 5.5.2
         version: 5.5.2
@@ -1922,8 +1922,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@12.0.6:
-    resolution: {integrity: sha512-LmrXbXF6Vv5WCNmb+O/zn891VPZrH7XbsZgRLBROw6kFiP+iTK49gxTv2Ur3F0Tbw6+sy9BVtSqnWfMUpH+6nA==}
+  framer-motion@12.6.3:
+    resolution: {integrity: sha512-2hsqknz23aloK85bzMc9nSR2/JP+fValQ459ZTVElFQ0xgwR2YqNjYSuDZdFBPOwVCt4Q9jgyTt6hg6sVOALzw==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -2378,14 +2378,14 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  motion-dom@12.0.0:
-    resolution: {integrity: sha512-CvYd15OeIR6kHgMdonCc1ihsaUG4MYh/wrkz8gZ3hBX/uamyZCXN9S9qJoYF03GqfTt7thTV/dxnHYX4+55vDg==}
+  motion-dom@12.6.3:
+    resolution: {integrity: sha512-gRY08RjcnzgFYLemUZ1lo/e9RkBxR+6d4BRvoeZDSeArG4XQXERSPapKl3LNQRu22Sndjf1h+iavgY0O4NrYqA==}
 
-  motion-utils@12.0.0:
-    resolution: {integrity: sha512-MNFiBKbbqnmvOjkPyOKgHUp3Q6oiokLkI1bEwm5QA28cxMZrv0CbbBGDNmhF6DIXsi1pCQBSs0dX8xjeER1tmA==}
+  motion-utils@12.6.3:
+    resolution: {integrity: sha512-R/b3Ia2VxtTNZ4LTEO5pKYau1OUNHOuUfxuP0WFCTDYdHkeTBR9UtxR1cc8mDmKr8PEhmmfnTKGz3rSMjNRoRg==}
 
-  motion@12.0.6:
-    resolution: {integrity: sha512-AzCEO0+//mPlcGiL9JaVwjddHY1cbbnvz5upHL0toqQwsPCs+hiKJ0XG5jfG0XwDtBbiSXdEqW/UTmGLwkVQ6A==}
+  motion@12.6.3:
+    resolution: {integrity: sha512-zw/vqUgv5F5m9fkvOl/eCv2AF1+tkeZl3fu2uIlisIaip8sm5e0CouAl6GkdiRoF+G7s29CjqMdIyPMirwUGHA==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -5162,10 +5162,10 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@12.0.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  framer-motion@12.6.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
-      motion-dom: 12.0.0
-      motion-utils: 12.0.0
+      motion-dom: 12.6.3
+      motion-utils: 12.6.3
       tslib: 2.8.1
     optionalDependencies:
       react: 19.0.0
@@ -5659,15 +5659,15 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  motion-dom@12.0.0:
+  motion-dom@12.6.3:
     dependencies:
-      motion-utils: 12.0.0
+      motion-utils: 12.6.3
 
-  motion-utils@12.0.0: {}
+  motion-utils@12.6.3: {}
 
-  motion@12.0.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  motion@12.6.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
-      framer-motion: 12.0.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      framer-motion: 12.6.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       tslib: 2.8.1
     optionalDependencies:
       react: 19.0.0
