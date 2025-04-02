@@ -33,8 +33,8 @@ importers:
         specifier: 2.10.9
         version: 2.10.9(@types/react@19.0.8)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-bootstrap-typeahead:
-        specifier: 6.4.0
-        version: 6.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 6.4.1
+        version: 6.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-currency-input-field:
         specifier: 3.10.0
         version: 3.10.0(react@19.0.0)
@@ -2543,8 +2543,8 @@ packages:
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
-  react-bootstrap-typeahead@6.4.0:
-    resolution: {integrity: sha512-utKkBhPt+/hRGqMJB1e55yzKk72smoP/ErRLvEMALlmAEEsxbu5ks8PlseIHgtWue2z4yzv9lazDncJFcJfKgQ==}
+  react-bootstrap-typeahead@6.4.1:
+    resolution: {integrity: sha512-Uw3vB4H5WGmnOHdQvqVKkOyzzxZ5NUrsd/HKhGnbta5+bEI99xyghr9Y0tVLcMoQZ9Wxpe4g/LJl75L/FsHq/A==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: '>=16.8.0'
@@ -2647,8 +2647,8 @@ packages:
   regenerate@1.4.2:
     resolution: {integrity: sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==}
 
-  regenerator-runtime@0.14.0:
-    resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
+  regenerator-runtime@0.14.1:
+    resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
 
   regenerator-transform@0.15.2:
     resolution: {integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==}
@@ -3942,7 +3942,7 @@ snapshots:
 
   '@babel/runtime@7.27.0':
     dependencies:
-      regenerator-runtime: 0.14.0
+      regenerator-runtime: 0.14.1
 
   '@babel/template@7.27.0':
     dependencies:
@@ -5797,11 +5797,12 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  react-bootstrap-typeahead@6.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  react-bootstrap-typeahead@6.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@babel/runtime': 7.27.0
       '@floating-ui/react-dom': 2.1.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@restart/hooks': 0.4.16(react@19.0.0)
+      '@restart/ui': 1.9.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       classnames: 2.5.1
       fast-deep-equal: 3.1.3
       invariant: 2.2.4
@@ -5928,7 +5929,7 @@ snapshots:
 
   regenerate@1.4.2: {}
 
-  regenerator-runtime@0.14.0: {}
+  regenerator-runtime@0.14.1: {}
 
   regenerator-transform@0.15.2:
     dependencies:
