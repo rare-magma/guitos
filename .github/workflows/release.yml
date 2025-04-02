@@ -15,9 +15,9 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.51.1
+      image: mcr.microsoft.com/playwright:v1.51.1@sha256:146d046a8d79a1b3a87596c4457b0b1c47f811bf4fc2cc1b99e873ae7f1cbbbd # ratchet:mcr.microsoft.com/playwright:v1.51.1
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # ratchet:actions/checkout@v4
         with:
           persist-credentials: false
 
@@ -40,7 +40,7 @@ jobs:
     needs:
       - test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # ratchet:actions/checkout@v4
         with:
           persist-credentials: false
           ref: main
@@ -48,7 +48,7 @@ jobs:
 
       - name: Semantic Release
         id: semrel
-        uses: go-semantic-release/action@v1
+        uses: go-semantic-release/action@2e9dc4247a6004f8377781bef4cb9dad273a741f # ratchet:go-semantic-release/action@v1
         with:
           github-token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
           update-file: package.json
@@ -75,7 +75,7 @@ jobs:
 
       - name: Deploy to Cloudflare Pages
         if: steps.semrel.outputs.version != ''
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # ratchet:cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -93,7 +93,7 @@ jobs:
 
       - name: Generate artifact attestation
         if: steps.semrel.outputs.version != ''
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@c074443f1aee8d4aeeae555aebba3282517141b2 # ratchet:actions/attest-build-provenance@v2
         with:
           subject-path: guitos-v${{ steps.semrel.outputs.version }}.zip
 

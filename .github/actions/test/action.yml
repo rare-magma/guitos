@@ -3,10 +3,10 @@ description: Runs checks and tests
 runs:
   using: "composite"
   steps:
-      - name: Lint
-        shell: bash
-        run: pnpm lint
+    - name: Lint
+      shell: bash
+      run: pnpm lint
 
-      - name: Run tests
-        shell: bash
-        run: pnpm test:unit -- --run
+    - name: Run tests
+      shell: bash
+      run: pnpm test:unit -- --run
