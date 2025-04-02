@@ -1,3 +1,22 @@
+## 1.5.1 (2025-04-02)
+
+#### Bug Fixes
+
+* bump libs (3df0d13a)
+
+#### Chores
+
+* **release:** 1.5.0 (2bcf785d)
+
+#### Build
+
+* **deps-dev:** bump vite-plugin-pwa from 0.21.1 to 1.0.0 (#185) (acf92858)
+* **deps-dev:** bump @faker-js/faker from 9.4.0 to 9.6.0 (#183) (2c07b27f)
+* **deps:** bump react-bootstrap-typeahead from 6.4.0 to 6.4.1 (#184) (ee8409be)
+* **deps:** bump motion from 12.0.6 to 12.6.3 (#186) (309df7d3)
+* **deps-dev:** bump @vitejs/plugin-react-swc from 3.8.0 to 3.8.1 (#187) (209c6e0f)
+
+
 ## 1.5.0 (2025-03-31)
 
 #### Feature
