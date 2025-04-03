@@ -10,9 +10,9 @@ updates:
     schedule:
       interval: "monthly"
     groups:
-      production-dependencies:
+      deps-prod:
         dependency-type: "production"
-      development-dependencies:
+      deps-dev:
         dependency-type: "development"
   - package-ecosystem: "github-actions"
     directory: "/"
