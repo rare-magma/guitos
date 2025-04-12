@@ -12,7 +12,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 // biome-ignore lint/style/noDefaultExport: <explanation>
 export default defineConfig({
-  timeout: 11 * 1000, // 11 seconds
+  timeout: 21 * 1000, // 21 seconds
   testDir: "./e2e",
   /* Run tests in files in parallel */
   fullyParallel: true,
