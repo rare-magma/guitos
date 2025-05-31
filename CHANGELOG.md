@@ -1,3 +1,23 @@
+## 1.5.3 (2025-05-31)
+
+#### Bug Fixes
+
+* accessibility of progress bar (5ed3af37)
+* build with rollup (58241340)
+
+#### Tests
+
+* run on production build (ca8bdad1)
+
+#### Styles
+
+* docker formatting (b1c60863)
+
+#### Chores
+
+* **release:** 1.5.2 (729e5ec1)
+
+
 ## 1.5.2 (2025-05-31)
 
 #### Bug Fixes
