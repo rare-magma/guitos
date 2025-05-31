@@ -124,7 +124,7 @@ importers:
         specifier: 5.8.3
         version: 5.8.3
       vite:
-        specifier: npm:rolldown-vite@latest
+        specifier: npm:rolldown-vite@6.3.14
         version: rolldown-vite@6.3.14(@types/node@22.15.3)(esbuild@0.25.3)(terser@5.39.0)
       vite-plugin-pwa:
         specifier: 1.0.0
