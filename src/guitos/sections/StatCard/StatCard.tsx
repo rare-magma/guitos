@@ -1,5 +1,5 @@
 import type React from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Button,
   Card,
@@ -36,6 +36,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
   const { revenuePercentage, budget, setBudget } = useBudget();
   const stat = budget?.stats;
   const [autoGoal, setAutoGoal] = useState(false);
+  const progressBarRef = useRef<HTMLDivElement>(null);
 
   const shouldCalculateAvailablePerc =
     revenuePercentage <= 100 && stat && stat.available > 0;
@@ -85,6 +86,14 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
     setAutoGoal(true);
   }
 
+  // workaround for https://github.com/react-bootstrap/react-bootstrap/pull/6739
+  useEffect(() => {
+    const innerBar = progressBarRef.current?.querySelector(".progress-bar");
+    if (innerBar) {
+      innerBar.setAttribute("aria-label", "percentage of revenue spent");
+    }
+  }, []);
+
   return (
     <Card
       className="stat-card"
@@ -106,14 +115,14 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             <Col className="align-self-center">
               Statistics
               <ProgressBar
+                ref={progressBarRef}
                 role="progressbar"
                 aria-label="percentage of revenue spent"
                 aria-valuetext={`${revenuePercentage}%`}
                 min={0}
                 max={100}
                 now={revenuePercentage}
-                // biome-ignore lint/style/noImplicitBoolean: <explanation>
-                visuallyHidden
+                visuallyHidden={true}
               />
             </Col>
           </OverlayTrigger>
