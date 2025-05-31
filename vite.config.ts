@@ -8,6 +8,9 @@ export default defineConfig((_) => {
   return {
     build: {
       outDir: "build",
+      rollupOptions: {
+        external: ["@emotion/is-prop-valid"], // temp fix for rolldown-vite https://github.com/rolldown/rolldown/issues/4051#issuecomment-2786061196
+      },
     },
     define: {
       APP_VERSION: JSON.stringify(process.env.npm_package_version),
