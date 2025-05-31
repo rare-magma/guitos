@@ -1,3 +1,35 @@
+## 1.5.2 (2025-05-31)
+
+#### Bug Fixes
+
+* swap vite with rolldown-vite (#196) (7f237128)
+
+#### Tests
+
+* increase timeout to 21 seconds (3e01cbbd)
+
+#### Chores
+
+* **release:** 1.5.1 (86d47c3b)
+
+#### Build
+
+* **deps:** bump the deps-prod group with 6 updates (#193) (c8851093)
+* **deps-dev:** bump the deps-dev group with 12 updates (#194) (272e0210)
+* **deps:** bump actions/attest-build-provenance from 2.2.3 to 2.3.0 (#195) (4cb902c9)
+* **deps-dev:** bump vite from 6.2.6 to 6.2.7 in the npm_and_yarn group (#192) (33bb1879)
+* **deps:** bump react-router in the npm_and_yarn group (#191) (f4ab4092)
+* **deps-dev:** bump vite from 6.2.5 to 6.2.6 in the npm_and_yarn group (#190) (10911e1a)
+* **deps-dev:** bump vite in the development-dependencies group (#189) (a88bfa7d)
+* **deps:** bump recharts in the production-dependencies group (#188) (8f73ccdf)
+
+#### CI
+
+* rename dependabot groups (bea3c25a)
+* group dependabot updates (0bb9cc18)
+* pin workflow versions with ratchet (ed161a67)
+
+
 ## 1.5.1 (2025-04-02)
 
 #### Bug Fixes
