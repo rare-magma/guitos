@@ -1,4 +1,4 @@
-FROM docker.io/library/node:lts-alpine as build
+FROM docker.io/library/node:lts-alpine AS build
 RUN npm install -g pnpm
 WORKDIR /app
 RUN chown -R node:node /app
