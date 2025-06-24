@@ -1,4 +1,4 @@
-import react from "@vitejs/plugin-react-swc";
+import react from "@vitejs/plugin-react-oxc";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 import { sri } from "vite-plugin-sri3";
@@ -8,9 +8,6 @@ export default defineConfig((_) => {
   return {
     build: {
       outDir: "build",
-      rollupOptions: {
-        external: ["@emotion/is-prop-valid"], // temp fix for rolldown-vite https://github.com/rolldown/rolldown/issues/4051#issuecomment-2786061196
-      },
     },
     define: {
       APP_VERSION: JSON.stringify(process.env.npm_package_version),
@@ -19,7 +16,7 @@ export default defineConfig((_) => {
       extensions: [".js", ".ts", ".tsx"],
     },
     plugins: [
-      react({ devTarget: "es2022" }),
+      react(),
       VitePWA({
         manifest: {
           theme_color: "#343746",
