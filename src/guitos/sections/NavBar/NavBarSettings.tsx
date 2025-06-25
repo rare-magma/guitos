@@ -49,7 +49,6 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                     key={"export-button-group"}
                   >
                     <Typeahead
-                      id="currency-option-list"
                       maxResults={currenciesList.length}
                       maxHeight="30vh"
                       paginate={false}

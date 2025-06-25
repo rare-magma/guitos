@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { vi } from "vitest";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { BudgetMother } from "../../domain/budget.mother";
 import { Chart } from "./Chart";
 

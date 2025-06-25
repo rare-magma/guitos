@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -15,33 +15,37 @@
     "useIgnoreFile": true,
     "defaultBranch": "main"
   },
-  "organizeImports": { "enabled": true },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
-      "a11y": {
-        "all": true
-      },
+      "a11y": {},
       "complexity": {
         "noExcessiveCognitiveComplexity": "error"
       },
       "correctness": {
         "noUndeclaredVariables": "error",
         "noUnusedImports": "error",
-        "useArrayLiterals": "error",
         "useHookAtTopLevel": "error"
       },
-      "performance": {
-        "all": true
-      },
-      "security": {
-        "all": true
-      },
+      "performance": {},
+      "security": {},
       "style": {
         "noDefaultExport": "error",
         "noImplicitBoolean": "error",
-        "noNegationElse": "error"
+        "noNegationElse": "error",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error",
+        "useArrayLiterals": "error"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error",

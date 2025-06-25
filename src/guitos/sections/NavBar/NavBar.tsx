@@ -4,13 +4,13 @@ import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
-import type TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
-import type { Option } from "react-bootstrap-typeahead/types/types";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import type TypeaheadRef from "react-bootstrap-typeahead/types/core/Typeahead";
+import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import {
   BsArrowClockwise,
@@ -204,9 +204,9 @@ export function NavBar() {
                     </Tooltip>
                   }
                 >
+                  {/** biome-ignore lint/complexity/noUselessFragments: <explanation> */}
                   <>
                     <Form.Control
-                      id="budget-name"
                       aria-label={"budget name"}
                       className="budget-name"
                       key={`budget-name-key-${budget.id}`}
@@ -258,7 +258,6 @@ export function NavBar() {
               <Nav className={expanded ? "p-2" : "m-2"}>
                 {hasMultipleBudgets && (
                   <AsyncTypeahead
-                    id="search-budget-list"
                     inputProps={{
                       "aria-label": "search in budgets",
                     }}

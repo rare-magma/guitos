@@ -107,6 +107,7 @@ export function CalculateButton({
                   <BsClockHistory aria-hidden={true} />
                 </Button>
                 <Dropdown>
+                  {/** biome-ignore lint/nursery/useUniqueElementIds: <explanation> */}
                   <Dropdown.Toggle
                     aria-label={"select type of operation on item value"}
                     aria-haspopup="true"

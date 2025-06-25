@@ -117,20 +117,30 @@ test("should complete the happy path", async ({ page, isMobile }) => {
   await page.getByLabel("reserves").click();
   await page.getByLabel("reserves").fill("2000");
 
-  await expect(page.locator("#reserves")).toHaveValue("$2,000");
+  await expect(page.getByRole("textbox", { name: "reserves" })).toHaveValue(
+    "$2,000",
+  );
   await expect(page.getByLabel("available", { exact: true })).toHaveValue(
     "$464.25",
   );
-  await expect(page.locator("#with-goal")).toHaveValue("$355.75");
-  await expect(page.locator("#saved")).toHaveValue("$108.5");
+  await expect(page.getByRole("textbox", { name: "with-goal" })).toHaveValue(
+    "$355.75",
+  );
+  await expect(page.getByRole("textbox", { name: "saved" })).toHaveValue(
+    "$108.5",
+  );
 
   await page.getByLabel("calculate savings goal").click();
 
   await expect(page.getByLabel("available", { exact: true })).toHaveValue(
     "$464.25",
   );
-  await expect(page.locator("#with-goal")).toHaveValue("$0");
-  await expect(page.locator("#saved")).toHaveValue("$464.25");
+  await expect(page.getByRole("textbox", { name: "with-goal" })).toHaveValue(
+    "$0",
+  );
+  await expect(page.getByRole("textbox", { name: "saved" })).toHaveValue(
+    "$464.25",
+  );
 
   // should handle budget changes
   await page.getByLabel("budget name").fill("2024-01");

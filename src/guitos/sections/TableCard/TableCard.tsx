@@ -116,9 +116,7 @@ export default function TableCard({ header: label }: TableCardProps) {
           <Row>
             <Col>{label}</Col>
             <Col className="text-end fixed-width-font">
-              <div aria-label="total amount">
-                {intlFormat(roundBig(Big(total), 2), userOptions)}
-              </div>
+              <div>{intlFormat(roundBig(Big(total), 2), userOptions)}</div>
             </Col>
           </Row>
         </OverlayTrigger>

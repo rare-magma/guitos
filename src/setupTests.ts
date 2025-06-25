@@ -8,8 +8,8 @@ import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
 import { createElement } from "react";
 import { afterEach, beforeEach, expect, vi } from "vitest";
-import * as AppBudgetContext from "./guitos/context/BudgetContext";
 import type { BudgetContextInterface } from "./guitos/context/BudgetContext";
+import * as AppBudgetContext from "./guitos/context/BudgetContext";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 
 window.crypto.randomUUID = randomUUID;

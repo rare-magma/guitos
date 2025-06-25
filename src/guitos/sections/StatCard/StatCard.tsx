@@ -1,3 +1,4 @@
+import { produce } from "immer";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -13,8 +14,6 @@ import {
 } from "react-bootstrap";
 import CurrencyInput from "react-currency-input-field";
 import { useHotkeys } from "react-hotkeys-hook";
-
-import { produce } from "immer";
 import {
   BsArrowReturnRight,
   BsGear,
@@ -162,7 +161,6 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             <InputGroup.Text>available</InputGroup.Text>
           </OverlayTrigger>
           <CurrencyInput
-            id="available"
             key={`${stat?.available}-available`}
             className="text-end form-control fixed-width-font"
             aria-label={"available"}
@@ -203,7 +201,6 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             </OverlayTrigger>
           </InputGroup.Text>
           <CurrencyInput
-            id="with-goal"
             key={`${stat?.withGoal}-withGoal`}
             className="text-end form-control fixed-width-font"
             aria-label={"with-goal"}
@@ -243,7 +240,6 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             </Button>
           </OverlayTrigger>
           <Form.Control
-            id="goal-input"
             data-testid="goal-input"
             className="text-end fixed-width-font"
             aria-label={"goal"}
@@ -278,7 +274,6 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             </OverlayTrigger>
           </InputGroup.Text>
           <CurrencyInput
-            id="saved"
             key={`${stat?.saved}-saved`}
             className="text-end form-control fixed-width-font"
             aria-label={"saved"}
@@ -300,7 +295,6 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             <InputGroup.Text>reserves</InputGroup.Text>
           </OverlayTrigger>
           <CurrencyInput
-            id="reserves"
             key={"reserves-input"}
             className="text-end form-control fixed-width-font"
             aria-label={"reserves"}

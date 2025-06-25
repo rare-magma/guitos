@@ -100,10 +100,8 @@ export function ErrorModal({
                     key={`${jsonError.file}-body-${i}`}
                   >
                     <p className="code" key={`${jsonError.file}-error-${i}`}>
-                      <>
-                        {jsonError.errors}
-                        <br />
-                      </>
+                      {jsonError.errors}
+                      <br />
                     </p>
                   </Accordion.Body>
                 </Accordion.Item>

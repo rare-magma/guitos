@@ -1,8 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { BrowserRouter } from "react-router";
-import { vi } from "vitest";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { BudgetItemsMother } from "../../domain/budgetItem.mother";
 import { CalculateButton } from "./CalculateButton";
 

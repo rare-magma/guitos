@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import { Suspense, lazy, useCallback, useEffect, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { Col, Container, Row, ToastContainer } from "react-bootstrap";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useParams } from "react-router";
