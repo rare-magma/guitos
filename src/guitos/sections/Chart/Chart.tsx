@@ -14,7 +14,6 @@ import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import type { FilteredItem } from "../ChartsPage/ChartsPage";
 import "./Chart.css";
-import { useState } from "react";
 import { ChartTooltip } from "./ChartTooltip";
 
 interface ChartProps {
@@ -64,13 +63,6 @@ export function Chart({
   const chartData =
     filteredData ?? budgetList?.sort((a, b) => a.name.localeCompare(b.name));
 
-  const [longestTick, setLongestTick] = useState("");
-
-  const getYAxisTickWidth = (): number => {
-    const charWidth = 8;
-    return longestTick.length * charWidth + 30;
-  };
-
   function medianLabelGroup(legend: string, values: number[]) {
     return (
       <InputGroup size="sm" className="mb-1">
@@ -88,9 +80,6 @@ export function Chart({
 
   function tickFormatter(value: number) {
     const formattedTick = intlFormat(value, userOptions) ?? "";
-    if (longestTick.length < formattedTick.length) {
-      setLongestTick(formattedTick);
-    }
     return formattedTick;
   }
 
@@ -120,14 +109,14 @@ export function Chart({
               <YAxis
                 stroke="var(--textcolor)"
                 style={{ fontFamily: "ui-monospace, monospace" }}
-                width={getYAxisTickWidth() + 15}
+                width="auto"
                 unit={unit}
               />
             ) : (
               <YAxis
                 stroke="var(--textcolor)"
                 style={{ fontFamily: "ui-monospace, monospace" }}
-                width={getYAxisTickWidth()}
+                width="auto"
                 tickFormatter={tickFormatter}
               />
             )}
