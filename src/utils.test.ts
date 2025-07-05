@@ -1,6 +1,5 @@
 import Big from "big.js";
 import { expect, test } from "vitest";
-import type { Budget } from "./guitos/domain/budget";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import { UserOptions } from "./guitos/domain/userOptions";
@@ -38,20 +37,20 @@ test("round", () => {
 test("createBudgetNameList", () => {
   const expectedResult = [
     {
-      id: Uuid.random().value,
+      id: Uuid.random(),
       item: "",
       name: "2023-03",
     },
     {
-      id: Uuid.random().value,
+      id: Uuid.random(),
       item: "",
       name: "2023-04",
     },
   ];
   expect(
     createBudgetNameList([
-      BudgetMother.testBudget() as Budget,
-      BudgetMother.testBudget2() as Budget,
+      BudgetMother.testBudget(),
+      BudgetMother.testBudget2(),
     ]),
   ).toEqual(expectedResult);
   expect(createBudgetNameList([])).toEqual([]);

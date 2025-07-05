@@ -1,6 +1,5 @@
 import Big from "big.js";
 import { describe, expect, test } from "vitest";
-import type { Budget } from "../domain/budget";
 import { BudgetMother } from "../domain/budget.mother";
 import { BudgetItemsMother } from "../domain/budgetItem.mother";
 import { BudgetCalculator } from "./budgetCalculator";
@@ -17,20 +16,20 @@ describe("BudgetCalculator", () => {
   });
 
   test("available", () => {
-    expect(
-      BudgetCalculator.available(BudgetMother.testBudget() as Budget),
-    ).toEqual(Big(90));
+    expect(BudgetCalculator.available(BudgetMother.testBudget())).toEqual(
+      Big(90),
+    );
     expect(BudgetCalculator.available(undefined)).toEqual(Big(0));
   });
 
   test("availableWithGoal", () => {
-    expect(
-      BudgetCalculator.availableWithGoal(BudgetMother.testBudget() as Budget),
-    ).eq(80);
+    expect(BudgetCalculator.availableWithGoal(BudgetMother.testBudget())).eq(
+      80,
+    );
   });
 
   test("saved", () => {
-    expect(BudgetCalculator.saved(BudgetMother.testBudget() as Budget)).eq(10);
+    expect(BudgetCalculator.saved(BudgetMother.testBudget())).eq(10);
   });
 
   test("automaticGoal", () => {
@@ -40,8 +39,8 @@ describe("BudgetCalculator", () => {
   });
 
   test("revenuePercentage", () => {
-    expect(
-      BudgetCalculator.revenuePercentage(BudgetMother.testBudget() as Budget),
-    ).eq(10);
+    expect(BudgetCalculator.revenuePercentage(BudgetMother.testBudget())).eq(
+      10,
+    );
   });
 });

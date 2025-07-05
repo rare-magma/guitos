@@ -121,9 +121,7 @@ export function useDB() {
           .reverse();
 
         setBudgetList(newBudgetList);
-        setBudgetNameList(
-          createBudgetNameList(newBudgetList as unknown as Budget[]),
-        );
+        setBudgetNameList(createBudgetNameList(newBudgetList));
 
         setNotifications(
           produce(notifications, (draft) => {

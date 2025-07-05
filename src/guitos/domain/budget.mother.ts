@@ -5,10 +5,10 @@ import { Uuid } from "./uuid";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class BudgetMother {
-  static testEmptyBudget() {
+  static testEmptyBudget(): Budget {
     return {
       [immerable]: true,
-      id: Uuid.random().value as unknown as Uuid,
+      id: Uuid.random(),
       name: "2023-03",
       expenses: {
         items: [],
@@ -28,10 +28,10 @@ export class BudgetMother {
     };
   }
 
-  static testBudget() {
+  static testBudget(): Budget {
     return {
       [immerable]: true,
-      id: Uuid.random().value as unknown as Uuid,
+      id: Uuid.random(),
       name: "2023-03",
       expenses: {
         items: [{ id: 1, name: "expense1", value: 10 }],
@@ -51,14 +51,14 @@ export class BudgetMother {
     };
   }
 
-  static testBudgetClone() {
-    return Budget.clone(BudgetMother.testBudget() as Budget);
+  static testBudgetClone(): Budget {
+    return Budget.clone(BudgetMother.testBudget());
   }
 
-  static testBudget2() {
+  static testBudget2(): Budget {
     return {
       ...Budget.create(),
-      id: Uuid.random().value as unknown as Uuid,
+      id: Uuid.random(),
       name: "2023-04",
       expenses: {
         items: [{ id: 1, name: "name", value: 50 }],
@@ -78,7 +78,7 @@ export class BudgetMother {
     };
   }
 
-  static testBigBudget() {
+  static testBigBudget(): Budget {
     return {
       ...Budget.create(),
       name: "2023-03",
@@ -106,7 +106,7 @@ export class BudgetMother {
     };
   }
 
-  static testBudgetCsv() {
+  static testBudgetCsv(): Budget {
     return {
       ...Budget.create(),
       name: "2023-03",
@@ -134,7 +134,7 @@ export class BudgetMother {
     };
   }
 
-  static testBudgetList() {
+  static testBudgetList(): Budget[] {
     return [
       BudgetMother.testBudget(),
       BudgetMother.testBudget2(),
