@@ -1,7 +1,7 @@
 import Papa from "papaparse";
 import { describe, expect, test } from "vitest";
 import { BudgetMother } from "../domain/budget.mother";
-import { BudgetCsvService } from "./budgetCsvService";
+import { BudgetCsvService, type CsvRow } from "./budgetCsvService";
 
 describe("BudgetCsvService", () => {
   test("fromCsv", () => {
@@ -10,7 +10,7 @@ describe("BudgetCsvService", () => {
       skipEmptyLines: "greedy",
     });
     expect(
-      BudgetCsvService.fromCsv(csvObject.data as string[], "2023-03"),
+      BudgetCsvService.fromCsv(csvObject.data as CsvRow[], "2023-03"),
     ).toEqual(BudgetMother.testBudgetCsv());
   });
 

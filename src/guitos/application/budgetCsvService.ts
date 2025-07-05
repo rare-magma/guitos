@@ -4,13 +4,18 @@ import { BudgetItem } from "../domain/budgetItem";
 import type { CsvItem } from "../domain/csvItem";
 import { BudgetCalculator } from "./budgetCalculator";
 
+export type CsvRow = CsvItem & {
+  type: "expense" | "income" | "goal" | "reserves";
+  name: string;
+  value: string | number;
+};
+
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class BudgetCsvService {
-  static fromCsv(csv: string[], date: string): Budget {
+  static fromCsv(csv: CsvRow[], date: string): Budget {
     const newBudget = Budget.createEmpty(date);
 
-    csv.forEach((value: string, key: number) => {
-      const item = value as unknown as CsvItem;
+    csv.forEach((item, key) => {
       const newBudgetItem = new BudgetItem(key, item.name, Number(item.value));
 
       switch (item.type) {
@@ -47,7 +52,7 @@ export class BudgetCsvService {
     return newBudget as unknown as Budget;
   }
 
-  static toCsv(budget: Budget): string {
+  static toCsv(budget: Readonly<Budget>): string {
     const header = ["type", "name", "value"];
 
     const expenses = budget.expenses.items.map((expense) => {

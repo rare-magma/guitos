@@ -5,7 +5,7 @@ import type { BudgetItem } from "../domain/budgetItem";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class BudgetCalculator {
-  static itemsTotal(items: BudgetItem[]): Big {
+  static itemsTotal(items: Readonly<BudgetItem[]>): Big {
     let total = Big(0);
     if (!items) {
       return total;
@@ -20,7 +20,7 @@ export class BudgetCalculator {
     return total;
   }
 
-  static available(budget: Budget | undefined): Big {
+  static available(budget: Readonly<Budget | undefined>): Big {
     if (!budget) {
       return Big(0);
     }
@@ -29,7 +29,7 @@ export class BudgetCalculator {
     return incomeTotal.sub(expenseTotal);
   }
 
-  static availableWithGoal(value: Budget): number {
+  static availableWithGoal(value: Readonly<Budget>): number {
     const goalIsCalculable =
       value.stats.goal !== null && !Number.isNaN(value.stats.goal);
 
@@ -43,7 +43,7 @@ export class BudgetCalculator {
     return roundBig(available.sub(availableWithGoal), 2);
   }
 
-  static saved(budget: Budget): number {
+  static saved(budget: Readonly<Budget>): number {
     const valueIsCalculable =
       budget.stats.saved !== null && !Number.isNaN(budget.stats.goal);
 
@@ -55,7 +55,7 @@ export class BudgetCalculator {
     return roundBig(saved, 2);
   }
 
-  static revenuePercentage(budget: Budget | undefined): number {
+  static revenuePercentage(budget: Readonly<Budget | undefined>): number {
     if (!budget) {
       return 0;
     }
@@ -73,7 +73,7 @@ export class BudgetCalculator {
     return roundBig(percentageOfTotal, percentageOfTotal.gte(1) ? 0 : 1);
   }
 
-  static automaticGoal(value: Budget): number {
+  static automaticGoal(value: Readonly<Budget>): number {
     const valueIsCalculable =
       value.stats.goal !== null && !Number.isNaN(value.stats.goal);
 
