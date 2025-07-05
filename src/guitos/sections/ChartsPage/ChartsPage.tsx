@@ -145,7 +145,6 @@ export default function ChartsPage({ onShowGraphs }: GraphProps) {
                   isLoading={false}
                   onSearch={(q) => handleSearch({ value: q, type: "" })}
                 />
-                {/** biome-ignore lint/nursery/useUniqueElementIds: <explanation> */}
                 <ToggleButton
                   id="toggle-strict"
                   aria-label="toggle strict match during search"
