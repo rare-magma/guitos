@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "big.js": "7.0.1",
-    "bootstrap": "5.3.6",
+    "bootstrap": "5.3.7",
     "immer": "10.1.1",
     "localforage": "1.10.0",
-    "motion": "12.15.0",
+    "motion": "12.23.0",
     "papaparse": "5.5.3",
     "react": "19.1.0",
     "react-bootstrap": "2.10.10",
