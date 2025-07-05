@@ -21,17 +21,9 @@ export class BudgetCsvService {
       switch (item.type) {
         case "expense":
           newBudget.expenses.items.push(newBudgetItem);
-          newBudget.expenses.total = roundBig(
-            BudgetCalculator.itemsTotal(newBudget.expenses.items),
-            2,
-          );
           break;
         case "income":
           newBudget.incomes.items.push(newBudgetItem);
-          newBudget.incomes.total = roundBig(
-            BudgetCalculator.itemsTotal(newBudget.incomes.items),
-            2,
-          );
           break;
         case "goal":
           newBudget.stats.goal = Number(item.value);
@@ -42,6 +34,14 @@ export class BudgetCsvService {
       }
     });
 
+    newBudget.expenses.total = roundBig(
+      BudgetCalculator.itemsTotal(newBudget.expenses.items),
+      2,
+    );
+    newBudget.incomes.total = roundBig(
+      BudgetCalculator.itemsTotal(newBudget.incomes.items),
+      2,
+    );
     newBudget.stats.available = roundBig(
       BudgetCalculator.available(newBudget),
       2,
@@ -49,7 +49,7 @@ export class BudgetCsvService {
     newBudget.stats.withGoal = BudgetCalculator.availableWithGoal(newBudget);
     newBudget.stats.saved = BudgetCalculator.saved(newBudget);
 
-    return newBudget as unknown as Budget;
+    return newBudget;
   }
 
   static toCsv(budget: Readonly<Budget>): string {
