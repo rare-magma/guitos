@@ -1,3 +1,53 @@
+## 1.5.4 (2025-07-05)
+
+#### Bug Fixes
+
+* calculate totals after parsing all csv rows (a33b8136)
+* handle undefined window (c587fa84)
+* add missing event listener removal (0e5271f0)
+
+#### Reverts
+
+* migrate to recharts v3 (7fdbd9d7)
+
+#### Performance Improvements
+
+* lazy load errormodal (4885e8a9)
+
+#### Tests
+
+* update snapshot (5a22d8e0)
+
+#### Code Refactoring
+
+* replace react-router with wouter (29f906e1)
+* remove unnecessary type casts (066b592c)
+* initialize object once (7e5b2935)
+* improve types (7a6952d9)
+* split budget into smaller classes (b0deed4a)
+
+#### Chores
+
+* **release:** 1.5.3 (f4fb2780)
+
+#### Build
+
+* bump deps (b529ee64)
+* **deps:** bump actions/attest-build-provenance from 2.3.0 to 2.4.0 (#200) (feace0d9)
+* bump recharts (e5e29583)
+* migrate to recharts v3 (2fe990cf)
+* migrate to biome v2 (0d41fbc1)
+* migrate to vite 7 (5bd4978c)
+* **deps:** bump brace-expansion in the npm_and_yarn group (#199) (c7a60887)
+* **deps-dev:** bump the deps-dev group with 9 updates (#198) (2fed0866)
+* **deps:** bump the deps-prod group with 7 updates (#197) (d4bc11d9)
+
+#### CI
+
+* apply linter recs (d5a6f0dc)
+* move ignore rules to correct place (dfb0ed77)
+
+
 ## 1.5.3 (2025-05-31)
 
 #### Bug Fixes
