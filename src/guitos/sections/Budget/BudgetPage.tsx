@@ -11,7 +11,6 @@ import {
 } from "../../context/GeneralContext";
 import type { Budget } from "../../domain/budget";
 import { useDB } from "../../hooks/useDB";
-import { ErrorModal } from "../ErrorModal/ErrorModal";
 import { LandingPage } from "../LandingPage/LandingPage";
 import { Loading } from "../Loading/Loading";
 import { NavBar } from "../NavBar/NavBar";
@@ -20,6 +19,7 @@ import { StatCard } from "../StatCard/StatCard";
 
 const ChartsPage = lazy(() => import("../ChartsPage/ChartsPage"));
 const TableCard = lazy(() => import("../TableCard/TableCard"));
+const ErrorModal = lazy(() => import("../ErrorModal/ErrorModal"));
 
 export function BudgetPage() {
   const [showGraphs, setShowGraphs] = useState(false);

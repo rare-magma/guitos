@@ -14,7 +14,9 @@ interface ErrorModalProps {
   setCsvErrors: (value: CsvError[]) => void;
   handleDismiss: () => void;
 }
-export function ErrorModal({
+
+// biome-ignore lint/style/noDefaultExport: lazy loading
+export default function ErrorModal({
   error,
   setShowError,
   showError,
