@@ -1,7 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react";
-import { BrowserRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 import {
   budgetContextSpy,
@@ -18,11 +17,7 @@ const budgetRepository = new localForageBudgetRepository();
 
 describe("BudgetPage", () => {
   const setNotificationsMock = vi.fn();
-  const comp = (
-    <BrowserRouter>
-      <BudgetPage />
-    </BrowserRouter>
-  );
+  const comp = <BudgetPage />;
 
   it("matches snapshot", () => {
     render(comp);
@@ -31,7 +26,9 @@ describe("BudgetPage", () => {
 
   it("renders initial state", async () => {
     render(comp);
-    const newButton = screen.getAllByRole("button", { name: "new budget" });
+    const newButton = await screen.findAllByRole("button", {
+      name: "new budget",
+    });
     await act(async () => {
       await userEvent.click(newButton[0]);
     });

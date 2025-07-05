@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, BrowserRouter as Router, Routes } from "react-router";
+import { Route, Router } from "wouter";
 import "./App.css";
 import "./colors.css";
 import { BudgetProvider } from "./guitos/context/BudgetContext";
@@ -13,10 +13,8 @@ export function App() {
       <ConfigProvider>
         <BudgetProvider>
           <Router>
-            <Routes>
-              <Route path="/" element={<BudgetPage />} />
-              <Route path="/:name" element={<BudgetPage />} />
-            </Routes>
+            <Route path="/" component={BudgetPage} />
+            <Route path="/:name" component={BudgetPage} />
           </Router>
         </BudgetProvider>
       </ConfigProvider>

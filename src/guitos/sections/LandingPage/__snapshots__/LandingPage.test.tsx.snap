@@ -1,10 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`LandingPage > matches snapshot 1`] = `
-<BrowserRouter>
-  <LandingPage
-    loadingFromDB={false}
-    showLandingPage={true}
-  />
-</BrowserRouter>
+<LandingPage
+  loadingFromDB={false}
+  showLandingPage={true}
+/>
 `;

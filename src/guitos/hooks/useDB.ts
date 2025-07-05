@@ -3,7 +3,7 @@ import Papa from "papaparse";
 import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Option } from "react-bootstrap-typeahead/types/types";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useParams } from "wouter";
 import { createBudgetNameList, saveLastOpenedBudget } from "../../utils";
 import { BudgetCsvService, type CsvRow } from "../application/budgetCsvService";
 import { useBudget } from "../context/BudgetContext";
@@ -29,7 +29,7 @@ export function useDB() {
   const { setUserOptions } = useConfig();
   const params = useParams();
   const name = String(params.name);
-  const navigate = useNavigate();
+  const [_, navigate] = useLocation();
 
   const navigateCallback = useCallback(() => navigate, [navigate]);
 

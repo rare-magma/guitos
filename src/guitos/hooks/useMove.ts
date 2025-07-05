@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useLocation } from "wouter";
 import { saveLastOpenedBudget } from "../../utils";
 import { useBudget } from "../context/BudgetContext";
 import type { Budget } from "../domain/budget";
@@ -6,7 +6,7 @@ import type { SearchOption } from "../sections/NavBar/NavBar";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();
-  const navigate = useNavigate();
+  const [_, navigate] = useLocation();
 
   function select(selectedBudget: SearchOption[] | undefined) {
     if (selectedBudget && budgetList) {

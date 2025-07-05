@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
-import { BrowserRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 import { setBudgetMock } from "../../../setupTests";
 import { BudgetMother } from "../../domain/budget.mother";
@@ -12,15 +11,13 @@ import { ItemFormGroup } from "./ItemFormGroup";
 describe("ItemFormGroup", () => {
   const ref = createRef<HTMLInputElement>();
   const comp = (
-    <BrowserRouter>
-      <ItemFormGroup
-        itemForm={BudgetItemsMother.itemForm1()}
-        label="Expenses"
-        inputRef={ref}
-        costPercentage={1}
-        userOptions={UserOptionsMother.default()}
-      />
-    </BrowserRouter>
+    <ItemFormGroup
+      itemForm={BudgetItemsMother.itemForm1()}
+      label="Expenses"
+      inputRef={ref}
+      costPercentage={1}
+      userOptions={UserOptionsMother.default()}
+    />
   );
 
   it("matches snapshot", () => {
@@ -118,16 +115,13 @@ describe("ItemFormGroup", () => {
 
   it("transforms decimal separator based on locale", async () => {
     render(
-      <BrowserRouter>
-        <ItemFormGroup
-          itemForm={BudgetItemsMother.itemForm1()}
-          label="Expenses"
-          inputRef={ref}
-          costPercentage={1}
-          userOptions={UserOptionsMother.spanish()}
-        />
-        ,
-      </BrowserRouter>,
+      <ItemFormGroup
+        itemForm={BudgetItemsMother.itemForm1()}
+        label="Expenses"
+        inputRef={ref}
+        costPercentage={1}
+        userOptions={UserOptionsMother.spanish()}
+      />,
     );
 
     await userEvent.clear(screen.getByDisplayValue("10 €"));

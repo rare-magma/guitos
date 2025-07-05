@@ -1,16 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter } from "react-router";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ChartsPage from "./ChartsPage";
 
 describe("ChartsPage", () => {
   const onShowGraphs = vi.fn();
-  const comp = (
-    <BrowserRouter>
-      <ChartsPage onShowGraphs={onShowGraphs} />
-    </BrowserRouter>
-  );
+  const comp = <ChartsPage onShowGraphs={onShowGraphs} />;
 
   beforeEach(() => {
     //@ts-ignore

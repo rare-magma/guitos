@@ -5,7 +5,7 @@ import type { CsvError } from "../../domain/csvError";
 import { CsvErrorMother } from "../../domain/csvError.mother";
 import type { JsonError } from "../../domain/jsonError";
 import { JsonErrorMother } from "../../domain/jsonError.mother";
-import { ErrorModal } from "./ErrorModal";
+import ErrorModal from "./ErrorModal";
 
 const error = "Thrown error";
 const jsonErrors: JsonError[] = [JsonErrorMother.error()];

@@ -1,7 +1,6 @@
 import Big from "big.js";
 import type { RefObject } from "react";
 import type Typeahead from "react-bootstrap-typeahead/types/core/Typeahead";
-import type { NavigateFunction } from "react-router";
 import type { Budget } from "./guitos/domain/budget";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import type { UserOptions } from "./guitos/domain/userOptions";
@@ -134,7 +133,7 @@ export function getLabelKeyFilteredItem(option: unknown): string {
 
 export function saveLastOpenedBudget(
   name: string,
-  navigateFn: NavigateFunction,
+  navigateFn: (string: string) => void,
 ) {
   navigateFn(`/${name}`);
   localStorage.setItem("guitos_lastOpenedBudget", name);

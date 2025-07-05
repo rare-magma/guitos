@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 import { BudgetItemsMother } from "../../domain/budgetItem.mother";
 import { CalculateButton } from "./CalculateButton";
@@ -8,13 +7,11 @@ import { CalculateButton } from "./CalculateButton";
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
   const comp = (
-    <BrowserRouter>
-      <CalculateButton
-        itemForm={BudgetItemsMother.itemForm1()}
-        label="Expense"
-        onCalculate={onCalculate}
-      />
-    </BrowserRouter>
+    <CalculateButton
+      itemForm={BudgetItemsMother.itemForm1()}
+      label="Expense"
+      onCalculate={onCalculate}
+    />
   );
 
   it("matches snapshot", () => {

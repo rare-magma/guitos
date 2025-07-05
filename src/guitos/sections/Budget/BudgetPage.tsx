@@ -2,7 +2,7 @@ import { produce } from "immer";
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { Col, Container, Row, ToastContainer } from "react-bootstrap";
 import { useHotkeys } from "react-hotkeys-hook";
-import { useParams } from "react-router";
+import { useParams } from "wouter";
 import { createBudgetNameList } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
 import {

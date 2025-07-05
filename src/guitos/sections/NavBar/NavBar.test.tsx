@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter } from "react-router";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   budgetContextSpy,
@@ -22,11 +21,7 @@ describe("NavBar", () => {
     windowSpy.mockClear();
   });
 
-  const comp = (
-    <BrowserRouter>
-      <NavBar />
-    </BrowserRouter>
-  );
+  const comp = <NavBar />;
 
   it("matches snapshot", () => {
     render(comp);
