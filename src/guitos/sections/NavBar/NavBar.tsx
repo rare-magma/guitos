@@ -93,9 +93,13 @@ export function NavBar() {
       setTheme("dark");
     }
 
-    mediaQueryList.addEventListener("change", (event) =>
-      setTheme(event.matches ? "dark" : "light"),
-    );
+    function handleChangeEvent(event: MediaQueryListEvent) {
+      setTheme(event.matches ? "dark" : "light");
+    }
+
+    mediaQueryList.addEventListener("change", handleChangeEvent);
+    return () =>
+      mediaQueryList.removeEventListener("change", handleChangeEvent);
   }, []);
 
   function handleRename(name: React.ChangeEvent<HTMLInputElement>) {
