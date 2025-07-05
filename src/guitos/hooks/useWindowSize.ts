@@ -7,6 +7,8 @@ export function useWindowSize() {
   });
 
   useLayoutEffect(() => {
+    if (typeof window === "undefined") return;
+
     const handleResize = () => {
       setSize({
         width: window.innerWidth,
