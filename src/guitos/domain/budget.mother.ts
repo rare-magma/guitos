@@ -5,6 +5,29 @@ import { Uuid } from "./uuid";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class BudgetMother {
+  static testEmptyBudget() {
+    return {
+      [immerable]: true,
+      id: Uuid.random().value as unknown as Uuid,
+      name: "2023-03",
+      expenses: {
+        items: [],
+        total: 0,
+      },
+      incomes: {
+        items: [],
+        total: 0,
+      },
+      stats: {
+        available: 0,
+        withGoal: 0,
+        saved: 0,
+        goal: 0,
+        reserves: 0,
+      },
+    };
+  }
+
   static testBudget() {
     return {
       [immerable]: true,

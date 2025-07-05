@@ -1,0 +1,66 @@
+import { roundBig } from "../../utils";
+import { Budget } from "../domain/budget";
+import { BudgetItem } from "../domain/budgetItem";
+import type { CsvItem } from "../domain/csvItem";
+import { BudgetCalculator } from "./budgetCalculator";
+
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
+export class BudgetCsvService {
+  static fromCsv(csv: string[], date: string): Budget {
+    const newBudget = Budget.createEmpty(date);
+
+    csv.forEach((value: string, key: number) => {
+      const item = value as unknown as CsvItem;
+      const newBudgetItem = new BudgetItem(key, item.name, Number(item.value));
+
+      switch (item.type) {
+        case "expense":
+          newBudget.expenses.items.push(newBudgetItem);
+          newBudget.expenses.total = roundBig(
+            BudgetCalculator.itemsTotal(newBudget.expenses.items),
+            2,
+          );
+          break;
+        case "income":
+          newBudget.incomes.items.push(newBudgetItem);
+          newBudget.incomes.total = roundBig(
+            BudgetCalculator.itemsTotal(newBudget.incomes.items),
+            2,
+          );
+          break;
+        case "goal":
+          newBudget.stats.goal = Number(item.value);
+          break;
+        case "reserves":
+          newBudget.stats.reserves = Number(item.value);
+          break;
+      }
+    });
+
+    newBudget.stats.available = roundBig(
+      BudgetCalculator.available(newBudget),
+      2,
+    );
+    newBudget.stats.withGoal = BudgetCalculator.availableWithGoal(newBudget);
+    newBudget.stats.saved = BudgetCalculator.saved(newBudget);
+
+    return newBudget as unknown as Budget;
+  }
+
+  static toCsv(budget: Budget): string {
+    const header = ["type", "name", "value"];
+
+    const expenses = budget.expenses.items.map((expense) => {
+      return ["expense", expense.name, expense.value].join(",");
+    });
+
+    const incomes = budget.incomes.items.map((income) => {
+      return ["income", income.name, income.value].join(",");
+    });
+
+    const stats = ["goal", "goal", budget.stats.goal].join(",");
+    const reserves = ["reserves", "reserves", budget.stats.reserves].join(",");
+
+    return [header, ...expenses, ...incomes, stats, reserves].join("\n");
+  }
+}

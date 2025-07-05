@@ -5,7 +5,8 @@ import {
   useState,
 } from "react";
 import useUndo from "use-undo";
-import { Budget } from "../domain/budget";
+import { BudgetCalculator } from "../application/budgetCalculator";
+import type { Budget } from "../domain/budget";
 import type { SearchOption } from "../sections/NavBar/NavBar";
 import { useGeneralContext } from "./GeneralContext";
 
@@ -104,7 +105,7 @@ function BudgetProvider({ children }: PropsWithChildren) {
   const past = pastState.filter((b) => b?.id === budget?.id);
   const future = futureState.filter((b) => b?.id === budget?.id);
 
-  const revenuePercentage = Budget.revenuePercentage(budget);
+  const revenuePercentage = BudgetCalculator.revenuePercentage(budget);
 
   const canReallyUndo = undoPossible && past[past.length - 1] !== undefined;
   const canReallyRedo = redoPossible && future[0] !== undefined;

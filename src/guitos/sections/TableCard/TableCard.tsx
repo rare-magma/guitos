@@ -17,7 +17,8 @@ import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
 import "./TableCard.css";
-import { Budget } from "../../domain/budget";
+import { BudgetCalculator } from "../../application/budgetCalculator";
+import type { Budget } from "../../domain/budget";
 import { BudgetItem } from "../../domain/budgetItem";
 import type { Expenses } from "../../domain/expenses";
 import type { Incomes } from "../../domain/incomes";
@@ -58,9 +59,14 @@ export default function TableCard({ header: label }: TableCardProps) {
       } else {
         draft.incomes = item;
       }
-      draft.stats.available = roundBig(Budget.available(draft as Budget), 2);
-      draft.stats.withGoal = Budget.availableWithGoal(draft as Budget);
-      draft.stats.saved = Budget.saved(draft as Budget);
+      draft.stats.available = roundBig(
+        BudgetCalculator.available(draft as Budget),
+        2,
+      );
+      draft.stats.withGoal = BudgetCalculator.availableWithGoal(
+        draft as Budget,
+      );
+      draft.stats.saved = BudgetCalculator.saved(draft as Budget);
     }, budget);
     setBudget(newState(), true);
   }
@@ -87,7 +93,7 @@ export default function TableCard({ header: label }: TableCardProps) {
     newItemForm.value = 0;
 
     newTable.items = tableBeingEdited.items.concat(newItemForm);
-    newTable.total = roundBig(Budget.itemsTotal(newTable.items), 2);
+    newTable.total = roundBig(BudgetCalculator.itemsTotal(newTable.items), 2);
 
     handleTableChange(newTable);
   }
@@ -109,6 +115,7 @@ export default function TableCard({ header: label }: TableCardProps) {
                 {revenuePercentage}% of revenue
               </Tooltip>
             ) : (
+              // biome-ignore lint/complexity/noUselessFragments: <explanation>
               <></>
             )
           }

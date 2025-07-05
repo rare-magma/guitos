@@ -81,179 +81,174 @@ export function CalculateButton({
   useEffect(() => void getHistory(), [getHistory]);
 
   return (
-    <>
-      <OverlayTrigger
-        trigger="click"
-        key={`${itemForm.id}-${label}-calculate-button-overlay-trigger`}
-        placement="top"
-        rootClose={true}
-        overlay={
-          <Popover id={"popover-calculate-button"}>
-            <Popover.Body>
-              <InputGroup
-                size="sm"
-                className="mb-1"
-                key={`${itemForm.id}-${label}-operation-group`}
+    <OverlayTrigger
+      trigger="click"
+      key={`${itemForm.id}-${label}-calculate-button-overlay-trigger`}
+      placement="top"
+      rootClose={true}
+      overlay={
+        <Popover id={"popover-calculate-button"}>
+          <Popover.Body>
+            <InputGroup
+              size="sm"
+              className="mb-1"
+              key={`${itemForm.id}-${label}-operation-group`}
+            >
+              <Button
+                id={`item-${itemForm.id}-operation-history-button`}
+                key={`${itemForm.id}-${label}-operation-history-button`}
+                aria-label={"open operation history"}
+                variant="outline-secondary"
+                disabled={!(history.length > 0)}
+                type="button"
+                onClick={handleHistory}
               >
-                <Button
-                  id={`item-${itemForm.id}-operation-history-button`}
-                  key={`${itemForm.id}-${label}-operation-history-button`}
-                  aria-label={"open operation history"}
+                <BsClockHistory aria-hidden={true} />
+              </Button>
+              <Dropdown>
+                <Dropdown.Toggle
+                  aria-label={"select type of operation on item value"}
+                  aria-haspopup="true"
                   variant="outline-secondary"
-                  disabled={!(history.length > 0)}
-                  type="button"
-                  onClick={handleHistory}
+                  id="dropdown-operation"
                 >
-                  <BsClockHistory aria-hidden={true} />
-                </Button>
-                <Dropdown>
-                  {/** biome-ignore lint/nursery/useUniqueElementIds: <explanation> */}
-                  <Dropdown.Toggle
-                    aria-label={"select type of operation on item value"}
-                    aria-haspopup="true"
-                    variant="outline-secondary"
-                    id="dropdown-operation"
-                  >
-                    {operation === "add" && <CgMathPlus aria-hidden={true} />}
-                    {operation === "subtract" && (
-                      <BsDashLg aria-hidden={true} />
-                    )}
-                    {operation === "multiply" && <BsXLg aria-hidden={true} />}
-                    {operation === "divide" && (
-                      <CgMathDivide aria-hidden={true} />
-                    )}
-                  </Dropdown.Toggle>
+                  {operation === "add" && <CgMathPlus aria-hidden={true} />}
+                  {operation === "subtract" && <BsDashLg aria-hidden={true} />}
+                  {operation === "multiply" && <BsXLg aria-hidden={true} />}
+                  {operation === "divide" && (
+                    <CgMathDivide aria-hidden={true} />
+                  )}
+                </Dropdown.Toggle>
 
-                  <Dropdown.Menu>
-                    <Dropdown.Item
-                      aria-label="addition"
-                      onClick={() => setOperation("add")}
+                <Dropdown.Menu>
+                  <Dropdown.Item
+                    aria-label="addition"
+                    onClick={() => setOperation("add")}
+                  >
+                    <CgMathPlus aria-hidden={true} />
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    aria-label="subtraction"
+                    onClick={() => setOperation("subtract")}
+                  >
+                    <BsDashLg aria-hidden={true} />
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    aria-label="multiplication"
+                    onClick={() => setOperation("multiply")}
+                  >
+                    <BsXLg aria-hidden={true} />
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    aria-label="division"
+                    onClick={() => setOperation("divide")}
+                  >
+                    <CgMathDivide aria-hidden={true} />
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              <CurrencyInput
+                id={`${label}-${itemForm.id}-operation-value`}
+                key={`item-${itemForm.id}-${label}-operation-value`}
+                className="text-end form-control straight-corners fixed-width-font"
+                aria-label={`${operation}`}
+                name="item-operate-value"
+                intlConfig={intlConfig}
+                defaultValue={0}
+                allowNegativeValue={false}
+                maxLength={14}
+                onKeyUp={handleKeyPress}
+                ref={inputRef}
+                onValueChange={(value) =>
+                  setChangeValue(
+                    Number.isNaN(Number(value)) ? 0 : Number(value),
+                  )
+                }
+              />
+              <Button
+                id={`item-${itemForm.id}-trigger-operation-button`}
+                key={`${itemForm.id}-${label}-trigger-operation-button`}
+                aria-label={"apply change to item value"}
+                variant="outline-secondary"
+                type="button"
+                onClick={() => {
+                  handleCalculate();
+                  opButtonRef?.current?.click();
+                }}
+              >
+                <BsCheckLg aria-hidden={true} />
+              </Button>
+            </InputGroup>
+            {showHistory && (
+              <div style={{ maxHeight: "30vh", overflow: "auto" }}>
+                {history
+                  .filter((i) => i.operation !== "value")
+                  .map((item, index) => (
+                    <InputGroup
+                      size="sm"
+                      className="mb-1"
+                      key={`${item.id}-history-group-${index}`}
                     >
-                      <CgMathPlus aria-hidden={true} />
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      aria-label="subtraction"
-                      onClick={() => setOperation("subtract")}
-                    >
-                      <BsDashLg aria-hidden={true} />
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      aria-label="multiplication"
-                      onClick={() => setOperation("multiply")}
-                    >
-                      <BsXLg aria-hidden={true} />
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      aria-label="division"
-                      onClick={() => setOperation("divide")}
-                    >
-                      <CgMathDivide aria-hidden={true} />
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-                <CurrencyInput
-                  id={`${label}-${itemForm.id}-operation-value`}
-                  key={`item-${itemForm.id}-${label}-operation-value`}
-                  className="text-end form-control straight-corners fixed-width-font"
-                  aria-label={`${operation}`}
-                  name="item-operate-value"
-                  intlConfig={intlConfig}
-                  defaultValue={0}
-                  allowNegativeValue={false}
-                  maxLength={14}
-                  onKeyUp={handleKeyPress}
-                  ref={inputRef}
-                  onValueChange={(value) =>
-                    setChangeValue(
-                      Number.isNaN(Number(value)) ? 0 : Number(value),
-                    )
-                  }
-                />
-                <Button
-                  id={`item-${itemForm.id}-trigger-operation-button`}
-                  key={`${itemForm.id}-${label}-trigger-operation-button`}
-                  aria-label={"apply change to item value"}
-                  variant="outline-secondary"
-                  type="button"
-                  onClick={() => {
-                    handleCalculate();
-                    opButtonRef?.current?.click();
-                  }}
-                >
-                  <BsCheckLg aria-hidden={true} />
-                </Button>
-              </InputGroup>
-              {showHistory && (
-                <div style={{ maxHeight: "30vh", overflow: "auto" }}>
-                  {history
-                    .filter((i) => i.operation !== "value")
-                    .map((item, index) => (
-                      <InputGroup
-                        size="sm"
-                        className="mb-1"
-                        key={`${item.id}-history-group-${index}`}
-                      >
-                        <CurrencyInput
-                          id={`${label}-${itemForm.id}-${index}-history-value`}
-                          key={`item-${itemForm.id}-${index}-${label}-history-value`}
-                          className="text-end form-control straight-corners fixed-width-font"
-                          aria-label={"item history value"}
-                          name="item-history-value"
-                          intlConfig={intlConfig}
-                          defaultValue={item.itemForm.value}
-                          disabled={true}
-                        />
-                        <InputGroup.Text>
-                          {item.operation === "add" && (
-                            <CgMathPlus aria-hidden={true} />
-                          )}
-                          {item.operation === "subtract" && (
-                            <BsDashLg aria-hidden={true} />
-                          )}
-                          {item.operation === "multiply" && (
-                            <BsXLg aria-hidden={true} />
-                          )}
-                          {item.operation === "divide" && (
-                            <CgMathDivide aria-hidden={true} />
-                          )}
-                        </InputGroup.Text>
-                        <CurrencyInput
-                          id={`${label}-${itemForm.id}-${index}-history-changeValue`}
-                          key={`item-${itemForm.id}-${index}-${label}-history-changeValue`}
-                          className="text-end form-control straight-corners fixed-width-font"
-                          aria-label={"item history change value"}
-                          name="item-history-change-value"
-                          intlConfig={intlConfig}
-                          defaultValue={item.changeValue}
-                          disabled={true}
-                        />
-                      </InputGroup>
-                    ))
-                    .reverse()}
-                </div>
-              )}
-            </Popover.Body>
-          </Popover>
-        }
+                      <CurrencyInput
+                        id={`${label}-${itemForm.id}-${index}-history-value`}
+                        key={`item-${itemForm.id}-${index}-${label}-history-value`}
+                        className="text-end form-control straight-corners fixed-width-font"
+                        aria-label={"item history value"}
+                        name="item-history-value"
+                        intlConfig={intlConfig}
+                        defaultValue={item.itemForm.value}
+                        disabled={true}
+                      />
+                      <InputGroup.Text>
+                        {item.operation === "add" && (
+                          <CgMathPlus aria-hidden={true} />
+                        )}
+                        {item.operation === "subtract" && (
+                          <BsDashLg aria-hidden={true} />
+                        )}
+                        {item.operation === "multiply" && (
+                          <BsXLg aria-hidden={true} />
+                        )}
+                        {item.operation === "divide" && (
+                          <CgMathDivide aria-hidden={true} />
+                        )}
+                      </InputGroup.Text>
+                      <CurrencyInput
+                        id={`${label}-${itemForm.id}-${index}-history-changeValue`}
+                        key={`item-${itemForm.id}-${index}-${label}-history-changeValue`}
+                        className="text-end form-control straight-corners fixed-width-font"
+                        aria-label={"item history change value"}
+                        name="item-history-change-value"
+                        intlConfig={intlConfig}
+                        defaultValue={item.changeValue}
+                        disabled={true}
+                      />
+                    </InputGroup>
+                  ))
+                  .reverse()}
+              </div>
+            )}
+          </Popover.Body>
+        </Popover>
+      }
+    >
+      <Button
+        id={`${label}-${itemForm.id}-operate-button`}
+        key={`${itemForm.id}-${label}-operate-button`}
+        aria-label={"select operation type to item value"}
+        aria-haspopup="dialog"
+        variant="outline-secondary"
+        type="button"
+        ref={opButtonRef}
+        onClick={() => {
+          setTimeout(() => {
+            inputRef.current?.focus();
+          }, 0);
+          getHistory();
+        }}
       >
-        <Button
-          id={`${label}-${itemForm.id}-operate-button`}
-          key={`${itemForm.id}-${label}-operate-button`}
-          aria-label={"select operation type to item value"}
-          aria-haspopup="dialog"
-          variant="outline-secondary"
-          type="button"
-          ref={opButtonRef}
-          onClick={() => {
-            setTimeout(() => {
-              inputRef.current?.focus();
-            }, 0);
-            getHistory();
-          }}
-        >
-          <BsPlusSlashMinus aria-hidden={true} />
-        </Button>
-      </OverlayTrigger>
-    </>
+        <BsPlusSlashMinus aria-hidden={true} />
+      </Button>
+    </OverlayTrigger>
   );
 }

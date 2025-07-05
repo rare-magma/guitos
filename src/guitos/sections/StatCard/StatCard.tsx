@@ -24,7 +24,8 @@ import { focusRef, parseLocaleNumber, roundBig } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
 import { useConfig } from "../../context/ConfigContext";
 import "./StatCard.css";
-import { Budget } from "../../domain/budget";
+import { BudgetCalculator } from "../../application/budgetCalculator";
+import type { Budget } from "../../domain/budget";
 
 interface StatCardProps {
   onShowGraphs: () => void;
@@ -55,9 +56,14 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
       setAutoGoal(false);
       const newState = produce((draft) => {
         draft.stats.goal = item.target.valueAsNumber;
-        draft.stats.available = roundBig(Budget.available(draft as Budget), 2);
-        draft.stats.withGoal = Budget.availableWithGoal(draft as Budget);
-        draft.stats.saved = Budget.saved(draft as Budget);
+        draft.stats.available = roundBig(
+          BudgetCalculator.available(draft as Budget),
+          2,
+        );
+        draft.stats.withGoal = BudgetCalculator.availableWithGoal(
+          draft as Budget,
+        );
+        draft.stats.saved = BudgetCalculator.saved(draft as Budget);
       }, budget);
       setBudget(newState(), false);
     }
@@ -75,10 +81,15 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
   function handleAutoGoal() {
     if (budget && stat) {
       const newState = produce((draft) => {
-        draft.stats.goal = Budget.automaticGoal(draft as Budget);
-        draft.stats.available = roundBig(Budget.available(draft as Budget), 2);
-        draft.stats.withGoal = Budget.availableWithGoal(draft as Budget);
-        draft.stats.saved = Budget.saved(draft as Budget);
+        draft.stats.goal = BudgetCalculator.automaticGoal(draft as Budget);
+        draft.stats.available = roundBig(
+          BudgetCalculator.available(draft as Budget),
+          2,
+        );
+        draft.stats.withGoal = BudgetCalculator.availableWithGoal(
+          draft as Budget,
+        );
+        draft.stats.saved = BudgetCalculator.saved(draft as Budget);
       }, budget);
       setBudget(newState(), true);
     }

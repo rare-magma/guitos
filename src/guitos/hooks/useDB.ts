@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useNavigate, useParams } from "react-router";
 import { createBudgetNameList, saveLastOpenedBudget } from "../../utils";
+import { BudgetCsvService } from "../application/budgetCsvService";
 import { useBudget } from "../context/BudgetContext";
 import { useConfig } from "../context/ConfigContext";
 import { useGeneralContext } from "../context/GeneralContext";
@@ -167,7 +168,7 @@ export function useDB() {
       return;
     }
 
-    const newBudget = Budget.fromCsv(
+    const newBudget = BudgetCsvService.fromCsv(
       csvObject.data as string[],
       file.name.slice(0, -4),
     );
