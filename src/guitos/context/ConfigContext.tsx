@@ -15,18 +15,14 @@ interface ConfigContextInterface {
 }
 
 const optionsRepository = new localForageOptionsRepository();
+const options = new UserOptions(
+  optionsRepository.getDefaultCurrencyCode(),
+  optionsRepository.getUserLang(),
+);
 
 const ConfigContext = createContext<ConfigContextInterface>({
-  userOptions: new UserOptions(
-    optionsRepository.getDefaultCurrencyCode(),
-    optionsRepository.getUserLang(),
-  ),
-  intlConfig: UserOptions.toIntlConfig(
-    new UserOptions(
-      optionsRepository.getDefaultCurrencyCode(),
-      optionsRepository.getUserLang(),
-    ),
-  ),
+  userOptions: options,
+  intlConfig: UserOptions.toIntlConfig(options),
   setUserOptions: (value: UserOptions) => value,
 });
 
@@ -37,12 +33,7 @@ function useConfig() {
 }
 
 function ConfigProvider({ children }: PropsWithChildren) {
-  const [userOptions, setUserOptions] = useState<UserOptions>(
-    new UserOptions(
-      optionsRepository.getDefaultCurrencyCode(),
-      optionsRepository.getUserLang(),
-    ),
-  );
+  const [userOptions, setUserOptions] = useState<UserOptions>(options);
   const intlConfig = UserOptions.toIntlConfig(userOptions);
   return (
     <ConfigContext value={{ userOptions, setUserOptions, intlConfig }}>
