@@ -4,20 +4,26 @@ import "./App.css";
 import "./colors.css";
 import { BudgetProvider } from "./guitos/context/BudgetContext";
 import { ConfigProvider } from "./guitos/context/ConfigContext";
-import { GeneralProvider } from "./guitos/context/GeneralContext";
+import { ErrorProvider } from "./guitos/context/ErrorContext";
+import { LoadingProvider } from "./guitos/context/LoadingContext";
+import { NotificationProvider } from "./guitos/context/NotificationContext";
 import { BudgetPage } from "./guitos/sections/Budget/BudgetPage";
 
 export function App() {
   return (
-    <GeneralProvider>
-      <ConfigProvider>
-        <BudgetProvider>
-          <Router>
-            <Route path="/" component={BudgetPage} />
-            <Route path="/:name" component={BudgetPage} />
-          </Router>
-        </BudgetProvider>
-      </ConfigProvider>
-    </GeneralProvider>
+    <ErrorProvider>
+      <LoadingProvider>
+        <NotificationProvider>
+          <ConfigProvider>
+            <BudgetProvider>
+              <Router>
+                <Route path="/" component={BudgetPage} />
+                <Route path="/:name" component={BudgetPage} />
+              </Router>
+            </BudgetProvider>
+          </ConfigProvider>
+        </NotificationProvider>
+      </LoadingProvider>
+    </ErrorProvider>
   );
 }

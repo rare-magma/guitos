@@ -5,10 +5,12 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { useParams } from "wouter";
 import { createBudgetNameList } from "../../../utils";
 import { useBudget } from "../../context/BudgetContext";
+import { useErrorContext } from "../../context/ErrorContext";
+import { useLoadingContext } from "../../context/LoadingContext";
 import {
   type BudgetNotification,
-  useGeneralContext,
-} from "../../context/GeneralContext";
+  useNotificationContext,
+} from "../../context/NotificationContext";
 import type { Budget } from "../../domain/budget";
 import { useDB } from "../../hooks/useDB";
 import { LandingPage } from "../LandingPage/LandingPage";
@@ -23,6 +25,8 @@ const ErrorModal = lazy(() => import("../ErrorModal/ErrorModal"));
 
 export function BudgetPage() {
   const [showGraphs, setShowGraphs] = useState(false);
+  const { needReload, loadingFromDB, setLoadingFromDB } = useLoadingContext();
+  const { notifications, setNotifications } = useNotificationContext();
 
   const {
     error,
@@ -33,12 +37,7 @@ export function BudgetPage() {
     showError,
     setShowError,
     handleError,
-    needReload,
-    loadingFromDB,
-    setLoadingFromDB,
-    notifications,
-    setNotifications,
-  } = useGeneralContext();
+  } = useErrorContext();
 
   const {
     budget,

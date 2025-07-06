@@ -1,8 +1,8 @@
 import { Button, Toast } from "react-bootstrap";
 import { BsArrowCounterclockwise, BsX } from "react-icons/bs";
 import { useBudget } from "../../context/BudgetContext";
-import type { BudgetNotification } from "../../context/GeneralContext";
 import "./Notification.css";
+import type { BudgetNotification } from "../../context/NotificationContext";
 
 interface NotificationProps {
   notification: BudgetNotification;

@@ -8,7 +8,9 @@ import { createBudgetNameList, saveLastOpenedBudget } from "../../utils";
 import { BudgetCsvService, type CsvRow } from "../application/budgetCsvService";
 import { useBudget } from "../context/BudgetContext";
 import { useConfig } from "../context/ConfigContext";
-import { useGeneralContext } from "../context/GeneralContext";
+import { useErrorContext } from "../context/ErrorContext";
+import { useLoadingContext } from "../context/LoadingContext";
+import { useNotificationContext } from "../context/NotificationContext";
 import { Budget } from "../domain/budget";
 import type { BudgetItem } from "../domain/budgetItem";
 import type { CalculationHistoryItem } from "../domain/calculationHistoryItem";
@@ -33,17 +35,10 @@ export function useDB() {
 
   const navigateCallback = useCallback(() => navigate, [navigate]);
 
-  const {
-    setShowError,
-    handleError,
-    csvErrors,
-    setCsvErrors,
-    setJsonErrors,
-    setNeedReload,
-    setLoadingFromDB,
-    notifications,
-    setNotifications,
-  } = useGeneralContext();
+  const { setNeedReload, setLoadingFromDB } = useLoadingContext();
+  const { notifications, setNotifications } = useNotificationContext();
+  const { setShowError, handleError, csvErrors, setCsvErrors, setJsonErrors } =
+    useErrorContext();
 
   const {
     budget,

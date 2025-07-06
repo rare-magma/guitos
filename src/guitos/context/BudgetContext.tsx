@@ -8,7 +8,7 @@ import useUndo from "use-undo";
 import { BudgetCalculator } from "../application/budgetCalculator";
 import type { Budget } from "../domain/budget";
 import type { SearchOption } from "../sections/NavBar/NavBar";
-import { useGeneralContext } from "./GeneralContext";
+import { useLoadingContext } from "./LoadingContext";
 
 export interface BudgetContextInterface {
   budget: Budget | undefined;
@@ -88,7 +88,7 @@ function BudgetProvider({ children }: PropsWithChildren) {
   const [budgetNameList, setBudgetNameList] = useState<
     SearchOption[] | undefined
   >([]);
-  const { setNeedReload } = useGeneralContext();
+  const { setNeedReload } = useLoadingContext();
 
   const [
     budgetState,
