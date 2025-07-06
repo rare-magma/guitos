@@ -9,15 +9,15 @@ import {
 interface LoadingContextInterface {
   loadingFromDB: boolean;
   setLoadingFromDB: (value: boolean) => void;
-  needReload: boolean;
-  setNeedReload: (value: boolean) => void;
+  shouldReload: boolean;
+  setShouldReload: (value: boolean) => void;
 }
 
 const LoadingContext = createContext<LoadingContextInterface>({
   loadingFromDB: true,
   setLoadingFromDB: (value) => value,
-  needReload: true,
-  setNeedReload: (value) => value,
+  shouldReload: true,
+  setShouldReload: (value) => value,
 });
 
 export function useLoadingContext() {
@@ -26,11 +26,11 @@ export function useLoadingContext() {
 
 export function LoadingProvider({ children }: PropsWithChildren) {
   const [loadingFromDB, setLoadingFromDB] = useState(true);
-  const [needReload, setNeedReload] = useState(true);
+  const [shouldReload, setShouldReload] = useState(true);
 
   const value = useMemo(
-    () => ({ loadingFromDB, setLoadingFromDB, needReload, setNeedReload }),
-    [loadingFromDB, needReload],
+    () => ({ loadingFromDB, setLoadingFromDB, shouldReload, setShouldReload }),
+    [loadingFromDB, shouldReload],
   );
 
   return (

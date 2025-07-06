@@ -35,7 +35,7 @@ export function useDB() {
 
   const navigateCallback = useCallback(() => navigate, [navigate]);
 
-  const { setNeedReload, setLoadingFromDB } = useLoadingContext();
+  const { setShouldReload, setLoadingFromDB } = useLoadingContext();
   const { notifications, setNotifications } = useNotificationContext();
   const { setShowError, handleError, csvErrors, setCsvErrors, setJsonErrors } =
     useErrorContext();
@@ -448,11 +448,11 @@ export function useDB() {
         budgetRepository.getAll().then((list) => {
           setBudgetList(list);
           setBudgetNameList(createBudgetNameList(list));
-          setNeedReload(true);
+          setShouldReload(true);
         });
       });
     },
-    [setBudgetList, setBudgetNameList, setNeedReload],
+    [setBudgetList, setBudgetNameList, setShouldReload],
   );
 
   useEffect(() => {

@@ -88,7 +88,7 @@ function BudgetProvider({ children }: PropsWithChildren) {
   const [budgetNameList, setBudgetNameList] = useState<
     SearchOption[] | undefined
   >([]);
-  const { setNeedReload } = useLoadingContext();
+  const { setShouldReload } = useLoadingContext();
 
   const [
     budgetState,
@@ -112,17 +112,17 @@ function BudgetProvider({ children }: PropsWithChildren) {
 
   function handleUndo() {
     if (canReallyUndo) {
-      setNeedReload(true);
+      setShouldReload(true);
       undo();
-      setNeedReload(false);
+      setShouldReload(false);
     }
   }
 
   function handleRedo() {
     if (canReallyRedo) {
-      setNeedReload(true);
+      setShouldReload(true);
       redo();
-      setNeedReload(false);
+      setShouldReload(false);
     }
   }
 

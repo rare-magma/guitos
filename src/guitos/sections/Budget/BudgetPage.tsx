@@ -25,7 +25,7 @@ const ErrorModal = lazy(() => import("../ErrorModal/ErrorModal"));
 
 export function BudgetPage() {
   const [showGraphs, setShowGraphs] = useState(false);
-  const { needReload, loadingFromDB, setLoadingFromDB } = useLoadingContext();
+  const { shouldReload, loadingFromDB, setLoadingFromDB } = useLoadingContext();
   const { notifications, setNotifications } = useNotificationContext();
 
   const {
@@ -135,7 +135,7 @@ export function BudgetPage() {
     <Container
       fluid={true}
       style={{ zIndex: 1 }}
-      key={`${budget?.id}-${needReload}`}
+      key={`${budget?.id}-${shouldReload}`}
       role="main"
     >
       <ToastContainer
@@ -179,7 +179,7 @@ export function BudgetPage() {
       )}
 
       {showCards && (
-        <Container key={`${budget.id}-${needReload}-cards-container`}>
+        <Container key={`${budget.id}-${shouldReload}-cards-container`}>
           <Row className="mt-1">
             <Suspense fallback={<Loading />}>
               <Col md="6">

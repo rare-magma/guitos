@@ -75,7 +75,7 @@ export const testEmptyBudgetContext = {
   revenuePercentage: 0,
   past: [],
   future: [],
-  needReload: true,
+  shouldReload: true,
   undo: undoMock,
   redo: redoMock,
   canUndo: false,
