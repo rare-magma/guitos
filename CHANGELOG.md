@@ -1,3 +1,32 @@
+## 1.5.5 (2025-07-06)
+
+#### Bug Fixes
+
+* add useWindowSize test (09e8dc73)
+
+#### Tests
+
+* add more cases for fromCsv() (9fdc92c0)
+
+#### Code Refactoring
+
+* rename needReload to shouldReload (b3a5e71a)
+* split general context into smaller contexts (089acba0)
+
+#### Chores
+
+* **release:** 1.5.4 (2ed37b64)
+
+#### Build
+
+* **deps:** bump the deps-prod group across 1 directory with 2 updates (#207) (e5446cfe)
+* **deps-dev:** bump the deps-dev group across 1 directory with 11 updates (#204) (b2059eef)
+
+#### CI
+
+* audit deps (c0eaab3a)
+
+
 ## 1.5.4 (2025-07-05)
 
 #### Bug Fixes
