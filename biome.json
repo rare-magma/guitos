@@ -28,7 +28,8 @@
       "recommended": true,
       "a11y": {},
       "complexity": {
-        "noExcessiveCognitiveComplexity": "error"
+        "noExcessiveCognitiveComplexity": "error",
+        "noStaticOnlyClass": "off"
       },
       "correctness": {
         "noUndeclaredVariables": "error",

@@ -1,6 +1,5 @@
 import type { JsonError } from "./jsonError";
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class JsonErrorMother {
   static error(): JsonError {
     return {

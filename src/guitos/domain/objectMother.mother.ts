@@ -1,7 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { Uuid } from "./uuid";
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class ObjectMother {
   static uuid(): Uuid {
     return new Uuid(faker.string.uuid());

@@ -1,7 +1,6 @@
 import { BudgetMother } from "./budget.mother";
 import { BudgetItemsMother } from "./budgetItem.mother";
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class CalculationHistoryItemMother {
   static testCalcHist() {
     return [

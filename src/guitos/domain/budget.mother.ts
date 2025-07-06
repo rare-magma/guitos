@@ -3,7 +3,6 @@ import { Budget } from "./budget";
 import { BudgetItem } from "./budgetItem";
 import { Uuid } from "./uuid";
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class BudgetMother {
   static testEmptyBudget(): Budget {
     return {

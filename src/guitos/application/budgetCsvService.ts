@@ -10,7 +10,6 @@ export type CsvRow = CsvItem & {
   value: string | number;
 };
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class BudgetCsvService {
   static fromCsv(csv: CsvRow[], date: string): Budget {
     const newBudget = Budget.createEmpty(date);

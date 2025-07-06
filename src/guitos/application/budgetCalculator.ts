@@ -3,7 +3,6 @@ import { roundBig } from "../../utils";
 import type { Budget } from "../domain/budget";
 import type { BudgetItem } from "../domain/budgetItem";
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class BudgetCalculator {
   static itemsTotal(items: Readonly<BudgetItem[]>): Big {
     let total = Big(0);

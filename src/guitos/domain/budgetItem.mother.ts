@@ -1,7 +1,6 @@
 import { BudgetItem } from "./budgetItem";
 import { ObjectMother } from "./objectMother.mother";
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class BudgetItemsMother {
   static budgetItems(): BudgetItem[] {
     const list = [

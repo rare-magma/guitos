@@ -1,7 +1,6 @@
 import { ObjectMother } from "./objectMother.mother";
 import { UserOptions } from "./userOptions";
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class UserOptionsMother {
   static default(): UserOptions {
     return new UserOptions("USD", navigator.language);
