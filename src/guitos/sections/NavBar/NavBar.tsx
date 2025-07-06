@@ -39,7 +39,7 @@ export interface SearchOption {
   name: string;
 }
 
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: big component
 export function NavBar() {
   const searchRef = useRef<TypeaheadRef>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -208,7 +208,7 @@ export function NavBar() {
                     </Tooltip>
                   }
                 >
-                  {/** biome-ignore lint/complexity/noUselessFragments: <explanation> */}
+                  {/** biome-ignore lint/complexity/noUselessFragments: react types need it */}
                   <>
                     <Form.Control
                       aria-label={"budget name"}

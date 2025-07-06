@@ -105,7 +105,7 @@ export function BudgetPage() {
     preventDefault: true,
   });
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: unstable deps
   useEffect(() => {
     try {
       const shouldLoadBudgetsFromList =

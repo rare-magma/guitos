@@ -115,7 +115,7 @@ export function getNestedValues<T, K extends keyof T, L extends keyof T[K]>(
   prop1: K,
   prop2: L,
 ): T[K][L][] {
-  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  // biome-ignore lint/style/noNonNullAssertion: for simplicity
   return list!.map((o: T) => {
     return getNestedProperty(o, prop1, prop2);
   });

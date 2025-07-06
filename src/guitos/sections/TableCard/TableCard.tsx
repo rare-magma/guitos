@@ -27,7 +27,7 @@ interface TableCardProps {
   header: "Revenue" | "Expenses";
 }
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: lazy loading
 export default function TableCard({ header: label }: TableCardProps) {
   const { budget, setBudget, revenuePercentage } = useBudget();
   const { userOptions } = useConfig();
@@ -115,7 +115,7 @@ export default function TableCard({ header: label }: TableCardProps) {
                 {revenuePercentage}% of revenue
               </Tooltip>
             ) : (
-              // biome-ignore lint/complexity/noUselessFragments: <explanation>
+              // biome-ignore lint/complexity/noUselessFragments: react types need it
               <></>
             )
           }

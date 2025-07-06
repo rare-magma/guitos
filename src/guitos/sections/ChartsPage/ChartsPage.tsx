@@ -45,7 +45,7 @@ export interface FilteredItem {
   type: string;
 }
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: lazy loading
 export default function ChartsPage({ onShowGraphs }: GraphProps) {
   const { budgetList } = useBudget();
   const { selectBudgetsWithFilter, searchBudgetsWithFilter, options } = useDB();

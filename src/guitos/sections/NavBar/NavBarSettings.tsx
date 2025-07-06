@@ -102,7 +102,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                     ref={versionRef}
                     rel="noreferrer"
                   >
-                    {/* biome-ignore lint/correctness/noUndeclaredVariables: <explanation> */}
+                    {/* biome-ignore lint/correctness/noUndeclaredVariables: value comes from the bundler */}
                     v{APP_VERSION}
                   </a>
                 </OverlayTrigger>

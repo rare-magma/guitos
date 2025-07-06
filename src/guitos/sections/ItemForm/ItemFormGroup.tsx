@@ -79,7 +79,7 @@ export function ItemFormGroup({
     if (!itemForm) return;
 
     let saveInHistory = false;
-    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: <explanation>
+    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: immer complicates breaking this into multiple functions
     const newState = produce((draft) => {
       const newItemForm = isExpense
         ? draft.expenses.items.find(
@@ -183,7 +183,7 @@ export function ItemFormGroup({
               {costPercentage}% of revenue
             </Tooltip>
           ) : (
-            // biome-ignore lint/complexity/noUselessFragments: <explanation>
+            // biome-ignore lint/complexity/noUselessFragments: react types need it
             <></>
           )
         }
@@ -214,7 +214,7 @@ export function ItemFormGroup({
               {costPercentage}% of revenue
             </Tooltip>
           ) : (
-            // biome-ignore lint/complexity/noUselessFragments: <explanation>
+            // biome-ignore lint/complexity/noUselessFragments: react types need it
             <></>
           )
         }
