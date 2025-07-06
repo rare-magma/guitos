@@ -17,3 +17,7 @@ runs:
     - name: Install dependencies
       shell: bash
       run: pnpm install
+
+    - name: Audit dependencies
+      shell: bash
+      run: pnpm audit --audit-level=moderate
