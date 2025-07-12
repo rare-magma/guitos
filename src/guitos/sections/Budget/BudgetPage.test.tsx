@@ -111,7 +111,10 @@ describe("BudgetPage", () => {
 
   it("responds to show graphs keyboard shortcut", async () => {
     render(comp);
-    await userEvent.type(await screen.findByTestId("header"), "i");
+    const header = await screen.findByTestId("header");
+    await act(async () => {
+      await userEvent.type(header, "i");
+    });
     for (const element of screen.getAllByRole("status")) {
       expect(element).toBeVisible();
     }
