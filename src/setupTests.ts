@@ -2,12 +2,11 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/vitest";
 import { randomUUID } from "node:crypto";
-import * as matchers from "@testing-library/jest-dom/matchers";
 import { cleanup } from "@testing-library/react";
 import { createElement } from "react";
-import { afterEach, beforeEach, expect, vi } from "vitest";
+import { afterEach, beforeEach, vi } from "vitest";
 import type { BudgetContextInterface } from "./guitos/context/BudgetContext";
 import * as AppBudgetContext from "./guitos/context/BudgetContext";
 import { BudgetMother } from "./guitos/domain/budget.mother";
@@ -29,9 +28,6 @@ vi.mock("recharts", async (importOriginal) => {
     ResponsiveContainer: () => createElement("div"),
   };
 });
-
-// extends Vitest's expect method with methods from react-testing-library
-expect.extend(matchers);
 
 export const budgetContextSpy = vi.spyOn(AppBudgetContext, "useBudget");
 beforeEach(() => {
