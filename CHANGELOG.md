@@ -1,3 +1,14 @@
+## 1.6.1 (2025-07-13)
+
+#### Bug Fixes
+
+* force release (e67cd080)
+
+#### Documentation
+
+* update table of contents (480f9bb8)
+
+
 ## 1.5.5 (2025-07-06)
 
 #### Bug Fixes
