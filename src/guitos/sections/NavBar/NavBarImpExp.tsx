@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsArrowDownUp, BsUpload } from "react-icons/bs";
+import { generatePrompt } from "../../../utils";
 import { BudgetCsvService } from "../../application/budgetCsvService";
 import { useBudget } from "../../context/BudgetContext";
 import { useDB } from "../../hooks/useDB";
@@ -42,19 +43,34 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
     preventDefault: true,
   });
 
+  useHotkeys("h", (e) => !e.repeat && handleExportPrompt(), {
+    preventDefault: true,
+  });
+
+  function handleExportPrompt() {
+    const date = new Date().toISOString();
+    const filename = `guitos-prompt-${date.slice(0, -5)}.md`;
+    const jsonExport = JSON.stringify(budgetList);
+    const fileContents = generatePrompt(jsonExport);
+    const url = window.URL.createObjectURL(new Blob([fileContents]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
+  }
+
   function handleExportJSON() {
-    if (budget) {
-      const date = new Date().toISOString();
-      const filename = `guitos-${date.slice(0, -5)}.json`;
-      const url = window.URL.createObjectURL(
-        new Blob([JSON.stringify(budgetList)]),
-      );
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", filename);
-      document.body.appendChild(link);
-      link.click();
-    }
+    const date = new Date().toISOString();
+    const filename = `guitos-${date.slice(0, -5)}.json`;
+    const url = window.URL.createObjectURL(
+      new Blob([JSON.stringify(budgetList)]),
+    );
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", filename);
+    document.body.appendChild(link);
+    link.click();
   }
 
   function handleExportCSV() {
@@ -137,6 +153,20 @@ export function NavBarImpExp({ expanded, setExpanded }: NavBarImpExpProps) {
                       onClick={handleExportJSON}
                     >
                       json
+                    </Button>
+
+                    <Button
+                      id={"budget-export-prompt-button"}
+                      aria-label="export budget AI prompt"
+                      key={"budget-export-prompt-button"}
+                      variant="outline-primary"
+                      type="button"
+                      style={{
+                        minWidth: "7ch",
+                      }}
+                      onClick={handleExportPrompt}
+                    >
+                      prompt
                     </Button>
                   </InputGroup>
                 </Stack>

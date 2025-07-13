@@ -162,25 +162,26 @@ reserves,reserves,0
 
 Keyboard shortcuts can be triggered when no input field is selected.
 
-| Action                       | Shortcut |
-| ---------------------------- | -------- |
-| Undo last change             | U        |
-| Redo last change             | R        |
-| Clone current budget         | C        |
-| Create new budget            | A        |
-| Open import/export panel     | O        |
-| Export data as JSON          | S        |
-| Export current budget as CSV | D        |
-| Open settings panel          | T        |
-| Go to older budget           | PageDown |
-| Go to current month's budget | Home     |
-| Go to newer budget           | PageUp   |
-| Rename current budget        | N        |
-| Search                       | F or /   |
-| Focus savings goal           | G        |
-| Focus reserves               | E        |
-| Toggle charts view           | I        |
-| Dismiss all notifications    | Escape   |
+| Action                            | Shortcut |
+| --------------------------------- | -------- |
+| Undo last change                  | U        |
+| Redo last change                  | R        |
+| Clone current budget              | C        |
+| Create new budget                 | A        |
+| Open import/export panel          | O        |
+| Export data as JSON               | S        |
+| Export current budget as CSV      | D        |
+| Export data as AI friendly prompt | H        |
+| Open settings panel               | T        |
+| Go to older budget                | PageDown |
+| Go to current month's budget      | Home     |
+| Go to newer budget                | PageUp   |
+| Rename current budget             | N        |
+| Search                            | F or /   |
+| Focus savings goal                | G        |
+| Focus reserves                    | E        |
+| Toggle charts view                | I        |
+| Dismiss all notifications         | Escape   |
 
 ## Notes
 
@@ -195,6 +196,27 @@ Keyboard shortcuts can be triggered when no input field is selected.
   - It's possible to override it by selecting a different currency code based on [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
 - Querying the search bar finds matching budget/expense/income names, opens the budget that contains the match and highlights it.
 - The list of Revenue/Expenses can be reordered by dragging each item after enabling the toggle button.
+
+## AI Analysis
+
+guitos can export an AI prompt ready file via the export button or the keyboard shortcut which is useful for feeding Large Language Models the necessary context for analysing the information that is stored in the app.
+Once you've generated a prompt file, you can send it to an AI assistant (like Ollama, ChatGPT, Claude, etc.) with a prompt like this:
+
+```text
+The attached file is an export from the guitos app which is a personal budgeting app that helps you figure out where your money went, plan your budget ahead of time and analyze past expenditures.
+I want to gather some insights from it, so please review it first.
+```
+
+The AI will analyze your data and could provide comprehensive insights with follow up instructions:
+
+```markdown
+Analyze the year to date period and:
+1. Identify potential budgeting issues.
+2. Suggest improvements for decreasing the total expenses per month.
+3. Note areas that follow bad practices.
+
+Provide examples.
+```
 
 ## Known issues
 
@@ -308,3 +330,4 @@ See [LICENSE](LICENSE) for more information.
 - [Hands on React](https://handsonreact.com)
 - [Playwright](https://playwright.dev/)
 - [@axe-core/playwright](https://github.com/dequelabs/axe-core-npm/blob/develop/packages/playwright/README.md)
+- [Repomix](https://repomix.com)

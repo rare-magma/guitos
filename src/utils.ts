@@ -6,6 +6,7 @@ import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import type { UserOptions } from "./guitos/domain/userOptions";
 import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "./guitos/sections/NavBar/NavBar";
+import { prompt } from "./guitos/sections/NavBar/prompt";
 
 export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();
@@ -137,4 +138,12 @@ export function saveLastOpenedBudget(
 ) {
   navigateFn(`/${name}`);
   localStorage.setItem("guitos_lastOpenedBudget", name);
+}
+
+export function generatePrompt(jsonFile: string) {
+  return `${prompt}
+  \`\`\`json
+  ${jsonFile}
+  \`\`\`
+  `;
 }

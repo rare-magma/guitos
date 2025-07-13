@@ -4,6 +4,7 @@ import { expect, test } from "@playwright/test";
 const rentRegex = /rent/;
 const csvRegex = /.csv/;
 const jsonRegex = /.json/;
+const mdRegex = /.md/;
 
 test("should complete the settings happy path", async ({ page, isMobile }) => {
   await page.goto("/");
@@ -80,6 +81,25 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   expect(jsonDownload.suggestedFilename()).toMatch(jsonRegex);
   expect(
     (await fs.promises.stat(await jsonDownload.path())).size,
+  ).toBeGreaterThan(0);
+
+  await page.getByLabel("import or export budget").click();
+  await expect(page.getByText("prompt")).toBeVisible();
+
+  const [promptDownload] = await Promise.all([
+    page.waitForEvent("download"),
+    page.getByLabel("export budget AI prompt").click(),
+  ]);
+
+  const promptDownloadError = await promptDownload.failure();
+  if (promptDownloadError !== null) {
+    console.log("Error on download:", promptDownloadError);
+    throw new Error(promptDownloadError);
+  }
+
+  expect(promptDownload.suggestedFilename()).toMatch(mdRegex);
+  expect(
+    (await fs.promises.stat(await promptDownload.path())).size,
   ).toBeGreaterThan(0);
 
   // should handle import

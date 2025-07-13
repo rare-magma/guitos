@@ -6,12 +6,14 @@ import { UserOptions } from "./guitos/domain/userOptions";
 import { Uuid } from "./guitos/domain/uuid";
 import { localForageOptionsRepository } from "./guitos/infrastructure/localForageOptionsRepository";
 import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
+import { prompt } from "./guitos/sections/NavBar/prompt";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
 import { currenciesMap } from "./lists/currenciesMap";
 import { firefoxLocalesList } from "./lists/firefoxLocalesList";
 import {
   calc,
   createBudgetNameList,
+  generatePrompt,
   getLabelKey,
   getLabelKeyFilteredItem,
   getNestedProperty,
@@ -163,5 +165,12 @@ test("getLabelKeyFilteredItem", () => {
   };
   expect(getLabelKeyFilteredItem(optionWithoutItem)).toEqual(
     "abcd (2023-03 abcd)",
+  );
+});
+
+test("generatePrompt", () => {
+  expect(generatePrompt(BudgetMother.testBudget().toString())).contain(
+    prompt,
+    BudgetMother.testBudget().toString(),
   );
 });
