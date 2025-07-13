@@ -240,7 +240,7 @@ docker compose -f docker/docker-compose.yaml up --detach
 - [React Bootstrap](https://react-bootstrap.github.io/)
 - [React Bootstrap Typeahead](https://ericgio.github.io/react-bootstrap-typeahead/)
 - [React Icons](https://react-icons.github.io/react-icons/)
-- [React Router](https://reactrouter.com/)
+- [Wouter](https://github.com/molefrog/wouter)
 - [React Currency Input Field](https://github.com/cchanxzy/react-currency-input-field)
 - [React Hotkeys Hook](https://github.com/JohannesKlauss/react-hotkeys-hook)
 - [Recharts](https://github.com/recharts/recharts)
