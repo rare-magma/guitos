@@ -2,9 +2,7 @@
   "browserslist": {
     "production": "defaults",
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "extends browserslist-config-baseline"
     ]
   },
   "dependencies": {
