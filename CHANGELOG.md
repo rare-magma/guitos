@@ -1,3 +1,41 @@
+## 1.6.2 (2025-09-02)
+
+#### Bug Fixes
+
+* apply linter recs (2fed93c0)
+
+#### Reverts
+
+* swap vite-plugin-sri3 with vite-plugin-sri-gen (1a8c8433)
+
+#### Documentation
+
+* update list of recommended extensions (100a8202)
+
+#### Chores
+
+* **release:** 1.6.1 (33692314)
+
+#### Build
+
+* **deps-dev:** bump the deps-dev group with 10 updates (#215) (21a0bcd5)
+* **deps:** bump the deps-prod group with 2 updates (#214) (c93d05ff)
+* **deps:** bump actions/attest-build-provenance from 2.4.0 to 3.0.0 (#213) (f5993bc8)
+* **deps:** bump actions/checkout from 4.2.2 to 5.0.0 (#212) (e7ec94f6)
+* install from lockfile in docker (186ec325)
+* revert recharts bump (c815ddb6)
+* swap vite-plugin-sri3 with vite-plugin-sri-gen (da0a5c45)
+* **deps:** bump the deps-prod group with 5 updates (#209) (5193e26a)
+* set browser target to baseline widely available (e7ce46c0)
+* **deps:** bump form-data in the npm_and_yarn group (#208) (6a9a060d)
+
+#### CI
+
+* bump pnpm in actions (9c4fbac0)
+* configure github actions reporter for playwright (b3aa7ef5)
+* automatically bump libs and playwright image and biome schema (#211) (4f267e79)
+
+
 ## 1.6.1 (2025-07-13)
 
 #### Bug Fixes

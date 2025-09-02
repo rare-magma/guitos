@@ -68,7 +68,7 @@
   },
   "private": true,
   "scripts": {
-    "bump:playwright-image": "PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test --json --depth=0 | jq -r '.[0].devDependencies[\"@playwright/test\"].version') && sed -i -E \"s|(mcr\\.microsoft\\.com/playwright:)v[0-9]+\\.[0-9]+\\.[0-9]+(@sha256:[a-f0-9]+)? +# ratchet:mcr\\.microsoft\\.com/playwright:v[0-9]+\\.[0-9]+\\.[0-9]+|\\1v$PLAYWRIGHT_VERSION\\2 # ratchet:mcr.microsoft.com/playwright:v$PLAYWRIGHT_VERSION|\" .github/workflows/*.yml",
+    "bump:playwright-image": "PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test --json --depth=0 | jq -r '.[0].devDependencies[\"@playwright/test\"].version') \u0026\u0026 sed -i -E \"s|(mcr\\.microsoft\\.com/playwright:)v[0-9]+\\.[0-9]+\\.[0-9]+(@sha256:[a-f0-9]+)? +# ratchet:mcr\\.microsoft\\.com/playwright:v[0-9]+\\.[0-9]+\\.[0-9]+|\\1v$PLAYWRIGHT_VERSION\\2 # ratchet:mcr.microsoft.com/playwright:v$PLAYWRIGHT_VERSION|\" .github/workflows/*.yml",
     "bump:biome-schema": "pnpx @biomejs/biome migrate --write",
     "build": "vite build",
     "bundle": "pnpm dlx vite-bundle-visualizer",
@@ -87,5 +87,5 @@
     "test:e2e:ui": "playwright test --ui --project chromium"
   },
   "type": "module",
-  "version": "1.6.1"
+  "version": "1.6.2"
 }
