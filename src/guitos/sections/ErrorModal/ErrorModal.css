@@ -45,6 +45,7 @@
 }
 
 .modal-90w {
+  /* biome-ignore lint/complexity/noImportantStyles: override bootstrap */
   max-width: none !important;
   width: 90%;
 }

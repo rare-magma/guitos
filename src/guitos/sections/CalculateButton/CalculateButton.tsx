@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import {
   Button,
   Dropdown,
@@ -110,7 +110,7 @@ export function CalculateButton({
                   aria-label={"select type of operation on item value"}
                   aria-haspopup="true"
                   variant="outline-secondary"
-                  id="dropdown-operation"
+                  id={useId()}
                 >
                   {operation === "add" && <CgMathPlus aria-hidden={true} />}
                   {operation === "subtract" && <BsDashLg aria-hidden={true} />}

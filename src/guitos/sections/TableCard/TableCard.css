@@ -37,6 +37,7 @@
 .btn-check:checked + .btn,
 .btn.active,
 .btn.show {
+  /* biome-ignore lint/complexity/noImportantStyles: override bootstrap */
   box-shadow: none !important;
   background-color: var(--cyan);
   border: 1px solid var(--cyan);
@@ -45,12 +46,14 @@
 }
 
 .btn-check + .btn:hover {
+  /* biome-ignore lint/complexity/noImportantStyles: override bootstrap */
   box-shadow: none !important;
   border: 1px solid var(--cyan);
 }
 
 .btn-check:focus-visible + .btn,
 .btn-check {
+  /* biome-ignore lint/complexity/noImportantStyles: override bootstrap */
   box-shadow: none !important;
   color: var(--cyan);
   border: 1px solid var(--cyan);

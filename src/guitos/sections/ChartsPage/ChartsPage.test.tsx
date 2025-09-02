@@ -8,7 +8,7 @@ describe("ChartsPage", () => {
   const comp = <ChartsPage onShowGraphs={onShowGraphs} />;
 
   beforeEach(() => {
-    //@ts-ignore
+    //@ts-expect-error
     window.ResizeObserver = undefined;
     window.ResizeObserver = vi.fn().mockImplementation(() => ({
       observe: vi.fn(),

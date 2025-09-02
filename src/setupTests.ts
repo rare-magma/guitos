@@ -23,7 +23,7 @@ vi.mock("crypto", () => ({
 vi.mock("recharts", async (importOriginal) => {
   const originalModule = await importOriginal();
   return {
-    //@ts-ignore
+    //@ts-expect-error
     ...originalModule,
     ResponsiveContainer: () => createElement("div"),
   };
