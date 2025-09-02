@@ -15,6 +15,7 @@ a:hover {
 
 .btn:focus-visible {
   background-color: var(--comment);
+  /* biome-ignore lint/complexity/noImportantStyles: override bootstrap */
   box-shadow: none !important;
   color: var(--lightbgcolor);
 }
@@ -48,6 +49,7 @@ a:hover {
 
 .btn-outline-info:focus-visible,
 .btn-outline-info:hover {
+  /* biome-ignore lint/complexity/noImportantStyles: override bootstrap */
   box-shadow: none !important;
   background-color: var(--cyan);
   border: 1px solid var(--cyan);

@@ -19,6 +19,7 @@
 
 .dropdown-menu {
   min-width: inherit;
+  /* biome-ignore lint/complexity/noImportantStyles: override bootstrap */
   overflow-x: hidden !important;
 }
 

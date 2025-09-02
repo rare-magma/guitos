@@ -19,7 +19,7 @@ describe("Chart", () => {
   );
 
   beforeEach(() => {
-    //@ts-ignore
+    //@ts-expect-error
     window.ResizeObserver = undefined;
     window.ResizeObserver = vi.fn().mockImplementation(() => ({
       observe: vi.fn(),

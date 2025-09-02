@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import {
   Button,
   Col,
@@ -146,7 +146,7 @@ export default function ChartsPage({ onShowGraphs }: GraphProps) {
                   onSearch={(q) => handleSearch({ value: q, type: "" })}
                 />
                 <ToggleButton
-                  id="toggle-strict"
+                  id={useId()}
                   aria-label="toggle strict match during search"
                   className="p-2 filter-search"
                   type="checkbox"
