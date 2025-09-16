@@ -1,6 +1,6 @@
 import type Big from "big.js";
 
-export type CsvType = "expense" | "income" | "goal" | "reserves";
+type CsvType = "expense" | "income" | "goal" | "reserves";
 
 export class CsvItem {
   type: CsvType;
