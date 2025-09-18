@@ -225,7 +225,7 @@ export function CalculateButton({
                       />
                     </InputGroup>
                   ))
-                  .reverse()}
+                  .toReversed()}
               </div>
             )}
           </Popover.Body>
