@@ -93,7 +93,7 @@ export function parseLocaleNumber(
 export function median(arr: number[]): number {
   if (!arr.length) return 0;
 
-  const s = [...arr].sort((a, b) => Big(a).minus(b).toNumber());
+  const s = [...arr].toSorted((a, b) => Big(a).minus(b).toNumber());
   const mid = Math.floor(s.length / 2);
   return s.length % 2 === 0
     ? Big(s[mid - 1])

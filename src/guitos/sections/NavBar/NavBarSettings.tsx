@@ -75,7 +75,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                               minWidth: "8ch",
                             }
                       }
-                      options={currenciesList.sort((a, b) =>
+                      options={currenciesList.toSorted((a, b) =>
                         a.localeCompare(b),
                       )}
                       placeholder={userOptions.currencyCode}

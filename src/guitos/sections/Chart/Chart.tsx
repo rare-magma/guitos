@@ -61,7 +61,8 @@ export function Chart({
   const isGoalChart = tooltipKey1 === "goal";
   const isVerticalScreen = window.innerWidth < window.innerHeight;
   const chartData =
-    filteredData ?? budgetList?.sort((a, b) => a.name.localeCompare(b.name));
+    filteredData ??
+    budgetList?.toSorted((a, b) => a.name.localeCompare(b.name));
 
   function medianLabelGroup(legend: string, values: number[]) {
     return (

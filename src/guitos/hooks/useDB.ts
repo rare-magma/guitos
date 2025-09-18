@@ -112,8 +112,8 @@ export function useDB() {
           .filter(
             (item: Budget) => item.id.toString() !== toBeDeleted.toString(),
           )
-          .sort((a, b) => a.name.localeCompare(b.name))
-          .reverse();
+          .toSorted((a, b) => a.name.localeCompare(b.name))
+          .toReversed();
 
         setBudgetList(newBudgetList);
         setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -222,16 +222,16 @@ export function useDB() {
           newBudget = list.filter((b: Budget) => b && b.name === name)[0];
         } else {
           newBudget = list
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .reverse()
+            .toSorted((a, b) => a.name.localeCompare(b.name))
+            .toReversed()
             .filter((b: Budget) => b && b.id === list[0].id)[0];
         }
 
         // load latest if budget name is not found
         if (newBudget === undefined) {
           newBudget = list
-            .sort((a, b) => a.name.localeCompare(b.name))
-            .reverse()
+            .toSorted((a, b) => a.name.localeCompare(b.name))
+            .toReversed()
             .filter((b: Budget) => b && b.id === list[0].id)[0];
         }
 
@@ -315,7 +315,7 @@ export function useDB() {
           options = options.concat(budgetNameList);
         }
         setOptions(
-          options.sort((a, b) => a.name.localeCompare(b.name)).reverse(),
+          options.toSorted((a, b) => a.name.localeCompare(b.name)).toReversed(),
         );
       })
       .catch((e) => {
@@ -354,10 +354,10 @@ export function useDB() {
       .then(() => {
         setOptions(
           options
-            .sort((a, b) => a.name.localeCompare(b.name))
+            .toSorted((a, b) => a.name.localeCompare(b.name))
             .filter((v, i, a) => a.indexOf(v) === i)
             .filter((i) => i.value)
-            .reverse(),
+            .toReversed(),
         );
       })
       .catch((e) => {

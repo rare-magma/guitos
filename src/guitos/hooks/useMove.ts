@@ -30,7 +30,9 @@ export function useMove() {
   }
 
   function handleGo(step: number, limit: number) {
-    const sortedList = budgetList?.sort((a, b) => a.name.localeCompare(b.name));
+    const sortedList = budgetList?.toSorted((a, b) =>
+      a.name.localeCompare(b.name),
+    );
     if (budget) {
       const index = sortedList?.findIndex((b) => b.name.includes(budget.name));
       if (index !== limit && sortedList) {
@@ -62,7 +64,9 @@ export function useMove() {
   }
 
   function checkCanGo(position: number): boolean {
-    const sortedList = budgetList?.sort((a, b) => a.name.localeCompare(b.name));
+    const sortedList = budgetList?.toSorted((a, b) =>
+      a.name.localeCompare(b.name),
+    );
     if (!budget) {
       return false;
     }
