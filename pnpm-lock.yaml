@@ -143,6 +143,9 @@ importers:
       vitest:
         specifier: 3.2.4
         version: 3.2.4(@types/node@24.3.0)(@vitest/browser@3.2.4)(@vitest/ui@3.2.4)(esbuild@0.25.9)(happy-dom@18.0.1)(jsdom@26.0.0)(terser@5.44.0)
+      vitest-when:
+        specifier: 0.8.0
+        version: 0.8.0(@vitest/expect@3.2.4)(vitest@3.2.4)
       workbox-window:
         specifier: 7.3.0
         version: 7.3.0
@@ -3238,6 +3241,15 @@ packages:
     engines: {node: '>=18.0.0'}
     peerDependencies:
       vite: ^2 || ^3 || ^4 || ^5 || ^6
+
+  vitest-when@0.8.0:
+    resolution: {integrity: sha512-/QaV+1Wm9nC3i4RiYeNSkNLPjwfeGbxOnj740vCpdSkS1cI8e7BYfuft/ERcCYyYWzWckvzYcNV3+mnkeb04ZQ==}
+    peerDependencies:
+      '@vitest/expect': '>=0.31.0 <5'
+      vitest: '>=0.31.0 <5'
+    peerDependenciesMeta:
+      '@vitest/expect':
+        optional: true
 
   vitest@3.2.4:
     resolution: {integrity: sha512-LUCP5ev3GURDysTWiP47wRRUpLKMOfPh+yKTx3kVIEiu5KOMeqzpnYNsKyOoVrULivR8tLcks4+lga33Whn90A==}
@@ -6792,6 +6804,13 @@ snapshots:
   vite-plugin-sri3@1.0.6(rolldown-vite@7.1.5(@types/node@24.3.0)(esbuild@0.25.9)(terser@5.44.0)):
     dependencies:
       vite: rolldown-vite@7.1.5(@types/node@24.3.0)(esbuild@0.25.9)(terser@5.44.0)
+
+  vitest-when@0.8.0(@vitest/expect@3.2.4)(vitest@3.2.4):
+    dependencies:
+      pretty-format: 30.0.2
+      vitest: 3.2.4(@types/node@24.3.0)(@vitest/browser@3.2.4)(@vitest/ui@3.2.4)(esbuild@0.25.9)(happy-dom@18.0.1)(jsdom@26.0.0)(terser@5.44.0)
+    optionalDependencies:
+      '@vitest/expect': 3.2.4
 
   vitest@3.2.4(@types/node@24.3.0)(@vitest/browser@3.2.4)(@vitest/ui@3.2.4)(esbuild@0.25.9)(happy-dom@18.0.1)(jsdom@26.0.0)(terser@5.44.0):
     dependencies:
