@@ -1,9 +1,9 @@
+import { BudgetMother } from "@guitos/domain/budget.mother";
+import { StatCard } from "@guitos/sections/StatCard/StatCard";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { setBudgetMock } from "../../../setupTests";
-import { BudgetMother } from "../../domain/budget.mother";
-import { StatCard } from "./StatCard";
 
 describe("StatCard", () => {
   const onShowGraphs = vi.fn();

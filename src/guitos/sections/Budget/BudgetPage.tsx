@@ -1,23 +1,23 @@
+import { useBudget } from "@guitos/context/BudgetContext";
+import { useErrorContext } from "@guitos/context/ErrorContext";
+import { useLoadingContext } from "@guitos/context/LoadingContext";
+import {
+  type BudgetNotification,
+  useNotificationContext,
+} from "@guitos/context/NotificationContext";
+import type { Budget } from "@guitos/domain/budget";
+import { useDB } from "@guitos/hooks/useDB";
+import { LandingPage } from "@guitos/sections/LandingPage/LandingPage";
+import { Loading } from "@guitos/sections/Loading/Loading";
+import { NavBar } from "@guitos/sections/NavBar/NavBar";
+import { Notification } from "@guitos/sections/Notification/Notification";
+import { StatCard } from "@guitos/sections/StatCard/StatCard";
 import { produce } from "immer";
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { Col, Container, Row, ToastContainer } from "react-bootstrap";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useParams } from "wouter";
 import { createBudgetNameList } from "../../../utils";
-import { useBudget } from "../../context/BudgetContext";
-import { useErrorContext } from "../../context/ErrorContext";
-import { useLoadingContext } from "../../context/LoadingContext";
-import {
-  type BudgetNotification,
-  useNotificationContext,
-} from "../../context/NotificationContext";
-import type { Budget } from "../../domain/budget";
-import { useDB } from "../../hooks/useDB";
-import { LandingPage } from "../LandingPage/LandingPage";
-import { Loading } from "../Loading/Loading";
-import { NavBar } from "../NavBar/NavBar";
-import { Notification } from "../Notification/Notification";
-import { StatCard } from "../StatCard/StatCard";
 
 const ChartsPage = lazy(() => import("../ChartsPage/ChartsPage"));
 const TableCard = lazy(() => import("../TableCard/TableCard"));

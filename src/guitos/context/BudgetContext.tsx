@@ -1,3 +1,7 @@
+import { BudgetCalculator } from "@guitos/application/budgetCalculator";
+import { useLoadingContext } from "@guitos/context/LoadingContext";
+import type { Budget } from "@guitos/domain/budget";
+import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
 import {
   createContext,
   type PropsWithChildren,
@@ -5,10 +9,6 @@ import {
   useState,
 } from "react";
 import useUndo from "use-undo";
-import { BudgetCalculator } from "../application/budgetCalculator";
-import type { Budget } from "../domain/budget";
-import type { SearchOption } from "../sections/NavBar/NavBar";
-import { useLoadingContext } from "./LoadingContext";
 
 export interface BudgetContextInterface {
   budget: Budget | undefined;

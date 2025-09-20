@@ -1,4 +1,4 @@
-import type { CalculationHistoryItem } from "./calculationHistoryItem";
+import type { CalculationHistoryItem } from "@guitos/domain/calculationHistoryItem";
 
 export interface CalcHistRepository {
   get(id: string): Promise<CalculationHistoryItem[] | null>;

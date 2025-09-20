@@ -1,3 +1,6 @@
+import { BudgetMother } from "@guitos/domain/budget.mother";
+import { localForageBudgetRepository } from "@guitos/infrastructure/localForageBudgetRepository";
+import { BudgetPage } from "@guitos/sections/Budget/BudgetPage";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react";
@@ -9,9 +12,6 @@ import {
   testBudgetContext,
   undoMock,
 } from "../../../setupTests";
-import { BudgetMother } from "../../domain/budget.mother";
-import { localForageBudgetRepository } from "../../infrastructure/localForageBudgetRepository";
-import { BudgetPage } from "./BudgetPage";
 
 const budgetRepository = new localForageBudgetRepository();
 

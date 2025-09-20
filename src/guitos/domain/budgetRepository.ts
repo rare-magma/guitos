@@ -1,5 +1,5 @@
-import type { Uuid } from "../../shared/domain/uuid";
-import type { Budget } from "./budget";
+import type { Budget } from "@guitos/domain/budget";
+import type { Uuid } from "@shared/domain/uuid";
 
 export interface BudgetRepository {
   get(id: Uuid): Promise<Budget>;

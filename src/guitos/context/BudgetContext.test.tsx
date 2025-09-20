@@ -1,7 +1,7 @@
+import { BudgetProvider, useBudget } from "@guitos/context/BudgetContext";
+import { BudgetMother } from "@guitos/domain/budget.mother";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { BudgetMother } from "../../guitos/domain/budget.mother";
-import { BudgetProvider, useBudget } from "./BudgetContext";
 
 function TestComponent() {
   const { budget, budgetList } = useBudget();

@@ -1,5 +1,5 @@
+import { BudgetMother } from "@guitos/domain/budget.mother";
 import { describe, expect, test } from "vitest";
-import { BudgetMother } from "./budget.mother";
 
 describe("Budget", () => {
   test("createEmpty", () => {

@@ -1,4 +1,4 @@
-import type { CsvError } from "./csvError";
+import type { CsvError } from "@guitos/domain/csvError";
 
 export class CsvErrorMother {
   static error(): CsvError {

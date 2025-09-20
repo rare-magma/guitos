@@ -1,3 +1,11 @@
+import { useBudget } from "@guitos/context/BudgetContext";
+import { useConfig } from "@guitos/context/ConfigContext";
+import type { BudgetItem } from "@guitos/domain/budgetItem";
+import type {
+  CalculationHistoryItem,
+  ItemOperation,
+} from "@guitos/domain/calculationHistoryItem";
+import { useDB } from "@guitos/hooks/useDB";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import {
   Button,
@@ -15,15 +23,7 @@ import {
   BsXLg,
 } from "react-icons/bs";
 import { CgMathDivide, CgMathPlus } from "react-icons/cg";
-import { useBudget } from "../../context/BudgetContext";
-import { useConfig } from "../../context/ConfigContext";
-import { useDB } from "../../hooks/useDB";
 import "./CalculateButton.css";
-import type { BudgetItem } from "../../domain/budgetItem";
-import type {
-  CalculationHistoryItem,
-  ItemOperation,
-} from "../../domain/calculationHistoryItem";
 
 interface CalculateButtonProps {
   itemForm: BudgetItem;

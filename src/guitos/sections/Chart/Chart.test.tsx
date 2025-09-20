@@ -1,7 +1,7 @@
+import { BudgetMother } from "@guitos/domain/budget.mother";
+import { Chart } from "@guitos/sections/Chart/Chart";
 import { render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { BudgetMother } from "../../domain/budget.mother";
-import { Chart } from "./Chart";
 
 describe("Chart", () => {
   const comp = (

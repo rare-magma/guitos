@@ -12,16 +12,16 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { BsArrowsVertical, BsPlusLg } from "react-icons/bs";
-import { intlFormat, roundBig } from "../../../utils";
-import { useBudget } from "../../context/BudgetContext";
-import { useConfig } from "../../context/ConfigContext";
-import { ItemFormGroup } from "../ItemForm/ItemFormGroup";
 import "./TableCard.css";
-import { BudgetCalculator } from "../../application/budgetCalculator";
-import type { Budget } from "../../domain/budget";
-import { BudgetItem } from "../../domain/budgetItem";
-import type { Expenses } from "../../domain/expenses";
-import type { Incomes } from "../../domain/incomes";
+import { BudgetCalculator } from "@guitos/application/budgetCalculator";
+import { useBudget } from "@guitos/context/BudgetContext";
+import { useConfig } from "@guitos/context/ConfigContext";
+import type { Budget } from "@guitos/domain/budget";
+import { BudgetItem } from "@guitos/domain/budgetItem";
+import type { Expenses } from "@guitos/domain/expenses";
+import type { Incomes } from "@guitos/domain/incomes";
+import { ItemFormGroup } from "@guitos/sections/ItemForm/ItemFormGroup";
+import { intlFormat, roundBig } from "../../../utils";
 
 interface TableCardProps {
   header: "Revenue" | "Expenses";

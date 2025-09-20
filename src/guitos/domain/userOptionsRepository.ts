@@ -1,4 +1,4 @@
-import type { UserOptions } from "./userOptions";
+import type { UserOptions } from "@guitos/domain/userOptions";
 
 export interface UserOptionsRepository {
   getCurrencyCode(): Promise<string>;

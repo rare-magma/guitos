@@ -1,12 +1,12 @@
+import type { Budget } from "@guitos/domain/budget";
+import type { ItemOperation } from "@guitos/domain/calculationHistoryItem";
+import type { UserOptions } from "@guitos/domain/userOptions";
+import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
+import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
+import { prompt } from "@guitos/sections/NavBar/prompt";
 import Big from "big.js";
 import type { RefObject } from "react";
 import type Typeahead from "react-bootstrap-typeahead/types/core/Typeahead";
-import type { Budget } from "./guitos/domain/budget";
-import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
-import type { UserOptions } from "./guitos/domain/userOptions";
-import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
-import type { SearchOption } from "./guitos/sections/NavBar/NavBar";
-import { prompt } from "./guitos/sections/NavBar/prompt";
 
 export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();

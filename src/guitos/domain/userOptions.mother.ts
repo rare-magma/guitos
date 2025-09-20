@@ -1,5 +1,5 @@
-import { ObjectMother } from "../../shared/domain/objectMother.mother";
-import { UserOptions } from "./userOptions";
+import { UserOptions } from "@guitos/domain/userOptions";
+import { ObjectMother } from "@shared/domain/objectMother.mother";
 
 export class UserOptionsMother {
   static default(): UserOptions {

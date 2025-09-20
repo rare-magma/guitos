@@ -1,5 +1,5 @@
-import { BudgetMother } from "./budget.mother";
-import { BudgetItemsMother } from "./budgetItem.mother";
+import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetItemsMother } from "@guitos/domain/budgetItem.mother";
 
 export class CalculationHistoryItemMother {
   static testCalcHist() {

@@ -1,11 +1,11 @@
+import type { CsvError } from "@guitos/domain/csvError";
+import { CsvErrorMother } from "@guitos/domain/csvError.mother";
+import type { JsonError } from "@guitos/domain/jsonError";
+import { JsonErrorMother } from "@guitos/domain/jsonError.mother";
+import ErrorModal from "@guitos/sections/ErrorModal/ErrorModal";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import type { CsvError } from "../../domain/csvError";
-import { CsvErrorMother } from "../../domain/csvError.mother";
-import type { JsonError } from "../../domain/jsonError";
-import { JsonErrorMother } from "../../domain/jsonError.mother";
-import ErrorModal from "./ErrorModal";
 
 const error = "Thrown error";
 const jsonErrors: JsonError[] = [JsonErrorMother.error()];

@@ -1,3 +1,5 @@
+import { UserOptions } from "@guitos/domain/userOptions";
+import { localForageOptionsRepository } from "@guitos/infrastructure/localForageOptionsRepository";
 import {
   createContext,
   type PropsWithChildren,
@@ -5,8 +7,6 @@ import {
   useState,
 } from "react";
 import type { IntlConfig } from "react-currency-input-field";
-import { UserOptions } from "../domain/userOptions";
-import { localForageOptionsRepository } from "../infrastructure/localForageOptionsRepository";
 
 interface ConfigContextInterface {
   userOptions: UserOptions;

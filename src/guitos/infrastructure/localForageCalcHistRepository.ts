@@ -1,6 +1,6 @@
+import type { CalcHistRepository } from "@guitos/domain/calcHistRepository";
+import type { CalculationHistoryItem } from "@guitos/domain/calculationHistoryItem";
 import localforage from "localforage";
-import type { CalcHistRepository } from "../domain/calcHistRepository";
-import type { CalculationHistoryItem } from "../domain/calculationHistoryItem";
 
 export class localForageCalcHistRepository implements CalcHistRepository {
   private readonly calcHistDB;

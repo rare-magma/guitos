@@ -1,7 +1,7 @@
+import { useConfig } from "@guitos/context/ConfigContext";
 import Big from "big.js";
 import { Col, Container, Row } from "react-bootstrap";
 import { intlFormat, roundBig } from "../../../utils";
-import { useConfig } from "../../context/ConfigContext";
 
 interface ChartTooltipProps {
   active?: boolean;

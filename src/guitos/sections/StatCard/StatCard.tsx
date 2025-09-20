@@ -20,12 +20,12 @@ import {
   BsGraphUp,
   BsPercent,
 } from "react-icons/bs";
-import { focusRef, parseLocaleNumber, roundBig } from "../../../utils";
-import { useBudget } from "../../context/BudgetContext";
-import { useConfig } from "../../context/ConfigContext";
 import "./StatCard.css";
-import { BudgetCalculator } from "../../application/budgetCalculator";
-import type { Budget } from "../../domain/budget";
+import { BudgetCalculator } from "@guitos/application/budgetCalculator";
+import { useBudget } from "@guitos/context/BudgetContext";
+import { useConfig } from "@guitos/context/ConfigContext";
+import type { Budget } from "@guitos/domain/budget";
+import { focusRef, parseLocaleNumber, roundBig } from "../../../utils";
 
 interface StatCardProps {
   onShowGraphs: () => void;

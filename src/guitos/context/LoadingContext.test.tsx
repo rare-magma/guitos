@@ -1,6 +1,9 @@
+import {
+  LoadingProvider,
+  useLoadingContext,
+} from "@guitos/context/LoadingContext";
 import { act, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { LoadingProvider, useLoadingContext } from "./LoadingContext";
 
 function TestLoadingComponent() {
   const { loadingFromDB, setLoadingFromDB, shouldReload, setShouldReload } =

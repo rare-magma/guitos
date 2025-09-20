@@ -1,6 +1,6 @@
+import type { BudgetItem } from "@guitos/domain/budgetItem";
+import { Uuid } from "@shared/domain/uuid";
 import { immerable } from "immer";
-import { Uuid } from "../../shared/domain/uuid";
-import type { BudgetItem } from "./budgetItem";
 
 export type ItemOperation =
   | "name"

@@ -1,7 +1,7 @@
+import { Budget } from "@guitos/domain/budget";
+import { BudgetItem } from "@guitos/domain/budgetItem";
+import { Uuid } from "@shared/domain/uuid";
 import { immerable } from "immer";
-import { Uuid } from "../../shared/domain/uuid";
-import { Budget } from "./budget";
-import { BudgetItem } from "./budgetItem";
 
 export class BudgetMother {
   static testEmptyBudget(): Budget {

@@ -1,3 +1,5 @@
+import type { CsvError } from "@guitos/domain/csvError";
+import type { JsonError } from "@guitos/domain/jsonError";
 import {
   createContext,
   type PropsWithChildren,
@@ -6,8 +8,6 @@ import {
   useMemo,
   useState,
 } from "react";
-import type { CsvError } from "../domain/csvError";
-import type { JsonError } from "../domain/jsonError";
 
 interface ErrorContextInterface {
   error: string | null;

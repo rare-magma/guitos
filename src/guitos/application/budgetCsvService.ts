@@ -1,8 +1,8 @@
+import { BudgetCalculator } from "@guitos/application/budgetCalculator";
+import { Budget } from "@guitos/domain/budget";
+import { BudgetItem } from "@guitos/domain/budgetItem";
+import type { CsvItem } from "@guitos/domain/csvItem";
 import { roundBig } from "../../utils";
-import { Budget } from "../domain/budget";
-import { BudgetItem } from "../domain/budgetItem";
-import type { CsvItem } from "../domain/csvItem";
-import { BudgetCalculator } from "./budgetCalculator";
 
 export type CsvRow = CsvItem & {
   type: "expense" | "income" | "goal" | "reserves";

@@ -22,11 +22,11 @@ import {
   getLabelKeyFilteredItem,
   getNestedValues,
 } from "../../../utils";
-import { useBudget } from "../../context/BudgetContext";
-import { useDB } from "../../hooks/useDB";
-import { Chart } from "../Chart/Chart";
 import "./ChartsPage.css";
-import type { Uuid } from "../../../shared/domain/uuid";
+import { useBudget } from "@guitos/context/BudgetContext";
+import { useDB } from "@guitos/hooks/useDB";
+import { Chart } from "@guitos/sections/Chart/Chart";
+import type { Uuid } from "@shared/domain/uuid";
 
 interface GraphProps {
   onShowGraphs: () => void;

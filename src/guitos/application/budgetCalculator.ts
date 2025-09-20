@@ -1,7 +1,7 @@
+import type { Budget } from "@guitos/domain/budget";
+import type { BudgetItem } from "@guitos/domain/budgetItem";
 import Big from "big.js";
 import { roundBig } from "../../utils";
-import type { Budget } from "../domain/budget";
-import type { BudgetItem } from "../domain/budgetItem";
 
 export class BudgetCalculator {
   static itemsTotal(items: Readonly<BudgetItem[]>): Big {

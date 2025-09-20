@@ -1,4 +1,4 @@
-import type { BudgetItem } from "./budgetItem";
+import type { BudgetItem } from "@guitos/domain/budgetItem";
 
 export class Expenses {
   items: BudgetItem[];

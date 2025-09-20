@@ -1,8 +1,8 @@
+import { BudgetCalculator } from "@guitos/application/budgetCalculator";
+import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetItemsMother } from "@guitos/domain/budgetItem.mother";
 import Big from "big.js";
 import { describe, expect, test } from "vitest";
-import { BudgetMother } from "../domain/budget.mother";
-import { BudgetItemsMother } from "../domain/budgetItem.mother";
-import { BudgetCalculator } from "./budgetCalculator";
 
 describe("BudgetCalculator", () => {
   test("itemsTotal", () => {

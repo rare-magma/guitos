@@ -12,17 +12,18 @@ import {
 import CurrencyInput from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
 import { calc, parseLocaleNumber, roundBig } from "../../../utils";
-import { useBudget } from "../../context/BudgetContext";
-import type { Expenses } from "../../domain/expenses";
-import type { Incomes } from "../../domain/incomes";
-import { useDB } from "../../hooks/useDB";
-import { CalculateButton } from "../CalculateButton/CalculateButton";
+
 import "./ItemFormGroup.css";
-import { BudgetCalculator } from "../../application/budgetCalculator";
-import type { Budget } from "../../domain/budget";
-import type { BudgetItem } from "../../domain/budgetItem";
-import type { ItemOperation } from "../../domain/calculationHistoryItem";
-import { UserOptions } from "../../domain/userOptions";
+import { BudgetCalculator } from "@guitos/application/budgetCalculator";
+import { useBudget } from "@guitos/context/BudgetContext";
+import type { Budget } from "@guitos/domain/budget";
+import type { BudgetItem } from "@guitos/domain/budgetItem";
+import type { ItemOperation } from "@guitos/domain/calculationHistoryItem";
+import type { Expenses } from "@guitos/domain/expenses";
+import type { Incomes } from "@guitos/domain/incomes";
+import { UserOptions } from "@guitos/domain/userOptions";
+import { useDB } from "@guitos/hooks/useDB";
+import { CalculateButton } from "@guitos/sections/CalculateButton/CalculateButton";
 
 interface ItemFormProps {
   itemForm: BudgetItem;

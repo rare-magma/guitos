@@ -1,7 +1,7 @@
+import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetItem } from "@guitos/domain/budgetItem";
+import { BudgetItemsMother } from "@guitos/domain/budgetItem.mother";
 import { describe, expect, test } from "vitest";
-import { BudgetMother } from "./budget.mother";
-import { BudgetItem } from "./budgetItem";
-import { BudgetItemsMother } from "./budgetItem.mother";
 
 describe("BudgetItem", () => {
   test("percentage", () => {

@@ -1,9 +1,9 @@
-import { act, render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
 import {
   NotificationProvider,
   useNotificationContext,
-} from "./NotificationContext";
+} from "@guitos/context/NotificationContext";
+import { act, render, screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
 
 function TestNotificationComponent() {
   const { notifications, setNotifications } = useNotificationContext();

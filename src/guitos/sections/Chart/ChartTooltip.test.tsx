@@ -1,6 +1,6 @@
+import { ChartTooltip } from "@guitos/sections/Chart/ChartTooltip";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { ChartTooltip } from "./ChartTooltip";
 
 describe("ChartTooltip", () => {
   const comp = (

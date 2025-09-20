@@ -1,7 +1,7 @@
+import { ConfigProvider, useConfig } from "@guitos/context/ConfigContext";
+import { UserOptions } from "@guitos/domain/userOptions";
 import { act, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { UserOptions } from "../domain/userOptions";
-import { ConfigProvider, useConfig } from "./ConfigContext";
 
 function TestComponent() {
   const { userOptions, setUserOptions, intlConfig } = useConfig();

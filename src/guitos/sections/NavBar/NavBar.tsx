@@ -23,15 +23,15 @@ import {
 } from "react-icons/bs";
 import { FaRegClone } from "react-icons/fa";
 import { focusRef, getLabelKey } from "../../../utils";
-import { useBudget } from "../../context/BudgetContext";
-import { useDB } from "../../hooks/useDB";
-import { useMove } from "../../hooks/useMove";
 import "./NavBar.css";
-import type { Uuid } from "../../../shared/domain/uuid";
-import { NavBarDelete } from "./NavBarDelete";
-import { NavBarImpExp } from "./NavBarImpExp";
-import { NavBarItem } from "./NavBarItem";
-import { NavBarSettings } from "./NavBarSettings";
+import { useBudget } from "@guitos/context/BudgetContext";
+import { useDB } from "@guitos/hooks/useDB";
+import { useMove } from "@guitos/hooks/useMove";
+import { NavBarDelete } from "@guitos/sections/NavBar/NavBarDelete";
+import { NavBarImpExp } from "@guitos/sections/NavBar/NavBarImpExp";
+import { NavBarItem } from "@guitos/sections/NavBar/NavBarItem";
+import { NavBarSettings } from "@guitos/sections/NavBar/NavBarSettings";
+import type { Uuid } from "@shared/domain/uuid";
 
 export interface SearchOption {
   id: Uuid;

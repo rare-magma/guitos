@@ -1,7 +1,7 @@
+import { UserOptions } from "@guitos/domain/userOptions";
+import type { UserOptionsRepository } from "@guitos/domain/userOptionsRepository";
 import localforage from "localforage";
 import { currenciesMap } from "../../lists/currenciesMap";
-import { UserOptions } from "../domain/userOptions";
-import type { UserOptionsRepository } from "../domain/userOptionsRepository";
 
 export class localForageOptionsRepository implements UserOptionsRepository {
   private readonly optionsDB;

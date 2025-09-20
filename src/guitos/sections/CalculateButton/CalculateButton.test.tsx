@@ -1,8 +1,8 @@
+import { BudgetItemsMother } from "@guitos/domain/budgetItem.mother";
+import { CalculateButton } from "@guitos/sections/CalculateButton/CalculateButton";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { BudgetItemsMother } from "../../domain/budgetItem.mother";
-import { CalculateButton } from "./CalculateButton";
 
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();

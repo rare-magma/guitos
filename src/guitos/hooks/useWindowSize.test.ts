@@ -1,6 +1,6 @@
+import { useWindowSize } from "@guitos/hooks/useWindowSize";
 import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { useWindowSize } from "./useWindowSize";
 
 describe("useWindowSize", () => {
   it("returns initial window size", () => {

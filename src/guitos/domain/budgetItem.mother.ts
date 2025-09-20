@@ -1,5 +1,5 @@
-import { ObjectMother } from "../../shared/domain/objectMother.mother";
-import { BudgetItem } from "./budgetItem";
+import { BudgetItem } from "@guitos/domain/budgetItem";
+import { ObjectMother } from "@shared/domain/objectMother.mother";
 
 export class BudgetItemsMother {
   static budgetItems(): BudgetItem[] {

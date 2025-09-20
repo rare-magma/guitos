@@ -1,3 +1,7 @@
+import { useBudget } from "@guitos/context/BudgetContext";
+import { useConfig } from "@guitos/context/ConfigContext";
+import { ChartTooltip } from "@guitos/sections/Chart/ChartTooltip";
+import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import { Card, Col, Form, InputGroup, Row } from "react-bootstrap";
 import CurrencyInput from "react-currency-input-field";
 import { BsPercent } from "react-icons/bs";
@@ -10,11 +14,7 @@ import {
   YAxis,
 } from "recharts";
 import { intlFormat, median } from "../../../utils";
-import { useBudget } from "../../context/BudgetContext";
-import { useConfig } from "../../context/ConfigContext";
-import type { FilteredItem } from "../ChartsPage/ChartsPage";
 import "./Chart.css";
-import { ChartTooltip } from "./ChartTooltip";
 
 interface ChartProps {
   header: string;

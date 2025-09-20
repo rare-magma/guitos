@@ -1,7 +1,10 @@
+import {
+  BudgetCsvService,
+  type CsvRow,
+} from "@guitos/application/budgetCsvService";
+import { BudgetMother } from "@guitos/domain/budget.mother";
 import Papa from "papaparse";
 import { describe, expect, test } from "vitest";
-import { BudgetMother } from "../domain/budget.mother";
-import { BudgetCsvService, type CsvRow } from "./budgetCsvService";
 
 describe("BudgetCsvService", () => {
   test("fromCsv", () => {

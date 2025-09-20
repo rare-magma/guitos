@@ -2,12 +2,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Router } from "wouter";
 import "./App.css";
 import "./colors.css";
-import { BudgetProvider } from "./guitos/context/BudgetContext";
-import { ConfigProvider } from "./guitos/context/ConfigContext";
-import { ErrorProvider } from "./guitos/context/ErrorContext";
-import { LoadingProvider } from "./guitos/context/LoadingContext";
-import { NotificationProvider } from "./guitos/context/NotificationContext";
-import { BudgetPage } from "./guitos/sections/Budget/BudgetPage";
+import { BudgetProvider } from "@guitos/context/BudgetContext";
+import { ConfigProvider } from "@guitos/context/ConfigContext";
+import { ErrorProvider } from "@guitos/context/ErrorContext";
+import { LoadingProvider } from "@guitos/context/LoadingContext";
+import { NotificationProvider } from "@guitos/context/NotificationContext";
+import { BudgetPage } from "@guitos/sections/Budget/BudgetPage";
 
 export function App() {
   return (

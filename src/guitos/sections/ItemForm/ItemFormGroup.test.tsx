@@ -1,12 +1,12 @@
+import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetItemsMother } from "@guitos/domain/budgetItem.mother";
+import { UserOptionsMother } from "@guitos/domain/userOptions.mother";
+import { ItemFormGroup } from "@guitos/sections/ItemForm/ItemFormGroup";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { describe, expect, it } from "vitest";
 import { setBudgetMock } from "../../../setupTests";
-import { BudgetMother } from "../../domain/budget.mother";
-import { BudgetItemsMother } from "../../domain/budgetItem.mother";
-import { UserOptionsMother } from "../../domain/userOptions.mother";
-import { ItemFormGroup } from "./ItemFormGroup";
 
 describe("ItemFormGroup", () => {
   const ref = createRef<HTMLInputElement>();

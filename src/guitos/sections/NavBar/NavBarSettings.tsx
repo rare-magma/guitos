@@ -1,3 +1,6 @@
+import { useConfig } from "@guitos/context/ConfigContext";
+import { UserOptions } from "@guitos/domain/userOptions";
+import { useDB } from "@guitos/hooks/useDB";
 import { useRef } from "react";
 import {
   Button,
@@ -13,9 +16,6 @@ import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsGear } from "react-icons/bs";
 import { currenciesList } from "../../../lists/currenciesList";
-import { useConfig } from "../../context/ConfigContext";
-import { UserOptions } from "../../domain/userOptions";
-import { useDB } from "../../hooks/useDB";
 
 interface NavBarSettingsProps {
   expanded: boolean;

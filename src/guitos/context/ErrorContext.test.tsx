@@ -1,6 +1,6 @@
+import { ErrorProvider, useErrorContext } from "@guitos/context/ErrorContext";
 import { act, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { ErrorProvider, useErrorContext } from "./ErrorContext";
 
 function TestErrorComponent() {
   const { error, setError, showError, handleError } = useErrorContext();
