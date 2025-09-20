@@ -53,4 +53,8 @@ export class ObjectMother {
   static randomAlpha(): string {
     return faker.string.alpha();
   }
+
+  static locale(): string {
+    return faker.location.language().alpha3;
+  }
 }

@@ -1,5 +1,5 @@
 import { ConfigProvider, useConfig } from "@guitos/context/ConfigContext";
-import { UserOptions } from "@guitos/domain/userOptions";
+import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import { act, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
@@ -11,7 +11,7 @@ function TestComponent() {
       <p data-testid="locale">{intlConfig.locale}</p>
       <button
         type="button"
-        onClick={() => setUserOptions(new UserOptions("EUR", "en"))}
+        onClick={() => setUserOptions(new UserPreferences("EUR", "en"))}
       >
         Change Currency
       </button>

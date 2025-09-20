@@ -1,9 +1,9 @@
 import { BudgetMother } from "@guitos/domain/budget.mother";
 import type { ItemOperation } from "@guitos/domain/calculationHistoryItem";
-import { UserOptions } from "@guitos/domain/userOptions";
-import { localForageOptionsRepository } from "@guitos/infrastructure/localForageOptionsRepository";
 import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import { prompt } from "@guitos/sections/NavBar/prompt";
+import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
+import { localForageUserPreferencesRepository } from "@guitos/userPreferences/infrastructure/localForageUserPreferencesRepository";
 import { Uuid } from "@shared/domain/uuid";
 import Big from "big.js";
 import { expect, test } from "vitest";
@@ -24,7 +24,7 @@ import {
   roundBig,
 } from "./utils";
 
-const optionsRepository = new localForageOptionsRepository();
+const optionsRepository = new localForageUserPreferencesRepository();
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
@@ -59,20 +59,24 @@ test("createBudgetNameList", () => {
 });
 
 test("intlFormat", () => {
-  expect(intlFormat(123.45, new UserOptions("JPY", "ja-JP"))).eq("￥123");
-  expect(intlFormat(123.45, new UserOptions("EUR", "en-IE"))).eq("€123.45");
-  expect(intlFormat(123.45, new UserOptions("USD", "en-US"))).eq("$123.45");
-  expect(intlFormat(123.45, new UserOptions("CAD", "en-CA"))).eq("$123.45");
-  expect(intlFormat(123.45, new UserOptions("GBP", "en-GB"))).eq("£123.45");
-  expect(intlFormat(123.45, new UserOptions("CNY", "cn-CN"))).eq("CN¥123.45");
-  expect(intlFormat(123.45, new UserOptions("AUD", "en-AU"))).eq("$123.45");
+  expect(intlFormat(123.45, new UserPreferences("JPY", "ja-JP"))).eq("￥123");
+  expect(intlFormat(123.45, new UserPreferences("EUR", "en-IE"))).eq("€123.45");
+  expect(intlFormat(123.45, new UserPreferences("USD", "en-US"))).eq("$123.45");
+  expect(intlFormat(123.45, new UserPreferences("CAD", "en-CA"))).eq("$123.45");
+  expect(intlFormat(123.45, new UserPreferences("GBP", "en-GB"))).eq("£123.45");
+  expect(intlFormat(123.45, new UserPreferences("CNY", "cn-CN"))).eq(
+    "CN¥123.45",
+  );
+  expect(intlFormat(123.45, new UserPreferences("AUD", "en-AU"))).eq("$123.45");
 
   for (const key in currenciesMap) {
     const currencyCode = currenciesMap[
       key as keyof typeof currenciesMap
     ] as unknown as string;
 
-    expect(intlFormat(1, new UserOptions(currencyCode, "en-US"))).toBeTruthy();
+    expect(
+      intlFormat(1, new UserPreferences(currencyCode, "en-US")),
+    ).toBeTruthy();
   }
 });
 
@@ -85,7 +89,9 @@ test("intlFormat browser locale list", () => {
       const countryCode = optionsRepository.getCountryCode(locale);
       const currencyCode =
         optionsRepository.getCurrencyCodeFromCountry(countryCode);
-      expect(intlFormat(1, new UserOptions(currencyCode, locale))).toBeTruthy();
+      expect(
+        intlFormat(1, new UserPreferences(currencyCode, locale)),
+      ).toBeTruthy();
     }
   }
 });

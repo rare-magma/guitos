@@ -10,15 +10,15 @@ import { useNotificationContext } from "@guitos/context/NotificationContext";
 import { Budget } from "@guitos/domain/budget";
 import type { BudgetItem } from "@guitos/domain/budgetItem";
 import type { CalculationHistoryItem } from "@guitos/domain/calculationHistoryItem";
-import { UserOptions } from "@guitos/domain/userOptions";
 import { localForageBudgetRepository } from "@guitos/infrastructure/localForageBudgetRepository";
 import { localForageCalcHistRepository } from "@guitos/infrastructure/localForageCalcHistRepository";
-import { localForageOptionsRepository } from "@guitos/infrastructure/localForageOptionsRepository";
 import type {
   Filter,
   FilteredItem,
 } from "@guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
+import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
+import { localForageUserPreferencesRepository } from "@guitos/userPreferences/infrastructure/localForageUserPreferencesRepository";
 import { Uuid } from "@shared/domain/uuid";
 import { produce } from "immer";
 import Papa from "papaparse";
@@ -29,7 +29,7 @@ import { useLocation, useParams } from "wouter";
 import { createBudgetNameList, saveLastOpenedBudget } from "../../utils";
 
 const budgetRepository = new localForageBudgetRepository();
-const optionsRepository = new localForageOptionsRepository();
+const optionsRepository = new localForageUserPreferencesRepository();
 const calcHistRepository = new localForageCalcHistRepository();
 
 export function useDB() {
@@ -265,12 +265,10 @@ export function useDB() {
 
   function loadCurrencyOption() {
     optionsRepository
-      .getCurrencyCode()
-      .then((c) => {
-        if (c) {
-          setUserOptions(
-            new UserOptions(c as string, optionsRepository.getUserLang()),
-          );
+      .read()
+      .then((u) => {
+        if (u) {
+          setUserOptions(u);
         }
       })
       .catch((e) => {
@@ -282,7 +280,7 @@ export function useDB() {
     (currencyCode: string) => {
       optionsRepository
         .saveCurrencyCode(
-          new UserOptions(currencyCode, optionsRepository.getUserLang()),
+          new UserPreferences(currencyCode, optionsRepository.getUserLang()),
         )
         .catch((e) => {
           handleError(e);

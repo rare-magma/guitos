@@ -1,6 +1,6 @@
 import { useConfig } from "@guitos/context/ConfigContext";
-import { UserOptions } from "@guitos/domain/userOptions";
 import { useDB } from "@guitos/hooks/useDB";
+import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import { useRef } from "react";
 import {
   Button,
@@ -58,7 +58,10 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                       onChange={(c: Option[]) => {
                         if (currenciesList.includes(c[0] as string)) {
                           setUserOptions(
-                            new UserOptions(c[0] as string, navigator.language),
+                            new UserPreferences(
+                              c[0] as string,
+                              navigator.language,
+                            ),
                           );
                           saveCurrencyOption(c[0] as string);
                         }

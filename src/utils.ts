@@ -1,9 +1,9 @@
 import type { Budget } from "@guitos/domain/budget";
 import type { ItemOperation } from "@guitos/domain/calculationHistoryItem";
-import type { UserOptions } from "@guitos/domain/userOptions";
 import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
 import { prompt } from "@guitos/sections/NavBar/prompt";
+import type { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import Big from "big.js";
 import type { RefObject } from "react";
 import type Typeahead from "react-bootstrap-typeahead/types/core/Typeahead";
@@ -50,10 +50,13 @@ export function calc(
   return 0;
 }
 
-export function intlFormat(amount: number, userOptions: UserOptions): string {
-  return new Intl.NumberFormat(userOptions.locale, {
+export function intlFormat(
+  amount: number,
+  userOptions: UserPreferences,
+): string {
+  return new Intl.NumberFormat(userOptions.locale.value, {
     style: "currency",
-    currency: userOptions.currencyCode,
+    currency: userOptions.currency.value,
     currencyDisplay: "symbol",
   }).format(amount);
 }

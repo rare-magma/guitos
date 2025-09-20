@@ -1,42 +1,54 @@
-import { UserOptions } from "@guitos/domain/userOptions";
-import { localForageOptionsRepository } from "@guitos/infrastructure/localForageOptionsRepository";
+import { useBusesContext } from "@guitos/context/BusesContext";
+import { UserPreferencesQuery } from "@guitos/userPreferences/application/changePreferences/userPreferencesQuery";
+import type { UserPreferencesResponse } from "@guitos/userPreferences/application/changePreferences/userPreferencesResponse";
+import type { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import {
   createContext,
   type PropsWithChildren,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import type { IntlConfig } from "react-currency-input-field";
 
 interface ConfigContextInterface {
-  userOptions: UserOptions;
+  userOptions: UserPreferences;
   intlConfig: IntlConfig;
-  setUserOptions: (value: UserOptions) => void;
 }
 
-const optionsRepository = new localForageOptionsRepository();
-const options = new UserOptions(
-  optionsRepository.getDefaultCurrencyCode(),
-  optionsRepository.getUserLang(),
+const ConfigContext = createContext<ConfigContextInterface | undefined>(
+  undefined,
 );
 
-const ConfigContext = createContext<ConfigContextInterface>({
-  userOptions: options,
-  intlConfig: UserOptions.toIntlConfig(options),
-  setUserOptions: (value: UserOptions) => value,
-});
-
 function useConfig() {
-  const { userOptions, setUserOptions, intlConfig } = useContext(ConfigContext);
+  const context = useContext(ConfigContext);
 
-  return { userOptions, setUserOptions, intlConfig };
+  if (!context) {
+    throw new Error("useConfigContext must be used within a ConfigProvider");
+  }
+  return context;
 }
 
 function ConfigProvider({ children }: PropsWithChildren) {
-  const [userOptions, setUserOptions] = useState<UserOptions>(options);
-  const intlConfig = UserOptions.toIntlConfig(userOptions);
+  const { queryBus } = useBusesContext();
+  const [userOptions, setUserOptions] = useState<UserPreferences>();
+  const intlConfig: IntlConfig = {
+    locale: userOptions?.locale.value,
+    currency: userOptions?.currency.value,
+  };
+
+  useEffect(() => {
+    async function readUserPreferences() {
+      const userPreferences = await queryBus.ask<UserPreferencesResponse>(
+        new UserPreferencesQuery(),
+      );
+      setUserOptions(userPreferences);
+      return userPreferences;
+    }
+    readUserPreferences();
+  }, [queryBus]);
   return (
-    <ConfigContext value={{ userOptions, setUserOptions, intlConfig }}>
+    <ConfigContext value={{ userOptions, intlConfig }}>
       {children}
     </ConfigContext>
   );

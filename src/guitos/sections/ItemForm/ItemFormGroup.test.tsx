@@ -1,7 +1,7 @@
 import { BudgetMother } from "@guitos/domain/budget.mother";
 import { BudgetItemsMother } from "@guitos/domain/budgetItem.mother";
-import { UserOptionsMother } from "@guitos/domain/userOptions.mother";
 import { ItemFormGroup } from "@guitos/sections/ItemForm/ItemFormGroup";
+import { UserPreferencesMother } from "@guitos/userPreferences/domain/userPreferences.mother";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
@@ -16,7 +16,7 @@ describe("ItemFormGroup", () => {
       label="Expenses"
       inputRef={ref}
       costPercentage={1}
-      userOptions={UserOptionsMother.default()}
+      userOptions={UserPreferencesMother.default()}
     />
   );
 
@@ -120,7 +120,7 @@ describe("ItemFormGroup", () => {
         label="Expenses"
         inputRef={ref}
         costPercentage={1}
-        userOptions={UserOptionsMother.spanish()}
+        userOptions={UserPreferencesMother.spanish()}
       />,
     );
 

@@ -21,16 +21,16 @@ import type { BudgetItem } from "@guitos/domain/budgetItem";
 import type { ItemOperation } from "@guitos/domain/calculationHistoryItem";
 import type { Expenses } from "@guitos/domain/expenses";
 import type { Incomes } from "@guitos/domain/incomes";
-import { UserOptions } from "@guitos/domain/userOptions";
 import { useDB } from "@guitos/hooks/useDB";
 import { CalculateButton } from "@guitos/sections/CalculateButton/CalculateButton";
+import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 
 interface ItemFormProps {
   itemForm: BudgetItem;
   costPercentage: number;
   label: string;
   inputRef: RefObject<HTMLInputElement | null>;
-  userOptions: UserOptions;
+  userOptions: UserPreferences;
 }
 
 export function ItemFormGroup({
@@ -226,7 +226,7 @@ export function ItemFormGroup({
           className="text-end form-control straight-corners fixed-width-font"
           aria-label={`item ${itemForm.id} value`}
           name="item-value"
-          intlConfig={UserOptions.toIntlConfig(userOptions)}
+          intlConfig={UserPreferences.toIntlConfig(userOptions)}
           defaultValue={itemForm.value}
           allowNegativeValue={false}
           maxLength={14}

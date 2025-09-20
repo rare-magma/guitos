@@ -24,7 +24,7 @@ exports[`ItemFormGroup > matches snapshot 1`] = `
   }
   label="Expenses"
   userOptions={
-    UserOptions {
+    UserPreferences {
       "currencyCode": "USD",
       "locale": "en-US",
     }
