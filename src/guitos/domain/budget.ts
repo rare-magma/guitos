@@ -1,9 +1,9 @@
 import { immerable } from "immer";
+import { Uuid } from "../../shared/domain/uuid";
 import type { BudgetItem } from "./budgetItem";
 import type { Expenses } from "./expenses";
 import type { Incomes } from "./incomes";
 import type { Stats } from "./stats";
-import { Uuid } from "./uuid";
 
 export class Budget {
   id: Uuid;

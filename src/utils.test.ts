@@ -3,13 +3,13 @@ import { expect, test } from "vitest";
 import { BudgetMother } from "./guitos/domain/budget.mother";
 import type { ItemOperation } from "./guitos/domain/calculationHistoryItem";
 import { UserOptions } from "./guitos/domain/userOptions";
-import { Uuid } from "./guitos/domain/uuid";
 import { localForageOptionsRepository } from "./guitos/infrastructure/localForageOptionsRepository";
 import type { FilteredItem } from "./guitos/sections/ChartsPage/ChartsPage";
 import { prompt } from "./guitos/sections/NavBar/prompt";
 import { chromeLocalesList } from "./lists/chromeLocalesList";
 import { currenciesMap } from "./lists/currenciesMap";
 import { firefoxLocalesList } from "./lists/firefoxLocalesList";
+import { Uuid } from "./shared/domain/uuid";
 import {
   calc,
   createBudgetNameList,

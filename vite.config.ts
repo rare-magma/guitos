@@ -14,6 +14,10 @@ export default defineConfig((_) => {
     },
     resolve: {
       extensions: [".js", ".ts", ".tsx"],
+      alias: [
+        { find: "@guitos", replacement: "/src/guitos" },
+        { find: "@shared", replacement: "/src/shared" },
+      ],
     },
     plugins: [
       react(),

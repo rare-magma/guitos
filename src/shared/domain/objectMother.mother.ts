@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Uuid } from "./uuid";
+import { Uuid } from "@shared/domain/uuid";
 
 export class ObjectMother {
   static uuid(): Uuid {

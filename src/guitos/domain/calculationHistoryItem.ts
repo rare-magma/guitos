@@ -1,6 +1,6 @@
 import { immerable } from "immer";
+import { Uuid } from "../../shared/domain/uuid";
 import type { BudgetItem } from "./budgetItem";
-import { Uuid } from "./uuid";
 
 export type ItemOperation =
   | "name"

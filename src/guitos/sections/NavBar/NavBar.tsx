@@ -27,7 +27,7 @@ import { useBudget } from "../../context/BudgetContext";
 import { useDB } from "../../hooks/useDB";
 import { useMove } from "../../hooks/useMove";
 import "./NavBar.css";
-import type { Uuid } from "../../domain/uuid";
+import type { Uuid } from "../../../shared/domain/uuid";
 import { NavBarDelete } from "./NavBarDelete";
 import { NavBarImpExp } from "./NavBarImpExp";
 import { NavBarItem } from "./NavBarItem";

@@ -1,5 +1,5 @@
+import { ObjectMother } from "../../shared/domain/objectMother.mother";
 import { BudgetItem } from "./budgetItem";
-import { ObjectMother } from "./objectMother.mother";
 
 export class BudgetItemsMother {
   static budgetItems(): BudgetItem[] {

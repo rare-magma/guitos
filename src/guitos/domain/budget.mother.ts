@@ -1,7 +1,7 @@
 import { immerable } from "immer";
+import { Uuid } from "../../shared/domain/uuid";
 import { Budget } from "./budget";
 import { BudgetItem } from "./budgetItem";
-import { Uuid } from "./uuid";
 
 export class BudgetMother {
   static testEmptyBudget(): Budget {

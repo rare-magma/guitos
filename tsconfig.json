@@ -3,6 +3,7 @@
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
+    "baseUrl": ".",
     "erasableSyntaxOnly": true,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
@@ -16,7 +17,12 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "paths": {
+      "@guitos/*": ["src/guitos/*"],
+      "@shared/*": ["src/shared/*"]
+    },
     "resolveJsonModule": true,
+    "rootDir": ".",
     "skipLibCheck": true,
     "strictNullChecks": true,
     "strict": true,

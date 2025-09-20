@@ -1,4 +1,4 @@
-import { ObjectMother } from "./objectMother.mother";
+import { ObjectMother } from "../../shared/domain/objectMother.mother";
 import { UserOptions } from "./userOptions";
 
 export class UserOptionsMother {

@@ -325,6 +325,7 @@ See [LICENSE](LICENSE) for more information.
 ## Acknowledgements
 
 - [r/personalfinance](https://www.reddit.com/r/personalfinance/wiki/budgeting/)
+- [cjuega/typescript-fullstack-skeleton](https://github.com/cjuega/typescript-fullstack-skeleton)
 - [Biome](https://biomejs.dev/)
 - [go-semantic-release](https://github.com/go-semantic-release/semantic-release)
 - [testing-library](https://github.com/testing-library)

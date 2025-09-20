@@ -1,7 +1,7 @@
+import { Budget } from "@guitos/domain/budget";
+import type { BudgetRepository } from "@guitos/domain/budgetRepository";
+import type { Uuid } from "@shared/domain/uuid";
 import localforage from "localforage";
-import { Budget } from "../domain/budget";
-import type { BudgetRepository } from "../domain/budgetRepository";
-import type { Uuid } from "../domain/uuid";
 
 export class localForageBudgetRepository implements BudgetRepository {
   private readonly budgetsDB;

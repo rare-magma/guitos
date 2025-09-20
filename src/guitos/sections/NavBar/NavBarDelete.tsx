@@ -1,8 +1,8 @@
 import type { RefObject } from "react";
 import { Button, Nav, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
+import type { Uuid } from "../../../shared/domain/uuid";
 import { useBudget } from "../../context/BudgetContext";
-import type { Uuid } from "../../domain/uuid";
 
 interface NavBarDeleteProps {
   deleteButtonRef: RefObject<HTMLButtonElement | null>;

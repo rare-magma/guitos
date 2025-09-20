@@ -26,7 +26,7 @@ import { useBudget } from "../../context/BudgetContext";
 import { useDB } from "../../hooks/useDB";
 import { Chart } from "../Chart/Chart";
 import "./ChartsPage.css";
-import type { Uuid } from "../../domain/uuid";
+import type { Uuid } from "../../../shared/domain/uuid";
 
 interface GraphProps {
   onShowGraphs: () => void;
