@@ -8,6 +8,8 @@
   "search.exclude": {
     "pnpm-lock.yaml": true
   },
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifier": "non-relative",
   "npm.packageManager": "pnpm",
   "explorer.fileNesting.patterns": {
     "package.json": "pnpm-lock.yaml"
