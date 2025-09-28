@@ -61,6 +61,7 @@
       "@swc/core",
       "esbuild"
     ],
+    "minimumReleaseAge": "2880",
     "overrides": {
       "vite": "npm:rolldown-vite@7.1.5",
       "@reduxjs/toolkit": "npm:@reduxjs/toolkit@1.9.7",
