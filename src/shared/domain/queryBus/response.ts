@@ -1,2 +1,2 @@
 // biome-ignore lint/suspicious/noEmptyInterface: primitive
-export interface Response {}
+export abstract class Response {}
