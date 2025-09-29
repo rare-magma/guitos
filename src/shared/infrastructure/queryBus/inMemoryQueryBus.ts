@@ -1,9 +1,9 @@
 import type { Query } from "@shared/domain/queryBus/query";
 import type { QueryBus } from "@shared/domain/queryBus/queryBus";
-import type { Response } from "@shared/domain/queryBus/response";
 import type { QueryHandler } from "@shared/domain/queryBus/queryHandler";
-import { MultipleQueryHandlersError } from "@shared/infrastructure/queryBus/multipleQueryHandlersError";
 import { QueryNotRegisteredError } from "@shared/domain/queryBus/queryNotRegisteredError";
+import type { Response } from "@shared/domain/queryBus/response";
+import { MultipleQueryHandlersError } from "@shared/infrastructure/queryBus/multipleQueryHandlersError";
 
 export class InMemoryQueryBus implements QueryBus {
   private readonly handlers: Map<string, QueryHandler<Query, Response>> =
