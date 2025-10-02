@@ -15,9 +15,9 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.55.0@sha256:b27e719ecbfef153e13fd24e8341736733bf2658b229677eb21ff57ff5d7fb29 # ratchet:mcr.microsoft.com/playwright:v1.55.0
+      image: mcr.microsoft.com/playwright:v1.55.1@sha256:2f29369043d81d6d69a815ceb80760f55e85f5020371ad06a4d996f18503ad1c # ratchet:mcr.microsoft.com/playwright:v1.55.1
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # ratchet:actions/checkout@v4
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # ratchet:actions/checkout@v4
         with:
           persist-credentials: false
 
@@ -40,7 +40,7 @@ jobs:
     needs:
       - test
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # ratchet:actions/checkout@v4
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # ratchet:actions/checkout@v4
         with:
           persist-credentials: false
           ref: main
@@ -93,7 +93,7 @@ jobs:
 
       - name: Generate artifact attestation
         if: steps.semrel.outputs.version != ''
-        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # ratchet:actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # ratchet:actions/attest-build-provenance@v2
         with:
           subject-path: guitos-v${{ steps.semrel.outputs.version }}.zip
 
