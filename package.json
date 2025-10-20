@@ -47,7 +47,7 @@
     "console-fail-test": "0.5.0",
     "happy-dom": "20.0.2",
     "typescript": "5.9.3",
-    "vite": "7.1.8",
+    "vite": "7.1.11",
     "vite-plugin-pwa": "1.0.3",
     "vite-plugin-sri3": "1.0.6",
     "vitest": "3.2.4",
