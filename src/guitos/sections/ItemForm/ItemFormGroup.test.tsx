@@ -104,7 +104,7 @@ describe("ItemFormGroup", () => {
       }),
     );
     expect(
-      screen.getByLabelText("select type of operation on item value"),
+      screen.getByLabelText("select type of operation on name1 value"),
     ).toBeInTheDocument();
   });
 

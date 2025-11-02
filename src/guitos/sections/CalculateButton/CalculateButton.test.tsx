@@ -30,7 +30,7 @@ describe("CalculateButton", () => {
 
     expect(
       screen.getByRole("button", {
-        name: "select type of operation on item value",
+        name: "select type of operation on name1 value",
       }),
     ).toBeInTheDocument();
 
