@@ -81,8 +81,13 @@ test("should complete the happy path", async ({ page, isMobile }) => {
   await expect(page.locator("#Expenses-3-value")).toHaveValue("$50");
 
   await page.locator("#Expenses-3-operate-button").click();
-  await page.getByLabel("select type of operation on").click();
-  await page.getByLabel("subtraction").click();
+  const opButton = page
+    .getByRole("button", { name: "select type of operation on item value" })
+    .last();
+  await expect(opButton).toBeVisible();
+
+  await opButton.click();
+  await page.getByLabel("subtraction").last().click();
   await page.getByLabel("subtract", { exact: true }).click();
   await page.getByLabel("subtract", { exact: true }).fill("50");
   await page.getByLabel("apply change to item value").click();

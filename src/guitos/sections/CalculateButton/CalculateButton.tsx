@@ -107,7 +107,7 @@ export function CalculateButton({
               </Button>
               <Dropdown>
                 <Dropdown.Toggle
-                  aria-label={"select type of operation on item value"}
+                  aria-label={`select type of operation on ${itemForm.name} value`}
                   aria-haspopup="true"
                   variant="outline-secondary"
                   id={useId()}

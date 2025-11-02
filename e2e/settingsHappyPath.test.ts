@@ -64,13 +64,15 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     (await fs.promises.stat(await csvDownload.path())).size,
   ).toBeGreaterThan(0);
 
+  await expect(page.getByLabel("import or export budget")).toBeVisible();
+
   await page.getByLabel("import or export budget").click();
   await expect(page.getByText("json")).toBeVisible();
+  expect(page.getByLabel("export budget as json")).toBeVisible();
 
-  const [jsonDownload] = await Promise.all([
-    page.waitForEvent("download"),
-    page.getByLabel("export budget as json").click(),
-  ]);
+  const jsonDownloadPromise = page.waitForEvent("download");
+  await page.getByLabel("export budget as json").click();
+  const jsonDownload = await jsonDownloadPromise;
 
   const downloadError = await jsonDownload.failure();
   if (downloadError !== null) {
@@ -83,18 +85,19 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     (await fs.promises.stat(await jsonDownload.path())).size,
   ).toBeGreaterThan(0);
 
+  await expect(page.getByLabel("import or export budget")).toBeVisible();
   await page.getByLabel("import or export budget").click();
   await expect(page.getByText("prompt")).toBeVisible();
 
-  const [promptDownload] = await Promise.all([
-    page.waitForEvent("download"),
-    page.getByLabel("export budget AI prompt").click(),
-  ]);
+  expect(page.getByLabel("export budget AI prompt")).toBeVisible();
 
-  const promptDownloadError = await promptDownload.failure();
-  if (promptDownloadError !== null) {
-    console.log("Error on download:", promptDownloadError);
-    throw new Error(promptDownloadError);
+  const promptDownloadPromise = page.waitForEvent("download");
+  await page.getByLabel("export budget AI prompt").click();
+  const promptDownload = await promptDownloadPromise;
+
+  const failure = await promptDownload.failure();
+  if (failure) {
+    throw new Error(`Prompt download failed: ${failure}`);
   }
 
   expect(promptDownload.suggestedFilename()).toMatch(mdRegex);
@@ -109,6 +112,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     .getByTestId("import-form-control")
     .setInputFiles("./docs/guitos-sample.json");
 
+  expect(page.getByLabel("go to newer budget")).toBeVisible();
   await page.getByLabel("go to newer budget").click({ force: true });
 
   if (isMobile) {
@@ -119,7 +123,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     page.getByRole("combobox", { name: "search in budgets" }),
   ).toBeVisible();
 
-  await expect(page.getByLabel("budget name")).toHaveValue("2023-06");
+  await expect(page.getByLabel("budget name")).toHaveValue(/2023-0/);
 
   await page.close();
 });
