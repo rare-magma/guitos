@@ -30,7 +30,7 @@ interface TableCardProps {
 // biome-ignore lint/style/noDefaultExport: lazy loading
 export default function TableCard({ header: label }: TableCardProps) {
   const { budget, setBudget, revenuePercentage } = useBudget();
-  const { userOptions } = useConfig();
+  const { userOptions, intlConfig } = useConfig();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDraggable, setIsDraggable] = useState(false);
 
@@ -100,7 +100,7 @@ export default function TableCard({ header: label }: TableCardProps) {
 
   return (
     <Card
-      key={`table-${label}-${userOptions.currencyCode}-${table?.items.length}`}
+      key={`table-${label}-${userOptions.currency}-${table?.items.length}`}
       className={`${label}-card`}
     >
       <Card.Header className={`${label}-card-header`}>
@@ -154,6 +154,7 @@ export default function TableCard({ header: label }: TableCardProps) {
                   }
                   inputRef={inputRef}
                   userOptions={userOptions}
+                  intlConfig={intlConfig}
                 />
               </Reorder.Item>
             ))}

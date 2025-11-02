@@ -3,7 +3,7 @@ import {
   type CsvRow,
 } from "@guitos/application/budgetCsvService";
 import { useBudget } from "@guitos/context/BudgetContext";
-import { useConfig } from "@guitos/context/ConfigContext";
+import { useBusesContext } from "@guitos/context/BusesContext";
 import { useErrorContext } from "@guitos/context/ErrorContext";
 import { useLoadingContext } from "@guitos/context/LoadingContext";
 import { useNotificationContext } from "@guitos/context/NotificationContext";
@@ -17,8 +17,12 @@ import type {
   FilteredItem,
 } from "@guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
+import { ChangeUserPreferencesCommand } from "@guitos/userPreferences/application/changePreferences/changeUserPreferencesCommand";
+import { Currency } from "@guitos/userPreferences/domain/currency";
+import { Locale } from "@guitos/userPreferences/domain/locale";
 import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import { LocalForageUserPreferencesRepository } from "@guitos/userPreferences/infrastructure/localForageUserPreferencesRepository";
+import { Datetime } from "@shared/domain/datetime";
 import { Uuid } from "@shared/domain/uuid";
 import { produce } from "immer";
 import Papa from "papaparse";
@@ -34,7 +38,7 @@ const calcHistRepository = new localForageCalcHistRepository();
 
 export function useDB() {
   const [options, setOptions] = useState<Option[]>([]);
-  const { setUserOptions } = useConfig();
+  const { commandBus } = useBusesContext();
   const params = useParams();
   const name = String(params.name);
   const [_, navigate] = useLocation();
@@ -268,7 +272,12 @@ export function useDB() {
       .read()
       .then((u) => {
         if (u) {
-          setUserOptions(u);
+          commandBus.dispatch(
+            new ChangeUserPreferencesCommand({
+              currency: u.currency.value,
+              locale: u.locale.value,
+            }),
+          );
         }
       })
       .catch((e) => {
@@ -280,7 +289,11 @@ export function useDB() {
     (currencyCode: string) => {
       optionsRepository
         .saveCurrencyCode(
-          new UserPreferences(currencyCode, optionsRepository.getUserLang()),
+          new UserPreferences(
+            new Currency(currencyCode),
+            new Locale(optionsRepository.getUserLang()),
+            new Datetime(),
+          ),
         )
         .catch((e) => {
           handleError(e);

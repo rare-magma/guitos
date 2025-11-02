@@ -1,7 +1,12 @@
 import { useBusesContext } from "@guitos/context/BusesContext";
-import { UserPreferencesQuery } from "@guitos/userPreferences/application/changePreferences/userPreferencesQuery";
-import type { UserPreferencesResponse } from "@guitos/userPreferences/application/changePreferences/userPreferencesResponse";
-import type { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
+import { useReactToEvents } from "@guitos/hooks/useEventBus";
+import { UserPreferencesQuery } from "@guitos/userPreferences/application/readPreferences/userPreferencesQuery";
+import type { UserPreferencesResponse } from "@guitos/userPreferences/application/readPreferences/userPreferencesResponse";
+import { Currency } from "@guitos/userPreferences/domain/currency";
+import { Locale } from "@guitos/userPreferences/domain/locale";
+import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
+import { UserPreferencesChangedDomainEvent } from "@guitos/userPreferences/domain/userPreferencesChangedDomainEvent";
+import { Datetime } from "@shared/domain/datetime";
 import {
   createContext,
   type PropsWithChildren,
@@ -31,22 +36,39 @@ function useConfig() {
 
 function ConfigProvider({ children }: PropsWithChildren) {
   const { queryBus } = useBusesContext();
-  const [userOptions, setUserOptions] = useState<UserPreferences>();
+  const [userOptions, setUserOptions] = useState<UserPreferences>(
+    new UserPreferences(
+      new Currency("USD"),
+      new Locale("en-US"),
+      new Datetime(),
+    ),
+  );
   const intlConfig: IntlConfig = {
     locale: userOptions?.locale.value,
     currency: userOptions?.currency.value,
   };
+  const userPreferencesChanged = useReactToEvents([
+    UserPreferencesChangedDomainEvent.eventName,
+  ]);
 
   useEffect(() => {
     async function readUserPreferences() {
-      const userPreferences = await queryBus.ask<UserPreferencesResponse>(
+      const { currency, locale } = await queryBus.ask<UserPreferencesResponse>(
         new UserPreferencesQuery(),
       );
-      setUserOptions(userPreferences);
-      return userPreferences;
+      setUserOptions(
+        new UserPreferences(
+          new Currency(currency),
+          new Locale(locale),
+          new Datetime(),
+        ),
+      );
     }
-    readUserPreferences();
-  }, [queryBus]);
+    if (userPreferencesChanged) {
+      readUserPreferences();
+    }
+  }, [userPreferencesChanged, queryBus]);
+
   return (
     <ConfigContext value={{ userOptions, intlConfig }}>
       {children}

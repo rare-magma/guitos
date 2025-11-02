@@ -1,12 +1,25 @@
 import type { DomainEvent } from "@shared/domain/eventBus/domainEvent";
+import type { DomainEventSubscriber } from "@shared/domain/eventBus/domainEventSubscriber";
 import type { EventBus } from "@shared/domain/eventBus/eventBus";
 import { expect, vi } from "vitest";
 
 export class EventBusMock implements EventBus {
   private mockPublish = vi.fn();
+  private mockSubscribe = vi.fn();
+  private mockUnsubscribe = vi.fn();
 
   async publish(events: DomainEvent[]): Promise<void> {
     await this.mockPublish(events);
+  }
+
+  subscribe<T extends DomainEvent>(subscriber: DomainEventSubscriber<T>): void {
+    this.mockSubscribe(subscriber);
+  }
+
+  unsubscribe<T extends DomainEvent>(
+    subscriber: DomainEventSubscriber<T>,
+  ): void {
+    this.mockUnsubscribe(subscriber);
   }
 
   whenPublishThrowFor(events: DomainEvent[]): void {

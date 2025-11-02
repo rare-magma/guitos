@@ -11,7 +11,7 @@ export class UserPreferences extends AggregateRoot {
 
   readonly createdAt: Datetime;
 
-  private constructor(currency: Currency, locale: Locale, createdAt: Datetime) {
+  constructor(currency: Currency, locale: Locale, createdAt: Datetime) {
     super();
 
     this.currency = currency;

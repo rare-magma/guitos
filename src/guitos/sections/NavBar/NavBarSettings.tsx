@@ -1,6 +1,7 @@
+import { useBusesContext } from "@guitos/context/BusesContext";
 import { useConfig } from "@guitos/context/ConfigContext";
 import { useDB } from "@guitos/hooks/useDB";
-import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
+import { ChangeUserPreferencesCommand } from "@guitos/userPreferences/application/changePreferences/changeUserPreferencesCommand";
 import { useRef } from "react";
 import {
   Button,
@@ -22,7 +23,8 @@ interface NavBarSettingsProps {
 }
 
 export function NavBarSettings({ expanded }: NavBarSettingsProps) {
-  const { userOptions, setUserOptions } = useConfig();
+  const { userOptions } = useConfig();
+  const { commandBus } = useBusesContext();
   const { saveCurrencyOption } = useDB();
   const settingsButtonRef = useRef<HTMLButtonElement>(null);
   const versionRef = useRef<HTMLAnchorElement>(null);
@@ -57,11 +59,11 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                       }}
                       onChange={(c: Option[]) => {
                         if (currenciesList.includes(c[0] as string)) {
-                          setUserOptions(
-                            new UserPreferences(
-                              c[0] as string,
-                              navigator.language,
-                            ),
+                          commandBus.dispatch(
+                            new ChangeUserPreferencesCommand({
+                              currency: c[0] as string,
+                              locale: navigator.language,
+                            }),
                           );
                           saveCurrencyOption(c[0] as string);
                         }

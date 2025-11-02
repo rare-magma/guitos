@@ -9,7 +9,7 @@ import {
   Popover,
   Tooltip,
 } from "react-bootstrap";
-import CurrencyInput from "react-currency-input-field";
+import CurrencyInput, { type IntlConfig } from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
 import { calc, parseLocaleNumber, roundBig } from "../../../utils";
 
@@ -23,7 +23,7 @@ import type { Expenses } from "@guitos/domain/expenses";
 import type { Incomes } from "@guitos/domain/incomes";
 import { useDB } from "@guitos/hooks/useDB";
 import { CalculateButton } from "@guitos/sections/CalculateButton/CalculateButton";
-import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
+import type { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 
 interface ItemFormProps {
   itemForm: BudgetItem;
@@ -31,6 +31,7 @@ interface ItemFormProps {
   label: string;
   inputRef: RefObject<HTMLInputElement | null>;
   userOptions: UserPreferences;
+  intlConfig: IntlConfig;
 }
 
 export function ItemFormGroup({
@@ -39,6 +40,7 @@ export function ItemFormGroup({
   inputRef,
   label,
   userOptions,
+  intlConfig,
 }: ItemFormProps) {
   const [needsRerender, setNeedsRerender] = useState(false);
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
@@ -97,7 +99,10 @@ export function ItemFormGroup({
           break;
         case "value":
           if (value) {
-            newItemForm.value = parseLocaleNumber(value, userOptions.locale);
+            newItemForm.value = parseLocaleNumber(
+              value,
+              userOptions.locale.value,
+            );
           }
           break;
         default:
@@ -226,7 +231,7 @@ export function ItemFormGroup({
           className="text-end form-control straight-corners fixed-width-font"
           aria-label={`item ${itemForm.id} value`}
           name="item-value"
-          intlConfig={UserPreferences.toIntlConfig(userOptions)}
+          intlConfig={intlConfig}
           defaultValue={itemForm.value}
           allowNegativeValue={false}
           maxLength={14}

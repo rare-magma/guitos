@@ -1,12 +1,12 @@
 import { Command } from "@shared/domain/commandBus/command";
-import type { Primitives } from "@shared/domain/primitives";
 
 export class ChangeUserPreferencesCommand extends Command {
+  static commandName = "user-preferences.command";
   readonly currency: string;
   readonly locale: string;
 
-  constructor({ currency, locale }: Primitives<ChangeUserPreferencesCommand>) {
-    super();
+  constructor({ currency, locale }: { currency: string; locale: string }) {
+    super("user-preferences.command");
 
     this.currency = currency;
     this.locale = locale;
