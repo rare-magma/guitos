@@ -3,7 +3,7 @@ import { ObjectMother } from "@shared/domain/objectMother.mother";
 
 export class LocaleMother {
   static default(): Locale {
-    return new Locale("en-IE");
+    return new Locale("en");
   }
 
   static random(): Locale {
@@ -17,6 +17,6 @@ export class LocaleMother {
   }
 
   static spanish(): Locale {
-    return new Locale("es-ES");
+    return new Locale("es");
   }
 }

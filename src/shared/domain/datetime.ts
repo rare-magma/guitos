@@ -10,12 +10,7 @@ export class Datetime extends StringValueObject {
 
   private static ensureIsValidDate(value?: string): void {
     try {
-      if (!value) {
-        throw new InvalidArgument(
-          `<${Datetime.name}> doesn't allow empty values`,
-        );
-      }
-      new Date(value);
+      new Date(value ?? "");
     } catch {
       throw new InvalidArgument(
         `<${Datetime.name}> doesn't allow the value <${value}>`,

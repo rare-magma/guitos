@@ -55,6 +55,6 @@ export class ObjectMother {
   }
 
   static locale(): string {
-    return faker.location.language().alpha3;
+    return faker.location.language().alpha2;
   }
 }

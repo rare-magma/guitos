@@ -22,6 +22,9 @@ importers:
       immer:
         specifier: 10.1.3
         version: 10.1.3
+      iso-639-1:
+        specifier: 3.1.5
+        version: 3.1.5
       localforage:
         specifier: 1.10.0
         version: 1.10.0
@@ -2241,6 +2244,10 @@ packages:
 
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+
+  iso-639-1@3.1.5:
+    resolution: {integrity: sha512-gXkz5+KN7HrG0Q5UGqSMO2qB9AsbEeyLP54kF1YrMsIxmu+g4BdB7rflReZTSTZGpfj8wywu6pfPBCylPIzGQA==}
+    engines: {node: '>=6.0'}
 
   istanbul-lib-coverage@3.2.2:
     resolution: {integrity: sha512-O8dpsF+r0WV/8MNRKfnmrtCWhuKjxrq2w+jpzBL5UZKTi2LeVWnWOmWRxFlesJONmc+wLAGvKQZEOanko0LFTg==}
@@ -5721,6 +5728,8 @@ snapshots:
   isarray@2.0.5: {}
 
   isexe@2.0.0: {}
+
+  iso-639-1@3.1.5: {}
 
   istanbul-lib-coverage@3.2.2: {}
 
