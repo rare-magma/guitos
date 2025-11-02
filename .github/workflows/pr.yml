@@ -16,9 +16,9 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.55.1@sha256:2f29369043d81d6d69a815ceb80760f55e85f5020371ad06a4d996f18503ad1c # ratchet:mcr.microsoft.com/playwright:v1.55.1
+      image: mcr.microsoft.com/playwright:v1.56.1@sha256:f1e7e01021efd65dd1a2c56064be399f3e4de00fd021ac561325f2bfbb2b837a # ratchet:mcr.microsoft.com/playwright:v1.56.1
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # ratchet:actions/checkout@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # ratchet:actions/checkout@v5
         with:
           persist-credentials: false
 

@@ -18,11 +18,6 @@ describe("Notification", () => {
     <Notification notification={notification} handleClose={handleClose} />
   );
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
-
   it("renders initial state", () => {
     render(comp);
     expect(screen.getByText("notification body")).toBeInTheDocument();

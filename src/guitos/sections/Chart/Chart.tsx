@@ -90,6 +90,7 @@ export function Chart({
       <Card.Body>
         <ResponsiveContainer
           width="100%"
+          initialDimension={{ width: 1, height: 1 }} // clear console warning due to <Suspense />
           aspect={isVerticalScreen ? verticalRatio : horizontalRatio}
         >
           <AreaChart

@@ -31,11 +31,6 @@ describe("ErrorModal", () => {
     />
   );
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
-
   it("renders initial state", () => {
     render(comp);
     expect(

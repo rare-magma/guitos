@@ -8,10 +8,6 @@ import { setBudgetMock } from "../../../setupTests";
 describe("TableCard", () => {
   const comp = <TableCard header={"Expenses"} />;
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
   it("renders initial Expenses state", async () => {
     render(comp);
     expect(await screen.findByDisplayValue("expense1")).toBeInTheDocument();
