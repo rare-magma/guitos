@@ -49,13 +49,7 @@ export function BudgetPage() {
     canUndo,
   } = useBudget();
 
-  const {
-    createBudget,
-    cloneBudget,
-    loadCurrencyOption,
-    loadBudget,
-    loadFromDb,
-  } = useDB();
+  const { createBudget, cloneBudget, loadBudget, loadFromDb } = useDB();
 
   const params = useParams();
   const name = String(params.name);
@@ -118,7 +112,6 @@ export function BudgetPage() {
           loadBudget(budgetList.slice(0));
         }
 
-        loadCurrencyOption();
         setBudgetNameList(createBudgetNameList(budgetList));
         setLoadingFromDB(false);
       } else {

@@ -1,6 +1,5 @@
 import { useBusesContext } from "@guitos/context/BusesContext";
 import { useConfig } from "@guitos/context/ConfigContext";
-import { useDB } from "@guitos/hooks/useDB";
 import { ChangeUserPreferencesCommand } from "@guitos/userPreferences/application/changePreferences/changeUserPreferencesCommand";
 import { useRef } from "react";
 import {
@@ -25,7 +24,6 @@ interface NavBarSettingsProps {
 export function NavBarSettings({ expanded }: NavBarSettingsProps) {
   const { userOptions } = useConfig();
   const { commandBus } = useBusesContext();
-  const { saveCurrencyOption } = useDB();
   const settingsButtonRef = useRef<HTMLButtonElement>(null);
   const versionRef = useRef<HTMLAnchorElement>(null);
 
@@ -65,7 +63,6 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                               locale: navigator.language,
                             }),
                           );
-                          saveCurrencyOption(c[0] as string);
                         }
                       }}
                       className="w-100 fixed-width-font"
@@ -83,7 +80,7 @@ export function NavBarSettings({ expanded }: NavBarSettingsProps) {
                       options={currenciesList.toSorted((a, b) =>
                         a.localeCompare(b),
                       )}
-                      placeholder={userOptions.currencyCode}
+                      placeholder={userOptions.currency.value}
                     />
                   </InputGroup>
                 </Stack>

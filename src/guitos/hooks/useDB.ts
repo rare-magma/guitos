@@ -17,12 +17,6 @@ import type {
   FilteredItem,
 } from "@guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
-import { ChangeUserPreferencesCommand } from "@guitos/userPreferences/application/changePreferences/changeUserPreferencesCommand";
-import { Currency } from "@guitos/userPreferences/domain/currency";
-import { Locale } from "@guitos/userPreferences/domain/locale";
-import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
-import { LocalForageUserPreferencesRepository } from "@guitos/userPreferences/infrastructure/localForageUserPreferencesRepository";
-import { Datetime } from "@shared/domain/datetime";
 import { Uuid } from "@shared/domain/uuid";
 import { produce } from "immer";
 import Papa from "papaparse";
@@ -33,7 +27,6 @@ import { useLocation, useParams } from "wouter";
 import { createBudgetNameList, saveLastOpenedBudget } from "../../utils";
 
 const budgetRepository = new localForageBudgetRepository();
-const optionsRepository = new LocalForageUserPreferencesRepository();
 const calcHistRepository = new localForageCalcHistRepository();
 
 export function useDB() {
@@ -246,7 +239,6 @@ export function useDB() {
         }
 
         setBudget(newBudget, false);
-        loadCurrencyOption();
         setLoadingFromDB(false);
       })
       .catch((e) => {
@@ -266,41 +258,6 @@ export function useDB() {
         });
     }
   }
-
-  function loadCurrencyOption() {
-    optionsRepository
-      .read()
-      .then((u) => {
-        if (u) {
-          commandBus.dispatch(
-            new ChangeUserPreferencesCommand({
-              currency: u.currency.value,
-              locale: u.locale.value,
-            }),
-          );
-        }
-      })
-      .catch((e) => {
-        handleError(e);
-      });
-  }
-
-  const saveCurrencyOption = useCallback(
-    (currencyCode: string) => {
-      optionsRepository
-        .saveCurrencyCode(
-          new UserPreferences(
-            new Currency(currencyCode),
-            new Locale(optionsRepository.getUserLang()),
-            new Datetime(),
-          ),
-        )
-        .catch((e) => {
-          handleError(e);
-        });
-    },
-    [handleError],
-  );
 
   function searchBudgets() {
     let options: SearchOption[] = [];
@@ -492,8 +449,6 @@ export function useDB() {
     searchBudgetsWithFilter,
     selectBudgetsWithFilter,
     saveBudget,
-    loadCurrencyOption,
-    saveCurrencyOption,
     loadBudget,
     loadFromDb,
     options,

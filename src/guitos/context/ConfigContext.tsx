@@ -51,6 +51,7 @@ function ConfigProvider({ children }: PropsWithChildren) {
     UserPreferencesChangedDomainEvent.eventName,
   ]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: react to event
   useEffect(() => {
     async function readUserPreferences() {
       const { currency, locale } = await queryBus.ask<UserPreferencesResponse>(
@@ -64,9 +65,7 @@ function ConfigProvider({ children }: PropsWithChildren) {
         ),
       );
     }
-    if (userPreferencesChanged) {
-      readUserPreferences();
-    }
+    readUserPreferences();
   }, [userPreferencesChanged, queryBus]);
 
   return (
