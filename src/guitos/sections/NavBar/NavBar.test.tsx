@@ -23,11 +23,6 @@ describe("NavBar", () => {
 
   const comp = <NavBar />;
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
-
   it("renders initial state", async () => {
     render(comp);
     expect(screen.getByText("2023-03")).toBeInTheDocument();

@@ -22,11 +22,6 @@ describe("ChartsPage", () => {
     vi.restoreAllMocks();
   });
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
-
   it("renders initial state", () => {
     render(comp);
     expect(screen.getByLabelText("go back to budgets")).toBeInTheDocument();

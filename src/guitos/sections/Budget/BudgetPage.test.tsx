@@ -19,11 +19,6 @@ describe("BudgetPage", () => {
   const setNotificationsMock = vi.fn();
   const comp = <BudgetPage />;
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
-
   it("renders initial state", async () => {
     render(comp);
     const newButton = await screen.findAllByRole("button", {

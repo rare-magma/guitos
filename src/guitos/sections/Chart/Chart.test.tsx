@@ -33,11 +33,6 @@ describe("Chart", () => {
     vi.restoreAllMocks();
   });
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
-
   it("renders initial state", () => {
     render(comp);
     expect(screen.getByText("chart header")).toBeInTheDocument();

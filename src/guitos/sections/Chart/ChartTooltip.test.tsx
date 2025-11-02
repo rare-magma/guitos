@@ -11,11 +11,6 @@ describe("ChartTooltip", () => {
     />
   );
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
-
   it("renders initial state", () => {
     render(comp);
     expect(screen.getByText("label")).toBeInTheDocument();

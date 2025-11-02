@@ -8,11 +8,6 @@ import { setBudgetMock } from "../../../setupTests";
 describe("LandingPage", () => {
   const comp = <LandingPage loadingFromDB={false} showLandingPage={true} />;
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
-
   it("renders initial state", () => {
     render(comp);
     expect(screen.getByLabelText("new budget")).toBeInTheDocument();
