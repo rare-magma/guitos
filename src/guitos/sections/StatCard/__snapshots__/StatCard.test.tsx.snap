@@ -1,7 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`StatCard > matches snapshot 1`] = `
-<StatCard
-  onShowGraphs={[MockFunction spy]}
-/>
-`;

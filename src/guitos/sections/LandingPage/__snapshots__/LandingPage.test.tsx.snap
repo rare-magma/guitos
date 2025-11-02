@@ -1,8 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`LandingPage > matches snapshot 1`] = `
-<LandingPage
-  loadingFromDB={false}
-  showLandingPage={true}
-/>
-`;
