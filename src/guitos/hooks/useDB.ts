@@ -18,7 +18,7 @@ import type {
 } from "@guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
 import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
-import { localForageUserPreferencesRepository } from "@guitos/userPreferences/infrastructure/localForageUserPreferencesRepository";
+import { LocalForageUserPreferencesRepository } from "@guitos/userPreferences/infrastructure/localForageUserPreferencesRepository";
 import { Uuid } from "@shared/domain/uuid";
 import { produce } from "immer";
 import Papa from "papaparse";
@@ -29,7 +29,7 @@ import { useLocation, useParams } from "wouter";
 import { createBudgetNameList, saveLastOpenedBudget } from "../../utils";
 
 const budgetRepository = new localForageBudgetRepository();
-const optionsRepository = new localForageUserPreferencesRepository();
+const optionsRepository = new LocalForageUserPreferencesRepository();
 const calcHistRepository = new localForageCalcHistRepository();
 
 export function useDB() {

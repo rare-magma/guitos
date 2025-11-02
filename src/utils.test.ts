@@ -3,7 +3,7 @@ import type { ItemOperation } from "@guitos/domain/calculationHistoryItem";
 import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import { prompt } from "@guitos/sections/NavBar/prompt";
 import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
-import { localForageUserPreferencesRepository } from "@guitos/userPreferences/infrastructure/localForageUserPreferencesRepository";
+import { LocalForageUserPreferencesRepository } from "@guitos/userPreferences/infrastructure/localForageUserPreferencesRepository";
 import { Uuid } from "@shared/domain/uuid";
 import Big from "big.js";
 import { expect, test } from "vitest";
@@ -24,7 +24,7 @@ import {
   roundBig,
 } from "./utils";
 
-const optionsRepository = new localForageUserPreferencesRepository();
+const optionsRepository = new LocalForageUserPreferencesRepository();
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);

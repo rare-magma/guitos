@@ -4,7 +4,7 @@ import { Datetime } from "@shared/domain/datetime";
 import localforage from "localforage";
 import { currenciesMap } from "../../../lists/currenciesMap";
 
-export class localForageUserPreferencesRepository
+export class LocalForageUserPreferencesRepository
   implements UserPreferencesRepository
 {
   private readonly optionsDB;
@@ -21,14 +21,14 @@ export class localForageUserPreferencesRepository
   async read(): Promise<UserPreferences> {
     try {
       let code = await this.optionsDB.getItem<string>(
-        localForageUserPreferencesRepository.currencyKey,
+        LocalForageUserPreferencesRepository.currencyKey,
       );
       if (!code) {
         code = this.getDefaultCurrencyCode();
       }
 
       let locale = await this.optionsDB.getItem<string>(
-        localForageUserPreferencesRepository.localeKey,
+        LocalForageUserPreferencesRepository.localeKey,
       );
       if (!locale) {
         locale = this.getUserLang();
@@ -43,11 +43,11 @@ export class localForageUserPreferencesRepository
   async save(userPreferences: UserPreferences): Promise<void> {
     try {
       await this.optionsDB.setItem<string>(
-        localForageUserPreferencesRepository.currencyKey,
+        LocalForageUserPreferencesRepository.currencyKey,
         userPreferences.currency.value,
       );
       await this.optionsDB.setItem<string>(
-        localForageUserPreferencesRepository.localeKey,
+        LocalForageUserPreferencesRepository.localeKey,
         userPreferences.locale.value,
       );
     } catch (e) {
@@ -58,7 +58,7 @@ export class localForageUserPreferencesRepository
   async getCurrencyCode(): Promise<string> {
     try {
       const code = await this.optionsDB.getItem<string>(
-        localForageUserPreferencesRepository.currencyKey,
+        LocalForageUserPreferencesRepository.currencyKey,
       );
       if (!code) {
         return this.getDefaultCurrencyCode();
@@ -72,7 +72,7 @@ export class localForageUserPreferencesRepository
   async saveCurrencyCode(options: UserPreferences): Promise<boolean> {
     try {
       await this.optionsDB.setItem<string>(
-        localForageUserPreferencesRepository.currencyKey,
+        LocalForageUserPreferencesRepository.currencyKey,
         options.currency.value,
       );
       return true;
@@ -84,7 +84,7 @@ export class localForageUserPreferencesRepository
   async getLocale(): Promise<string> {
     try {
       const locale = await this.optionsDB.getItem<string>(
-        localForageUserPreferencesRepository.localeKey,
+        LocalForageUserPreferencesRepository.localeKey,
       );
       if (!locale) throw new Error();
       return locale;
@@ -96,7 +96,7 @@ export class localForageUserPreferencesRepository
   async saveLocale(options: UserPreferences): Promise<boolean> {
     try {
       await this.optionsDB.setItem<string>(
-        localForageUserPreferencesRepository.localeKey,
+        LocalForageUserPreferencesRepository.localeKey,
         options.locale.value,
       );
       return true;
