@@ -14,7 +14,11 @@ updates:
         dependency-type: "production"
       deps-dev:
         dependency-type: "development"
+    cooldown:
+      default-days: 7
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
