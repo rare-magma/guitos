@@ -69,7 +69,7 @@
   "private": true,
   "scripts": {
     "bump:playwright-image": "PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test --json --depth=0 | jq -r '.[0].devDependencies[\"@playwright/test\"].version') && sed -i -E \"s|(mcr\\.microsoft\\.com/playwright:)v[0-9]+\\.[0-9]+\\.[0-9]+(@sha256:[a-f0-9]+)? +# ratchet:mcr\\.microsoft\\.com/playwright:v[0-9]+\\.[0-9]+\\.[0-9]+|\\1v$PLAYWRIGHT_VERSION\\2 # ratchet:mcr.microsoft.com/playwright:v$PLAYWRIGHT_VERSION|\" .github/workflows/*.yml",
-    "bump:biome-schema": "pnpx @biomejs/biome migrate --write",
+    "bump:biome-schema": "BIOME_VERSION=$(pnpm ls @biomejs/biome --json --depth=0 | jq -r '.[0].devDependencies[\"@biomejs/biome\"].version') && pnpx @biomejs/biome@$BIOME_VERSION migrate --write",
     "build": "vite build",
     "bundle": "pnpm dlx vite-bundle-visualizer",
     "coverage": "vitest run --coverage --silent --exclude 'e2e'",
