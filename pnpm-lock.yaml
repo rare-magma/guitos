@@ -18,8 +18,8 @@ importers:
         specifier: 5.3.8
         version: 5.3.8(@popperjs/core@2.11.8)
       immer:
-        specifier: 10.2.0
-        version: 10.2.0
+        specifier: 11.0.0
+        version: 11.0.0
       localforage:
         specifier: 1.10.0
         version: 1.10.0
@@ -55,7 +55,7 @@ importers:
         version: 3.5.1(@types/react-dom@19.2.3(@types/react@19.2.4))(@types/react@19.2.4)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)(redux@4.2.1)
       use-immer:
         specifier: 0.11.0
-        version: 0.11.0(immer@10.2.0)(react@19.2.0)
+        version: 0.11.0(immer@11.0.0)(react@19.2.0)
       use-undo:
         specifier: 1.1.1
         version: 1.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -2002,6 +2002,9 @@ packages:
 
   immer@10.2.0:
     resolution: {integrity: sha512-d/+XTN3zfODyjr89gM3mPq1WNX2B8pYsu7eORitdwyA2sBubnTl3laYlBk4sXY5FUa5qTZGBDPJICVbvqzjlbw==}
+
+  immer@11.0.0:
+    resolution: {integrity: sha512-XtRG4SINt4dpqlnJvs70O2j6hH7H0X8fUzFsjMn1rwnETaxwp83HLNimXBjZ78MrKl3/d3/pkzDH0o0Lkxm37Q==}
 
   immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
@@ -5226,6 +5229,8 @@ snapshots:
 
   immer@10.2.0: {}
 
+  immer@11.0.0: {}
+
   immer@9.0.21: {}
 
   indent-string@4.0.0: {}
@@ -6296,9 +6301,9 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  use-immer@0.11.0(immer@10.2.0)(react@19.2.0):
+  use-immer@0.11.0(immer@11.0.0)(react@19.2.0):
     dependencies:
-      immer: 10.2.0
+      immer: 11.0.0
       react: 19.2.0
 
   use-sync-external-store@1.5.0(react@19.2.0):
