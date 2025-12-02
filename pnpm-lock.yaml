@@ -18,8 +18,8 @@ importers:
         specifier: 5.3.8
         version: 5.3.8(@popperjs/core@2.11.8)
       immer:
-        specifier: 10.2.0
-        version: 10.2.0
+        specifier: 11.0.1
+        version: 11.0.1
       localforage:
         specifier: 1.10.0
         version: 1.10.0
@@ -55,13 +55,13 @@ importers:
         version: 3.5.1(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.0(react@19.2.0))(react-is@18.3.1)(react@19.2.0)(redux@4.2.1)
       use-immer:
         specifier: 0.11.0
-        version: 0.11.0(immer@10.2.0)(react@19.2.0)
+        version: 0.11.0(immer@11.0.1)(react@19.2.0)
       use-undo:
         specifier: 1.1.1
         version: 1.1.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       wouter:
-        specifier: 3.7.1
-        version: 3.7.1(react@19.2.0)
+        specifier: 3.8.0
+        version: 3.8.0(react@19.2.0)
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.11.0
@@ -2003,6 +2003,9 @@ packages:
   immer@10.2.0:
     resolution: {integrity: sha512-d/+XTN3zfODyjr89gM3mPq1WNX2B8pYsu7eORitdwyA2sBubnTl3laYlBk4sXY5FUa5qTZGBDPJICVbvqzjlbw==}
 
+  immer@11.0.1:
+    resolution: {integrity: sha512-naDCyggtcBWANtIrjQEajhhBEuL9b0Zg4zmlWK2CzS6xCWSE39/vvf4LqnMjUAWHBhot4m9MHCM/Z+mfWhUkiA==}
+
   immer@9.0.21:
     resolution: {integrity: sha512-bc4NBHqOqSfRW7POMkHd51LvClaeMXpm8dx0e8oE2GORbq5aRK7Bxl4FyzVLdGtLmvLKL7BTDBG5ACQm4HWjTA==}
 
@@ -3028,6 +3031,11 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+  use-sync-external-store@1.6.0:
+    resolution: {integrity: sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   use-undo@1.1.1:
     resolution: {integrity: sha512-2NNpJv7TDQpyETgRTG5I/CsABX5nhExpx8PEhWiDsnW9C5BA6Xnn8G9u/lPeg3+JsBrBtUx8/5bMbGmpnWz1Cw==}
     peerDependencies:
@@ -3210,8 +3218,8 @@ packages:
   workbox-window@7.4.0:
     resolution: {integrity: sha512-/bIYdBLAVsNR3v7gYGaV4pQW3M3kEPx5E8vDxGvxo6khTrGtSSCS7QiFKv9ogzBgZiy0OXLP9zO28U/1nF1mfw==}
 
-  wouter@3.7.1:
-    resolution: {integrity: sha512-od5LGmndSUzntZkE2R5CHhoiJ7YMuTIbiXsa0Anytc2RATekgv4sfWRAxLEULBrp7ADzinWQw8g470lkT8+fOw==}
+  wouter@3.8.0:
+    resolution: {integrity: sha512-oFQKbZVQxaXGXSuUg++FETTORSKQUur1Q+tvIlVm9TjPt+bpzS/IkRy2mXdSuqTjJ/PorSPxbRz4UwWsICes1Q==}
     peerDependencies:
       react: '>=16.8.0'
 
@@ -5235,6 +5243,8 @@ snapshots:
 
   immer@10.2.0: {}
 
+  immer@11.0.1: {}
+
   immer@9.0.21: {}
 
   indent-string@4.0.0: {}
@@ -6305,12 +6315,16 @@ snapshots:
       escalade: 3.2.0
       picocolors: 1.1.1
 
-  use-immer@0.11.0(immer@10.2.0)(react@19.2.0):
+  use-immer@0.11.0(immer@11.0.1)(react@19.2.0):
     dependencies:
-      immer: 10.2.0
+      immer: 11.0.1
       react: 19.2.0
 
   use-sync-external-store@1.5.0(react@19.2.0):
+    dependencies:
+      react: 19.2.0
+
+  use-sync-external-store@1.6.0(react@19.2.0):
     dependencies:
       react: 19.2.0
 
@@ -6601,12 +6615,12 @@ snapshots:
       '@types/trusted-types': 2.0.7
       workbox-core: 7.4.0
 
-  wouter@3.7.1(react@19.2.0):
+  wouter@3.8.0(react@19.2.0):
     dependencies:
       mitt: 3.0.1
       react: 19.2.0
       regexparam: 3.0.0
-      use-sync-external-store: 1.5.0(react@19.2.0)
+      use-sync-external-store: 1.6.0(react@19.2.0)
 
   wrappy@1.0.2: {}
 

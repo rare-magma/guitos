@@ -8,7 +8,7 @@
   "dependencies": {
     "big.js": "7.0.1",
     "bootstrap": "5.3.8",
-    "immer": "10.2.0",
+    "immer": "11.0.1",
     "localforage": "1.10.0",
     "motion": "12.23.24",
     "papaparse": "5.5.3",
@@ -22,7 +22,7 @@
     "recharts": "3.5.1",
     "use-immer": "0.11.0",
     "use-undo": "1.1.1",
-    "wouter": "3.7.1"
+    "wouter": "3.8.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.11.0",
