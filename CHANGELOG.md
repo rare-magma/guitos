@@ -1,3 +1,59 @@
+## 1.6.3 (2025-12-02)
+
+#### Bug Fixes
+
+* trigger release (dab963a4)
+
+#### Performance Improvements
+
+* improve docker arm build time (9cc3e6b1)
+
+#### Tests
+
+* fix selector (9841a531)
+
+#### Code Refactoring
+
+* use import aliases (58caf4cf)
+* import shared domain from cjuega/typescript-fullstack-skeleton (0346cb44)
+* use more safe array methods (06600684)
+* use safe array methods (b06bd55f)
+* remove unused export (27051e10)
+
+#### Chores
+
+* **release:** 1.6.2 (6787343c)
+
+#### Build
+
+* **deps:** bump the deps-prod group across 1 directory with 2 updates (#236) (b9145cae)
+* **deps-dev:** bump the deps-dev group with 6 updates (#234) (e8d10526)
+* **deps:** bump actions/checkout from 5.0.0 to 6.0.0 (#235) (3739709c)
+* **deps-dev:** bump the deps-dev group with 12 updates (#232) (ed94ab8b)
+* **deps-dev:** bump the deps-dev group with 16 updates (#229) (40319f9c)
+* **deps:** bump actions/attest-build-provenance from 2.4.0 to 3.0.0 (#227) (ad00b3f8)
+* **deps:** bump actions/checkout from 4.3.0 to 5.0.0 (#228) (d52e3fd1)
+* **deps:** bump the deps-prod group with 3 updates (#226) (215167ce)
+* **deps-dev:** bump vite from 7.1.8 to 7.1.11 in the npm_and_yarn group across 1 directory (#224) (c89e20a8)
+* **deps-dev:** bump happy-dom (#223) (e169cc6e)
+* **deps-dev:** bump happy-dom (#222) (48cfe05a)
+* **deps-dev:** bump the deps-dev group with 8 updates (#221) (4c648332)
+* **deps:** bump actions/checkout from 4.3.0 to 5.0.0 (#220) (0fb24928)
+* **deps:** bump actions/attest-build-provenance from 2.4.0 to 3.0.0 (#219) (8bb694c2)
+* **deps:** bump the deps-prod group with 4 updates (#218) (56a06d54)
+* **deps-dev:** bump vite from 7.1.4 to 7.1.5 in the npm_and_yarn group across 1 directory (#216) (923a826d)
+
+#### CI
+
+* set dependabot cooldown to 7 days (#231) (c0e4cc85)
+* set dependabot cooldown to 7 days (#230) (1a645a61)
+* setup CODEOWNERS (#217) (17b6811d)
+* only allow installing 2+ days old packages (f92187c9)
+* add vitest-when (74b770fa)
+* use aliased imports (b001eff7)
+* add knip script (83e11672)
+
+
 ## 1.6.2 (2025-09-02)
 
 #### Bug Fixes

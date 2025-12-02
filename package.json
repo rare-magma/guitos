@@ -68,8 +68,8 @@
   },
   "private": true,
   "scripts": {
-    "bump:playwright-image": "PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test --json --depth=0 | jq -r '.[0].devDependencies[\"@playwright/test\"].version') && sed -i -E \"s|(mcr\\.microsoft\\.com/playwright:)v[0-9]+\\.[0-9]+\\.[0-9]+(@sha256:[a-f0-9]+)? +# ratchet:mcr\\.microsoft\\.com/playwright:v[0-9]+\\.[0-9]+\\.[0-9]+|\\1v$PLAYWRIGHT_VERSION\\2 # ratchet:mcr.microsoft.com/playwright:v$PLAYWRIGHT_VERSION|\" .github/workflows/*.yml",
-    "bump:biome-schema": "BIOME_VERSION=$(pnpm ls @biomejs/biome --json --depth=0 | jq -r '.[0].devDependencies[\"@biomejs/biome\"].version') && pnpx @biomejs/biome@$BIOME_VERSION migrate --write",
+    "bump:playwright-image": "PLAYWRIGHT_VERSION=$(pnpm ls @playwright/test --json --depth=0 | jq -r '.[0].devDependencies[\"@playwright/test\"].version') \u0026\u0026 sed -i -E \"s|(mcr\\.microsoft\\.com/playwright:)v[0-9]+\\.[0-9]+\\.[0-9]+(@sha256:[a-f0-9]+)? +# ratchet:mcr\\.microsoft\\.com/playwright:v[0-9]+\\.[0-9]+\\.[0-9]+|\\1v$PLAYWRIGHT_VERSION\\2 # ratchet:mcr.microsoft.com/playwright:v$PLAYWRIGHT_VERSION|\" .github/workflows/*.yml",
+    "bump:biome-schema": "BIOME_VERSION=$(pnpm ls @biomejs/biome --json --depth=0 | jq -r '.[0].devDependencies[\"@biomejs/biome\"].version') \u0026\u0026 pnpx @biomejs/biome@$BIOME_VERSION migrate --write",
     "build": "vite build",
     "bundle": "pnpm dlx vite-bundle-visualizer",
     "coverage": "vitest run --coverage --silent --exclude 'e2e'",
@@ -79,7 +79,7 @@
     "schema": "pnpm dlx generate-schema ./docs/guitos-sample.json",
     "serve": "vite preview",
     "start": "vite",
-    "test": "pnpm test:unit --run && pnpm test:e2e",
+    "test": "pnpm test:unit --run \u0026\u0026 pnpm test:e2e",
     "test:unit": "vitest --typecheck --exclude 'e2e'",
     "test:e2e": "playwright test --reporter=list --project chromium",
     "test:e2e:mobile": "playwright test --reporter=list --project 'Mobile Chrome'",
@@ -88,5 +88,5 @@
     "knip": "pnpm dlx knip"
   },
   "type": "module",
-  "version": "1.6.2"
+  "version": "1.6.3"
 }
