@@ -1,8 +1,8 @@
-import { UserPreferencesRepositoryMock } from "@guitos/__mocks__/userPreferencesRepository.mock";
 import { UserPreferencesQuery } from "@guitos/userPreferences/application/readPreferences/userPreferencesQuery";
 import { UserPreferencesQueryHandler } from "@guitos/userPreferences/application/readPreferences/userPreferencesQueryHandler";
 import { UserPreferencesReader } from "@guitos/userPreferences/application/readPreferences/userPreferencesReader";
 import { UserPreferencesResponseMother } from "@guitos/userPreferences/application/readPreferences/userPreferencesResponse.mother";
+import { UserPreferencesRepositoryMock } from "@guitos/userPreferences/domain/__mocks__/userPreferencesRepository.mock";
 import { UserPreferencesMother } from "@guitos/userPreferences/domain/userPreferences.mother";
 import { UserPreferencesChangedDomainEventMother } from "@guitos/userPreferences/domain/userPreferencesChangedDomainEvent.mother";
 import { ClockMock } from "@shared/__mocks__/clock.mock";
@@ -50,7 +50,7 @@ describe("userPreferencesReader", () => {
 
     clock.whenNowThenReturn(createdAt);
     repository.whenReadThenReturn(userPreferences);
-    repository.save(userPreferences);
+    repository.save(userPreferences.toPrimitives());
 
     const actual = await handler.handle(query);
 

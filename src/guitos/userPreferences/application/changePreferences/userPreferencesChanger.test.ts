@@ -1,7 +1,7 @@
-import { UserPreferencesRepositoryMock } from "@guitos/__mocks__/userPreferencesRepository.mock";
 import { ChangeUserPreferencesCommandMother } from "@guitos/userPreferences/application/changePreferences/changeUserPreferencesCommand.mother";
 import { ChangeUserPreferencesCommandHandler } from "@guitos/userPreferences/application/changePreferences/changeUserPreferencesCommandHandler";
 import { UserPreferencesChanger } from "@guitos/userPreferences/application/changePreferences/userPreferencesChanger";
+import { UserPreferencesRepositoryMock } from "@guitos/userPreferences/domain/__mocks__/userPreferencesRepository.mock";
 import { UserPreferencesChangedDomainEventMother } from "@guitos/userPreferences/domain/userPreferencesChangedDomainEvent.mother";
 import { ClockMock } from "@shared/__mocks__/clock.mock";
 import { EventBusMock } from "@shared/__mocks__/eventBus.mock";

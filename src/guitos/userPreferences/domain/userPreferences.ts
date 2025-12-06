@@ -1,3 +1,4 @@
+import { currenciesMap } from "@guitos/infrastructure/lists/currenciesMap";
 import { Currency } from "@guitos/userPreferences/domain/currency";
 import { Locale } from "@guitos/userPreferences/domain/locale";
 import { UserPreferencesChangedDomainEvent } from "@guitos/userPreferences/domain/userPreferencesChangedDomainEvent";
@@ -38,6 +39,16 @@ export class UserPreferences extends AggregateRoot {
     return userPreferences;
   }
 
+  static default(createdAt: Datetime) {
+    const locale = UserPreferences.getUserLang();
+    const code = UserPreferences.getDefaultCurrencyCode();
+    return new UserPreferences(
+      new Currency(code),
+      new Locale(locale),
+      createdAt,
+    );
+  }
+
   static fromPrimitives({
     currency,
     locale,
@@ -56,5 +67,34 @@ export class UserPreferences extends AggregateRoot {
       locale: this.locale.value,
       createdAt: this.createdAt.value,
     };
+  }
+
+  static getUserLang(): string {
+    return navigator.language || Locale.default;
+  }
+
+  private static getCountryCode(locale: string): string {
+    return locale.split("-").length >= 2
+      ? locale.split("-")[1].toUpperCase()
+      : locale.toUpperCase();
+  }
+
+  private static getCurrencyCodeFromCountry(country: string): string {
+    const countryIsInMap =
+      currenciesMap[country as keyof typeof currenciesMap] !== undefined;
+
+    if (countryIsInMap) {
+      return currenciesMap[
+        country as keyof typeof currenciesMap
+      ] as unknown as string;
+    }
+    return Currency.default;
+  }
+
+  private static getDefaultCurrencyCode(): string {
+    const country = UserPreferences.getCountryCode(
+      UserPreferences.getUserLang(),
+    );
+    return UserPreferences.getCurrencyCodeFromCountry(country);
   }
 }

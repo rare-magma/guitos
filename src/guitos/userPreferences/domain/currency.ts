@@ -1,8 +1,10 @@
 import { InvalidArgument } from "@shared/domain/invalidArgument";
 import { StringValueObject } from "@shared/domain/stringValueObject";
-import { currenciesList } from "../../../lists/currenciesList";
+import { currenciesList } from "../../infrastructure/lists/currenciesList";
 
 export class Currency extends StringValueObject {
+  static readonly default = "USD";
+
   constructor(code: string) {
     super(code);
 

@@ -28,7 +28,7 @@ export class UserPreferencesChanger {
       this.clock.now(),
     );
 
-    await this.repository.save(userPreferences);
+    await this.repository.save(userPreferences.toPrimitives());
     await this.eventBus.publish(userPreferences.pullDomainEvents());
   }
 }

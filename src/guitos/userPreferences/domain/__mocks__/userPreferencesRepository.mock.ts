@@ -3,6 +3,7 @@ import type { Locale } from "@guitos/userPreferences/domain/locale";
 import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import type { UserPreferencesRepository } from "@guitos/userPreferences/domain/userPreferencesRepository";
 import type { Nullable } from "@shared/domain/nullable";
+import type { Primitives } from "@shared/domain/primitives";
 import { expect, vi } from "vitest";
 
 export class UserPreferencesRepositoryMock
@@ -11,7 +12,7 @@ export class UserPreferencesRepositoryMock
   private mockSave = vi.fn();
   private mockRead = vi.fn();
 
-  async save(userPreferences: UserPreferences): Promise<void> {
+  async save(userPreferences: Primitives<UserPreferences>): Promise<void> {
     await this.mockSave(userPreferences);
   }
 
@@ -26,33 +27,11 @@ export class UserPreferencesRepositoryMock
     expect(lastSavedExampleAggregateBody).toStrictEqual(expectedBody);
   }
 
-  async read(): Promise<Nullable<UserPreferences>> {
+  async read(): Promise<Nullable<Primitives<UserPreferences>>> {
     return await this.mockRead();
   }
 
   whenReadThenReturn(userPreferences: Nullable<UserPreferences>): void {
     this.mockRead.mockResolvedValue(userPreferences);
-  }
-
-  getCurrencyCode(): Promise<Currency> {
-    throw new Error("Method not implemented.");
-  }
-  saveCurrencyCode(_code: Currency): Promise<boolean> {
-    throw new Error("Method not implemented.");
-  }
-  getLocale(): Promise<string> {
-    throw new Error("Method not implemented.");
-  }
-  saveLocale(_locale: Locale): Promise<boolean> {
-    throw new Error("Method not implemented.");
-  }
-  getUserLang(): string {
-    throw new Error("Method not implemented.");
-  }
-  getCountryCode(_locale: string): string {
-    throw new Error("Method not implemented.");
-  }
-  getDefaultCurrencyCode(): string {
-    throw new Error("Method not implemented.");
   }
 }

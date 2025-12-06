@@ -17,8 +17,8 @@ import {
 import type { IntlConfig } from "react-currency-input-field";
 
 interface ConfigContextInterface {
-  userOptions: UserPreferences;
-  intlConfig: IntlConfig;
+  userOptions: UserPreferences | undefined;
+  intlConfig: IntlConfig | undefined;
 }
 
 const ConfigContext = createContext<ConfigContextInterface | undefined>(
@@ -35,17 +35,13 @@ function useConfig() {
 }
 
 function ConfigProvider({ children }: PropsWithChildren) {
-  const [userOptions, setUserOptions] = useState<UserPreferences>(
-    new UserPreferences(
-      new Currency("USD"),
-      new Locale("en-US"),
-      new Datetime(),
-    ),
-  );
-  const intlConfig: IntlConfig = {
-    locale: userOptions?.locale.value,
-    currency: userOptions?.currency.value,
-  };
+  const [userOptions, setUserOptions] = useState<UserPreferences>();
+  const intlConfig: IntlConfig | undefined = userOptions
+    ? {
+        locale: userOptions?.locale.value,
+        currency: userOptions?.currency.value,
+      }
+    : undefined;
   const userPreferencesChanged = useReactToEvents([
     UserPreferencesChangedDomainEvent.eventName,
   ]);

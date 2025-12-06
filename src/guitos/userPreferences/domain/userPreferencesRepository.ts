@@ -1,10 +1,8 @@
 import type { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import type { Nullable } from "@shared/domain/nullable";
+import type { Primitives } from "@shared/domain/primitives";
 
 export interface UserPreferencesRepository {
-  save(userPreferences: UserPreferences): Promise<void>;
-  read(): Promise<Nullable<UserPreferences>>;
-  getUserLang(): string;
-  getCountryCode(locale: string): string;
-  getDefaultCurrencyCode(): string;
+  read(): Promise<Nullable<Primitives<UserPreferences>>>;
+  save(userPreferences: Primitives<UserPreferences>): Promise<void>;
 }

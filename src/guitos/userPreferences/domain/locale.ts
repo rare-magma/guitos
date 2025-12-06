@@ -3,6 +3,7 @@ import { StringValueObject } from "@shared/domain/stringValueObject";
 import ISO6391 from "iso-639-1";
 
 export class Locale extends StringValueObject {
+  static readonly default = "en-US";
   readonly locale: string;
 
   constructor(locale: string) {

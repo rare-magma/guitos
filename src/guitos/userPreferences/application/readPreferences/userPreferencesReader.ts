@@ -1,8 +1,11 @@
 import type { UserPreferencesQuery } from "@guitos/userPreferences/application/readPreferences/userPreferencesQuery";
 import { UserPreferencesResponse } from "@guitos/userPreferences/application/readPreferences/userPreferencesResponse";
+import { Currency } from "@guitos/userPreferences/domain/currency";
+import { Locale } from "@guitos/userPreferences/domain/locale";
 import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import type { UserPreferencesRepository } from "@guitos/userPreferences/domain/userPreferencesRepository";
 import type { Clock } from "@shared/domain/clock";
+import { Datetime } from "@shared/domain/datetime";
 import type { EventBus } from "@shared/domain/eventBus/eventBus";
 
 export class UserPreferencesReader {
@@ -21,20 +24,18 @@ export class UserPreferencesReader {
   }
 
   async run(_query: UserPreferencesQuery): Promise<UserPreferencesResponse> {
-    const preferences = await this.repository.read();
+    const savedPreferences = await this.repository.read();
 
-    if (!preferences) {
-      const preferences = UserPreferences.create("USD", "en", this.clock.now());
-      await this.eventBus.publish(preferences.pullDomainEvents());
-      return new UserPreferencesResponse({
-        currency: preferences.currency.value,
-        locale: preferences.locale.value,
-      });
-    }
+    const preferences = savedPreferences
+      ? new UserPreferences(
+          new Currency(savedPreferences.currency),
+          new Locale(savedPreferences.locale),
+          new Datetime(savedPreferences.createdAt),
+        )
+      : UserPreferences.default(this.clock.now());
 
-    return new UserPreferencesResponse({
-      currency: preferences.currency.value,
-      locale: preferences.locale.value,
-    });
+    await this.eventBus.publish(preferences.pullDomainEvents());
+
+    return new UserPreferencesResponse(preferences.toPrimitives());
   }
 }
