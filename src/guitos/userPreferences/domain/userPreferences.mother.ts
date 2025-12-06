@@ -10,11 +10,11 @@ export class UserPreferencesMother {
     return UserPreferences.fromPrimitives(primitives);
   }
 
-  static default(): UserPreferences {
+  static default(createdAt?: string): UserPreferences {
     return UserPreferences.create(
       CurrencyMother.default().value,
       LocaleMother.default().value,
-      DatetimeMother.random(),
+      createdAt ? DatetimeMother.create(createdAt) : DatetimeMother.random(),
     );
   }
 

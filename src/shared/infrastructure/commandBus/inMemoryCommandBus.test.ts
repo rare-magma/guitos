@@ -6,18 +6,18 @@ import { MultipleCommandHandlersError } from "@shared/infrastructure/commandBus/
 import { describe, expect, it } from "vitest";
 
 class UnhandledCommand extends Command {
-  static commandName = "unhandled.command";
+  static readonly name = "unhandled.command";
 
   constructor() {
-    super(UnhandledCommand.commandName);
+    super(UnhandledCommand.name);
   }
 }
 
 class HandledCommand extends Command {
-  static commandName = "handled.command";
+  static readonly name = "handled.command";
 
   constructor() {
-    super(HandledCommand.commandName);
+    super(HandledCommand.name);
   }
 }
 

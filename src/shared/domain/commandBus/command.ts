@@ -1,7 +1,7 @@
 export abstract class Command {
-  readonly commandName: string;
+  readonly name: string;
 
-  constructor(commandName: string) {
-    this.commandName = commandName;
+  constructor(name: string) {
+    this.name = name;
   }
 }

@@ -3,7 +3,6 @@ import {
   type CsvRow,
 } from "@guitos/application/budgetCsvService";
 import { useBudget } from "@guitos/context/BudgetContext";
-import { useBusesContext } from "@guitos/context/BusesContext";
 import { useErrorContext } from "@guitos/context/ErrorContext";
 import { useLoadingContext } from "@guitos/context/LoadingContext";
 import { useNotificationContext } from "@guitos/context/NotificationContext";
@@ -31,7 +30,6 @@ const calcHistRepository = new localForageCalcHistRepository();
 
 export function useDB() {
   const [options, setOptions] = useState<Option[]>([]);
-  const { commandBus } = useBusesContext();
   const params = useParams();
   const name = String(params.name);
   const [_, navigate] = useLocation();

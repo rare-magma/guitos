@@ -1,5 +1,5 @@
-import { useBusesContext } from "@guitos/context/BusesContext";
 import { useConfig } from "@guitos/context/ConfigContext";
+import { commandBus } from "@guitos/infrastructure/buses";
 import { ChangeUserPreferencesCommand } from "@guitos/userPreferences/application/changePreferences/changeUserPreferencesCommand";
 import { useRef } from "react";
 import {
@@ -23,7 +23,6 @@ interface NavBarSettingsProps {
 
 export function NavBarSettings({ expanded }: NavBarSettingsProps) {
   const { userOptions } = useConfig();
-  const { commandBus } = useBusesContext();
   const settingsButtonRef = useRef<HTMLButtonElement>(null);
   const versionRef = useRef<HTMLAnchorElement>(null);
 

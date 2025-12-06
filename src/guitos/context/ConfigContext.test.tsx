@@ -1,17 +1,25 @@
 import { ConfigProvider, useConfig } from "@guitos/context/ConfigContext";
-import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
-import { act, render, screen } from "@testing-library/react";
+import { commandBus } from "@guitos/infrastructure/buses";
+import { ChangeUserPreferencesCommand } from "@guitos/userPreferences/application/changePreferences/changeUserPreferencesCommand";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 function TestComponent() {
-  const { userOptions, setUserOptions, intlConfig } = useConfig();
+  const { userOptions, intlConfig } = useConfig();
   return (
     <>
-      <p data-testid="currency">{userOptions.currencyCode}</p>
+      <p data-testid="currency">{userOptions.currency.value}</p>
       <p data-testid="locale">{intlConfig.locale}</p>
       <button
         type="button"
-        onClick={() => setUserOptions(new UserPreferences("EUR", "en"))}
+        onClick={() =>
+          commandBus.dispatch(
+            new ChangeUserPreferencesCommand({
+              currency: "EUR",
+              locale: "en",
+            }),
+          )
+        }
       >
         Change Currency
       </button>
@@ -39,6 +47,8 @@ describe("ConfigContext", () => {
     act(() => {
       screen.getByText("Change Currency").click();
     });
-    expect(screen.getByTestId("currency").textContent).toBe("EUR");
+    waitFor(() =>
+      expect(screen.getByTestId("currency").textContent).toBe("EUR"),
+    );
   });
 });

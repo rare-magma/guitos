@@ -1,5 +1,6 @@
 import Big from "big.js";
 import { roundBig } from "../../utils";
+import type { Primitives } from "@shared/domain/primitives";
 
 export class BudgetItem {
   id: number;
@@ -27,5 +28,13 @@ export class BudgetItem {
     }
     const percentageOfTotal = Big(itemValue).mul(100).div(revenueTotal);
     return roundBig(percentageOfTotal, percentageOfTotal.gte(1) ? 0 : 1);
+  }
+
+  toPrimitives(): Primitives<BudgetItem> {
+    return {
+      id: this.id,
+      name: this.name,
+      value: this.value,
+    };
   }
 }

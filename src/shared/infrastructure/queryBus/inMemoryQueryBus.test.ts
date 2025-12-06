@@ -7,18 +7,16 @@ import { MultipleQueryHandlersError } from "@shared/infrastructure/queryBus/mult
 import { describe, expect, it } from "vitest";
 
 class UnhandledQuery extends Query {
-  static queryName = "unhandled.query";
-
+  static readonly name = "unhandled";
   constructor() {
-    super(UnhandledQuery.queryName);
+    super(UnhandledQuery.name);
   }
 }
 
 class HandledQuery extends Query {
-  static queryName = "handled.query";
-
+  static readonly name = "handled";
   constructor() {
-    super(HandledQuery.queryName);
+    super(HandledQuery.name);
   }
 }
 

@@ -10,7 +10,7 @@ export class InMemoryQueryBus implements QueryBus {
     new Map();
 
   async ask<R extends Response>(query: Query): Promise<R> {
-    const handler = this.handlers.get(query.queryName);
+    const handler = this.handlers.get(query.name);
     if (!handler) {
       throw new QueryNotRegisteredError(query);
     }
@@ -23,19 +23,19 @@ export class InMemoryQueryBus implements QueryBus {
   register<Q extends Query, R extends Response>(
     handler: QueryHandler<Q, R>,
   ): void {
-    const { queryName } = handler.subscribedTo();
-    const existingHandler = this.handlers.get(queryName);
+    const query = handler.subscribedTo();
+    const existingHandler = this.handlers.get(query.name);
     if (existingHandler) {
       if (existingHandler.constructor.name === handler.constructor.name) {
         return;
       }
-      throw new MultipleQueryHandlersError(queryName);
+      throw new MultipleQueryHandlersError(query.constructor.name);
     }
-    this.handlers.set(queryName, handler);
+    this.handlers.set(query.name, handler);
   }
 
   unregister(handler: QueryHandler<Query, Response>): void {
-    const { queryName } = handler.subscribedTo();
-    this.handlers.delete(queryName);
+    const query = handler.subscribedTo();
+    this.handlers.delete(query.name);
   }
 }

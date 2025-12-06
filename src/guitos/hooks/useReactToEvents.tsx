@@ -1,4 +1,4 @@
-import { useBusesContext } from "@guitos/context/BusesContext";
+import { eventBus } from "@guitos/infrastructure/buses";
 import type { DomainEvent } from "@shared/domain/eventBus/domainEvent";
 import type { DomainEventSubscriber } from "@shared/domain/eventBus/domainEventSubscriber";
 import { useEffect, useState } from "react";
@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 export function useReactToEvents<T extends DomainEvent>(
   eventNames: string[],
 ): T | undefined {
-  const { eventBus } = useBusesContext();
   const [event, setEvent] = useState<T>();
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export function useReactToEvents<T extends DomainEvent>(
     return () => {
       eventBus.unsubscribe(subscriber);
     };
-  }, [eventBus, eventNames]);
+  }, [eventNames]);
 
   return event;
 }

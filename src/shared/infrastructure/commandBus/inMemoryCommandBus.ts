@@ -8,7 +8,7 @@ export class InMemoryCommandBus implements CommandBus {
   private readonly handlers: Map<string, CommandHandler<Command>> = new Map();
 
   async dispatch(command: Command): Promise<void> {
-    const handler = this.handlers.get(command.commandName);
+    const handler = this.handlers.get(command.name);
     if (!handler) {
       throw new CommandNotRegisteredError(command);
     }
@@ -16,19 +16,19 @@ export class InMemoryCommandBus implements CommandBus {
   }
 
   register<C extends Command>(handler: CommandHandler<C>): void {
-    const { commandName } = handler.subscribedTo();
-    const existingHandler = this.handlers.get(commandName);
+    const command = handler.subscribedTo();
+    const existingHandler = this.handlers.get(command.name);
     if (existingHandler) {
       if (existingHandler.constructor.name === handler.constructor.name) {
         return;
       }
-      throw new MultipleCommandHandlersError(commandName);
+      throw new MultipleCommandHandlersError(command.constructor.name);
     }
-    this.handlers.set(commandName, handler);
+    this.handlers.set(command.name, handler);
   }
 
   unregister<C extends Command>(handler: CommandHandler<C>): void {
-    const { commandName } = handler.subscribedTo();
-    this.handlers.delete(commandName);
+    const command = handler.subscribedTo();
+    this.handlers.delete(command.name);
   }
 }

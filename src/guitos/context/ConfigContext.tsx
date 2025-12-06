@@ -1,5 +1,5 @@
-import { useBusesContext } from "@guitos/context/BusesContext";
-import { useReactToEvents } from "@guitos/hooks/useEventBus";
+import { useReactToEvents } from "@guitos/hooks/useReactToEvents";
+import { queryBus } from "@guitos/infrastructure/buses";
 import { UserPreferencesQuery } from "@guitos/userPreferences/application/readPreferences/userPreferencesQuery";
 import type { UserPreferencesResponse } from "@guitos/userPreferences/application/readPreferences/userPreferencesResponse";
 import { Currency } from "@guitos/userPreferences/domain/currency";
@@ -35,7 +35,6 @@ function useConfig() {
 }
 
 function ConfigProvider({ children }: PropsWithChildren) {
-  const { queryBus } = useBusesContext();
   const [userOptions, setUserOptions] = useState<UserPreferences>(
     new UserPreferences(
       new Currency("USD"),
@@ -65,8 +64,9 @@ function ConfigProvider({ children }: PropsWithChildren) {
         ),
       );
     }
+
     readUserPreferences();
-  }, [userPreferencesChanged, queryBus]);
+  }, [userPreferencesChanged]);
 
   return (
     <ConfigContext value={{ userOptions, intlConfig }}>
