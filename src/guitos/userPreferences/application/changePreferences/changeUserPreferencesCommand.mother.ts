@@ -17,6 +17,7 @@ export class ChangeUserPreferencesCommandMother {
     overwrites?: Partial<Primitives<ChangeUserPreferencesCommand>>,
   ): ChangeUserPreferencesCommand {
     return ChangeUserPreferencesCommandMother.create({
+      name: ChangeUserPreferencesCommand.name,
       currency: CurrencyMother.random().value,
       locale: LocaleMother.random().value,
       ...overwrites,

@@ -42,6 +42,10 @@ export class ObjectMother {
     return faker.date.recent();
   }
 
+  static randomElementFromList<T>(list: T[]): T {
+    return faker.helpers.arrayElement(list);
+  }
+
   static randomElementsFromList<T>(list: T[]): T[] {
     return faker.helpers.arrayElements(list);
   }

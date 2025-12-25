@@ -29,7 +29,7 @@ describe("userPreferencesReader", () => {
 
     const actual = await handler.handle(query);
 
-    expect(actual).toEqual(expected);
+    expect(actual).toStrictEqual(expected);
   });
 
   it("should return existing UserPreferences", async () => {
@@ -54,7 +54,7 @@ describe("userPreferencesReader", () => {
 
     const actual = await handler.handle(query);
 
-    expect(actual).toEqual(expected);
+    expect(actual).toStrictEqual(expected);
   });
 
   it("should publish an UserPreferencesChangedDomainEvent", async () => {

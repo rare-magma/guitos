@@ -1,5 +1,5 @@
 import type { Budget } from "@guitos/domain/budget";
-import type { ItemOperation } from "@guitos/domain/calculationHistoryItem";
+import { MathOperation } from "@guitos/operations/domain/mathOperation";
 import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
 import { prompt } from "@guitos/sections/NavBar/prompt";
@@ -15,7 +15,7 @@ export function roundBig(number: Big, precision: number): number {
 export function calc(
   itemValue: number,
   change: number,
-  operation: ItemOperation,
+  operation: MathOperation,
 ): number {
   let total = 0;
   const isActionableChange = !Number.isNaN(itemValue) && change > 0;
@@ -27,16 +27,16 @@ export function calc(
   let newValue = Big(itemValue);
   const changeValue = Big(change);
   switch (operation) {
-    case "add":
+    case MathOperation.Add:
       newValue = newValue.add(changeValue);
       break;
-    case "subtract":
+    case MathOperation.Subtract:
       newValue = newValue.sub(changeValue);
       break;
-    case "multiply":
+    case MathOperation.Multiply:
       newValue = newValue.mul(changeValue);
       break;
-    case "divide":
+    case MathOperation.Divide:
       newValue = newValue.div(changeValue);
       break;
     default:

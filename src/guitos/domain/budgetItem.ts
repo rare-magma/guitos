@@ -1,19 +1,27 @@
 import type { Primitives } from "@shared/domain/primitives";
 import Big from "big.js";
 import { roundBig } from "../../utils";
+import { AggregateRoot } from "@shared/domain/aggregateRoot";
+import { BudgetItemCreatedDomainEvent } from "@guitos/domain/budgetItemCreatedDomainEvent";
 
-export class BudgetItem {
+export class BudgetItem extends AggregateRoot {
   id: number;
   name: string;
   value: number;
 
   constructor(id: number, name: string, value: number) {
+    super();
+
     this.id = id;
     this.name = name;
     this.value = value;
   }
 
   static create(): BudgetItem {
+    const newBudgetItem = new BudgetItem(1, "", 0);
+    newBudgetItem.record(
+      new BudgetItemCreatedDomainEvent(newBudgetItem.toPrimitives()),
+    );
     return new BudgetItem(1, "", 0);
   }
 
