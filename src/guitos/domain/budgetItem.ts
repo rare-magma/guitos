@@ -1,6 +1,6 @@
+import type { Primitives } from "@shared/domain/primitives";
 import Big from "big.js";
 import { roundBig } from "../../utils";
-import type { Primitives } from "@shared/domain/primitives";
 
 export class BudgetItem {
   id: number;

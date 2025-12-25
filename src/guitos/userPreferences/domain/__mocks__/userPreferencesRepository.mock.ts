@@ -1,5 +1,3 @@
-import type { Currency } from "@guitos/userPreferences/domain/currency";
-import type { Locale } from "@guitos/userPreferences/domain/locale";
 import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import type { UserPreferencesRepository } from "@guitos/userPreferences/domain/userPreferencesRepository";
 import type { Nullable } from "@shared/domain/nullable";
