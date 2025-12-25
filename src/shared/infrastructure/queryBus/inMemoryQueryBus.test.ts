@@ -20,13 +20,15 @@ class HandledQuery extends Query {
   }
 }
 
-class MyQueryHandler implements QueryHandler<Query, Response> {
+class MyQueryResponse extends Response {}
+
+class MyQueryHandler implements QueryHandler<Query, MyQueryResponse> {
   subscribedTo(): HandledQuery {
     return HandledQuery;
   }
 
-  handle(_query: HandledQuery): Promise<Response> {
-    return Promise.resolve({});
+  handle(_query: HandledQuery): Promise<MyQueryResponse> {
+    return Promise.resolve(new MyQueryResponse());
   }
 }
 
@@ -39,8 +41,6 @@ class AnotherQueryHandler implements QueryHandler<Query, Response> {
     return Promise.resolve({});
   }
 }
-
-class MyQueryResponse extends Response {}
 
 describe("inMemoryQueryBus", () => {
   describe("ask()", () => {
@@ -73,7 +73,7 @@ describe("inMemoryQueryBus", () => {
       queryBus.register(myQueryHandler);
 
       const actual = await queryBus.ask(handledQuery);
-      expect(actual).toEqual(expected);
+      expect(actual).toStrictEqual(expected);
     });
   });
 
