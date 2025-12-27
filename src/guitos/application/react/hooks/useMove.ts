@@ -1,14 +1,15 @@
 import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
-import { saveLastOpenedBudget } from "@guitos/application/react/utils";
+import { PersistLastOpenedBudgetCommand } from "@guitos/contexts/budget/application/saveLastOpenedBudget/persistLastOpenedBudgetCommand";
 import type { Budget } from "@guitos/contexts/budget/domain/budget";
+import { commandBus } from "@shared/infrastructure/buses";
 import { useLocation } from "wouter";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();
   const [_, navigate] = useLocation();
 
-  function select(selectedBudget: SearchOption[] | undefined) {
+  async function select(selectedBudget: SearchOption[] | undefined) {
     if (selectedBudget && budgetList) {
       const filteredList = budgetList.filter(
         (item: Budget) => item.id === selectedBudget[0].id,
@@ -25,7 +26,13 @@ export function useMove() {
           }
         }
       }, 100);
-      saveLastOpenedBudget(selectedBudget[0].name, navigate);
+
+      navigate(`/${selectedBudget[0].name}`);
+      await commandBus.dispatch(
+        new PersistLastOpenedBudgetCommand({
+          budgetName: selectedBudget[0].name,
+        }),
+      );
     }
   }
 

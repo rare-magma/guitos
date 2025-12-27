@@ -4,7 +4,7 @@ import { Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { AsyncTypeahead } from "react-bootstrap-typeahead";
 import "react-bootstrap-typeahead/css/Typeahead.bs5.css";
 import "react-bootstrap-typeahead/css/Typeahead.css";
-import { focusRef, getLabelKey } from "@guitos/application/react/utils";
+import { getLabelKey } from "@guitos/application/react/utils";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -78,11 +78,11 @@ export function NavBar() {
     preventDefault: true,
   });
 
-  useHotkeys(["/", "f"], (e) => !e.repeat && focusRef(searchRef), {
+  useHotkeys(["/", "f"], (e) => !e.repeat && searchRef.current?.focus(), {
     preventDefault: true,
   });
 
-  useHotkeys("n", (e) => !e.repeat && focusRef(nameRef), {
+  useHotkeys("n", (e) => !e.repeat && nameRef.current?.focus(), {
     preventDefault: true,
   });
 

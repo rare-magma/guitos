@@ -5,8 +5,6 @@ import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
 import type { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
 import Big from "big.js";
-import type { RefObject } from "react";
-import type Typeahead from "react-bootstrap-typeahead/types/core/Typeahead";
 
 export function roundBig(number: Big, precision: number): number {
   return Big(number).round(precision, 1).toNumber();
@@ -63,12 +61,6 @@ export function intlFormat(
         currencyDisplay: "symbol",
       }).format(amount)
     : amount.toString();
-}
-
-export function focusRef(ref: RefObject<HTMLInputElement | Typeahead | null>) {
-  if (ref.current) {
-    ref.current.focus();
-  }
 }
 
 export function createBudgetNameList(list: Budget[]): SearchOption[] {
@@ -137,14 +129,6 @@ export function getLabelKey(option: unknown): string {
 export function getLabelKeyFilteredItem(option: unknown): string {
   const label = option as FilteredItem;
   return `${label.item} (${label.name} ${label.type.toLowerCase()})`;
-}
-
-export function saveLastOpenedBudget(
-  name: string,
-  navigateFn: (string: string) => void,
-) {
-  navigateFn(`/${name}`);
-  localStorage.setItem("guitos_lastOpenedBudget", name);
 }
 
 export function generatePrompt(jsonFile: string) {

@@ -22,7 +22,6 @@ import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import { useDB } from "@guitos/application/react/hooks/useDB";
 import { Chart } from "@guitos/application/react/sections/Chart/Chart";
 import {
-  focusRef,
   getLabelKeyFilteredItem,
   getNestedValues,
 } from "@guitos/application/react/utils";
@@ -73,7 +72,7 @@ export default function ChartsPage({ onShowGraphs }: GraphProps) {
     preventDefault: true,
   });
 
-  useHotkeys(["/", "f"], (e) => !e.repeat && focusRef(filterRef), {
+  useHotkeys(["/", "f"], (e) => !e.repeat && filterRef.current?.focus(), {
     preventDefault: true,
   });
 

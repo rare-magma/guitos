@@ -24,11 +24,7 @@ import "./StatCard.css";
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
 import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import { useConfig } from "@guitos/application/react/context/ConfigContext";
-import {
-  focusRef,
-  parseLocaleNumber,
-  roundBig,
-} from "@guitos/application/react/utils";
+import { parseLocaleNumber, roundBig } from "@guitos/application/react/utils";
 import type { Budget } from "@guitos/contexts/budget/domain/budget";
 
 interface StatCardProps {
@@ -48,10 +44,10 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
   const goalRef = useRef<HTMLInputElement>(null);
   const reservesRef = useRef<HTMLInputElement>(null);
 
-  useHotkeys("g", (e) => !e.repeat && focusRef(goalRef), {
+  useHotkeys("g", (e) => !e.repeat && goalRef.current?.focus(), {
     preventDefault: true,
   });
-  useHotkeys("e", (e) => !e.repeat && focusRef(reservesRef), {
+  useHotkeys("e", (e) => !e.repeat && reservesRef.current?.focus(), {
     preventDefault: true,
   });
 
