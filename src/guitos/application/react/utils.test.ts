@@ -1,3 +1,5 @@
+import type { FilteredItem } from "@guitos/application/react/sections/ChartsPage/ChartsPage";
+import { prompt } from "@guitos/application/react/sections/NavBar/prompt";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
 import { Currency } from "@guitos/contexts/userPreferences/domain/currency";
@@ -7,8 +9,6 @@ import { chromeLocalesList } from "@guitos/contexts/userPreferences/infrastructu
 import { currenciesMap } from "@guitos/contexts/userPreferences/infrastructure/lists/currenciesMap";
 import { firefoxLocalesList } from "@guitos/contexts/userPreferences/infrastructure/lists/firefoxLocalesList";
 import { LocalForageUserPreferencesRepository } from "@guitos/contexts/userPreferences/infrastructure/localForageUserPreferencesRepository";
-import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
-import { prompt } from "@guitos/sections/NavBar/prompt";
 import { Uuid } from "@shared/domain/uuid";
 import { CurrentTimeClock } from "@shared/infrastructure/currentTimeClock";
 import Big from "big.js";

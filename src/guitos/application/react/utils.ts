@@ -1,9 +1,9 @@
+import type { FilteredItem } from "@guitos/application/react/sections/ChartsPage/ChartsPage";
+import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
+import { prompt } from "@guitos/application/react/sections/NavBar/prompt";
 import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
 import type { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
-import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
-import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
-import { prompt } from "@guitos/sections/NavBar/prompt";
 import Big from "big.js";
 import type { RefObject } from "react";
 import type Typeahead from "react-bootstrap-typeahead/types/core/Typeahead";

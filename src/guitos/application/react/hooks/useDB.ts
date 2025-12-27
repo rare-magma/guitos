@@ -6,14 +6,18 @@ import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import { useErrorContext } from "@guitos/application/react/context/ErrorContext";
 import { useLoadingContext } from "@guitos/application/react/context/LoadingContext";
 import { useNotificationContext } from "@guitos/application/react/context/NotificationContext";
-import { Budget } from "@guitos/contexts/budget/domain/budget";
-import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
-import { localForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
 import type {
   Filter,
   FilteredItem,
-} from "@guitos/sections/ChartsPage/ChartsPage";
-import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
+} from "@guitos/application/react/sections/ChartsPage/ChartsPage";
+import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
+import {
+  createBudgetNameList,
+  saveLastOpenedBudget,
+} from "@guitos/application/react/utils";
+import { Budget } from "@guitos/contexts/budget/domain/budget";
+import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
+import { localForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
 import { Uuid } from "@shared/domain/uuid";
 import { produce } from "immer";
 import Papa from "papaparse";
@@ -21,7 +25,6 @@ import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useLocation, useParams } from "wouter";
-import { createBudgetNameList, saveLastOpenedBudget } from "../utils";
 
 const budgetRepository = new localForageBudgetRepository();
 

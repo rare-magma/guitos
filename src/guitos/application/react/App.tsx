@@ -7,7 +7,7 @@ import { ConfigProvider } from "@guitos/application/react/context/ConfigContext"
 import { ErrorProvider } from "@guitos/application/react/context/ErrorContext";
 import { LoadingProvider } from "@guitos/application/react/context/LoadingContext";
 import { NotificationProvider } from "@guitos/application/react/context/NotificationContext";
-import { BudgetPage } from "@guitos/sections/Budget/BudgetPage";
+import { BudgetPage } from "@guitos/application/react/sections/Budget/BudgetPage";
 
 export function App() {
   return (

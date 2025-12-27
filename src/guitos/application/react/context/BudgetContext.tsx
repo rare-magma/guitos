@@ -1,7 +1,7 @@
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
 import { useLoadingContext } from "@guitos/application/react/context/LoadingContext";
+import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
 import type { Budget } from "@guitos/contexts/budget/domain/budget";
-import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
 import {
   createContext,
   type PropsWithChildren,

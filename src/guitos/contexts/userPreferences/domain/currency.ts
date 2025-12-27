@@ -1,6 +1,6 @@
+import { currenciesList } from "@guitos/contexts/userPreferences/infrastructure/lists/currenciesList";
 import { InvalidArgument } from "@shared/domain/invalidArgument";
 import { StringValueObject } from "@shared/domain/stringValueObject";
-import { currenciesList } from "../infrastructure/lists/currenciesList";
 
 export class Currency extends StringValueObject {
   static readonly default = "USD";
