@@ -2,7 +2,7 @@ import { ConfigProvider } from "@guitos/application/react/context/ConfigContext"
 import { CalculateButton } from "@guitos/application/react/sections/CalculateButton/CalculateButton";
 import { BudgetItemsMother } from "@guitos/contexts/budget/domain/budgetItem.mother";
 import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
-import { QueryBusMock } from "@shared/__mocks__/queryBus.mock";
+import { queryBus } from "@shared/infrastructure/buses";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
@@ -10,7 +10,7 @@ import { describe, expect, it, vi } from "vitest";
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
   const comp = (
-    <ConfigProvider queryBus={new QueryBusMock()}>
+    <ConfigProvider queryBus={queryBus}>
       <CalculateButton
         itemForm={BudgetItemsMother.itemForm1()}
         label="Expense"

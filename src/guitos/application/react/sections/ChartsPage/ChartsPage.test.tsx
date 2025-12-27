@@ -1,16 +1,12 @@
 import { ConfigProvider } from "@guitos/application/react/context/ConfigContext";
 import ChartsPage from "@guitos/application/react/sections/ChartsPage/ChartsPage";
-import { UserPreferencesResponseMother } from "@guitos/contexts/userPreferences/application/readPreferences/userPreferencesResponse.mother";
-import { QueryBusMock } from "@shared/__mocks__/queryBus.mock";
-import { render, screen } from "@testing-library/react";
+import { queryBus } from "@shared/infrastructure/buses";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("ChartsPage", () => {
   const onShowGraphs = vi.fn();
-
-  const queryBus = new QueryBusMock();
-  queryBus.whenAskThenReturn(UserPreferencesResponseMother.default());
 
   const comp = (
     <ConfigProvider queryBus={queryBus}>
@@ -35,7 +31,9 @@ describe("ChartsPage", () => {
 
   it("matches snapshot", () => {
     render(comp);
-    expect(comp).toMatchSnapshot();
+    waitFor(() => {
+      expect(comp).toMatchSnapshot();
+    });
   });
 
   it("renders initial state", () => {

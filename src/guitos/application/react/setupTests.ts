@@ -6,6 +6,7 @@ import "@testing-library/jest-dom/vitest";
 import { randomUUID } from "node:crypto";
 import type { BudgetContextInterface } from "@guitos/application/react/context/BudgetContext";
 import * as AppBudgetContext from "@guitos/application/react/context/BudgetContext";
+import { registerHandlers } from "@guitos/application/react/registerHandlers";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { cleanup } from "@testing-library/react";
 import { createElement } from "react";
@@ -96,3 +97,5 @@ export const testBudgetContext: BudgetContextInterface = {
   canUndo: false,
   canRedo: false,
 };
+
+registerHandlers();

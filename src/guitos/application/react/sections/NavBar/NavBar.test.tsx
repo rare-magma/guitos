@@ -6,6 +6,7 @@ import {
   testEmptyBudgetContext,
 } from "@guitos/application/react/setupTests";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
+import { queryBus } from "@shared/infrastructure/buses";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -23,7 +24,7 @@ describe("NavBar", () => {
   });
 
   const comp = (
-    <ConfigProvider>
+    <ConfigProvider queryBus={queryBus}>
       <NavBar />
     </ConfigProvider>
   );

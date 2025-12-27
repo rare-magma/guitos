@@ -3,7 +3,11 @@ import {
   useConfig,
 } from "@guitos/application/react/context/ConfigContext";
 import { ChangeUserPreferencesCommand } from "@guitos/contexts/userPreferences/application/changePreferences/changeUserPreferencesCommand";
-import { commandBus } from "@shared/infrastructure/buses";
+import { UserPreferencesQueryHandler } from "@guitos/contexts/userPreferences/application/readPreferences/userPreferencesQueryHandler";
+import { UserPreferencesReader } from "@guitos/contexts/userPreferences/application/readPreferences/userPreferencesReader";
+import { LocalForageUserPreferencesRepository } from "@guitos/contexts/userPreferences/infrastructure/localForageUserPreferencesRepository";
+import { commandBus, queryBus } from "@shared/infrastructure/buses";
+import { CurrentTimeClock } from "@shared/infrastructure/currentTimeClock";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
@@ -31,9 +35,17 @@ function TestComponent() {
 }
 
 describe("ConfigContext", () => {
+  const queryHandler = new UserPreferencesQueryHandler(
+    new UserPreferencesReader(
+      new CurrentTimeClock(),
+      new LocalForageUserPreferencesRepository(),
+    ),
+  );
+  queryBus.register(queryHandler);
+
   it("provides default config values", () => {
     render(
-      <ConfigProvider>
+      <ConfigProvider queryBus={queryBus}>
         <TestComponent />
       </ConfigProvider>,
     );
@@ -43,7 +55,7 @@ describe("ConfigContext", () => {
 
   it("allows updating userOptions", () => {
     render(
-      <ConfigProvider>
+      <ConfigProvider queryBus={queryBus}>
         <TestComponent />
       </ConfigProvider>,
     );

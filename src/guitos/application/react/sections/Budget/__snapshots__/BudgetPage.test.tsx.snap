@@ -3,8 +3,105 @@
 exports[`BudgetPage > matches snapshot 1`] = `
 <ConfigProvider
   queryBus={
-    QueryBusMock {
-      "mockAsk": [MockFunction spy],
+    InMemoryQueryBus {
+      "handlers": Map {
+        "guitos.userpreferences.get.1" => UserPreferencesQueryHandler {
+          "reader": UserPreferencesReader {
+            "clock": CurrentTimeClock {},
+            "repository": LocalForageUserPreferencesRepository {
+              "userPreferencesDB": LocalForage {
+                "INDEXEDDB": "asyncStorage",
+                "LOCALSTORAGE": "localStorageWrapper",
+                "WEBSQL": "webSQLStorage",
+                "_config": {
+                  "description": "",
+                  "driver": "localStorageWrapper",
+                  "name": "guitos",
+                  "size": 4980736,
+                  "storeName": "userPreferences",
+                  "version": 1,
+                },
+                "_dbInfo": null,
+                "_defaultConfig": {
+                  "description": "",
+                  "driver": [
+                    "asyncStorage",
+                    "webSQLStorage",
+                    "localStorageWrapper",
+                  ],
+                  "name": "localforage",
+                  "size": 4980736,
+                  "storeName": "keyvaluepairs",
+                  "version": 1,
+                },
+                "_driver": "localStorageWrapper",
+                "_driverSet": Promise {},
+                "_initDriver": [Function],
+                "_ready": null,
+                "clear": [Function],
+                "dropInstance": [Function],
+                "getItem": [Function],
+                "iterate": [Function],
+                "key": [Function],
+                "keys": [Function],
+                "length": [Function],
+                "removeItem": [Function],
+                "setItem": [Function],
+              },
+            },
+          },
+        },
+        "guitos.operations.find.1" => FindOperationsQueryHandler {
+          "finder": OperationsFinder {
+            "repository": LocalForageOperationsRepository {
+              "operationsDb": LocalForage {
+                "INDEXEDDB": "asyncStorage",
+                "LOCALSTORAGE": "localStorageWrapper",
+                "WEBSQL": "webSQLStorage",
+                "_config": {
+                  "description": "",
+                  "driver": "localStorageWrapper",
+                  "name": "guitos",
+                  "size": 4980736,
+                  "storeName": "itemOperations",
+                  "version": 1,
+                },
+                "_dbInfo": null,
+                "_defaultConfig": {
+                  "description": "",
+                  "driver": [
+                    "asyncStorage",
+                    "webSQLStorage",
+                    "localStorageWrapper",
+                  ],
+                  "name": "localforage",
+                  "size": 4980736,
+                  "storeName": "keyvaluepairs",
+                  "version": 1,
+                },
+                "_driver": "localStorageWrapper",
+                "_driverSet": Promise {},
+                "_initDriver": [Function],
+                "_ready": null,
+                "clear": [Function],
+                "dropInstance": [Function],
+                "getItem": [Function],
+                "iterate": [Function],
+                "key": [Function],
+                "keys": [Function],
+                "length": [Function],
+                "removeItem": [Function],
+                "setItem": [Function],
+              },
+            },
+          },
+        },
+        "guitos.lastopenedbudget.find.1" => LastOpenedBudgetQueryHandler {
+          "finder": LastOpenedBudgetFinder {
+            "repository": LocalStorageLastOpenedBudgetRepository {},
+          },
+        },
+      },
     }
   }
 >

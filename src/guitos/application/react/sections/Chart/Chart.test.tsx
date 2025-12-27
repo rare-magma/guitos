@@ -1,14 +1,11 @@
 import { ConfigProvider } from "@guitos/application/react/context/ConfigContext";
 import { Chart } from "@guitos/application/react/sections/Chart/Chart";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
-import { UserPreferencesResponseMother } from "@guitos/contexts/userPreferences/application/readPreferences/userPreferencesResponse.mother";
-import { QueryBusMock } from "@shared/__mocks__/queryBus.mock";
+import { queryBus } from "@shared/infrastructure/buses";
 import { render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("Chart", () => {
-  const queryBus = new QueryBusMock();
-  queryBus.whenAskThenReturn(UserPreferencesResponseMother.default());
   const comp = (
     <ConfigProvider queryBus={queryBus}>
       <Chart
@@ -42,7 +39,9 @@ describe("Chart", () => {
 
   it("matches snapshot", () => {
     render(comp);
-    expect(comp).toMatchSnapshot();
+    waitFor(() => {
+      expect(comp).toMatchSnapshot();
+    });
   });
 
   it("renders initial state", () => {

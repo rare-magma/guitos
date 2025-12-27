@@ -9,10 +9,9 @@ import {
 } from "@guitos/application/react/setupTests";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { localForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
-import { QueryBusMock } from "@shared/__mocks__/queryBus.mock";
+import { queryBus } from "@shared/infrastructure/buses";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { act } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 const budgetRepository = new localForageBudgetRepository();
@@ -20,7 +19,7 @@ const budgetRepository = new localForageBudgetRepository();
 describe("BudgetPage", () => {
   const setNotificationsMock = vi.fn();
   const comp = (
-    <ConfigProvider queryBus={new QueryBusMock()}>
+    <ConfigProvider queryBus={queryBus}>
       <BudgetPage />
     </ConfigProvider>
   );
@@ -35,9 +34,7 @@ describe("BudgetPage", () => {
     const newButton = await screen.findAllByRole("button", {
       name: "new budget",
     });
-    await act(async () => {
-      await userEvent.click(newButton[0]);
-    });
+    await userEvent.click(newButton[0]);
     expect(screen.getByLabelText("delete budget")).toBeVisible();
   });
 
@@ -118,9 +115,7 @@ describe("BudgetPage", () => {
   it("responds to show graphs keyboard shortcut", async () => {
     render(comp);
     const header = await screen.findByTestId("header");
-    await act(async () => {
-      await userEvent.type(header, "i");
-    });
+    await userEvent.type(header, "i");
     for (const element of screen.getAllByRole("status")) {
       expect(element).toBeVisible();
     }
