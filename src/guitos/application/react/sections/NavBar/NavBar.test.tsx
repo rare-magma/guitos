@@ -1,3 +1,4 @@
+import { ConfigProvider } from "@guitos/application/react/context/ConfigContext";
 import { NavBar } from "@guitos/application/react/sections/NavBar/NavBar";
 import {
   budgetContextSpy,
@@ -21,7 +22,11 @@ describe("NavBar", () => {
     windowSpy.mockClear();
   });
 
-  const comp = <NavBar />;
+  const comp = (
+    <ConfigProvider>
+      <NavBar />
+    </ConfigProvider>
+  );
 
   it("matches snapshot", () => {
     render(comp);

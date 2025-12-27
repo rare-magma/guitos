@@ -4,6 +4,7 @@ import { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPre
 import { DatetimeMother } from "@shared/domain/datetime.mother";
 import { ObjectMother } from "@shared/domain/objectMother.mother";
 import type { Primitives } from "@shared/domain/primitives";
+import type { IntlConfig } from "react-currency-input-field";
 
 export class UserPreferencesMother {
   static create(primitives: Primitives<UserPreferences>): UserPreferences {
@@ -45,5 +46,12 @@ export class UserPreferencesMother {
       locale: LocaleMother.spanish().value,
       createdAt: DatetimeMother.random().value,
     });
+  }
+
+  static toIntlConfig(prefs: UserPreferences): IntlConfig {
+    return {
+      locale: prefs.locale.value,
+      currency: prefs.currency.value,
+    };
   }
 }

@@ -56,11 +56,13 @@ export function intlFormat(
   amount: number,
   userOptions?: UserPreferences,
 ): string {
-  return new Intl.NumberFormat(userOptions?.locale.value, {
-    style: "currency",
-    currency: userOptions?.currency.value,
-    currencyDisplay: "symbol",
-  }).format(amount);
+  return userOptions
+    ? new Intl.NumberFormat(userOptions?.locale.value, {
+        style: "currency",
+        currency: userOptions?.currency.value,
+        currencyDisplay: "symbol",
+      }).format(amount)
+    : amount.toString();
 }
 
 export function focusRef(ref: RefObject<HTMLInputElement | Typeahead | null>) {

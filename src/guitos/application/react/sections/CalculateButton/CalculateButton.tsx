@@ -170,7 +170,7 @@ export function CalculateButton({
                 id={`${label}-${itemForm.id}-operation-value`}
                 key={`item-${itemForm.id}-${label}-operation-value`}
                 className="text-end form-control straight-corners fixed-width-font"
-                aria-label={`${operation}`}
+                aria-label={`${operation.name}`}
                 name="item-operate-value"
                 intlConfig={intlConfig}
                 defaultValue={0}

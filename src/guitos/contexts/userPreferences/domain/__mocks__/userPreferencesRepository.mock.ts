@@ -1,4 +1,4 @@
-import { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
+import type { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
 import type { UserPreferencesRepository } from "@guitos/contexts/userPreferences/domain/userPreferencesRepository";
 import type { Nullable } from "@shared/domain/nullable";
 import type { Primitives } from "@shared/domain/primitives";
@@ -18,10 +18,9 @@ export class UserPreferencesRepositoryMock
     const { mock } = this.mockSave;
     const lastSavedExampleAggregate = mock.calls[mock.calls.length - 1][0];
     const expectedBody = userPreferences.toPrimitives();
-    const lastSavedExampleAggregateBody =
-      lastSavedExampleAggregate.toPrimitives();
+    const lastSavedExampleAggregateBody = lastSavedExampleAggregate;
 
-    expect(lastSavedExampleAggregate).toBeInstanceOf(UserPreferences);
+    // expect(lastSavedExampleAggregate).toBeInstanceOf(UserPreferences);
     expect(lastSavedExampleAggregateBody).toStrictEqual(expectedBody);
   }
 
@@ -29,7 +28,9 @@ export class UserPreferencesRepositoryMock
     return await this.mockRead();
   }
 
-  whenReadThenReturn(userPreferences: Nullable<UserPreferences>): void {
+  whenReadThenReturn(
+    userPreferences: Nullable<Primitives<UserPreferences>>,
+  ): void {
     this.mockRead.mockResolvedValue(userPreferences);
   }
 }

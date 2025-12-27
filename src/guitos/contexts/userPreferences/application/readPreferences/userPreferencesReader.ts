@@ -6,21 +6,14 @@ import { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPre
 import type { UserPreferencesRepository } from "@guitos/contexts/userPreferences/domain/userPreferencesRepository";
 import type { Clock } from "@shared/domain/clock";
 import { Datetime } from "@shared/domain/datetime";
-import type { EventBus } from "@shared/domain/eventBus/eventBus";
 
 export class UserPreferencesReader {
   private readonly clock: Clock;
   private readonly repository: UserPreferencesRepository;
-  private readonly eventBus: EventBus;
 
-  constructor(
-    clock: Clock,
-    repository: UserPreferencesRepository,
-    eventBus: EventBus,
-  ) {
+  constructor(clock: Clock, repository: UserPreferencesRepository) {
     this.clock = clock;
     this.repository = repository;
-    this.eventBus = eventBus;
   }
 
   async run(_query: UserPreferencesQuery): Promise<UserPreferencesResponse> {
@@ -33,8 +26,6 @@ export class UserPreferencesReader {
           new Datetime(savedPreferences.createdAt),
         )
       : UserPreferences.default(this.clock.now());
-
-    await this.eventBus.publish(preferences.pullDomainEvents());
 
     return new UserPreferencesResponse(preferences.toPrimitives());
   }

@@ -6,7 +6,7 @@ import { Locale } from "@guitos/contexts/userPreferences/domain/locale";
 import { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
 import { UserPreferencesChangedDomainEvent } from "@guitos/contexts/userPreferences/domain/userPreferencesChangedDomainEvent";
 import { Datetime } from "@shared/domain/datetime";
-import { queryBus } from "@shared/infrastructure/buses";
+import type { QueryBus } from "@shared/domain/queryBus/queryBus";
 import {
   createContext,
   type PropsWithChildren,
@@ -34,7 +34,10 @@ function useConfig() {
   return context;
 }
 
-function ConfigProvider({ children }: PropsWithChildren) {
+function ConfigProvider({
+  queryBus,
+  children,
+}: PropsWithChildren<{ queryBus: QueryBus }>) {
   const [userOptions, setUserOptions] = useState<UserPreferences>();
   const intlConfig: IntlConfig | undefined = userOptions
     ? {

@@ -1,0 +1,39 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChartTooltip > matches snapshot 1`] = `
+<ConfigProvider
+  queryBus={
+    QueryBusMock {
+      "mockAsk": [MockFunction spy] {
+        "calls": [
+          [
+            guitos.userpreferences.get.1 {
+              "name": "guitos.userpreferences.get.1",
+            },
+          ],
+        ],
+        "results": [
+          {
+            "type": "return",
+            "value": Promise {},
+          },
+        ],
+      },
+    }
+  }
+>
+  <ChartTooltip
+    active={true}
+    label="label"
+    payload={
+      [
+        {
+          "name": "name",
+          "unit": "$",
+          "value": 123,
+        },
+      ]
+    }
+  />
+</ConfigProvider>
+`;

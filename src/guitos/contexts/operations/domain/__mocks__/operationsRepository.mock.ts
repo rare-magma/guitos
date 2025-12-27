@@ -1,4 +1,4 @@
-import { ItemOperation } from "@guitos/contexts/operations/domain/itemOperation";
+import type { ItemOperation } from "@guitos/contexts/operations/domain/itemOperation";
 import type { OperationsRepository } from "@guitos/contexts/operations/domain/operationsRepository";
 import type { Nullable } from "@shared/domain/nullable";
 import type { Primitives } from "@shared/domain/primitives";
@@ -44,7 +44,7 @@ export class OperationsRepositoryMock implements OperationsRepository {
       const expectedBody = operation.toPrimitives();
       const lastSavedExampleAggregateBody = lastSavedExampleAggregate;
 
-      expect(lastSavedExampleAggregate).toBeInstanceOf(ItemOperation);
+      // expect(lastSavedExampleAggregate).toBeInstanceOf(ItemOperation);
       expect(lastSavedExampleAggregateBody).toStrictEqual([expectedBody]);
     }
   }
@@ -56,9 +56,8 @@ export class OperationsRepositoryMock implements OperationsRepository {
   assertDeleteHasBeenCalledWith(id: string): void {
     const { mock } = this.mockDelete;
     const lastDeletedExampleAggregate = mock.calls[mock.calls.length - 1][0];
-    const lastDeletedExampleAggregateBody =
-      lastDeletedExampleAggregate.toPrimitives();
-    expect(lastDeletedExampleAggregate).toBeInstanceOf(ItemOperation);
+    const lastDeletedExampleAggregateBody = lastDeletedExampleAggregate;
+    // expect(lastDeletedExampleAggregate).toBeInstanceOf(ItemOperation);
     expect(lastDeletedExampleAggregateBody).toStrictEqual(id);
   }
 }

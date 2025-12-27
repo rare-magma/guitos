@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Chart > matches snapshot 1`] = `
+<ConfigProvider
+  queryBus={
+    QueryBusMock {
+      "mockAsk": [MockFunction spy] {
+        "calls": [
+          [
+            guitos.userpreferences.get.1 {
+              "name": "guitos.userpreferences.get.1",
+            },
+          ],
+        ],
+        "results": [
+          {
+            "type": "return",
+            "value": Promise {},
+          },
+        ],
+      },
+    }
+  }
+>
+  <Chart
+    areaDataKey1="revenue"
+    areaFill1="highlight"
+    areaStroke1="highlight"
+    header="chart header"
+    legend1="median revenue"
+    legendValues1={
+      [
+        100,
+        200,
+        342883.86,
+      ]
+    }
+    tooltipKey1="tooltipKey1"
+  />
+</ConfigProvider>
+`;

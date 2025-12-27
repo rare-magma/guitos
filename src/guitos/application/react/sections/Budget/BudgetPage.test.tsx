@@ -1,3 +1,4 @@
+import { ConfigProvider } from "@guitos/application/react/context/ConfigContext";
 import { BudgetPage } from "@guitos/application/react/sections/Budget/BudgetPage";
 import {
   budgetContextSpy,
@@ -8,6 +9,7 @@ import {
 } from "@guitos/application/react/setupTests";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { localForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
+import { QueryBusMock } from "@shared/__mocks__/queryBus.mock";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { act } from "react";
@@ -17,7 +19,11 @@ const budgetRepository = new localForageBudgetRepository();
 
 describe("BudgetPage", () => {
   const setNotificationsMock = vi.fn();
-  const comp = <BudgetPage />;
+  const comp = (
+    <ConfigProvider queryBus={new QueryBusMock()}>
+      <BudgetPage />
+    </ConfigProvider>
+  );
 
   it("matches snapshot", () => {
     render(comp);

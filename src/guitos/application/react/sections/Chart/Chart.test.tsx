@@ -1,21 +1,28 @@
+import { ConfigProvider } from "@guitos/application/react/context/ConfigContext";
 import { Chart } from "@guitos/application/react/sections/Chart/Chart";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
-import { render, screen } from "@testing-library/react";
+import { UserPreferencesResponseMother } from "@guitos/contexts/userPreferences/application/readPreferences/userPreferencesResponse.mother";
+import { QueryBusMock } from "@shared/__mocks__/queryBus.mock";
+import { render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("Chart", () => {
+  const queryBus = new QueryBusMock();
+  queryBus.whenAskThenReturn(UserPreferencesResponseMother.default());
   const comp = (
-    <Chart
-      header={"chart header"}
-      tooltipKey1={"tooltipKey1"}
-      areaDataKey1={"revenue"}
-      areaStroke1={"highlight"}
-      areaFill1={"highlight"}
-      legend1={"median revenue"}
-      legendValues1={BudgetMother.testBudgetList().map((b) => {
-        return b.incomes.total;
-      })}
-    />
+    <ConfigProvider queryBus={queryBus}>
+      <Chart
+        header={"chart header"}
+        tooltipKey1={"tooltipKey1"}
+        areaDataKey1={"revenue"}
+        areaStroke1={"highlight"}
+        areaFill1={"highlight"}
+        legend1={"median revenue"}
+        legendValues1={BudgetMother.testBudgetList().map((b) => {
+          return b.incomes.total;
+        })}
+      />
+    </ConfigProvider>
   );
 
   beforeEach(() => {
@@ -40,8 +47,10 @@ describe("Chart", () => {
 
   it("renders initial state", () => {
     render(comp);
-    expect(screen.getByText("chart header")).toBeInTheDocument();
-    expect(screen.getByText("median revenue")).toBeInTheDocument();
-    expect(screen.getByDisplayValue("$200")).toBeInTheDocument();
+    waitFor(() => {
+      expect(screen.getByText("chart header")).toBeInTheDocument();
+      expect(screen.getByText("median revenue")).toBeInTheDocument();
+      expect(screen.getByDisplayValue("$200")).toBeInTheDocument();
+    });
   });
 });

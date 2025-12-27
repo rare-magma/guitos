@@ -1,11 +1,22 @@
+import { ConfigProvider } from "@guitos/application/react/context/ConfigContext";
 import ChartsPage from "@guitos/application/react/sections/ChartsPage/ChartsPage";
+import { UserPreferencesResponseMother } from "@guitos/contexts/userPreferences/application/readPreferences/userPreferencesResponse.mother";
+import { QueryBusMock } from "@shared/__mocks__/queryBus.mock";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("ChartsPage", () => {
   const onShowGraphs = vi.fn();
-  const comp = <ChartsPage onShowGraphs={onShowGraphs} />;
+
+  const queryBus = new QueryBusMock();
+  queryBus.whenAskThenReturn(UserPreferencesResponseMother.default());
+
+  const comp = (
+    <ConfigProvider queryBus={queryBus}>
+      <ChartsPage onShowGraphs={onShowGraphs} />
+    </ConfigProvider>
+  );
 
   beforeEach(() => {
     //@ts-expect-error

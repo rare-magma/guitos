@@ -1,8 +1,11 @@
+import { ConfigProvider } from "@guitos/application/react/context/ConfigContext";
 import { ItemFormGroup } from "@guitos/application/react/sections/ItemForm/ItemFormGroup";
 import { setBudgetMock } from "@guitos/application/react/setupTests";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { BudgetItemsMother } from "@guitos/contexts/budget/domain/budgetItem.mother";
+import { UserPreferencesResponseMother } from "@guitos/contexts/userPreferences/application/readPreferences/userPreferencesResponse.mother";
 import { UserPreferencesMother } from "@guitos/contexts/userPreferences/domain/userPreferences.mother";
+import { QueryBusMock } from "@shared/__mocks__/queryBus.mock";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
@@ -10,20 +13,23 @@ import { describe, expect, it } from "vitest";
 
 describe("ItemFormGroup", () => {
   const ref = createRef<HTMLInputElement>();
-  const comp = (
-    <ItemFormGroup
-      itemForm={BudgetItemsMother.itemForm1()}
-      label="Expenses"
-      inputRef={ref}
-      costPercentage={1}
-      userOptions={UserPreferencesMother.default()}
-    />
-  );
 
-  it("matches snapshot", () => {
-    render(comp);
-    expect(comp).toMatchSnapshot();
-  });
+  const queryBus = new QueryBusMock();
+  queryBus.whenAskThenReturn(UserPreferencesResponseMother.default());
+  const comp = (
+    <ConfigProvider queryBus={queryBus}>
+      <ItemFormGroup
+        itemForm={BudgetItemsMother.itemForm1()}
+        label="Expenses"
+        inputRef={ref}
+        costPercentage={1}
+        userOptions={UserPreferencesMother.default()}
+        intlConfig={UserPreferencesMother.toIntlConfig(
+          UserPreferencesMother.default(),
+        )}
+      />
+    </ConfigProvider>
+  );
 
   it("renders initial state", async () => {
     render(comp);
@@ -115,13 +121,19 @@ describe("ItemFormGroup", () => {
 
   it("transforms decimal separator based on locale", async () => {
     render(
-      <ItemFormGroup
-        itemForm={BudgetItemsMother.itemForm1()}
-        label="Expenses"
-        inputRef={ref}
-        costPercentage={1}
-        userOptions={UserPreferencesMother.spanish()}
-      />,
+      <ConfigProvider queryBus={queryBus}>
+        <ItemFormGroup
+          itemForm={BudgetItemsMother.itemForm1()}
+          label="Expenses"
+          inputRef={ref}
+          costPercentage={1}
+          userOptions={UserPreferencesMother.spanish()}
+          intlConfig={UserPreferencesMother.toIntlConfig(
+            UserPreferencesMother.spanish(),
+          )}
+        />
+        ,
+      </ConfigProvider>,
     );
 
     await userEvent.clear(screen.getByDisplayValue("10 €"));

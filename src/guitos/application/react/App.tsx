@@ -33,7 +33,7 @@ export function App() {
     <ErrorProvider>
       <LoadingProvider>
         <NotificationProvider>
-          <ConfigProvider>
+          <ConfigProvider queryBus={queryBus}>
             <BudgetProvider>
               <Router>
                 <Route path="/" component={BudgetPage} />

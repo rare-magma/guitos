@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BudgetPage > matches snapshot 1`] = `
+<ConfigProvider
+  queryBus={
+    QueryBusMock {
+      "mockAsk": [MockFunction spy],
+    }
+  }
+>
+  <BudgetPage />
+</ConfigProvider>
+`;

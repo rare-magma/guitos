@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChartsPage > matches snapshot 1`] = `
+<ConfigProvider
+  queryBus={
+    QueryBusMock {
+      "mockAsk": [MockFunction spy] {
+        "calls": [
+          [
+            guitos.userpreferences.get.1 {
+              "name": "guitos.userpreferences.get.1",
+            },
+          ],
+        ],
+        "results": [
+          {
+            "type": "return",
+            "value": Promise {},
+          },
+        ],
+      },
+    }
+  }
+>
+  <ChartsPage
+    onShowGraphs={[MockFunction spy]}
+  />
+</ConfigProvider>
+`;

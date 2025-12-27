@@ -1,5 +1,8 @@
+import { ConfigProvider } from "@guitos/application/react/context/ConfigContext";
 import { CalculateButton } from "@guitos/application/react/sections/CalculateButton/CalculateButton";
 import { BudgetItemsMother } from "@guitos/contexts/budget/domain/budgetItem.mother";
+import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
+import { QueryBusMock } from "@shared/__mocks__/queryBus.mock";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
@@ -7,11 +10,13 @@ import { describe, expect, it, vi } from "vitest";
 describe("CalculateButton", () => {
   const onCalculate = vi.fn();
   const comp = (
-    <CalculateButton
-      itemForm={BudgetItemsMother.itemForm1()}
-      label="Expense"
-      onCalculate={onCalculate}
-    />
+    <ConfigProvider queryBus={new QueryBusMock()}>
+      <CalculateButton
+        itemForm={BudgetItemsMother.itemForm1()}
+        label="Expense"
+        onCalculate={onCalculate}
+      />
+    </ConfigProvider>
   );
 
   it("matches snapshot", () => {
@@ -96,7 +101,7 @@ describe("CalculateButton", () => {
     await userEvent.type(screen.getByLabelText("add"), "123");
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toHaveBeenCalledWith(123, "add");
+    expect(onCalculate).toHaveBeenCalledWith(123, MathOperation.Add);
   });
 
   it("calls onCalculate when change > 0 and enter is pressed", async () => {
@@ -108,7 +113,7 @@ describe("CalculateButton", () => {
     await userEvent.type(screen.getByLabelText("add"), "123");
     await userEvent.type(screen.getByLabelText("add"), "{enter}");
 
-    expect(onCalculate).toHaveBeenCalledWith(123, "add");
+    expect(onCalculate).toHaveBeenCalledWith(123, MathOperation.Add);
   });
 
   it("calls onCalculate with sub", async () => {
@@ -126,7 +131,7 @@ describe("CalculateButton", () => {
     await userEvent.click(screen.getByLabelText("subtraction"));
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toHaveBeenCalledWith(123, "subtract");
+    expect(onCalculate).toHaveBeenCalledWith(123, MathOperation.Subtract);
   });
 
   it("calls onCalculate with multiply", async () => {
@@ -144,7 +149,7 @@ describe("CalculateButton", () => {
     await userEvent.click(screen.getByLabelText("multiplication"));
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toHaveBeenCalledWith(123, "multiply");
+    expect(onCalculate).toHaveBeenCalledWith(123, MathOperation.Multiply);
   });
 
   it("calls onCalculate with div", async () => {
@@ -162,7 +167,7 @@ describe("CalculateButton", () => {
     await userEvent.click(screen.getByLabelText("division"));
     await userEvent.click(acceptButton);
 
-    expect(onCalculate).toHaveBeenCalledWith(123, "divide");
+    expect(onCalculate).toHaveBeenCalledWith(123, MathOperation.Divide);
   });
 
   it.skip("shows history when clicking button", async () => {

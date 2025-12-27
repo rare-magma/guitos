@@ -58,7 +58,6 @@ describe("operationsPersister", () => {
         ...PersistOperationsCommandMother.applyCommand(command),
         ...existing,
       ];
-      console.log("🚀 ~ expected:", expected);
       queryBus.whenAskThenReturn(response);
 
       await handler.handle(command);
