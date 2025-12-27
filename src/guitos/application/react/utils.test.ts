@@ -5,10 +5,7 @@ import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation"
 import { Currency } from "@guitos/contexts/userPreferences/domain/currency";
 import { Locale } from "@guitos/contexts/userPreferences/domain/locale";
 import { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
-import { chromeLocalesList } from "@guitos/contexts/userPreferences/infrastructure/lists/chromeLocalesList";
 import { currenciesMap } from "@guitos/contexts/userPreferences/infrastructure/lists/currenciesMap";
-import { firefoxLocalesList } from "@guitos/contexts/userPreferences/infrastructure/lists/firefoxLocalesList";
-import { LocalForageUserPreferencesRepository } from "@guitos/contexts/userPreferences/infrastructure/localForageUserPreferencesRepository";
 import { Uuid } from "@shared/domain/uuid";
 import { CurrentTimeClock } from "@shared/infrastructure/currentTimeClock";
 import Big from "big.js";
@@ -26,8 +23,6 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
-
-const optionsRepository = new LocalForageUserPreferencesRepository();
 
 test("round", () => {
   expect(roundBig(Big(123.123123123), 5)).eq(123.12312);
@@ -121,30 +116,6 @@ test("intlFormat", () => {
         ),
       ),
     ).toBeTruthy();
-  }
-});
-
-test.skip("intlFormat browser locale list", () => {
-  const date = new CurrentTimeClock().now();
-  for (const list of [
-    firefoxLocalesList.filter((l) => l !== "ja-JP-mac" && l !== "ach"),
-    chromeLocalesList,
-  ]) {
-    for (const locale of list) {
-      const countryCode = optionsRepository.getCountryCode(locale);
-      const currencyCode =
-        optionsRepository.getCurrencyCodeFromCountry(countryCode);
-      expect(
-        intlFormat(
-          1,
-          new UserPreferences(
-            new Currency(currencyCode),
-            new Locale(locale),
-            date,
-          ),
-        ),
-      ).toBeTruthy();
-    }
   }
 });
 
