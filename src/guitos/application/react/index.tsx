@@ -11,13 +11,6 @@ const updateSW = registerSW({
   },
 });
 
-if (window.location.pathname === "/") {
-  const lastOpenedBudget = localStorage.getItem("guitos_lastOpenedBudget");
-  if (lastOpenedBudget) {
-    window.location.pathname = `/${lastOpenedBudget}`;
-  }
-}
-
 const rootElement = document.getElementById("root");
 const root = rootElement && ReactDOM.createRoot(rootElement);
 registerHandlers();

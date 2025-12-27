@@ -8,8 +8,27 @@ import { ErrorProvider } from "@guitos/application/react/context/ErrorContext";
 import { LoadingProvider } from "@guitos/application/react/context/LoadingContext";
 import { NotificationProvider } from "@guitos/application/react/context/NotificationContext";
 import { BudgetPage } from "@guitos/application/react/sections/Budget/BudgetPage";
+import { LastOpenedBudgetQuery } from "@guitos/contexts/budget/application/findLastOpenedBudget/lastOpenedBudgetQuery";
+import type { LastOpenedBudgetResponse } from "@guitos/contexts/budget/application/findLastOpenedBudget/lastOpenedBudgetResponse";
+import { queryBus } from "@shared/infrastructure/buses";
+import { useEffect } from "react";
 
 export function App() {
+  useEffect(() => {
+    async function getLastOpenedBudget() {
+      if (window.location.pathname === "/") {
+        const { name: lastOpenedBudget } =
+          await queryBus.ask<LastOpenedBudgetResponse>(
+            new LastOpenedBudgetQuery(),
+          );
+        if (lastOpenedBudget) {
+          window.location.pathname = `/${lastOpenedBudget}`;
+        }
+      }
+    }
+    getLastOpenedBudget();
+  }, []);
+
   return (
     <ErrorProvider>
       <LoadingProvider>

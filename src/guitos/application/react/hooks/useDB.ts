@@ -11,14 +11,13 @@ import type {
   FilteredItem,
 } from "@guitos/application/react/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
-import {
-  createBudgetNameList,
-  saveLastOpenedBudget,
-} from "@guitos/application/react/utils";
+import { createBudgetNameList } from "@guitos/application/react/utils";
+import { PersistLastOpenedBudgetCommand } from "@guitos/contexts/budget/application/saveLastOpenedBudget/persistLastOpenedBudgetCommand";
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
 import { localForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
 import { Uuid } from "@shared/domain/uuid";
+import { commandBus } from "@shared/infrastructure/buses";
 import { produce } from "immer";
 import Papa from "papaparse";
 import type React from "react";
@@ -34,7 +33,10 @@ export function useDB() {
   const name = String(params.name);
   const [_, navigate] = useLocation();
 
-  const navigateCallback = useCallback(() => navigate, [navigate]);
+  const navigateCallback = useCallback(
+    (to: string | URL) => navigate(to),
+    [navigate],
+  );
 
   const { setShouldReload, setLoadingFromDB } = useLoadingContext();
   const { notifications, setNotifications } = useNotificationContext();
@@ -411,13 +413,19 @@ export function useDB() {
   );
 
   useEffect(() => {
-    if (budget) {
-      saveBudget(budget);
-      if (budget.name !== previousBudget.current) {
-        saveLastOpenedBudget(budget.name, navigateCallback());
-        previousBudget.current = budget.name;
+    async function handle() {
+      if (budget) {
+        saveBudget(budget);
+        if (budget.name !== previousBudget.current) {
+          navigateCallback(`/${budget.name}`);
+          await commandBus.dispatch(
+            new PersistLastOpenedBudgetCommand({ budgetName: budget.name }),
+          );
+          previousBudget.current = budget.name;
+        }
       }
     }
+    handle();
   }, [budget, saveBudget, navigateCallback]);
 
   return {
