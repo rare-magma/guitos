@@ -1,5 +1,5 @@
-import { Budget } from "@guitos/domain/budget";
-import type { BudgetRepository } from "@guitos/domain/budgetRepository";
+import { Budget } from "@guitos/contexts/budget/domain/budget";
+import type { BudgetRepository } from "@guitos/contexts/budget/domain/budgetRepository";
 import type { Uuid } from "@shared/domain/uuid";
 import localforage from "localforage";
 

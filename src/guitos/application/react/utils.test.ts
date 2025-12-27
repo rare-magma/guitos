@@ -1,18 +1,18 @@
+import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
 import { Currency } from "@guitos/contexts/userPreferences/domain/currency";
 import { Locale } from "@guitos/contexts/userPreferences/domain/locale";
 import { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
+import { chromeLocalesList } from "@guitos/contexts/userPreferences/infrastructure/lists/chromeLocalesList";
+import { currenciesMap } from "@guitos/contexts/userPreferences/infrastructure/lists/currenciesMap";
+import { firefoxLocalesList } from "@guitos/contexts/userPreferences/infrastructure/lists/firefoxLocalesList";
 import { LocalForageUserPreferencesRepository } from "@guitos/contexts/userPreferences/infrastructure/localForageUserPreferencesRepository";
-import { BudgetMother } from "@guitos/domain/budget.mother";
 import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import { prompt } from "@guitos/sections/NavBar/prompt";
 import { Uuid } from "@shared/domain/uuid";
 import { CurrentTimeClock } from "@shared/infrastructure/currentTimeClock";
 import Big from "big.js";
 import { expect, test } from "vitest";
-import { chromeLocalesList } from "../../infrastructure/lists/chromeLocalesList";
-import { currenciesMap } from "../../infrastructure/lists/currenciesMap";
-import { firefoxLocalesList } from "../../infrastructure/lists/firefoxLocalesList";
 import {
   calc,
   createBudgetNameList,

@@ -1,12 +1,12 @@
+import { useReactToEvents } from "@guitos/application/react/hooks/useReactToEvents";
 import { UserPreferencesQuery } from "@guitos/contexts/userPreferences/application/readPreferences/userPreferencesQuery";
 import type { UserPreferencesResponse } from "@guitos/contexts/userPreferences/application/readPreferences/userPreferencesResponse";
 import { Currency } from "@guitos/contexts/userPreferences/domain/currency";
 import { Locale } from "@guitos/contexts/userPreferences/domain/locale";
 import { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
 import { UserPreferencesChangedDomainEvent } from "@guitos/contexts/userPreferences/domain/userPreferencesChangedDomainEvent";
-import { useReactToEvents } from "@guitos/hooks/useReactToEvents";
-import { queryBus } from "@guitos/infrastructure/buses";
 import { Datetime } from "@shared/domain/datetime";
+import { queryBus } from "@shared/infrastructure/buses";
 import {
   createContext,
   type PropsWithChildren,

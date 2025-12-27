@@ -1,6 +1,6 @@
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
-import { Budget } from "@guitos/domain/budget";
-import { BudgetItem } from "@guitos/domain/budgetItem";
+import { Budget } from "@guitos/contexts/budget/domain/budget";
+import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
 import type { CsvItem } from "@guitos/domain/csvItem";
 import { roundBig } from "./utils";
 

@@ -2,7 +2,7 @@ import {
   BudgetProvider,
   useBudget,
 } from "@guitos/application/react/context/BudgetContext";
-import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 

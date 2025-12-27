@@ -1,5 +1,5 @@
-import type { BudgetItem } from "@guitos/domain/budgetItem";
-import { BudgetItemCreatedDomainEvent } from "@guitos/domain/budgetItemCreatedDomainEvent";
+import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
+import { BudgetItemCreatedDomainEvent } from "@guitos/contexts/budget/domain/budgetItemCreatedDomainEvent";
 import type { Primitives } from "@shared/domain/primitives";
 
 export class BudgetItemCreatedDomainEventMother {

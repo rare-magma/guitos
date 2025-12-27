@@ -1,6 +1,6 @@
+import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
+import { BudgetItemsMother } from "@guitos/contexts/budget/domain/budgetItem.mother";
 import { UserPreferencesMother } from "@guitos/contexts/userPreferences/domain/userPreferences.mother";
-import { BudgetMother } from "@guitos/domain/budget.mother";
-import { BudgetItemsMother } from "@guitos/domain/budgetItem.mother";
 import { ItemFormGroup } from "@guitos/sections/ItemForm/ItemFormGroup";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";

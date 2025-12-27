@@ -2,8 +2,8 @@ import type React from "react";
 import { useRef } from "react";
 import { Button, Container, Form, Row, Stack } from "react-bootstrap";
 import "./LandingPage.css";
-import { useDB } from "@guitos/hooks/useDB";
-import { useWindowSize } from "@guitos/hooks/useWindowSize";
+import { useDB } from "@guitos/application/react/hooks/useDB";
+import { useWindowSize } from "@guitos/application/react/hooks/useWindowSize";
 import { Loading } from "@guitos/sections/Loading/Loading";
 
 interface LandingPageProps {

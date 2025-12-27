@@ -1,4 +1,4 @@
-import { BudgetItem } from "@guitos/domain/budgetItem";
+import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
 import { DomainEvent } from "@shared/domain/eventBus/domainEvent";
 import type { Primitives } from "@shared/domain/primitives";
 

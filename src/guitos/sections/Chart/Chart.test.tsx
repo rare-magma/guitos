@@ -1,4 +1,4 @@
-import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { Chart } from "@guitos/sections/Chart/Chart";
 import { render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";

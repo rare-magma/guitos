@@ -1,4 +1,4 @@
-import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { describe, expect, test } from "vitest";
 
 describe("Budget", () => {

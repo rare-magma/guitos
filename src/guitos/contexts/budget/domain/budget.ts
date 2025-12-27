@@ -1,4 +1,4 @@
-import type { BudgetItem } from "@guitos/domain/budgetItem";
+import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
 import type { Expenses } from "@guitos/domain/expenses";
 import type { Incomes } from "@guitos/domain/incomes";
 import type { Stats } from "@guitos/domain/stats";

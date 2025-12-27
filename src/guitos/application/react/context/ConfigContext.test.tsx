@@ -3,7 +3,7 @@ import {
   useConfig,
 } from "@guitos/application/react/context/ConfigContext";
 import { ChangeUserPreferencesCommand } from "@guitos/contexts/userPreferences/application/changePreferences/changeUserPreferencesCommand";
-import { commandBus } from "@guitos/infrastructure/buses";
+import { commandBus } from "@shared/infrastructure/buses";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 

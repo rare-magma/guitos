@@ -1,4 +1,4 @@
-import { BudgetItem } from "@guitos/domain/budgetItem";
+import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
 import { ObjectMother } from "@shared/domain/objectMother.mother";
 
 export class BudgetItemsMother {

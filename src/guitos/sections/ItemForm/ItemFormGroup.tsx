@@ -20,18 +20,18 @@ import {
 import "./ItemFormGroup.css";
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
 import { useBudget } from "@guitos/application/react/context/BudgetContext";
+import type { Budget } from "@guitos/contexts/budget/domain/budget";
+import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
+import type { Expenses } from "@guitos/contexts/budget/domain/expenses";
+import type { Incomes } from "@guitos/contexts/budget/domain/incomes";
 import { PersistOperationsCommand } from "@guitos/contexts/operations/application/persistOperations/persistOperationsCommand";
 import { RemoveOperationsCommand } from "@guitos/contexts/operations/application/removeOperations/removeOperationsCommand";
 import { ItemOperation } from "@guitos/contexts/operations/domain/itemOperation";
 import type { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
 import type { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
-import type { Budget } from "@guitos/domain/budget";
-import type { BudgetItem } from "@guitos/domain/budgetItem";
-import type { Expenses } from "@guitos/domain/expenses";
-import type { Incomes } from "@guitos/domain/incomes";
-import { commandBus } from "@guitos/infrastructure/buses";
 import { CalculateButton } from "@guitos/sections/CalculateButton/CalculateButton";
 import { Datetime } from "@shared/domain/datetime";
+import { commandBus } from "@shared/infrastructure/buses";
 
 interface ItemFormProps {
   itemForm: BudgetItem;

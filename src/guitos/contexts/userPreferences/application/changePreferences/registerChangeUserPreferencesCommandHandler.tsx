@@ -1,7 +1,7 @@
 import { ChangeUserPreferencesCommandHandler } from "@guitos/contexts/userPreferences/application/changePreferences/changeUserPreferencesCommandHandler";
 import { UserPreferencesChanger } from "@guitos/contexts/userPreferences/application/changePreferences/userPreferencesChanger";
 import { LocalForageUserPreferencesRepository } from "@guitos/contexts/userPreferences/infrastructure/localForageUserPreferencesRepository";
-import { commandBus, eventBus } from "@guitos/infrastructure/buses";
+import { commandBus, eventBus } from "@shared/infrastructure/buses";
 import { CurrentTimeClock } from "@shared/infrastructure/currentTimeClock";
 
 export function registerChangeUserPreferencesCommandHandler() {

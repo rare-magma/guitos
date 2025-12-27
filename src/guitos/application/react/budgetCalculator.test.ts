@@ -1,6 +1,6 @@
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
-import { BudgetMother } from "@guitos/domain/budget.mother";
-import { BudgetItemsMother } from "@guitos/domain/budgetItem.mother";
+import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
+import { BudgetItemsMother } from "@guitos/contexts/budget/domain/budgetItem.mother";
 import Big from "big.js";
 import { describe, expect, test } from "vitest";
 

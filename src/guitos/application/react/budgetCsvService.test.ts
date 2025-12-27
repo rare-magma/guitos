@@ -2,7 +2,7 @@ import {
   BudgetCsvService,
   type CsvRow,
 } from "@guitos/application/react/budgetCsvService";
-import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import Papa from "papaparse";
 import { describe, expect, test } from "vitest";
 

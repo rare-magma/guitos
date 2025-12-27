@@ -1,6 +1,6 @@
 import { BudgetCsvService } from "@guitos/application/react/budgetCsvService";
 import { useBudget } from "@guitos/application/react/context/BudgetContext";
-import { useDB } from "@guitos/hooks/useDB";
+import { useDB } from "@guitos/application/react/hooks/useDB";
 import type React from "react";
 import { type Dispatch, type SetStateAction, useRef } from "react";
 import {

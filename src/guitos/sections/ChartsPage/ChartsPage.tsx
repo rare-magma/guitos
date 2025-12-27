@@ -24,7 +24,7 @@ import {
 } from "../../application/react/utils";
 import "./ChartsPage.css";
 import { useBudget } from "@guitos/application/react/context/BudgetContext";
-import { useDB } from "@guitos/hooks/useDB";
+import { useDB } from "@guitos/application/react/hooks/useDB";
 import { Chart } from "@guitos/sections/Chart/Chart";
 import type { Uuid } from "@shared/domain/uuid";
 

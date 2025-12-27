@@ -24,7 +24,7 @@ import "./StatCard.css";
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
 import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import { useConfig } from "@guitos/application/react/context/ConfigContext";
-import type { Budget } from "@guitos/domain/budget";
+import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import {
   focusRef,
   parseLocaleNumber,

@@ -1,4 +1,4 @@
-import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { StatCard } from "@guitos/sections/StatCard/StatCard";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";

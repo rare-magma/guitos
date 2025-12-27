@@ -1,5 +1,5 @@
-import type { Budget } from "@guitos/domain/budget";
-import type { BudgetItem } from "@guitos/domain/budgetItem";
+import type { Budget } from "@guitos/contexts/budget/domain/budget";
+import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
 import Big from "big.js";
 import { roundBig } from "./utils";
 

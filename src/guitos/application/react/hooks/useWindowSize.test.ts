@@ -1,4 +1,4 @@
-import { useWindowSize } from "@guitos/hooks/useWindowSize";
+import { useWindowSize } from "@guitos/application/react/hooks/useWindowSize";
 import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 

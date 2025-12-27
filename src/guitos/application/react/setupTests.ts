@@ -6,7 +6,7 @@ import "@testing-library/jest-dom/vitest";
 import { randomUUID } from "node:crypto";
 import type { BudgetContextInterface } from "@guitos/application/react/context/BudgetContext";
 import * as AppBudgetContext from "@guitos/application/react/context/BudgetContext";
-import { BudgetMother } from "@guitos/domain/budget.mother";
+import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
 import { cleanup } from "@testing-library/react";
 import { createElement } from "react";
 import { afterEach, beforeEach, vi } from "vitest";

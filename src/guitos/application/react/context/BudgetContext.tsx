@@ -1,6 +1,6 @@
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
 import { useLoadingContext } from "@guitos/application/react/context/LoadingContext";
-import type { Budget } from "@guitos/domain/budget";
+import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
 import {
   createContext,

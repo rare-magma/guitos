@@ -6,9 +6,9 @@ import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import { useErrorContext } from "@guitos/application/react/context/ErrorContext";
 import { useLoadingContext } from "@guitos/application/react/context/LoadingContext";
 import { useNotificationContext } from "@guitos/application/react/context/NotificationContext";
-import { Budget } from "@guitos/domain/budget";
-import type { BudgetItem } from "@guitos/domain/budgetItem";
-import { localForageBudgetRepository } from "@guitos/infrastructure/localForageBudgetRepository";
+import { Budget } from "@guitos/contexts/budget/domain/budget";
+import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
+import { localForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
 import type {
   Filter,
   FilteredItem,
@@ -21,10 +21,7 @@ import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useLocation, useParams } from "wouter";
-import {
-  createBudgetNameList,
-  saveLastOpenedBudget,
-} from "../application/react/utils";
+import { createBudgetNameList, saveLastOpenedBudget } from "../utils";
 
 const budgetRepository = new localForageBudgetRepository();
 

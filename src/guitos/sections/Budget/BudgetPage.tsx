@@ -5,8 +5,8 @@ import {
   type BudgetNotification,
   useNotificationContext,
 } from "@guitos/application/react/context/NotificationContext";
-import type { Budget } from "@guitos/domain/budget";
-import { useDB } from "@guitos/hooks/useDB";
+import { useDB } from "@guitos/application/react/hooks/useDB";
+import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import { LandingPage } from "@guitos/sections/LandingPage/LandingPage";
 import { Loading } from "@guitos/sections/Loading/Loading";
 import { NavBar } from "@guitos/sections/NavBar/NavBar";

@@ -1,7 +1,7 @@
 import { Currency } from "@guitos/contexts/userPreferences/domain/currency";
 import { Locale } from "@guitos/contexts/userPreferences/domain/locale";
 import { UserPreferencesChangedDomainEvent } from "@guitos/contexts/userPreferences/domain/userPreferencesChangedDomainEvent";
-import { currenciesMap } from "@guitos/infrastructure/lists/currenciesMap";
+import { currenciesMap } from "@guitos/contexts/userPreferences/infrastructure/lists/currenciesMap";
 import { AggregateRoot } from "@shared/domain/aggregateRoot";
 import { Datetime } from "@shared/domain/datetime";
 import type { Primitives } from "@shared/domain/primitives";

@@ -1,6 +1,6 @@
-import { eventBus } from "@guitos/infrastructure/buses";
 import type { DomainEvent } from "@shared/domain/eventBus/domainEvent";
 import type { DomainEventSubscriber } from "@shared/domain/eventBus/domainEventSubscriber";
+import { eventBus } from "@shared/infrastructure/buses";
 import { useEffect, useState } from "react";
 
 export function useReactToEvents<T extends DomainEvent>(

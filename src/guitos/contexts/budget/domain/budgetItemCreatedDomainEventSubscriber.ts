@@ -1,4 +1,4 @@
-import { BudgetItemCreatedDomainEvent } from "@guitos/domain/budgetItemCreatedDomainEvent";
+import { BudgetItemCreatedDomainEvent } from "@guitos/contexts/budget/domain/budgetItemCreatedDomainEvent";
 import type { DomainEventName } from "@shared/domain/eventBus/domainEventName";
 import type { DomainEventSubscriber } from "@shared/domain/eventBus/domainEventSubscriber";
 

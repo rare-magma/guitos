@@ -1,6 +1,6 @@
+import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
 import type { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
-import type { Budget } from "@guitos/domain/budget";
 import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
 import { prompt } from "@guitos/sections/NavBar/prompt";

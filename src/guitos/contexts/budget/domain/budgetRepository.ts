@@ -1,4 +1,4 @@
-import type { Budget } from "@guitos/domain/budget";
+import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import type { Uuid } from "@shared/domain/uuid";
 
 export interface BudgetRepository {

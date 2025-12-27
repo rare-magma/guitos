@@ -16,10 +16,10 @@ import "./TableCard.css";
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
 import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import { useConfig } from "@guitos/application/react/context/ConfigContext";
-import type { Budget } from "@guitos/domain/budget";
-import { BudgetItem } from "@guitos/domain/budgetItem";
-import type { Expenses } from "@guitos/domain/expenses";
-import type { Incomes } from "@guitos/domain/incomes";
+import type { Budget } from "@guitos/contexts/budget/domain/budget";
+import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
+import type { Expenses } from "@guitos/contexts/budget/domain/expenses";
+import type { Incomes } from "@guitos/contexts/budget/domain/incomes";
 import { ItemFormGroup } from "@guitos/sections/ItemForm/ItemFormGroup";
 import { intlFormat, roundBig } from "../../application/react/utils";
 
