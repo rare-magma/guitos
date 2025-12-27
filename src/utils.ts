@@ -26,21 +26,23 @@ export function calc(
 
   let newValue = Big(itemValue);
   const changeValue = Big(change);
-  switch (operation) {
-    case MathOperation.Add:
+  switch (operation.name) {
+    case MathOperation.Add.name:
       newValue = newValue.add(changeValue);
       break;
-    case MathOperation.Subtract:
+    case MathOperation.Subtract.name:
       newValue = newValue.sub(changeValue);
       break;
-    case MathOperation.Multiply:
+    case MathOperation.Multiply.name:
       newValue = newValue.mul(changeValue);
       break;
-    case MathOperation.Divide:
+    case MathOperation.Divide.name:
       newValue = newValue.div(changeValue);
       break;
     default:
-      throw new Error("operation not implemented");
+      throw new Error(
+        `operation not implemented: ${JSON.stringify(operation)}`,
+      );
   }
   total = roundBig(newValue, 2);
 

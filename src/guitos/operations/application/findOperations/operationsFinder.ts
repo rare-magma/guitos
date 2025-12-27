@@ -3,6 +3,7 @@ import { FindOperationsResponse } from "@guitos/operations/application/findOpera
 import { ItemOperation } from "@guitos/operations/domain/itemOperation";
 import { MathOperation } from "@guitos/operations/domain/mathOperation";
 import type { OperationsRepository } from "@guitos/operations/domain/operationsRepository";
+import { Datetime } from "@shared/domain/datetime";
 import type { Primitives } from "@shared/domain/primitives";
 
 export class OperationsFinder {
@@ -28,6 +29,7 @@ export class OperationsFinder {
         operation.budgetItemId,
         operation.changeValue,
         new MathOperation(operation.mathOperation.name),
+        new Datetime(operation.createdAt),
       );
       operations.push(newOperation.toPrimitives());
     }

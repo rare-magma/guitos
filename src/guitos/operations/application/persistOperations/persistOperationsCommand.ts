@@ -5,12 +5,12 @@ import type { Primitives } from "@shared/domain/primitives";
 export class PersistOperationsCommand extends Command {
   static readonly name = "guitos.operations.persist.1";
   readonly id: string;
-  readonly operations: Primitives<ItemOperation>[];
+  readonly operations: Primitives<ItemOperation[]>;
 
   constructor({
     id,
     operations,
-  }: { id: string; operations: Primitives<ItemOperation>[] }) {
+  }: { id: string; operations: Primitives<ItemOperation[]> }) {
     super(PersistOperationsCommand.name);
 
     this.id = id;

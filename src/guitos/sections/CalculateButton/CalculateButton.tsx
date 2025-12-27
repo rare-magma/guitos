@@ -1,11 +1,7 @@
 import { useBudget } from "@guitos/context/BudgetContext";
 import { useConfig } from "@guitos/context/ConfigContext";
 import type { BudgetItem } from "@guitos/domain/budgetItem";
-import type {
-  CalculationHistoryItem,
-  ItemOperation,
-} from "@guitos/domain/calculationHistoryItem";
-import { useDB } from "@guitos/hooks/useDB";
+import { ItemOperation } from "@guitos/operations/domain/itemOperation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import {
   Button,
@@ -24,11 +20,16 @@ import {
 } from "react-icons/bs";
 import { CgMathDivide, CgMathPlus } from "react-icons/cg";
 import "./CalculateButton.css";
+import { queryBus } from "@guitos/infrastructure/buses";
+import { FindOperationsQuery } from "@guitos/operations/application/findOperations/findOperationsQuery";
+import type { FindOperationsResponse } from "@guitos/operations/application/findOperations/findOperationsResponse";
+import { MathOperation } from "@guitos/operations/domain/mathOperation";
+import { Datetime } from "@shared/domain/datetime";
 
 interface CalculateButtonProps {
   itemForm: BudgetItem;
   label: string;
-  onCalculate: (changeValue: number, operation: ItemOperation) => void;
+  onCalculate: (changeValue: number, operation: MathOperation) => void;
 }
 
 export function CalculateButton({
@@ -36,14 +37,15 @@ export function CalculateButton({
   label,
   onCalculate,
 }: CalculateButtonProps) {
-  const [operation, setOperation] = useState<ItemOperation>("add");
+  const [operation, setOperation] = useState<MathOperation>(
+    new MathOperation("add"),
+  );
   const [changeValue, setChangeValue] = useState(0);
   const [showHistory, setShowHistory] = useState(false);
-  const [history, setHistory] = useState<CalculationHistoryItem[]>([]);
+  const [history, setHistory] = useState<ItemOperation[]>([]);
   const opButtonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { intlConfig } = useConfig();
-  const { getCalcHist } = useDB();
   const { budget } = useBudget();
   const calcHistID = `${budget?.id}-${label}-${itemForm.id}`;
 
@@ -70,13 +72,24 @@ export function CalculateButton({
     setShowHistory(!showHistory);
   }
 
-  const getHistory = useCallback(() => {
-    getCalcHist(calcHistID)
-      .then((h) => h && setHistory(h))
-      .catch((e: unknown) => {
-        throw e;
-      });
-  }, [calcHistID, getCalcHist]);
+  const getHistory = useCallback(async () => {
+    const { operations } = await queryBus.ask<FindOperationsResponse>(
+      new FindOperationsQuery(calcHistID),
+    );
+    const newOperations = [];
+    for (const operation of operations) {
+      newOperations.push(
+        new ItemOperation(
+          operation.id,
+          operation.budgetItemId,
+          operation.changeValue,
+          new MathOperation(operation.mathOperation.name),
+          new Datetime(operation.createdAt),
+        ),
+      );
+    }
+    setHistory(newOperations);
+  }, [calcHistID]);
 
   useEffect(() => void getHistory(), [getHistory]);
 
@@ -112,10 +125,16 @@ export function CalculateButton({
                   variant="outline-secondary"
                   id={useId()}
                 >
-                  {operation === "add" && <CgMathPlus aria-hidden={true} />}
-                  {operation === "subtract" && <BsDashLg aria-hidden={true} />}
-                  {operation === "multiply" && <BsXLg aria-hidden={true} />}
-                  {operation === "divide" && (
+                  {operation === MathOperation.Add && (
+                    <CgMathPlus aria-hidden={true} />
+                  )}
+                  {operation === MathOperation.Subtract && (
+                    <BsDashLg aria-hidden={true} />
+                  )}
+                  {operation === MathOperation.Multiply && (
+                    <BsXLg aria-hidden={true} />
+                  )}
+                  {operation === MathOperation.Divide && (
                     <CgMathDivide aria-hidden={true} />
                   )}
                 </Dropdown.Toggle>
@@ -123,25 +142,25 @@ export function CalculateButton({
                 <Dropdown.Menu>
                   <Dropdown.Item
                     aria-label="addition"
-                    onClick={() => setOperation("add")}
+                    onClick={() => setOperation(MathOperation.Add)}
                   >
                     <CgMathPlus aria-hidden={true} />
                   </Dropdown.Item>
                   <Dropdown.Item
                     aria-label="subtraction"
-                    onClick={() => setOperation("subtract")}
+                    onClick={() => setOperation(MathOperation.Subtract)}
                   >
                     <BsDashLg aria-hidden={true} />
                   </Dropdown.Item>
                   <Dropdown.Item
                     aria-label="multiplication"
-                    onClick={() => setOperation("multiply")}
+                    onClick={() => setOperation(MathOperation.Multiply)}
                   >
                     <BsXLg aria-hidden={true} />
                   </Dropdown.Item>
                   <Dropdown.Item
                     aria-label="division"
-                    onClick={() => setOperation("divide")}
+                    onClick={() => setOperation(MathOperation.Divide)}
                   >
                     <CgMathDivide aria-hidden={true} />
                   </Dropdown.Item>
@@ -182,7 +201,6 @@ export function CalculateButton({
             {showHistory && (
               <div style={{ maxHeight: "30vh", overflow: "auto" }}>
                 {history
-                  .filter((i) => i.operation !== "value")
                   .map((item, index) => (
                     <InputGroup
                       size="sm"
@@ -196,20 +214,20 @@ export function CalculateButton({
                         aria-label={"item history value"}
                         name="item-history-value"
                         intlConfig={intlConfig}
-                        defaultValue={item.itemForm.value}
+                        defaultValue={item.changeValue}
                         disabled={true}
                       />
                       <InputGroup.Text>
-                        {item.operation === "add" && (
+                        {item.mathOperation === MathOperation.Add && (
                           <CgMathPlus aria-hidden={true} />
                         )}
-                        {item.operation === "subtract" && (
+                        {item.mathOperation === MathOperation.Subtract && (
                           <BsDashLg aria-hidden={true} />
                         )}
-                        {item.operation === "multiply" && (
+                        {item.mathOperation === MathOperation.Multiply && (
                           <BsXLg aria-hidden={true} />
                         )}
-                        {item.operation === "divide" && (
+                        {item.mathOperation === MathOperation.Divide && (
                           <CgMathDivide aria-hidden={true} />
                         )}
                       </InputGroup.Text>

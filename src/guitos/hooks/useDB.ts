@@ -8,9 +8,7 @@ import { useLoadingContext } from "@guitos/context/LoadingContext";
 import { useNotificationContext } from "@guitos/context/NotificationContext";
 import { Budget } from "@guitos/domain/budget";
 import type { BudgetItem } from "@guitos/domain/budgetItem";
-import type { CalculationHistoryItem } from "@guitos/domain/calculationHistoryItem";
 import { localForageBudgetRepository } from "@guitos/infrastructure/localForageBudgetRepository";
-import { localForageCalcHistRepository } from "@guitos/infrastructure/localForageCalcHistRepository";
 import type {
   Filter,
   FilteredItem,
@@ -26,7 +24,6 @@ import { useLocation, useParams } from "wouter";
 import { createBudgetNameList, saveLastOpenedBudget } from "../../utils";
 
 const budgetRepository = new localForageBudgetRepository();
-const calcHistRepository = new localForageCalcHistRepository();
 
 export function useDB() {
   const [options, setOptions] = useState<Option[]>([]);
@@ -396,23 +393,6 @@ export function useDB() {
     }
   }
 
-  const getCalcHist = useCallback(
-    async (id: string): Promise<CalculationHistoryItem[] | null> => {
-      return await calcHistRepository.get(id);
-    },
-    [],
-  );
-
-  async function saveCalcHist(id: string, item: CalculationHistoryItem) {
-    const calcHist = await getCalcHist(id);
-    const newCalcHist = calcHist ? [...calcHist, item] : [item];
-    calcHistRepository.update(id, newCalcHist);
-  }
-
-  async function deleteCalcHist(id: string) {
-    return await calcHistRepository.delete(id);
-  }
-
   const saveBudget = useCallback(
     (budget: Budget | undefined) => {
       if (!budget) return;
@@ -450,8 +430,5 @@ export function useDB() {
     loadBudget,
     loadFromDb,
     options,
-    getCalcHist,
-    saveCalcHist,
-    deleteCalcHist,
   };
 }

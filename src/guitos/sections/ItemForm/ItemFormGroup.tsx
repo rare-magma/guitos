@@ -1,4 +1,4 @@
-import { immerable, produce } from "immer";
+import { produce } from "immer";
 import type React from "react";
 import { type RefObject, useRef, useState } from "react";
 import {
@@ -18,12 +18,16 @@ import { BudgetCalculator } from "@guitos/application/budgetCalculator";
 import { useBudget } from "@guitos/context/BudgetContext";
 import type { Budget } from "@guitos/domain/budget";
 import type { BudgetItem } from "@guitos/domain/budgetItem";
-import type { ItemOperation } from "@guitos/domain/calculationHistoryItem";
 import type { Expenses } from "@guitos/domain/expenses";
 import type { Incomes } from "@guitos/domain/incomes";
-import { useDB } from "@guitos/hooks/useDB";
+import { commandBus } from "@guitos/infrastructure/buses";
+import { PersistOperationsCommand } from "@guitos/operations/application/persistOperations/persistOperationsCommand";
+import { RemoveOperationsCommand } from "@guitos/operations/application/removeOperations/removeOperationsCommand";
+import { ItemOperation } from "@guitos/operations/domain/itemOperation";
+import type { MathOperation } from "@guitos/operations/domain/mathOperation";
 import { CalculateButton } from "@guitos/sections/CalculateButton/CalculateButton";
 import type { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
+import { Datetime } from "@shared/domain/datetime";
 
 interface ItemFormProps {
   itemForm: BudgetItem;
@@ -46,11 +50,10 @@ export function ItemFormGroup({
   const deleteButtonRef = useRef<HTMLButtonElement>(null);
   const valueRef = useRef<HTMLInputElement>(null);
   const { budget, setBudget } = useBudget();
-  const { deleteCalcHist, saveCalcHist } = useDB();
   const isExpense = label === "Expenses";
   const table = isExpense ? budget?.expenses : budget?.incomes;
 
-  function handleCalcHist(operation: ItemOperation, changeValue: number) {
+  async function handleCalcHist(operation: MathOperation, changeValue: number) {
     if (!budget) return;
     const newItemForm = isExpense
       ? budget.expenses.items.find(
@@ -61,19 +64,24 @@ export function ItemFormGroup({
         );
     if (!newItemForm) return;
     const calcHistID = `${budget.id}-${label}-${newItemForm.id}`;
-    saveCalcHist(calcHistID, {
-      [immerable]: true,
-      id: calcHistID,
-      itemForm: newItemForm,
-      changeValue,
-      operation,
-    }).catch((e: unknown) => {
-      throw e;
-    });
+    await commandBus.dispatch(
+      new PersistOperationsCommand({
+        id: calcHistID,
+        operations: [
+          new ItemOperation(
+            calcHistID,
+            newItemForm.id.toString(),
+            changeValue,
+            operation,
+            new Datetime(),
+          ).toPrimitives(),
+        ],
+      }),
+    );
   }
 
   function handleChange(
-    operation: ItemOperation,
+    operation: MathOperation | "name" | "value",
     value?: string,
     event?: React.ChangeEvent<HTMLInputElement>,
     changeValue?: number,
@@ -139,7 +147,7 @@ export function ItemFormGroup({
     setBudget(newState(), saveInHistory);
   }
 
-  function handleRemove(toBeDeleted: BudgetItem) {
+  async function handleRemove(toBeDeleted: BudgetItem) {
     if (!table?.items) return;
     if (!budget) return;
 
@@ -166,9 +174,11 @@ export function ItemFormGroup({
     setBudget(newState(), true);
 
     const calcHistID = `${budget.id}-${label}-${toBeDeleted.id}`;
-    deleteCalcHist(calcHistID).catch((e: unknown) => {
-      throw e;
-    });
+    await commandBus.dispatch(
+      new RemoveOperationsCommand({
+        id: calcHistID,
+      }),
+    );
   }
 
   return (

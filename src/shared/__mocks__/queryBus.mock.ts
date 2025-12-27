@@ -1,5 +1,6 @@
 import type { Query } from "@shared/domain/queryBus/query";
 import type { QueryBus } from "@shared/domain/queryBus/queryBus";
+import type { QueryHandler } from "@shared/domain/queryBus/queryHandler";
 import type { Response } from "@shared/domain/queryBus/response";
 import { expect, vi } from "vitest";
 import { when } from "vitest-when";
@@ -39,5 +40,12 @@ export class QueryBusMock implements QueryBus {
 
   assertNothingAsked(): void {
     expect(this.mockAsk).not.toHaveBeenCalled();
+  }
+
+  register(queryHandler: QueryHandler<Query, Response>): void {
+    throw new Error("Method not implemented.");
+  }
+  unregister(queryHandler: QueryHandler<Query, Response>): void {
+    throw new Error("Method not implemented.");
   }
 }

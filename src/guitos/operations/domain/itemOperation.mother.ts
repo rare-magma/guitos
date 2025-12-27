@@ -1,6 +1,7 @@
 import { BudgetItemsMother } from "@guitos/domain/budgetItem.mother";
 import { ItemOperation } from "@guitos/operations/domain/itemOperation";
 import { MathOperation } from "@guitos/operations/domain/mathOperation";
+import { DatetimeMother } from "@shared/domain/datetime.mother";
 import { ObjectMother } from "@shared/domain/objectMother.mother";
 import type { Primitives } from "@shared/domain/primitives";
 
@@ -11,6 +12,7 @@ export class ItemOperationMother {
       primitives.budgetItemId,
       primitives.changeValue,
       primitives.mathOperation,
+      primitives.createdAt ?? "",
     );
   }
 
@@ -26,6 +28,7 @@ export class ItemOperationMother {
       BudgetItemsMother.itemForm1().id.toString(),
       ObjectMother.randomNumber(),
       new MathOperation(mathOperation),
+      DatetimeMother.random(),
     );
   }
   static randomList() {

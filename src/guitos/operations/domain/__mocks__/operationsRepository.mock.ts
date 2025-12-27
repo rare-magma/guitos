@@ -1,6 +1,5 @@
-import type { ItemOperation } from "@guitos/operations/domain/itemOperation";
+import { ItemOperation } from "@guitos/operations/domain/itemOperation";
 import type { OperationsRepository } from "@guitos/operations/domain/operationsRepository";
-import { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import type { Nullable } from "@shared/domain/nullable";
 import type { Primitives } from "@shared/domain/primitives";
 import { expect, vi } from "vitest";
@@ -38,33 +37,28 @@ export class OperationsRepositoryMock implements OperationsRepository {
     return await this.mockUpdate(id, itemOperations);
   }
 
-  assertUpdateHasBeenCalledWith(
-    itemOperations: Primitives<ItemOperation[]>,
-  ): void {
+  assertUpdateHasBeenCalledWith(itemOperations: ItemOperation[]): void {
     const { mock } = this.mockUpdate;
-    const lastSavedExampleAggregate = mock.calls[mock.calls.length - 1][0];
-    const expectedBody = itemOperations;
-    const lastSavedExampleAggregateBody =
-      lastSavedExampleAggregate.toPrimitives();
+    const lastSavedExampleAggregate = mock.calls[mock.calls.length - 1][1];
+    for (const operation of itemOperations) {
+      const expectedBody = operation.toPrimitives();
+      const lastSavedExampleAggregateBody = lastSavedExampleAggregate;
 
-    expect(lastSavedExampleAggregate).toBeInstanceOf(UserPreferences);
-    expect(lastSavedExampleAggregateBody).toStrictEqual(expectedBody);
+      expect(lastSavedExampleAggregate).toBeInstanceOf(ItemOperation);
+      expect(lastSavedExampleAggregateBody).toStrictEqual([expectedBody]);
+    }
   }
 
   async delete(id: string): Promise<boolean> {
     return await this.mockDelete(id);
   }
 
-  assertDeleteHasBeenCalledWith(
-    itemOperations: Primitives<ItemOperation[]>,
-  ): void {
+  assertDeleteHasBeenCalledWith(id: string): void {
     const { mock } = this.mockDelete;
-    const lastSavedExampleAggregate = mock.calls[mock.calls.length - 1][0];
-    const expectedBody = itemOperations;
-    const lastSavedExampleAggregateBody =
-      lastSavedExampleAggregate.toPrimitives();
-
-    expect(lastSavedExampleAggregate).toBeInstanceOf(UserPreferences);
-    expect(lastSavedExampleAggregateBody).toStrictEqual(expectedBody);
+    const lastDeletedExampleAggregate = mock.calls[mock.calls.length - 1][0];
+    const lastDeletedExampleAggregateBody =
+      lastDeletedExampleAggregate.toPrimitives();
+    expect(lastDeletedExampleAggregate).toBeInstanceOf(ItemOperation);
+    expect(lastDeletedExampleAggregateBody).toStrictEqual(id);
   }
 }

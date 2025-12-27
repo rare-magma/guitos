@@ -1,5 +1,5 @@
 import { BudgetMother } from "@guitos/domain/budget.mother";
-import type { ItemOperation } from "@guitos/operations/domain/itemOperation";
+import { MathOperation } from "@guitos/operations/domain/mathOperation";
 import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import { prompt } from "@guitos/sections/NavBar/prompt";
 import { Currency } from "@guitos/userPreferences/domain/currency";
@@ -26,7 +26,6 @@ import {
   parseLocaleNumber,
   roundBig,
 } from "./utils";
-import { MathOperation } from "@guitos/operations/domain/mathOperation";
 
 const optionsRepository = new LocalForageUserPreferencesRepository();
 
