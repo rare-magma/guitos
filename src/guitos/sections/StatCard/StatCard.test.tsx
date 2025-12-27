@@ -3,7 +3,7 @@ import { StatCard } from "@guitos/sections/StatCard/StatCard";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { setBudgetMock } from "../../../setupTests";
+import { setBudgetMock } from "../../application/react/setupTests";
 
 describe("StatCard", () => {
   const onShowGraphs = vi.fn();

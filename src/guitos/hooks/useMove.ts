@@ -1,8 +1,8 @@
-import { useBudget } from "@guitos/context/BudgetContext";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import type { Budget } from "@guitos/domain/budget";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
 import { useLocation } from "wouter";
-import { saveLastOpenedBudget } from "../../utils";
+import { saveLastOpenedBudget } from "../application/react/utils";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();

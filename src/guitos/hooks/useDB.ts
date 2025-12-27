@@ -1,11 +1,11 @@
 import {
   BudgetCsvService,
   type CsvRow,
-} from "@guitos/application/budgetCsvService";
-import { useBudget } from "@guitos/context/BudgetContext";
-import { useErrorContext } from "@guitos/context/ErrorContext";
-import { useLoadingContext } from "@guitos/context/LoadingContext";
-import { useNotificationContext } from "@guitos/context/NotificationContext";
+} from "@guitos/application/react/budgetCsvService";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
+import { useErrorContext } from "@guitos/application/react/context/ErrorContext";
+import { useLoadingContext } from "@guitos/application/react/context/LoadingContext";
+import { useNotificationContext } from "@guitos/application/react/context/NotificationContext";
 import { Budget } from "@guitos/domain/budget";
 import type { BudgetItem } from "@guitos/domain/budgetItem";
 import { localForageBudgetRepository } from "@guitos/infrastructure/localForageBudgetRepository";
@@ -21,7 +21,10 @@ import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useLocation, useParams } from "wouter";
-import { createBudgetNameList, saveLastOpenedBudget } from "../../utils";
+import {
+  createBudgetNameList,
+  saveLastOpenedBudget,
+} from "../application/react/utils";
 
 const budgetRepository = new localForageBudgetRepository();
 

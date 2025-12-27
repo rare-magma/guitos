@@ -3,7 +3,7 @@ import { LandingPage } from "@guitos/sections/LandingPage/LandingPage";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
-import { setBudgetMock } from "../../../setupTests";
+import { setBudgetMock } from "../../application/react/setupTests";
 
 describe("LandingPage", () => {
   const comp = <LandingPage loadingFromDB={false} showLandingPage={true} />;

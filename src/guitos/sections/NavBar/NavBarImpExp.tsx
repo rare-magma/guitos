@@ -1,5 +1,5 @@
-import { BudgetCsvService } from "@guitos/application/budgetCsvService";
-import { useBudget } from "@guitos/context/BudgetContext";
+import { BudgetCsvService } from "@guitos/application/react/budgetCsvService";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import { useDB } from "@guitos/hooks/useDB";
 import type React from "react";
 import { type Dispatch, type SetStateAction, useRef } from "react";
@@ -15,7 +15,7 @@ import {
 } from "react-bootstrap";
 import { useHotkeys } from "react-hotkeys-hook";
 import { BsArrowDownUp, BsUpload } from "react-icons/bs";
-import { generatePrompt } from "../../../utils";
+import { generatePrompt } from "../../application/react/utils";
 
 interface NavBarImpExpProps {
   expanded: boolean;

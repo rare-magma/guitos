@@ -11,22 +11,26 @@ import {
 } from "react-bootstrap";
 import CurrencyInput, { type IntlConfig } from "react-currency-input-field";
 import { BsXLg } from "react-icons/bs";
-import { calc, parseLocaleNumber, roundBig } from "../../../utils";
+import {
+  calc,
+  parseLocaleNumber,
+  roundBig,
+} from "../../application/react/utils";
 
 import "./ItemFormGroup.css";
-import { BudgetCalculator } from "@guitos/application/budgetCalculator";
-import { useBudget } from "@guitos/context/BudgetContext";
+import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
+import { PersistOperationsCommand } from "@guitos/contexts/operations/application/persistOperations/persistOperationsCommand";
+import { RemoveOperationsCommand } from "@guitos/contexts/operations/application/removeOperations/removeOperationsCommand";
+import { ItemOperation } from "@guitos/contexts/operations/domain/itemOperation";
+import type { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
+import type { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
 import type { Budget } from "@guitos/domain/budget";
 import type { BudgetItem } from "@guitos/domain/budgetItem";
 import type { Expenses } from "@guitos/domain/expenses";
 import type { Incomes } from "@guitos/domain/incomes";
 import { commandBus } from "@guitos/infrastructure/buses";
-import { PersistOperationsCommand } from "@guitos/operations/application/persistOperations/persistOperationsCommand";
-import { RemoveOperationsCommand } from "@guitos/operations/application/removeOperations/removeOperationsCommand";
-import { ItemOperation } from "@guitos/operations/domain/itemOperation";
-import type { MathOperation } from "@guitos/operations/domain/mathOperation";
 import { CalculateButton } from "@guitos/sections/CalculateButton/CalculateButton";
-import type { UserPreferences } from "@guitos/userPreferences/domain/userPreferences";
 import { Datetime } from "@shared/domain/datetime";
 
 interface ItemFormProps {
@@ -34,8 +38,8 @@ interface ItemFormProps {
   costPercentage: number;
   label: string;
   inputRef: RefObject<HTMLInputElement | null>;
-  userOptions: UserPreferences;
-  intlConfig: IntlConfig;
+  userOptions: UserPreferences | undefined;
+  intlConfig: IntlConfig | undefined;
 }
 
 export function ItemFormGroup({
@@ -109,7 +113,7 @@ export function ItemFormGroup({
           if (value) {
             newItemForm.value = parseLocaleNumber(
               value,
-              userOptions.locale.value,
+              userOptions?.locale.value,
             );
           }
           break;

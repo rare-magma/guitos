@@ -21,11 +21,15 @@ import {
   BsPercent,
 } from "react-icons/bs";
 import "./StatCard.css";
-import { BudgetCalculator } from "@guitos/application/budgetCalculator";
-import { useBudget } from "@guitos/context/BudgetContext";
-import { useConfig } from "@guitos/context/ConfigContext";
+import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
+import { useConfig } from "@guitos/application/react/context/ConfigContext";
 import type { Budget } from "@guitos/domain/budget";
-import { focusRef, parseLocaleNumber, roundBig } from "../../../utils";
+import {
+  focusRef,
+  parseLocaleNumber,
+  roundBig,
+} from "../../application/react/utils";
 
 interface StatCardProps {
   onShowGraphs: () => void;
@@ -74,7 +78,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
       const newState = produce((draft) => {
         draft.stats.reserves = parseLocaleNumber(
           value,
-          userOptions.locale.value,
+          userOptions?.locale.value,
         );
       }, budget);
       setBudget(newState(), false);
@@ -110,7 +114,7 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
   return (
     <Card
       className="stat-card"
-      key={`stat-${userOptions.currency}-${budget?.expenses.total} + ${budget?.incomes.total}}`}
+      key={`stat-${userOptions?.currency}-${budget?.expenses.total} + ${budget?.incomes.total}}`}
     >
       <Card.Header className="stat-card-header py-0">
         <Row className="mb-1">

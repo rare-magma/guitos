@@ -1,10 +1,10 @@
-import { useBudget } from "@guitos/context/BudgetContext";
-import { useErrorContext } from "@guitos/context/ErrorContext";
-import { useLoadingContext } from "@guitos/context/LoadingContext";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
+import { useErrorContext } from "@guitos/application/react/context/ErrorContext";
+import { useLoadingContext } from "@guitos/application/react/context/LoadingContext";
 import {
   type BudgetNotification,
   useNotificationContext,
-} from "@guitos/context/NotificationContext";
+} from "@guitos/application/react/context/NotificationContext";
 import type { Budget } from "@guitos/domain/budget";
 import { useDB } from "@guitos/hooks/useDB";
 import { LandingPage } from "@guitos/sections/LandingPage/LandingPage";
@@ -17,7 +17,7 @@ import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { Col, Container, Row, ToastContainer } from "react-bootstrap";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useParams } from "wouter";
-import { createBudgetNameList } from "../../../utils";
+import { createBudgetNameList } from "../../application/react/utils";
 
 const ChartsPage = lazy(() => import("../ChartsPage/ChartsPage"));
 const TableCard = lazy(() => import("../TableCard/TableCard"));

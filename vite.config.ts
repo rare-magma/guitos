@@ -52,7 +52,10 @@ export default defineConfig((_) => {
       globals: true,
       mockClear: true,
       environment: "happy-dom",
-      setupFiles: ["./src/setupTests.ts", "console-fail-test/setup"],
+      setupFiles: [
+        "./src/guitos/application/react/setupTests.ts",
+        "console-fail-test/setup",
+      ],
       include: [
         "src/**/*.{test,spec}.?(c|m)[jt]s?(x)",
         "src/*.{test,spec}.?(c|m)[jt]s?(x)",

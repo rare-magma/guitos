@@ -21,9 +21,9 @@ import {
   focusRef,
   getLabelKeyFilteredItem,
   getNestedValues,
-} from "../../../utils";
+} from "../../application/react/utils";
 import "./ChartsPage.css";
-import { useBudget } from "@guitos/context/BudgetContext";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import { useDB } from "@guitos/hooks/useDB";
 import { Chart } from "@guitos/sections/Chart/Chart";
 import type { Uuid } from "@shared/domain/uuid";

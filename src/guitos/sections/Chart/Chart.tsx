@@ -1,5 +1,3 @@
-import { useBudget } from "@guitos/context/BudgetContext";
-import { useConfig } from "@guitos/context/ConfigContext";
 import { ChartTooltip } from "@guitos/sections/Chart/ChartTooltip";
 import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import { Card, Col, Form, InputGroup, Row } from "react-bootstrap";
@@ -13,8 +11,10 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { intlFormat, median } from "../../../utils";
+import { intlFormat, median } from "../../application/react/utils";
 import "./Chart.css";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
+import { useConfig } from "@guitos/application/react/context/ConfigContext";
 
 interface ChartProps {
   header: string;

@@ -1,9 +1,9 @@
-import type { BudgetNotification } from "@guitos/context/NotificationContext";
+import type { BudgetNotification } from "@guitos/application/react/context/NotificationContext";
 import { Notification } from "@guitos/sections/Notification/Notification";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { undoMock } from "../../../setupTests";
+import { undoMock } from "../../application/react/setupTests";
 
 describe("Notification", () => {
   const notification: BudgetNotification = {

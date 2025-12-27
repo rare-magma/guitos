@@ -11,7 +11,7 @@ import {
   setBudgetMock,
   testBudgetContext,
   undoMock,
-} from "../../../setupTests";
+} from "../../application/react/setupTests";
 
 const budgetRepository = new localForageBudgetRepository();
 

@@ -2,7 +2,7 @@ import { BudgetItemCreatedDomainEvent } from "@guitos/domain/budgetItemCreatedDo
 import { AggregateRoot } from "@shared/domain/aggregateRoot";
 import type { Primitives } from "@shared/domain/primitives";
 import Big from "big.js";
-import { roundBig } from "../../utils";
+import { roundBig } from "../application/react/utils";
 
 export class BudgetItem extends AggregateRoot {
   id: number;

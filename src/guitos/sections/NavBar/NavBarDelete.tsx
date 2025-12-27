@@ -1,4 +1,4 @@
-import { useBudget } from "@guitos/context/BudgetContext";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import type { Uuid } from "@shared/domain/uuid";
 import type { RefObject } from "react";
 import { Button, Nav, OverlayTrigger, Popover, Tooltip } from "react-bootstrap";

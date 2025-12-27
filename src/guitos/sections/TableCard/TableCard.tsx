@@ -13,15 +13,15 @@ import {
 } from "react-bootstrap";
 import { BsArrowsVertical, BsPlusLg } from "react-icons/bs";
 import "./TableCard.css";
-import { BudgetCalculator } from "@guitos/application/budgetCalculator";
-import { useBudget } from "@guitos/context/BudgetContext";
-import { useConfig } from "@guitos/context/ConfigContext";
+import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
+import { useConfig } from "@guitos/application/react/context/ConfigContext";
 import type { Budget } from "@guitos/domain/budget";
 import { BudgetItem } from "@guitos/domain/budgetItem";
 import type { Expenses } from "@guitos/domain/expenses";
 import type { Incomes } from "@guitos/domain/incomes";
 import { ItemFormGroup } from "@guitos/sections/ItemForm/ItemFormGroup";
-import { intlFormat, roundBig } from "../../../utils";
+import { intlFormat, roundBig } from "../../application/react/utils";
 
 interface TableCardProps {
   header: "Revenue" | "Expenses";
@@ -100,7 +100,7 @@ export default function TableCard({ header: label }: TableCardProps) {
 
   return (
     <Card
-      key={`table-${label}-${userOptions.currency}-${table?.items.length}`}
+      key={`table-${label}-${userOptions?.currency}-${table?.items.length}`}
       className={`${label}-card`}
     >
       <Card.Header className={`${label}-card-header`}>

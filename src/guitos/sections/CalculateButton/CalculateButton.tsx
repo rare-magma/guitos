@@ -1,7 +1,5 @@
-import { useBudget } from "@guitos/context/BudgetContext";
-import { useConfig } from "@guitos/context/ConfigContext";
+import { ItemOperation } from "@guitos/contexts/operations/domain/itemOperation";
 import type { BudgetItem } from "@guitos/domain/budgetItem";
-import { ItemOperation } from "@guitos/operations/domain/itemOperation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import {
   Button,
@@ -20,10 +18,12 @@ import {
 } from "react-icons/bs";
 import { CgMathDivide, CgMathPlus } from "react-icons/cg";
 import "./CalculateButton.css";
+import { useBudget } from "@guitos/application/react/context/BudgetContext";
+import { useConfig } from "@guitos/application/react/context/ConfigContext";
+import { FindOperationsQuery } from "@guitos/contexts/operations/application/findOperations/findOperationsQuery";
+import type { FindOperationsResponse } from "@guitos/contexts/operations/application/findOperations/findOperationsResponse";
+import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
 import { queryBus } from "@guitos/infrastructure/buses";
-import { FindOperationsQuery } from "@guitos/operations/application/findOperations/findOperationsQuery";
-import type { FindOperationsResponse } from "@guitos/operations/application/findOperations/findOperationsResponse";
-import { MathOperation } from "@guitos/operations/domain/mathOperation";
 import { Datetime } from "@shared/domain/datetime";
 
 interface CalculateButtonProps {

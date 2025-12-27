@@ -7,7 +7,7 @@ import {
   budgetContextSpy,
   setBudgetMock,
   testEmptyBudgetContext,
-} from "../../../setupTests";
+} from "../../application/react/setupTests";
 
 const changelogRegex = /open guitos changelog/i;
 const importRegex = /import budget/i;
