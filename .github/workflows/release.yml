@@ -75,11 +75,10 @@ jobs:
 
       - name: Deploy to Cloudflare Pages
         if: steps.semrel.outputs.version != ''
-        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # ratchet:cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy build --project-name=guitos
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: pnpx wrangler pages deploy build --project-name=guitos
 
       - uses: ./.github/actions/docker
         if: steps.semrel.outputs.version != ''
@@ -91,6 +90,14 @@ jobs:
         if: steps.semrel.outputs.version != ''
         run: mv build guitos && zip -r guitos-v${{ steps.semrel.outputs.version }}.zip guitos/*
 
+      - name: Sign bundle
+        if: steps.semrel.outputs.version != ''
+        run: |
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+          brew install cosign
+
+          cosign sign-blob --yes "guitos-v${{ steps.semrel.outputs.version }}.zip" --bundle "guitos-v${{ steps.semrel.outputs.version }}.zip.sigstore.json"
+
       - name: Generate artifact attestation
         if: steps.semrel.outputs.version != ''
         uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # ratchet:actions/attest-build-provenance@v3
@@ -100,7 +107,7 @@ jobs:
       - name: Upload bundle to GH release
         if: steps.semrel.outputs.version != ''
         run: |
-          gh release upload v${{ steps.semrel.outputs.version }} guitos-v${{ steps.semrel.outputs.version }}.zip
+          gh release upload v${{ steps.semrel.outputs.version }} guitos-v${{ steps.semrel.outputs.version }}.zip*
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
