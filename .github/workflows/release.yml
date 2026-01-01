@@ -93,10 +93,8 @@ jobs:
       - name: Sign bundle
         if: steps.semrel.outputs.version != ''
         run: |
-          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-          brew install cosign
-
-          cosign sign-blob --yes "guitos-v${{ steps.semrel.outputs.version }}.zip" --bundle "guitos-v${{ steps.semrel.outputs.version }}.zip.sigstore.json"
+          cosign sign-blob --yes "guitos-v${{ steps.semrel.outputs.version }}.zip" \
+            --bundle "guitos-v${{ steps.semrel.outputs.version }}.zip.sigstore.json"
 
       - name: Generate artifact attestation
         if: steps.semrel.outputs.version != ''
