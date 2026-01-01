@@ -88,5 +88,5 @@
     "knip": "pnpm dlx knip"
   },
   "type": "module",
-  "version": "1.6.3"
+  "version": "1.6.6"
 }
