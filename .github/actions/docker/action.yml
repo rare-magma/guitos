@@ -12,7 +12,7 @@ runs:
 
     - name: Build and push image
       shell: bash
-      id: build
+      id: build-push
       run: |
         set -euo pipefail
 
