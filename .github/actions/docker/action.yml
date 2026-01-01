@@ -6,11 +6,9 @@ runs:
 
     - name: Authenticate to GHCR
       shell: bash
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         set -euo pipefail
-        echo "${GITHUB_TOKEN}" | buildah login ghcr.io -u "${GITHUB_ACTOR}" --password-stdin --compat-auth-file=/home/runner/.docker/config.json
+        echo "${GH_TOKEN}" | buildah login ghcr.io -u "${GITHUB_ACTOR}" --password-stdin --compat-auth-file=/home/runner/.docker/config.json
 
     - name: Build and push image
       shell: bash
