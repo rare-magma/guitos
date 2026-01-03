@@ -1,18 +1,29 @@
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
+import type { CsvRow } from "@guitos/application/react/budgetCsvService";
+import { roundBig } from "@guitos/application/react/utils";
+import type { ImportBudgetCsvCommand } from "@guitos/contexts/budget/application/importBudget/importBudgetCsvCommand";
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
-import type { CsvItem } from "@guitos/contexts/budget/domain/csvItem";
-import { roundBig } from "./utils";
+import type { CsvBudgetRepository } from "@guitos/contexts/budget/domain/csvBudgetRepository";
+import type { EventBus } from "@shared/domain/eventBus/eventBus";
 
-export type CsvRow = CsvItem & {
-  type: "expense" | "income" | "goal" | "reserves";
-  name: string;
-  value: string | number;
-};
+export class CsvBudgetImporter {
+  private readonly repository: CsvBudgetRepository;
+  private readonly eventBus: EventBus;
 
-export class BudgetCsvService {
-  static fromCsv(csv: CsvRow[], date: string): Budget {
-    const newBudget = Budget.create(date);
+  constructor(repository: CsvBudgetRepository, eventBus: EventBus) {
+    this.repository = repository;
+    this.eventBus = eventBus;
+  }
+
+  async run({ budgetName, csv }: ImportBudgetCsvCommand): Promise<void> {
+    const budgetCsv = this.repository.import(csv);
+    const newBudget = this.createBudgetFromCsv(budgetCsv.data, budgetName);
+    await this.eventBus.publish(newBudget.pullDomainEvents());
+  }
+
+  private createBudgetFromCsv(csv: CsvRow[], name: string): Budget {
+    const newBudget = Budget.create(name);
 
     csv.forEach((item, key) => {
       const newBudgetItem = new BudgetItem(key, item.name, Number(item.value));
@@ -49,22 +60,5 @@ export class BudgetCsvService {
     newBudget.stats.saved = BudgetCalculator.saved(newBudget);
 
     return newBudget;
-  }
-
-  static toCsv(budget: Readonly<Budget>): string {
-    const header = ["type", "name", "value"];
-
-    const expenses = budget.expenses.items.map((expense: BudgetItem) => {
-      return ["expense", expense.name, expense.value].join(",");
-    });
-
-    const incomes = budget.incomes.items.map((income: BudgetItem) => {
-      return ["income", income.name, income.value].join(",");
-    });
-
-    const stats = ["goal", "goal", budget.stats.goal].join(",");
-    const reserves = ["reserves", "reserves", budget.stats.reserves].join(",");
-
-    return [header, ...expenses, ...incomes, stats, reserves].join("\n");
   }
 }

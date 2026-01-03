@@ -1,18 +1,17 @@
-import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
-import type { Expenses } from "@guitos/domain/expenses";
-import type { Incomes } from "@guitos/domain/incomes";
-import type { Stats } from "@guitos/domain/stats";
+import { BudgetChangedDomainEvent } from "@guitos/contexts/budget/domain/budgetChangedDomainEvent";
+import { Expenses } from "@guitos/contexts/budget/domain/expenses";
+import { Incomes } from "@guitos/contexts/budget/domain/incomes";
+import { Stats } from "@guitos/contexts/budget/domain/stats";
+import { AggregateRoot } from "@shared/domain/aggregateRoot";
+import type { Primitives } from "@shared/domain/primitives";
 import { Uuid } from "@shared/domain/uuid";
-import { immerable } from "immer";
 
-export class Budget {
+export class Budget extends AggregateRoot {
   id: Uuid;
   name: string;
   expenses: Expenses;
   incomes: Incomes;
   stats: Stats;
-
-  [immerable] = true;
 
   constructor(
     id: Uuid,
@@ -21,6 +20,8 @@ export class Budget {
     incomes: Incomes,
     stats: Stats,
   ) {
+    super();
+
     this.id = id;
     this.name = name;
     this.expenses = expenses;
@@ -34,56 +35,37 @@ export class Budget {
     const newBudget = new Budget(
       newId,
       date ?? `${year}-${newId.toString().slice(0, 8)}`,
-      {
-        items: [{ id: 1, name: "", value: 0 }],
-        total: 0,
-      },
-      {
-        items: [{ id: 1, name: "", value: 0 }],
-        total: 0,
-      },
-      {
-        available: 0,
-        withGoal: 0,
-        saved: 0,
-        goal: goal ?? 10,
-        reserves: 0,
-      },
+      Expenses.create(),
+      Incomes.create(),
+      Stats.create(goal),
     );
+    newBudget.record(new BudgetChangedDomainEvent(newBudget.toPrimitives()));
 
     return newBudget;
   }
 
-  static createEmpty(name: string): Budget {
-    const emptyExpenses: BudgetItem[] = [];
-    const emptyIncomes: BudgetItem[] = [];
-    const emptyBudget: Budget = {
-      ...Budget.create(name, 0),
-      expenses: {
-        items: emptyExpenses,
-        total: 0,
-      },
-      incomes: {
-        items: emptyIncomes,
-        total: 0,
-      },
-    };
-    return emptyBudget;
-  }
-
   static clone(budget: Budget): Budget {
-    const clonedBudget: Budget = {
-      ...budget,
-      id: Uuid.random(),
-      name: `${budget.name}-clone`,
-    };
+    const clonedBudget = new Budget(
+      Uuid.random(),
+      `${budget.name}-clone`,
+      budget.expenses,
+      budget.incomes,
+      budget.stats,
+    );
+
+    clonedBudget.record(
+      new BudgetChangedDomainEvent(clonedBudget.toPrimitives()),
+    );
     return clonedBudget;
   }
 
-  static toSafeFormat(budget: Budget) {
+  toPrimitives(): Primitives<Budget> {
     return {
-      ...budget,
-      id: budget.id.toString(),
+      id: this.id.toString(),
+      name: this.name,
+      expenses: this.expenses.toPrimitives(),
+      incomes: this.incomes.toPrimitives(),
+      stats: this.stats.toPrimitives(),
     };
   }
 }

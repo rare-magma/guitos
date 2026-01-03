@@ -42,10 +42,10 @@ export class QueryBusMock implements QueryBus {
     expect(this.mockAsk).not.toHaveBeenCalled();
   }
 
-  register(queryHandler: QueryHandler<Query, Response>): void {
+  register(_queryHandler: QueryHandler<Query, Response>): void {
     throw new Error("Method not implemented.");
   }
-  unregister(queryHandler: QueryHandler<Query, Response>): void {
+  unregister(_queryHandler: QueryHandler<Query, Response>): void {
     throw new Error("Method not implemented.");
   }
 }

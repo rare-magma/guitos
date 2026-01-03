@@ -10,7 +10,7 @@ export class BudgetItemCreatedDomainEventSubscriber
     | undefined = undefined;
 
   name(): string {
-    return "execute-action-on-item-operations-created-event";
+    return "execute-action-on-budget-item-created-event";
   }
 
   subscribedTo(): DomainEventName<BudgetItemCreatedDomainEvent>[] {

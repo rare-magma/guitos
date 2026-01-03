@@ -1,11 +1,18 @@
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
 import { useLoadingContext } from "@guitos/application/react/context/LoadingContext";
+import { useReactToEvents } from "@guitos/application/react/hooks/useReactToEvents";
 import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
-import type { Budget } from "@guitos/contexts/budget/domain/budget";
+import { FindBudgetQuery } from "@guitos/contexts/budget/application/readBudget/findBudgetQuery";
+import type { FindBudgetResponse } from "@guitos/contexts/budget/application/readBudget/findBudgetResponse";
+import { Budget } from "@guitos/contexts/budget/domain/budget";
+import { BudgetChangedDomainEvent } from "@guitos/contexts/budget/domain/budgetChangedDomainEvent";
+import { Uuid } from "@shared/domain/uuid";
+import { queryBus } from "@shared/infrastructure/buses";
 import {
   createContext,
   type PropsWithChildren,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import useUndo from "use-undo";
@@ -109,6 +116,34 @@ function BudgetProvider({ children }: PropsWithChildren) {
 
   const canReallyUndo = undoPossible && past[past.length - 1] !== undefined;
   const canReallyRedo = redoPossible && future[0] !== undefined;
+
+  const budgetChanged = useReactToEvents([BudgetChangedDomainEvent.eventName]);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: react to event
+  useEffect(() => {
+    async function readBudget() {
+      if (!budget) {
+        return;
+      }
+      const { budget: foundBudget } = await queryBus.ask<FindBudgetResponse>(
+        new FindBudgetQuery(budget.id.value),
+      );
+      if (!foundBudget) {
+        return;
+      }
+      setBudget(
+        new Budget(
+          new Uuid(foundBudget?.id),
+          foundBudget?.name,
+          foundBudget?.expenses,
+          foundBudget?.incomes,
+          foundBudget?.stats,
+        ),
+      );
+    }
+
+    readBudget();
+  }, [budgetChanged]);
 
   function handleUndo() {
     if (canReallyUndo) {

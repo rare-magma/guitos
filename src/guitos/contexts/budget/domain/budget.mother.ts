@@ -1,9 +1,21 @@
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
+import { ObjectMother } from "@shared/domain/objectMother.mother";
+import type { Primitives } from "@shared/domain/primitives";
 import { Uuid } from "@shared/domain/uuid";
 import { immerable } from "immer";
 
 export class BudgetMother {
+  static random(overwrites?: Primitives<Budget>): Budget {
+    return new Budget(
+      ObjectMother.uuid(),
+      ObjectMother.word(),
+      ExpensesMother.random({ items: [BudgetItemMother.random()] }),
+      IncomesMother.random({ items: [BudgetItemMother.random()] }),
+      StatsMother.random(),
+      ...overwrites,
+    );
+  }
   static testEmptyBudget(): Budget {
     return {
       [immerable]: true,

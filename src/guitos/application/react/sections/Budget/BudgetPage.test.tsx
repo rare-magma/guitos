@@ -54,7 +54,7 @@ describe("BudgetPage", () => {
       await screen.findByRole("button", { name: "confirm budget deletion" }),
     );
     await expect(
-      budgetRepository.get(BudgetMother.testBudget().id),
+      budgetRepository.find(BudgetMother.testBudget().id),
     ).rejects.toThrow();
   });
 

@@ -1,5 +1,6 @@
-import { Budget } from "@guitos/contexts/budget/domain/budget";
+import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import type { BudgetRepository } from "@guitos/contexts/budget/domain/budgetRepository";
+import type { Primitives } from "@shared/domain/primitives";
 import type { Uuid } from "@shared/domain/uuid";
 import localforage from "localforage";
 
@@ -13,9 +14,9 @@ export class localForageBudgetRepository implements BudgetRepository {
     });
   }
 
-  async get(id: Uuid): Promise<Budget> {
+  async find(id: Primitives<Uuid>): Promise<Primitives<Budget>> {
     try {
-      const budget = await this.budgetsDB.getItem<Budget>(id.toString());
+      const budget = await this.budgetsDB.getItem<Primitives<Budget>>(id.value);
       if (!budget) throw new Error();
       return budget;
     } catch (e) {
@@ -23,12 +24,12 @@ export class localForageBudgetRepository implements BudgetRepository {
     }
   }
 
-  async getAll(): Promise<Budget[]> {
+  async findAll(): Promise<Primitives<Budget[]>> {
     try {
-      const list: Budget[] = [];
+      const list: Primitives<Budget[]> = [];
       for (const item of await this.budgetsDB.keys()) {
         if (item) {
-          const budget = await this.budgetsDB.getItem<Budget>(item);
+          const budget = await this.budgetsDB.getItem<Primitives<Budget>>(item);
           if (budget) {
             list.push(budget);
           }
@@ -40,21 +41,21 @@ export class localForageBudgetRepository implements BudgetRepository {
     }
   }
 
-  async update(id: Uuid, newBudget: Budget): Promise<boolean> {
+  async save(
+    id: Primitives<Uuid>,
+    newBudget: Primitives<Budget>,
+  ): Promise<boolean> {
     try {
-      await this.budgetsDB.setItem(
-        id.toString(),
-        Budget.toSafeFormat(newBudget),
-      );
+      await this.budgetsDB.setItem(id.value, newBudget);
       return true;
     } catch {
       return false;
     }
   }
 
-  async delete(id: Uuid): Promise<boolean> {
+  async delete(id: Primitives<Uuid>): Promise<boolean> {
     try {
-      await this.budgetsDB.removeItem(id.toString());
+      await this.budgetsDB.removeItem(id.value);
       return true;
     } catch {
       return false;

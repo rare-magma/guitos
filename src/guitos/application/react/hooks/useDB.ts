@@ -12,6 +12,7 @@ import type {
 } from "@guitos/application/react/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
 import { createBudgetNameList } from "@guitos/application/react/utils";
+import { ImportBudgetCsvCommand } from "@guitos/contexts/budget/application/importBudget/importBudgetCsvCommand";
 import { PersistLastOpenedBudgetCommand } from "@guitos/contexts/budget/application/saveLastOpenedBudget/persistLastOpenedBudgetCommand";
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
@@ -62,7 +63,7 @@ export function useDB() {
       ? budgetList.concat(newBudget)
       : newBudgetList.concat(newBudget);
 
-    budgetRepository.update(newBudget.id, newBudget).then(() => {
+    budgetRepository.save(newBudget.id, newBudget).then(() => {
       setBudget(newBudget, true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -99,7 +100,7 @@ export function useDB() {
         });
       }),
     );
-    budgetRepository.update(newBudget.id, newBudget).then(() => {
+    budgetRepository.save(newBudget.id, newBudget).then(() => {
       setBudget(newBudget, true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -169,7 +170,7 @@ export function useDB() {
       file.name.slice(0, -4),
     );
     newBudgetList.push(newBudget);
-    budgetRepository.update(newBudget.id, newBudget).then(() => {
+    budgetRepository.save(newBudget.id, newBudget).then(() => {
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
     });
@@ -179,7 +180,7 @@ export function useDB() {
     try {
       const list = JSON.parse(fileReader.result as string) as Budget[];
       for (const b of list) {
-        budgetRepository.update(b.id, b);
+        budgetRepository.save(b.id, b);
       }
       setBudgetList(list);
       setBudgetNameList(createBudgetNameList(list));
@@ -200,12 +201,17 @@ export function useDB() {
     for (const file of importedFiles) {
       const reader = new FileReader();
       reader.readAsText(file, "UTF-8");
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         if (!reader.result) {
           return;
         }
         if (file.type === "text/csv") {
-          importCSV(reader, file);
+          await commandBus.dispatch(
+            new ImportBudgetCsvCommand({
+              budgetName: file.name,
+              csv: reader.result.toString(),
+            }),
+          );
         } else {
           importJSON(reader, file);
         }
@@ -215,7 +221,7 @@ export function useDB() {
 
   function loadFromDb() {
     budgetRepository
-      .getAll()
+      .findAll()
       .then((list) => {
         setBudgetList(list);
         setBudgetNameList(createBudgetNameList(list));
@@ -249,7 +255,7 @@ export function useDB() {
   function loadBudget(list: Budget[]) {
     for (const data of list) {
       budgetRepository
-        .get(data.id)
+        .find(data.id)
         .then((b: Budget) => {
           setBudget(b, false);
         })
@@ -263,7 +269,7 @@ export function useDB() {
     let options: SearchOption[] = [];
 
     budgetRepository
-      .getAll()
+      .findAll()
       .then((list) => {
         for (const budget of list) {
           options = options.concat(
@@ -300,7 +306,7 @@ export function useDB() {
   function searchBudgetsWithFilter() {
     let options: FilteredItem[] = [];
     budgetRepository
-      .getAll()
+      .findAll()
       .then((list) => {
         for (const budget of list) {
           options = options.concat(
@@ -392,7 +398,7 @@ export function useDB() {
         draft.name = event.target.value;
       }, budget);
 
-      budgetRepository.update(budget.id, budget).then(() => {
+      budgetRepository.save(budget.id, budget).then(() => {
         setBudget(newState(), false);
       });
     }
@@ -401,8 +407,8 @@ export function useDB() {
   const saveBudget = useCallback(
     (budget: Budget | undefined) => {
       if (!budget) return;
-      budgetRepository.update(budget.id, budget).then(() => {
-        budgetRepository.getAll().then((list) => {
+      budgetRepository.save(budget.id, budget).then(() => {
+        budgetRepository.findAll().then((list) => {
           setBudgetList(list);
           setBudgetNameList(createBudgetNameList(list));
           setShouldReload(true);
@@ -414,19 +420,16 @@ export function useDB() {
 
   useEffect(() => {
     async function handle() {
-      if (budget) {
-        saveBudget(budget);
-        if (budget.name !== previousBudget.current) {
-          navigateCallback(`/${budget.name}`);
-          await commandBus.dispatch(
-            new PersistLastOpenedBudgetCommand({ budgetName: budget.name }),
-          );
-          previousBudget.current = budget.name;
-        }
+      if (budget && budget.name !== previousBudget.current) {
+        navigateCallback(`/${budget.name}`);
+        await commandBus.dispatch(
+          new PersistLastOpenedBudgetCommand({ budgetName: budget.name }),
+        );
+        previousBudget.current = budget.name;
       }
     }
     handle();
-  }, [budget, saveBudget, navigateCallback]);
+  }, [budget, navigateCallback]);
 
   return {
     createBudget,
