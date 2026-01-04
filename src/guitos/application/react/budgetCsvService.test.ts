@@ -31,7 +31,7 @@ describe("BudgetCsvService", () => {
     expect(typeof budget.stats.reserves).toBe("number");
 
     const hasNaN = [...budget.expenses.items, ...budget.incomes.items].some(
-      (item) => Number.isNaN(item.value),
+      (item) => Number.isNaN(item.amount),
     );
     expect(hasNaN).toBe(false);
   });
@@ -39,7 +39,7 @@ describe("BudgetCsvService", () => {
   test("toCsv", () => {
     expect(
       BudgetCsvService.toCsv(BudgetMother.testBigBudget()),
-    ).eq(`type,name,value
+    ).eq(`type,name,amount
 expense,name,11378.64
 expense,name2,11378.64
 income,name,100.03
@@ -52,22 +52,24 @@ reserves,reserves,200`);
     const emptyBudget = BudgetMother.testEmptyBudget();
     const csv = BudgetCsvService.toCsv(emptyBudget);
 
-    expect(csv).toBe(`type,name,value
+    expect(csv).toBe(`type,name,amount
 goal,goal,0
 reserves,reserves,0`);
   });
 
   test("toCsv should skip items with NaN or undefined values", () => {
     const budget = BudgetMother.testBudget();
+    // @ts-expect-error
     budget.incomes.items.push({
       id: 3,
       name: "brokenIncome",
-      value: Number.NaN,
+      amount: Number.NaN,
     });
+    // @ts-expect-error
     budget.expenses.items.push({
       id: 4,
       name: "badExpense",
-      value: undefined as unknown as number,
+      amount: undefined as unknown as number,
     });
 
     const csv = BudgetCsvService.toCsv(budget);

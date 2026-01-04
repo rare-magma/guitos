@@ -120,7 +120,7 @@ export function CalculateButton({
               </Button>
               <Dropdown>
                 <Dropdown.Toggle
-                  aria-label={"select type of operation on item value"}
+                  aria-label={"select type of operation on item amount"}
                   aria-haspopup="true"
                   variant="outline-secondary"
                   id={useId()}
@@ -167,27 +167,27 @@ export function CalculateButton({
                 </Dropdown.Menu>
               </Dropdown>
               <CurrencyInput
-                id={`${label}-${itemForm.id}-operation-value`}
-                key={`item-${itemForm.id}-${label}-operation-value`}
+                id={`${label}-${itemForm.id}-operation-amount`}
+                key={`item-${itemForm.id}-${label}-operation-amount`}
                 className="text-end form-control straight-corners fixed-width-font"
                 aria-label={`${operation.name}`}
-                name="item-operate-value"
+                name="item-operate-amount"
                 intlConfig={intlConfig}
                 defaultValue={0}
                 allowNegativeValue={false}
                 maxLength={14}
                 onKeyUp={handleKeyPress}
                 ref={inputRef}
-                onValueChange={(value) =>
+                onValueChange={(amount) =>
                   setChangeValue(
-                    Number.isNaN(Number(value)) ? 0 : Number(value),
+                    Number.isNaN(Number(amount)) ? 0 : Number(amount),
                   )
                 }
               />
               <Button
                 id={`item-${itemForm.id}-trigger-operation-button`}
                 key={`${itemForm.id}-${label}-trigger-operation-button`}
-                aria-label={"apply change to item value"}
+                aria-label={"apply change to item amount"}
                 variant="outline-secondary"
                 type="button"
                 onClick={() => {
@@ -208,11 +208,11 @@ export function CalculateButton({
                       key={`${item.id}-history-group-${index}`}
                     >
                       <CurrencyInput
-                        id={`${label}-${itemForm.id}-${index}-history-value`}
-                        key={`item-${itemForm.id}-${index}-${label}-history-value`}
+                        id={`${label}-${itemForm.id}-${index}-history-amount`}
+                        key={`item-${itemForm.id}-${index}-${label}-history-amount`}
                         className="text-end form-control straight-corners fixed-width-font"
-                        aria-label={"item history value"}
-                        name="item-history-value"
+                        aria-label={"item history amount"}
+                        name="item-history-amount"
                         intlConfig={intlConfig}
                         defaultValue={item.changeValue}
                         disabled={true}
@@ -235,8 +235,8 @@ export function CalculateButton({
                         id={`${label}-${itemForm.id}-${index}-history-changeValue`}
                         key={`item-${itemForm.id}-${index}-${label}-history-changeValue`}
                         className="text-end form-control straight-corners fixed-width-font"
-                        aria-label={"item history change value"}
-                        name="item-history-change-value"
+                        aria-label={"item history change amount"}
+                        name="item-history-change-amount"
                         intlConfig={intlConfig}
                         defaultValue={item.changeValue}
                         disabled={true}
@@ -253,7 +253,7 @@ export function CalculateButton({
       <Button
         id={`${label}-${itemForm.id}-operate-button`}
         key={`${itemForm.id}-${label}-operate-button`}
-        aria-label={"select operation type to item value"}
+        aria-label={"select operation type to item amount"}
         aria-haspopup="dialog"
         variant="outline-secondary"
         type="button"

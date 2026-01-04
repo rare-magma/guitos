@@ -4,21 +4,61 @@
     "name": "2023-06",
     "expenses": {
       "items": [
-        { "id": 1, "name": "rent", "value": 300 },
-        { "id": 2, "name": "groceries", "value": 100 },
-        { "id": 3, "name": "electricity", "value": 50 },
-        { "id": 4, "name": "internet", "value": 30 },
-        { "id": 5, "name": "gym", "value": 25 },
-        { "id": 6, "name": "water", "value": 15 },
-        { "id": 7, "name": "cellphone", "value": 20 },
-        { "id": 8, "name": "coffee", "value": 10 }
+        {
+          "id": 1,
+          "name": "rent",
+          "amount": 300
+        },
+        {
+          "id": 2,
+          "name": "groceries",
+          "amount": 100
+        },
+        {
+          "id": 3,
+          "name": "electricity",
+          "amount": 50
+        },
+        {
+          "id": 4,
+          "name": "internet",
+          "amount": 30
+        },
+        {
+          "id": 5,
+          "name": "gym",
+          "amount": 25
+        },
+        {
+          "id": 6,
+          "name": "water",
+          "amount": 15
+        },
+        {
+          "id": 7,
+          "name": "cellphone",
+          "amount": 20
+        },
+        {
+          "id": 8,
+          "name": "coffee",
+          "amount": 10
+        }
       ],
       "total": 550
     },
     "incomes": {
       "items": [
-        { "id": 1, "name": "salary", "value": 1000 },
-        { "id": 2, "name": "2nd hand sale", "value": 50 }
+        {
+          "id": 1,
+          "name": "salary",
+          "amount": 1000
+        },
+        {
+          "id": 2,
+          "name": "2nd hand sale",
+          "amount": 50
+        }
       ],
       "total": 1050
     },
@@ -35,22 +75,66 @@
     "name": "2023-07",
     "expenses": {
       "items": [
-        { "id": 1, "name": "rent", "value": 300 },
-        { "id": 2, "name": "groceries", "value": 100 },
-        { "id": 3, "name": "electricity", "value": 50 },
-        { "id": 4, "name": "internet", "value": 30 },
-        { "id": 5, "name": "gym", "value": 25 },
-        { "id": 6, "name": "water", "value": 15 },
-        { "id": 7, "name": "cellphone", "value": 20 },
-        { "id": 8, "name": "coffee", "value": 10 },
-        { "id": 9, "name": "car rental", "value": 200 }
+        {
+          "id": 1,
+          "name": "rent",
+          "amount": 300
+        },
+        {
+          "id": 2,
+          "name": "groceries",
+          "amount": 100
+        },
+        {
+          "id": 3,
+          "name": "electricity",
+          "amount": 50
+        },
+        {
+          "id": 4,
+          "name": "internet",
+          "amount": 30
+        },
+        {
+          "id": 5,
+          "name": "gym",
+          "amount": 25
+        },
+        {
+          "id": 6,
+          "name": "water",
+          "amount": 15
+        },
+        {
+          "id": 7,
+          "name": "cellphone",
+          "amount": 20
+        },
+        {
+          "id": 8,
+          "name": "coffee",
+          "amount": 10
+        },
+        {
+          "id": 9,
+          "name": "car rental",
+          "amount": 200
+        }
       ],
       "total": 750
     },
     "incomes": {
       "items": [
-        { "id": 1, "name": "salary", "value": 1000 },
-        { "id": 2, "name": "2nd hand sale", "value": 250 }
+        {
+          "id": 1,
+          "name": "salary",
+          "amount": 1000
+        },
+        {
+          "id": 2,
+          "name": "2nd hand sale",
+          "amount": 250
+        }
       ],
       "total": 1250
     },
@@ -67,24 +151,76 @@
     "name": "2023-08",
     "expenses": {
       "items": [
-        { "id": 1, "name": "rent", "value": 300 },
-        { "id": 2, "name": "groceries", "value": 100 },
-        { "id": 3, "name": "electricity", "value": 50 },
-        { "id": 4, "name": "internet", "value": 30 },
-        { "id": 5, "name": "gym", "value": 25 },
-        { "id": 6, "name": "water", "value": 15 },
-        { "id": 7, "name": "cellphone", "value": 20 },
-        { "id": 8, "name": "coffee", "value": 10 },
-        { "id": 9, "name": "car rental", "value": 200 },
-        { "id": 10, "name": "bike rental", "value": 100 }
+        {
+          "id": 1,
+          "name": "rent",
+          "amount": 300
+        },
+        {
+          "id": 2,
+          "name": "groceries",
+          "amount": 100
+        },
+        {
+          "id": 3,
+          "name": "electricity",
+          "amount": 50
+        },
+        {
+          "id": 4,
+          "name": "internet",
+          "amount": 30
+        },
+        {
+          "id": 5,
+          "name": "gym",
+          "amount": 25
+        },
+        {
+          "id": 6,
+          "name": "water",
+          "amount": 15
+        },
+        {
+          "id": 7,
+          "name": "cellphone",
+          "amount": 20
+        },
+        {
+          "id": 8,
+          "name": "coffee",
+          "amount": 10
+        },
+        {
+          "id": 9,
+          "name": "car rental",
+          "amount": 200
+        },
+        {
+          "id": 10,
+          "name": "bike rental",
+          "amount": 100
+        }
       ],
       "total": 850
     },
     "incomes": {
       "items": [
-        { "id": 1, "name": "salary", "value": 1000 },
-        { "id": 2, "name": "2nd hand sale", "value": 250 },
-        { "id": 3, "name": "2nd hand sale", "value": 250 }
+        {
+          "id": 1,
+          "name": "salary",
+          "amount": 1000
+        },
+        {
+          "id": 2,
+          "name": "2nd hand sale",
+          "amount": 250
+        },
+        {
+          "id": 3,
+          "name": "2nd hand sale",
+          "amount": 250
+        }
       ],
       "total": 1500
     },

@@ -63,7 +63,7 @@ export function useDB() {
       ? budgetList.concat(newBudget)
       : newBudgetList.concat(newBudget);
 
-    budgetRepository.save(newBudget.id, newBudget).then(() => {
+    budgetRepository.save(newBudget.id, newBudget.toPrimitives()).then(() => {
       setBudget(newBudget, true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -100,7 +100,7 @@ export function useDB() {
         });
       }),
     );
-    budgetRepository.save(newBudget.id, newBudget).then(() => {
+    budgetRepository.save(newBudget.id, newBudget.toPrimitives()).then(() => {
       setBudget(newBudget, true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
@@ -170,7 +170,7 @@ export function useDB() {
       file.name.slice(0, -4),
     );
     newBudgetList.push(newBudget);
-    budgetRepository.save(newBudget.id, newBudget).then(() => {
+    budgetRepository.save(newBudget.id, newBudget.toPrimitives()).then(() => {
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
     });
@@ -180,7 +180,7 @@ export function useDB() {
     try {
       const list = JSON.parse(fileReader.result as string) as Budget[];
       for (const b of list) {
-        budgetRepository.save(b.id, b);
+        budgetRepository.save(b.id, b.toPrimitives());
       }
       setBudgetList(list);
       setBudgetNameList(createBudgetNameList(list));
@@ -315,7 +315,7 @@ export function useDB() {
                 id: budget.id,
                 name: budget.name,
                 item: i.name,
-                value: i.value,
+                amount: i.amount,
                 type: "Incomes",
               };
             }),
@@ -324,7 +324,7 @@ export function useDB() {
                 id: budget.id,
                 name: budget.name,
                 item: i.name,
-                value: i.value,
+                amount: i.amount,
                 type: "Expenses",
               };
             }),
@@ -354,7 +354,7 @@ export function useDB() {
     const filteredIncomes = budgetList?.flatMap((b: Budget) => {
       return b.incomes.items
         .filter((i: BudgetItem) =>
-          i.value && strictFilter
+          i.amount && strictFilter
             ? i.name === filter.value
             : i.name.toLowerCase().includes(filter.value.toLowerCase()),
         )
@@ -363,7 +363,7 @@ export function useDB() {
             id: b.id,
             name: b.name,
             item: i.name,
-            value: i.value,
+            value: i.amount,
             type: "Incomes",
           };
         })
@@ -373,7 +373,7 @@ export function useDB() {
     const filteredExpenses = budgetList?.flatMap((b: Budget) => {
       return b.expenses.items
         .filter((i: BudgetItem) =>
-          i.value && strictFilter
+          i.amount && strictFilter
             ? i.name === filter.value
             : i.name.toLowerCase().includes(filter.value.toLowerCase()),
         )
@@ -382,7 +382,7 @@ export function useDB() {
             id: b.id,
             name: b.name,
             item: i.name,
-            value: i.value,
+            value: i.amount,
             type: "Expenses",
           };
         })
@@ -398,7 +398,7 @@ export function useDB() {
         draft.name = event.target.value;
       }, budget);
 
-      budgetRepository.save(budget.id, budget).then(() => {
+      budgetRepository.save(budget.id, budget.toPrimitives()).then(() => {
         setBudget(newState(), false);
       });
     }
@@ -407,7 +407,7 @@ export function useDB() {
   const saveBudget = useCallback(
     (budget: Budget | undefined) => {
       if (!budget) return;
-      budgetRepository.save(budget.id, budget).then(() => {
+      budgetRepository.save(budget.id, budget.toPrimitives()).then(() => {
         budgetRepository.findAll().then((list) => {
           setBudgetList(list);
           setBudgetNameList(createBudgetNameList(list));

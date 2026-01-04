@@ -90,7 +90,7 @@ export default function TableCard({ header: label }: TableCardProps) {
 
     newItemForm.id = Number.isNaN(maxId) ? 0 : maxId + 1;
     newItemForm.name = "";
-    newItemForm.value = 0;
+    newItemForm.amount = 0;
 
     newTable.items = tableBeingEdited.items.concat(newItemForm);
     newTable.total = roundBig(BudgetCalculator.itemsTotal(newTable.items), 2);
@@ -109,7 +109,7 @@ export default function TableCard({ header: label }: TableCardProps) {
           overlay={
             isExpense ? (
               <Tooltip
-                id={`tooltip-value-${label}`}
+                id={`tooltip-amount-${label}`}
                 style={{ position: "fixed" }}
               >
                 {revenuePercentage}% of revenue
@@ -149,7 +149,7 @@ export default function TableCard({ header: label }: TableCardProps) {
                   label={label}
                   costPercentage={
                     budget
-                      ? BudgetItem.percentage(item.value, budget.incomes.total)
+                      ? BudgetItem.percentage(item.amount, budget.incomes.total)
                       : 0
                   }
                   inputRef={inputRef}

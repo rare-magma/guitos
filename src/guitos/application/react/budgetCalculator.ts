@@ -11,8 +11,8 @@ export class BudgetCalculator {
     }
 
     for (const item of items) {
-      if (!Number.isNaN(item.value)) {
-        total = total.add(Big(item.value));
+      if (!Number.isNaN(item.amount)) {
+        total = total.add(Big(item.amount));
       }
     }
 

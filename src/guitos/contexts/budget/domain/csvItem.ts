@@ -1,15 +1,13 @@
-import type Big from "big.js";
-
 type CsvType = "expense" | "income" | "goal" | "reserves";
 
 export class CsvItem {
   type: CsvType;
   name: string;
-  value: Big;
+  amount: number;
 
-  constructor(type: CsvType, name: string, value: Big) {
+  constructor(type: CsvType, name: string, amount: number) {
     this.type = type;
     this.name = name;
-    this.value = value;
+    this.amount = amount;
   }
 }

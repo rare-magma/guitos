@@ -7,14 +7,14 @@ import Big from "big.js";
 export class BudgetItem extends AggregateRoot {
   id: number;
   name: string;
-  value: number;
+  amount: number;
 
-  constructor(id: number, name: string, value: number) {
+  constructor(id: number, name: string, amount: number) {
     super();
 
     this.id = id;
     this.name = name;
-    this.value = value;
+    this.amount = amount;
   }
 
   static create(): BudgetItem {
@@ -42,7 +42,7 @@ export class BudgetItem extends AggregateRoot {
     return {
       id: this.id,
       name: this.name,
-      value: this.value,
+      amount: this.amount,
     };
   }
 }

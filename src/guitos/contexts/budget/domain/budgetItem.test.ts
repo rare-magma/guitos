@@ -7,25 +7,25 @@ describe("BudgetItem", () => {
   test("percentage", () => {
     expect(
       BudgetItem.percentage(
-        BudgetItemsMother.itemForm1().value,
+        BudgetItemsMother.itemForm1().amount,
         BudgetMother.testBudget().incomes.total,
       ),
     ).eq(10);
     expect(
       BudgetItem.percentage(
-        BudgetItemsMother.itemForm2().value,
+        BudgetItemsMother.itemForm2().amount,
         BudgetMother.testBudget().incomes.total,
       ),
     ).eq(100);
     expect(
       BudgetItem.percentage(
-        BudgetItemsMother.itemForm1().value,
+        BudgetItemsMother.itemForm1().amount,
         BudgetMother.testBudget().expenses.total,
       ),
     ).eq(100);
     expect(
       BudgetItem.percentage(
-        BudgetItemsMother.itemForm2().value,
+        BudgetItemsMother.itemForm2().amount,
         BudgetMother.testBudget().expenses.total,
       ),
     ).eq(1000);

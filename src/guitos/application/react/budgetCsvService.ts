@@ -7,7 +7,7 @@ import { roundBig } from "./utils";
 export type CsvRow = CsvItem & {
   type: "expense" | "income" | "goal" | "reserves";
   name: string;
-  value: string | number;
+  amount: string | number;
 };
 
 export class BudgetCsvService {
@@ -15,7 +15,7 @@ export class BudgetCsvService {
     const newBudget = Budget.create(date);
 
     csv.forEach((item, key) => {
-      const newBudgetItem = new BudgetItem(key, item.name, Number(item.value));
+      const newBudgetItem = new BudgetItem(key, item.name, Number(item.amount));
 
       switch (item.type) {
         case "expense":
@@ -25,10 +25,10 @@ export class BudgetCsvService {
           newBudget.incomes.items.push(newBudgetItem);
           break;
         case "goal":
-          newBudget.stats.goal = Number(item.value);
+          newBudget.stats.goal = Number(item.amount);
           break;
         case "reserves":
-          newBudget.stats.reserves = Number(item.value);
+          newBudget.stats.reserves = Number(item.amount);
           break;
       }
     });
@@ -52,14 +52,14 @@ export class BudgetCsvService {
   }
 
   static toCsv(budget: Readonly<Budget>): string {
-    const header = ["type", "name", "value"];
+    const header = ["type", "name", "amount"];
 
     const expenses = budget.expenses.items.map((expense: BudgetItem) => {
-      return ["expense", expense.name, expense.value].join(",");
+      return ["expense", expense.name, expense.amount].join(",");
     });
 
     const incomes = budget.incomes.items.map((income: BudgetItem) => {
-      return ["income", income.name, income.value].join(",");
+      return ["income", income.name, income.amount].join(",");
     });
 
     const stats = ["goal", "goal", budget.stats.goal].join(",");

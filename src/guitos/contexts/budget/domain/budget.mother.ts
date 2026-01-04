@@ -6,15 +6,19 @@ import { Uuid } from "@shared/domain/uuid";
 import { immerable } from "immer";
 
 export class BudgetMother {
+  static create(overwrites?: Primitives<Budget>): Budget {
+    return new Budget({ ...overwrites });
+  }
+
   static random(overwrites?: Primitives<Budget>): Budget {
-    return new Budget(
-      ObjectMother.uuid(),
-      ObjectMother.word(),
-      ExpensesMother.random({ items: [BudgetItemMother.random()] }),
-      IncomesMother.random({ items: [BudgetItemMother.random()] }),
-      StatsMother.random(),
+    return new Budget({
+      id: ObjectMother.uuid().value,
+      name: ObjectMother.word(),
+      expenses: ExpensesMother.random({ items: [BudgetItemMother.random()] }),
+      incomes: IncomesMother.random({ items: [BudgetItemMother.random()] }),
+      stats: StatsMother.random(),
       ...overwrites,
-    );
+    });
   }
   static testEmptyBudget(): Budget {
     return {
@@ -45,11 +49,11 @@ export class BudgetMother {
       id: Uuid.random(),
       name: "2023-03",
       expenses: {
-        items: [{ id: 1, name: "expense1", value: 10 }],
+        items: [{ id: 1, name: "expense1", amount: 10 }],
         total: 10,
       },
       incomes: {
-        items: [{ id: 2, name: "income1", value: 100 }],
+        items: [{ id: 2, name: "income1", amount: 100 }],
         total: 100,
       },
       stats: {
@@ -72,11 +76,11 @@ export class BudgetMother {
       id: Uuid.random(),
       name: "2023-04",
       expenses: {
-        items: [{ id: 1, name: "name", value: 50 }],
+        items: [{ id: 1, name: "name", amount: 50 }],
         total: 50,
       },
       incomes: {
-        items: [{ id: 2, name: "name2", value: 200 }],
+        items: [{ id: 2, name: "name2", amount: 200 }],
         total: 200,
       },
       stats: {
@@ -95,15 +99,15 @@ export class BudgetMother {
       name: "2023-03",
       expenses: {
         items: [
-          { id: 1, name: "name", value: 11378.64 },
-          { id: 4, name: "name2", value: 11378.64 },
+          { id: 1, name: "name", amount: 11378.64 },
+          { id: 4, name: "name2", amount: 11378.64 },
         ],
         total: 22757.28,
       },
       incomes: {
         items: [
-          { id: 2, name: "name", value: 100.03 },
-          { id: 3, name: "name2", value: 342783.83 },
+          { id: 2, name: "name", amount: 100.03 },
+          { id: 3, name: "name2", amount: 342783.83 },
         ],
         total: 342883.86,
       },
@@ -173,7 +177,7 @@ export class BudgetMother {
   id: "03123AAA5c2de4-00a4-403c-8f0e-f81339be9a4e",
   na2me: "2023-03",
   expens3es: {
-    items: [{ id: "infinity", name: -1, value: "r" }],
+    items: [{ id: "infinity", name: -1, amount: "r" }],
     total: 10,
   },
   stats: {

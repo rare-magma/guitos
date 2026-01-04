@@ -23,10 +23,10 @@ export class CsvBudgetImporter {
   }
 
   private createBudgetFromCsv(csv: CsvRow[], name: string): Budget {
-    const newBudget = Budget.create(name);
+    const newBudget = Budget.create(name.slice(0, -4));
 
     csv.forEach((item, key) => {
-      const newBudgetItem = new BudgetItem(key, item.name, Number(item.value));
+      const newBudgetItem = new BudgetItem(key, item.name, Number(item.amount));
 
       switch (item.type) {
         case "expense":
@@ -36,10 +36,10 @@ export class CsvBudgetImporter {
           newBudget.incomes.items.push(newBudgetItem);
           break;
         case "goal":
-          newBudget.stats.goal = Number(item.value);
+          newBudget.stats.goal = Number(item.amount);
           break;
         case "reserves":
-          newBudget.stats.reserves = Number(item.value);
+          newBudget.stats.reserves = Number(item.amount);
           break;
       }
     });
@@ -59,6 +59,6 @@ export class CsvBudgetImporter {
     newBudget.stats.withGoal = BudgetCalculator.availableWithGoal(newBudget);
     newBudget.stats.saved = BudgetCalculator.saved(newBudget);
 
-    return newBudget;
+    return Budget.update(newBudget);
   }
 }

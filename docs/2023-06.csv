@@ -1,4 +1,4 @@
-type,name,value
+type,name,amount
 expense,rent,300
 expense,groceries,100
 expense,electricity,50

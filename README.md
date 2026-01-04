@@ -115,7 +115,7 @@ There I can see an overview of the evolution of several metrics such as `savings
 ### CSV data model
 
 ```csv
-type,name,value
+type,name,amount
 expense,rent,1000.00
 expense,food,200.00
 income,salary,2000.00
@@ -137,15 +137,15 @@ reserves,reserves,0
     "name": "2023-03",
     "expenses": {
       "items": [
-        { "id": 1, "name": "expense1", "value": 10 },
-        { "id": 2, "name": "expense2", "value": 20 }
+        { "id": 1, "name": "expense1", "amount": 10 },
+        { "id": 2, "name": "expense2", "amount": 20 }
       ],
       "total": 30
     },
     "incomes": {
       "items": [
-        { "id": 1, "name": "income1", "value": 100 },
-        { "id": 2, "name": "income2", "value": 200 }
+        { "id": 1, "name": "income1", "amount": 100 },
+        { "id": 2, "name": "income2", "amount": 200 }
       ],
       "total": 300
     },

@@ -85,8 +85,8 @@ export function ItemFormGroup({
   }
 
   function handleChange(
-    operation: MathOperation | "name" | "value",
-    value?: string,
+    operation: MathOperation | "name" | "amount",
+    amount?: string,
     event?: React.ChangeEvent<HTMLInputElement>,
     changeValue?: number,
   ) {
@@ -109,17 +109,17 @@ export function ItemFormGroup({
         case "name":
           if (event) newItemForm.name = event.target.value;
           break;
-        case "value":
-          if (value) {
-            newItemForm.value = parseLocaleNumber(
-              value,
+        case "amount":
+          if (amount) {
+            newItemForm.amount = parseLocaleNumber(
+              amount,
               userOptions?.locale.value,
             );
           }
           break;
         default:
           if (changeValue) {
-            newItemForm.value = calc(itemForm.value, changeValue, operation);
+            newItemForm.amount = calc(itemForm.amount, changeValue, operation);
             saveInHistory = true;
             setNeedsRerender(!needsRerender);
             handleCalcHist(operation, changeValue);
@@ -197,7 +197,7 @@ export function ItemFormGroup({
         overlay={
           costPercentage > 0 ? (
             <Tooltip
-              id={`tooltip-value-${label}-${itemForm.id}`}
+              id={`tooltip-amount-${label}-${itemForm.id}`}
               style={{ position: "fixed" }}
             >
               {costPercentage}% of revenue
@@ -240,18 +240,18 @@ export function ItemFormGroup({
         }
       >
         <CurrencyInput
-          id={`${label}-${itemForm.id}-value`}
-          key={`${itemForm.id}-${label}-value-${needsRerender}`}
+          id={`${label}-${itemForm.id}-amount`}
+          key={`${itemForm.id}-${label}-amount-${needsRerender}`}
           className="text-end form-control straight-corners fixed-width-font"
-          aria-label={`item ${itemForm.id} value`}
-          name="item-value"
+          aria-label={`item ${itemForm.id} amount`}
+          name="item-amount"
           intlConfig={intlConfig}
-          defaultValue={itemForm.value}
+          defaultValue={itemForm.amount}
           allowNegativeValue={false}
           maxLength={14}
           ref={valueRef}
           onFocus={() => valueRef.current?.setSelectionRange(0, 25)}
-          onValueChange={(value) => handleChange("value", value)}
+          onValueChange={(amount) => handleChange("amount", amount)}
         />
       </OverlayTrigger>
       <CalculateButton

@@ -24,11 +24,11 @@
                 "name": {
                   "type": "string"
                 },
-                "value": {
+                "amount": {
                   "type": "number"
                 }
               },
-              "required": ["id", "name", "value"]
+              "required": ["id", "name", "amount"]
             }
           },
           "total": {
@@ -50,11 +50,11 @@
                 "name": {
                   "type": "string"
                 },
-                "value": {
+                "amount": {
                   "type": "number"
                 }
               },
-              "required": ["id", "name", "value"]
+              "required": ["id", "name", "amount"]
             }
           },
           "total": {

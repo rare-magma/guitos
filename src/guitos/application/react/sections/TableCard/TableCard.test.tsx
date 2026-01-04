@@ -56,7 +56,7 @@ describe("TableCard", () => {
         {
           ...BudgetMother.testBudget(),
           expenses: {
-            items: [{ id: 1, name: "expense1change name", value: 10 }],
+            items: [{ id: 1, name: "expense1change name", amount: 10 }],
             total: 10,
           },
         },
@@ -72,7 +72,7 @@ describe("TableCard", () => {
       {
         ...BudgetMother.testBudget(),
         expenses: {
-          items: [{ id: 1, name: "expense1", value: 123 }],
+          items: [{ id: 1, name: "expense1", amount: 123 }],
           total: 123,
         },
         stats: {
@@ -98,7 +98,7 @@ describe("TableCard", () => {
           expenses: {
             items: [
               ...BudgetMother.testBudget().expenses.items,
-              { id: 2, name: "", value: 0 },
+              { id: 2, name: "", amount: 0 },
             ],
             total: 10,
           },
@@ -126,7 +126,7 @@ describe("TableCard", () => {
           incomes: {
             items: [
               ...BudgetMother.testBudget().incomes.items,
-              { id: 3, name: "", value: 0 },
+              { id: 3, name: "", amount: 0 },
             ],
             total: 100,
           },

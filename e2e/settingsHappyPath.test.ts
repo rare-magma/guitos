@@ -14,10 +14,10 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   await page.locator("#Expenses-1-name").click();
   await page.locator("#Expenses-1-name").fill("rent");
   await page.locator("#Expenses-1-name").press("Tab");
-  await page.locator("#Expenses-1-value").fill("500.75");
+  await page.locator("#Expenses-1-amount").fill("500.75");
 
   await expect(page.locator("#Expenses-1-name")).toHaveValue("rent");
-  await expect(page.locator("#Expenses-1-value")).toHaveValue("$500.75");
+  await expect(page.locator("#Expenses-1-amount")).toHaveValue("$500.75");
 
   await page.getByLabel("open charts view").click();
 
