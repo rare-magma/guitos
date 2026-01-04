@@ -8,6 +8,7 @@ export type CsvRow = CsvItem & {
   type: "expense" | "income" | "goal" | "reserves";
   name: string;
   amount: string | number;
+  value?: string | number; // deprecated legacy field
 };
 
 export class BudgetCsvService {

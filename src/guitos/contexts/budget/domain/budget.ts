@@ -1,5 +1,6 @@
 import { BudgetChangedDomainEvent } from "@guitos/contexts/budget/domain/budgetChangedDomainEvent";
 import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
+import { BudgetName } from "@guitos/contexts/budget/domain/budgetName";
 import { Expenses } from "@guitos/contexts/budget/domain/expenses";
 import { Incomes } from "@guitos/contexts/budget/domain/incomes";
 import { Stats } from "@guitos/contexts/budget/domain/stats";
@@ -9,7 +10,7 @@ import { Uuid } from "@shared/domain/uuid";
 
 export class Budget extends AggregateRoot {
   id: Uuid;
-  name: string;
+  name: BudgetName;
   expenses: Expenses;
   incomes: Incomes;
   stats: Stats;
@@ -18,7 +19,7 @@ export class Budget extends AggregateRoot {
     super();
 
     this.id = new Uuid(id);
-    this.name = name;
+    this.name = new BudgetName(name);
     this.expenses = new Expenses(
       expenses.items.map((expense) => new BudgetItem({ ...expense })),
       expenses.total,
@@ -70,7 +71,7 @@ export class Budget extends AggregateRoot {
   toPrimitives(): Primitives<Budget> {
     return {
       id: this.id.toString(),
-      name: this.name,
+      name: this.name.value,
       expenses: this.expenses.toPrimitives(),
       incomes: this.incomes.toPrimitives(),
       stats: this.stats.toPrimitives(),

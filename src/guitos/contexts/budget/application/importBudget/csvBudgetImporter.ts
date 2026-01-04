@@ -26,10 +26,11 @@ export class CsvBudgetImporter {
     const newBudget = Budget.create(name.slice(0, -4));
 
     csv.forEach((item, key) => {
+      const amount = item.amount ?? item.value; // handle deprecated value field
       const newBudgetItem = new BudgetItem({
         id: key,
         name: item.name,
-        amount: Number(item.amount),
+        amount: Number(amount),
       });
 
       switch (item.type) {

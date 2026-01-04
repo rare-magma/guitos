@@ -8,13 +8,14 @@ export class BudgetItem extends AggregateRoot {
   id: number;
   name: string;
   amount: number;
+  value?: number; // deprecated field
 
-  constructor({ id, name, amount }: Primitives<BudgetItem>) {
+  constructor({ id, name, amount, value }: Primitives<BudgetItem>) {
     super();
 
     this.id = id;
     this.name = name;
-    this.amount = amount;
+    this.amount = amount ?? value;
   }
 
   static create(): BudgetItem {
