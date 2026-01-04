@@ -26,7 +26,11 @@ export class CsvBudgetImporter {
     const newBudget = Budget.create(name.slice(0, -4));
 
     csv.forEach((item, key) => {
-      const newBudgetItem = new BudgetItem(key, item.name, Number(item.amount));
+      const newBudgetItem = new BudgetItem({
+        id: key,
+        name: item.name,
+        amount: Number(item.amount),
+      });
 
       switch (item.type) {
         case "expense":

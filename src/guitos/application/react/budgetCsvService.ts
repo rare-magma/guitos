@@ -15,7 +15,11 @@ export class BudgetCsvService {
     const newBudget = Budget.create(date);
 
     csv.forEach((item, key) => {
-      const newBudgetItem = new BudgetItem(key, item.name, Number(item.amount));
+      const newBudgetItem = new BudgetItem({
+        id: key,
+        name: item.name,
+        amount: Number(item.amount),
+      });
 
       switch (item.type) {
         case "expense":

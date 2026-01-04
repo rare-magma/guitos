@@ -24,15 +24,11 @@ export class BudgetFinder {
       id: new Uuid(budget.id).value,
       name: budget.name,
       expenses: new Expenses(
-        budget.expenses.items.map(
-          (expense) => new BudgetItem(expense.id, expense.name, expense.amount),
-        ),
+        budget.expenses.items.map((expense) => new BudgetItem({ ...expense })),
         budget.expenses.total,
       ),
       incomes: new Incomes(
-        budget.incomes.items.map(
-          (income) => new BudgetItem(income.id, income.name, income.amount),
-        ),
+        budget.incomes.items.map((income) => new BudgetItem({ ...income })),
         budget.incomes.total,
       ),
       stats: new Stats({

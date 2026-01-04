@@ -20,15 +20,11 @@ export class Budget extends AggregateRoot {
     this.id = new Uuid(id);
     this.name = name;
     this.expenses = new Expenses(
-      expenses.items.map(
-        (expense) => new BudgetItem(expense.id, expense.name, expense.amount),
-      ),
+      expenses.items.map((expense) => new BudgetItem({ ...expense })),
       expenses.total,
     );
     this.incomes = new Incomes(
-      incomes.items.map(
-        (income) => new BudgetItem(income.id, income.name, income.amount),
-      ),
+      incomes.items.map((income) => new BudgetItem({ ...income })),
       incomes.total,
     );
     this.stats = new Stats(stats);

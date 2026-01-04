@@ -9,7 +9,7 @@ export class BudgetItem extends AggregateRoot {
   name: string;
   amount: number;
 
-  constructor(id: number, name: string, amount: number) {
+  constructor({ id, name, amount }: Primitives<BudgetItem>) {
     super();
 
     this.id = id;
@@ -18,11 +18,11 @@ export class BudgetItem extends AggregateRoot {
   }
 
   static create(): BudgetItem {
-    const newBudgetItem = new BudgetItem(1, "", 0);
+    const newBudgetItem = new BudgetItem({ id: 1, name: "", amount: 0 });
     newBudgetItem.record(
       new BudgetItemCreatedDomainEvent(newBudgetItem.toPrimitives()),
     );
-    return new BudgetItem(1, "", 0);
+    return newBudgetItem;
   }
 
   static percentage(itemValue: number, revenueTotal: number): number {
