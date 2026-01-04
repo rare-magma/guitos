@@ -11,7 +11,7 @@ import { registerRemoveOperationsCommandHandler } from "@guitos/contexts/operati
 import { registerChangeUserPreferencesCommandHandler } from "@guitos/contexts/userPreferences/application/changePreferences/registerChangeUserPreferencesCommandHandler";
 import { registerReadUserPreferencesQueryHandler } from "@guitos/contexts/userPreferences/application/readPreferences/registerReadUserPreferencesQueryHandler";
 
-export function registerHandlers() {
+export function registerHandlersSubscribers() {
   // commands
   registerChangeUserPreferencesCommandHandler();
   registerPersistOperationsCommandHandler();
