@@ -48,6 +48,8 @@ export function ErrorProvider({ children }: PropsWithChildren) {
     setShowError(true);
   }, []);
 
+  // TODO: listen to error events
+
   const value = useMemo(
     () => ({
       error,

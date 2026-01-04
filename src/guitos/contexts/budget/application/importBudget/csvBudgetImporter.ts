@@ -4,6 +4,7 @@ import { roundBig } from "@guitos/application/react/utils";
 import type { ImportBudgetCsvCommand } from "@guitos/contexts/budget/application/importBudget/importBudgetCsvCommand";
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
+import { CsvBudgetImportFailedDomainEvent } from "@guitos/contexts/budget/domain/csvBudgetImportFailedDomainEvent";
 import type { CsvBudgetRepository } from "@guitos/contexts/budget/domain/csvBudgetRepository";
 import type { EventBus } from "@shared/domain/eventBus/eventBus";
 
@@ -20,6 +21,11 @@ export class CsvBudgetImporter {
     const budgetCsv = this.repository.import(csv);
     const newBudget = this.createBudgetFromCsv(budgetCsv.data, budgetName);
     await this.eventBus.publish(newBudget.pullDomainEvents());
+    if (budgetCsv?.errors && budgetCsv.errors.length > 0) {
+      await this.eventBus.publish(
+        new CsvBudgetImportFailedDomainEvent({ errors: budgetCsv.errors }),
+      );
+    }
   }
 
   private createBudgetFromCsv(csv: CsvRow[], name: string): Budget {

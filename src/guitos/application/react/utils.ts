@@ -4,6 +4,8 @@ import { prompt } from "@guitos/application/react/sections/NavBar/prompt";
 import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
 import type { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
+import type { Primitives } from "@shared/domain/primitives";
+import { Uuid } from "@shared/domain/uuid";
 import Big from "big.js";
 
 export function roundBig(number: Big, precision: number): number {
@@ -63,9 +65,11 @@ export function intlFormat(
     : amount.toString();
 }
 
-export function createBudgetNameList(list: Budget[]): SearchOption[] {
-  return list.map((b: Budget) => {
-    return { id: b.id, item: "", name: b.name.value };
+export function createBudgetNameList(
+  list: Primitives<Budget[]>,
+): SearchOption[] {
+  return list.map((b: Primitives<Budget>) => {
+    return { id: new Uuid(b.id), item: "", name: b.name };
   });
 }
 
