@@ -1,5 +1,6 @@
 import type { Command } from "@shared/domain/commandBus/command";
 import type { CommandBus } from "@shared/domain/commandBus/commandBus";
+import type { CommandHandler } from "@shared/domain/commandBus/commandHandler";
 import { ObjectMother } from "@shared/domain/objectMother.mother";
 import { expect, vi } from "vitest";
 
@@ -42,5 +43,12 @@ export class CommandBusMock implements CommandBus {
 
   assertNothingDispatched(): void {
     expect(this.mockDispatch).not.toHaveBeenCalled();
+  }
+
+  register<C extends Command>(_commandHandler: CommandHandler<C>): void {
+    throw new Error("Method not implemented.");
+  }
+  unregister<C extends Command>(_commandHandler: CommandHandler<C>): void {
+    throw new Error("Method not implemented.");
   }
 }

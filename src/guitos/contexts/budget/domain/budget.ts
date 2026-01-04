@@ -1,4 +1,5 @@
 import { BudgetChangedDomainEvent } from "@guitos/contexts/budget/domain/budgetChangedDomainEvent";
+import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
 import { Expenses } from "@guitos/contexts/budget/domain/expenses";
 import { Incomes } from "@guitos/contexts/budget/domain/incomes";
 import { Stats } from "@guitos/contexts/budget/domain/stats";
@@ -13,50 +14,61 @@ export class Budget extends AggregateRoot {
   incomes: Incomes;
   stats: Stats;
 
-  constructor(
-    id: Uuid,
-    name: string,
-    expenses: Expenses,
-    incomes: Incomes,
-    stats: Stats,
-  ) {
+  constructor({ id, name, expenses, incomes, stats }: Primitives<Budget>) {
     super();
 
-    this.id = id;
+    this.id = new Uuid(id);
     this.name = name;
-    this.expenses = expenses;
-    this.incomes = incomes;
-    this.stats = stats;
+    this.expenses = new Expenses(
+      expenses.items.map(
+        (expense) => new BudgetItem(expense.id, expense.name, expense.amount),
+      ),
+      expenses.total,
+    );
+    this.incomes = new Incomes(
+      incomes.items.map(
+        (income) => new BudgetItem(income.id, income.name, income.amount),
+      ),
+      incomes.total,
+    );
+    this.stats = new Stats(stats);
   }
 
   static create(date?: string, goal?: number): Budget {
     const newId = Uuid.random();
     const year = new Date().getFullYear();
-    const newBudget = new Budget(
-      newId,
-      date ?? `${year}-${newId.toString().slice(0, 8)}`,
-      Expenses.create(),
-      Incomes.create(),
-      Stats.create(goal),
-    );
+    const newBudget = new Budget({
+      id: newId.value,
+      name: date ?? `${year}-${newId.toString().slice(0, 8)}`,
+      expenses: Expenses.create().toPrimitives(),
+      incomes: Incomes.create().toPrimitives(),
+      stats: Stats.create(goal),
+    });
     newBudget.record(new BudgetChangedDomainEvent(newBudget.toPrimitives()));
 
     return newBudget;
   }
 
   static clone(budget: Budget): Budget {
-    const clonedBudget = new Budget(
-      Uuid.random(),
-      `${budget.name}-clone`,
-      budget.expenses,
-      budget.incomes,
-      budget.stats,
-    );
+    const clonedBudget = new Budget({
+      ...budget,
+      id: Uuid.random().value,
+      name: `${budget.name}-clone`,
+    });
 
     clonedBudget.record(
       new BudgetChangedDomainEvent(clonedBudget.toPrimitives()),
     );
     return clonedBudget;
+  }
+
+  static update(budget: Budget): Budget {
+    const updatedBudget = new Budget({ ...budget.toPrimitives() });
+
+    updatedBudget.record(
+      new BudgetChangedDomainEvent(updatedBudget.toPrimitives()),
+    );
+    return updatedBudget;
   }
 
   toPrimitives(): Primitives<Budget> {

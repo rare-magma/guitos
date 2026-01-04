@@ -132,13 +132,13 @@ function BudgetProvider({ children }: PropsWithChildren) {
         return;
       }
       setBudget(
-        new Budget(
-          new Uuid(foundBudget?.id),
-          foundBudget?.name,
-          foundBudget?.expenses,
-          foundBudget?.incomes,
-          foundBudget?.stats,
-        ),
+        new Budget({
+          id: new Uuid(foundBudget?.id).value,
+          name: foundBudget?.name,
+          expenses: foundBudget?.expenses,
+          incomes: foundBudget?.incomes,
+          stats: foundBudget?.stats,
+        }),
       );
     }
 

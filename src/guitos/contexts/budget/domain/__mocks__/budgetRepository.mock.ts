@@ -17,7 +17,7 @@ export class BudgetRepositoryMock implements BudgetRepository {
   }
 
   assertSaveHasBeenCalledWith(
-    id: Primitives<Uuid>,
+    _id: Primitives<Uuid>,
     newBudget: Primitives<Budget>,
   ): void {
     const { mock } = this.mockSave;

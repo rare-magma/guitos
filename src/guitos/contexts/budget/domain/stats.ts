@@ -8,13 +8,13 @@ export class Stats extends AggregateRoot {
   goal: number;
   reserves: number;
 
-  constructor(
-    available: number,
-    withGoal: number,
-    saved: number,
-    goal: number,
-    reserves: number,
-  ) {
+  constructor({
+    available,
+    withGoal,
+    saved,
+    goal,
+    reserves,
+  }: Primitives<Stats>) {
     super();
 
     this.available = available;
@@ -25,7 +25,13 @@ export class Stats extends AggregateRoot {
   }
 
   static create(goal?: number): Stats {
-    return new Stats(0, 0, 0, goal ?? 10, 0);
+    return new Stats({
+      available: 0,
+      withGoal: 0,
+      saved: 0,
+      goal: goal ?? 10,
+      reserves: 0,
+    });
   }
 
   toPrimitives(): Primitives<Stats> {
