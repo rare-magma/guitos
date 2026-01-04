@@ -2,6 +2,7 @@ import { useBudget } from "@guitos/application/react/context/BudgetContext";
 import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
 import { PersistLastOpenedBudgetCommand } from "@guitos/contexts/budget/application/saveLastOpenedBudget/persistLastOpenedBudgetCommand";
 import type { Budget } from "@guitos/contexts/budget/domain/budget";
+import type { Primitives } from "@shared/domain/primitives";
 import { commandBus } from "@shared/infrastructure/buses";
 import { useLocation } from "wouter";
 
@@ -12,7 +13,7 @@ export function useMove() {
   async function select(selectedBudget: SearchOption[] | undefined) {
     if (selectedBudget && budgetList) {
       const filteredList = budgetList.filter(
-        (item: Budget) => item.id === selectedBudget[0].id,
+        (item: Primitives<Budget>) => item.id === selectedBudget[0].id.value,
       );
       filteredList[0] && setBudget(filteredList[0], false);
 

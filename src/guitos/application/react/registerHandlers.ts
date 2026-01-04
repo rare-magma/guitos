@@ -2,6 +2,7 @@ import { registerFindLastOpenedBudgetQueryHandler } from "@guitos/contexts/budge
 import { registerImportBudgetCsvCommandHandler } from "@guitos/contexts/budget/application/importBudget/registerImportBudgetCsvCommandHandler";
 import { registerPersistBudgetCommandHandler } from "@guitos/contexts/budget/application/persistBudget/registerPersistBudgetCommandHandler";
 import { registerPersistOnBudgetChangedSubscriber } from "@guitos/contexts/budget/application/persistBudget/registerPersistOnBudgetChangedSubscriber";
+import { registerFindAllBudgetsQueryHandler } from "@guitos/contexts/budget/application/readAllBudgets/registerFindAllBudgetsQueryHandler";
 import { registerFindBudgetQueryHandler } from "@guitos/contexts/budget/application/readBudget/registerFindBudgetQueryHandler";
 import { registerPersistLastOpenedBudgetCommandHandler } from "@guitos/contexts/budget/application/saveLastOpenedBudget/registerPersistLastOpenedBudgetCommandHandler";
 import { registerFindOperationsQueryHandler } from "@guitos/contexts/operations/application/findOperations/registerFindOperationsQueryHandler";
@@ -25,4 +26,5 @@ export function registerHandlers() {
   registerFindOperationsQueryHandler();
   registerFindLastOpenedBudgetQueryHandler();
   registerFindBudgetQueryHandler();
+  registerFindAllBudgetsQueryHandler();
 }

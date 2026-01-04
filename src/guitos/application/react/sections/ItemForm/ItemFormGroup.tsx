@@ -31,10 +31,11 @@ import { ItemOperation } from "@guitos/contexts/operations/domain/itemOperation"
 import type { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
 import type { UserPreferences } from "@guitos/contexts/userPreferences/domain/userPreferences";
 import { Datetime } from "@shared/domain/datetime";
+import type { Primitives } from "@shared/domain/primitives";
 import { commandBus } from "@shared/infrastructure/buses";
 
 interface ItemFormProps {
-  itemForm: BudgetItem;
+  itemForm: Primitives<BudgetItem>;
   costPercentage: number;
   label: string;
   inputRef: RefObject<HTMLInputElement | null>;
@@ -61,10 +62,10 @@ export function ItemFormGroup({
     if (!budget) return;
     const newItemForm = isExpense
       ? budget.expenses.items.find(
-          (item: BudgetItem) => item.id === itemForm.id,
+          (item: Primitives<BudgetItem>) => item.id === itemForm.id,
         )
       : budget.incomes.items.find(
-          (item: BudgetItem) => item.id === itemForm.id,
+          (item: Primitives<BudgetItem>) => item.id === itemForm.id,
         );
     if (!newItemForm) return;
     const calcHistID = `${budget.id}-${label}-${newItemForm.id}`;
@@ -98,10 +99,10 @@ export function ItemFormGroup({
     const newState = produce((draft) => {
       const newItemForm = isExpense
         ? draft.expenses.items.find(
-            (item: BudgetItem) => item.id === itemForm.id,
+            (item: Primitives<BudgetItem>) => item.id === itemForm.id,
           )
         : draft.incomes.items.find(
-            (item: BudgetItem) => item.id === itemForm.id,
+            (item: Primitives<BudgetItem>) => item.id === itemForm.id,
           );
       if (!newItemForm) return;
 
@@ -139,23 +140,25 @@ export function ItemFormGroup({
         );
       }
       draft.stats.available = roundBig(
-        BudgetCalculator.available(draft as Budget),
+        BudgetCalculator.available(draft as Primitives<Budget>),
         2,
       );
       draft.stats.withGoal = BudgetCalculator.availableWithGoal(
-        draft as Budget,
+        draft as Primitives<Budget>,
       );
-      draft.stats.saved = BudgetCalculator.saved(draft as Budget);
+      draft.stats.saved = BudgetCalculator.saved(draft as Primitives<Budget>);
     }, budget);
 
     setBudget(newState(), saveInHistory);
   }
 
-  async function handleRemove(toBeDeleted: BudgetItem) {
+  async function handleRemove(toBeDeleted: Primitives<BudgetItem>) {
     if (!table?.items) return;
     if (!budget) return;
 
-    const newTable = isExpense ? ({} as Expenses) : ({} as Incomes);
+    const newTable = isExpense
+      ? ({} as Primitives<Expenses>)
+      : ({} as Primitives<Incomes>);
     const newState = produce((draft) => {
       if (isExpense) {
         draft.expenses = newTable;
@@ -163,17 +166,17 @@ export function ItemFormGroup({
         draft.incomes = newTable;
       }
       newTable.items = table.items.filter(
-        (item: BudgetItem) => item.id !== toBeDeleted.id,
+        (item: Primitives<BudgetItem>) => item.id !== toBeDeleted.id,
       );
       newTable.total = roundBig(BudgetCalculator.itemsTotal(newTable.items), 2);
       draft.stats.available = roundBig(
-        BudgetCalculator.available(draft as Budget),
+        BudgetCalculator.available(draft as Primitives<Budget>),
         2,
       );
       draft.stats.withGoal = BudgetCalculator.availableWithGoal(
-        draft as Budget,
+        draft as Primitives<Budget>,
       );
-      draft.stats.saved = BudgetCalculator.saved(draft as Budget);
+      draft.stats.saved = BudgetCalculator.saved(draft as Primitives<Budget>);
     }, budget);
     setBudget(newState(), true);
 

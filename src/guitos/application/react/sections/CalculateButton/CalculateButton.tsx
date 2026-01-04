@@ -1,5 +1,5 @@
 import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
-import { ItemOperation } from "@guitos/contexts/operations/domain/itemOperation";
+import type { ItemOperation } from "@guitos/contexts/operations/domain/itemOperation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import {
   Button,
@@ -23,11 +23,11 @@ import { useConfig } from "@guitos/application/react/context/ConfigContext";
 import { FindOperationsQuery } from "@guitos/contexts/operations/application/findOperations/findOperationsQuery";
 import type { FindOperationsResponse } from "@guitos/contexts/operations/application/findOperations/findOperationsResponse";
 import { MathOperation } from "@guitos/contexts/operations/domain/mathOperation";
-import { Datetime } from "@shared/domain/datetime";
+import type { Primitives } from "@shared/domain/primitives";
 import { queryBus } from "@shared/infrastructure/buses";
 
 interface CalculateButtonProps {
-  itemForm: BudgetItem;
+  itemForm: Primitives<BudgetItem>;
   label: string;
   onCalculate: (changeValue: number, operation: MathOperation) => void;
 }
@@ -42,7 +42,7 @@ export function CalculateButton({
   );
   const [changeValue, setChangeValue] = useState(0);
   const [showHistory, setShowHistory] = useState(false);
-  const [history, setHistory] = useState<ItemOperation[]>([]);
+  const [history, setHistory] = useState<Primitives<ItemOperation[]>>([]);
   const opButtonRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { intlConfig } = useConfig();
@@ -76,19 +76,7 @@ export function CalculateButton({
     const { operations } = await queryBus.ask<FindOperationsResponse>(
       new FindOperationsQuery(calcHistID),
     );
-    const newOperations = [];
-    for (const operation of operations) {
-      newOperations.push(
-        new ItemOperation(
-          operation.id,
-          operation.budgetItemId,
-          operation.changeValue,
-          new MathOperation(operation.mathOperation.name),
-          new Datetime(operation.createdAt),
-        ),
-      );
-    }
-    setHistory(newOperations);
+    setHistory(operations);
   }, [calcHistID]);
 
   useEffect(() => void getHistory(), [getHistory]);

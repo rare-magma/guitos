@@ -22,6 +22,8 @@ import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
 import type { Expenses } from "@guitos/contexts/budget/domain/expenses";
 import type { Incomes } from "@guitos/contexts/budget/domain/incomes";
+import type { Nullable } from "@shared/domain/nullable";
+import type { Primitives } from "@shared/domain/primitives";
 
 interface TableCardProps {
   header: "Revenue" | "Expenses";
@@ -60,13 +62,15 @@ export default function TableCard({ header: label }: TableCardProps) {
         draft.incomes = item;
       }
       draft.stats.available = roundBig(
-        BudgetCalculator.available(draft as Budget),
+        BudgetCalculator.available(draft as Nullable<Primitives<Budget>>),
         2,
       );
       draft.stats.withGoal = BudgetCalculator.availableWithGoal(
-        draft as Budget,
+        draft as Nullable<Primitives<Budget>>,
       );
-      draft.stats.saved = BudgetCalculator.saved(draft as Budget);
+      draft.stats.saved = BudgetCalculator.saved(
+        draft as Nullable<Primitives<Budget>>,
+      );
     }, budget);
     setBudget(newState(), true);
   }
@@ -80,7 +84,7 @@ export default function TableCard({ header: label }: TableCardProps) {
 
     if (tableHasItems) {
       maxId = Math.max(
-        ...table.items.map((i: BudgetItem) => {
+        ...table.items.map((i: Primitives<BudgetItem>) => {
           return i.id;
         }),
       );
@@ -136,7 +140,7 @@ export default function TableCard({ header: label }: TableCardProps) {
             onReorder={reorderTable}
             as="div"
           >
-            {table.items?.map((item: BudgetItem) => (
+            {table.items?.map((item: Primitives<BudgetItem>) => (
               <Reorder.Item
                 key={item.id}
                 value={item}

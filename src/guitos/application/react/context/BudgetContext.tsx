@@ -6,7 +6,8 @@ import { FindBudgetQuery } from "@guitos/contexts/budget/application/readBudget/
 import type { FindBudgetResponse } from "@guitos/contexts/budget/application/readBudget/findBudgetResponse";
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import { BudgetChangedDomainEvent } from "@guitos/contexts/budget/domain/budgetChangedDomainEvent";
-import { Uuid } from "@shared/domain/uuid";
+import type { Nullable } from "@shared/domain/nullable";
+import type { Primitives } from "@shared/domain/primitives";
 import { queryBus } from "@shared/infrastructure/buses";
 import {
   createContext,
@@ -18,15 +19,18 @@ import {
 import useUndo from "use-undo";
 
 export interface BudgetContextInterface {
-  budget: Budget | undefined;
-  setBudget: (value: Budget | undefined, saveInHistory: boolean) => void;
-  budgetList: Budget[] | undefined;
-  setBudgetList: (value: Budget[] | undefined) => void;
+  budget: Nullable<Primitives<Budget>>;
+  setBudget: (
+    value: Nullable<Primitives<Budget>>,
+    saveInHistory: boolean,
+  ) => void;
+  budgetList: Nullable<Primitives<Budget[]>>;
+  setBudgetList: (value: Primitives<Budget[]>) => void;
   budgetNameList: SearchOption[] | undefined;
   setBudgetNameList: (value: SearchOption[] | undefined) => void;
   revenuePercentage: number;
-  past: (Budget | undefined)[];
-  future: (Budget | undefined)[];
+  past: Nullable<Primitives<Budget[]>>;
+  future: Nullable<Primitives<Budget[]>>;
   undo: () => void;
   redo: () => void;
   canUndo: boolean;
@@ -34,18 +38,18 @@ export interface BudgetContextInterface {
 }
 
 const BudgetContext = createContext<BudgetContextInterface>({
-  budget: undefined,
-  setBudget: (_value: Budget | undefined, _saveInHistory: boolean) => {
+  budget: null,
+  setBudget: (_value, _saveInHistory) => {
     _value;
     _saveInHistory;
   },
   budgetList: [],
-  setBudgetList: (value: Budget[] | undefined) => value,
+  setBudgetList: (value) => value,
   budgetNameList: [],
-  setBudgetNameList: (value: SearchOption[] | undefined) => value,
+  setBudgetNameList: (value) => value,
   revenuePercentage: 0,
-  past: [undefined],
-  future: [undefined],
+  past: [],
+  future: [],
   undo: () => {
     // undo
   },
@@ -91,7 +95,9 @@ function useBudget() {
 }
 
 function BudgetProvider({ children }: PropsWithChildren) {
-  const [budgetList, setBudgetList] = useState<Budget[] | undefined>([]);
+  const [budgetList, setBudgetList] = useState<Nullable<Primitives<Budget[]>>>(
+    [],
+  );
   const [budgetNameList, setBudgetNameList] = useState<
     SearchOption[] | undefined
   >([]);
@@ -106,13 +112,17 @@ function BudgetProvider({ children }: PropsWithChildren) {
       canUndo: undoPossible,
       canRedo: redoPossible,
     },
-  ] = useUndo<Budget | undefined>(undefined, { useCheckpoints: true });
+  ] = useUndo<Nullable<Primitives<Budget>>>(null, {
+    useCheckpoints: true,
+  });
 
   const { present: budget, past: pastState, future: futureState } = budgetState;
   const past = pastState.filter((b) => b?.id === budget?.id);
   const future = futureState.filter((b) => b?.id === budget?.id);
 
-  const revenuePercentage = BudgetCalculator.revenuePercentage(budget);
+  const revenuePercentage = budget
+    ? BudgetCalculator.revenuePercentage(new Budget({ ...budget }))
+    : 0;
 
   const canReallyUndo = undoPossible && past[past.length - 1] !== undefined;
   const canReallyRedo = redoPossible && future[0] !== undefined;
@@ -126,20 +136,12 @@ function BudgetProvider({ children }: PropsWithChildren) {
         return;
       }
       const { budget: foundBudget } = await queryBus.ask<FindBudgetResponse>(
-        new FindBudgetQuery(budget.id.value),
+        new FindBudgetQuery(budget.id),
       );
       if (!foundBudget) {
         return;
       }
-      setBudget(
-        new Budget({
-          id: new Uuid(foundBudget?.id).value,
-          name: foundBudget?.name,
-          expenses: foundBudget?.expenses,
-          incomes: foundBudget?.incomes,
-          stats: foundBudget?.stats,
-        }),
-      );
+      setBudget(foundBudget);
     }
 
     readBudget();

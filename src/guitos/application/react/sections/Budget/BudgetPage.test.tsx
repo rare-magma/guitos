@@ -8,13 +8,13 @@ import {
   undoMock,
 } from "@guitos/application/react/setupTests";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
-import { localForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
+import { LocalForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
 import { queryBus } from "@shared/infrastructure/buses";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 
-const budgetRepository = new localForageBudgetRepository();
+const budgetRepository = new LocalForageBudgetRepository();
 
 describe("BudgetPage", () => {
   const setNotificationsMock = vi.fn();

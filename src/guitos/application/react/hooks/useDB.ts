@@ -13,12 +13,15 @@ import type {
 import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
 import { createBudgetNameList } from "@guitos/application/react/utils";
 import { ImportBudgetCsvCommand } from "@guitos/contexts/budget/application/importBudget/importBudgetCsvCommand";
+import { FindAllBudgetsQuery } from "@guitos/contexts/budget/application/readAllBudgets/findAllBudgetsQuery";
+import type { FindAllBudgetsResponse } from "@guitos/contexts/budget/application/readAllBudgets/findAllBudgetsResponse";
 import { PersistLastOpenedBudgetCommand } from "@guitos/contexts/budget/application/saveLastOpenedBudget/persistLastOpenedBudgetCommand";
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import type { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
-import { localForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
+import { LocalForageBudgetRepository } from "@guitos/contexts/budget/infrastructure/localForageBudgetRepository";
+import type { Primitives } from "@shared/domain/primitives";
 import { Uuid } from "@shared/domain/uuid";
-import { commandBus } from "@shared/infrastructure/buses";
+import { commandBus, queryBus } from "@shared/infrastructure/buses";
 import { produce } from "immer";
 import Papa from "papaparse";
 import type React from "react";
@@ -26,7 +29,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useLocation, useParams } from "wouter";
 
-const budgetRepository = new localForageBudgetRepository();
+const budgetRepository = new LocalForageBudgetRepository();
 
 export function useDB() {
   const [options, setOptions] = useState<Option[]>([]);
@@ -64,7 +67,7 @@ export function useDB() {
       : newBudgetList.concat(newBudget);
 
     budgetRepository.save(newBudget.id, newBudget.toPrimitives()).then(() => {
-      setBudget(newBudget, true);
+      setBudget(newBudget.toPrimitives(), true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
 
@@ -101,21 +104,19 @@ export function useDB() {
       }),
     );
     budgetRepository.save(newBudget.id, newBudget.toPrimitives()).then(() => {
-      setBudget(newBudget, true);
+      setBudget(newBudget.toPrimitives(), true);
       setBudgetList(newBudgetList);
       setBudgetNameList(createBudgetNameList(newBudgetList));
     });
   }
 
-  function deleteBudget(toBeDeleted: Uuid) {
+  function deleteBudget(toBeDeleted: string) {
     if (!budgetList) return;
     budgetRepository
-      .delete(toBeDeleted)
+      .delete(new Uuid(toBeDeleted))
       .then(() => {
         const newBudgetList = budgetList
-          .filter(
-            (item: Budget) => item.id.toString() !== toBeDeleted.toString(),
-          )
+          .filter((item: Primitives<Budget>) => item.id !== toBeDeleted)
           .toSorted((a, b) => a.name.localeCompare(b.name))
           .toReversed();
 
@@ -135,7 +136,7 @@ export function useDB() {
         if (newBudgetList.length >= 1) {
           setBudget(newBudgetList[0], true);
         } else {
-          setBudget(undefined, true);
+          setBudget(null, true);
           localStorage.setItem("guitos_lastOpenedBudget", "");
         }
       })
@@ -178,9 +179,11 @@ export function useDB() {
 
   function importJSON(fileReader: FileReader, file: File) {
     try {
-      const list = JSON.parse(fileReader.result as string) as Budget[];
+      const list = JSON.parse(fileReader.result as string) as Primitives<
+        Budget[]
+      >;
       for (const b of list) {
-        budgetRepository.save(b.id, b.toPrimitives());
+        budgetRepository.save(new Uuid(b.id), new Budget(b).toPrimitives());
       }
       setBudgetList(list);
       setBudgetNameList(createBudgetNameList(list));
@@ -219,44 +222,32 @@ export function useDB() {
     }
   }
 
-  function loadFromDb() {
-    budgetRepository
-      .findAll()
-      .then((list) => {
-        setBudgetList(list);
-        setBudgetNameList(createBudgetNameList(list));
+  async function loadFromDb() {
+    const { budgets: list } = await queryBus.ask<FindAllBudgetsResponse>(
+      new FindAllBudgetsQuery(),
+    );
+    setBudgetList(list);
+    setBudgetNameList(createBudgetNameList(list));
 
-        let newBudget: Budget;
-        if (name.trim() !== "undefined") {
-          newBudget = list.filter((b: Budget) => b && b.name === name)[0];
-        } else {
-          newBudget = list
-            .toSorted((a, b) => a.name.localeCompare(b.name))
-            .toReversed()
-            .filter((b: Budget) => b && b.id === list[0].id)[0];
-        }
+    let newBudget: Budget;
+    if (name.trim() !== "undefined") {
+      newBudget = list.filter((b: Budget) => b && b.name === name)[0];
+    }
 
-        // load latest if budget name is not found
-        if (newBudget === undefined) {
-          newBudget = list
-            .toSorted((a, b) => a.name.localeCompare(b.name))
-            .toReversed()
-            .filter((b: Budget) => b && b.id === list[0].id)[0];
-        }
+    // load latest if budget name is not found
+    if (newBudget === undefined) {
+      newBudget = list.filter((b: Budget) => b && b.id === list[0].id)[0];
+    }
 
-        setBudget(newBudget, false);
-        setLoadingFromDB(false);
-      })
-      .catch((e) => {
-        handleError(e);
-      });
+    setBudget(newBudget, false);
+    setLoadingFromDB(false);
   }
 
   function loadBudget(list: Budget[]) {
     for (const data of list) {
       budgetRepository
         .find(data.id)
-        .then((b: Budget) => {
+        .then((b: Primitives<Budget>) => {
           setBudget(b, false);
         })
         .catch((e) => {
@@ -295,7 +286,9 @@ export function useDB() {
           options = options.concat(budgetNameList);
         }
         setOptions(
-          options.toSorted((a, b) => a.name.localeCompare(b.name)).toReversed(),
+          options
+            .toSorted((a, b) => a.name?.localeCompare(b.name))
+            .toReversed(),
         );
       })
       .catch((e) => {
@@ -334,7 +327,7 @@ export function useDB() {
       .then(() => {
         setOptions(
           options
-            .toSorted((a, b) => a.name.localeCompare(b.name))
+            .toSorted((a, b) => a.name?.localeCompare(b.name))
             .filter((v, i, a) => a.indexOf(v) === i)
             .filter((i) => i.value)
             .toReversed(),

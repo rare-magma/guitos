@@ -115,7 +115,7 @@ export function NavBar() {
     return isUnique;
   }
 
-  function handleRemoveBudget(initialId?: Uuid | null) {
+  function handleRemoveBudget(initialId?: string) {
     if (initialId) {
       setExpanded(false);
       deleteBudget(initialId);

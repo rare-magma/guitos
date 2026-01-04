@@ -4,7 +4,7 @@ import type { Primitives } from "@shared/domain/primitives";
 import type { Uuid } from "@shared/domain/uuid";
 import localforage from "localforage";
 
-export class localForageBudgetRepository implements BudgetRepository {
+export class LocalForageBudgetRepository implements BudgetRepository {
   private readonly budgetsDB;
 
   constructor() {

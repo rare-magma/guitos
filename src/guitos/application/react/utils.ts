@@ -64,11 +64,9 @@ export function intlFormat(
 }
 
 export function createBudgetNameList(list: Budget[]): SearchOption[] {
-  return list
-    .filter((b: Budget) => b.id !== undefined && b.name !== undefined)
-    .map((b: Budget) => {
-      return { id: b.id, item: "", name: b.name };
-    });
+  return list.map((b: Budget) => {
+    return { id: b.id, item: "", name: b.name.value };
+  });
 }
 
 export function parseLocaleNumber(
