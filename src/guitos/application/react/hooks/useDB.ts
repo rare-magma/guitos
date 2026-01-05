@@ -28,6 +28,7 @@ import type React from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Option } from "react-bootstrap-typeahead/types/types";
 import { useLocation, useParams } from "wouter";
+import { ImportBudgetJsonCommand } from "@guitos/contexts/importExport/application/importBudgetJson/importBudgetJsonCommand";
 
 const budgetRepository = new LocalForageBudgetRepository();
 
@@ -216,7 +217,12 @@ export function useDB() {
             }),
           );
         } else {
-          importJSON(reader, file);
+          await commandBus.dispatch(
+            new ImportBudgetJsonCommand({
+              budgetName: file.name,
+              json: reader.result.toString(),
+            }),
+          );
         }
       };
     }

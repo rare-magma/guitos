@@ -5,6 +5,7 @@ import { registerFindAllBudgetsQueryHandler } from "@guitos/contexts/budget/appl
 import { registerFindBudgetQueryHandler } from "@guitos/contexts/budget/application/readBudget/registerFindBudgetQueryHandler";
 import { registerPersistLastOpenedBudgetCommandHandler } from "@guitos/contexts/budget/application/saveLastOpenedBudget/registerPersistLastOpenedBudgetCommandHandler";
 import { registerImportBudgetCsvCommandHandler } from "@guitos/contexts/importExport/application/importBudgetCsv/registerImportBudgetCsvCommandHandler";
+import { registerImportBudgetJsonCommandHandler } from "@guitos/contexts/importExport/application/importBudgetJson/registerImportBudgetJsonCommandHandler";
 import { registerFindOperationsQueryHandler } from "@guitos/contexts/operations/application/findOperations/registerFindOperationsQueryHandler";
 import { registerPersistOperationsCommandHandler } from "@guitos/contexts/operations/application/persistOperations/registerPersistOperationsCommandHandler";
 import { registerRemoveOperationsCommandHandler } from "@guitos/contexts/operations/application/removeOperations/registerRemoveOperationsCommandHandler";
@@ -18,6 +19,7 @@ export function registerHandlersSubscribers() {
   registerRemoveOperationsCommandHandler();
   registerPersistLastOpenedBudgetCommandHandler();
   registerImportBudgetCsvCommandHandler();
+  registerImportBudgetJsonCommandHandler();
   registerPersistBudgetCommandHandler();
   // events
   registerPersistOnBudgetChangedSubscriber();

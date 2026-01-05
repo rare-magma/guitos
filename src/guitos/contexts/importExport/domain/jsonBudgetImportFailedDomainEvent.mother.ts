@@ -1,8 +1,9 @@
-import type { Primitives } from "@shared/domain/primitives";
+import { JsonBudgetImportFailedDomainEvent } from "@guitos/contexts/importExport/domain/jsonBudgetImportFailedDomainEvent";
+import type { JsonImportResult } from "@guitos/contexts/importExport/infrastructure/jsonParseBudgetRepository";
 
 export class JsonBudgetImportFailedDomainEventMother {
   static create(
-    params: Primitives<JsonImportResult> & {
+    params: JsonImportResult & {
       eventId?: string;
       occurredOn?: Date;
     },
@@ -13,8 +14,6 @@ export class JsonBudgetImportFailedDomainEventMother {
   static fromBudgetItem(
     aggregate: JsonImportResult,
   ): JsonBudgetImportFailedDomainEvent {
-    return JsonBudgetImportFailedDomainEventMother.create(
-      aggregate.toPrimitives(),
-    );
+    return JsonBudgetImportFailedDomainEventMother.create(aggregate);
   }
 }

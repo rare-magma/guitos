@@ -1,10 +1,8 @@
 import { Budget } from "@guitos/contexts/budget/domain/budget";
+import type { JsonImportResult } from "@guitos/contexts/importExport/infrastructure/jsonParseBudgetRepository";
 import { DomainEvent } from "@shared/domain/eventBus/domainEvent";
-import type { Primitives } from "@shared/domain/primitives";
 
-type FailImportJsonBudgetDomainEventBody = Readonly<
-  Primitives<JsonImportResult> //TODO: model import json errors
->;
+type FailImportJsonBudgetDomainEventBody = Readonly<JsonImportResult>;
 
 export class JsonBudgetImportFailedDomainEvent extends DomainEvent {
   static readonly eventName = "guitos.guitos.event.import-json.failed.1";
@@ -12,7 +10,7 @@ export class JsonBudgetImportFailedDomainEvent extends DomainEvent {
   readonly body: FailImportJsonBudgetDomainEventBody;
 
   constructor(
-    args: Primitives<JsonImportResult> & {
+    args: JsonImportResult & {
       eventId?: string;
       occurredOn?: Date;
     },
