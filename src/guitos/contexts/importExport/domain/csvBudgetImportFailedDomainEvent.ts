@@ -1,5 +1,5 @@
 import { Budget } from "@guitos/contexts/budget/domain/budget";
-import type { CsvImportResult } from "@guitos/contexts/budget/infrastructure/papaparseCsvBudgetRepository";
+import type { CsvImportResult } from "@guitos/contexts/importExport/infrastructure/papaparseCsvBudgetRepository";
 import { DomainEvent } from "@shared/domain/eventBus/domainEvent";
 import type { Primitives } from "@shared/domain/primitives";
 

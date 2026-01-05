@@ -1,7 +1,7 @@
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
-import type { CsvItem } from "@guitos/contexts/budget/domain/csvItem";
+import type { CsvItem } from "@guitos/contexts/importExport/domain/csvItem";
 import { roundBig } from "./utils";
 
 export type CsvRow = CsvItem & {

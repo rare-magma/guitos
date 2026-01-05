@@ -1,5 +1,5 @@
 import type { CsvRow } from "@guitos/application/react/budgetCsvService";
-import type { CsvBudgetRepository } from "@guitos/contexts/budget/domain/csvBudgetRepository";
+import type { CsvBudgetRepository } from "@guitos/contexts/importExport/domain/csvBudgetRepository";
 import Papa, { type ParseError } from "papaparse";
 
 export type CsvImportResult = {

@@ -1,4 +1,4 @@
-import type { JsonError } from "@guitos/contexts/budget/domain/jsonError";
+import type { JsonError } from "@guitos/contexts/importExport/domain/jsonError";
 
 export class JsonErrorMother {
   static error(): JsonError {

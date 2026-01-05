@@ -1,5 +1,5 @@
-import { CsvBudgetImportFailedDomainEvent } from "@guitos/contexts/budget/domain/csvBudgetImportFailedDomainEvent";
-import type { CsvImportResult } from "@guitos/contexts/budget/infrastructure/papaparseCsvBudgetRepository";
+import { CsvBudgetImportFailedDomainEvent } from "@guitos/contexts/importExport/domain/csvBudgetImportFailedDomainEvent";
+import type { CsvImportResult } from "@guitos/contexts/importExport/infrastructure/papaparseCsvBudgetRepository";
 import type { Primitives } from "@shared/domain/primitives";
 
 export class CsvBudgetImportFailedDomainEventMother {

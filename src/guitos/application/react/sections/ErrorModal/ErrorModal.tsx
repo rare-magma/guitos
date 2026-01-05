@@ -1,8 +1,8 @@
 import { Accordion, Button, Modal } from "react-bootstrap";
 import { BsXLg } from "react-icons/bs";
 import "./ErrorModal.css";
-import type { CsvError } from "@guitos/contexts/budget/domain/csvError";
-import type { JsonError } from "@guitos/contexts/budget/domain/jsonError";
+import type { CsvError } from "@guitos/contexts/importExport/domain/csvError";
+import type { JsonError } from "@guitos/contexts/importExport/domain/jsonError";
 
 interface ErrorModalProps {
   error: string | null;

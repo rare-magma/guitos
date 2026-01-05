@@ -1,5 +1,5 @@
-import type { CsvBudgetRepository } from "@guitos/contexts/budget/domain/csvBudgetRepository";
-import type { CsvImportResult } from "@guitos/contexts/budget/infrastructure/papaparseCsvBudgetRepository";
+import type { CsvBudgetRepository } from "@guitos/contexts/importExport/domain/csvBudgetRepository";
+import type { CsvImportResult } from "@guitos/contexts/importExport/infrastructure/papaparseCsvBudgetRepository";
 import { expect, vi } from "vitest";
 
 export class CsvBudgetRepositoryMock implements CsvBudgetRepository {

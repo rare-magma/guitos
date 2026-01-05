@@ -1,5 +1,5 @@
-import type { CsvError } from "@guitos/contexts/budget/domain/csvError";
-import type { JsonError } from "@guitos/contexts/budget/domain/jsonError";
+import type { CsvError } from "@guitos/contexts/importExport/domain/csvError";
+import type { JsonError } from "@guitos/contexts/importExport/domain/jsonError";
 import {
   createContext,
   type PropsWithChildren,

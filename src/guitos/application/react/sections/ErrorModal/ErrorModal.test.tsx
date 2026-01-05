@@ -1,8 +1,8 @@
 import ErrorModal from "@guitos/application/react/sections/ErrorModal/ErrorModal";
-import type { CsvError } from "@guitos/contexts/budget/domain/csvError";
-import { CsvErrorMother } from "@guitos/contexts/budget/domain/csvError.mother";
-import type { JsonError } from "@guitos/contexts/budget/domain/jsonError";
-import { JsonErrorMother } from "@guitos/contexts/budget/domain/jsonError.mother";
+import type { CsvError } from "@guitos/contexts/importExport/domain/csvError";
+import { CsvErrorMother } from "@guitos/contexts/importExport/domain/csvError.mother";
+import type { JsonError } from "@guitos/contexts/importExport/domain/jsonError";
+import { JsonErrorMother } from "@guitos/contexts/importExport/domain/jsonError.mother";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";

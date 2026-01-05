@@ -1,11 +1,11 @@
 import { BudgetCalculator } from "@guitos/application/react/budgetCalculator";
 import type { CsvRow } from "@guitos/application/react/budgetCsvService";
 import { roundBig } from "@guitos/application/react/utils";
-import type { ImportBudgetCsvCommand } from "@guitos/contexts/budget/application/importBudget/importBudgetCsvCommand";
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
-import { CsvBudgetImportFailedDomainEvent } from "@guitos/contexts/budget/domain/csvBudgetImportFailedDomainEvent";
-import type { CsvBudgetRepository } from "@guitos/contexts/budget/domain/csvBudgetRepository";
+import type { ImportBudgetCsvCommand } from "@guitos/contexts/importExport/application/importBudget/importBudgetCsvCommand";
+import { CsvBudgetImportFailedDomainEvent } from "@guitos/contexts/importExport/domain/csvBudgetImportFailedDomainEvent";
+import type { CsvBudgetRepository } from "@guitos/contexts/importExport/domain/csvBudgetRepository";
 import type { EventBus } from "@shared/domain/eventBus/eventBus";
 
 export class CsvBudgetImporter {
