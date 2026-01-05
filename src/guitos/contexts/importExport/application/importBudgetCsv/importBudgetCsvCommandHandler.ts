@@ -1,5 +1,5 @@
-import type { CsvBudgetImporter } from "@guitos/contexts/importExport/application/importBudget/csvBudgetImporter";
-import { ImportBudgetCsvCommand } from "@guitos/contexts/importExport/application/importBudget/importBudgetCsvCommand";
+import type { CsvBudgetImporter } from "@guitos/contexts/importExport/application/importBudgetCsv/csvBudgetImporter";
+import { ImportBudgetCsvCommand } from "@guitos/contexts/importExport/application/importBudgetCsv/importBudgetCsvCommand";
 import type { Command } from "@shared/domain/commandBus/command";
 import type { CommandHandler } from "@shared/domain/commandBus/commandHandler";
 

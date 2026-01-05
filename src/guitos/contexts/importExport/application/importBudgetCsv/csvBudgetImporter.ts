@@ -3,7 +3,7 @@ import type { CsvRow } from "@guitos/application/react/budgetCsvService";
 import { roundBig } from "@guitos/application/react/utils";
 import { Budget } from "@guitos/contexts/budget/domain/budget";
 import { BudgetItem } from "@guitos/contexts/budget/domain/budgetItem";
-import type { ImportBudgetCsvCommand } from "@guitos/contexts/importExport/application/importBudget/importBudgetCsvCommand";
+import type { ImportBudgetCsvCommand } from "@guitos/contexts/importExport/application/importBudgetCsv/importBudgetCsvCommand";
 import { CsvBudgetImportFailedDomainEvent } from "@guitos/contexts/importExport/domain/csvBudgetImportFailedDomainEvent";
 import type { CsvBudgetRepository } from "@guitos/contexts/importExport/domain/csvBudgetRepository";
 import type { EventBus } from "@shared/domain/eventBus/eventBus";

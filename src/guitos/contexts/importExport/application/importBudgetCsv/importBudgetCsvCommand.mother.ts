@@ -1,6 +1,6 @@
 import type { Budget } from "@guitos/contexts/budget/domain/budget";
 import { BudgetMother } from "@guitos/contexts/budget/domain/budget.mother";
-import { ImportBudgetCsvCommand } from "@guitos/contexts/importExport/application/importBudget/importBudgetCsvCommand";
+import { ImportBudgetCsvCommand } from "@guitos/contexts/importExport/application/importBudgetCsv/importBudgetCsvCommand";
 import { ObjectMother } from "@shared/domain/objectMother.mother";
 import type { Primitives } from "@shared/domain/primitives";
 

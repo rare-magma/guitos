@@ -1,7 +1,7 @@
 import { BudgetChangedDomainEventMother } from "@guitos/contexts/budget/domain/budgetChangedDomainEvent.mother";
-import { CsvBudgetImporter } from "@guitos/contexts/importExport/application/importBudget/csvBudgetImporter";
-import { ImportBudgetCsvCommandMother } from "@guitos/contexts/importExport/application/importBudget/importBudgetCsvCommand.mother";
-import { ImportBudgetCsvCommandHandler } from "@guitos/contexts/importExport/application/importBudget/importBudgetCsvCommandHandler";
+import { CsvBudgetImporter } from "@guitos/contexts/importExport/application/importBudgetCsv/csvBudgetImporter";
+import { ImportBudgetCsvCommandMother } from "@guitos/contexts/importExport/application/importBudgetCsv/importBudgetCsvCommand.mother";
+import { ImportBudgetCsvCommandHandler } from "@guitos/contexts/importExport/application/importBudgetCsv/importBudgetCsvCommandHandler";
 import { CsvBudgetRepositoryMock } from "@guitos/contexts/importExport/domain/__mocks__/csvBudgetRepository.mock";
 import { EventBusMock } from "@shared/__mocks__/eventBus.mock";
 import { describe, expect, it } from "vitest";

@@ -12,7 +12,7 @@ import type {
 } from "@guitos/application/react/sections/ChartsPage/ChartsPage";
 import type { SearchOption } from "@guitos/application/react/sections/NavBar/NavBar";
 import { createBudgetNameList } from "@guitos/application/react/utils";
-import { ImportBudgetCsvCommand } from "@guitos/contexts/budget/application/importBudget/importBudgetCsvCommand";
+import { ImportBudgetCsvCommand } from "@guitos/contexts/importExport/application/importBudgetCsv/importBudgetCsvCommand";
 import { FindAllBudgetsQuery } from "@guitos/contexts/budget/application/readAllBudgets/findAllBudgetsQuery";
 import type { FindAllBudgetsResponse } from "@guitos/contexts/budget/application/readAllBudgets/findAllBudgetsResponse";
 import { PersistLastOpenedBudgetCommand } from "@guitos/contexts/budget/application/saveLastOpenedBudget/persistLastOpenedBudgetCommand";

@@ -1,10 +1,10 @@
 import { registerFindLastOpenedBudgetQueryHandler } from "@guitos/contexts/budget/application/findLastOpenedBudget/registerFindLastOpenedBudgetQueryHandler";
-import { registerImportBudgetCsvCommandHandler } from "@guitos/contexts/budget/application/importBudget/registerImportBudgetCsvCommandHandler";
 import { registerPersistBudgetCommandHandler } from "@guitos/contexts/budget/application/persistBudget/registerPersistBudgetCommandHandler";
 import { registerPersistOnBudgetChangedSubscriber } from "@guitos/contexts/budget/application/persistBudget/registerPersistOnBudgetChangedSubscriber";
 import { registerFindAllBudgetsQueryHandler } from "@guitos/contexts/budget/application/readAllBudgets/registerFindAllBudgetsQueryHandler";
 import { registerFindBudgetQueryHandler } from "@guitos/contexts/budget/application/readBudget/registerFindBudgetQueryHandler";
 import { registerPersistLastOpenedBudgetCommandHandler } from "@guitos/contexts/budget/application/saveLastOpenedBudget/registerPersistLastOpenedBudgetCommandHandler";
+import { registerImportBudgetCsvCommandHandler } from "@guitos/contexts/importExport/application/importBudgetCsv/registerImportBudgetCsvCommandHandler";
 import { registerFindOperationsQueryHandler } from "@guitos/contexts/operations/application/findOperations/registerFindOperationsQueryHandler";
 import { registerPersistOperationsCommandHandler } from "@guitos/contexts/operations/application/persistOperations/registerPersistOperationsCommandHandler";
 import { registerRemoveOperationsCommandHandler } from "@guitos/contexts/operations/application/removeOperations/registerRemoveOperationsCommandHandler";
