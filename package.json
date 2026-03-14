@@ -46,7 +46,7 @@
     "console-fail-test": "0.6.1",
     "happy-dom": "20.3.9",
     "typescript": "5.9.3",
-    "vite": "7.3.1",
+    "vite": "^8.0.0",
     "vite-plugin-pwa": "1.2.0",
     "vite-plugin-sri3": "1.1.0",
     "vitest": "4.0.18",
@@ -62,7 +62,6 @@
     ],
     "minimumReleaseAge": "2880",
     "overrides": {
-      "vite": "npm:rolldown-vite@7.3.1",
       "flatted": ">=3.4.0",
       "serialize-javascript": ">=7.0.3"
     }
