@@ -187,11 +187,17 @@ export function CalculateButton({
                     <InputGroup
                       size="sm"
                       className="mb-1"
-                      key={`${item.id}-history-group-${index}`}
+                      key={`${item.id}-history-group-${
+                        // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                        index
+                      }`}
                     >
                       <CurrencyInput
                         id={`${label}-${itemForm.id}-${index}-history-value`}
-                        key={`item-${itemForm.id}-${index}-${label}-history-value`}
+                        key={`item-${itemForm.id}-${
+                          // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                          index
+                        }-${label}-history-value`}
                         className="text-end form-control straight-corners fixed-width-font"
                         aria-label={"item history value"}
                         name="item-history-value"
@@ -215,7 +221,10 @@ export function CalculateButton({
                       </InputGroup.Text>
                       <CurrencyInput
                         id={`${label}-${itemForm.id}-${index}-history-changeValue`}
-                        key={`item-${itemForm.id}-${index}-${label}-history-changeValue`}
+                        key={`item-${itemForm.id}-${
+                          // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                          index
+                        }-${label}-history-changeValue`}
                         className="text-end form-control straight-corners fixed-width-font"
                         aria-label={"item history change value"}
                         name="item-history-change-value"

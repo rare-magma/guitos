@@ -88,20 +88,35 @@ export default function ErrorModal({
             >
               {jsonErrors.map((jsonError: JsonError, i: number) => (
                 <Accordion.Item
-                  key={`${jsonError.file}-item-${i}`}
+                  key={`${jsonError.file}-item-${
+                    // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                    i
+                  }`}
                   eventKey={jsonError.file}
                 >
                   <Accordion.Header
                     aria-label="file"
-                    key={`${jsonError.file}-header-${i}`}
+                    key={`${jsonError.file}-header-${
+                      // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                      i
+                    }`}
                   >
                     {jsonError.file}
                   </Accordion.Header>
                   <Accordion.Body
                     className="textarea fixed-width-font mx-1"
-                    key={`${jsonError.file}-body-${i}`}
+                    key={`${jsonError.file}-body-${
+                      // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                      i
+                    }`}
                   >
-                    <p className="code" key={`${jsonError.file}-error-${i}`}>
+                    <p
+                      className="code"
+                      key={`${jsonError.file}-error-${
+                        // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                        i
+                      }`}
+                    >
                       {jsonError.errors}
                       <br />
                     </p>
@@ -144,20 +159,35 @@ export default function ErrorModal({
             >
               {csvErrors.map((csvError: CsvError, i: number) => (
                 <Accordion.Item
-                  key={`${csvError.file}-item-${i}`}
+                  key={`${csvError.file}-item-${
+                    // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                    i
+                  }`}
                   eventKey={csvError.file}
                 >
                   <Accordion.Header
                     aria-label="file"
-                    key={`${csvError.file}-header-${i}`}
+                    key={`${csvError.file}-header-${
+                      // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                      i
+                    }`}
                   >
                     {csvError.file}
                   </Accordion.Header>
                   <Accordion.Body
                     className="textarea fixed-width-font mx-1"
-                    key={`${csvError.file}-body-${i}`}
+                    key={`${csvError.file}-body-${
+                      // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                      i
+                    }`}
                   >
-                    <p className="code" key={`${csvError.file}-csverror-${i}`}>
+                    <p
+                      className="code"
+                      key={`${csvError.file}-csverror-${
+                        // biome-ignore lint/suspicious/noArrayIndexKey: fix later
+                        i
+                      }`}
+                    >
                       {csvError.errors.map((error) => (
                         <span key={error.row}>
                           Line {error.row}: {error.message}

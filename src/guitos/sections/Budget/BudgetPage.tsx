@@ -131,7 +131,6 @@ export function BudgetPage() {
   }, [name, loadingFromDB]);
 
   return (
-    // biome-ignore lint/a11y/useSemanticElements: bootstrap is not semantic
     <Container
       fluid={true}
       style={{ zIndex: 1 }}

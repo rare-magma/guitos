@@ -137,7 +137,6 @@ export function NavBar() {
       onToggle={() => setExpanded(!expanded)}
       data-testid="header"
     >
-      {/** biome-ignore lint/a11y/useSemanticElements: bootstrap isn't semantic */}
       <Container
         fluid={true}
         className="flex-row"
