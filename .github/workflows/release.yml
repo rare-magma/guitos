@@ -98,7 +98,7 @@ jobs:
 
       - name: Generate artifact attestation
         if: steps.semrel.outputs.version != ''
-        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # ratchet:actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # ratchet:actions/attest-build-provenance@v4.1.0
         with:
           subject-path: guitos-v${{ steps.semrel.outputs.version }}.zip
 
