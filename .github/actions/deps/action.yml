@@ -4,12 +4,12 @@ runs:
   using: "composite"
   steps:
     - name: Install pnpm
-      uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # ratchet:pnpm/action-setup@v6
+      uses: pnpm/action-setup@91ab88e2619ed1f46221f0ba42d1492c02baf788 # ratchet:pnpm/action-setup@v6
       with:
         version: 11
 
     - name: Setup Node
-      uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # ratchet:actions/setup-node@v6
+      uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # ratchet:actions/setup-node@v6
       with:
         node-version: 24
         cache: "pnpm"
