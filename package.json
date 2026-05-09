@@ -44,7 +44,7 @@
     "autoprefixer": "10.4.27",
     "browserslist-config-baseline": "0.5.0",
     "console-fail-test": "0.6.1",
-    "happy-dom": "20.8.3",
+    "happy-dom": "20.8.9",
     "typescript": "5.9.3",
     "vite": "^8.0.0",
     "vite-plugin-pwa": "1.2.0",
