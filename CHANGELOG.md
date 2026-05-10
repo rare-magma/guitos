@@ -1,3 +1,10 @@
+## 1.6.9 (2026-05-10)
+
+#### Bug Fixes
+
+* install cosign (eb088fc5)
+
+
 ## 1.6.6 (2026-01-01)
 
 #### Bug Fixes
