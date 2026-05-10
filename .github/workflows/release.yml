@@ -90,6 +90,9 @@ jobs:
         if: steps.semrel.outputs.version != ''
         run: mv build guitos && zip -r guitos-v${{ steps.semrel.outputs.version }}.zip guitos/*
 
+      - name: Install cosign
+        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # ratchet:sigstore/cosign-installer@main
+
       - name: Sign bundle
         if: steps.semrel.outputs.version != ''
         run: |
