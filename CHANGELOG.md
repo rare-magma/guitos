@@ -1,3 +1,23 @@
+## 1.7.0 (2026-05-22)
+
+#### Feature
+
+* add total value calculation in filtered chart (3eaabc34)
+
+#### Bug Fixes
+
+* budget save issue after a doing a change and changing the budget (52b338f7)
+
+#### Chores
+
+* **release:** 1.6.9 (e651254e)
+
+#### Build
+
+* fix vulns (02fcca87)
+* bump ws (9a394c60)
+
+
 ## 1.6.9 (2026-05-10)
 
 #### Bug Fixes
