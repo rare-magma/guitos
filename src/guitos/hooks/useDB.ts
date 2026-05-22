@@ -447,18 +447,20 @@ export function useDB() {
     return await calcHistRepository.delete(id);
   }
 
+  const persistBudget = useCallback(async (budget: Budget | undefined) => {
+    if (!budget) return;
+    await budgetRepository.update(budget.id, budget);
+  }, []);
+
   const saveBudget = useCallback(
-    (budget: Budget | undefined) => {
-      if (!budget) return;
-      budgetRepository.update(budget.id, budget).then(() => {
-        budgetRepository.getAll().then((list) => {
-          setBudgetList(list);
-          setBudgetNameList(createBudgetNameList(list));
-          setShouldReload(true);
-        });
-      });
+    async (budget: Budget | undefined) => {
+      await persistBudget(budget);
+      const list = await budgetRepository.getAll();
+      setBudgetList(list);
+      setBudgetNameList(createBudgetNameList(list));
+      setShouldReload(true);
     },
-    [setBudgetList, setBudgetNameList, setShouldReload],
+    [persistBudget, setBudgetList, setBudgetNameList, setShouldReload],
   );
 
   useEffect(() => {
@@ -480,6 +482,7 @@ export function useDB() {
     searchBudgets,
     searchBudgetsWithFilter,
     selectBudgetsWithFilter,
+    persistBudget,
     saveBudget,
     loadCurrencyOption,
     saveCurrencyOption,

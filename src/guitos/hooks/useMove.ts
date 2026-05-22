@@ -1,15 +1,21 @@
 import { useBudget } from "@guitos/context/BudgetContext";
 import type { Budget } from "@guitos/domain/budget";
+import { useDB } from "@guitos/hooks/useDB";
 import type { SearchOption } from "@guitos/sections/NavBar/NavBar";
 import { useLocation } from "wouter";
 import { saveLastOpenedBudget } from "../../utils";
 
 export function useMove() {
   const { budget, setBudget, budgetList } = useBudget();
+  const { persistBudget } = useDB();
   const [_, navigate] = useLocation();
 
-  function select(selectedBudget: SearchOption[] | undefined) {
+  async function select(selectedBudget: SearchOption[] | undefined) {
     if (selectedBudget && budgetList) {
+      if (budget) {
+        await persistBudget(budget);
+      }
+
       const filteredList = budgetList.filter(
         (item: Budget) => item.id === selectedBudget[0].id,
       );
