@@ -13,7 +13,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { intlFormat, median } from "../../../utils";
+import { intlFormat, median, total } from "../../../utils";
 import "./Chart.css";
 
 interface ChartProps {
@@ -30,12 +30,18 @@ interface ChartProps {
   legendValues1: number[];
   legend2?: string;
   legendValues2?: number[];
+  totalLegend1?: string;
+  totalValues1?: number[];
   unit?: string;
   filteredData?: FilteredItem[];
 }
 
 const horizontalRatio = 3.4;
 const verticalRatio = 1.6;
+
+export function sortChartDataByName<T extends { name: string }>(data: T[]) {
+  return data.toSorted((a, b) => a.name.localeCompare(b.name));
+}
 
 export function Chart({
   header,
@@ -51,6 +57,8 @@ export function Chart({
   legend2,
   legendValues1,
   legendValues2,
+  totalLegend1,
+  totalValues1,
   unit,
   filteredData,
 }: ChartProps) {
@@ -60,11 +68,11 @@ export function Chart({
   const showSecondArea = areaDataKey2 && areaStroke2 && areaFill2;
   const isGoalChart = tooltipKey1 === "goal";
   const isVerticalScreen = window.innerWidth < window.innerHeight;
-  const chartData =
-    filteredData ??
-    budgetList?.toSorted((a, b) => a.name.localeCompare(b.name));
+  const chartData = filteredData
+    ? sortChartDataByName(filteredData)
+    : budgetList && sortChartDataByName(budgetList);
 
-  function medianLabelGroup(legend: string, values: number[]) {
+  function valueLabelGroup(legend: string, value: number) {
     return (
       <InputGroup size="sm" className="mb-1">
         <InputGroup.Text>{legend}</InputGroup.Text>
@@ -73,10 +81,18 @@ export function Chart({
           className="text-end form-control fixed-width-font"
           aria-label={legend}
           intlConfig={intlConfig}
-          defaultValue={median(values)}
+          defaultValue={value}
         />
       </InputGroup>
     );
+  }
+
+  function medianLabelGroup(legend: string, values: number[]) {
+    return valueLabelGroup(legend, median(values));
+  }
+
+  function totalLabelGroup(legend: string, values: number[]) {
+    return valueLabelGroup(legend, total(values));
   }
 
   function tickFormatter(value: number) {
@@ -168,6 +184,11 @@ export function Chart({
           {!isGoalChart &&
             !legendValues2 &&
             medianLabelGroup(legend1, legendValues1)}
+          {!isGoalChart &&
+            !legendValues2 &&
+            totalLegend1 &&
+            totalValues1 &&
+            totalLabelGroup(totalLegend1, totalValues1)}
           {!isGoalChart && legendValues2 && (
             <Col lg={6}>{medianLabelGroup(legend1, legendValues1)}</Col>
           )}

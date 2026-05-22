@@ -170,10 +170,12 @@ export default function ChartsPage({ onShowGraphs }: GraphProps) {
           header={`${filter.type} filtered by: ${filter.value}`}
           filteredData={filteredData}
           legendValues1={filteredData.map((i) => i.value)}
+          totalValues1={filteredData.map((i) => i.value)}
           areaDataKey1={"value"}
           areaStroke1={filterChartStroke}
           areaFill1={filterChartFill}
           legend1={"median value"}
+          totalLegend1={"total value"}
         />
       )}
 

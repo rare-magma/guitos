@@ -103,6 +103,12 @@ export function median(arr: number[]): number {
     : s[mid];
 }
 
+export function total(arr: number[]): number {
+  if (!arr.length) return 0;
+
+  return arr.reduce((sum, value) => sum.plus(value), Big(0)).toNumber();
+}
+
 export function getNestedProperty<O, K extends keyof O, L extends keyof O[K]>(
   object: O,
   firstProp: K,

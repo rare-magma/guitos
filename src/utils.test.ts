@@ -22,6 +22,7 @@ import {
   median,
   parseLocaleNumber,
   roundBig,
+  total,
 } from "./utils";
 
 const optionsRepository = new localForageOptionsRepository();
@@ -117,6 +118,14 @@ test("median", () => {
   expect(median([0])).eq(0);
   expect(median([])).eq(0);
   expect(median([-1, -2])).eq(-1.5);
+});
+
+test("total", () => {
+  expect(total([123.43, 100, 300, -500])).eq(23.43);
+  expect(total([123.45, 100])).eq(223.45);
+  expect(total([123.45])).eq(123.45);
+  expect(total([0])).eq(0);
+  expect(total([])).eq(0);
 });
 
 test("getNestedProperty", () => {
