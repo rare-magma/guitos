@@ -10,7 +10,7 @@
     "bootstrap": "5.3.8",
     "immer": "11.1.8",
     "localforage": "1.10.0",
-    "motion": "12.38.0",
+    "motion": "12.40.0",
     "papaparse": "5.5.3",
     "react": "19.2.6",
     "react-bootstrap": "2.10.10",
@@ -22,7 +22,7 @@
     "recharts": "3.8.1",
     "use-immer": "0.11.0",
     "use-undo": "1.2.0",
-    "wouter": "3.9.0"
+    "wouter": "3.10.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.11.3",
