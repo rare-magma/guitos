@@ -3,7 +3,7 @@ RUN npm install -g pnpm
 WORKDIR /app
 RUN chown -R node:node /app
 USER node
-COPY --chown=node:node package.json pnpm-lock.yaml ./
+COPY --chown=node:node package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY --chown=node:node index.html vite.config.ts tsconfig.json .postcssrc.json .npmrc ./
 COPY --chown=node:node public ./public
