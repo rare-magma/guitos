@@ -112,10 +112,10 @@ export function BudgetPage() {
         budgetList && budgetList.length >= 1 && Array.isArray(budgetList);
 
       if (shouldLoadBudgetsFromList) {
-        if (name.trim() !== "undefined") {
-          loadBudget(budgetList.filter((b: Budget) => b && b.name === name));
-        } else {
+        if (name.trim() === "undefined") {
           loadBudget(budgetList.slice(0));
+        } else {
+          loadBudget(budgetList.filter((b: Budget) => b && b.name === name));
         }
 
         loadCurrencyOption();

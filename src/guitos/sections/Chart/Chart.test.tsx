@@ -1,7 +1,7 @@
 import { BudgetMother } from "@guitos/domain/budget.mother";
 import { Chart, sortChartDataByName } from "@guitos/sections/Chart/Chart";
-import { render, screen } from "@testing-library/react";
 import { Uuid } from "@shared/domain/uuid";
+import { render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("Chart", () => {

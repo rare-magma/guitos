@@ -224,13 +224,13 @@ export function useDB() {
         setBudgetNameList(createBudgetNameList(list));
 
         let newBudget: Budget;
-        if (name.trim() !== "undefined") {
-          newBudget = list.filter((b: Budget) => b && b.name === name)[0];
-        } else {
+        if (name.trim() === "undefined") {
           newBudget = list
             .toSorted((a, b) => a.name.localeCompare(b.name))
             .toReversed()
             .filter((b: Budget) => b && b.id === list[0].id)[0];
+        } else {
+          newBudget = list.filter((b: Budget) => b && b.name === name)[0];
         }
 
         // load latest if budget name is not found
