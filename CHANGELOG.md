@@ -1,3 +1,10 @@
+## 1.7.3 (2026-07-02)
+
+#### Bug Fixes
+
+* add missing file to dockerfile (5dd354c9)
+
+
 ## 1.7.0 (2026-05-22)
 
 #### Feature
