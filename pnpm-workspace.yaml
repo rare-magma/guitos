@@ -6,3 +6,5 @@ minimumReleaseAge: 2880
 overrides:
   flatted: ">=3.4.0"
   serialize-javascript: ">=7.0.3"
+minimumReleaseAgeExclude:
+  - postcss@8.5.18
