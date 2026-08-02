@@ -15,7 +15,7 @@ jobs:
       contents: read
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.61.1@sha256:5b8f294aff9041b7191c34a4bab3ac270157a28774d4b0660e9743297b697e48 # ratchet:mcr.microsoft.com/playwright:v1.61.1
+      image: mcr.microsoft.com/playwright:v1.62.0@sha256:5b8f294aff9041b7191c34a4bab3ac270157a28774d4b0660e9743297b697e48 # ratchet:mcr.microsoft.com/playwright:v1.62.0
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
