@@ -1,5 +1,6 @@
 import { useBudget } from "@guitos/context/BudgetContext";
 import { useConfig } from "@guitos/context/ConfigContext";
+import type { Budget } from "@guitos/domain/budget";
 import { ChartTooltip } from "@guitos/sections/Chart/ChartTooltip";
 import type { FilteredItem } from "@guitos/sections/ChartsPage/ChartsPage";
 import { Card, Col, Form, InputGroup, Row } from "react-bootstrap";
@@ -109,7 +110,7 @@ export function Chart({
           initialDimension={{ width: 1, height: 1 }} // clear console warning due to <Suspense />
           aspect={isVerticalScreen ? verticalRatio : horizontalRatio}
         >
-          <AreaChart
+          <AreaChart<Budget | FilteredItem>
             data={chartData}
             margin={{
               top: 10,

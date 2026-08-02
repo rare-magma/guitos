@@ -260,10 +260,14 @@ export function StatCard({ onShowGraphs }: StatCardProps) {
             onWheel={(e) => e.target instanceof HTMLElement && e.target.blur()}
             type="number"
             ref={goalRef}
-            onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
-              e.target.valueAsNumber = Number(
-                Math.max(0, Number(e.target.value)).toString().slice(0, 2),
-              );
+            onInput={(e) => {
+              if (e.currentTarget instanceof HTMLInputElement) {
+                e.currentTarget.valueAsNumber = Number(
+                  Math.max(0, Number(e.currentTarget.value))
+                    .toString()
+                    .slice(0, 2),
+                );
+              }
             }}
           />
           <InputGroup.Text>
