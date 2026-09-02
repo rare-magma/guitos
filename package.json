@@ -8,10 +8,10 @@
   "dependencies": {
     "big.js": "7.0.1",
     "bootstrap": "5.3.8",
-    "immer": "11.1.15",
+    "immer": "11.1.18",
     "localforage": "1.10.0",
-    "motion": "12.42.2",
-    "papaparse": "5.5.4",
+    "motion": "13.1.1",
+    "papaparse": "5.7.0",
     "react": "19.2.8",
     "react-bootstrap": "2.10.10",
     "react-bootstrap-typeahead": "6.4.1",
