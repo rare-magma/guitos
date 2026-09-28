@@ -68,7 +68,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
 
   await page.getByLabel("import or export budget").click();
   await expect(page.getByText("json")).toBeVisible();
-  expect(page.getByLabel("export budget as json")).toBeVisible();
+  await expect(page.getByLabel("export budget as json")).toBeVisible();
 
   const jsonDownloadPromise = page.waitForEvent("download");
   await page.getByLabel("export budget as json").click();
@@ -89,7 +89,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   await page.getByLabel("import or export budget").click();
   await expect(page.getByText("prompt")).toBeVisible();
 
-  expect(page.getByLabel("export budget AI prompt")).toBeVisible();
+  await expect(page.getByLabel("export budget AI prompt")).toBeVisible();
 
   const promptDownloadPromise = page.waitForEvent("download");
   await page.getByLabel("export budget AI prompt").click();
@@ -112,8 +112,8 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     .getByTestId("import-form-control")
     .setInputFiles("./docs/guitos-sample.json");
 
-  expect(page.getByLabel("go to newer budget")).toBeVisible();
-  await page.getByLabel("go to newer budget").click({ force: true });
+  await expect(page.getByLabel("go to newer budget")).toBeEnabled();
+  await page.getByLabel("go to newer budget").click();
 
   if (isMobile) {
     await page.getByLabel("Toggle navigation").click();

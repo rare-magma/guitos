@@ -11,8 +11,8 @@ test("should complete the happy path", async ({ page, isMobile }) => {
   await page.getByText("get started").click();
 
   await expect(page.getByText("Statistics")).toBeVisible();
-  await expect(page.getByText("Revenue")).toBeVisible();
-  await expect(page.getByText("Expenses")).toBeVisible();
+  await expect(page.getByText("Revenue", { exact: true })).toBeVisible();
+  await expect(page.getByText("Expenses", { exact: true })).toBeVisible();
 
   // should create new incomes
   await page.locator("#Revenue-1-name").click();

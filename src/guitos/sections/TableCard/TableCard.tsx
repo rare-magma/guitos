@@ -204,7 +204,6 @@ export default function TableCard({ header: label }: TableCardProps) {
           >
             <ToggleButton
               id={`toggle-reorder-${label}`}
-              aria-label={`reorder items in ${label}`}
               type="checkbox"
               variant="outline-info toggle"
               value={1}
@@ -213,6 +212,7 @@ export default function TableCard({ header: label }: TableCardProps) {
               checked={isDraggable}
             >
               <BsArrowsVertical aria-hidden={true} />
+              <span className="visually-hidden">reorder items in {label}</span>
             </ToggleButton>
           </OverlayTrigger>
         </div>
