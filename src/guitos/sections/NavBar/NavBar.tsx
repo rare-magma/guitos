@@ -257,8 +257,8 @@ export function NavBar() {
             </Button>
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end flex">
-            <Nav>
-              <Nav className={expanded ? "p-2" : "m-2"}>
+            <Nav className="w-100">
+              <Nav className={expanded ? "p-2" : "m-2 w-100"}>
                 {hasMultipleBudgets && (
                   <AsyncTypeahead
                     inputProps={{
@@ -267,7 +267,7 @@ export function NavBar() {
                     filterBy={["name", "item"]}
                     labelKey={getLabelKey}
                     ref={searchRef}
-                    style={expanded ? {} : { minWidth: "26ch" }}
+                    style={expanded ? {} : { minWidth: "14ch" }}
                     onChange={(option: Option[]) => handleSelectAction(option)}
                     className={
                       expanded
