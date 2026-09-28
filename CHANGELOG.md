@@ -1,3 +1,15 @@
+## 1.7.5 (2026-09-28)
+
+#### Bug Fixes
+
+* flaky tests and accessibility on progress bar and reorder toggle (3b25b013)
+* increase search bar width (b094579f)
+
+#### Chores
+
+* **release:** 1.7.4 (a24abf69)
+
+
 ## 1.7.4 (2026-09-28)
 
 #### Bug Fixes
