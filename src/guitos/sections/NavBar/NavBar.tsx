@@ -257,7 +257,7 @@ export function NavBar() {
             </Button>
           </Offcanvas.Header>
           <Offcanvas.Body className="justify-content-end flex">
-            <Nav className="w-100">
+            <Nav className={expanded ? "w-100" : "w-50"}>
               <Nav className={expanded ? "p-2" : "m-2 w-100"}>
                 {hasMultipleBudgets && (
                   <AsyncTypeahead
