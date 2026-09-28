@@ -1,3 +1,15 @@
+## 1.7.6 (2026-09-28)
+
+#### Bug Fixes
+
+* flaky imports (90e044cf)
+* limit search bar to 50% of width (84b3ba61)
+
+#### Chores
+
+* **release:** 1.7.5 (c1c66aec)
+
+
 ## 1.7.5 (2026-09-28)
 
 #### Bug Fixes
