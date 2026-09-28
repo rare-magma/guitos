@@ -1,3 +1,30 @@
+## 1.7.4 (2026-09-28)
+
+#### Bug Fixes
+
+* increase search bar width (7696b9d6)
+
+#### Chores
+
+* **release:** 1.7.3 (b23fa860)
+
+#### Build
+
+* bump the deps-dev group with 13 updates (#271) (7614afe7)
+* bump the deps-prod group with 3 updates (#270) (c74b995d)
+* bump actions/attest from 4.2.1 to 4.2.2 (#269) (19a3616d)
+* fix vulns (9f5a4860)
+* bump the deps-dev group across 1 directory with 12 updates (#268) (feddfc10)
+* bump the deps-prod group with 7 updates (#267) (885d7fed)
+* bump actions/attest from 4.1.0 to 4.2.0 (#266) (e12ea9c6)
+* bump actions/checkout from 7.0.0 to 7.0.1 (#265) (4a689677)
+
+#### CI
+
+* bump playwright (82f3ac81)
+* bump actions (eb7e90d0)
+
+
 ## 1.7.3 (2026-07-02)
 
 #### Bug Fixes
