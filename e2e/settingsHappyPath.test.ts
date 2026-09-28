@@ -64,7 +64,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     (await fs.promises.stat(await csvDownload.path())).size,
   ).toBeGreaterThan(0);
 
-  await expect(page.getByLabel("import or export budget")).toBeVisible();
+  await expect(page.getByLabel("export budget as csv")).toBeHidden();
 
   await page.getByLabel("import or export budget").click();
   await expect(page.getByText("json")).toBeVisible();
@@ -85,7 +85,7 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
     (await fs.promises.stat(await jsonDownload.path())).size,
   ).toBeGreaterThan(0);
 
-  await expect(page.getByLabel("import or export budget")).toBeVisible();
+  await expect(page.getByLabel("export budget as json")).toBeHidden();
   await page.getByLabel("import or export budget").click();
   await expect(page.getByText("prompt")).toBeVisible();
 
@@ -106,14 +106,16 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   ).toBeGreaterThan(0);
 
   // should handle import
-  await expect(page.getByLabel("import or export budget")).toBeVisible();
+  await expect(page.getByLabel("export budget AI prompt")).toBeHidden();
   await page.getByLabel("import or export budget").click();
   await page
     .getByTestId("import-form-control")
     .setInputFiles("./docs/guitos-sample.json");
 
+  await expect(page.getByLabel("budget name")).toHaveValue("2023-06");
   await expect(page.getByLabel("go to newer budget")).toBeEnabled();
   await page.getByLabel("go to newer budget").click();
+  await expect(page.getByLabel("budget name")).toHaveValue("2023-07");
 
   if (isMobile) {
     await page.getByLabel("Toggle navigation").click();
@@ -122,8 +124,6 @@ test("should complete the settings happy path", async ({ page, isMobile }) => {
   await expect(
     page.getByRole("combobox", { name: "search in budgets" }),
   ).toBeVisible();
-
-  await expect(page.getByLabel("budget name")).toHaveValue(/2023-0/);
 
   await page.close();
 });

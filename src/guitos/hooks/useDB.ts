@@ -146,9 +146,8 @@ export function useDB() {
       });
   }
 
-  function importCSV(fileReader: FileReader, file: File) {
-    const newBudgetList: Budget[] = [];
-    const csvObject = Papa.parse(fileReader.result as string, {
+  function importCSV(contents: string, file: File): Budget | undefined {
+    const csvObject = Papa.parse(contents, {
       header: true,
       skipEmptyLines: "greedy",
     });
@@ -167,26 +166,15 @@ export function useDB() {
       return;
     }
 
-    const newBudget = BudgetCsvService.fromCsv(
+    return BudgetCsvService.fromCsv(
       csvObject.data as CsvRow[],
       file.name.slice(0, -4),
     );
-    newBudgetList.push(newBudget);
-    budgetRepository.update(newBudget.id, newBudget).then(() => {
-      setBudgetList(newBudgetList);
-      setBudgetNameList(createBudgetNameList(newBudgetList));
-    });
   }
 
-  function importJSON(fileReader: FileReader, file: File) {
+  function importJSON(contents: string, file: File): Budget[] | undefined {
     try {
-      const list = JSON.parse(fileReader.result as string) as Budget[];
-      for (const b of list) {
-        budgetRepository.update(b.id, b);
-      }
-      setBudgetList(list);
-      setBudgetNameList(createBudgetNameList(list));
-      setBudget(list[0], false);
+      return JSON.parse(contents) as Budget[];
     } catch (e) {
       setJsonErrors([{ errors: (e as string).toString(), file: file.name }]);
       setShowError(true);
@@ -194,25 +182,36 @@ export function useDB() {
     }
   }
 
-  function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
-    setLoadingFromDB(true);
+  async function handleImport(e: React.ChangeEvent<HTMLInputElement>) {
     const importedFiles = e.target.files;
-    if (importedFiles === null) {
-      return;
-    }
-    for (const file of importedFiles) {
-      const reader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onloadend = () => {
-        if (!reader.result) {
-          return;
-        }
-        if (file.type === "text/csv") {
-          importCSV(reader, file);
-        } else {
-          importJSON(reader, file);
-        }
-      };
+    if (!importedFiles?.length) return;
+
+    try {
+      const importedBudgets = await Promise.all(
+        Array.from(importedFiles, async (file) => {
+          const contents = await new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = () => reject(reader.error);
+            reader.readAsText(file, "UTF-8");
+          });
+          return file.type === "text/csv" ||
+            file.name.toLowerCase().endsWith(".csv")
+            ? importCSV(contents, file)
+            : importJSON(contents, file);
+        }),
+      );
+      const budgets = importedBudgets.flatMap((result) =>
+        Array.isArray(result) ? result : result ? [result] : [],
+      );
+      if (!budgets.length) return;
+
+      await Promise.all(budgets.map((b) => budgetRepository.update(b.id, b)));
+      setBudgetList(budgets);
+      setBudgetNameList(createBudgetNameList(budgets));
+      setBudget(budgets[0], false);
+    } catch (e) {
+      handleError(e);
     }
   }
 
