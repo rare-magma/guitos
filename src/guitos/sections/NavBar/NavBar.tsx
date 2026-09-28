@@ -267,7 +267,7 @@ export function NavBar() {
                     filterBy={["name", "item"]}
                     labelKey={getLabelKey}
                     ref={searchRef}
-                    style={expanded ? {} : { minWidth: "14ch" }}
+                    style={expanded ? {} : { minWidth: "26ch" }}
                     onChange={(option: Option[]) => handleSelectAction(option)}
                     className={
                       expanded
