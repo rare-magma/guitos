@@ -1,3 +1,24 @@
+## 1.7.7 (2026-10-25)
+
+#### Bug Fixes
+
+* more vulns (361e12a6)
+* vulnerabilities (7155107a)
+
+#### Chores
+
+* **release:** 1.7.6 (090b51f9)
+
+#### Build
+
+* bump fast-uri from 4.2.1 to 4.2.3 (#278) (d8b096d9)
+* bump happy-dom from 20.14.5 to 21.0.4 (#277) (5ef96ba5)
+* bump @vitest/ui from 5.0.1 to 5.0.5 (#276) (9a954c6b)
+* bump vite from 8.3.1 to 8.3.3 (#274) (79b1db32)
+* bump the deps-prod group with 4 updates (#272) (cb51f132)
+* bump the deps-dev group with 15 updates (#273) (cc031328)
+
+
 ## 1.7.6 (2026-09-28)
 
 #### Bug Fixes
