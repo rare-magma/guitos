@@ -1,3 +1,14 @@
+## 1.7.8 (2026-10-28)
+
+#### Bug Fixes
+
+* prevent tooltip transitions on empty React fragments (8c16f107)
+
+#### Chores
+
+* **release:** 1.7.7 (9d057768)
+
+
 ## 1.7.7 (2026-10-25)
 
 #### Bug Fixes
