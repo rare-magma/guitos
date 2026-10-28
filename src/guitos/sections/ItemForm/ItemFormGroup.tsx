@@ -175,18 +175,14 @@ export function ItemFormGroup({
       <OverlayTrigger
         delay={250}
         placement="top"
+        show={costPercentage > 0 ? undefined : false}
         overlay={
-          costPercentage > 0 ? (
-            <Tooltip
-              id={`tooltip-value-${label}-${itemForm.id}`}
-              style={{ position: "fixed" }}
-            >
-              {costPercentage}% of revenue
-            </Tooltip>
-          ) : (
-            // biome-ignore lint/complexity/noUselessFragments: react types need it
-            <></>
-          )
+          <Tooltip
+            id={`tooltip-value-${label}-${itemForm.id}`}
+            style={{ position: "fixed" }}
+          >
+            {costPercentage}% of revenue
+          </Tooltip>
         }
       >
         <Form.Control
@@ -206,18 +202,14 @@ export function ItemFormGroup({
       <OverlayTrigger
         delay={250}
         placement="top"
+        show={costPercentage > 0 ? undefined : false}
         overlay={
-          costPercentage > 0 ? (
-            <Tooltip
-              id={`tooltip-costPercentage-${label}-${itemForm.id}`}
-              style={{ position: "fixed" }}
-            >
-              {costPercentage}% of revenue
-            </Tooltip>
-          ) : (
-            // biome-ignore lint/complexity/noUselessFragments: react types need it
-            <></>
-          )
+          <Tooltip
+            id={`tooltip-costPercentage-${label}-${itemForm.id}`}
+            style={{ position: "fixed" }}
+          >
+            {costPercentage}% of revenue
+          </Tooltip>
         }
       >
         <CurrencyInput

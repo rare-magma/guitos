@@ -106,18 +106,14 @@ export default function TableCard({ header: label }: TableCardProps) {
       <Card.Header className={`${label}-card-header`}>
         <OverlayTrigger
           placement="top"
+          show={isExpense ? undefined : false}
           overlay={
-            isExpense ? (
-              <Tooltip
-                id={`tooltip-value-${label}`}
-                style={{ position: "fixed" }}
-              >
-                {revenuePercentage}% of revenue
-              </Tooltip>
-            ) : (
-              // biome-ignore lint/complexity/noUselessFragments: react types need it
-              <></>
-            )
+            <Tooltip
+              id={`tooltip-value-${label}`}
+              style={{ position: "fixed" }}
+            >
+              {revenuePercentage}% of revenue
+            </Tooltip>
           }
         >
           <Row>
