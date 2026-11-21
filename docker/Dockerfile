@@ -19,11 +19,10 @@ RUN pnpm build && \
     | while read file; do gzip "$file"; done
 
 FROM docker.io/library/busybox:latest
-RUN adduser -D static
-USER static
+USER 10001:10001
 WORKDIR /home/static
-COPY --chown=static:static docker/httpd.conf .
-COPY --from=build --chown=static:static /app/build .
+COPY --chown=10001:10001 docker/httpd.conf .
+COPY --from=build --chown=10001:10001 /app/build .
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=1s --start-period=5s --retries=3 CMD [ "wget", "--no-verbose", "--tries=1", "--spider", "127.0.0.1:3000" ]
 CMD ["busybox", "httpd", "-f", "-c", "httpd.conf", "-p", "3000"]
