@@ -1,3 +1,10 @@
+## 1.7.10 (2026-11-21)
+
+#### Bug Fixes
+
+* remove run instruction in dockerfile, replace with user uid (c7961d75)
+
+
 ## 1.7.8 (2026-10-28)
 
 #### Bug Fixes
