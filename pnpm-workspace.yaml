@@ -7,5 +7,7 @@ overrides:
   flatted: ">=3.4.0"
   serialize-javascript: ">=7.0.3"
   fast-uri: ">=4.1.4"
+  minimatch: ">=11.0.1"
+  glob: ">=14.0.2"
 minimumReleaseAgeExclude:
   - fast-uri@4.1.4
