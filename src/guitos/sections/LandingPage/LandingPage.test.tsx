@@ -10,17 +10,21 @@ describe("LandingPage", () => {
 
   it("renders initial state", () => {
     render(comp);
-    expect(screen.getByLabelText("new budget")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "get started with a new budget" }),
+    ).toBeInTheDocument();
     expect(screen.getByLabelText("import budget")).toBeInTheDocument();
     expect(
-      screen.getByLabelText("open instructions in new tab"),
+      screen.getByLabelText("help (opens in a new tab)"),
     ).toBeInTheDocument();
   });
 
   it("triggers new budget", async () => {
     render(comp);
     setBudgetMock.mockClear();
-    const newButton = screen.getAllByRole("button", { name: "new budget" })[0];
+    const newButton = screen.getByRole("button", {
+      name: "get started with a new budget",
+    });
     await userEvent.click(newButton);
   });
 
@@ -37,7 +41,7 @@ describe("LandingPage", () => {
   it("opens instructions in new tab", async () => {
     render(comp);
     const instructionsButton = screen.getByLabelText(
-      "open instructions in new tab",
+      "help (opens in a new tab)",
     );
     await userEvent.click(instructionsButton);
     expect(instructionsButton).toHaveAttribute(

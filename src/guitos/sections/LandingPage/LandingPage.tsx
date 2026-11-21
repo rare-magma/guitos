@@ -42,7 +42,7 @@ export function LandingPage({
             <Stack gap={3}>
               <Button
                 className={`${buttonWidth} align-self-center text-nowrap`}
-                aria-label="new budget"
+                aria-label="get started with a new budget"
                 variant="outline-success"
                 onClick={createBudget}
               >
@@ -73,7 +73,7 @@ export function LandingPage({
               </Form.Group>
               <Button
                 className={`${buttonWidth} align-self-center text-nowrap`}
-                aria-label="open instructions in new tab"
+                aria-label="help (opens in a new tab)"
                 variant="outline-info"
                 href="https://github.com/rare-magma/guitos#getting-started"
                 target="_blank"
