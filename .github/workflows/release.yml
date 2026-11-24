@@ -17,15 +17,15 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.64.1@sha256:2f05f8a734509a7b3f26a912639488ee08f58a7b292d14d62271bcff9038768f # ratchet:mcr.microsoft.com/playwright:v1.64.1
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/deps
+      - uses: $/.github/actions/deps
         name: Install
-      - uses: ./.github/actions/test
+      - uses: $/.github/actions/test
         name: Test
-      - uses: ./.github/actions/playwright
+      - uses: $/.github/actions/playwright
         name: Test e2e
 
   release:
@@ -40,7 +40,7 @@ jobs:
     needs:
       - test
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
           ref: main
@@ -48,7 +48,7 @@ jobs:
 
       - name: Semantic Release
         id: semrel
-        uses: go-semantic-release/action@2e9dc4247a6004f8377781bef4cb9dad273a741f # v1.24.1
+        uses: go-semantic-release/action@v1.24.1
         with:
           github-token: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
           update-file: package.json
@@ -63,7 +63,7 @@ jobs:
           git add CHANGELOG.md package.json
           git commit -m "chore(release): ${{ steps.semrel.outputs.version }}"
 
-      - uses: ./.github/actions/deps
+      - uses: $/.github/actions/deps
         if: steps.semrel.outputs.version != ''
         name: Install
 
@@ -80,7 +80,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: pnpx wrangler pages deploy build --project-name=guitos
 
-      - uses: ./.github/actions/docker
+      - uses: $/.github/actions/docker
         if: steps.semrel.outputs.version != ''
         name: Build docker image
         env:
@@ -91,7 +91,7 @@ jobs:
         run: mv build guitos && zip -r guitos-v${{ steps.semrel.outputs.version }}.zip guitos/*
 
       - name: Install cosign
-        uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
+        uses: sigstore/cosign-installer@v4.1.2
 
       - name: Sign bundle
         if: steps.semrel.outputs.version != ''

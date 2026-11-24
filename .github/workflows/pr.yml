@@ -18,13 +18,13 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.64.1@sha256:2f05f8a734509a7b3f26a912639488ee08f58a7b292d14d62271bcff9038768f # ratchet:mcr.microsoft.com/playwright:v1.64.1
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
-      - uses: ./.github/actions/deps
+      - uses: $/.github/actions/deps
         name: Install
-      - uses: ./.github/actions/test
+      - uses: $/.github/actions/test
         name: Test
-      - uses: ./.github/actions/playwright
+      - uses: $/.github/actions/playwright
         name: Test e2e
